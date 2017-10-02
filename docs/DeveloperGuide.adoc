@@ -785,6 +785,45 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+*MSS*
+
+1.  User requests to show a list of person that is mostly accessed by keying in "list freq" keyword
+2.  AddressBook shows this list of person in descending frequency order
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+*MSS*
+
+1.  User requests to show one of a person using find command
+2.  AddressBook shows this person
+3.  User requests to delete one of this person's tag by specifying a index of tag
+4.  AddressBook deletes the tag
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The tag list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
+
+
+
 {More to be added}
 
 [appendix]
