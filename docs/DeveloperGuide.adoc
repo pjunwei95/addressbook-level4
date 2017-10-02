@@ -833,6 +833,9 @@ Use case resumes at step 2.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
+.  Should secure contact information safely.
+.  Should be able to open the application in 2 seconds.
+.  The application should provide several aesthetic designed color sets.
 {More to be added}
 
 [appendix]
