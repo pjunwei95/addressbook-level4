@@ -731,6 +731,24 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |hide link:#private-contact-detail[private contact details] by default |minimize chance of someone else seeing them by accident
 
+|`* *` |user |share the contact information in my addressbook to others' |share contact infomation conveniently
+
+|`* *` |user |have shortcuts for each command |don't have to type the whole command each time
+
+|`* *` |user |have a copy button for each category of information |copy and paste information easily
+
+|`* *` |user |be able to customize the color set of user interface|customize the display as I like
+
+|`* *` |user |be able to display person according to frequency I access their contacts|access the contacts that are more possible for me to access easily
+
+|`* *` |user |be able to delete tags|delete wrong tags
+
+|`* *` |user |be able to move the windows and tables in the user interface around|choose the combination of positions of windows as I like
+
+|`* *` |user |be able to click on contact to open windows to display and modify their information|look through and modify their information easily
+
+|`* ` |user |be able to move the windows and tables in the user interface around|choose the combination of positions of windows as I like
+
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 |=======================================================================
 
