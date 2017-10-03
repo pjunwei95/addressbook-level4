@@ -75,9 +75,11 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     /**
-     * Set total persons in status bar.
+     * Get the display text in status bar totalPersons for a given number
+     * @param numberOfTotalPersons
+     * @return string of display text
      */
-    private void setTotalPerson(int numberOfTotalPersons) {
+    public static String getDisplayTextTotalPerson(int numberOfTotalPersons) {
         String displayText = "";
 
         if (numberOfTotalPersons > 1) {
@@ -85,7 +87,11 @@ public class StatusBarFooter extends UiPart<Region> {
         } else {
             displayText = numberOfTotalPersons + " person total.";
         }
-        this.totalPersons.setText(displayText);
+        return displayText;
+    }
+
+    private void setTotalPerson(int numberOfTotalPersons) {
+        this.totalPersons.setText(getDisplayTextTotalPerson(numberOfTotalPersons));
     }
 
     @Subscribe
