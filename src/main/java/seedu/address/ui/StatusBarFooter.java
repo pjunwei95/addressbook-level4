@@ -40,13 +40,16 @@ public class StatusBarFooter extends UiPart<Region> {
     private StatusBar syncStatus;
     @FXML
     private StatusBar saveLocationStatus;
+    @FXML
+    private StatusBar totalPersons;
 
 
-    public StatusBarFooter(String saveLocation) {
+    public StatusBarFooter(String saveLocation, int numberOfTotalPersons) {
         super(FXML);
         setSyncStatus(SYNC_STATUS_INITIAL);
         setSaveLocation("./" + saveLocation);
         registerAsAnEventHandler(this);
+        setTotalPerson(numberOfTotalPersons);
     }
 
     /**
@@ -71,11 +74,26 @@ public class StatusBarFooter extends UiPart<Region> {
         Platform.runLater(() -> this.syncStatus.setText(status));
     }
 
+    /**
+     * Set total persons in status bar.
+     */
+    private void setTotalPerson(int numberOfTotalPersons) {
+        String displayText = "";
+
+        if (numberOfTotalPersons > 1) {
+            displayText = numberOfTotalPersons + " persons total.";
+        } else {
+            displayText = numberOfTotalPersons + " person total.";
+        }
+        this.totalPersons.setText(displayText);
+    }
+
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
+        setTotalPerson(abce.data.getPersonList().size());
     }
 }
