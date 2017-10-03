@@ -56,7 +56,8 @@ public class StatusBarFooterTest extends GuiUnitTest {
     @Test
     public void display() {
         // initial state
-        assertStatusBarContent(RELATIVE_PATH + STUB_SAVE_LOCATION, SYNC_STATUS_INITIAL, TOTAL_PERSONS);
+        assertStatusBarContent(RELATIVE_PATH + STUB_SAVE_LOCATION,
+                SYNC_STATUS_INITIAL, TOTAL_PERSONS);
 
         // after address book is updated
         postNow(EVENT_STUB);
@@ -68,7 +69,8 @@ public class StatusBarFooterTest extends GuiUnitTest {
      * Asserts that the save location matches that of {@code expectedSaveLocation}, and the
      * sync status matches that of {@code expectedSyncStatus}.
      */
-    private void assertStatusBarContent(String expectedSaveLocation, String expectedSyncStatus, String expectedTotalPerson) {
+    private void assertStatusBarContent(String expectedSaveLocation, String expectedSyncStatus,
+                                        String expectedTotalPerson) {
         assertEquals(expectedSaveLocation, statusBarFooterHandle.getSaveLocation());
         assertEquals(expectedSyncStatus, statusBarFooterHandle.getSyncStatus());
         assertEquals(expectedTotalPerson, statusBarFooterHandle.getTotalPersons());
