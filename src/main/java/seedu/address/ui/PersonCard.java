@@ -7,7 +7,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.ReadOnlyPerson;
-
 import java.util.HashMap;
 import java.util.Random;
 
@@ -72,6 +71,7 @@ public class PersonCard extends UiPart<Region> {
 
     /**
      * Initialize tag color for each tag
+     *
      * @param person
      */
     private void initTags(ReadOnlyPerson person) {
@@ -85,6 +85,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Get a color for a given tag.
      * If the tag doesn't have a predefined color, return a random color.
+     *
      * @param tagValue
      * @return tag's color
      */
