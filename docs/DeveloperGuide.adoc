@@ -779,7 +779,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 
->>>>>>> 703e3cbdbf862c4b3d3e15e47c9fb9242f56d25c
 |=======================================================================
 
 
