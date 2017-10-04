@@ -738,9 +738,31 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |user |see person's social media page in AddressBook|check persons's social media page easily and directly in one app
 
 |`* * *` |user added many tags to persons|customize tag colour|visualize different tag by its color
+
+|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+
+|`* *` |user |share the contact information in my addressbook to others' |share contact infomation conveniently
+
+|`* *` |user |have shortcuts for each command |don't have to type the whole command each time
+
+|`* *` |user |have a copy button for each category of information |copy and paste information easily
+
+|`* *` |user |be able to customize the color set of user interface|customize the display as I like
+
+|`* *` |user |be able to display person according to frequency I access their contacts|access the contacts that are more possible for me to access easily
+
+|`* *` |user |be able to delete tags|delete wrong tags
+
+|`* *` |user |be able to move the windows and tables in the user interface around|choose the combination of positions of windows as I like
+
+|`* *` |user |be able to click on contact to open windows to display and modify their information|look through and modify their information easily
+
+|`*` |user |be able to move the windows and tables in the user interface around|choose the combination of positions of windows as I like
+
+|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+
 |=======================================================================
 
-{More to be added}
 
 [appendix]
 == Use Cases
@@ -772,6 +794,7 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
+
 
 [discrete]
 === Use case: Edit person
@@ -827,6 +850,46 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
+=== Use case: Show the list of persons by frequency
+*MSS*
+
+1.  User requests to show a list of person that is mostly accessed by keying in "list freq" keyword
+2.  AddressBook shows this list of person in descending frequency order
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+[discrete]
+=== Use case: Delete a tag
+*MSS*
+
+1.  User requests to show one of a person using find command
+2.  AddressBook shows this person
+3.  User requests to delete one of this person's tag by specifying a index of tag
+4.  AddressBook deletes the tag
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The tag list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
 
 [appendix]
 == Non Functional Requirements
@@ -837,6 +900,9 @@ Use case ends.
 .  The user guide should be clear and easy to understand by new users.
 .  The system should be usable by a novice.
 .  The project is open-source and available on GitHub.
+.  Should secure contact information safely.
+.  Should be able to open the application in 2 seconds.
+.  The application should provide several aesthetic designed color sets.
 
 [appendix]
 == Glossary
