@@ -34,8 +34,7 @@ public class DateOfBirth {
                 || (other instanceof DateOfBirth
                 && this.Date.equals(((DateOfBirth) other).Date));
     }
-   // public static boolean isValidDate(String test) { return test.matches(".*[a-z].*");}
-
+    
     @Override
     public int hashCode() {
         return Date.hashCode();
