@@ -71,6 +71,6 @@ public class XmlAdaptedPerson {
         final Address address = new Address(this.address);
         final DateOfBirth dateOfBirth = new DateOfBirth(this.Date);
         final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, email, address,dateOfBirth, tags);
+        return new Person(name, phone, email, address, dateOfBirth, tags);
     }
 }

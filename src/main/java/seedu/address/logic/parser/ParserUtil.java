@@ -68,7 +68,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> dateOfBirth} into an {@code Optional<DateOfBirth>} if {@code dateOfBirth} is present.
+     * Parses a {@code Optional<String> date} into an {@code Optional<DateOfBirth>} if {@code dateOfBirth} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
      */
     public static Optional<DateOfBirth> parseDateOfBirth(Optional<String> date) throws IllegalValueException {
