@@ -34,7 +34,6 @@ public class DateOfBirth {
                 || (other instanceof DateOfBirth
                 && this.Date.equals(((DateOfBirth) other).Date));
     }
-    
     @Override
     public int hashCode() {
         return Date.hashCode();
