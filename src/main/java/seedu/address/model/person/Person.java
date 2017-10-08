@@ -22,6 +22,7 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Phone> phone;
     private ObjectProperty<Email> email;
     private ObjectProperty<Address> address;
+    private ObjectProperty<DateOfBirth> Date;
 
     private ObjectProperty<UniqueTagList> tags;
 
