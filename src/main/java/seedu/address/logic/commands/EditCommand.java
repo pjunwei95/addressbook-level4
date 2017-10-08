@@ -148,15 +148,16 @@ public class EditCommand extends UndoableCommand {
         public void setName(Name name) {
             this.name = name;
         }
-
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
+
         public void setDateOfBirth(DateOfBirth date) { this.dateOfBirth = date; }
 
         public Optional<DateOfBirth> getDateOfBirth() {
             return Optional.ofNullable(dateOfBirth);
         }
+
         public void setPhone(Phone phone) {
             this.phone = phone;
         }
@@ -208,6 +209,7 @@ public class EditCommand extends UndoableCommand {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getDateOfBirth().equals(e.getDateOfBirth())
                     && getTags().equals(e.getTags());
         }
     }
