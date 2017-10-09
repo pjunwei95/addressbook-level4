@@ -1028,7 +1028,6 @@ Use case ends.
 .  Should respond within two seconds.
 
 {More to be added}
-=======
 
 [appendix]
 == Glossary
