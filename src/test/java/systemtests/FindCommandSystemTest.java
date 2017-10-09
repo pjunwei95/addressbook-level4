@@ -150,9 +150,12 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: mixed case command word -> rejected */
+        /* Case: mixed case command word -> success */
         command = "FiNd Meier";
-        assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
+        command = command.toLowerCase();
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
     }
 
     /**
