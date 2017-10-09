@@ -32,7 +32,7 @@ Responsibilities: Ensure that all deadlines and Deliverables are met on time.Sen
 '''
 
 === Yang Minxing
-image::yangminxingnus.tiff[width="150", align="left"]
+image::yangminxingnus.png[width="150", align="left"]
 {empty}[https://github.com/yangminxingnus[github]]
 
 Role: In charhe of Storage and UI +
