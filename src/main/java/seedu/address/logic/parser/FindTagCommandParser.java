@@ -5,7 +5,7 @@ import java.util.Arrays;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -24,9 +24,9 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] tagKeywords = trimmedArgs.split("\\s+");
 
-        return new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
     }
 
 }
