@@ -34,6 +34,7 @@ public interface ReadOnlyPerson {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPhone().equals(this.getPhone())
                 && other.getEmail().equals(this.getEmail())
+                && other.getDateOfBirth().equals(this.getDateOfBirth())
                 && other.getAddress().equals(this.getAddress()));
     }
 
@@ -49,6 +50,8 @@ public interface ReadOnlyPerson {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Date Of Birth: ")
+                .append(getDateOfBirth())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
