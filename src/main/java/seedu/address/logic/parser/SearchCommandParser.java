@@ -8,6 +8,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.SearchContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -28,7 +29,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         }
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new SearchCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new SearchCommand(new SearchContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
 }
