@@ -10,12 +10,14 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -162,6 +164,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.add(t);
     }
 
+    public void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
+        // To store new list of tags
+        Set<Tag> modifiedTags = new HashSet<>();
+
+        for (Tag existingTag: getTagList()) {
+            for (Tag modifyingTag: tagList) {
+
+                // Check whether a tag needs to be changed color
+                if (modifyingTag.equals(existingTag)) {
+                    // Change the color of the tag
+                    modifiedTags.add(new Tag(modifyingTag.tagName, color.tagColorName));
+                } else {
+                    // Remain unchanged
+                    modifiedTags.add(existingTag);
+                }
+            }
+        }
+
+        // Set the list of tags to new list of tags
+        setTags(modifiedTags);
+    }
+
     //// util methods
 
     @Override
@@ -193,4 +217,5 @@ public class AddressBook implements ReadOnlyAddressBook {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(persons, tags);
     }
+
 }

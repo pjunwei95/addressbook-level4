@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COLOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
@@ -27,6 +29,15 @@ public class ChangeTagColorCommand extends UndoableCommand {
 
     public static final String MESSAGE_ARGUMENTS = "Tag: %1$s, Color: %2$s";
 
+    public static final String MESSAGE_NOT_EXISTING_TAGS = "Cannot change color of not existing tags: %1$s";
+
+    public static final String MESSAGE_INVALID_COLOR = "Color %1$s is invalid." +
+            "\n" + TagColor.MESSAGE_TAG_COLOR_CONSTRAINTS;
+
+    public static final String MESSAGE_FAILED = "Change tag color command failed";
+
+    public static final String MESSAGE_CHANGE_TAG_COLOR_SUCCESS = "Change tag color of %1$s to %2$s";
+
     private final Set<Tag> tagList;
     private final TagColor color;
 
@@ -42,10 +53,44 @@ public class ChangeTagColorCommand extends UndoableCommand {
         this.color = color;
     }
 
+    private boolean isExistingTagName(Tag t) {
+        for (Tag tag : model.getAddressBook().getTagList()) {
+            if (tag.tagName.equals(t.tagName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     protected CommandResult executeUndoableCommand() throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, tagList, color));
+        // Store all non existing tags
+        Set<Tag> nonExistingTagList = new HashSet<>();
+
+        // Check whether tags in the tagList are not existing tags
+        for (Tag tag: tagList) {
+            if (!isExistingTagName(tag)) {
+                nonExistingTagList.add(tag);
+            }
+        }
+
+        // There are tags that are not existing tags
+        if (nonExistingTagList.size() != 0) {
+            throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS, nonExistingTagList));
+        }
+
+        // Check whether the input tag color is a valid color name
+        if(!TagColor.isValidTagColorName(color.tagColorName)) {
+            throw new CommandException(String.format(MESSAGE_INVALID_COLOR, color));
+        }
+
+        try {
+            model.updateTagColorPair(tagList, color);
+        } catch (IllegalValueException e) {
+            throw new CommandException(MESSAGE_FAILED);
+        }
+
+        return new CommandResult(String.format(MESSAGE_CHANGE_TAG_COLOR_SUCCESS, tagList, color.tagColorName));
     }
 
     @Override

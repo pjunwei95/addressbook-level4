@@ -10,7 +10,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class TagColor {
     public static final String[] VALID_TAG_COLOR = {"red", "blue", "yellow", "green"};
-    public static final String MESSAGE_TAG_COLOR_CONSTRAINTS = "Colors names should be one of these: "
+    public static final String MESSAGE_TAG_COLOR_CONSTRAINTS = "Valid colors are: "
             + Arrays.toString(VALID_TAG_COLOR);
 
     public final String tagColorName;
