@@ -3,33 +3,34 @@ package systemtests;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.testutil.TypicalPersons.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.*;
+
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+
 
 public class SearchCommandSystemTest extends AddressBookSystemTest {
 
     @Test
     public void search() {
-        /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
-         * -> 2 persons found
-         */
-        String command = "   " + SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " " + "13.10.1997"
-        + "   ";
+       /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
+        * -> 2 persons found
+        */
+        String command = "   " + SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " "
+                + "13.10.1997" + "   ";
+
         Model expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, LAKHOTIA, RANDOM); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: repeat previous find command where person list is displaying the persons we are Searching
-         * -> 2 persons found
-         */
+       /* Case: repeat previous find command where person list is displaying the persons we are Searching
+        * -> 2 persons found
+        */
         command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " " + "13.10.1997";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
