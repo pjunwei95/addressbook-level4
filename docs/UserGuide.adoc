@@ -117,7 +117,7 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 Lists persons with the given name and Date Of Birth.
 Format: `search NAME DATE_OF_BIRTH`
 
-image::docs/images/EmailThem.png[width="600"]
+image::EmailThem.png[width="600"]
 
 ****
 * The search is case-insensitive. e.g `hans` will match `Hans`
