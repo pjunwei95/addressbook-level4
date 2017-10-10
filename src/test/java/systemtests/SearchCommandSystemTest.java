@@ -20,9 +20,9 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
 
     @Test
     public void search() {
-       /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
-        * -> 2 persons found
-        */
+        /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
+         * -> 2 persons found
+         */
         String command = "   " + SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " "
                 + "13.10.1997" + "   ";
 
