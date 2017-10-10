@@ -15,6 +15,7 @@ import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -78,6 +79,15 @@ public class ParserUtil {
     public static Optional<DateOfBirth> parseDateOfBirth(Optional<String> date) throws IllegalValueException {
         requireNonNull(date);
         return date.isPresent() ? Optional.of(new DateOfBirth(date.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> remark} into an {@code Optional<Remark>} if {@code remark} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Remark> parseRemark(Optional<String> remark) throws IllegalValueException {
+        requireNonNull(remark);
+        return remark.isPresent() ? Optional.of(new Remark(remark.get())) : Optional.empty();
     }
 
     /**
