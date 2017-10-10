@@ -73,7 +73,7 @@ public class AddressBookParser {
             return new RedoCommand();
 
         case ChangeTagColorCommand.COMMAND_WORD:
-            return new ChangeTagColorCommand();
+            return new ChangeTagColorCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -67,7 +67,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommandChangeTagColor() throws Exception {
-        assertTrue(parser.parseCommand(ChangeTagColorCommand.COMMAND_WORD) instanceof ChangeTagColorCommand);
+        assertTrue(parser.parseCommand(ChangeTagColorCommand.COMMAND_WORD
+                + " " + "t/friend"
+                + " " + "c/red"
+        ) instanceof ChangeTagColorCommand);
     }
 
     @Test
