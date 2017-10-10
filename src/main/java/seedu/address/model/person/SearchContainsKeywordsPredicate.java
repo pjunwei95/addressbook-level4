@@ -19,8 +19,8 @@ public class SearchContainsKeywordsPredicate implements Predicate<ReadOnlyPerson
 
     @Override
     public boolean test (ReadOnlyPerson person) {
-       return StringUtil.containsWordIgnoreCase(person.getName().fullName, keywords.get(0))
-               && StringUtil.containsWordIgnoreCase(person.getDateOfBirth().Date,keywords.get(1));
+        return StringUtil.containsWordIgnoreCase(person.getName().fullName, keywords.get(0))
+               && StringUtil.containsWordIgnoreCase(person.getDateOfBirth().Date, keywords.get(1));
     }
 
     @Override

@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import seedu.address.model.person.SearchContainsKeywordsPredicate;
 
+/**
+ * Searches and lists all persons in address book whose name and DateOfBirth matches the argument keywords.
+ * Keyword matching is case insensitive.
+ */
 public class SearchCommand extends Command {
 
     public static final String COMMAND_WORD = "search";
