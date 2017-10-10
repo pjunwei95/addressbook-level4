@@ -203,12 +203,13 @@ public class AddressBook implements ReadOnlyAddressBook {
                     // Change the color of the tag
                     updatedTags.add(new Tag(modifyingTag.tagName, color.tagColorName));
 
-                } else {
-
-                    // Remain unchanged
-                    updatedTags.add(existingTag);
-
                 }
+            }
+
+            // This tag doesn't need to be changed
+            if (!updatedTags.contains(existingTag)) {
+                // Remain unchanged
+                updatedTags.add(existingTag);
             }
         }
 
