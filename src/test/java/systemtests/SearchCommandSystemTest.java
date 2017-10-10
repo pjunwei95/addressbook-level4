@@ -1,10 +1,13 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_RONAK;
+import static seedu.address.testutil.TypicalPersons.LAKHOTIA;
+import static seedu.address.testutil.TypicalPersons.RANDOM;
 
 import org.junit.Test;
-
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -28,30 +31,30 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-       /* Case: repeat previous find command where person list is displaying the persons we are Searching
-        * -> 2 persons found
-        */
+        /* Case: repeat previous find command where person list is displaying the persons we are Searching
+         * -> 2 persons found
+         */
         command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " " + "13.10.1997";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-       /* Case: undo previous search command -> rejected */
+        /* Case: undo previous search command -> rejected */
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-       /* Case: redo previous search command -> rejected */
+        /* Case: redo previous search command -> rejected */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-       /* Case: mixed case command word -> success */
+        /* Case: mixed case command word -> success */
         command = "SeaRch RonAk 13.10.1997";
         command = command.toLowerCase();
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-       /* Case: search person in empty address book -> 0 persons found */
+        /* Case: search person in empty address book -> 0 persons found */
         executeCommand(ClearCommand.COMMAND_WORD);
         assert getModel().getAddressBook().getPersonList().size() == 0;
         command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
@@ -82,6 +85,15 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchanged();
     }
+    /**
+     * Executes {@code command} and verifies that the command box displays {@code command}, the result display
+     * box displays {@code expectedResultMessage} and the model related components equal to the current model.
+     * These verifications are done by
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
+     * error style.
+     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
 
