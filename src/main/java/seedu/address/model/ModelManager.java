@@ -105,6 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
         addressBook.updateTagColorPair(tagList, color);
+        indicateAddressBookChanged();
     }
 
     @Override

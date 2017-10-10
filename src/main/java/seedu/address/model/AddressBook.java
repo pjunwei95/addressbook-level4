@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import org.omg.CORBA.TCKind;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -164,27 +166,63 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.add(t);
     }
 
-    public void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
-        // To store new list of tags
-        Set<Tag> modifiedTags = new HashSet<>();
+    /**
+     * Update the tag color pair in storage
+     * @param modifyingTagList tags that need to be changed color
+     * @param color
+     * @throws IllegalValueException
+     */
+    public void updateTagColorPair(Set<Tag> modifyingTagList, TagColor color) throws IllegalValueException {
+        // Set the list of tags to new list of tags
+        setTags(getUpdatedTagColorPair(modifyingTagList, tags.toSet(), color));
 
-        for (Tag existingTag: getTagList()) {
-            for (Tag modifyingTag: tagList) {
+        updateTagColorInEveryPerson(modifyingTagList, color);
 
-                // Check whether a tag needs to be changed color
+        // Sync the updated person list
+        syncMasterTagListWith(persons);
+    }
+
+    /**
+     * Get a list of given tags with updated color
+     * @param modifyingTagList
+     * @param existingTagList
+     * @param color
+     * @return list of updated tags
+     * @throws IllegalValueException
+     */
+    private Set<Tag> getUpdatedTagColorPair(Set<Tag> modifyingTagList, Set<Tag> existingTagList, TagColor color) throws IllegalValueException {
+        // To store updated list of tags
+        Set<Tag> updatedTags = new HashSet<>();
+
+        for (Tag existingTag: existingTagList) {
+            for (Tag modifyingTag: modifyingTagList) {
+
+                // Check whether a tag needs to be changed its color
                 if (modifyingTag.equals(existingTag)) {
+
                     // Change the color of the tag
-                    modifiedTags.add(new Tag(modifyingTag.tagName, color.tagColorName));
+                    updatedTags.add(new Tag(modifyingTag.tagName, color.tagColorName));
+
                 } else {
+
                     // Remain unchanged
-                    modifiedTags.add(existingTag);
+                    updatedTags.add(existingTag);
+
                 }
             }
         }
 
-        // Set the list of tags to new list of tags
-        setTags(modifiedTags);
+        return updatedTags;
+
     }
+
+    private void updateTagColorInEveryPerson(Set<Tag> modifyingTagList, TagColor tagColor) throws IllegalValueException {
+        for(Person person : persons) {
+            Set<Tag> updatedTagList = getUpdatedTagColorPair(modifyingTagList, person.getTags(), tagColor);
+            person.setTags(updatedTagList);
+        }
+    }
+
 
     //// util methods
 
