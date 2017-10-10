@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.ChangeTagColorCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.Test;
-
 import java.util.HashSet;
 import java.util.Set;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
@@ -33,7 +33,7 @@ public class ChangeTagColorCommandTest {
     }
 
     @Test
-    public void equals() throws Exception{
+    public void equals() throws Exception {
         final TagColor tagColor = new TagColor("red");
         final Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("family"));

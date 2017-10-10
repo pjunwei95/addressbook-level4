@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COLOR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
@@ -19,7 +19,7 @@ public class ChangeTagColorCommand extends UndoableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the color of a tag or list of tags. "
             + "Existing color will be overwritten by the input.\n"
-            + "Parameters: " + COMMAND_WORD +" "
+            + "Parameters: " + COMMAND_WORD + " "
             + PREFIX_TAG + "[TAG] "
             + PREFIX_COLOR + "[COLOR]\n"
             + "Example: " + COMMAND_WORD + " t/friend "

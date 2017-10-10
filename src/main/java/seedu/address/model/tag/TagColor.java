@@ -2,10 +2,9 @@ package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 import java.util.Arrays;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 /**
  * Represent a color for a tag
  */

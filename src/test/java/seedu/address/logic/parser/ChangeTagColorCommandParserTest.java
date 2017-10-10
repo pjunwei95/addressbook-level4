@@ -6,14 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Test;
 
 import seedu.address.logic.commands.ChangeTagColorCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class ChangeTagColorCommandParserTest {
     private ChangeTagColorCommandParser parser = new ChangeTagColorCommandParser();
