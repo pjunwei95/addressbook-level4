@@ -79,24 +79,9 @@ public class PersonCard extends UiPart<Region> {
     private void initTags(ReadOnlyPerson person) {
         person.getTags().forEach(tag -> {
             Label tagLabel = new Label(tag.tagName);
-            tagLabel.setStyle("-fx-background-color: " + getColorForTag(tag.tagName));
+            tagLabel.setStyle("-fx-background-color: " + tag.tagColor.tagColorName);
             tags.getChildren().add(tagLabel);
         });
-    }
-
-    /**
-     * Get a color for a given tag.
-     * If the tag doesn't have a predefined color, return a random color.
-     *
-     * @param tagValue
-     * @return tag's color
-     */
-    private String getColorForTag(String tagValue) {
-        if (!tagColors.containsKey(tagValue)) {
-            return colors[random.nextInt(colors.length)];
-        } else {
-            return tagColors.get(tagValue);
-        }
     }
 
     @Override

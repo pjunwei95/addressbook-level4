@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -10,8 +11,10 @@ import seedu.address.model.tag.Tag;
  */
 public class XmlAdaptedTag {
 
-    @XmlValue
-    private String tagName;
+    @XmlElement
+    private String name;
+    @XmlElement
+    private String color;
 
     /**
      * Constructs an XmlAdaptedTag.
@@ -25,7 +28,8 @@ public class XmlAdaptedTag {
      * @param source future changes to this will not affect the created
      */
     public XmlAdaptedTag(Tag source) {
-        tagName = source.tagName;
+        name = source.tagName;
+        color = source.tagColor.tagColorName;
     }
 
     /**
@@ -34,7 +38,7 @@ public class XmlAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Tag toModelType() throws IllegalValueException {
-        return new Tag(tagName);
+        return new Tag(this.name, this.color);
     }
 
 }
