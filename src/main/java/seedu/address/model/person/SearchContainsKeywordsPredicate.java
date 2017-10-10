@@ -20,7 +20,7 @@ public class SearchContainsKeywordsPredicate implements Predicate<ReadOnlyPerson
     @Override
     public boolean test (ReadOnlyPerson person) {
 
-        if (keywords.size() <=1) {
+        if (keywords.size() <= 1) {
             return false;
         }
 
