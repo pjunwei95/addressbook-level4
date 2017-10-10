@@ -2,12 +2,13 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import seedu.address.model.tag.Tag;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Helper functions for handling strings.
@@ -65,12 +66,12 @@ public class StringUtil {
 
         ArrayList<String> wordsInPreppedSet = new ArrayList<>();
 
-        for (Tag tag: tagSet){
+        for (Tag tag: tagSet) {
             wordsInPreppedSet.add(tag.tagName);
         }
 
-        for(String wordInTag: wordsInPreppedSet){
-            if(wordInTag.equalsIgnoreCase(preppedWord)){
+        for (String wordInTag: wordsInPreppedSet) {
+            if (wordInTag.equalsIgnoreCase(preppedWord)) {
                 return true;
             }
         }
