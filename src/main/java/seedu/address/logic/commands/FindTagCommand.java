@@ -3,14 +3,14 @@ package seedu.address.logic.commands;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all persons in address book whose tag(s) contains any of the argument keywords.
  * Keyword matching is case sensitive.
  */
 public class FindTagCommand extends Command {
 
     public static final String COMMAND_WORD = "find/t";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tag(s) contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";

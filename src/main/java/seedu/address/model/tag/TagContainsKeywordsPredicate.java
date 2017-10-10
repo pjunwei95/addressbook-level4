@@ -7,7 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.ReadOnlyPerson;
 
 /**
- * Tests that a {@code ReadOnlyPerson}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code ReadOnlyPerson}'s {@code Tag}(s) matches any of the keywords given.
  */
 public class TagContainsKeywordsPredicate implements Predicate<ReadOnlyPerson> {
     private final List<String> keywords;
