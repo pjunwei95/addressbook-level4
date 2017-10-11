@@ -112,6 +112,7 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
+
 === Searching a person : `search`
 
 Lists persons with the given name and Date Of Birth.
@@ -130,6 +131,31 @@ Examples:
 
 * `search John 13.10.1997` +
 Returns persons with name `John` and Date of Birth `13.10.1997`.
+
+=== Locating persons by tag: `find/t`
+
+Finds persons whose tags contain any of the given keywords. +
+Format: `find/t KEYWORD [MORE_KEYWORDS]`
+
+[TIP]
+Make sure there are no whitespaces between `find` and `/t`!
+
+****
+* Given three samples `John Doe` with tag `Friends`, `Hans Gruber` with tag `Friends`, and `Bo Yang` with tag `Colleagues`
+* The search is case insensitive. e.g `friends` will match `Friends`
+* All the tags are searched.
+* Only full words will be matched e.g. `Friend` will not match `Friends`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `friends` will return `John Doe`, `Hans Gruber`
+
+****
+
+Examples:
+
+=======
+* `find/t friends` +
+Returns `John Doe` and `Hans Gruber`
+* `find/t friends colleagues` +
+Returns any person having tags `Friends` or `Colleagues`
 
 === Deleting a person : `delete`
 
@@ -231,6 +257,29 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+=== Customize tags' color : `color`
+
+Change the color of one or more than one tags. +
+Format: `color [c/COLOR] [t/TAG]...`
+****
+* The default color of tags is blue.
+* You can change the color of more than one tag at a time
+* The colors supported are: blue, red, green and yellow
+* You cannot change the color of a non existing tag.
+****
+
+Examples:
+
+* `color c/red t/friends`
+
+* `color c/red t/friends t/family t/colleagues`
+
+* `color t/friend c/invalid_color` +
+The `color` command fails as `invalid_color` is not supported.
+
+* `color t/not_existing_tag c/yellow` +
+The `color` command fails as `not_existing_tag` does not exit in current database.
+
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
@@ -273,6 +322,8 @@ e.g. `delete 3`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
+* *Find by Tags* : `find/t KEYWORD [MORE_KEYWORDS]` +
+e.g. `find/t friends family`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +

@@ -10,7 +10,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 public class DateOfBirth {
 
-    public final String Date;
+    public final String date;
 
     /**
      * Validates DateOfBirth
@@ -21,21 +21,21 @@ public class DateOfBirth {
 
         requireNonNull(Date);
         String trimmedDate = Date.trim();
-        this.Date = trimmedDate;
+        this.date = trimmedDate;
     }
     @Override
     public String toString() {
-        return Date;
+        return date;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof DateOfBirth
-                && this.Date.equals(((DateOfBirth) other).Date));
+                && this.date.equals(((DateOfBirth) other).date));
     }
     @Override
     public int hashCode() {
-        return Date.hashCode();
+        return date.hashCode();
     }
 }
