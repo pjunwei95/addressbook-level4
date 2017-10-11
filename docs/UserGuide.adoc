@@ -212,6 +212,29 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+=== Customize tags' color : `color`
+
+Change the color of one or more than one tags. +
+Format: `color [c/COLOR] [t/TAG]...`
+****
+* The default color of tags is blue.
+* You can change the color of more than one tag at a time
+* The colors supported are: blue, red, green and yellow
+* You cannot change the color of a non existing tag.
+****
+
+Examples:
+
+* `color c/red t/friends`
+
+* `color c/red t/friends t/family t/colleagues`
+
+* `color t/friend c/invalid_color` +
+The `color` command fails as `invalid_color` is not supported.
+
+* `color t/not_existing_tag c/yellow` +
+The `color` command fails as `not_existing_tag` does not exit in current database.
+
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
