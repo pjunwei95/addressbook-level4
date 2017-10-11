@@ -12,14 +12,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagColor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -38,7 +43,10 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_FRIEND = "friends";
+    public static final String VALID_TAG_FAMILY = "family";
+    public static final String VALID_TAG_COLOR_NAME_RED = "red";
+    public static final String VALID_TAG_COLOR_NAME_YELLOW = "yellow";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -59,9 +67,17 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_DATE_OF_BIRH = " " + PREFIX_DOB; // empty string not allowed for dateOfBirth
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG = "notExistingTag";
+    public static final String INVALID_TAG_COLOR_NAME = "notExistingColor";
+
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final Set<Tag> VALID_TAGLIST;
+    public static final Set<Tag> INVALID_TAGLIST;
+    public static final TagColor VALID_TAG_COLOR_RED;
+    public static final TagColor VALID_TAG_COLOR_YELLOW;
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -72,6 +88,25 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withDateOfBirth(VALID_DOB_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        VALID_TAGLIST = new HashSet<>();
+        try {
+            VALID_TAGLIST.add(new Tag(VALID_TAG_FRIEND));
+            VALID_TAGLIST.add(new Tag(VALID_TAG_FAMILY));
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+
+        INVALID_TAGLIST = new HashSet<>();
+        try {
+            INVALID_TAGLIST.add(new Tag(INVALID_TAG));
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
+
+        VALID_TAG_COLOR_RED = new TagColor(VALID_TAG_COLOR_NAME_RED, true);
+        VALID_TAG_COLOR_YELLOW = new TagColor(VALID_TAG_COLOR_NAME_YELLOW, true);
+
     }
 
     /**
