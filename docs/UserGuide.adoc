@@ -117,7 +117,7 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 Lists persons with the given name and Date Of Birth.
 Format: `search NAME DATE_OF_BIRTH`
 
-image::EmailThem.png[width="600"]
+image::Search.png[width="600"]
 
 ****
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -240,6 +240,17 @@ Format: `clear`
 
 Exits the program. +
 Format: `exit`
+
+=== Coming in V2.0
+
+image::EmailThem.png[width="600"]
+
+* Add a notification system to notify users about upcoming birthdays +
+* Send Email Intents to contacts +
+* Social Integration +
+* Have a favourites list +
+* Be able to view contacts frequently viewed +
+
 
 === Saving the data
 
