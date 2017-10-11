@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
-import org.omg.CORBA.TCKind;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -192,7 +191,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @return list of updated tags
      * @throws IllegalValueException
      */
-    private Set<Tag> getUpdatedTagColorPair(Set<Tag> modifyingTagList, Set<Tag> existingTagList, TagColor color) throws IllegalValueException {
+    private Set<Tag> getUpdatedTagColorPair(Set<Tag> modifyingTagList, Set<Tag> existingTagList, TagColor color)
+            throws IllegalValueException {
         // To store updated list of tags
         Set<Tag> updatedTags = new HashSet<>();
 
@@ -219,8 +219,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     }
 
-    private void updateTagColorInEveryPerson(Set<Tag> modifyingTagList, TagColor tagColor) throws IllegalValueException {
-        for(Person person : persons) {
+    /**
+     * Update tag and color pair in every person
+     */
+    private void updateTagColorInEveryPerson(Set<Tag> modifyingTagList, TagColor tagColor)
+            throws IllegalValueException {
+        for (Person person : persons) {
             Set<Tag> updatedTagList = getUpdatedTagColorPair(modifyingTagList, person.getTags(), tagColor);
             person.setTags(updatedTagList);
         }

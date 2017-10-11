@@ -5,6 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.Arrays;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+
+
+
+
 /**
  * Represent a color for a tag
  */
@@ -26,6 +30,19 @@ public class TagColor {
         if (!isValidTagColorName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_TAG_COLOR_CONSTRAINTS);
         }
+        this.tagColorName = trimmedName;
+    }
+
+    /**
+     * Assume the given color name is valid.
+     * Only for testing purpose.
+     *
+     * @param name
+     * @param isValidColorName
+     */
+    public TagColor(String name, boolean isValidColorName) {
+        requireNonNull(name);
+        String trimmedName = name.trim();
         this.tagColorName = trimmedName;
     }
 
@@ -52,6 +69,6 @@ public class TagColor {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagColorName + ']';
+        return tagColorName;
     }
 }

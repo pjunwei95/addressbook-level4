@@ -32,8 +32,8 @@ public class ChangeTagColorCommand extends UndoableCommand {
 
     public static final String MESSAGE_NOT_EXISTING_TAGS = "Cannot change color of not existing tags: %1$s";
 
-    public static final String MESSAGE_INVALID_COLOR = "Color %1$s is invalid." +
-            "\n" + TagColor.MESSAGE_TAG_COLOR_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_COLOR = "Color %1$s is invalid."
+            + "\n" + TagColor.MESSAGE_TAG_COLOR_CONSTRAINTS;
 
     public static final String MESSAGE_FAILED = "Change tag color command failed";
 
@@ -54,6 +54,9 @@ public class ChangeTagColorCommand extends UndoableCommand {
         this.color = color;
     }
 
+    /**
+     *Check whether a given tag exists in current database
+     */
     private boolean isExistingTagName(Tag t) {
         for (Tag tag : model.getAddressBook().getTagList()) {
             if (tag.tagName.equals(t.tagName)) {
@@ -81,7 +84,7 @@ public class ChangeTagColorCommand extends UndoableCommand {
         }
 
         // Check whether the input tag color is a valid color name
-        if(!TagColor.isValidTagColorName(color.tagColorName)) {
+        if (!TagColor.isValidTagColorName(color.tagColorName)) {
             throw new CommandException(String.format(MESSAGE_INVALID_COLOR, color));
         }
 
