@@ -13,5 +13,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_COLOR = new Prefix("c/");
     public static final Prefix PREFIX_DOB = new Prefix("b/");
-
+    public static final Prefix PREFIX_REMARK = new Prefix("r/");
 }
