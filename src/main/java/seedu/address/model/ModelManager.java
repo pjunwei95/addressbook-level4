@@ -77,6 +77,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public synchronized void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
+        addressBook.updateTagColorPair(tagList, color);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
             throws DuplicatePersonException, PersonNotFoundException {
         requireAllNonNull(target, editedPerson);
@@ -100,12 +107,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
-        addressBook.updateTagColorPair(tagList, color);
-        indicateAddressBookChanged();
     }
 
     @Override

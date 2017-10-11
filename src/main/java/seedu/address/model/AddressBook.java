@@ -178,8 +178,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         updateTagColorInEveryPerson(modifyingTagList, color);
 
-        // Sync the updated person list
+        // Sync the updated tag list
         syncMasterTagListWith(persons);
+
+        resetData(this);
     }
 
     /**
