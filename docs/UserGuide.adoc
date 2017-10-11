@@ -195,6 +195,24 @@ Selects the 2nd person in the address book.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
+=== Remarking a person : `remark`
+
+Remarks the person identified by the index number. +
+Format: `remark INDEX /r REMARK`
+
+****
+* Remarks the person identified by the index number.
+* The content of remark is specified in REMARK.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`remark 2 /r Likes to swim` +
+Remarks the 2nd person with "Likes to swim".
+
+
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
