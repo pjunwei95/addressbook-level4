@@ -33,4 +33,5 @@ public class SearchCommand extends Command {
                 && this.predicate.equals(((SearchCommand) other).predicate));
 
     }
+
 }
