@@ -1,4 +1,7 @@
 = Weaver (Level 4)
+
+image::Present.png[width="500"]
+
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 
@@ -8,7 +11,6 @@ https://coveralls.io/github/se-edu/addressbook-level4?branch=master[image:https:
 
 
 ifndef::env-github[]
-image::images/Present.png[width="600"]
 endif::[]
 
 * This is a desktop Address Book application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
