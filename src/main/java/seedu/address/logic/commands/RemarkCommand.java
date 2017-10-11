@@ -41,7 +41,7 @@ public class RemarkCommand extends UndoableCommand {
         requireNonNull(index);
         requireNonNull(remark);
 
-        this.index = index;
+        this.index = index - 1;
         this.remark = remark;
     }
 
