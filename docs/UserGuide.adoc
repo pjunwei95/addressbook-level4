@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Weaver - User Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -12,7 +12,9 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `W13-B2`      Since: `Aug 2017`      Licence: `MIT`
+
+image::Present.png[width="790"]
 
 == Quick Start
 
@@ -135,6 +137,26 @@ Returns `John Doe` and `Hans Gruber`
 * `find/t friends colleagues` +
 Returns any person having tags `Friends` or `Colleagues`
 
+image::Search.png[width="600"]
+
+=== Searching a person : `search`
+
+Lists persons with the given name and Date Of Birth.
+Format: `search NAME DATE_OF_BIRTH`
+
+
+****
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of keywords matter. e.g. in `search Hans 13.10.1997` Hans and 13.10.1997 cannot be interchanged
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching both name and Date Of Birth will be returned.
+****
+
+Examples:
+
+* `search John 13.10.1997` +
+Returns persons with name `John` and Date of Birth `13.10.1997`.
+
 === Deleting a person : `delete`
 
 Deletes the specified person from the address book. +
@@ -174,6 +196,24 @@ Selects the 2nd person in the address book.
 * `find Betsy` +
 `select 1` +
 Selects the 1st person in the results of the `find` command.
+
+=== Remarking a person : `remark`
+
+Remarks the person identified by the index number. +
+Format: `remark INDEX /r REMARK`
+
+****
+* Remarks the person identified by the index number.
+* The content of remark is specified in REMARK.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`remark 2 /r Likes to swim` +
+Remarks the 2nd person with "Likes to swim".
+
 
 === Listing entered commands : `history`
 
@@ -267,6 +307,16 @@ Format: `clear`
 
 Exits the program. +
 Format: `exit`
+
+=== Coming in V2.0
+
+image::EmailThem.png[width="600"]
+
+* Add a notification system to notify users about upcoming birthdays +
+* Send Email Intents to contacts +
+* Social Integration +
+* Have a favourites list +
+* Be able to view contacts frequently viewed +
 
 === Saving the data
 

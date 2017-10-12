@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Weaver - Developer Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -12,7 +12,7 @@ endif::[]
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `W13-B2`      Since: `Aug 2017`      Licence: `MIT`
 
 == Setting up
 
@@ -739,6 +739,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |be able to find persons based on name and Date of Birth | we can narrow the scope when users have same names
 
+|`* * *` |user |add a remark for somebody | customize the descriptions
+
 |`* * *` |user |directly contact a person by email, by clicking on email button | have instant access to communication
 
 |`* * *`|user |confirm before clearing |not clear the contents accidentally
@@ -888,6 +890,29 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
+=== Use case: Remark person
+
+*MSS*
+
+1.  User requests the list of person.
+2.  AddressBook shows the list of person.
+3.  User requests to remark persons by specifying index and remark
+4.  AddressBook remarks the person
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The index is illegal.
++
+Use case ends. AddressBook shows an error message.
+
+[discrete]
 === Use case: Change color of a tag
 
 *MSS*
@@ -908,9 +933,6 @@ Use case ends.
 +
 Use case ends.
 
-
-{More to be added}
-=======
 [none]
 * 2b. The given color is not available.
 +
@@ -1010,6 +1032,8 @@ Use case ends.
 ** 1a1. AddressBook shows a message to prompt adding new contacts.
 +
 Use case ends.
+
+=======
 
 [appendix]
 == Non Functional Requirements
