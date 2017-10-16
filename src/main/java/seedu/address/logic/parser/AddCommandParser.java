@@ -54,12 +54,12 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             Remark remark;
             DateOfBirth date;
-            if(ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).isPresent()) {
+            if (ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).isPresent()) {
                 date = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).get();
             } else {
                 date = new DateOfBirth("");;
             }
-            if(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)).isPresent()) {
+            if (ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)).isPresent()) {
                 remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)).get();
             } else {
                 remark = new Remark("");

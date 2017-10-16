@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -18,7 +16,7 @@ public class DateOfBirth {
      * @throws IllegalValueException if given dateOfBirth string is invalid.
      */
     public DateOfBirth(String Date) {
-        if(!Date.equals("")) {
+        if (!Date.equals("")) {
             String trimmedDate = Date.trim();
             this.date = trimmedDate;
         } else {

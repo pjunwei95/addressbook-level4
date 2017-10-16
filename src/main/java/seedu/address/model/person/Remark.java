@@ -1,20 +1,12 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
-import seedu.address.commons.exceptions.IllegalValueException;
-
 /**
  * Represents a Person's remark in the address book.
  */
 
 public class Remark {
     public final String value;
-    /**
-     * Validates given remark.
-     *
-     * @throws IllegalValueException if given remark string is invalid.
-     */
+
     public Remark(String remark) {
         this.value = remark;
     }
