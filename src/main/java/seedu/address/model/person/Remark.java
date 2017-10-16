@@ -16,7 +16,6 @@ public class Remark {
      * @throws IllegalValueException if given remark string is invalid.
      */
     public Remark(String remark) {
-        requireNonNull(remark);
         this.value = remark;
     }
 

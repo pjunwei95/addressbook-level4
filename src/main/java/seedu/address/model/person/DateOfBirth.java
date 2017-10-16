@@ -18,10 +18,12 @@ public class DateOfBirth {
      * @throws IllegalValueException if given dateOfBirth string is invalid.
      */
     public DateOfBirth(String Date) {
-
-        requireNonNull(Date);
-        String trimmedDate = Date.trim();
-        this.date = trimmedDate;
+        if(!Date.equals("")) {
+            String trimmedDate = Date.trim();
+            this.date = trimmedDate;
+        } else {
+            this.date = "";
+        }
     }
     @Override
     public String toString() {
