@@ -35,18 +35,18 @@ public class DeleteTagCommand extends UndoableCommand {
     public static final String MESSAGE_DUPLICATE_TAG = "This person already exists in the address book.";
 
     private final Index index;
-    private final EditTagDescriptor editTagDescriptor;
+    private final DeleteTagDescriptor deleteTagDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param editTagDescriptor details to edit the person with
+     * @param deleteTagDescriptor details to edit the person with
      */
-    public DeleteTagCommand(Index index, EditTagDescriptor editTagDescriptor) {
+    public DeleteTagCommand(Index index, DeleteTagDescriptor deleteTagDescriptor) {
         requireNonNull(index);
-        requireNonNull(editTagDescriptor);
+        requireNonNull(deleteTagDescriptor);
 
         this.index = index;
-        this.editTagDescriptor = new EditTagDescriptor(editTagDescriptor);
+        this.deleteTagDescriptor = new DeleteTagDescriptor(deleteTagDescriptor);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class DeleteTagCommand extends UndoableCommand {
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createTagEditedPerson(personToEdit, new EditTagDescriptor(editTagDescriptor));
+        Person editedPerson = createTagDeletedPerson(personToEdit, new DeleteTagDescriptor(deleteTagDescriptor));
 
         try {
             model.updatePerson(personToEdit, editedPerson);
@@ -76,11 +76,11 @@ public class DeleteTagCommand extends UndoableCommand {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createTagEditedPerson(ReadOnlyPerson personToEdit,
-                                             EditTagDescriptor editTagDescriptor) {
+    private static Person createTagDeletedPerson(ReadOnlyPerson personToEdit,
+                                             DeleteTagDescriptor deleteTagDescriptor) {
         assert personToEdit != null;
 
-        Set<Tag> updatedTags = editTagDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tag> updatedTags = deleteTagDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getDateOfBirth(), personToEdit.getRemark(), updatedTags);
@@ -90,20 +90,20 @@ public class DeleteTagCommand extends UndoableCommand {
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditTagDescriptor {
+    public static class DeleteTagDescriptor {
         private Set<Tag> tags;
 
-        public EditTagDescriptor() {
+        public DeleteTagDescriptor() {
         }
 
-        public EditTagDescriptor(EditTagDescriptor toCopy) {
+        public DeleteTagDescriptor(DeleteTagDescriptor toCopy) {
             this.tags = toCopy.tags;
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if tag is edited.
          */
-        public boolean isTagEdited() {
+        public boolean isTagDeleted() {
             return CollectionUtil.isAnyNonNull(this.tags);
         }
 
@@ -123,12 +123,12 @@ public class DeleteTagCommand extends UndoableCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditTagDescriptor)) {
+            if (!(other instanceof DeleteTagDescriptor)) {
                 return false;
             }
 
             // state check
-            EditTagDescriptor e = (EditTagDescriptor) other;
+            DeleteTagDescriptor e = (DeleteTagDescriptor) other;
 
             return getTags().equals(e.getTags());
         }
