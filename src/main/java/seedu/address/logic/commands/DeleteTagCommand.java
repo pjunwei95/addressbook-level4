@@ -1,13 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -31,13 +28,12 @@ public class DeleteTagCommand extends UndoableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tag identified by the index number used in the last person listing.\n"
-            + "Parameters: INDEX (must be a positive integer)"
-            + "TAG (must match tag)\n"
-            + "Example: " + COMMAND_WORD + " 1";
-    //delete/t 1 friends
+            + "Parameters: INDEX (must be a positive integer)" + PREFIX_TAG + "TAG (must match tag)\n"
+            + "Example: " + COMMAND_WORD + " 1" + "t/friends";
+
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s";
-    public static final String MESSAGE_NOT_DELETED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TAG = "This person already exists in the address book.";
+    public static final String MESSAGE_NOT_EXISTING_TAGS = "The tag(s) provided is invalid.";
 
     private final Index index;
     private final DeleteTagDescriptor deleteTagDescriptor;
@@ -63,6 +59,14 @@ public class DeleteTagCommand extends UndoableCommand {
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(index.getZeroBased());
+
+        try{
+            checkTagExist(personToEdit, deleteTagDescriptor);
+        }
+        catch(CommandException net){
+            throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS));
+        }
+
         Person editedPerson = createTagDeletedPerson(personToEdit, new DeleteTagDescriptor(deleteTagDescriptor));
 
         try {
@@ -76,6 +80,42 @@ public class DeleteTagCommand extends UndoableCommand {
 
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, editedPerson));
     }
+    /**
+     *Check whether a given tag exists in current database
+     */
+    private boolean isExistingTagName(Tag t) {
+        for (Tag tag : model.getAddressBook().getTagList()) {
+            if (tag.tagName.equals(t.tagName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void checkTagExist(ReadOnlyPerson personToEdit, DeleteTagDescriptor deleteTagDescriptor) throws CommandException {
+        Set<Tag> nonExistingTagList = new HashSet<>();
+        Set<Tag> personTags = new HashSet<>(personToEdit.getTags());
+        Set<Tag> tagsToDelete = deleteTagDescriptor.getTags().orElse(personToEdit.getTags());
+
+        // Check whether tags are not existing tags in addressbook
+        for (Tag tag: tagsToDelete) {
+            if (!isExistingTagName(tag)) {
+                nonExistingTagList.add(tag);
+            }
+        }
+        //Check whether tags in  are not existing tags in personTags
+        for (Tag tag: tagsToDelete) {
+            if (!personTags.contains(tag)){
+                nonExistingTagList.add(tag);
+            }
+        }
+
+        // There are tags that are not existing tags
+        if (nonExistingTagList.size() != 0) {
+            throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS));
+        }
+    }
+
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
