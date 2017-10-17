@@ -104,7 +104,7 @@ public class DeleteTagCommand extends UndoableCommand {
         Set<Tag> personTags = new HashSet<>(personToEdit.getTags());
         Set<Tag> tagsToDelete = deleteTagDescriptor.getTags().orElse(personToEdit.getTags());
 
-        // Check whether tags are not existing tags in addressbook
+        // Check whether tags are not existing tags in address book
         for (Tag tag: tagsToDelete) {
             if (!isExistingTagName(tag)) {
                 nonExistingTagList.add(tag);
