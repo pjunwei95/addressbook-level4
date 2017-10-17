@@ -3,6 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -80,7 +85,9 @@ public class DeleteTagCommand extends UndoableCommand {
                                              DeleteTagDescriptor deleteTagDescriptor) {
         assert personToEdit != null;
 
-        Set<Tag> updatedTags = deleteTagDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+        Set<Tag> tagsToDelete = deleteTagDescriptor.getTags().orElse(personToEdit.getTags());
+        updatedTags.removeAll(tagsToDelete);
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getDateOfBirth(), personToEdit.getRemark(), updatedTags);

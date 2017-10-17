@@ -1,18 +1,21 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.logic.commands.DeleteTagCommand.EditTagDescriptor;
+import seedu.address.logic.commands.DeleteTagCommand.DeleteTagDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
@@ -39,15 +42,17 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
         }
 
-        EditTagDescriptor editTagDescriptor = new EditTagDescriptor();
+        DeleteTagDescriptor deleteTagDescriptor = new DeleteTagDescriptor();
 
         try {
-            parseTagsForDelete(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editTagDescriptor::setTags);
+            parseTagsForDelete(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(deleteTagDescriptor::setTags);
+
+
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }
 
-        return new DeleteTagCommand(index, editTagDescriptor);
+        return new DeleteTagCommand(index, deleteTagDescriptor);
     }
 
     /**
