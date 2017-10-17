@@ -9,6 +9,7 @@ import static seedu.address.model.font.FontSize.FONT_SIZE_XS_LABEL;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.font.FontSize;
 
@@ -16,7 +17,7 @@ import seedu.address.model.font.FontSize;
  * Customise the look of the Address Book application.
  */
 public class ChangeFontSizeCommand extends UndoableCommand {
-    public static final String COMMAND_WORD = "fontsize";
+    public static final String COMMAND_WORD = "fs";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Customize the font size "
             + "Parameters: "
             + PREFIX_FONT_SIZE + "[FONT SIZE]\n"
@@ -38,6 +39,7 @@ public class ChangeFontSizeCommand extends UndoableCommand {
         if (FontSize.isValidFontSize(newFontSize)) {
             EventsCenter.getInstance().post(new ChangeFontSizeEvent(MESSAGE_SUCCESS + newFontSize + ".",
                     newFontSize));
+            FontSize.setCurrentFontSizeLabel(newFontSize);
             return new CommandResult(MESSAGE_SUCCESS + newFontSize + ".");
         } else {
             throw new CommandException(FontSize.MESSAGE_FONT_SIZE_CONSTRAINTS);

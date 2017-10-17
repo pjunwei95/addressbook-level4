@@ -2,18 +2,21 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.font.FontSize;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -36,6 +39,7 @@ public class CommandBox extends UiPart<Region> {
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
+        registerAsAnEventHandler(this);
     }
 
     /**
@@ -146,6 +150,19 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+    }
+
+    @Subscribe
+    private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
+        setFontSize(event.fontSize);
+    }
+
+    /**
+     * Sets the command box style to user preferred font size.
+     */
+    private void setFontSize(String newFontSize) {
+        String FXFormatFontSize = FontSize.getAssociateFXFontSizeString(newFontSize);
+        commandTextField.setStyle(FXFormatFontSize);
     }
 
 }

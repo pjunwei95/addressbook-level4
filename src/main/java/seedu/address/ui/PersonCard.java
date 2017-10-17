@@ -5,6 +5,7 @@ import static seedu.address.model.font.FontSize.FONT_SIZE_M_LABEL;
 import static seedu.address.model.font.FontSize.FONT_SIZE_S_LABEL;
 import static seedu.address.model.font.FontSize.FONT_SIZE_XL_LABEL;
 import static seedu.address.model.font.FontSize.FONT_SIZE_XS_LABEL;
+import static seedu.address.model.font.FontSize.getAssociateFXFontSizeString;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -18,6 +19,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -61,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
 
-    public PersonCard(ReadOnlyPerson person, int displayedIndex) {
+    public PersonCard(ReadOnlyPerson person, int displayedIndex){
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -126,42 +128,22 @@ public class PersonCard extends UiPart<Region> {
         setFontSize(event.fontSize);
     }
 
-    private void setFontSize(String userPref) {
-        switch (userPref) {
-            case FONT_SIZE_XS_LABEL:
-                setFontSizeHelper("x-small");
-                break;
+    private void setFontSize(String newFontSize) {
+        assert (FontSize.isValidFontSize(newFontSize));
 
-            case FONT_SIZE_S_LABEL:
-                setFontSizeHelper("small");
-                break;
-
-            case FONT_SIZE_M_LABEL:
-                setFontSizeHelper("normal");
-                break;
-
-            case FONT_SIZE_L_LABEL:
-                setFontSizeHelper("x-large");
-                break;
-
-            case FONT_SIZE_XL_LABEL:
-                setFontSizeHelper("xx-large");
-                break;
-
-            default:
-                break;
-        }
+        String FXFormatFontSize = getAssociateFXFontSizeString(newFontSize);
+        setFontSizeForAllAttributes(FXFormatFontSize);
     }
 
-    private void setFontSizeHelper(String fontSize) {
-        name.setStyle("-fx-font-size: " + fontSize + ";");
-        id.setStyle("-fx-font-size: " + fontSize + ";");
-        phone.setStyle("-fx-font-size: " + fontSize + ";");
-        address.setStyle("-fx-font-size: " + fontSize + ";");
-        email.setStyle("-fx-font-size: " + fontSize + ";");
-        date.setStyle("-fx-font-size: " + fontSize + ";");
-        remark.setStyle("-fx-font-size: " + fontSize + ";");
-        tags.getChildren().forEach(node -> node.setStyle("-fx-font-size: " + fontSize + ";"));
+    private void setFontSizeForAllAttributes(String fontSize) {
+        name.setStyle(fontSize);
+        id.setStyle(fontSize);
+        phone.setStyle(fontSize);
+        address.setStyle(fontSize);
+        email.setStyle(fontSize);
+        date.setStyle(fontSize);
+        remark.setStyle(fontSize);
+        tags.getChildren().forEach(node -> node.setStyle(fontSize));
     }
 
 }
