@@ -20,7 +20,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Deletes a person identified using it's last displayed index from the address book.
+ * Deletes tags from a person identified using it's last displayed index from the address book.
  */
 public class DeleteTagCommand extends UndoableCommand {
 
@@ -32,7 +32,7 @@ public class DeleteTagCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " 1" + "t/friends";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s";
-    public static final String MESSAGE_DUPLICATE_TAG = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_NOT_DELETED = "At least one field to delete must be provided.";
     public static final String MESSAGE_NOT_EXISTING_TAGS = "The tag(s) provided is invalid.";
 
@@ -41,7 +41,7 @@ public class DeleteTagCommand extends UndoableCommand {
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param deleteTagDescriptor details to edit the person with
+     * @param deleteTagDescriptor details of which tags to delete
      */
     public DeleteTagCommand(Index index, DeleteTagDescriptor deleteTagDescriptor) {
         requireNonNull(index);
@@ -72,7 +72,7 @@ public class DeleteTagCommand extends UndoableCommand {
         try {
             model.updatePerson(personToEdit, editedPerson);
         } catch (DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("The target person cannot be missing");
         }
@@ -81,7 +81,8 @@ public class DeleteTagCommand extends UndoableCommand {
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, editedPerson));
     }
     /**
-     *Check whether a given tag exists in current database
+     * Check whether a given tag exists in address book.
+     * @param t tag that is to be checked
      */
     private boolean isExistingTagName(Tag t) {
         for (Tag tag : model.getAddressBook().getTagList()) {
@@ -92,8 +93,10 @@ public class DeleteTagCommand extends UndoableCommand {
         return false;
     }
     /**
-     * TODO: modify this
-     *Check whether a given tag exists in current database
+     * Check whether a given tag exists in current database(including the person).
+     * Throws {@code CommandException} if tag does not exist
+     * @param personToEdit the person that is to be checked
+     * @param deleteTagDescriptor details of which tags to delete
      */
     private void checkTagExist(ReadOnlyPerson personToEdit,
                                DeleteTagDescriptor deleteTagDescriptor) throws CommandException {
@@ -122,8 +125,8 @@ public class DeleteTagCommand extends UndoableCommand {
 
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the tags of {@code personToEdit}
+     * deleted with {@code DeleteTagDescriptor}.
      */
     private static Person createTagDeletedPerson(ReadOnlyPerson personToEdit,
                                              DeleteTagDescriptor deleteTagDescriptor) {
@@ -138,8 +141,7 @@ public class DeleteTagCommand extends UndoableCommand {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details of which tags to be deleted.
      */
     public static class DeleteTagDescriptor {
         private Set<Tag> tags;
