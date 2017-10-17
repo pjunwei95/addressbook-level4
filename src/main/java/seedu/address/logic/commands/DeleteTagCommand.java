@@ -60,10 +60,9 @@ public class DeleteTagCommand extends UndoableCommand {
 
         ReadOnlyPerson personToEdit = lastShownList.get(index.getZeroBased());
 
-        try{
+        try {
             checkTagExist(personToEdit, deleteTagDescriptor);
-        }
-        catch(CommandException net){
+        } catch (CommandException net) {
             throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS));
         }
 
@@ -91,8 +90,12 @@ public class DeleteTagCommand extends UndoableCommand {
         }
         return false;
     }
-
-    private void checkTagExist(ReadOnlyPerson personToEdit, DeleteTagDescriptor deleteTagDescriptor) throws CommandException {
+    /**
+     * TODO: modify this
+     *Check whether a given tag exists in current database
+     */
+    private void checkTagExist(ReadOnlyPerson personToEdit,
+                               DeleteTagDescriptor deleteTagDescriptor) throws CommandException {
         Set<Tag> nonExistingTagList = new HashSet<>();
         Set<Tag> personTags = new HashSet<>(personToEdit.getTags());
         Set<Tag> tagsToDelete = deleteTagDescriptor.getTags().orElse(personToEdit.getTags());
@@ -105,7 +108,7 @@ public class DeleteTagCommand extends UndoableCommand {
         }
         //Check whether tags in  are not existing tags in personTags
         for (Tag tag: tagsToDelete) {
-            if (!personTags.contains(tag)){
+            if (!personTags.contains(tag)) {
                 nonExistingTagList.add(tag);
             }
         }
