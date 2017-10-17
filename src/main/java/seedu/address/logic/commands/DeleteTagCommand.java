@@ -28,13 +28,13 @@ public class DeleteTagCommand extends UndoableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tag identified by the index number used in the last person listing.\n"
-            + "Parameters: INDEX (must be a positive integer)" + PREFIX_TAG + "TAG (must match tag)\n"
-            + "Example: " + COMMAND_WORD + " 1" + "t/friends";
+            + "Parameters: INDEX (must be a positive integer) " + PREFIX_TAG + "TAG (must match tag)\n"
+            + "Example: " + COMMAND_WORD + " 1 t/friends";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_NOT_DELETED = "At least one field to delete must be provided.";
-    public static final String MESSAGE_NOT_EXISTING_TAGS = "The tag(s) provided is invalid.";
+    public static final String MESSAGE_NOT_EXISTING_TAGS = "The tag provided is invalid. Please check again.";
 
     private final Index index;
     private final DeleteTagDescriptor deleteTagDescriptor;
@@ -78,7 +78,8 @@ public class DeleteTagCommand extends UndoableCommand {
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS,
+                deleteTagDescriptor.getTags().orElse(editedPerson.getTags())));
     }
     /**
      * Check whether a given tag exists in address book.
@@ -110,14 +111,13 @@ public class DeleteTagCommand extends UndoableCommand {
                 nonExistingTagList.add(tag);
             }
         }
-        //Check whether tags in  are not existing tags in personTags
+        //Check whether tags are not existing tags in personTags
         for (Tag tag: tagsToDelete) {
             if (!personTags.contains(tag)) {
                 nonExistingTagList.add(tag);
             }
         }
 
-        // There are tags that are not existing tags
         if (nonExistingTagList.size() != 0) {
             throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS));
         }
