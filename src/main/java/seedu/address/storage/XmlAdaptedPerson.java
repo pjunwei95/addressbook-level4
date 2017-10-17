@@ -35,6 +35,8 @@ public class XmlAdaptedPerson {
     private String date;
     @XmlElement(required = true)
     private String remark;
+    @XmlElement(required = false)
+    private String image;
 
 
     @XmlElement
@@ -59,6 +61,7 @@ public class XmlAdaptedPerson {
         address = source.getAddress().value;
         date = source.getDateOfBirth().date;
         remark = source.getRemark().value;
+
 
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
