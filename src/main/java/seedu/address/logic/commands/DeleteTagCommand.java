@@ -33,6 +33,7 @@ public class DeleteTagCommand extends UndoableCommand {
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s";
     public static final String MESSAGE_DUPLICATE_TAG = "This person already exists in the address book.";
+    public static final String MESSAGE_NOT_DELETED = "At least one field to delete must be provided.";
     public static final String MESSAGE_NOT_EXISTING_TAGS = "The tag(s) provided is invalid.";
 
     private final Index index;

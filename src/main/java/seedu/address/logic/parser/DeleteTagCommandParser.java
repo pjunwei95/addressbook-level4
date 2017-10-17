@@ -43,10 +43,12 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
 
         try {
             parseTagsForDelete(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(deleteTagDescriptor::setTags);
-
-
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
+        }
+
+        if (!deleteTagDescriptor.isTagDeleted()) {
+            throw new ParseException(DeleteTagCommand.MESSAGE_NOT_DELETED);
         }
 
         return new DeleteTagCommand(index, deleteTagDescriptor);
