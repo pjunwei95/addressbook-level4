@@ -8,9 +8,11 @@ import seedu.address.commons.events.BaseEvent;
 public class ChangeFontSizeEvent extends BaseEvent {
 
     public final String message;
+    public String fontSize;
 
-    public ChangeFontSizeEvent(String message) {
+    public ChangeFontSizeEvent(String message, String fontSize) {
         this.message = message;
+        this.fontSize = fontSize;
     }
 
     @Override

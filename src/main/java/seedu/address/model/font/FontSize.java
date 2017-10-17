@@ -11,10 +11,18 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class FontSize {
 
     public static final String MESSAGE_FONT_SIZE_CONSTRAINTS =
-            "Font size can only be either \"xsmall\", \"small\","
-                    + " \"normal\", \"large\",  or \"xlarge\" (case-sensitive).";
-    public static final String[] FONT_SIZE_VALIDATION = {"xsmall", "small", "normal", "large", "xlarge"};
+            "Font size can only be either \"xs\", \"s\","
+                    + " \"m\", \"l\",  or \"xl\"";
+    public static final String[] FONT_SIZE_LIST = {"xs", "s", "m", "l", "xl"};
+
+    public static final String FONT_SIZE_XS_LABEL = "xs";
+    public static final String FONT_SIZE_S_LABEL = "s";
+    public static final String FONT_SIZE_M_LABEL = "m";
+    public static final String FONT_SIZE_L_LABEL = "l";
+    public static final String FONT_SIZE_XL_LABEL = "xl";
+    
     public final String value;
+    public static String currentFontSizeLabel = FONT_SIZE_M_LABEL;
 
     /**
      * Validates given font size.
@@ -33,12 +41,28 @@ public class FontSize {
      * Returns true if a given string is a valid font size.
      */
     public static boolean isValidFontSize(String test) {
-        for (String s : FONT_SIZE_VALIDATION) {
+        for (String s : FONT_SIZE_LIST) {
             if (test.equals(s)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * @return the current font size
+     */
+    public static String getCurrentFontSizeLabel() {
+        return currentFontSizeLabel;
+    }
+
+    /**
+     * Set the current font size to a new font size
+     * @param newFontSizeLabel
+     */
+    public static void setCurrentFontSizeLabel(String newFontSizeLabel) {
+        requireNonNull(newFontSizeLabel);
+        currentFontSizeLabel = newFontSizeLabel;
     }
 
     @Override

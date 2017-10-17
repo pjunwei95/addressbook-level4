@@ -1,7 +1,15 @@
 package seedu.address.ui;
 
+import static seedu.address.model.font.FontSize.FONT_SIZE_L_LABEL;
+import static seedu.address.model.font.FontSize.FONT_SIZE_M_LABEL;
+import static seedu.address.model.font.FontSize.FONT_SIZE_S_LABEL;
+import static seedu.address.model.font.FontSize.FONT_SIZE_XL_LABEL;
+import static seedu.address.model.font.FontSize.FONT_SIZE_XS_LABEL;
+
 import java.util.HashMap;
 import java.util.Random;
+
+import com.google.common.eventbus.Subscribe;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -9,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.events.ui.ChangeFontSizeEvent;
+import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
 
 
@@ -57,6 +67,9 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         initTags(person);
         bindListeners(person);
+        registerAsAnEventHandler(this);
+        String currentFontSize = FontSize.getCurrentFontSizeLabel();
+        setFontSize(currentFontSize);
     }
 
 
@@ -107,4 +120,48 @@ public class PersonCard extends UiPart<Region> {
         return id.getText().equals(card.id.getText())
                 && person.equals(card.person);
     }
+
+    @Subscribe
+    private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
+        setFontSize(event.fontSize);
+    }
+
+    private void setFontSize(String userPref) {
+        switch (userPref) {
+            case FONT_SIZE_XS_LABEL:
+                setFontSizeHelper("x-small");
+                break;
+
+            case FONT_SIZE_S_LABEL:
+                setFontSizeHelper("small");
+                break;
+
+            case FONT_SIZE_M_LABEL:
+                setFontSizeHelper("normal");
+                break;
+
+            case FONT_SIZE_L_LABEL:
+                setFontSizeHelper("x-large");
+                break;
+
+            case FONT_SIZE_XL_LABEL:
+                setFontSizeHelper("xx-large");
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void setFontSizeHelper(String fontSize) {
+        name.setStyle("-fx-font-size: " + fontSize + ";");
+        id.setStyle("-fx-font-size: " + fontSize + ";");
+        phone.setStyle("-fx-font-size: " + fontSize + ";");
+        address.setStyle("-fx-font-size: " + fontSize + ";");
+        email.setStyle("-fx-font-size: " + fontSize + ";");
+        date.setStyle("-fx-font-size: " + fontSize + ";");
+        remark.setStyle("-fx-font-size: " + fontSize + ";");
+        tags.getChildren().forEach(node -> node.setStyle("-fx-font-size: " + fontSize + ";"));
+    }
+
 }
