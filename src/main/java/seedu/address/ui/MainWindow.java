@@ -48,6 +48,8 @@ public class MainWindow extends UiPart<Region> {
     private Config config;
     private UserPrefs prefs;
 
+    private CommandBox commandBox;
+
     @FXML
     private StackPane browserPlaceholder;
 
@@ -143,7 +145,7 @@ public class MainWindow extends UiPart<Region> {
                 logic.getFilteredPersonList().size());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(logic);
+        this.commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -170,6 +172,7 @@ public class MainWindow extends UiPart<Region> {
     private void setWindowDefaultSize(UserPrefs prefs) {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
+        FontSize.setCurrentFontSizeLabel(prefs.getGuiSettings().getFontSize());
         if (prefs.getGuiSettings().getWindowCoordinates() != null) {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
@@ -186,7 +189,7 @@ public class MainWindow extends UiPart<Region> {
      */
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.currentFontSizeLabel);
     }
 
     /**
@@ -229,7 +232,7 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleIncreaseFontSize() throws CommandException, ParseException {
-        logic.execute(FontSize.INCREASE_FONT_SIZE_COMMAND);
+        commandBox.handleCommandInputChanged(FontSize.INCREASE_FONT_SIZE_COMMAND);
     }
 
     /**
@@ -237,7 +240,7 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleDecreaseFontSize() throws CommandException, ParseException {
-        logic.execute(FontSize.DECREASE_FONT_SIZE_COMMAND);
+        commandBox.handleCommandInputChanged(FontSize.DECREASE_FONT_SIZE_COMMAND);
     }
 
 

@@ -17,6 +17,7 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.font.FontSize;
 
 /**
  * The manager of the UI component.
@@ -51,6 +52,7 @@ public class UiManager extends ComponentManager implements Ui {
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+
 
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);

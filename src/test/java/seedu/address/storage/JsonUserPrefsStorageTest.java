@@ -15,6 +15,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.font.FontSize;
 
 public class JsonUserPrefsStorageTest {
 

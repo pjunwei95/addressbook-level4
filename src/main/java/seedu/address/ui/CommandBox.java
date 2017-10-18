@@ -122,6 +122,26 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    // Handle a input command by passing a string
+    public void handleCommandInputChanged(String inputCommand) {
+        try {
+            CommandResult commandResult = logic.execute(inputCommand);
+            initHistory();
+            historySnapshot.next();
+            // process result of the command
+            commandTextField.setText("");
+            logger.info("Result: " + commandResult.feedbackToUser);
+            raise(new NewResultAvailableEvent(commandResult.feedbackToUser, false));
+
+        } catch (CommandException | ParseException e) {
+            initHistory();
+            // handle command failure
+            setStyleToIndicateCommandFailure();
+            logger.info("Invalid command: " + inputCommand);
+            raise(new NewResultAvailableEvent(e.getMessage(), true));
+        }
+    }
+
     /**
      * Initializes the history snapshot.
      */

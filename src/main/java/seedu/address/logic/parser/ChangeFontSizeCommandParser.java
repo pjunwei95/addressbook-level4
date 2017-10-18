@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FONT_SIZE;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
