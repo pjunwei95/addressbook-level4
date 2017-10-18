@@ -2,13 +2,15 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
-
 import seedu.address.logic.commands.PhotoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.stream.Stream;
+
+
 
 /**
  * Parses input arguments and creates a new PhotoCommand object
@@ -25,7 +27,7 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
         String trimmedArgs = args.trim();
         String[] Keywords = trimmedArgs.split("\\s+");
 
-        if (trimmedArgs.isEmpty() || Keywords.length!=2) {
+        if (trimmedArgs.isEmpty() || Keywords.length != 2) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
         }

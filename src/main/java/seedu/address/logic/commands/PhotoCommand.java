@@ -19,7 +19,7 @@ public class PhotoCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a photo of the person to the addressBook\n"
             + "Parameters: INDEX (must be a positive integer) FILE_PATH\n"
-            + "Example: " + COMMAND_WORD + " 1" +" /Desktop/button.png";
+            + "Example: " + COMMAND_WORD + " 1" + " button.png";
 
     public static final String MESSAGE_PHOTO_PERSON_SUCCESS = "Added Photo to Person: %1$s";
 

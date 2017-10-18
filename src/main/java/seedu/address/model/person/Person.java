@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.io.File;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -113,6 +112,9 @@ public class Person implements ReadOnlyPerson {
         this.date.set(requireNonNull(date));
     }
 
+    public void setImage(FileImage image) {
+        this.image.set(requireNonNull(image));
+    }
     @Override
     public ObjectProperty<DateOfBirth> dateOfBirthProperty() {
         return date;

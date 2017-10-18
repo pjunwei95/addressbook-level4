@@ -115,6 +115,11 @@ public class AddCommandTest {
             fail("This method should not be called.");
             return null;
         }
+        @Override
+        public void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException {
+            fail("This method should not be called.");
+
+        }
 
         @Override
         public void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {

@@ -14,7 +14,6 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.FileImage;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -26,6 +25,7 @@ import seedu.address.model.tag.TagColor;
  * Represents the in-memory model of the address book data.
  * All changes to any model should be synchronized.
  */
+
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
@@ -68,8 +68,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
 
-            addressBook.removePerson(target);
-            indicateAddressBookChanged();
+        addressBook.removePerson(target);
+        indicateAddressBookChanged();
 
     }
     @Override
@@ -79,7 +79,6 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
 
-
     }
     @Override
     public synchronized void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException {
@@ -87,9 +86,10 @@ public class ModelManager extends ComponentManager implements Model {
         try {
             person.imageProperty().setValue( new FileImage(FilePath));
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            indicateAddressBookChanged();
         }
         catch (IllegalValueException ive) {
-
+            System.out.println("Error encountered");
         }
     }
     @Override

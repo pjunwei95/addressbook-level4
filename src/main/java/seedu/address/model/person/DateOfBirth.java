@@ -10,21 +10,20 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 public class DateOfBirth {
 
-    public final String date;
-
     /**
      * Represents a Person's Date Of birth
      * Guarantees: immutable; is valid as declared in {@link #isValidBirthday(String)}
      */
-    public static final String MESSAGE_BIRTHDAY_CONSTRAINTS =
-            "Date of Birth must be a Valid Date and in the following format: \n"
-            +"'.' and '/' can be used as separators. \n";
 
-    private static final String BIRTHDAY_VALIDATION_REGEX = "(0[1-9]|[1-9]|1[0-9]|2[0-9]|3[01])[///./-]"
+    public static final String BIRTHDAY_VALIDATION_REGEX = "(0[1-9]|[1-9]|1[0-9]|2[0-9]|3[01])[///./-]"
             + "(0[1-9]|1[0-2]|[1-9])[///./-](19|20)[0-9][0-9]";
 
 
-    private static final String BIRTHDAY_SPLIT_REGEX = "[///./-]";
+    public static final String MESSAGE_BIRTHDAY_CONSTRAINTS =
+            "Date of Birth must be a Valid Date and in the following format: \n"
+            + "'.' and '/' can be used as separators. \n";
+
+    public final String date;
 
     public DateOfBirth(String Date) throws IllegalValueException {
 

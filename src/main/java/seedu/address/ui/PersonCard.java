@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.stage.FileChooser;
+
 import seedu.address.model.person.ReadOnlyPerson;
 
 //import javax.swing.text.html.ImageView;
@@ -68,6 +68,9 @@ public class PersonCard extends UiPart<Region> {
 
 
     }
+    /**
+     * Adds a photo to a persons contact
+     */
     private void assignImage(String FilePath) {
 
         String url;
