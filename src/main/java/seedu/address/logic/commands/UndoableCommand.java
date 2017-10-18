@@ -15,8 +15,8 @@ import seedu.address.model.font.FontSize;
  * Represents a command which can be undone and redone.
  */
 public abstract class UndoableCommand extends Command {
-    private ReadOnlyAddressBook previousAddressBook;
     private static String previousFontSize = FontSize.getCurrentFontSizeLabel();
+    private ReadOnlyAddressBook previousAddressBook;
 
     protected abstract CommandResult executeUndoableCommand() throws CommandException;
 
