@@ -5,10 +5,10 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.IMAGE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.IMAGE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.IMAGE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.IMAGE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -89,7 +89,8 @@ public class AddCommandParserTest {
                 .withRemark(VALID_REMARK_BOB).withImage(VALID_IMAGE_BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DOB_DESC_BOB + REMARK_DESC_BOB + IMAGE_BOB + TAG_DESC_HUSBAND
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DOB_DESC_BOB + REMARK_DESC_BOB + IMAGE_BOB
+                        + TAG_DESC_HUSBAND
                         + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleTags));
     }
