@@ -34,6 +34,13 @@ public class GuiSettings implements Serializable {
         this.fontSize = fontSize;
     }
 
+    public GuiSettings(Double windowWidth, Double windowHeight, int xPosition, int yPosition) {
+        this.windowWidth = windowWidth;
+        this.windowHeight = windowHeight;
+        this.windowCoordinates = new Point(xPosition, yPosition);
+        this.fontSize = DEFAULT_FONT_SIZE;
+    }
+
     public Double getWindowWidth() {
         return windowWidth;
     }

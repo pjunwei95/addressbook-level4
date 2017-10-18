@@ -25,15 +25,15 @@ public class ChangeFontSizeCommand extends UndoableCommand {
             + PREFIX_FONT_SIZE + "xs\n";
     public static final String MESSAGE_SUCCESS = "Changed font size to ";
 
-    private final FontSize fontSize;
+    private final String fontSize;
 
-    public ChangeFontSizeCommand(FontSize fontSize) {
+    public ChangeFontSizeCommand(String fontSize) {
         this.fontSize = fontSize;
     };
 
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
-        String newFontSize = fontSize.value;
+        String newFontSize = fontSize;
 
         // Font size is valid
         if (FontSize.isValidFontSize(newFontSize)) {

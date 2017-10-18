@@ -32,7 +32,7 @@ public class FontSize {
     public static final String DECREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " -";
 
     public final String value;
-    public static String currentFontSizeLabel = FONT_SIZE_M_LABEL;
+    private static String currentFontSizeLabel = FONT_SIZE_M_LABEL;
 
     /**
      * Validates given font size.
@@ -157,15 +157,15 @@ public class FontSize {
         String FXFontSizeString = "-fx-font-size: ";
         switch (inputFontSize) {
             case FONT_SIZE_XS_LABEL:
-                FXFontSizeString += "x-small;";
-                break;
-
-            case FONT_SIZE_S_LABEL:
                 FXFontSizeString += "small;";
                 break;
 
-            case FONT_SIZE_M_LABEL:
+            case FONT_SIZE_S_LABEL:
                 FXFontSizeString += "medium;";
+                break;
+
+            case FONT_SIZE_M_LABEL:
+                FXFontSizeString += "large;";
                 break;
 
             case FONT_SIZE_L_LABEL:
@@ -177,7 +177,7 @@ public class FontSize {
                 break;
 
             default:
-                FXFontSizeString += "medium;";
+                FXFontSizeString += "large;";
         }
         return FXFontSizeString;
     }
