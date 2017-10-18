@@ -3,6 +3,7 @@ package seedu.address.model.font;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.ChangeFontSizeCommand;
 
 /**
  * Represents the font size of the AddressBook.
@@ -17,6 +18,7 @@ public class FontSize {
             "The current font size is the largest one.";
     public static final String MESSAGE_FONT_SIZE_IS_SMALLEST =
             "The current font size is the smallest one.";
+
     public static final String[] FONT_SIZE_LIST = {"xs", "s", "m", "l", "xl"};
     public static final String[] FONT_SIZE_CHANGE_SYMBOL = {"+", "-"};
 
@@ -25,6 +27,9 @@ public class FontSize {
     public static final String FONT_SIZE_M_LABEL = "m";
     public static final String FONT_SIZE_L_LABEL = "l";
     public static final String FONT_SIZE_XL_LABEL = "xl";
+
+    public static final String INCREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " +";
+    public static final String DECREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " -";
 
     public final String value;
     public static String currentFontSizeLabel = FONT_SIZE_M_LABEL;
@@ -160,7 +165,7 @@ public class FontSize {
                 break;
 
             case FONT_SIZE_M_LABEL:
-                FXFontSizeString += "normal;";
+                FXFontSizeString += "medium;";
                 break;
 
             case FONT_SIZE_L_LABEL:
@@ -172,7 +177,7 @@ public class FontSize {
                 break;
 
             default:
-                FXFontSizeString += "normal;";
+                FXFontSizeString += "medium;";
         }
         return FXFontSizeString;
     }

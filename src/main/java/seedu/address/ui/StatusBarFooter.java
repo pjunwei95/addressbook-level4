@@ -4,6 +4,7 @@ import java.time.Clock;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import javafx.scene.layout.GridPane;
 import org.controlsfx.control.StatusBar;
 
 import com.google.common.eventbus.Subscribe;
@@ -13,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.ui.ChangeFontSizeEvent;
+import seedu.address.model.font.FontSize;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -24,7 +27,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
     /**
      * Used to generate time stamps.
-     *
+     * <p>
      * TODO: change clock to an instance variable.
      * We leave it as a static variable because manual dependency injection
      * will require passing down the clock reference all the way from MainApp,
@@ -36,6 +39,8 @@ public class StatusBarFooter extends UiPart<Region> {
 
     private static final String FXML = "StatusBarFooter.fxml";
 
+    @FXML
+    private GridPane gridPane;
     @FXML
     private StatusBar syncStatus;
     @FXML
@@ -50,6 +55,9 @@ public class StatusBarFooter extends UiPart<Region> {
         setSaveLocation("./" + saveLocation);
         registerAsAnEventHandler(this);
         setTotalPerson(numberOfTotalPersons);
+        registerAsAnEventHandler(this);
+        setFontSize("xl");
+
     }
 
     /**
@@ -76,6 +84,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
     /**
      * Get the display text in status bar totalPersons for a given number
+     *
      * @param numberOfTotalPersons
      * @return string of display text
      */
@@ -102,5 +111,18 @@ public class StatusBarFooter extends UiPart<Region> {
                 "Setting last updated status to " + lastUpdated));
         setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
         setTotalPerson(abce.data.getPersonList().size());
+    }
+
+    @Subscribe
+    private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
+        setFontSize(event.fontSize);
+    }
+
+    private void setFontSize(String fontSize) {
+        String FXFomatString = FontSize.getAssociateFXFontSizeString(fontSize);
+        syncStatus.setStyle(FXFomatString);
+        saveLocationStatus.setStyle(FXFomatString);
+        totalPersons.setStyle(FXFomatString);
+        gridPane.setStyle(FXFomatString);
     }
 }

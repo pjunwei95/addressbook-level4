@@ -21,7 +21,10 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.font.FontSize;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -220,4 +223,22 @@ public class MainWindow extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
+
+    /**
+     * Increase the font size.
+     */
+    @FXML
+    private void handleIncreaseFontSize() throws CommandException, ParseException {
+        logic.execute(FontSize.INCREASE_FONT_SIZE_COMMAND);
+    }
+
+    /**
+     * Decrease the font size.
+     */
+    @FXML
+    private void handleDecreaseFontSize() throws CommandException, ParseException {
+        logic.execute(FontSize.DECREASE_FONT_SIZE_COMMAND);
+    }
+
+
 }
