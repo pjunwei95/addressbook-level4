@@ -68,8 +68,7 @@ public class FontSize {
                 if (currentFontSizeLabel.equals(FONT_SIZE_LIST[i])) {
 
                     // Get the next largest font size
-                    currentFontSizeLabel =  FONT_SIZE_LIST[i + 1];
-                    return currentFontSizeLabel;
+                    return FONT_SIZE_LIST[i + 1];
                 }
             }
 
@@ -85,8 +84,7 @@ public class FontSize {
                 // The current font size is at the ith place in the list
                 if (currentFontSizeLabel.equals(FONT_SIZE_LIST[i])) {
                     // Get the next smaller size
-                    currentFontSizeLabel = FONT_SIZE_LIST[i - 1];
-                    return currentFontSizeLabel;
+                    return FONT_SIZE_LIST[i - 1];
                 }
             }
 

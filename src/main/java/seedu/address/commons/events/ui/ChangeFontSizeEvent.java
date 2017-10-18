@@ -10,9 +10,14 @@ public class ChangeFontSizeEvent extends BaseEvent {
     public final String message;
     private String fontSize;
 
-    public ChangeFontSizeEvent(String fontSize, String message) {
+    public ChangeFontSizeEvent(String message, String fontSize) {
         this.fontSize = fontSize;
         this.message = message;
+    }
+
+    public ChangeFontSizeEvent(String fontSize) {
+        this.fontSize = fontSize;
+        this.message = "";
     }
 
     public String getFontSize() {
