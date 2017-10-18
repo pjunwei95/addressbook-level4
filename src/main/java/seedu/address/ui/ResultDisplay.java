@@ -14,7 +14,6 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.model.font.FontSize;
 
 /**
@@ -52,12 +51,12 @@ public class ResultDisplay extends UiPart<Region> {
 
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
-        setFontSize(event.fontSize);
+        setFontSize(event.getFontSize());
     }
 
     private void setFontSize(String fontSize) {
-        String FXFomatString = FontSize.getAssociateFXFontSizeString(fontSize);
-        resultDisplay.setStyle(FXFomatString);
+        String fxFomatString = FontSize.getassociatefxfontsizestring(fontSize);
+        resultDisplay.setStyle(fxFomatString);
     }
 
     /**

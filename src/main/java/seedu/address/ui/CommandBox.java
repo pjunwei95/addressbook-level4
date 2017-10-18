@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -122,7 +123,9 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-    // Handle a input command by passing a string
+    /**
+     * Handle a input command by passing a string
+     */
     public void handleCommandInputChanged(String inputCommand) {
         try {
             CommandResult commandResult = logic.execute(inputCommand);
@@ -174,15 +177,15 @@ public class CommandBox extends UiPart<Region> {
 
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
-        setFontSize(event.fontSize);
+        setFontSize(event.getFontSize());
     }
 
     /**
      * Sets the command box style to user preferred font size.
      */
     private void setFontSize(String newFontSize) {
-        String FXFormatFontSize = FontSize.getAssociateFXFontSizeString(newFontSize);
-        commandTextField.setStyle(FXFormatFontSize);
+        String fxFormatFontSize = FontSize.getassociatefxfontsizestring(newFontSize);
+        commandTextField.setStyle(fxFormatFontSize);
     }
 
 }

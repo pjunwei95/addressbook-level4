@@ -4,7 +4,6 @@ import java.time.Clock;
 import java.util.Date;
 import java.util.logging.Logger;
 
-import javafx.scene.layout.GridPane;
 import org.controlsfx.control.StatusBar;
 
 import com.google.common.eventbus.Subscribe;
@@ -40,8 +39,6 @@ public class StatusBarFooter extends UiPart<Region> {
     private static final String FXML = "StatusBarFooter.fxml";
 
     @FXML
-    private GridPane gridPane;
-    @FXML
     private StatusBar syncStatus;
     @FXML
     private StatusBar saveLocationStatus;
@@ -56,8 +53,6 @@ public class StatusBarFooter extends UiPart<Region> {
         registerAsAnEventHandler(this);
         setTotalPerson(numberOfTotalPersons);
         registerAsAnEventHandler(this);
-        setFontSize("xl");
-
     }
 
     /**
@@ -115,14 +110,13 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
-        setFontSize(event.fontSize);
+        setFontSize(event.getFontSize());
     }
 
     private void setFontSize(String fontSize) {
-        String FXFomatString = FontSize.getAssociateFXFontSizeString(fontSize);
-        syncStatus.setStyle(FXFomatString);
-        saveLocationStatus.setStyle(FXFomatString);
-        totalPersons.setStyle(FXFomatString);
-        gridPane.setStyle(FXFomatString);
+        String fxFomatString = FontSize.getassociatefxfontsizestring(fontSize);
+        syncStatus.setStyle(fxFomatString);
+        saveLocationStatus.setStyle(fxFomatString);
+        totalPersons.setStyle(fxFomatString);
     }
 }

@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FONT_SIZE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DECREASE_FONT_SIZE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INCREASE_FONT_SIZE;
@@ -7,8 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.model.font.FontSize.FONT_SIZE_L_LABEL;
 import static seedu.address.model.font.FontSize.FONT_SIZE_M_LABEL;
 import static seedu.address.model.font.FontSize.FONT_SIZE_S_LABEL;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
@@ -17,12 +22,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 
-import java.awt.*;
-
-import static org.junit.Assert.*;
-import static seedu.address.model.font.FontSize.FONT_SIZE_XL_LABEL;
-import static seedu.address.model.font.FontSize.FONT_SIZE_XS_LABEL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class ChangeFontSizeCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

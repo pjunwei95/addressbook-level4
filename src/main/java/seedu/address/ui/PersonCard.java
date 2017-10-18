@@ -1,11 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.model.font.FontSize.FONT_SIZE_L_LABEL;
-import static seedu.address.model.font.FontSize.FONT_SIZE_M_LABEL;
-import static seedu.address.model.font.FontSize.FONT_SIZE_S_LABEL;
-import static seedu.address.model.font.FontSize.FONT_SIZE_XL_LABEL;
-import static seedu.address.model.font.FontSize.FONT_SIZE_XS_LABEL;
-import static seedu.address.model.font.FontSize.getAssociateFXFontSizeString;
+import static seedu.address.model.font.FontSize.getassociatefxfontsizestring;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -19,7 +14,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -63,7 +57,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
 
-    public PersonCard(ReadOnlyPerson person, int displayedIndex){
+    public PersonCard(ReadOnlyPerson person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -100,11 +94,11 @@ public class PersonCard extends UiPart<Region> {
     private void initTags(ReadOnlyPerson person, String fontSizeLabel) {
         tags.getChildren().clear();
 
-        String FXFormatFontSize = FontSize.getAssociateFXFontSizeString(fontSizeLabel);
+        String fxFormatFontSize = FontSize.getassociatefxfontsizestring(fontSizeLabel);
 
         person.getTags().forEach(tag -> {
             Label tagLabel = new Label(tag.tagName);
-            tagLabel.setStyle(FXFormatFontSize + "-fx-background-color: " + tag.tagColor.tagColorName);
+            tagLabel.setStyle(fxFormatFontSize + "-fx-background-color: " + tag.tagColor.tagColorName);
             tags.getChildren().add(tagLabel);
         });
     }
@@ -129,15 +123,15 @@ public class PersonCard extends UiPart<Region> {
 
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
-        initTags(person, event.fontSize);
-        setFontSize(event.fontSize);
+        initTags(person, event.getFontSize());
+        setFontSize(event.getFontSize());
     }
 
     private void setFontSize(String newFontSize) {
         assert (FontSize.isValidFontSize(newFontSize));
 
-        String FXFormatFontSize = getAssociateFXFontSizeString(newFontSize);
-        setFontSizeForAllAttributesExceptTag(FXFormatFontSize);
+        String fxFormatFontSize = getassociatefxfontsizestring(newFontSize);
+        setFontSizeForAllAttributesExceptTag(fxFormatFontSize);
     }
 
 
@@ -149,7 +143,6 @@ public class PersonCard extends UiPart<Region> {
         email.setStyle(fontSize);
         date.setStyle(fontSize);
         remark.setStyle(fontSize);
-        //tags.getChildren().forEach(node -> node.setStyle(fontSize));
     }
 
 }

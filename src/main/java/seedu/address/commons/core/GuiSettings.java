@@ -1,11 +1,10 @@
 package seedu.address.commons.core;
 
-import seedu.address.model.font.FontSize;
-
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
 
+import seedu.address.model.font.FontSize;
 /**
  * A Serializable class that contains the GUI settings.
  */

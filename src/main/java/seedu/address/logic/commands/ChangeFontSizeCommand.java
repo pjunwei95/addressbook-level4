@@ -1,15 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FONT_SIZE;
-import static seedu.address.model.font.FontSize.FONT_SIZE_L_LABEL;
-import static seedu.address.model.font.FontSize.FONT_SIZE_M_LABEL;
-import static seedu.address.model.font.FontSize.FONT_SIZE_S_LABEL;
-import static seedu.address.model.font.FontSize.FONT_SIZE_XL_LABEL;
-import static seedu.address.model.font.FontSize.FONT_SIZE_XS_LABEL;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.font.FontSize;
 

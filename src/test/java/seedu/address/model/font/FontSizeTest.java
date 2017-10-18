@@ -1,9 +1,10 @@
 package seedu.address.model.font;
 
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FONT_SIZE;
+
+import org.junit.Test;
 
 public class FontSizeTest {
     @Test

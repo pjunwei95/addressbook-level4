@@ -27,12 +27,12 @@ public class FontSize {
     public static final String FONT_SIZE_M_LABEL = "m";
     public static final String FONT_SIZE_L_LABEL = "l";
     public static final String FONT_SIZE_XL_LABEL = "xl";
-
     public static final String INCREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " +";
     public static final String DECREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " -";
 
-    public final String value;
     private static String currentFontSizeLabel = FONT_SIZE_M_LABEL;
+
+    public final String value;
 
     /**
      * Validates given font size.
@@ -95,6 +95,9 @@ public class FontSize {
         }
     }
 
+    /**
+     * Check whether the change symbol is valid
+     */
     private boolean isValidFontSizeChangeSymbol(String symbol) {
         for (String s : FONT_SIZE_CHANGE_SYMBOL) {
             if (symbol.equals(s)) {
@@ -152,34 +155,34 @@ public class FontSize {
      * @param inputFontSize
      * @return
      */
-    public static String getAssociateFXFontSizeString(String inputFontSize) {
+    public static String getassociatefxfontsizestring(String inputFontSize) {
         assert (FontSize.isValidFontSize(inputFontSize));
-        String FXFontSizeString = "-fx-font-size: ";
+        String fxFontSizeString = "-fx-font-size: ";
         switch (inputFontSize) {
-            case FONT_SIZE_XS_LABEL:
-                FXFontSizeString += "small;";
-                break;
+        case FONT_SIZE_XS_LABEL:
+            fxFontSizeString += "small;";
+            break;
 
-            case FONT_SIZE_S_LABEL:
-                FXFontSizeString += "medium;";
-                break;
+        case FONT_SIZE_S_LABEL:
+            fxFontSizeString += "medium;";
+            break;
 
-            case FONT_SIZE_M_LABEL:
-                FXFontSizeString += "large;";
-                break;
+        case FONT_SIZE_M_LABEL:
+            fxFontSizeString += "large;";
+            break;
 
-            case FONT_SIZE_L_LABEL:
-                FXFontSizeString += "x-large;";
-                break;
+        case FONT_SIZE_L_LABEL:
+            fxFontSizeString += "x-large;";
+            break;
 
-            case FONT_SIZE_XL_LABEL:
-                FXFontSizeString += "xx-large;";
-                break;
+        case FONT_SIZE_XL_LABEL:
+            fxFontSizeString += "xx-large;";
+            break;
 
-            default:
-                FXFontSizeString += "large;";
+        default:
+            fxFontSizeString += "large;";
         }
-        return FXFontSizeString;
+        return fxFontSizeString;
     }
 
 }
