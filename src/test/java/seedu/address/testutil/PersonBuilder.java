@@ -115,7 +115,12 @@ public class PersonBuilder {
      * Sets the {@code DateOfBirth} of the {@code Person} that we are building.
      */
     public PersonBuilder withDateOfBirth(String Date) {
-        this.person.setDateOfBirth(new DateOfBirth(Date));
+        try {
+            this.person.setDateOfBirth(new DateOfBirth(Date));
+
+        } catch (IllegalValueException ive) {
+                throw new IllegalArgumentException("Unique birthday expected");
+        }
         return this;
     }
 

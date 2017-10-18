@@ -63,9 +63,12 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         initTags(person);
         bindListeners(person);
+       // assignImage();
 
     }
+    private void assignImage(ImageView image) {
 
+    }
 
     /**
      * Binds the individual UI elements to observe their respective {@code Person} properties
