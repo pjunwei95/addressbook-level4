@@ -34,6 +34,7 @@ public class ResultDisplay extends UiPart<Region> {
     public ResultDisplay() {
         super(FXML);
         resultDisplay.textProperty().bind(displayed);
+        setFontSize(FontSize.getCurrentFontSizeLabel());
         registerAsAnEventHandler(this);
     }
 
