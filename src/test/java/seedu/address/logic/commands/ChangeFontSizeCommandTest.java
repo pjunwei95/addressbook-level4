@@ -37,27 +37,6 @@ public class ChangeFontSizeCommandTest {
         assertEquals(FontSize.getCurrentFontSizeLabel(), FONT_SIZE_L_LABEL);
     }
 
-    @Test
-    public void executeIncreaseFontSizeSuccess() throws Exception {
-        ChangeFontSizeCommand changeFontSizeCommand = prepareCommand(VALID_INCREASE_FONT_SIZE);
-        CommandResult commandResult = changeFontSizeCommand.execute();
-
-        String expectedMessage = ChangeFontSizeCommand.MESSAGE_SUCCESS + FONT_SIZE_L_LABEL + ".";
-
-        assertEquals(expectedMessage, commandResult.feedbackToUser);
-        assertEquals(FontSize.getCurrentFontSizeLabel(), FONT_SIZE_L_LABEL);
-    }
-
-    @Test
-    public void executeDecreaseFontSizeSuccess() throws Exception {
-        ChangeFontSizeCommand changeFontSizeCommand = prepareCommand(VALID_DECREASE_FONT_SIZE);
-        CommandResult commandResult = changeFontSizeCommand.execute();
-
-        String expectedMessage = ChangeFontSizeCommand.MESSAGE_SUCCESS + FONT_SIZE_S_LABEL + ".";
-
-        assertEquals(expectedMessage, commandResult.feedbackToUser);
-        assertEquals(FontSize.getCurrentFontSizeLabel(), FONT_SIZE_S_LABEL);
-    }
 
     @Test
     public void executeInvalidFontSizeFailure() throws Exception {
