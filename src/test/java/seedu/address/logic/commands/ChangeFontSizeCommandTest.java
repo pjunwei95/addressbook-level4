@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FONT_SIZE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DECREASE_FONT_SIZE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INCREASE_FONT_SIZE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.model.font.FontSize.FONT_SIZE_L_LABEL;
 import static seedu.address.model.font.FontSize.FONT_SIZE_M_LABEL;
