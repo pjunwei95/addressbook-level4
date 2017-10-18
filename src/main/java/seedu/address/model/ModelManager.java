@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.FileImage;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -80,7 +81,17 @@ public class ModelManager extends ComponentManager implements Model {
 
 
     }
+    @Override
+    public synchronized void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException {
 
+        try {
+            person.imageProperty().setValue( new FileImage(FilePath));
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
+        catch (IllegalValueException ive) {
+
+        }
+    }
     @Override
     public synchronized void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
         addressBook.updateTagColorPair(tagList, color);

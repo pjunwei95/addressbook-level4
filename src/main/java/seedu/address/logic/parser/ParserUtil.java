@@ -10,12 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.DateOfBirth;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
@@ -89,6 +84,14 @@ public class ParserUtil {
     public static Optional<Remark> parseRemark(Optional<String> remark) throws IllegalValueException {
         requireNonNull(remark);
         return remark.isPresent() ? Optional.of(new Remark(remark.get())) : Optional.empty();
+    }
+    /**
+     * Parses a {@code Optional<String> FilePath} into an {@code Optional<FileImage>} if {@code FilePath} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<FileImage> parseImage(Optional<String> image) throws IllegalValueException {
+        requireNonNull(image);
+        return image.isPresent() ? Optional.of(new FileImage(image.get())) : Optional.empty();
     }
 
     /**

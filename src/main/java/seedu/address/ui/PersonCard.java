@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.stage.FileChooser;
 import seedu.address.model.person.ReadOnlyPerson;
 
 //import javax.swing.text.html.ImageView;
@@ -63,10 +65,27 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         initTags(person);
         bindListeners(person);
-       // assignImage();
+
 
     }
-    private void assignImage(ImageView image) {
+    private void assignImage(String FilePath) {
+
+        String url;
+        if (FilePath.equals("")) {
+            url = "/images/address_book_32.png";
+            Image Display = new Image(url);
+            image.setImage(Display);
+        }
+        else {
+
+            String home = System.getProperty("user.home");
+            java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", FilePath);
+            url = path + "";
+            File file = new File(url);
+
+            Image Display = new Image(file.toURI().toString());
+            image.setImage(Display);
+        }
 
     }
 
@@ -81,11 +100,14 @@ public class PersonCard extends UiPart<Region> {
         date.textProperty().bind(Bindings.convert(person.dateOfBirthProperty()));
         email.textProperty().bind(Bindings.convert(person.emailProperty()));
         remark.textProperty().bind(Bindings.convert(person.remarkProperty()));
+
         person.tagProperty().addListener((observable, oldValue, newValue) -> {
             tags.getChildren().clear();
             initTags(person);
 
+
         });
+        assignImage(person.getImage().toString());
     }
 
     /**

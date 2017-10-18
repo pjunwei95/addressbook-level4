@@ -30,6 +30,9 @@ public interface Model {
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
 
+    /** Adds photo to person */
+    void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException;
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      *

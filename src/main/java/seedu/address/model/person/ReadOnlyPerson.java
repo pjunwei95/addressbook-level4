@@ -26,6 +26,8 @@ public interface ReadOnlyPerson {
     Remark getRemark();
     ObjectProperty<UniqueTagList> tagProperty();
     Set<Tag> getTags();
+    ObjectProperty<FileImage> imageProperty();
+    FileImage getImage();
 
 
     /**
@@ -58,6 +60,8 @@ public interface ReadOnlyPerson {
                 .append(getDateOfBirth())
                 .append(" Remark: ")
                 .append(getRemark())
+                .append(" FilePath: ")
+                .append(getImage())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
