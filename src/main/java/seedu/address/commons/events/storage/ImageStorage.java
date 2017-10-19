@@ -26,6 +26,7 @@ public class ImageStorage {
         String uniquePath = null;
 
         try {
+            System.out.println(path);
             fileToRead = new File(path);
             image = new BufferedImage(963, 640, BufferedImage.TYPE_INT_ARGB);
             image = ImageIO.read(fileToRead);

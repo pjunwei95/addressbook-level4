@@ -22,6 +22,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
+import seedu.address.ui.PersonCard;
 
 import javax.imageio.ImageIO;
 
@@ -79,19 +80,25 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
 
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+        try {
+            addressBook.addPerson(person);
+            person.imageProperty().setValue(new FileImage("/Users/ronaklakhotia/Desktop/nus.jpg"));
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            indicateAddressBookChanged();
+        }
+        catch (IllegalValueException ive) {
 
+        }
     }
     @Override
     public synchronized void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException,
             FileNotFoundException, IOException {
 
         try {
-            person.imageProperty().setValue( new FileImage("src/main/resources/images/" + FilePath + ".jpg"));
+            person.imageProperty().setValue(new FileImage("src/main/resources/images/" + FilePath + ".jpg"));
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
+
         }
         catch (IllegalValueException ive) {
             System.out.println("Error encountered");

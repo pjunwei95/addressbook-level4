@@ -1,142 +1,147 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IMAGE;
+
 import java.io.IOException;
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.storage.ImageStorage;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.FileImage;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * Adds a photo of the person to the addressBook
+ * Adds a display picture to an existing person in address book
  */
-
 public class PhotoCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "photo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a photo of the person to the addressBook\n"
-            + "Parameters: INDEX (must be a positive integer) FILE_PATH\n"
-            + "Example: " + COMMAND_WORD + " 1" + " button.png";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds/Updates the profile picture of a person identified "
+            + "by the index number used in the last person listing. "
+            + "Existing Display picture will be updated by the image referenced in the input path. \n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_IMAGE + "[PATH]\n"
+            + "Example: " + COMMAND_WORD + " 2 "
+            + "C:\\Users\\Admin\\Desktop\\pic.jpg";
 
-    public static final String MESSAGE_PHOTO_PERSON_SUCCESS = "Added Photo to Person: %1$s";
+    public static final String MESSAGE_ADD_DISPLAYPICTURE_SUCCESS = "Added Display Picture to Person: %1$s";
 
-    public static final String MESSAGE_PHOTO_DELETE_SUCCESS = "Deleted Photo of Person: %1$s";
+    public static final String MESSAGE_DELETE_DISPLAYPICTURE_SUCCESS = "Removed Display Picture from Person: %1$s";
 
-    public static final String MESSAGE_FILE_PATH_NOT_FOUND = "Please enter valid File path";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index targetIndex;
-    private final FileImage FilePath;
+    public static final String MESSAGE_FILE_PATH_NOT_FOUND =
+            "This specified path cannot be read. Please check it's validity and try again";
 
-    public PhotoCommand(Index targetIndex, FileImage FilePath) {
-        this.targetIndex = targetIndex;
-        this.FilePath = FilePath;
+
+    private Index index;
+    private FileImage displayPicture;
+
+    /**
+     * @param index of the person in the filtered person list to edit the remark
+     * @param displayPicture of the person
+     */
+    public PhotoCommand(Index index, FileImage displayPicture) {
+
+        this.index = index;
+        this.displayPicture = displayPicture;
     }
 
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
-
         List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
-      /*
-        if(FilePath.getFilePath().equalsIgnoreCase("")) {
-            FilePath.setFilePath("");
+        ReadOnlyPerson personToEdit = lastShownList.get(index.getZeroBased());
 
-            Person personToEdit = new Person(personToAddPhoto.getName(), personToAddPhoto.getPhone(),
-                    personToAddPhoto.getEmail(), personToAddPhoto.getAddress(), personToAddPhoto.getDateOfBirth(),
-                    personToAddPhoto.getRemark(), FilePath, personToAddPhoto.getTags());
-
-            try {
-                model.updatePerson(personToAddPhoto, personToEdit);
-            }
-            catch (DuplicatePersonException dp) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            }
-            catch (PersonNotFoundException pfe) {
-                throw new AssertionError("Person not present");
-            }
-            model.updateFilteredListToShow();
-            return new CommandResult(getMessage(personToEdit));
-
-            }
-        try {
-
-
-            ImageStorage imageStorage = new ImageStorage();
-            FilePath.setFilePath(imageStorage.execute(FilePath.getFilePath(),
-                    personToAddPhoto.getEmail().hashCode()));
-            model.addPhotoPerson(personToAddPhoto, FilePath.getFilePath());
-        }
-        catch (IOException ioe) {
-            FilePath.setFilePath("");
-            return new CommandResult(generateFaliure());
-        }
-        catch (PersonNotFoundException PNE) {
-            throw new AssertionError("Person Not present");
-        }
-
-        Person personToEdit = new Person(personToAddPhoto.getName(), personToAddPhoto.getPhone(),
-                personToAddPhoto.getEmail(), personToAddPhoto.getAddress(), personToAddPhoto.getDateOfBirth(),
-                personToAddPhoto.getRemark(), FilePath, personToAddPhoto.getTags());
-
-        try {
-            model.updatePerson(personToAddPhoto, personToEdit);
-        }
-        catch (DuplicatePersonException dp) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-        catch (PersonNotFoundException pfe) {
-            throw new AssertionError("Person not present");
-        }
-        model.updateFilteredListToShow();
-        return new CommandResult(getMessage(personToEdit));
-
-    }
-    */
-
-       ReadOnlyPerson personToAddPhoto = lastShownList.get(targetIndex.getZeroBased());
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        if (displayPicture.getFilePath().equalsIgnoreCase("")) {
+            displayPicture.setFilePath("");
+
+            Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                    personToEdit.getAddress(), personToEdit.getDateOfBirth(), personToEdit.getRemark(),
+                    displayPicture, personToEdit.getTags());
+
+            try {
+                model.updatePerson(personToEdit, editedPerson);
+            } catch (DuplicatePersonException dpe) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            } catch (PersonNotFoundException pnfe) {
+                throw new AssertionError("The target person cannot be missing");
+            }
+            model.updateFilteredListToShow();
+
+            return new CommandResult(generateSuccessMessage(editedPerson));
+        }
+
         try {
+            ImageStorage readAndStoreImage = new ImageStorage();
+            displayPicture.setFilePath(readAndStoreImage.execute(displayPicture.getFilePath(),
+                    personToEdit.getEmail().hashCode()));
+        } catch (IOException ioe) {
+            displayPicture.setFilePath("");
+            return new CommandResult(generateFailureMessage());
+        }
 
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getDateOfBirth(), personToEdit.getRemark(),
+                displayPicture, personToEdit.getTags());
 
-            ImageStorage imageStorage = new ImageStorage();
-            FilePath.setFilePath(imageStorage.execute(FilePath.getFilePath(),
-                    personToAddPhoto.getEmail().hashCode()));
-            model.addPhotoPerson(personToAddPhoto, FilePath.getFilePath());
-
+        try {
+            model.updatePerson(personToEdit, editedPerson);
+        } catch (DuplicatePersonException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } catch (PersonNotFoundException pnfe) {
-            assert false : "The target person cannot be missing";
+            throw new AssertionError("The target person cannot be missing");
         }
-        catch (IOException pnfe) {
-            assert false : "The target person cannot be missing";
-        }
+        model.updateFilteredListToShow();
 
-
-        return new CommandResult(getMessage(personToAddPhoto));
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
+    /**
+     * Generates failure message
+     * @return String
+     */
+    private String generateFailureMessage() {
+        return MESSAGE_FILE_PATH_NOT_FOUND;
+    }
 
-    public String getMessage(ReadOnlyPerson personToEdit) {
-        if(!FilePath.getFilePath().isEmpty()) {
-            return String.format(MESSAGE_PHOTO_PERSON_SUCCESS, personToEdit);
+    /**
+     * Generates success message
+     * @param personToEdit is checked
+     * @return String
+     */
+    private String generateSuccessMessage(ReadOnlyPerson personToEdit) {
+        if (!displayPicture.getFilePath().isEmpty()) {
+            return String.format(MESSAGE_ADD_DISPLAYPICTURE_SUCCESS, personToEdit);
+        } else {
+            return String.format(MESSAGE_DELETE_DISPLAYPICTURE_SUCCESS, personToEdit);
         }
-        else {
-            return String.format(MESSAGE_PHOTO_DELETE_SUCCESS, personToEdit);
-        }
-
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof PhotoCommand // instanceof handles nulls
-                && this.targetIndex.equals(((PhotoCommand) other).targetIndex)); // state check
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PhotoCommand)) {
+            return false;
+        }
+
+        // state check
+        PhotoCommand e = (PhotoCommand) other;
+        return index.equals(e.index)
+                && displayPicture.equals(e.displayPicture);
     }
 }

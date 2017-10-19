@@ -71,11 +71,10 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Adds a photo to a persons contact
      */
-    private void assignImage(ReadOnlyPerson person) {
+    public void assignImage(ReadOnlyPerson person) {
 
 
         String url =  person.getImage().getFilePath() ;
-        System.out.println(person.getImage().getFilePath());
 
         File file = new File(url);
         Image imageDisplay = new Image(file.toURI().toString(), 100, 100,
