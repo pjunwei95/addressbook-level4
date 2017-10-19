@@ -14,6 +14,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
+import seedu.address.commons.events.ui.ChangeTagColorEvent;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -84,6 +85,11 @@ public class PersonCard extends UiPart<Region> {
             tags.getChildren().clear();
             initTags(person, FontSize.getCurrentFontSizeLabel());
         });
+    }
+
+    @Subscribe
+    private void handleChangeTagColorEvent(ChangeTagColorEvent event) {
+        initTags(person, FontSize.getCurrentFontSizeLabel());
     }
 
     /**

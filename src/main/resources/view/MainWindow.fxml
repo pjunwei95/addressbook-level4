@@ -28,8 +28,8 @@
     </MenuBar>
     <ButtonBar prefHeight="40.0" prefWidth="20.0">
       <buttons>
-        <Button text="+" wrapText="true" onAction="#handleIncreaseFontSize"/>
-        <Button text="-" wrapText="true" onAction="#handleDecreaseFontSize"/>
+        <Button onAction="#handleIncreaseFontSize" text="+" wrapText="true" />
+        <Button onAction="#handleDecreaseFontSize" text="-" wrapText="true" />
       </buttons>
     </ButtonBar>
   </SplitPane>

@@ -5,10 +5,10 @@ import seedu.address.commons.events.BaseEvent;
 /**
  * Indicates a request to change the tag color of the application
  */
-public class CustomizeTagColorEvent extends BaseEvent {
+public class ChangeTagColorEvent extends BaseEvent {
     private String color;
 
-    public CustomizeTagColorEvent(String color) {
+    public ChangeTagColorEvent(String color) {
         this.color = color;
     }
 
