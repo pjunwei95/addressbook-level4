@@ -92,14 +92,25 @@ public class PersonCard extends UiPart<Region> {
         }
         else {
 
-            String home = System.getProperty("user.home");
-            java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", FilePath);
-            url = path + "";
-            System.out.println(url);
-            File file = new File(url);
+            if (FilePath.endsWith("g")) {
 
-            Image Display = new Image(file.toURI().toString());
-            image.setImage(Display);
+                String home = System.getProperty("user.home");
+                java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", FilePath);
+                url = path + "";
+                File file = new File(url);
+
+                Image Display = new Image(file.toURI().toString());
+                image.setImage(Display);
+            } else {
+
+                url = "src/main/resources/images/" + person.getImage().getFilePath() + ".jpg";
+                File stored = new File(url);
+                Image Display = new Image(stored.toURI().toString(), 100, 100,
+                        false, false);
+
+                image.setImage(Display);
+
+            }
         }
     }
 

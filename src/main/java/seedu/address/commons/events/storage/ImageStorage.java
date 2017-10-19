@@ -18,6 +18,7 @@ public class ImageStorage {
 
     public String execute(String path, int newPath) throws IOException {
 
+
         File fileToRead = null;
         BufferedImage image = null;
 
@@ -26,13 +27,13 @@ public class ImageStorage {
         String uniquePath = null;
 
         try {
-            System.out.println(path);
-            fileToRead = new File(path);
+            String home = System.getProperty("user.home");
+            java.nio.file.Path path1 = java.nio.file.Paths.get(home, "Desktop", path);
+            String url = path1 + "";
             image = new BufferedImage(963, 640, BufferedImage.TYPE_INT_ARGB);
+            fileToRead = new File(url);
             image = ImageIO.read(fileToRead);
-
             uniquePath = Integer.toString(newPath);
-
             fileToWrite = new File("src/main/resources/images/" + uniquePath + ".jpg");
             ImageIO.write(image, "jpg", fileToWrite);
 

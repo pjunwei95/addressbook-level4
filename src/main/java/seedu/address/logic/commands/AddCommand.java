@@ -35,7 +35,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_DOB + "Date of Birth "
             + PREFIX_REMARK + "REMARK "
-            + PREFIX_IMAGE + "IMAGE"
+            + "[" + PREFIX_IMAGE + "IMAGE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -44,7 +44,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_DOB + "13.10.1997 "
             + PREFIX_REMARK + "remark "
-            + PREFIX_IMAGE + "Photo copy.jpeg "
+            + PREFIX_IMAGE + " "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

@@ -3,8 +3,9 @@ package seedu.address.logic.commands;
 import java.io.IOException;
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
+import seedu.address.commons.events.storage.ImageStorage;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -30,7 +31,7 @@ public class PhotoCommand extends UndoableCommand {
     public static final String MESSAGE_FILE_PATH_NOT_FOUND = "Incorrect file path";
 
     private final Index targetIndex;
-    private final String FilePath;
+    private  String FilePath;
 
     public PhotoCommand(Index targetIndex, String FilePath) {
         this.targetIndex = targetIndex;
@@ -54,6 +55,16 @@ public class PhotoCommand extends UndoableCommand {
                     new FileImage(FilePath), personToAddPhoto.getTags());
             model.addPhotoPerson(personToAddPhoto, FilePath, targetIndex);
             model.updatePerson(personToAddPhoto, editedPerson);
+            ImageStorage imageStorage = new ImageStorage();
+
+            FilePath = (imageStorage.execute(FilePath,
+                    personToAddPhoto.getEmail().hashCode()));
+
+            editedPerson = new Person(personToAddPhoto.getName(), personToAddPhoto.getPhone(), personToAddPhoto.getEmail(),
+                    personToAddPhoto.getAddress(), personToAddPhoto.getDateOfBirth(), personToAddPhoto.getRemark(),
+                    new FileImage(FilePath), personToAddPhoto.getTags());
+            model.updatePerson(personToAddPhoto, editedPerson);
+
         } catch (PersonNotFoundException pnfe) {
             assert false : "The target person cannot be missing";
         } catch (IOException ioe) {
