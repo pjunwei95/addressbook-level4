@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.FileImage;
@@ -82,7 +83,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         try {
             addressBook.addPerson(person);
-            person.imageProperty().setValue(new FileImage("/Users/ronaklakhotia/Desktop/nus.jpg"));
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
         }
@@ -91,11 +91,24 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     @Override
-    public synchronized void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException,
+    public synchronized void addPhotoPerson(ReadOnlyPerson person, String FilePath, Index targetIndex)
+            throws PersonNotFoundException,
             FileNotFoundException, IOException {
 
-        try {
+      /*  try {
             person.imageProperty().setValue(new FileImage("src/main/resources/images/" + FilePath + ".jpg"));
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            indicateAddressBookChanged();
+
+        }
+        catch (IllegalValueException ive) {
+            System.out.println("Error encountered");
+        } */
+        try {
+            PersonCard dummy = new PersonCard(person, targetIndex.getZeroBased());
+            dummy.assignImage(FilePath);
+            person.imageProperty().setValue( new FileImage(FilePath));
+            //System.out.println(person.getImage().getFilePath());
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
 

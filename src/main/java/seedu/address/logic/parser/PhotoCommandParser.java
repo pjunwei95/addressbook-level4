@@ -33,7 +33,7 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
 
         try {
             Index index = ParserUtil.parseIndex(Keywords[0]);
-            return new PhotoCommand(index, new FileImage(Keywords[1]));
+            return new PhotoCommand(index, (Keywords[1]));
         } catch (IllegalValueException ive) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));

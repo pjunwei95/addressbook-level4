@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -33,7 +34,7 @@ public interface Model {
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
 
     /** Adds photo to person */
-    void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException, FileNotFoundException,
+    void addPhotoPerson(ReadOnlyPerson person, String FilePath, Index targetIndex) throws PersonNotFoundException, FileNotFoundException,
             IOException;
 
     /**

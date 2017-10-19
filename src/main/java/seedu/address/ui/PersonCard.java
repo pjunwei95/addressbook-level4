@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Random;
 
+
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -71,16 +72,35 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Adds a photo to a persons contact
      */
-    public void assignImage(ReadOnlyPerson person) {
+    public void assignImage(String FilePath) {
 
 
-        String url =  person.getImage().getFilePath() ;
+       /* String url =  person.getImage().getFilePath() ;
 
         File file = new File(url);
         Image imageDisplay = new Image(file.toURI().toString(), 100, 100,
                 false, false);
 
         image.setImage(imageDisplay);
+        */
+        String url;
+      //  System.out.println(FilePath+" lolololololol");
+        if (FilePath.equals("")) {
+            url = "/images/clock.png";
+            Image Display = new Image(url);
+            image.setImage(Display);
+        }
+        else {
+
+            String home = System.getProperty("user.home");
+            java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", FilePath);
+            url = path + "";
+            System.out.println(url);
+            File file = new File(url);
+
+            Image Display = new Image(file.toURI().toString());
+            image.setImage(Display);
+        }
     }
 
     /**
@@ -101,7 +121,7 @@ public class PersonCard extends UiPart<Region> {
 
 
         });
-        assignImage(person);
+        assignImage(person.getImage().getFilePath());
     }
 
     /**
