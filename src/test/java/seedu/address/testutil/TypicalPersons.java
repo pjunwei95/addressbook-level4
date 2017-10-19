@@ -54,6 +54,7 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com")
             .withDateOfBirth("13.10.1997")
             .withImage("")
+            .withImage("")
             .withAddress("10th street").build();
     public static final ReadOnlyPerson ELLE = new PersonBuilder().withName("Elle Meyer")
             .withPhone("9482224")

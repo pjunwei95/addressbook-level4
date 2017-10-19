@@ -25,8 +25,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.ui.PersonCard;
 
-import javax.imageio.ImageIO;
-
 /**
  * Represents the in-memory model of the address book data.
  * All changes to any model should be synchronized.
@@ -81,34 +79,21 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
 
-        try {
-            addressBook.addPerson(person);
-            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            indicateAddressBookChanged();
-        }
-        catch (IllegalValueException ive) {
+        addressBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
 
-        }
+
     }
     @Override
     public synchronized void addPhotoPerson(ReadOnlyPerson person, String FilePath, Index targetIndex)
             throws PersonNotFoundException,
             FileNotFoundException, IOException {
 
-      /*  try {
-            person.imageProperty().setValue(new FileImage("src/main/resources/images/" + FilePath + ".jpg"));
-            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            indicateAddressBookChanged();
-
-        }
-        catch (IllegalValueException ive) {
-            System.out.println("Error encountered");
-        } */
         try {
             PersonCard dummy = new PersonCard(person, targetIndex.getZeroBased());
             dummy.assignImage(FilePath);
             person.imageProperty().setValue( new FileImage(FilePath));
-            //System.out.println(person.getImage().getFilePath());
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
 
@@ -116,10 +101,6 @@ public class ModelManager extends ComponentManager implements Model {
         catch (IllegalValueException ive) {
             System.out.println("Error encountered");
         }
-    }
-    @Override
-    public synchronized void updateFilteredListToShow() {
-        filteredPersons.setPredicate(null);
     }
 
     @Override

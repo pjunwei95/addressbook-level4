@@ -42,7 +42,9 @@ public class BrowserPanel extends UiPart<Region> {
         loadDefaultPage();
         registerAsAnEventHandler(this);
     }
-
+    /**
+     * The Browser Panel of the App.
+     */
     private void loadPersonPage(ReadOnlyPerson person) {
 
         loadPage(GOOGLE_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll(" ", "+")

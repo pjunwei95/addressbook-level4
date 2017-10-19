@@ -16,6 +16,9 @@ import seedu.address.logic.parser.exceptions.ImageException;
 
 public class ImageStorage {
 
+    /** Reads and stores image file
+     */
+
     public String execute(String path, int newPath) throws IOException {
 
 

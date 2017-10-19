@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.RANDOM;
 import org.junit.Test;
 
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -57,7 +58,7 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
         /* Case: search person in empty address book -> 0 persons found */
         executeCommand(ClearCommand.COMMAND_WORD);
         assert getModel().getAddressBook().getPersonList().size() == 0;
-        command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);

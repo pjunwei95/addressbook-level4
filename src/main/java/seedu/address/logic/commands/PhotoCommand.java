@@ -3,14 +3,14 @@ package seedu.address.logic.commands;
 import java.io.IOException;
 import java.util.List;
 
-import seedu.address.commons.events.storage.ImageStorage;
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.storage.ImageStorage;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -50,7 +50,8 @@ public class PhotoCommand extends UndoableCommand {
         ReadOnlyPerson personToAddPhoto = lastShownList.get(targetIndex.getZeroBased());
 
         try {
-            Person editedPerson = new Person(personToAddPhoto.getName(), personToAddPhoto.getPhone(), personToAddPhoto.getEmail(),
+            Person editedPerson = new Person(personToAddPhoto.getName(), personToAddPhoto.getPhone(),
+                    personToAddPhoto.getEmail(),
                     personToAddPhoto.getAddress(), personToAddPhoto.getDateOfBirth(), personToAddPhoto.getRemark(),
                     new FileImage(FilePath), personToAddPhoto.getTags());
             model.addPhotoPerson(personToAddPhoto, FilePath, targetIndex);
@@ -60,7 +61,8 @@ public class PhotoCommand extends UndoableCommand {
             FilePath = (imageStorage.execute(FilePath,
                     personToAddPhoto.getEmail().hashCode()));
 
-            editedPerson = new Person(personToAddPhoto.getName(), personToAddPhoto.getPhone(), personToAddPhoto.getEmail(),
+            editedPerson = new Person(personToAddPhoto.getName(),
+                    personToAddPhoto.getPhone(), personToAddPhoto.getEmail(),
                     personToAddPhoto.getAddress(), personToAddPhoto.getDateOfBirth(), personToAddPhoto.getRemark(),
                     new FileImage(FilePath), personToAddPhoto.getTags());
             model.updatePerson(personToAddPhoto, editedPerson);
@@ -70,7 +72,7 @@ public class PhotoCommand extends UndoableCommand {
         } catch (IOException ioe) {
             assert false : "Correct input required";
         } catch (IllegalValueException ive) {
-
+            assert false : "Invalid input";
         }
 
         return new CommandResult(String.format(MESSAGE_PHOTO_PERSON_SUCCESS, personToAddPhoto));

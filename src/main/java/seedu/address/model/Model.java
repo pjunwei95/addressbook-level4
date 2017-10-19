@@ -34,7 +34,8 @@ public interface Model {
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
 
     /** Adds photo to person */
-    void addPhotoPerson(ReadOnlyPerson person, String FilePath, Index targetIndex) throws PersonNotFoundException, FileNotFoundException,
+    void addPhotoPerson(ReadOnlyPerson person, String FilePath, Index targetIndex)
+            throws PersonNotFoundException, FileNotFoundException,
             IOException;
 
     /**
@@ -63,6 +64,6 @@ public interface Model {
      */
     void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException;
 
-    void updateFilteredListToShow();
+
 
 }
