@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -31,7 +33,8 @@ public interface Model {
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
 
     /** Adds photo to person */
-    void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException;
+    void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException, FileNotFoundException,
+            IOException;
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

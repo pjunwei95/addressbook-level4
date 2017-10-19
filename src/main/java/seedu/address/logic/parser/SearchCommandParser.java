@@ -21,11 +21,13 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     public SearchCommand parse(String args) throws ParseException {
 
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        String[] nameKeywords = trimmedArgs.split("\\s+");
+
+        if (trimmedArgs.isEmpty() || nameKeywords.length != 2) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+
 
         return new SearchCommand(new SearchContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }

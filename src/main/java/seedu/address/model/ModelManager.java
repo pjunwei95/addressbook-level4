@@ -3,6 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -81,12 +83,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
     @Override
-    public synchronized void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException {
+    public synchronized void addPhotoPerson(ReadOnlyPerson person, String FilePath) throws PersonNotFoundException,
+            FileNotFoundException, IOException {
 
         try {
             person.imageProperty().setValue( new FileImage(FilePath));
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
+
         }
         catch (IllegalValueException ive) {
             System.out.println("Error encountered");

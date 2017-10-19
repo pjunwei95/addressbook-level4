@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.io.IOException;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -45,6 +46,9 @@ public class PhotoCommand extends UndoableCommand {
         try {
             model.addPhotoPerson(personToAddPhoto, FilePath);
         } catch (PersonNotFoundException pnfe) {
+            assert false : "The target person cannot be missing";
+        }
+        catch (IOException pnfe) {
             assert false : "The target person cannot be missing";
         }
 
