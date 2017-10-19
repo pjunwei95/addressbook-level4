@@ -62,4 +62,6 @@ public interface Model {
      */
     void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException;
 
+    void updateFilteredListToShow();
+
 }

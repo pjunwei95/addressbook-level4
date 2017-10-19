@@ -3,9 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Set;
@@ -92,20 +89,19 @@ public class ModelManager extends ComponentManager implements Model {
             FileNotFoundException, IOException {
 
         try {
-            File fileToRead = new File(FilePath);
-            person.imageProperty().setValue( new FileImage(FilePath));
+            person.imageProperty().setValue( new FileImage("src/main/resources/images/" + FilePath + ".jpg"));
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
-            BufferedImage image = new BufferedImage(963, 640, BufferedImage.TYPE_INT_ARGB);
-            image = ImageIO.read(fileToRead);
-
-
-
         }
         catch (IllegalValueException ive) {
             System.out.println("Error encountered");
         }
     }
+    @Override
+    public synchronized void updateFilteredListToShow() {
+        filteredPersons.setPredicate(null);
+    }
+
     @Override
     public synchronized void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
         addressBook.updateTagColorPair(tagList, color);
@@ -156,5 +152,4 @@ public class ModelManager extends ComponentManager implements Model {
         return addressBook.equals(other.addressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

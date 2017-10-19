@@ -8,8 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.PhotoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-
+import seedu.address.model.person.FileImage;
 
 
 /**
@@ -34,7 +33,7 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
 
         try {
             Index index = ParserUtil.parseIndex(Keywords[0]);
-            return new PhotoCommand(index, Keywords[1]);
+            return new PhotoCommand(index, new FileImage(Keywords[1]));
         } catch (IllegalValueException ive) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));

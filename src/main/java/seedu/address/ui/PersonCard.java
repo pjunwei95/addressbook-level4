@@ -71,25 +71,17 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Adds a photo to a persons contact
      */
-    private void assignImage(String FilePath) {
+    private void assignImage(ReadOnlyPerson person) {
 
-        String url;
-        if (FilePath.equals("")) {
-            url = "/images/address_book_32.png";
-            Image Display = new Image(url);
-            image.setImage(Display);
-        }
-        else {
 
-            String home = System.getProperty("user.home");
-            java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", FilePath);
-            url = path + "";
-            File file = new File(url);
+        String url =  person.getImage().getFilePath() ;
+        System.out.println(person.getImage().getFilePath());
 
-            Image Display = new Image(file.toURI().toString());
-            image.setImage(Display);
-        }
+        File file = new File(url);
+        Image imageDisplay = new Image(file.toURI().toString(), 100, 100,
+                false, false);
 
+        image.setImage(imageDisplay);
     }
 
     /**
@@ -110,7 +102,7 @@ public class PersonCard extends UiPart<Region> {
 
 
         });
-        assignImage(person.getImage().toString());
+        assignImage(person);
     }
 
     /**
