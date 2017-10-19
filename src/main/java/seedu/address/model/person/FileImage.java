@@ -12,7 +12,7 @@ public class FileImage {
     public static final String MESSAGE_IMAGE_CONSTRAINTS =
             "File Path must be correctly entered";
 
-    public final String filePath;
+    public String filePath;
 
     public FileImage(String filePath) throws IllegalValueException {
         requireNonNull(filePath);
@@ -37,6 +37,14 @@ public class FileImage {
     @Override
     public int hashCode() {
         return filePath.hashCode();
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
 }

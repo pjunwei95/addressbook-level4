@@ -3,6 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Set;
@@ -22,6 +25,8 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
+
+import javax.imageio.ImageIO;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -87,9 +92,14 @@ public class ModelManager extends ComponentManager implements Model {
             FileNotFoundException, IOException {
 
         try {
+            File fileToRead = new File(FilePath);
             person.imageProperty().setValue( new FileImage(FilePath));
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
+            BufferedImage image = new BufferedImage(963, 640, BufferedImage.TYPE_INT_ARGB);
+            image = ImageIO.read(fileToRead);
+
+
 
         }
         catch (IllegalValueException ive) {
