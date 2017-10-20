@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import java.io.IOException;
 import java.util.List;
 
+import com.sun.org.apache.xpath.internal.compiler.Keywords;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.storage.ImageStorage;
@@ -24,7 +25,7 @@ public class PhotoCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a photo of the person to the addressBook\n"
             + "Parameters: INDEX (must be a positive integer) FILE_PATH\n"
-            + "File Path must be Valid\n"
+            + "File Path must be Valid that is , must be present on the Desktop\n"
             + "Example: " + COMMAND_WORD + " 1" + " button.png";
 
     public static final String MESSAGE_PHOTO_PERSON_SUCCESS = "Added Photo to Person: %1$s";
@@ -49,6 +50,9 @@ public class PhotoCommand extends UndoableCommand {
         }
 
         ReadOnlyPerson personToAddPhoto = lastShownList.get(targetIndex.getZeroBased());
+        if(FilePath.equalsIgnoreCase("Delete")) {
+            FilePath = "";
+        }
 
         try {
             Person editedPerson = new Person(personToAddPhoto.getName(), personToAddPhoto.getPhone(),
