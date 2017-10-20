@@ -24,6 +24,7 @@ public class PhotoCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a photo of the person to the addressBook\n"
             + "Parameters: INDEX (must be a positive integer) FILE_PATH\n"
+            + "File Path must be Valid\n"
             + "Example: " + COMMAND_WORD + " 1" + " button.png";
 
     public static final String MESSAGE_PHOTO_PERSON_SUCCESS = "Added Photo to Person: %1$s";
@@ -54,6 +55,7 @@ public class PhotoCommand extends UndoableCommand {
                     personToAddPhoto.getEmail(),
                     personToAddPhoto.getAddress(), personToAddPhoto.getDateOfBirth(), personToAddPhoto.getRemark(),
                     new FileImage(FilePath), personToAddPhoto.getTags());
+
             model.addPhotoPerson(personToAddPhoto, FilePath, targetIndex);
             model.updatePerson(personToAddPhoto, editedPerson);
             ImageStorage imageStorage = new ImageStorage();

@@ -126,8 +126,9 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
         try {
+
             CommandResult result = command.execute();
-            assertEquals(expectedMessage, result.feedbackToUser);
+            assertEquals(expectedMessage, result.feedbackToUser);;
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);

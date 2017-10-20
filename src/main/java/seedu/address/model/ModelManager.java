@@ -91,8 +91,8 @@ public class ModelManager extends ComponentManager implements Model {
             FileNotFoundException, IOException {
 
         try {
-            PersonCard dummy = new PersonCard(person, targetIndex.getZeroBased());
-            dummy.assignImage(FilePath);
+//            PersonCard dummy = new PersonCard(person, targetIndex.getZeroBased());
+  //          dummy.assignImage(FilePath);
             person.imageProperty().setValue( new FileImage(FilePath));
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
