@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.PhotoCommand.MESSAGE_PHOTO_PERSON_SUC
 import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -14,7 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-import java.io.IOException;
 
 public class PhotoCommandSystemTest extends AddressBookSystemTest {
 
@@ -25,7 +26,7 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
     public void photo() {
         /* ----------------- Performing photo operation while an unfiltered list is being shown -------------------- */
 
-          /* Case: Add photo to the first person in the list, command with leading spaces and
+        /* Case: Add photo to the first person in the list, command with leading spaces and
           trailing spaces -> deleted */
 
         Model expectedModel = getModel();

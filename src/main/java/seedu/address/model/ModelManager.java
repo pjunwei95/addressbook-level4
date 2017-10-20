@@ -23,7 +23,6 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
-import seedu.address.ui.PersonCard;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -91,8 +90,6 @@ public class ModelManager extends ComponentManager implements Model {
             FileNotFoundException, IOException {
 
         try {
-//            PersonCard dummy = new PersonCard(person, targetIndex.getZeroBased());
-  //          dummy.assignImage(FilePath);
             person.imageProperty().setValue( new FileImage(FilePath));
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();

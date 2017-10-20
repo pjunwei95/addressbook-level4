@@ -1,7 +1,15 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -12,13 +20,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.FileImage;
 import seedu.address.model.person.ReadOnlyPerson;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code PhotoCommand}.
@@ -56,7 +57,7 @@ public class PhotoCommandTest {
      */
     private PhotoCommand prepareCommand(Index index, String FilePath) {
         //DeleteCommand deleteCommand = new DeleteCommand(index);
-        PhotoCommand photoCommand = new PhotoCommand(index,FilePath);
+        PhotoCommand photoCommand = new PhotoCommand(index, FilePath);
         photoCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return photoCommand;
     }
