@@ -78,10 +78,10 @@ public class AccountsStorage implements UserPrefsStorage {
     public HashMap<String, String> makeMap(String rawValue) {
         HashMap<String, String> hm = new HashMap<String, String>();
         rawValue = rawValue.substring(9, rawValue.length() - 1);
-        String[] value= rawValue.split("/");
+        String[] value = rawValue.split("/");
         String[] username = value[0].split(",");
         String[] password = value[1].split(",");
-        for(int i = 0; i < username.length; i++) {
+        for (int i = 0; i < username.length; i++) {
             hm.put(username[i].trim(), password[i].trim());
         }
         return hm;

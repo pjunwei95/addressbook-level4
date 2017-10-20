@@ -218,6 +218,9 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+    /**
+     * Method for handle logout event.
+     */
     @FXML
     private void handleLogoutEvent() {
         logger.info("Trying to logout");

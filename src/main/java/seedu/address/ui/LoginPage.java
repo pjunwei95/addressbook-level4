@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -32,11 +31,13 @@ import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
 
-public class LoginPage extends UiPart<Region>{
+/**
+ * The login page. Users need to key in their username and password to login the MainWindow.
+ */
+public class LoginPage extends UiPart<Region> {
 
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "loginPage.fxml";
-    public static final String DEFAULT_PAGE = "default.html";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
 
@@ -57,7 +58,8 @@ public class LoginPage extends UiPart<Region>{
     @FXML
     private TextField password;
 
-    public LoginPage(Stage primaryStage, Config config, Storage storage, UserPrefs prefs, Logic logic, AccountsStorage accPrefs) {
+    public LoginPage(Stage primaryStage, Config config, Storage storage, UserPrefs prefs,
+                     Logic logic, AccountsStorage accPrefs) {
         super(FXML);
         this.logic = logic;
         // Set dependencies
@@ -82,6 +84,9 @@ public class LoginPage extends UiPart<Region>{
         return primaryStage;
     }
 
+    /**
+     * Method for handle login event
+     */
     @FXML
     private void handleLoginEvent() {
         logger.info("Trying to login");

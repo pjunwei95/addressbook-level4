@@ -62,8 +62,8 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
             loginPage.show();
-//          mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
-//          mainWindow.show(); //This should be called before creating other UI parts
+            //mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
+            //mainWindow.show(); //This should be called before creating other UI parts
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
@@ -75,8 +75,8 @@ public class UiManager extends ComponentManager implements Ui {
         prefs.updateLastUsedGuiSetting(loginPage.getCurrentGuiSetting());
         loginPage.hide();
         loginPage.releaseResources();
-//      mainWindow.hide();
-//      mainWindow.releaseResources();
+        //mainWindow.hide();
+        //mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {

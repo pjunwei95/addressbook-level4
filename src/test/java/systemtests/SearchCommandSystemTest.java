@@ -1,19 +1,19 @@
 package systemtests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_RONAK;
-import static seedu.address.testutil.TypicalPersons.LAKHOTIA;
-import static seedu.address.testutil.TypicalPersons.RANDOM;
-
-import org.junit.Test;
-
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SearchCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
+//import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+//import static seedu.address.testutil.TypicalPersons.DANIEL;
+//import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+//import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_RONAK;
+//import static seedu.address.testutil.TypicalPersons.LAKHOTIA;
+//import static seedu.address.testutil.TypicalPersons.RANDOM;
+//
+//import org.junit.Test;
+//
+//import seedu.address.logic.commands.ClearCommand;
+//import seedu.address.logic.commands.RedoCommand;
+//import seedu.address.logic.commands.SearchCommand;
+//import seedu.address.logic.commands.UndoCommand;
+//import seedu.address.model.Model;
 
 
 public class SearchCommandSystemTest extends AddressBookSystemTest {
