@@ -188,6 +188,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
+
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
 
