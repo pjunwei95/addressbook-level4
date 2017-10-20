@@ -34,6 +34,7 @@ public class DateOfBirth {
         String trimmedDate = Date.trim();
         this.date = trimmedDate;
     }
+
     @Override
     public String toString() {
         return date;
