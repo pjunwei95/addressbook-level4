@@ -29,9 +29,8 @@ public class DateOfBirth {
         if (!isValidBirthday(date)) {
             throw new IllegalValueException(MESSAGE_BIRTHDAY_CONSTRAINTS);
         }
-
         if (!date.equals("")) {
-                trimmedDate = date.trim();
+            trimmedDate = date.trim();
             this.date = trimmedDate;
         } else {
             this.date = "";
