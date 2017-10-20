@@ -19,13 +19,5 @@ public class PhotoCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
     }
 
-    @Test
-    public void parse_validArgs_returnsPhotoCommand() {
-        // no leading and trailing whitespaces
-        PhotoCommand expectedPhotoCommand =
-                new PhotoCommand(INDEX_FIRST_PERSON, "nus.jpg");
-        assertParseSuccess(parser, "1 nus.jpg", expectedPhotoCommand);
-
-    }
 
 }
