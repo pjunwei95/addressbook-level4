@@ -50,9 +50,6 @@ public class BrowserPanel extends UiPart<Region> {
         loadPage(GOOGLE_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll(" ", "+")
                 + GOOGLE_SEARCH_URL_SUFFIX);
 
-        //loadPage(FACEBOOK_MESSENGER_URL_PREFIX + "yash.chowdhary.5");
-
-
     }
 
     public void loadPage(String url) {
