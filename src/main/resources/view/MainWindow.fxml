@@ -10,8 +10,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 
-<VBox xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
   <stylesheets>
     <URL value="@DarkTheme.css" />
     <URL value="@Extensions.css" />
@@ -20,6 +20,7 @@
   <SplitPane id="splitPane" fx:id="splitPaneTop" dividerPositions="0.4" VBox.vgrow="ALWAYS">
     <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
       <Menu mnemonicParsing="false" text="File">
+        <MenuItem id="logout" mnemonicParsing="false" onAction="#handleLogoutEvent" text="Logout" />
         <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
       </Menu>
       <Menu mnemonicParsing="false" text="Help">

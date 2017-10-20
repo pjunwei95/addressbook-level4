@@ -25,6 +25,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
+import seedu.address.storage.AccountsStorage;
+import seedu.address.storage.Storage;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -47,6 +49,8 @@ public class MainWindow extends UiPart<Region> {
     private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
+    private Storage storage;
+    private AccountsStorage accPrefs;
 
     private CommandBox commandBox;
 
@@ -68,7 +72,8 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    public MainWindow(Stage primaryStage, Config config, Storage storage, UserPrefs prefs, Logic logic,
+                      AccountsStorage accPrefs) {
         super(FXML);
 
         // Set dependencies
@@ -76,6 +81,8 @@ public class MainWindow extends UiPart<Region> {
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+        this.storage = storage;
+        this.accPrefs = accPrefs;
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -91,6 +98,10 @@ public class MainWindow extends UiPart<Region> {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public BrowserPanel getBrowserPanel() {
+        return browserPanel;
     }
 
     private void setAccelerators() {
@@ -213,6 +224,18 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+    /**
+     * Method for handle logout event.
+     */
+    @FXML
+    private void handleLogoutEvent() {
+        logger.info("Trying to logout");
+        this.hide();
+        this.releaseResources();
+        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        loginPage.show();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return this.personListPanel;
     }
@@ -242,6 +265,5 @@ public class MainWindow extends UiPart<Region> {
     private void handleDecreaseFontSize() throws CommandException, ParseException {
         commandBox.handleCommandInputChanged(FontSize.DECREASE_FONT_SIZE_COMMAND);
     }
-
 
 }
