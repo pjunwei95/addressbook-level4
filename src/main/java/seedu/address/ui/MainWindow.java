@@ -22,6 +22,8 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.AccountsStorage;
+import seedu.address.storage.Storage;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -44,6 +46,8 @@ public class MainWindow extends UiPart<Region> {
     private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
+    private Storage storage;
+    private AccountsStorage accPrefs;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -63,7 +67,8 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    public MainWindow(Stage primaryStage, Config config, Storage storage, UserPrefs prefs, Logic logic,
+                      AccountsStorage accPrefs) {
         super(FXML);
 
         // Set dependencies
@@ -71,6 +76,8 @@ public class MainWindow extends UiPart<Region> {
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+        this.storage = storage;
+        this.accPrefs = accPrefs;
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -86,6 +93,10 @@ public class MainWindow extends UiPart<Region> {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public BrowserPanel getBrowserPanel() {
+        return browserPanel;
     }
 
     private void setAccelerators() {
@@ -207,6 +218,15 @@ public class MainWindow extends UiPart<Region> {
         raise(new ExitAppRequestEvent());
     }
 
+    @FXML
+    private void handleLogoutEvent() {
+        logger.info("Trying to logout");
+        this.hide();
+        this.releaseResources();
+        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        loginPage.show();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return this.personListPanel;
     }
@@ -220,4 +240,6 @@ public class MainWindow extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
+
+
 }

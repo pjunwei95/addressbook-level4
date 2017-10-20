@@ -39,7 +39,7 @@ public class Person implements ReadOnlyPerson {
         this.date = new SimpleObjectProperty<>(dateOfBirth);
         this.remark = new SimpleObjectProperty<>(remark);
         // protect internal tags from changes in the arg list
-        this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
+        this.tags = new SimpleObjectProperty<> (new UniqueTagList(tags));
     }
 
     /**
