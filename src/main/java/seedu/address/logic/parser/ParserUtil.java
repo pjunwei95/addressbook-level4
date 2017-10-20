@@ -10,9 +10,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.font.FontSize;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -90,6 +92,14 @@ public class ParserUtil {
         requireNonNull(remark);
         return remark.isPresent() ? Optional.of(new Remark(remark.get())) : Optional.empty();
     }
+    /**
+     * Parses a {@code Optional<String> FilePath} into an {@code Optional<FileImage>} if {@code FilePath} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<FileImage> parseImage(Optional<String> image) throws IllegalValueException {
+        requireNonNull(image);
+        return image.isPresent() ? Optional.of(new FileImage(image.get())) : Optional.empty();
+    }
 
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
@@ -107,6 +117,15 @@ public class ParserUtil {
     public static Optional<TagColor> parseTagColor(Optional<String> tagColor) throws IllegalValueException {
         requireNonNull(tagColor);
         return tagColor.isPresent() ? Optional.of(new TagColor(tagColor.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code Optional<String> fontSize} into an {@code Optional<FontSize>} if {@code fontSize} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<FontSize> parseFontSize(Optional<String> fontSize) throws IllegalValueException {
+        requireNonNull(fontSize);
+        return fontSize.isPresent() ? Optional.of(new FontSize(fontSize.get())) : Optional.empty();
     }
 
     /**
