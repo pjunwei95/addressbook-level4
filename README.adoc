@@ -1,6 +1,6 @@
-image::docs/images/Present.png[width="790"]
-
 = Weaver (Level 4)
+
+image::docs/images/login.png[width="790"]
 
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]

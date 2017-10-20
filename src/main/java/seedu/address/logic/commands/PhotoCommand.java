@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -24,9 +25,10 @@ public class PhotoCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a photo of the person to the addressBook\n"
             + "Parameters: INDEX (must be a positive integer) FILE_PATH\n"
-            + "File Path must be Valid\n"
+            + "File Path must be Valid that is , must be present on the Desktop\n"
             + "Example: " + COMMAND_WORD + " 1" + " button.png";
 
+    public static final String DELETE_SUCCESS = "Deleted photo of Person: %1$s";
     public static final String MESSAGE_PHOTO_PERSON_SUCCESS = "Added Photo to Person: %1$s";
 
     public static final String MESSAGE_FILE_PATH_NOT_FOUND = "Incorrect file path";
@@ -49,6 +51,13 @@ public class PhotoCommand extends UndoableCommand {
         }
 
         ReadOnlyPerson personToAddPhoto = lastShownList.get(targetIndex.getZeroBased());
+
+        if (personToAddPhoto.getImage().getFilePath().equals("") && FilePath.equalsIgnoreCase("delete")) {
+            throw new CommandException(Messages.MESSAGE_NO_IMAGE_TO_DELETE);
+        }
+        if (FilePath.equalsIgnoreCase("Delete")) {
+            FilePath = "";
+        }
 
         try {
             Person editedPerson = new Person(personToAddPhoto.getName(), personToAddPhoto.getPhone(),
@@ -76,8 +85,11 @@ public class PhotoCommand extends UndoableCommand {
         } catch (IllegalValueException ive) {
             assert false : "Invalid input";
         }
-
-        return new CommandResult(String.format(MESSAGE_PHOTO_PERSON_SUCCESS, personToAddPhoto));
+        if (FilePath.equals("")) {
+            return new CommandResult(String.format(DELETE_SUCCESS, personToAddPhoto));
+        } else {
+            return new CommandResult(String.format(MESSAGE_PHOTO_PERSON_SUCCESS, personToAddPhoto));
+        }
     }
 
     @Override

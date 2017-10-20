@@ -93,7 +93,6 @@ public class ModelManager extends ComponentManager implements Model {
             person.imageProperty().setValue( new FileImage(FilePath));
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
-
         }
         catch (IllegalValueException ive) {
             System.out.println("Error encountered");

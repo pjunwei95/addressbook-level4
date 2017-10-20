@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_IMAGE;
+
+import java.io.File;
 
 import java.util.stream.Stream;
 
@@ -27,6 +30,17 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
         if (trimmedArgs.isEmpty() || Keywords.length != 2) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
+        }
+        String home = System.getProperty("user.home");
+        String inputFile = Keywords[1];
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop");
+        String url = path + "";
+        System.out.println(path + " " + inputFile);
+        File workingDirectory = new File(url);
+        File testFile = new File(workingDirectory, inputFile);
+        if (!testFile.exists() && !inputFile.equalsIgnoreCase("delete")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_IMAGE, PhotoCommand.MESSAGE_USAGE));
         }
 
         try {
