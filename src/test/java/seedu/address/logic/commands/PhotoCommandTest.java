@@ -28,20 +28,6 @@ public class PhotoCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    @Test
-    public void execute_validIndexUnfilteredList_success() throws Exception {
-
-        ReadOnlyPerson personToAddPhoto = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        personToAddPhoto.imageProperty().setValue(new FileImage("nus.jpg"));
-        PhotoCommand photoCommand = prepareCommand(INDEX_FIRST_PERSON, "nus.jpg");
-
-        String expectedMessage = String.format(PhotoCommand.MESSAGE_PHOTO_PERSON_SUCCESS, personToAddPhoto);
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPhotoPerson(personToAddPhoto, "nus.jpg", INDEX_FIRST_PERSON);
-
-        assertCommandSuccess(photoCommand, model, expectedMessage, expectedModel);
-    }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
