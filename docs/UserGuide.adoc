@@ -14,7 +14,6 @@ endif::[]
 
 By: `W13-B2`      Since: `Aug 2017`      Licence: `MIT`
 
-image::Present.png[width="790"]
 
 == Quick Start
 
@@ -28,6 +27,10 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
+image::login.png[width="790"]
+
+. After login, you will see the GUI below.
+
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -321,6 +324,27 @@ The `color` command fails as `invalid_color` is not supported.
 * `color t/not_existing_tag c/yellow` +
 The `color` command fails as `not_existing_tag` does not exit in current database.
 
+=== Change font size : `fs`
+
+Change the font size of the entire application +
+Format: `fs [FONT SIZE]` or `fs [+/-]`
+****
+* The available font sizes are: xs(extra small), s(small), m(medium), l(large), xl(extra large).
+* The default font size is m.
+* The font size changed will be auto stored.
+* You can increase (or decrease) the font size by pressing the "+" (or "-") button in the right top corner.
+****
+
+Examples:
+
+* `fs xl`
+
+* `fs s`
+
+* `fs +`
+
+* `fs -` +
+
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
@@ -366,6 +390,10 @@ e.g. `edit 2 n/James Lee e/jameslee@example.com`
 e.g. `find James Jake`
 * *Find by Tags* : `find/t KEYWORD [MORE_KEYWORDS]` +
 e.g. `find/t friends family`
+* *Customize tag color* : `color c/[COLOR] t/[TAG] t/[TAG] t/[MORE_TAGS]` +
+e.g. `color c/red t/friend t/family`
+* *Chang font size* : `fs [FONT SIZE]` or  `fs +/-` +
+e.g. `fs xs` `fs +` `fs -`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +

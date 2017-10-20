@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -17,12 +15,16 @@ public class DateOfBirth {
      *
      * @throws IllegalValueException if given dateOfBirth string is invalid.
      */
-    public DateOfBirth(String Date) {
 
-        requireNonNull(Date);
-        String trimmedDate = Date.trim();
-        this.date = trimmedDate;
+    public DateOfBirth(String date) {
+        if (!date.equals("")) {
+            String trimmedDate = date.trim();
+            this.date = trimmedDate;
+        } else {
+            this.date = "";
+        }
     }
+
     @Override
     public String toString() {
         return date;
