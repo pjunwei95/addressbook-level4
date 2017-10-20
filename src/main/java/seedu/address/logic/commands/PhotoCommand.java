@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import java.io.IOException;
+
 import java.util.List;
 
-import com.sun.org.apache.xpath.internal.compiler.Keywords;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.storage.ImageStorage;
@@ -51,6 +51,10 @@ public class PhotoCommand extends UndoableCommand {
         }
 
         ReadOnlyPerson personToAddPhoto = lastShownList.get(targetIndex.getZeroBased());
+
+        if (personToAddPhoto.getImage().getFilePath().equals("") && FilePath.equalsIgnoreCase("delete")) {
+            throw new CommandException(Messages.MESSAGE_NO_IMAGE_TO_DELETE);
+        }
         if (FilePath.equalsIgnoreCase("Delete")) {
             FilePath = "";
         }

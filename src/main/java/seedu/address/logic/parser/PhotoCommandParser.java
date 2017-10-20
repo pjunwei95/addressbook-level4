@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_IMAGE;
 
-import java.util.stream.Stream;
-
 import java.io.File;
+
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -38,7 +38,7 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
         System.out.println(path + " " + inputFile);
         File workingDirectory = new File(url);
         File testFile = new File(workingDirectory, inputFile);
-        if(!testFile.exists() && !inputFile.equalsIgnoreCase("delete")) {
+        if (!testFile.exists() && !inputFile.equalsIgnoreCase("delete")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_IMAGE, PhotoCommand.MESSAGE_USAGE));
         }
