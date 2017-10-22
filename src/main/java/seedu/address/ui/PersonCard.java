@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import static seedu.address.model.font.FontSize.getassociatefxfontsizestring;
 
-import java.awt.event.MouseEvent;
-import java.beans.EventHandler;
 import java.io.File;
 
 import java.util.HashMap;
@@ -11,7 +9,6 @@ import java.util.Random;
 
 import com.google.common.eventbus.Subscribe;
 
-import com.oracle.tools.packager.Log;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -23,7 +20,7 @@ import javafx.scene.layout.Region;
 
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.events.ui.ChangeTagColorEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionAddressChangedEvent;
+import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -211,7 +208,7 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private void handleAddressClick(){
-        raise(new PersonPanelSelectionAddressChangedEvent(address.getText()));
+        raise(new PersonPanelAddressPressedEvent(address.getText()));
     }
 
 }
