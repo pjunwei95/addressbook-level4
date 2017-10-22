@@ -233,6 +233,7 @@ public class MainWindow extends UiPart<Region> {
         logger.info("Trying to logout");
         this.hide();
         this.releaseResources();
+        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
         LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
         loginPage.show();
     }
