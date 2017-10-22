@@ -15,6 +15,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
+import javax.swing.text.html.ImageView;
+
+
 /**
  * The Browser Panel of the App.
  */
@@ -23,8 +26,6 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String DEFAULT_PAGE = "default.html";
     public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.google.com.sg/search?safe=off&q=";
     public static final String GOOGLE_SEARCH_URL_SUFFIX = "&cad=h";
-    public static final String FACEBOOK_MESSENGER_URL_PREFIX = "https://www.facebook.com/messages/t/";
-
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -40,6 +41,8 @@ public class BrowserPanel extends UiPart<Region> {
         getRoot().setOnKeyPressed(Event::consume);
 
         loadDefaultPage();
+
+
         registerAsAnEventHandler(this);
     }
     /**

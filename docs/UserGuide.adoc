@@ -1,4 +1,4 @@
-= Weaver - User Guide
+= Weaver User HandBook
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -15,7 +15,11 @@ endif::[]
 By: `W13-B2`      Since: `Aug 2017`      Licence: `MIT`
 
 
-== Quick Start
+== Product Overview
+
+Weaver is a desktop application that has a GUI (Graphical User Interface) but most of the interactions happen using
+a Command Line Interface.Weaver is your personalised addressbook that will make your day to day life easier by letting
+you access the details over your friends and family members as and when you want them.
 
 .  Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 +
