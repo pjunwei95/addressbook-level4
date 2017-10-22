@@ -38,6 +38,9 @@ public interface Model {
             throws PersonNotFoundException, FileNotFoundException,
             IOException;
 
+    /** Searches for a person on facebook */
+    void faceBook(ReadOnlyPerson person, String username) throws PersonNotFoundException;
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      *

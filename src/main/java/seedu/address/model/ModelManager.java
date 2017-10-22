@@ -76,6 +76,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
     @Override
+    public synchronized void faceBook(ReadOnlyPerson person, String username) throws PersonNotFoundException {
+
+    }
+    @Override
     public synchronized void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
 
         addressBook.addPerson(person);
