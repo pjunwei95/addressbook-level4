@@ -12,10 +12,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
-import javax.swing.text.html.ImageView;
 
 
 /**
@@ -26,6 +26,7 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String DEFAULT_PAGE = "default.html";
     public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.google.com.sg/search?safe=off&q=";
     public static final String GOOGLE_SEARCH_URL_SUFFIX = "&cad=h";
+    public static final String FACEBOOK_PROFILE_PAGE = "https://www.facebook.com/";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -79,4 +80,20 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonPage(event.getNewSelection().person);
     }
+
+    public void loadPersonFaceBookPage(ReadOnlyPerson person, String username) {
+
+        String url = FACEBOOK_PROFILE_PAGE + username;
+        loadPage(url);
+    }
+
+    @Subscribe
+    public void handleFaceBookEvent(FaceBookEvent event) {
+
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        loadPersonFaceBookPage(event.getPerson(), event.getUsername());
+    }
+
+
 }
