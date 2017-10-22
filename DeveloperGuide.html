@@ -5,20 +5,20 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>AddressBook Level 4 - Developer Guide</title>
+<title>Weaver - Developer Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>AddressBook Level 4 - Developer Guide</h1>
+<h1>Weaver - Developer Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>W13-B2</code>      Since: <code>Aug 2017</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -45,8 +45,12 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></li>
-<li><a href="#logging">3.2. Logging</a></li>
-<li><a href="#configuration">3.3. Configuration</a></li>
+<li><a href="#login-logout-mechanism">3.2. Login / Logout mechanism</a></li>
+<li><a href="#customize-tag-color-mechanism">3.3. Customize tag color mechanism</a></li>
+<li><a href="#deleting-a-person-s-tag-mechanism">3.4. Deleting a person&#8217;s tag mechanism</a></li>
+<li><a href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">3.5. Adding a photo to a contact in your personalised Weaver.</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#configuration">3.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -78,7 +82,12 @@
 </ul>
 </li>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
-<li><a href="#use-cases">Appendix C: Use Cases</a></li>
+<li><a href="#use-cases">Appendix C: Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#use-case-email-intents">C.1. Use case: Email Intents</a></li>
+<li><a href="#use-case-social-integration">C.2. Use case: Social Integration</a></li>
+</ul>
+</li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
 <li><a href="#product-survey">Appendix F: Product Survey</a></li>
@@ -767,7 +776,475 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.2. Logging</a></h3>
+<h3 id="login-logout-mechanism"><a class="link" href="#login-logout-mechanism">3.2. Login / Logout mechanism</a></h3>
+<div class="paragraph">
+<p>The login / logout mechanism is a page which requires user to key in his username and password before he can use the addressbook. And Once he is logged in, there will be a automatically generated file named as "username + addressbook.xml" storing the information about his own addressbook.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>It uses files whloginich stores the information of legal username and password pair to check whether the username and password key in by users are valid.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/login.png" alt="login" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>With the extra layer, the UiManager is calling login page before it calls the MainWindow:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">loginPage = <span class="keyword">new</span> LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+loginPage.show();
+<span class="comment">//mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);</span>
+<span class="comment">//mainWindow.show(); //This should be called before creating other UI parts</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The check mechanism is implemented in this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">boolean</span> checkValid(<span class="predefined-type">String</span> username, <span class="predefined-type">String</span> password) {
+        <span class="keyword">return</span> accPrefs.getHm().get(username).equals(password);
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If user key in wrong user name or password, he will stuck at login page until he manages to get in.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Read the account information from file and save them into a hashmap.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> AccountsStorage setAccountMsg() <span class="directive">throws</span> DataConversionException, <span class="exception">IOException</span> {
+        <span class="predefined-type">String</span> accountMsg = <span class="local-variable">this</span>.readAccountsPrefs(<span class="local-variable">this</span>.accountsPath).toString();
+        <span class="local-variable">this</span>.hm = makeMap(accountMsg);
+        <span class="keyword">return</span> <span class="local-variable">this</span>;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Logout is implemented using JavaFX.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@FXML</span>
+<span class="directive">private</span> <span class="type">void</span> handleLogoutEvent() {
+    logger.info(<span class="string"><span class="delimiter">&quot;</span><span class="content">Trying to logout</span><span class="delimiter">&quot;</span></span>);
+    <span class="local-variable">this</span>.hide();
+    <span class="local-variable">this</span>.releaseResources();
+    LoginPage loginPage = <span class="keyword">new</span> LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+    loginPage.show();
+}</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/logout.png" alt="logout" width="200">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>login / logout</code> feature<br>
+<strong>Alternative 1 (current choice):</strong> <code>login</code> is compulsory. User must login before he can use the addressbook <br>
+<strong>Pros:</strong> Faster to implement. Not changing the structure of code.<br>
+<strong>Cons:</strong> Previous test cases need to be rewrote to get use to this new page.<br>
+<strong>Alternative 2:</strong> <code>login</code> is  optional. User can still use this addressbook without login.<br>
+<strong>Pros:</strong> Previous test cases can still be used.<br>
+<strong>Cons:</strong> Need to invoke <code>login page</code> from command level, which is very hard to implement. It changes a considerable
+part of structure of the whole code.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> User experiences <br>
+<strong>Alternative 1 (current choice):</strong> <code>login</code> is compulsory. User must login before he can use the addressbook<br>
+<strong>Pros:</strong> Level of security is increased. Each user has a separate file to store addressbook. This software now support
+multiple users.<br>
+<strong>Cons:</strong> User needs an account to use this addressbook. Operation become one layer more complex.<br>
+<strong>Alternative 2:</strong> <code>login</code> is  optional. User can still use this addressbook without login. <br>
+<strong>Pros:</strong> Multiple choices for users. More flexible.<br>
+<strong>Cons:</strong> The default page becomes public, anyone can read and modify it.<br></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="customize-tag-color-mechanism"><a class="link" href="#customize-tag-color-mechanism">3.3. Customize tag color mechanism</a></h3>
+<div class="paragraph">
+<p>Tag color can be changed by typing a <code>ChangeTagColorCommand</code> in the command line.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+User can change one or more than one tag to a different color in one command.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The diagram below shows the hierarchy of ChangeTagColorCommand.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ChangeTagColorCommandClassDiagram.png" alt="ChangeTagColorCommandClassDiagram" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>We use a new class <code>TagColor</code> to represent a color of a tag. For every <code>Tag</code> object, it has a new field <code>tagColor</code> of <code>TagColor</code> class which stores its associate tag color.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When the tag color of a tag has not specified by the user yet, it is in default color blue.<br>
+Tags with the same tag name are of the same color.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The diagram below shows the hierarchy of TagColor class.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TagColorClassDiagram.png" alt="TagColorClassDiagram" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>After every <code>ChangeTagColorCommand</code>, the tag and tag color pair will be stored in the storage file. The tag color in the UI is also updated accordingly.<br></p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below shows how the <code>ChangeTagColorCommand</code> works.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ChangeTagColorSequenceDiagram.png" alt="ChangeTagColorSequenceDiagram" width="800">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to associate each tag with a tag color?<br>
+<strong>Alternative 1 (current choice):</strong> Create a new class <code>TagColor</code> and add a new field to <code>Tag</code> class.<br>
+<strong>Pros:</strong> The associate tag color is easy to get from a given tag. It is also very intuitive for each tag to have its tag color.<br>
+<strong>Cons:</strong> It is complicated to implement.<br>
+<strong>Alternative 2:</strong> Create a static hash map of all tag names(String) and their associate tag color(String) inside <code>Tag</code> class.<br>
+<strong>Pros:</strong> It is easy to implement.<br>
+<strong>Cons:</strong> Storing tag and tag color pairs inside <code>Tag</code> class violates the single responsibility principle of classes.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Colors supported of <code>TagColor</code><br>
+<strong>Alternative 1 (current choice):</strong> Developers specify a list of available colors for users.<br>
+<strong>Pros:</strong> It is easy to check whether the tag color name user typed in is valid.<br>
+<strong>Cons:</strong> The choices of color is limited.<br>
+<strong>Alternative 2:</strong> User can type in Hex Color Code as the color for tags.<br>
+<strong>Pros:</strong> User may not know what is Hex Color Code.<br>
+<strong>Cons:</strong> The colors available are various.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person-s-tag-mechanism"><a class="link" href="#deleting-a-person-s-tag-mechanism">3.4. Deleting a person&#8217;s tag mechanism</a></h3>
+<div class="paragraph">
+<p>The Deleting a person&#8217;s tag mechanism consists of <code>DeleteTagCommand</code> and <code>DeleteTagCommandParser</code> classes.</p>
+</div>
+<div class="paragraph">
+<p>The <code>DeleteTagCommandParser</code> resides inside <code>LogicManager</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>DeleteTagCommandParser</code> only deals with <code>Parser</code>. It is created from <code>AddressBookParser</code>. The following diagram shows the flow for parser:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see from the diagram, <code>XYZCommand Parser</code> inherits from the <code>Parser</code> interface and is created by the AddressBook Parser as the <code>DeleteTagCommandParser</code>. Note that the tags are parsed under <code>parseTagsForDelete</code>, while the person index is parsed under <code>parse</code> before execution. The tags are identified by the prefix <code>t/</code> to be parsed for deletion, and it must be fully matched.</p>
+</div>
+<div class="paragraph">
+<p>The <code>DeleteTagCommand</code> resides inside <code>LogicManager</code>. It supports undoing and redoing of that modifies the state of Weaver. Such commands will inherit from <code>UndoableCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>DeleteTagCommand</code> only deals with <code>UndoableCommands</code>. Commands that cannot be undone will inherit from <code>Command</code> instead. The following diagram shows the inheritance diagram for commands:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteTagCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
+</div>
+<div class="paragraph">
+<p>Commands that are not undoable are implemented this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">ListCommand</span> <span class="directive">extends</span> Command {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> CommandResult execute() {
+        <span class="comment">// ... list logic ...</span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the extra layer, the commands that are undoable are implemented this way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">abstract</span> <span class="type">class</span> <span class="class">UndoableCommand</span> <span class="directive">extends</span> Command {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> CommandResult execute() {
+        <span class="comment">// ... undo logic ...</span>
+
+        executeUndoableCommand();
+    }
+}
+
+<span class="directive">public</span> <span class="type">class</span> <span class="class">DeleteTagCommand</span> <span class="directive">extends</span> UndoableCommand {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> CommandResult executeUndoableCommand() {
+        <span class="comment">// ... delete logic ...</span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Inside the <code>DeleteTagCommand</code> class, a <code>DeleteTagDescriptor</code> identifying the tags to be deleted will be created from <code>DeleteTagCommandParser</code>, which will create and update a new <code>createTagDeletedPerson</code> accordingly. This will overwrite the existing <code>ReadOnlyPerson</code> Person&#8217;s Tags while retaining the rest of its attributes as seen from the Model diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see from the <code>Model</code> diagram, the <code>Person</code> retains the attributes that inherit it except for its own <code>UniqueTagList</code>, which is modified only for that particular <code>Person</code>.</p>
+</div>
+<div class="paragraph">
+<p>Suppose that the user has just launched the application.</p>
+</div>
+<div class="paragraph">
+<p>The user executes a new <code>DeleteTagCommand</code>, <code>delete/t 5 t/friends</code>, to delete the tag <code>friends</code> of the 5th person in the address book. The tags and the index are parsed into <code>DeleteTagCommandParser</code> before the <code>delete/t</code> command executes.</p>
+</div>
+<div class="paragraph">
+<p>As the user continues to use the program, he might decide to delete more than one tags. For example, the user may execute <code>delete/t 2 t/colleagues t/friends</code> to delete multiple tags.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the tags are not fully matched, it will throw an <code>Exception</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The user now decides that deleting the tags was a mistake, and decides to undo that action using <code>undo</code>.</p>
+</div>
+<div class="paragraph">
+<p>Using the <code>Undo/Redo</code> stack, we will restore the address book to the state before the <code>delete/t</code> command is executed.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the <code>undoStack</code> is empty, then there are no other commands left to be undone, and an <code>Exception</code> will be thrown when popping the <code>undoStack</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>DeleteTagCommand</code><br>
+<strong>Alternative 1 (current choice):</strong> Access the <code>Person</code> and overwrite a new <code>Person</code> to it.<br>
+<strong>Pros:</strong> We will not lose the same tags for other <code>Person</code> it is now part of the default behaviour. Classes that deal with <code>Tags</code> like <code>UniqueTagsList</code> do not have to be deleted.<br>
+<strong>Cons:</strong> Hard for new developers to understand the <code>UniqueTagsList</code>.<br>
+<strong>Alternative 2:</strong> Just delete the <code>Tag</code> in the <code>UniqueTagsList</code><br>
+<strong>Pros:</strong> Does not involve <code>Person</code> model, easier for new developers to understand with less coupling.<br>
+<strong>Cons:</strong> It will defeat the purpose of deleting a tag solely of the specific <code>Person</code>. Might take more effort to organise tags for users.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>DeleteTagCommandParser</code><br>
+<strong>Alternative 1 (current choice):</strong> Able to utilise <code>Index</code> and tag prefix <code>t/</code>.<br>
+<strong>Pros:</strong> Able to delete multiple tags, easy to implement.<br>
+<strong>Cons:</strong> User will have to type additional prefixes to delete.<br>
+<strong>Alternative 2:</strong> Not utilising prefix <code>t/</code>.<br>
+<strong>Pros:</strong> Easier and faster to delete with no prefix identifier.<br>
+<strong>Cons:</strong> Difficult to implement, as it is harder to tokenize the arguments to differentiate between index and tag.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Deleting only a <code>Person</code> Tags<br>
+<strong>Alternative 1 (current choice):</strong> If there are no tags for any <code>Person</code>, the <code>UniqueTagsList</code> will still contain that tag.<br>
+<strong>Pros:</strong> Easy to implement.<br>
+<strong>Cons:</strong> May have performance issues in terms of memory usage.<br>
+<strong>Alternative 2:</strong> Clean up the <code>UniqueTagsList</code> after deleting its last tag.<br>
+<strong>Pros:</strong> Will use less memory (e.g. for <code>UniqueTagsList</code>, will not contain tags that are not present in any <code>Person</code>).<br>
+<strong>Cons:</strong> We must ensure that the implementation for discovering the last tags of the list is correct. May be harder to implement for new developers.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">3.5. Adding a photo to a contact in your personalised Weaver.</a></h3>
+<div class="paragraph">
+<p>The add Photo command adds a display picture to a particular contact.The command takes in two parameters, TargetIndex
+that is the index of the person I want to add a photo and the image name with the extension.<br>
+The command can also be used to delete an existing picture of a person.If the person has no display picture, an exception
+will be thrown.</p>
+</div>
+<div class="paragraph">
+<p>Format - photo [INDEX] [IMAGE_NAME.EXTENSION]<br>
+e.g. <code>photo 1 Ronak.jpeg</code> to add an image
+e.g. <code>photo 1 delete</code> to delete an existing image.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MockUp.png" alt="MockUp" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The photo command is done with the help of ImageView property in JAVAFX, hence it is an attempt to enhance the UI.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>PRE-REQUISITE</strong><br>
+There is a pre-requisite for the command to work.The image that is going to be added to the contact must already be
+present on the user&#8217;s desktop.If it is not so, Weaver is going to prompt the user to add a valid File name.</p>
+</div>
+<div class="paragraph">
+<p>The photo Command is inherited from the <code>UndoableCommand</code> class.</p>
+</div>
+<div class="paragraph">
+<p><strong>Working Flow</strong><br></p>
+</div>
+<div class="paragraph">
+<p>The <code>PhotoCommandParser</code> Class parses the arguments entered in the photo command.The class then throws an Exception with the
+appropriate message depending on whether the File name is not present on the Desktop or if the number of arguments entered
+is not equal to two.<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>PhotoCommand</code> class takes care of Invalid conditions like incorrect index.<br></p>
+</div>
+<div class="paragraph">
+<p>It then creates a new instance of the <code>FileImage</code> class. <code>FileImage</code> is an attribute that every person must have.
+A new <code>Person</code> is created with the updated <code>FileImage</code> and the existing model is updated.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PhotoCommand.png" alt="PhotoCommand" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ModelManager</code> class implements the <code>addPhotoToPerson</code> method that adds a valid file image as an attribute to the person.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>            person.imageProperty().setValue( new FileImage(FilePath));
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            indicateAddressBookChanged();</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>ImageStorage</code> class stores the image of each contact in the directory <code>/src/main/resources/images</code>.ImageIO class is used
+for reading and writing of images.Each image is assigned a unique hashcode based on the email-id of the perosn.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>image = new BufferedImage(963, 640, BufferedImage.TYPE_INT_ARGB);
+            fileToRead = new File(url);
+
+image = ImageIO.read(fileToRead);
+
+uniquePath = Integer.toString(newPath);
+
+fileToWrite = new File("src/main/resources/images/" + uniquePath + ".jpg");
+
+ImageIO.write(image, "jpg", fileToWrite);</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Sequence Diagram</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/PhotoSequenceDiagram.png" alt="PhotoSequenceDiagram" width="800">
+</div>
+</div>
+<div class="sect3">
+<h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">3.5.1. Reasons for this type of implementation</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>The feature can be implemented using CommandLine by just stating name of the file.<br></p>
+</li>
+<li>
+<p>The index can be used easily used to reference the person.<br></p>
+</li>
+<li>
+<p>The image gets stored in the local directory , so the user wont have to keep track of his/her copy of the image.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How should the user choose the Image.<br>
+<strong>Alternative1 (current choice): </strong> Enter the name of the File present on
+the desktop.<br>
+<strong>Pros:</strong> Makes use of Commad Line Interface.<br>
+<strong>Cons:</strong> User has to make sure the file exists on his/her Desktop.<br>
+<strong>Alternative2:</strong> Make use of FileChooser that prompts user to choose file from
+any directory.<br>
+<strong>Pros:</strong> User can choose any image from any location.<br>
+<strong>Cons:</strong> Makes use of a dialog box instead of Command Line.<br></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How should the image be stored.<br>
+<strong>Alternative1 (current choice):</strong> Image is stored in the <code>images</code> directory of the project by invoking <code>ImageStorage</code> class.<br>
+<strong>Pros:</strong> Each image is assigned a unique hashcode.<br>
+<strong>Cons:</strong> The working flow is not easy for incomimg developers to follow.<br>
+<strong>Alternative2:</strong> Image should be stored from Model Component instead of Logic Component.<br>
+<strong>Pros:</strong> Easy for new developers to comprehend.<br>
+<strong>Cons:</strong> Two or more people may have the same id which is used to store the image.<br></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -805,7 +1282,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.3. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1708,33 +2185,189 @@ for <code>RemarkCommandParser</code>.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see usage instructions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">refer to instructions when I forget how to use the App</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit the existing information stored in the database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the information can be up-to-date</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add a new person</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">undo a command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">correct the mistake I made accidentally</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete a person</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remove entries that I no longer need</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">import information from FaceBook</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">save me the effort to add friends' information</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find a person by name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locate details of persons without having to go through the entire list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add date of birth of a person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remember the birthday of my friends</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see person&#8217;s social media page in AddressBook</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">check persons&#8217;s social media page easily and directly in one app</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user added many tags to persons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">customize tag colour</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">visualize different tag by its color</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user added many tags to persons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">customize tag colour</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">visualize different tag by its color</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to view photos of my contacts in the address book</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">recognize contacts more easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to find persons based on name and Date of Birth</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">we can narrow the scope when users have same names</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a remark for somebody</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">customize the descriptions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">directly contact a person by email, by clicking on email button</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have instant access to communication</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">confirm before clearing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">not clear the contents accidentally</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit a person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">modify an address conveniently</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">hide <a href="#private-contact-detail">private contact details</a> by default</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">minimize chance of someone else seeing them by accident</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view a more attractive icon for the AddressBook</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the AddressBook has a better appeal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the details of a person on Facebook by clicking on the name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get more information of the person</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">want a better name for my Application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a more appealing name for my application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">want to get notifications about birthdays/events coming up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be aware of important events in the coming week</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">users with many person in address book</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view all the tags by a single command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have an idea of the different associations I have with my contacts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">share the contact information in my addressbook to others'</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">share contact infomation conveniently</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have shortcuts for each command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">don&#8217;t have to type the whole command each time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a copy button for each category of information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">copy and paste information easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to customize the color set of user interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">customize the display as I like</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to display person according to frequency I access their contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">access the contacts that are more possible for me to access easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to delete tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete wrong tags</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to move the windows and tables in the user interface around</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">choose the combination of positions of windows as I like</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to click on contact to open windows to display and modify their information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">look through and modify their information easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in the address book</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">locate a person easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see a history bar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of my previous searches</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see random people on the front page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get in touch with old friends</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with frequent contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a favourites list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find them easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by date of birth</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see a list of people from youngest to oldest or oldest to youngest</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
@@ -1742,11 +2375,50 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locate a person easily</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find all the friends or other relationships I have</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a good idea of the type of relationships I have with the contacts of my address book</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to move the windows and tables in the user interface around</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">choose the combination of positions of windows as I like</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in the address book</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">locate a person easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be notified of birthdays</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">send them well wishes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete people with a specific tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clean up my list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">log in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">access privately</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">customise the display</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the list to my preference</p></td>
+</tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>{More to be added}</p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -1804,8 +2476,388 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
+<div class="sect2">
+<h3 id="use-case-email-intents"><a class="link" href="#use-case-email-intents">C.1. Use case: Email Intents</a></h3>
 <div class="paragraph">
-<p>{More to be added}</p>
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User clicks on email button.</p>
+</li>
+<li>
+<p>AddressBook opens up the Gmail webpage.</p>
+</li>
+<li>
+<p>The email address of the person to be contacted is already filled in.</p>
+</li>
+<li>
+<p>User types in the message and sends the email.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-social-integration"><a class="link" href="#use-case-social-integration">C.2. Use case: Social Integration</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User clicks on the button, 'Social Media'.</p>
+</li>
+<li>
+<p>AddressBook sends an intent to FaceBook where the homepage of the person&#8217;s account is displayed.</p>
+</li>
+<li>
+<p>User gets all the required information</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>EXTENSIONS</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The person does not have a FaceBook account.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<h3 id="use-case-edit-person" class="discrete">Use case: Edit person</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to edit persons</p>
+</li>
+<li>
+<p>AddressBook shows a list of persons</p>
+</li>
+<li>
+<p>User requests to edit information of a specific person in the list</p>
+</li>
+<li>
+<p>AddressBook edits the person</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-remark-person" class="discrete">Use case: Remark person</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests the list of person.</p>
+</li>
+<li>
+<p>AddressBook shows the list of person.</p>
+</li>
+<li>
+<p>User requests to remark persons by specifying index and remark</p>
+</li>
+<li>
+<p>AddressBook remarks the person</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The index is illegal.</p>
+<div class="paragraph">
+<p>Use case ends. AddressBook shows an error message.</p>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-change-color-of-a-tag" class="discrete">Use case: Change color of a tag</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to change a tag to another color</p>
+</li>
+<li>
+<p>AddressBook changes the color of the tag</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The given tag does not exist.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b. The given color is not available.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-show-the-list-of-persons-by-frequency" class="discrete">Use case: Show the list of persons by frequency</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to show a list of person that is mostly accessed by keying in "list freq" keyword</p>
+</li>
+<li>
+<p>AddressBook shows this list of person in descending frequency order</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-delete-a-tag" class="discrete">Use case: Delete a tag</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to show one of a person using find command</p>
+</li>
+<li>
+<p>AddressBook shows this person</p>
+</li>
+<li>
+<p>User requests to delete one of this person&#8217;s tag by specifying a index of tag</p>
+</li>
+<li>
+<p>AddressBook deletes the tag</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The tag list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-confirmation-before-clearing" class="discrete">Use case: Confirmation before clearing</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list persons</p>
+</li>
+<li>
+<p>AddressBook shows a list of persons</p>
+</li>
+<li>
+<p>User requests to clear the list</p>
+</li>
+<li>
+<p>AddressBook shows a message for confirmation</p>
+</li>
+<li>
+<p>User confirms clearing the list</p>
+</li>
+<li>
+<p>AddressBook clears the list</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>5a. User chooses to cancel.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>5b. The given input is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5b1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-random-person-at-front-page" class="discrete">Use case: Random person at front page</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>AddressBook shows a random person</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The list is empty.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. AddressBook shows a message to prompt adding new contacts.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1822,6 +2874,33 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 <li>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
+</li>
+<li>
+<p>Should work on both 32-bit and 64-bit environment.</p>
+</li>
+<li>
+<p>Should have enough security features to protect data of a user.</p>
+</li>
+<li>
+<p>The user guide should be clear and easy to understand by new users.</p>
+</li>
+<li>
+<p>The system should be usable by a novice.</p>
+</li>
+<li>
+<p>The project is open-source and available on GitHub.</p>
+</li>
+<li>
+<p>Should secure contact information safely.</p>
+</li>
+<li>
+<p>Should be able to open the application in 2 seconds.</p>
+</li>
+<li>
+<p>The application should provide several aesthetic designed color sets.</p>
+</li>
+<li>
+<p>Should respond within two seconds.</p>
 </li>
 </ol>
 </div>
@@ -1847,6 +2926,14 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="literalblock">
 <div class="content">
 <pre>A contact detail that is not meant to be shared with others</pre>
+</div>
+</div>
+<div id="Environment-bit" class="paragraph">
+<p>Environment Bit</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>32/64 bits refer to the number of bits that compose a data element</pre>
 </div>
 </div>
 </div>
@@ -1891,7 +2978,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-30 13:29:40 +00:00
+Last updated 2017-10-22 14:01:39 +00:00
 </div>
 </div>
 </body>

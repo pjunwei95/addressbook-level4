@@ -5,20 +5,20 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>AddressBook Level 4 - User Guide</title>
+<title>Weaver - User Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>AddressBook Level 4 - User Guide</h1>
+<h1>Weaver - User Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>W13-B2</code>      Since: <code>Aug 2017</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -32,14 +32,22 @@
 <li><a href="#listing-all-persons-code-list-code">2.3. Listing all persons : <code>list</code></a></li>
 <li><a href="#editing-a-person-code-edit-code">2.4. Editing a person : <code>edit</code></a></li>
 <li><a href="#locating-persons-by-name-code-find-code">2.5. Locating persons by name: <code>find</code></a></li>
-<li><a href="#deleting-a-person-code-delete-code">2.6. Deleting a person : <code>delete</code></a></li>
-<li><a href="#selecting-a-person-code-select-code">2.7. Selecting a person : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">2.8. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">2.9. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">2.10. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">2.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">2.12. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">2.13. Saving the data</a></li>
+<li><a href="#locating-persons-by-tag-code-find-t-code">2.6. Locating persons by tag: <code>find/t</code></a></li>
+<li><a href="#searching-a-person-code-search-code">2.7. Searching a person : <code>search</code></a></li>
+<li><a href="#deleting-a-person-code-delete-code">2.8. Deleting a person : <code>delete</code></a></li>
+<li><a href="#deleting-a-person-s-tag-code-delete-t-code">2.9. Deleting a person&#8217;s tag : <code>delete/t</code></a></li>
+<li><a href="#selecting-a-person-code-select-code">2.10. Selecting a person : <code>select</code></a></li>
+<li><a href="#remarking-a-person-code-remark-code">2.11. Remarking a person : <code>remark</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">2.12. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">2.13. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">2.14. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#customize-tags-color-code-color-code">2.15. Customize tags' color : <code>color</code></a></li>
+<li><a href="#change-font-size-code-fs-code">2.16. Change font size : <code>fs</code></a></li>
+<li><a href="#add-photo-to-contacts-code-photo-code-br">2.17. Add Photo to contacts : <code>photo</code><br></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">2.18. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">2.19. Exiting the program : <code>exit</code></a></li>
+<li><a href="#coming-in-v2-0">2.20. Coming in V2.0</a></li>
+<li><a href="#saving-the-data">2.21. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#faq">3. FAQ</a></li>
@@ -76,12 +84,19 @@ This app will not work with earlier versions of Java 8.
 </li>
 <li>
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+</li>
+<li>
+<p>After login, you will see the GUI below.</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ui.png" alt="Ui" width="790">
+<img src="images/MockUp.png" alt="MockUp" width="790">
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
@@ -94,13 +109,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all contacts</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
+<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/13.10.1997 f/nus.jpg</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
+</li>
+<li>
+<p><strong><code>photo</code></strong> : Add a photo to a person</p>
 </li>
 </ul>
 </div>
@@ -148,7 +166,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">2.2. Adding a person: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH f/FILE_PATH [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -168,10 +186,10 @@ A person can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code></p>
+<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/13.10.1997 f/nus.jpg</code></p>
 </li>
 <li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal</code></p>
+<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/13.10.1997 f/nus.jpg t/criminal</code></p>
 </li>
 </ul>
 </div>
@@ -187,7 +205,7 @@ Format: <code>list</code></p>
 <h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">2.4. Editing a person : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing person in the address book.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATE_OF_BIRTH] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -274,7 +292,107 @@ Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>J
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">2.6. Deleting a person : <code>delete</code></a></h3>
+<h3 id="locating-persons-by-tag-code-find-t-code"><a class="link" href="#locating-persons-by-tag-code-find-t-code">2.6. Locating persons by tag: <code>find/t</code></a></h3>
+<div class="paragraph">
+<p>Finds persons whose tags contain any of the given keywords.<br>
+Format: <code>find/t KEYWORD [MORE_KEYWORDS]</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Make sure there are no whitespaces between <code>find</code> and <code>/t</code>!
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Given three people with tags: <code>John Doe t/Friends</code>, <code>Hans Gruber t/Friends</code>, and <code>Bo Yang t/Colleagues</code></p>
+</li>
+<li>
+<p>The search is case insensitive. e.g <code>friends</code> will match <code>Friends</code></p>
+</li>
+<li>
+<p>All the tags are searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Friend</code> will not match <code>Friends</code></p>
+</li>
+<li>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>friends</code> will return <code>John Doe</code>, <code>Hans Gruber</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find/t friends</code><br>
+Returns <code>John Doe</code> and <code>Hans Gruber</code></p>
+</li>
+<li>
+<p><code>find/t friends colleagues</code><br>
+Returns any person having tags <code>Friends</code> or <code>Colleagues</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Search.png" alt="Search" width="600">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="searching-a-person-code-search-code"><a class="link" href="#searching-a-person-code-search-code">2.7. Searching a person : <code>search</code></a></h3>
+<div class="paragraph">
+<p>Lists persons with the given name and Date Of Birth.
+Format: <code>search NAME DATE_OF_BIRTH</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case-insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of keywords matter. e.g. in <code>search Hans 13.10.1997</code> Hans and 13.10.1997 cannot be interchanged</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Persons matching both name and Date Of Birth will be returned.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>search John 13.10.1997</code><br>
+Returns persons with name <code>John</code> and Date of Birth <code>13.10.1997</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">2.8. Deleting a person : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified person from the address book.<br>
 Format: <code>delete INDEX</code></p>
@@ -315,7 +433,62 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">2.7. Selecting a person : <code>select</code></a></h3>
+<h3 id="deleting-a-person-s-tag-code-delete-t-code"><a class="link" href="#deleting-a-person-s-tag-code-delete-t-code">2.9. Deleting a person&#8217;s tag : <code>delete/t</code></a></h3>
+<div class="paragraph">
+<p>Deletes the tag(s) of an existing person in the address book.<br>
+Format: <code>delete/t INDEX [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the tag of the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>The search is case insensitive. e.g <code>friends</code> will match <code>Friends</code></p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Friend</code> will not match <code>Friends</code></p>
+</li>
+<li>
+<p>At least one of the tag fields must be provided.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete/t 1 t/friends</code><br>
+Deletes the tag <code>friends</code> from the person index <code>1</code>.</p>
+</li>
+<li>
+<p><code>delete/t 2 t/friends t/colleagues</code><br>
+Deletes the tag <code>friends</code> and <code>colleagues</code> from the person index <code>2</code>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can remove all the person&#8217;s tags by typing <code>edit INDEX t/</code> without specifying any tags after it.
+Refer to the <a href="#edit">Edit</a> section above for more details.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">2.10. Selecting a person : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the person identified by the index number used in the last person listing.<br>
 Format: <code>select INDEX</code></p>
@@ -356,7 +529,43 @@ Selects the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">2.8. Listing entered commands : <code>history</code></a></h3>
+<h3 id="remarking-a-person-code-remark-code"><a class="link" href="#remarking-a-person-code-remark-code">2.11. Remarking a person : <code>remark</code></a></h3>
+<div class="paragraph">
+<p>Remarks the person identified by the index number.<br>
+Format: <code>remark INDEX /r REMARK</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Remarks the person identified by the index number.</p>
+</li>
+<li>
+<p>The content of remark is specified in REMARK.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>remark 2 /r Likes to swim</code><br>
+Remarks the 2nd person with "Likes to swim".</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">2.12. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -377,7 +586,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">2.9. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">2.13. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -422,7 +631,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">2.10. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">2.14. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -452,23 +661,177 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>SINCE V1.2</strong></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">2.11. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="customize-tags-color-code-color-code"><a class="link" href="#customize-tags-color-code-color-code">2.15. Customize tags' color : <code>color</code></a></h3>
+<div class="paragraph">
+<p>Change the color of one or more than one tags.<br>
+Format: <code>color [c/COLOR] [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The default color of tags is blue.</p>
+</li>
+<li>
+<p>You can change the color of more than one tag at a time</p>
+</li>
+<li>
+<p>The colors supported are: blue, red, green and yellow</p>
+</li>
+<li>
+<p>You cannot change the color of a non existing tag.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>color c/red t/friends</code></p>
+</li>
+<li>
+<p><code>color c/red t/friends t/family t/colleagues</code></p>
+</li>
+<li>
+<p><code>color t/friend c/invalid_color</code><br>
+The <code>color</code> command fails as <code>invalid_color</code> is not supported.</p>
+</li>
+<li>
+<p><code>color t/not_existing_tag c/yellow</code><br>
+The <code>color</code> command fails as <code>not_existing_tag</code> does not exit in current database.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="change-font-size-code-fs-code"><a class="link" href="#change-font-size-code-fs-code">2.16. Change font size : <code>fs</code></a></h3>
+<div class="paragraph">
+<p>Change the font size of the entire application<br>
+Format: <code>fs [FONT SIZE]</code> or <code>fs [+/-]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The available font sizes are: xs(extra small), s(small), m(medium), l(large), xl(extra large).</p>
+</li>
+<li>
+<p>The default font size is m.</p>
+</li>
+<li>
+<p>The font size changed will be auto stored.</p>
+</li>
+<li>
+<p>You can increase (or decrease) the font size by pressing the "+" (or "-") button in the right top corner.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>fs xl</code></p>
+</li>
+<li>
+<p><code>fs s</code></p>
+</li>
+<li>
+<p><code>fs +</code></p>
+</li>
+<li>
+<p><code>fs -</code><br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-photo-to-contacts-code-photo-code-br"><a class="link" href="#add-photo-to-contacts-code-photo-code-br">2.17. Add Photo to contacts : <code>photo</code><br></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/MockUp.png" alt="MockUp" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p>Adds a Display picture to the contact.The image file must be present on the desktop of the user.</p>
+</div>
+<div class="paragraph">
+<p>e.g. <code>Photo 1 Ronak.jpg</code> adds the image <code>Ronak.jpg</code> to the contact with index 1 in the address book.</p>
+</div>
+<div class="paragraph">
+<p><strong>Different Scenarios</strong> :</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>1) Incorrect File entered - e.g <code>Photo 1 nus.jpg</code>
+If 'nus.jpg' is not present on the desktop of the user, a prompt will be displayed to enter the correct file.</p>
+</div>
+<div class="paragraph">
+<p>2) Delete an existing File -<br>
+Command - Photo 1 Delete<br>
+this will delete the photo attached with the person at index 1.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">2.18. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the address book.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">2.12. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">2.19. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.13. Saving the data</a></h3>
+<h3 id="coming-in-v2-0"><a class="link" href="#coming-in-v2-0">2.20. Coming in V2.0</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/EmailThem.png" alt="EmailThem" width="600">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a notification system to notify users about upcoming birthdays<br></p>
+</li>
+<li>
+<p>Send Email Intents to contacts<br></p>
+</li>
+<li>
+<p>Social Integration<br></p>
+</li>
+<li>
+<p>Have a favourites list<br></p>
+</li>
+<li>
+<p>Be able to view contacts frequently viewed<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.21. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -491,8 +854,8 @@ There is no need to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
+<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/13.10.1997 f/ t/friend t/colleague</code></p>
 </li>
 <li>
 <p><strong>Clear</strong> : <code>clear</code></p>
@@ -502,12 +865,28 @@ e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1
 e.g. <code>delete 3</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Delete Person&#8217;s Tags</strong> : <code>delete/t INDEX [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>delete/t 3 t/colleagues</code></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/DATE_OF_BIRTH] [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
 </li>
 <li>
 <p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
 e.g. <code>find James Jake</code></p>
+</li>
+<li>
+<p><strong>Find by Tags</strong> : <code>find/t KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find/t friends family</code></p>
+</li>
+<li>
+<p><strong>Customize tag color</strong> : <code>color c/[COLOR] t/[TAG] t/[TAG] t/[MORE_TAGS]</code><br>
+e.g. <code>color c/red t/friend t/family</code></p>
+</li>
+<li>
+<p><strong>Change font size</strong> : <code>fs [FONT SIZE]</code> or  <code>fs +/-</code><br>
+e.g. <code>fs xs</code> <code>fs +</code> <code>fs -</code></p>
 </li>
 <li>
 <p><strong>List</strong> : <code>list</code></p>
@@ -528,6 +907,10 @@ e.g.<code>select 2</code></p>
 <li>
 <p><strong>Redo</strong> : <code>redo</code></p>
 </li>
+<li>
+<p><strong>Photo Index FilePath</strong> : photo [Index] [FilePath]<br>
+e.g. <code>photo 1 nus.jpg</code></p>
+</li>
 </ul>
 </div>
 </div>
@@ -535,7 +918,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-30 13:29:40 +00:00
+Last updated 2017-10-22 14:01:39 +00:00
 </div>
 </div>
 </body>
