@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import static seedu.address.model.font.FontSize.getassociatefxfontsizestring;
 
+import java.awt.event.MouseEvent;
+import java.beans.EventHandler;
 import java.io.File;
 
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.Random;
 
 import com.google.common.eventbus.Subscribe;
 
+import com.oracle.tools.packager.Log;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -20,6 +23,7 @@ import javafx.scene.layout.Region;
 
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.events.ui.ChangeTagColorEvent;
+import seedu.address.commons.events.ui.PersonPanelSelectionAddressChangedEvent;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -76,8 +80,15 @@ public class PersonCard extends UiPart<Region> {
         String currentFontSize = FontSize.getCurrentFontSizeLabel();
         setFontSize(currentFontSize);
         initTags(person, currentFontSize);
-
     }
+
+    /**
+     * Get the label address
+     */
+    public Label getAddressLabel() {
+        return address;
+    }
+
     /**
      * Adds a photo to a persons contact
      */
@@ -125,7 +136,6 @@ public class PersonCard extends UiPart<Region> {
         date.textProperty().bind(Bindings.convert(person.dateOfBirthProperty()));
         email.textProperty().bind(Bindings.convert(person.emailProperty()));
         remark.textProperty().bind(Bindings.convert(person.remarkProperty()));
-
         person.tagProperty().addListener((observable, oldValue, newValue) -> {
             tags.getChildren().clear();
 
@@ -197,6 +207,11 @@ public class PersonCard extends UiPart<Region> {
         email.setStyle(fontSize);
         date.setStyle(fontSize);
         remark.setStyle(fontSize);
+    }
+
+    @FXML
+    private void handleAddressClick(){
+        raise(new PersonPanelSelectionAddressChangedEvent(address.getText()));
     }
 
 }

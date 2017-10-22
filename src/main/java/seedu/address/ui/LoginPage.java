@@ -18,7 +18,6 @@ import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -27,12 +26,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AccountsStorage;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
 
 /**
  * The login page. Users need to key in their username and password to login the MainWindow.
@@ -207,6 +201,5 @@ public class LoginPage extends UiPart<Region> {
         String fxFormatFontSize = FontSize.getassociatefxfontsizestring(newFontSize);
         username.setStyle(fxFormatFontSize);
         password.setStyle(fxFormatFontSize);
-
     }
 }
