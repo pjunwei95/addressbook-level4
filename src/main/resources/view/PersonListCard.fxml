@@ -29,16 +29,28 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+            <padding>
+               <Insets top="5.0" />
+            </padding>
 
             </HBox>
-            <FlowPane fx:id="tags" />
+            <FlowPane fx:id="tags">
+            <padding>
+               <Insets top="5.0" />
+            </padding></FlowPane>
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <ImageView fx:id="imagePhone" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="/images/phone.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+                <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">
+               <padding>
+                  <Insets top="5.0" />
+               </padding></Label>
+            <padding>
+               <Insets top="5.0" />
+            </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <ImageView fx:id="imageAddress" pickOnBounds="true" preserveRatio="true">
@@ -46,7 +58,13 @@
                         <Image url="/images/address.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="address" onMousePressed="#handleAddressClick" styleClass="cell_small_label" text="\$address" />
+                <Label fx:id="address" onMousePressed="#handleAddressClick" styleClass="cell_small_label" text="\$address">
+               <padding>
+                  <Insets top="5.0" />
+               </padding></Label>
+            <padding>
+               <Insets top="5.0" />
+            </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <ImageView fx:id="imageEmail" pickOnBounds="true" preserveRatio="true">
@@ -54,23 +72,41 @@
                         <Image url="/images/email.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+                <Label fx:id="email" styleClass="cell_small_label" text="\$email">
+               <padding>
+                  <Insets top="5.0" />
+               </padding></Label>
+            <padding>
+               <Insets top="5.0" />
+            </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
-                <ImageView fx:id="imageBirth" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="imageBirth" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="/images/birthday.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="date" styleClass="cell_small_label" text="\$dateOfBirth" />
+                <Label fx:id="date" styleClass="cell_small_label" text="\$dateOfBirth">
+               <padding>
+                  <Insets top="5.0" />
+               </padding></Label>
+            <padding>
+               <Insets top="5.0" />
+            </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
-                <ImageView fx:id="imageRemark" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="imageRemark" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="/images/remark.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+                <Label fx:id="remark" styleClass="cell_small_label" text="\$remark">
+               <padding>
+                  <Insets top="5.0" />
+               </padding></Label>
+            <padding>
+               <Insets top="5.0" />
+            </padding>
             </HBox>
         </VBox>
         <rowConstraints>
