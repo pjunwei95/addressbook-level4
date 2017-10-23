@@ -63,7 +63,8 @@ public class ResultDisplay extends UiPart<Region> {
 
     @Subscribe
     private void handlePersonPanelAddressPressedEvent(PersonPanelAddressPressedEvent event) {
-        Platform.runLater(() -> displayed.setValue("Showing address of " + event.getAddress()));
+        Platform.runLater(() -> displayed.setValue("Showing address of " + event.getPersonName() +
+                ": " + event.getAddress()));
     }
 
     /**

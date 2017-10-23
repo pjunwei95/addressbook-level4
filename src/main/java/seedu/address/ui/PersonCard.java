@@ -231,12 +231,11 @@ public class PersonCard extends UiPart<Region> {
         imageBirth.setFitWidth(newImageSize);
         imageRemark.setFitHeight(newImageSize);
         imageRemark.setFitWidth(newImageSize);
-
     }
 
     @FXML
     private void handleAddressClick(){
-        raise(new PersonPanelAddressPressedEvent(address.getText()));
+        raise(new PersonPanelAddressPressedEvent(person.getName().fullName, address.getText()));
     }
 
 }

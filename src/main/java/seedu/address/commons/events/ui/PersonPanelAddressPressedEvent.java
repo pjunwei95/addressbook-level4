@@ -4,9 +4,12 @@ import seedu.address.commons.events.BaseEvent;
 
 public class PersonPanelAddressPressedEvent extends BaseEvent{
 
+    private String personName;
     private String address;
 
-    public PersonPanelAddressPressedEvent(String address) {
+    public PersonPanelAddressPressedEvent(String personName, String address) {
+
+        this.personName = personName;
         this.address = address;
     }
 
@@ -20,5 +23,12 @@ public class PersonPanelAddressPressedEvent extends BaseEvent{
      */
     public String getAddress() {
         return address;
+    }
+
+    /**
+     * Get the name of the person from the event
+     */
+    public String getPersonName() {
+        return personName;
     }
 }
