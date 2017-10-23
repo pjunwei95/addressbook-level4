@@ -166,7 +166,11 @@ public class LoginPage extends UiPart<Region> {
     }
 
     private boolean checkValid(String username, String password) {
-        return accPrefs.getHm().get(username).equals(password);
+        if(accPrefs.getHm().get(username) != null) {
+            return accPrefs.getHm().get(username).equals(password);
+        } else {
+            return false;
+        }
     }
 
     /**
