@@ -26,7 +26,7 @@ People who have the need for storing and managing contact information efficientl
 
 === Purposes
 
-. *`Weaver`* aims at providing efficient solution for university students to store and manage contact information. 
+. *`Weaver`* aims at providing efficient solution for university students to store and manage contact information.
 . It devotes to improve the experience when users try to add person , delete person , edit person , remark person ect.
 . Targeted at university students, *`Weaver`* is bringing shortcut for students to note meetings, calendars and course information.
 
@@ -495,7 +495,7 @@ The `DeleteTagCommandParser` resides inside `LogicManager`. `DeleteTagCommandPar
 
 image::LogicClassDiagram.png[width="800"]
 
-`XYZCommand Parser` inherits from the `Parser` interface and is created by the AddressBook Parser as the `DeleteTagCommandParser`. 
+`XYZCommand Parser` inherits from the `Parser` interface and is created by the AddressBook Parser as the `DeleteTagCommandParser`.
 [NOTE]
 The tags are parsed under `parseTagsForDelete`, while the person index is parsed under `parse` before execution. The tags are identified by the prefix `t/` to be parsed for deletion, and it must be fully matched.
 
@@ -505,9 +505,9 @@ The `DeleteTagCommand` resides inside `LogicManager`. It supports undoing and re
 
 image::LogicCommandClassDiagram.png[width="800"]
 
-`UndoableCommand` adds an extra layer between the abstract `Command` class and concrete commands that can be undone, such as the `DeleteTagCommand`. 
+`UndoableCommand` adds an extra layer between the abstract `Command` class and concrete commands that can be undone, such as the `DeleteTagCommand`.
 
-Note that extra tasks need to be done when executing a command in an _undoable_ way, such as saving the state of the address book before execution. `UndoableCommand` contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. 
+Note that extra tasks need to be done when executing a command in an _undoable_ way, such as saving the state of the address book before execution. `UndoableCommand` contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command.
 
 Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the https://www.tutorialspoint.com/design_pattern/template_pattern.htm[template pattern].
 
