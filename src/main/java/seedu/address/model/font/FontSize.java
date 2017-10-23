@@ -191,28 +191,28 @@ public class FontSize {
         assert (FontSize.isValidFontSize(inputFontSize));
         int imageSize;
         switch (inputFontSize) {
-            case FONT_SIZE_XS_LABEL:
-                imageSize = 15;
-                break;
+        case FONT_SIZE_XS_LABEL:
+            imageSize = 15;
+            break;
 
-            case FONT_SIZE_S_LABEL:
-                imageSize = 20;
-                break;
+        case FONT_SIZE_S_LABEL:
+            imageSize = 20;
+            break;
 
-            case FONT_SIZE_M_LABEL:
-                imageSize = 25;
-                break;
+        case FONT_SIZE_M_LABEL:
+            imageSize = 25;
+            break;
 
-            case FONT_SIZE_L_LABEL:
-                imageSize = 30;
-                break;
+        case FONT_SIZE_L_LABEL:
+            imageSize = 30;
+            break;
 
-            case FONT_SIZE_XL_LABEL:
-                imageSize = 35;
-                break;
+        case FONT_SIZE_XL_LABEL:
+            imageSize = 35;
+            break;
 
-            default:
-                imageSize = 25;
+        default:
+            imageSize = 25;
         }
         return imageSize;
     }

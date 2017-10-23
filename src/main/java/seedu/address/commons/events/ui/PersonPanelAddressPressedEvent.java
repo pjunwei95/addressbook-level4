@@ -2,7 +2,10 @@ package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
 
-public class PersonPanelAddressPressedEvent extends BaseEvent{
+/**
+ * Indicates an address in a person panel is pressed
+ */
+public class PersonPanelAddressPressedEvent extends BaseEvent {
 
     private String personName;
     private String address;

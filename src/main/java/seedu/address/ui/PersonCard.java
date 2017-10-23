@@ -101,34 +101,33 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Adds a photo to a persons contact
      */
-    public void assignImage(String FilePath) {
+    public void assignImage(String filePath) {
 
         String url;
 
-        if (FilePath.equals("")) {
+        if (filePath.equals("")) {
             url = "/images/clock.png";
-            Image Display = new Image(url);
-            image.setImage(Display);
-        }
-        else {
+            Image display = new Image(url);
+            image.setImage(display);
+        } else {
 
-            if (FilePath.endsWith("g")) {
+            if (filePath.endsWith("g")) {
 
                 String home = System.getProperty("user.home");
-                java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", FilePath);
+                java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", filePath);
                 url = path + "";
                 File file = new File(url);
 
-                Image Display = new Image(file.toURI().toString());
-                image.setImage(Display);
+                Image display = new Image(file.toURI().toString());
+                image.setImage(display);
             } else {
 
                 url = "src/main/resources/images/" + person.getImage().getFilePath() + ".jpg";
                 File stored = new File(url);
-                Image Display = new Image(stored.toURI().toString(), 100, 100,
+                Image display = new Image(stored.toURI().toString(), 100, 100,
                         false, false);
 
-                image.setImage(Display);
+                image.setImage(display);
 
             }
         }
@@ -234,7 +233,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     @FXML
-    private void handleAddressClick(){
+    private void handleAddressClick() {
         raise(new PersonPanelAddressPressedEvent(person.getName().fullName, address.getText()));
     }
 
