@@ -54,7 +54,6 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com")
             .withDateOfBirth("13.10.1997")
             .withImage("")
-            .withImage("")
             .withAddress("10th street").build();
     public static final ReadOnlyPerson ELLE = new PersonBuilder().withName("Elle Meyer")
             .withPhone("9482224")
@@ -131,6 +130,6 @@ public class TypicalPersons {
     }
 
     public static List<ReadOnlyPerson> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, LAKHOTIA, RANDOM));
+        return new ArrayList<>(Arrays.asList(ALICE, BOB, CARL, DANIEL));
     }
 }
