@@ -1,7 +1,5 @@
 package systemtests;
 
-
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -66,8 +64,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
     @Test
     public void add() throws Exception {
         Model model = getModel();
-        /* Case: add a person without tags to a non-empty address book, command with leading spaces and trailing
- spaces
+        /* Case: add a person without tags to a non-empty address book, command with leading spaces and trailing spaces
          * -> added
          */
         ReadOnlyPerson toAdd = AMY;
