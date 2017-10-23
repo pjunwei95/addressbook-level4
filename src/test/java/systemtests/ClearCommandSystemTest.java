@@ -52,7 +52,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: mixed case command word -> rejected */
-        assertCommandSuccess("ClEaR".toLowerCase());
+        assertCommandSuccess("cLs".toLowerCase());
         assertSelectedCardUnchanged();
     }
 
