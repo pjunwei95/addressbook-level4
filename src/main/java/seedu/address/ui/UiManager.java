@@ -42,6 +42,7 @@ public class UiManager extends ComponentManager implements Ui {
     private LoginPage loginPage;
     private AccountsStorage accPrefs;
 
+    private int test;
     public UiManager(Logic logic, Config config, Storage storage, UserPrefs prefs, AccountsStorage accPrefs) {
         super();
         this.logic = logic;
@@ -63,8 +64,25 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
             loginPage.show();
-            //mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
-            //mainWindow.show(); //This should be called before creating other UI parts
+        } catch (Throwable e) {
+            logger.severe(StringUtil.getDetails(e));
+            showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
+        }
+    }
+
+    @Override
+    public void start(Stage primaryStage, int test) {
+        this.test = 1;
+        logger.info("Starting UI...");
+        primaryStage.setTitle(config.getAppTitle());
+
+        //Set the application icon.
+        primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+
+        try {
+            mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
+            mainWindow.show(); //This should be called before creating other UI parts
+            mainWindow.fillInnerParts();
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
@@ -73,11 +91,15 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Override
     public void stop() {
-        prefs.updateLastUsedGuiSetting(loginPage.getCurrentGuiSetting());
-        loginPage.hide();
-        loginPage.releaseResources();
-        //mainWindow.hide();
-        //mainWindow.releaseResources();
+        if(test == 1) {
+            prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
+            mainWindow.hide();
+            mainWindow.releaseResources();
+        } else {
+            prefs.updateLastUsedGuiSetting(loginPage.getCurrentGuiSetting());
+            loginPage.hide();
+            loginPage.releaseResources();
+        }
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
