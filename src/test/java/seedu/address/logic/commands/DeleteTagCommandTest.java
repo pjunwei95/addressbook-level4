@@ -25,7 +25,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.testutil.DeleteTagDescriptorBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for DeleteTagCommand.
  */
 public class DeleteTagCommandTest {
 
@@ -90,7 +90,7 @@ public class DeleteTagCommandTest {
     }
 
     /**
-     * Returns an {@code EditCommand} with parameters {@code index} and {@code descriptor}
+     * Returns an {@code DeleteTagCommand} with parameters {@code index} and {@code descriptor}
      */
     private DeleteTagCommand prepareCommand(Index index, DeleteTagDescriptor descriptor) {
         DeleteTagCommand editCommand = new DeleteTagCommand(index, descriptor);
