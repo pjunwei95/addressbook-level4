@@ -30,6 +30,22 @@ People who have the need for storing and managing contact information efficientl
 . It devotes to improve the experience when users try to add person , delete person , edit person , remark person ect.
 . Targeted at university students, *`Weaver`* is bringing shortcut for students to note meetings, calendars and course information.
 
+*`Weaver`* is a command line based software for storing and managing contact information. It satisfies almost all functions might be needed by university students on storing and managing contact information.
+
+
+== Introduction
+
+=== Audiences
+
+All university students. +
+People who have the need for storing and managing contact information efficiently are suggested to use *`Weaver`*.
+
+=== Purposes
+
+. *`Weaver`* aims at providing efficient solution for university students to store and manage contact information.
+. It devotes to improve the experience when users try to add person , delete person , edit person , remark person ect.
+. Targeted at university students, *`Weaver`* is bringing shortcut for students to note meetings, calendars and course information.
+
 == Setting up
 
 === Prerequisites

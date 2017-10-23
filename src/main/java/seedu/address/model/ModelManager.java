@@ -82,8 +82,8 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
 
-
     }
+
     @Override
     public synchronized void addPhotoPerson(ReadOnlyPerson person, String filePath, Index targetIndex)
             throws PersonNotFoundException,

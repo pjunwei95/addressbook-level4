@@ -163,8 +163,18 @@ public class LoginPage extends UiPart<Region> {
         primaryStage.setMinWidth(MIN_WIDTH);
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return validity of account
+     */
     private boolean checkValid(String username, String password) {
-        return accPrefs.getHm().get(username).equals(password);
+        if (accPrefs.getHm().get(username) != null) {
+            return accPrefs.getHm().get(username).equals(password);
+        } else {
+            return false;
+        }
     }
 
     /**
