@@ -304,8 +304,13 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 *SINCE V1.2*
 
+=== Login / Logout SINCE V1.2
 
-=== Customize tags' color : `color`
+Users now can login using valid accounts. And their files are seperated.
+
+To logout, just click logout in the "file - > logout" button.
+
+=== Customize tags' color : `color` SINCE V1.2
 
 Change the color of one or more than one tags. +
 Format: `color [c/COLOR] [t/TAG]...`
@@ -328,7 +333,7 @@ The `color` command fails as `invalid_color` is not supported.
 * `color t/not_existing_tag c/yellow` +
 The `color` command fails as `not_existing_tag` does not exit in current database.
 
-=== Change font size : `fs`
+=== Change font size : `fs` SINCE V1.2
 
 Change the font size of the entire application +
 Format: `fs [FONT SIZE]` or `fs [+/-]`
@@ -349,7 +354,7 @@ Examples:
 
 * `fs -` +
 
-=== Add Photo to contacts : `photo` +
+=== Add Photo to contacts : `photo` SINCE V1.2 +
 
 image::MockUp.png[width="790"]
 
@@ -366,6 +371,29 @@ If 'nus.jpg' is not present on the desktop of the user, a prompt will be display
 Command - Photo 1 Delete +
 this will delete the photo attached with the person at index 1.
 ****
+
+=== Deleting a person's tag : `delete/t` SINCE V1.2
+
+Deletes the tag(s) of an existing person in the address book. +
+Format: `delete/t INDEX [t/TAG]...`
+
+****
+* Deletes the tag of the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
+* The search is case insensitive. e.g `friends` will match `Friends`
+* Only full words will be matched e.g. `Friend` will not match `Friends`
+* At least one of the tag fields must be provided.
+****
+
+Examples:
+
+* `delete/t 1 t/friends` +
+Deletes the tag `friends` from the person index `1`.
+* `delete/t 2 t/friends t/colleagues` +
+Deletes the tag `friends` and `colleagues` from the person index `2`.
+
+[TIP]
+You can remove all the person's tags by typing `edit INDEX t/` without specifying any tags after it.
+Refer to the link:#edit[Edit] section above for more details.
 
 
 === Clearing all entries : `clear`

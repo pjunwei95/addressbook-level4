@@ -13,13 +13,18 @@ import seedu.address.model.UserPrefs;
  */
 
 public class AccountsStorage implements UserPrefsStorage {
+    public static final String DEFAULT_ACCOUNTS_PATH = "accounts.json";
+
     private String accountsPath;
     private String usernames;
     private String passwords;
     private HashMap<String, String> hm;
 
     public AccountsStorage() {
-
+        this.accountsPath = DEFAULT_ACCOUNTS_PATH;
+        this.hm = new HashMap<String, String> ();
+        hm.put("admin", "admin");
+        hm.put("user", "user");
     }
 
     public AccountsStorage(String accountsPath) {

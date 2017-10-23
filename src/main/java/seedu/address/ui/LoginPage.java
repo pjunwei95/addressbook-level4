@@ -38,7 +38,7 @@ public class LoginPage extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     private static final String ICON = "/images/address_book_32.png";
-    private static final String FXML = "loginPage.fxml";
+    private static final String FXML = "LoginPage.fxml";
     private static final int MIN_HEIGHT = 600;
     private static final int MIN_WIDTH = 450;
 
@@ -165,8 +165,18 @@ public class LoginPage extends UiPart<Region> {
         primaryStage.setMinWidth(MIN_WIDTH);
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return validity of account
+     */
     private boolean checkValid(String username, String password) {
-        return accPrefs.getHm().get(username).equals(password);
+        if (accPrefs.getHm().get(username) != null) {
+            return accPrefs.getHm().get(username).equals(password);
+        } else {
+            return false;
+        }
     }
 
     /**
