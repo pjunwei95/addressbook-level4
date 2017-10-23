@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
-import java.util.Optional;
-
 import static java.util.Objects.requireNonNull;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import seedu.address.model.AddressBook;
 import seedu.address.ui.ClearConfirmation;
 
@@ -27,7 +23,8 @@ public class ClearCommand extends UndoableCommand {
             model.resetData(new AddressBook());
             return new CommandResult(MESSAGE_SUCCESS);
         }
-        else
+        else {
             return new CommandResult(MESSAGE_FAILURE);
+        }
     }
 }
