@@ -67,6 +67,17 @@ public class PersonCard extends UiPart<Region> {
     private Label remark;
     @FXML
     private ImageView image;
+    @FXML
+    private ImageView imagePhone;
+    @FXML
+    private ImageView imageEmail;
+    @FXML
+    private ImageView imageAddress;
+    @FXML
+    private ImageView imageBirth;
+    @FXML
+    private ImageView imageRemark;
+
 
     public PersonCard(ReadOnlyPerson person, int displayedIndex) {
         super(FXML);
@@ -76,6 +87,7 @@ public class PersonCard extends UiPart<Region> {
         registerAsAnEventHandler(this);
         String currentFontSize = FontSize.getCurrentFontSizeLabel();
         setFontSize(currentFontSize);
+        setFontSizeForAllImages(currentFontSize);
         initTags(person, currentFontSize);
     }
 
@@ -186,6 +198,7 @@ public class PersonCard extends UiPart<Region> {
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
         initTags(person, event.getFontSize());
         setFontSize(event.getFontSize());
+        setFontSizeForAllImages(event.getFontSize());
     }
 
     private void setFontSize(String newFontSize) {
@@ -204,6 +217,21 @@ public class PersonCard extends UiPart<Region> {
         email.setStyle(fontSize);
         date.setStyle(fontSize);
         remark.setStyle(fontSize);
+    }
+
+    private void setFontSizeForAllImages(String fontSize) {
+        int newImageSize = FontSize.getAssociateImageSizeFromFontSize(fontSize);
+        imagePhone.setFitHeight(newImageSize);
+        imagePhone.setFitWidth(newImageSize);
+        imageAddress.setFitHeight(newImageSize);
+        imageAddress.setFitWidth(newImageSize);
+        imageEmail.setFitHeight(newImageSize);
+        imageEmail.setFitWidth(newImageSize);
+        imageBirth.setFitHeight(newImageSize);
+        imageBirth.setFitWidth(newImageSize);
+        imageRemark.setFitHeight(newImageSize);
+        imageRemark.setFitWidth(newImageSize);
+
     }
 
     @FXML

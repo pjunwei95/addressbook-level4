@@ -33,7 +33,7 @@
             </HBox>
             <FlowPane fx:id="tags" />
             <HBox alignment="CENTER_LEFT" spacing="5">
-                <ImageView fx:id="imagePhone" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="imagePhone" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="/images/phone.png" />
                     </image>
@@ -41,7 +41,7 @@
                 <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
-                <ImageView fx:id="imageAddress" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="imageAddress" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="/images/address.png" />
                     </image>
@@ -49,7 +49,7 @@
                 <Label fx:id="address" onMousePressed="#handleAddressClick" styleClass="cell_small_label" text="\$address" />
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
-                <ImageView fx:id="imageEmail" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="imageEmail" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="/images/email.png" />
                     </image>
