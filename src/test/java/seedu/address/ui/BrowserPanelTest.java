@@ -47,7 +47,7 @@ public class BrowserPanelTest extends GuiUnitTest {
         URL expectedPersonUrl = new URL(GOOGLE_SEARCH_URL_PREFIX
                 + ALICE.getName().fullName.replaceAll(" ", "+") + GOOGLE_SEARCH_URL_SUFFIX);
 
-       // System.out.println(browserPanelHandle.getLoadedUrl());
+        // System.out.println(browserPanelHandle.getLoadedUrl());
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
     }

@@ -3,6 +3,9 @@ package seedu.address.commons.events.ui;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
+/**
+ * To raise a FacebOOK EVENT
+ */
 public class FaceBookEvent extends BaseEvent {
 
     private final ReadOnlyPerson person;

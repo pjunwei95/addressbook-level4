@@ -80,7 +80,9 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonPage(event.getNewSelection().person);
     }
-
+    /**
+     * Shows Facebook profile picture of user
+     */
     public void loadPersonFaceBookPage(ReadOnlyPerson person, String username) {
 
         String url = FACEBOOK_PROFILE_PAGE + username;
