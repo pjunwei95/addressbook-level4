@@ -11,6 +11,7 @@ import seedu.address.logic.commands.CancelClearCommand;
 import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.commands.ChangeTagColorCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearPopupCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
@@ -73,12 +74,14 @@ public class AddressBookParser {
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD: {
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case ClearPopupCommand.COMMAND_WORD: {
             ClearConfirmation clearConfirmation = new ClearConfirmation();
             if (clearConfirmation.isClearCommand()) {
-                return new ClearCommand();
-            }
-            else {
+                return new ClearPopupCommand();
+            } else {
                 return new CancelClearCommand();
             }
         }
