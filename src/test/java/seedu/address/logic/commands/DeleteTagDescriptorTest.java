@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+
+import org.junit.Test;
+
 import seedu.address.logic.commands.DeleteTagCommand.DeleteTagDescriptor;
 import seedu.address.testutil.DeleteTagDescriptorBuilder;
 
@@ -31,7 +32,8 @@ public class DeleteTagDescriptorTest {
         assertFalse(TAG_DESC_AMY.equals(TAG_DESC_BOB));
 
         // different tags -> returns false
-        DeleteTagDescriptor editedAmy = new DeleteTagDescriptorBuilder(TAG_DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        DeleteTagDescriptor editedAmy = new DeleteTagDescriptorBuilder(TAG_DESC_AMY)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertFalse(TAG_DESC_AMY.equals(editedAmy));
     }
 }
