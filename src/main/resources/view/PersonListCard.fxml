@@ -21,23 +21,49 @@
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <HBox alignment="CENTER_LEFT" spacing="5">
-                <Label fx:id="id" styleClass="cell_big_label">
-                    <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
-                    </minWidth>
-                </Label>
-                <Label fx:id="name" style="-fx-font-weight: bold;" text="\$first" />
-            <padding>
-               <Insets top="5.0" />
-            </padding>
+            <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="130.0" spacing="5">
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <Label fx:id="id" alignment="BOTTOM_LEFT" styleClass="cell_big_label">
+                                    <minWidth>
+                                        <!-- Ensures that the label text is never truncated -->
+                                        <Region fx:constant="USE_PREF_SIZE" />
+                                    </minWidth>
+                                </Label>
+                                <Label fx:id="name" alignment="BOTTOM_LEFT" text="\$first" styleClass="cell_big_label"/>
+                            </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                        </HBox>
+                        <FlowPane fx:id="tags">
+                            <padding>
+                                <Insets top="5.0" />
+                            </padding>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                        </FlowPane>
+                    </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+                </VBox>
+                <ImageView fx:id="image" fitHeight="100.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="/images/clock.png" />
+                    </image>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+                </ImageView>
+                <padding>
+                    <Insets top="5.0" />
+                </padding>
 
             </HBox>
-            <FlowPane fx:id="tags">
-            <padding>
-               <Insets top="5.0" />
-            </padding></FlowPane>
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <ImageView fx:id="imagePhone" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -45,12 +71,13 @@
                     </image>
                 </ImageView>
                 <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">
-               <padding>
-                  <Insets top="5.0" />
-               </padding></Label>
-            <padding>
-               <Insets top="5.0" />
-            </padding>
+                    <padding>
+                        <Insets top="5.0" />
+                    </padding>
+                </Label>
+                <padding>
+                    <Insets top="5.0" />
+                </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <ImageView fx:id="imageAddress" onMousePressed="#handleAddressClick" pickOnBounds="true" preserveRatio="true">
@@ -59,12 +86,13 @@
                     </image>
                 </ImageView>
                 <Label fx:id="address" onMousePressed="#handleAddressClick" styleClass="cell_small_label" text="\$address">
-               <padding>
-                  <Insets top="5.0" />
-               </padding></Label>
-            <padding>
-               <Insets top="5.0" />
-            </padding>
+                    <padding>
+                        <Insets top="5.0" />
+                    </padding>
+                </Label>
+                <padding>
+                    <Insets top="5.0" />
+                </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <ImageView fx:id="imageEmail" pickOnBounds="true" preserveRatio="true">
@@ -73,12 +101,13 @@
                     </image>
                 </ImageView>
                 <Label fx:id="email" styleClass="cell_small_label" text="\$email">
-               <padding>
-                  <Insets top="5.0" />
-               </padding></Label>
-            <padding>
-               <Insets top="5.0" />
-            </padding>
+                    <padding>
+                        <Insets top="5.0" />
+                    </padding>
+                </Label>
+                <padding>
+                    <Insets top="5.0" />
+                </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <ImageView fx:id="imageBirth" pickOnBounds="true" preserveRatio="true">
@@ -87,12 +116,13 @@
                     </image>
                 </ImageView>
                 <Label fx:id="date" styleClass="cell_small_label" text="\$dateOfBirth">
-               <padding>
-                  <Insets top="5.0" />
-               </padding></Label>
-            <padding>
-               <Insets top="5.0" />
-            </padding>
+                    <padding>
+                        <Insets top="5.0" />
+                    </padding>
+                </Label>
+                <padding>
+                    <Insets top="5.0" />
+                </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <ImageView fx:id="imageRemark" pickOnBounds="true" preserveRatio="true">
@@ -101,21 +131,17 @@
                     </image>
                 </ImageView>
                 <Label fx:id="remark" styleClass="cell_small_label" text="\$remark">
-               <padding>
-                  <Insets top="5.0" />
-               </padding></Label>
-            <padding>
-               <Insets top="5.0" />
-            </padding>
+                    <padding>
+                        <Insets top="5.0" />
+                    </padding>
+                </Label>
+                <padding>
+                    <Insets top="5.0" />
+                </padding>
             </HBox>
         </VBox>
         <rowConstraints>
             <RowConstraints />
         </rowConstraints>
     </GridPane>
-    <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="/images/clock.png" />
-        </image>
-    </ImageView>
 </HBox>
