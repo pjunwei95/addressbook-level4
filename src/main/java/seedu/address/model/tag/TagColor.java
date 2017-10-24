@@ -13,7 +13,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represent a color for a tag
  */
 public class TagColor {
-    public static final String[] VALID_TAG_COLOR = {"red", "blue", "yellow", "green"};
+    public static final String[] VALID_TAG_COLOR = {"red", "blue", "green", "teal", "aqua",
+                                                    "black", "gray", "lime", "maroon", "navy",
+                                                    "orange", "purple", "silver", "olive",
+                                                    "white", "yellow", "transparent"};
     public static final String MESSAGE_TAG_COLOR_CONSTRAINTS = "Valid colors are: "
             + Arrays.toString(VALID_TAG_COLOR);
 

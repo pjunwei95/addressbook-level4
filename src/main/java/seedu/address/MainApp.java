@@ -41,7 +41,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -63,7 +63,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         AccountsStorage accountsPrefs = new AccountsStorage(config.getAccountsPath());
 
-        accPrefs = accountsPrefs.setAccountMsg();
+        accPrefs = initAccPrefs(accountsPrefs);
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -152,6 +152,39 @@ public class MainApp extends Application {
         }
         return initializedConfig;
     }
+
+    /**
+     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
+     * or a new {@code UserPrefs} with default configuration if errors occur when
+     * reading from the file.
+     */
+    protected AccountsStorage initAccPrefs(AccountsStorage storage) {
+        String prefsFilePath = storage.getUserPrefsFilePath();
+        logger.info("Using account prefs file : " + prefsFilePath);
+
+        AccountsStorage initializedPrefs;
+        try {
+            Optional<AccountsStorage> prefsOptional = storage.readAccountsPrefs(prefsFilePath);
+            initializedPrefs = prefsOptional.orElse(new AccountsStorage());
+        } catch (DataConversionException e) {
+            logger.warning("Account Prefs file at " + prefsFilePath + " is not in the correct format. "
+                    + "Using default account prefs");
+            initializedPrefs = new AccountsStorage();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with default account messages");
+            initializedPrefs = new AccountsStorage();
+        }
+
+        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        try {
+            storage.saveAccountsPrefs(initializedPrefs, prefsFilePath);
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        }
+
+        return initializedPrefs;
+    }
+
 
     /**
      * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,

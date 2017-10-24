@@ -34,9 +34,12 @@ public interface Model {
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
 
     /** Adds photo to person */
-    void addPhotoPerson(ReadOnlyPerson person, String FilePath, Index targetIndex)
+    void addPhotoPerson(ReadOnlyPerson person, String filePath, Index targetIndex)
             throws PersonNotFoundException, FileNotFoundException,
             IOException;
+
+    /** Searches for a person on facebook */
+    void faceBook(ReadOnlyPerson person, String username) throws PersonNotFoundException;
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

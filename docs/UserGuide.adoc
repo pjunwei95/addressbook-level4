@@ -1,4 +1,4 @@
-= Weaver - User Guide
+= Weaver User HandBook
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -15,7 +15,20 @@ endif::[]
 By: `W13-B2`      Since: `Aug 2017`      Licence: `MIT`
 
 
-== Quick Start
+== Product Overview
+
+Weaver is a desktop application that has a GUI (Graphical User Interface) but most of the interactions happen using
+a Command Line Interface.Weaver is your personalised addressbook that will make your day to day life easier by letting
+you access the details over your friends and family members as and when you want them.
+
+== About
+
+This User Guide gives you some basic guidlines that you need to follow to use Weaver.It gives you a brief introduction
+of what the product intends to do and how it will benefit you as a user.Since Weaver uses a Command line Interface
+you will find below the list of commands and how to execute them in order to use the application.
+So lets get Started! +
+
+== Getting started
 
 .  Ensure you have Java version `1.8.0_60` or later installed in your Computer.
 +
@@ -304,8 +317,13 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 *SINCE V1.2*
 
+=== Login / Logout SINCE V1.2
 
-=== Customize tags' color : `color`
+Users now can login using valid accounts. And their files are seperated.
+
+To logout, just click logout in the "file - > logout" button.
+
+=== Customize tags' color : `color` SINCE V1.2
 
 Change the color of one or more than one tags. +
 Format: `color [c/COLOR] [t/TAG]...`
@@ -328,7 +346,7 @@ The `color` command fails as `invalid_color` is not supported.
 * `color t/not_existing_tag c/yellow` +
 The `color` command fails as `not_existing_tag` does not exit in current database.
 
-=== Change font size : `fs`
+=== Change font size : `fs` SINCE V1.2
 
 Change the font size of the entire application +
 Format: `fs [FONT SIZE]` or `fs [+/-]`
@@ -349,7 +367,7 @@ Examples:
 
 * `fs -` +
 
-=== Add Photo to contacts : `photo` +
+=== Add Photo to contacts : `photo` SINCE V1.2 +
 
 image::MockUp.png[width="790"]
 
@@ -367,6 +385,16 @@ Command - Photo 1 Delete +
 this will delete the photo attached with the person at index 1.
 ****
 
+
+=== FaceBook Integration (SINCE V1.3)
+
+Helps you view the profile page of a person in your contact list. +
+
+Command Format - `Facebook [INDEX] [USERNAME OF PERSON ON FACEBOOK]` +
+
+e.g. - `facebook 1 ronak.lakhotia`
+
+image::facebook.png[width="790"]
 
 === Clearing all entries : `clear`
 
