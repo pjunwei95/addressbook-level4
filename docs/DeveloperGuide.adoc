@@ -677,6 +677,47 @@ any directory. +
 
 // end::addPhoto[]
 
+=== FaceBook Integration
+
+The facebook command helps the user to view the profile page of a person on the contact list. +
+It requires the user to login to his/her account before they can view the profile page.The profile +
+page is shown up on the browser panel.
+
+FORMAT - `facebook [INDEX] [USERNAME]`
+
+e.g. - `facebook 1 ronak.lakhotia`
+
+==== Working flow
+
+The `FaceBookCommand Parser` class parses the arguments and throws an exception if the index entered
+is invalid. A new event is then raised in the ModelManager class.
+The Brower Panel class then loads the page with the url of the profile page to be viewed on Facebook. +
+
+---
+ public void loadPersonFaceBookPage(ReadOnlyPerson person, String username) {
+
+ String url =  FACEBOOK_PROFILE_PAGE + username;
+loadPage(url);
+    }
+---
+
+==== Reasons for this kind of implementation
+
+* This helps the user to take a quick glance of the the profile image of the contacts on his/her list. +
+
+* It is better than opening a brower on the desktop. +
+
+==== Design Considerations
+
+**Aspect:** How should the user view the profile page. +
+**Alternative1 : ** View the profile page on a web browser +
+**Pros:** Helps user exercise other functionalities like messaging. +
+**Cons:** Does not make use of Weaver in any useful way. +
+**Alternative2:** View the profile page on the browser panel. +
+**Pros:** Makes it quicker and adds a fucntion to the personalised Weaver. +
+**Cons:** Limits the functionalities that can be used on facebook. +
+
+
 // tag::Logging[]
 === Logging
 

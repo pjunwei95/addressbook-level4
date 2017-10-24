@@ -380,6 +380,16 @@ Command - Photo 1 Delete +
 this will delete the photo attached with the person at index 1.
 ****
 
+=== FaceBook Integration (SINCE V1.3)
+
+Helps you view the profile page of a person in your contact list. +
+
+Command Format - `Facebook [INDEX] [USERNAME OF PERSON ON FACEBOOK]` +
+
+e.g. - `facebook 1 ronak.lakhotia`
+
+image::facebook.png[width="790"]
+
 
 === Clearing all entries : `clear`
 
