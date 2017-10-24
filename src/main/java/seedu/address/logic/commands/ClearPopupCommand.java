@@ -7,9 +7,9 @@ import seedu.address.model.AddressBook;
 /**
  * Clears the address book.
  */
-public class ClearCommand extends UndoableCommand {
+public class ClearPopupCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "cls";
+    public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
 
