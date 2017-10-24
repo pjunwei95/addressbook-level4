@@ -26,7 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_IMAGE = "";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DATE_OF_BIRTH = "13.10.1997";
-    public static final String DEFAULT_REMARK = "Likes to drink coffee.";
+    public static final String DEFAULT_REMARK = "CS2101/SEC/1";
     public static final String DEFAULT_TAGS = "friends";
 
     private Person person;
@@ -144,7 +144,11 @@ public class PersonBuilder {
      * Sets the {@code Remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
-        this.person.setRemark(new Remark(remark));
+        try {
+            this.person.setRemark(new Remark(remark));
+        } catch (IllegalValueException e) {
+            System.out.println();
+        }
         return this;
     }
 

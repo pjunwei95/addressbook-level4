@@ -135,7 +135,7 @@ public class Person implements ReadOnlyPerson {
     }
 
     @Override
-    public  Remark getRemark() {
+    public Remark getRemark() {
         return remark.get();
     }
 

@@ -60,7 +60,7 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         date = source.getDateOfBirth().date;
-        remark = source.getRemark().value;
+        remark = source.getRemark().getModuleLists();
         image = source.getImage().filePath;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
