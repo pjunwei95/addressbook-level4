@@ -12,5 +12,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_IMAGE = "Enter correct path, your image file should be present."
             + "on the Desktop";
     public static final String MESSAGE_NO_IMAGE_TO_DELETE = "The person has no Photo to be deleted.";
+    public static final String MESSAGE_FACEBOOK_SHOWN_SUCCESS = "FaceBook profile of the user displayed!";
 
 }

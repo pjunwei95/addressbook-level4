@@ -1,0 +1,103 @@
+package seedu.address.logic.commands;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showFirstPersonOnly;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import org.junit.Test;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.UndoRedoStack;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.ReadOnlyPerson;
+
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code MapCommand}.
+ */
+public class FaceBookCommandTest {
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_validIndexUnfilteredList_success() throws Exception {
+
+        ReadOnlyPerson personToMap = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String username = "ronak.lakhotia";
+        FaceBookCommand faceBookCommand = prepareCommand(INDEX_FIRST_PERSON, username);
+
+        String expectedMessage = String.format(FaceBookCommand.MESSAGE_FACEBOOK_SHOWN_SUCCESS, personToMap);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.faceBook(personToMap, username);
+
+        assertCommandSuccess(faceBookCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
+
+        String username = "ronak.lakhotia";
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex, username);
+
+        assertCommandFailure(faceBookCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showFirstPersonOnly(model);
+
+        String username = "ronak.lakhotia";
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex, username);
+
+        assertCommandFailure(faceBookCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+
+        String username = "ronak.lakhotia";
+
+        FaceBookCommand faceBookCommandFirst = new FaceBookCommand(INDEX_FIRST_PERSON, username);
+        FaceBookCommand faceBookCommandSecond = new FaceBookCommand(INDEX_SECOND_PERSON, username);
+
+        // same object -> returns true
+        assertTrue(faceBookCommandFirst.equals(faceBookCommandFirst));
+
+        // same values -> returns true
+        FaceBookCommand facebookFirstCommandCopy = new FaceBookCommand(INDEX_FIRST_PERSON, username);
+        assertTrue(facebookFirstCommandCopy.equals(facebookFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(faceBookCommandFirst.equals(1));
+
+        // null -> returns false
+        assertFalse(faceBookCommandFirst.equals(null));
+
+        // different person -> returns false
+        assertFalse(faceBookCommandFirst.equals(faceBookCommandSecond));
+    }
+
+    /**
+     * Returns a {@code MapCommand} with the parameter {@code index}.
+     */
+    private FaceBookCommand prepareCommand(Index index, String username) {
+        FaceBookCommand faceBookCommand = new FaceBookCommand(index, username);
+        faceBookCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        return faceBookCommand;
+    }
+}
