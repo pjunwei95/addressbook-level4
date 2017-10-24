@@ -2,12 +2,10 @@ package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_RONAK;
 import static seedu.address.testutil.TypicalPersons.LAKHOTIA;
 import static seedu.address.testutil.TypicalPersons.RANDOM;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.logic.commands.ClearCommand;
@@ -20,7 +18,7 @@ import seedu.address.model.Model;
 public class SearchCommandSystemTest extends AddressBookSystemTest {
 
     @Test
-    @Ignore
+
     public void search() {
         /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
          * -> 2 persons found
@@ -59,7 +57,10 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
         /* Case: search person in empty address book -> 0 persons found */
         executeCommand(ClearCommand.COMMAND_WORD);
         assert getModel().getAddressBook().getPersonList().size() == 0;
-        command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+
+
+        command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " " +  "13.10.1997";
+
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);

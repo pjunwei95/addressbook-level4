@@ -26,6 +26,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
+import seedu.address.testutil.DeleteTagDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -45,8 +46,8 @@ public class CommandTestUtil {
     public static final String VALID_DOB_BOB = "13.10.1997";
     public static final String VALID_IMAGE_AMY = "";
     public static final String VALID_IMAGE_BOB = "";
-    public static final String VALID_REMARK_AMY = "Likes to drink coffee.";
-    public static final String VALID_REMARK_BOB = "Likes to drink coffee.";
+    public static final String VALID_REMARK_AMY = "CS2101/SEC/1";
+    public static final String VALID_REMARK_BOB = "CS2101/SEC/1";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friends";
     public static final String VALID_TAG_FAMILY = "family";
@@ -83,6 +84,8 @@ public class CommandTestUtil {
     public static final String INVALID_FONT_SIZE = "invalid font size";
 
 
+    public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_AMY;
+    public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_BOB;
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final Set<Tag> VALID_TAGLIST;
@@ -100,6 +103,11 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withDateOfBirth(VALID_DOB_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        TAG_DESC_AMY = new DeleteTagDescriptorBuilder()
+                .withTags(VALID_TAG_FRIEND).build();
+        TAG_DESC_BOB = new DeleteTagDescriptorBuilder()
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
 
         VALID_TAGLIST = new HashSet<>();
         try {
