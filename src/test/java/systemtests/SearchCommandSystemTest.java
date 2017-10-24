@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 public class SearchCommandSystemTest extends AddressBookSystemTest {
 
     @Test
+
     public void search() {
         /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
          * -> 2 persons found
@@ -56,7 +57,10 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
         /* Case: search person in empty address book -> 0 persons found */
         executeCommand(ClearCommand.COMMAND_WORD);
         assert getModel().getAddressBook().getPersonList().size() == 0;
+
+
         command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " " +  "13.10.1997";
+
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);

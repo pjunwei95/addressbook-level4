@@ -12,9 +12,12 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
+
+
 
 /**
  * The Browser Panel of the App.
@@ -25,6 +28,7 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String DEFAULT_PAGE = "https://nusmods.com/timetable/2017-2018/sem1";
     public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.google.com.sg/search?safe=off&q=";
     public static final String GOOGLE_SEARCH_URL_SUFFIX = "&cad=h";
+    public static final String FACEBOOK_PROFILE_PAGE = "https://www.facebook.com/";
     public static final String NUSMODS_SEARCH_URL_PREFIX = "https://nusmods.com/timetable/2017-2018/sem1?";
     public static final String FACEBOOK_MESSENGER_URL_PREFIX = "https://www.facebook.com/messages/t/";
     public static final String GOOGLE_MAP_SEARCH_URL_PREFIX = "https://www.google.com.sg/maps/search/";
@@ -43,6 +47,8 @@ public class BrowserPanel extends UiPart<Region> {
         getRoot().setOnKeyPressed(Event::consume);
 
         loadDefaultPage();
+
+
         registerAsAnEventHandler(this);
     }
     /**
@@ -106,4 +112,22 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPage(GOOGLE_MAP_SEARCH_URL_PREFIX + event.getAddress());
     }
+
+    /**
+     * Shows Facebook profile picture of user
+     */
+    public void loadPersonFaceBookPage(ReadOnlyPerson person, String username) {
+
+        String url = FACEBOOK_PROFILE_PAGE + username;
+        loadPage(url);
+    }
+
+    @Subscribe
+    public void handleFaceBookEvent(FaceBookEvent event) {
+
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        loadPersonFaceBookPage(event.getPerson(), event.getUsername());
+    }
+
 }

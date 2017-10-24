@@ -16,6 +16,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.FileImage;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -34,6 +35,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
+
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -75,6 +78,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
     }
+    @Override
+    public synchronized void faceBook(ReadOnlyPerson person, String username) throws PersonNotFoundException {
+
+        raise(new FaceBookEvent(person, username));
+    }
+
+
     @Override
     public synchronized void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
 

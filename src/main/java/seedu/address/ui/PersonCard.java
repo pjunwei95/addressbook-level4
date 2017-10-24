@@ -106,10 +106,11 @@ public class PersonCard extends UiPart<Region> {
         String url;
 
         if (filePath.equals("")) {
-            url = "/images/clock.png";
-            Image display = new Image(url);
-            image.setImage(display);
-        } else {
+            url = "/images/address_book_32.png";
+            Image Display = new Image(url);
+            image.setImage(Display);
+        }
+        else {
 
             if (filePath.endsWith("g")) {
 
