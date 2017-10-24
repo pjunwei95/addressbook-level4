@@ -47,9 +47,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_remark() throws Exception {
-        final Remark remark = new Remark("Some remark.");
+        final Remark remark = new Remark("CS2101/SEC/1");
         RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
-            + 1 + " " + PREFIX_REMARK + " " + remark.value);
+            + 1 + " " + PREFIX_REMARK + " " + "CS2101/SEC/1");
         assertEquals(new RemarkCommand(1, remark), command);
     }
 

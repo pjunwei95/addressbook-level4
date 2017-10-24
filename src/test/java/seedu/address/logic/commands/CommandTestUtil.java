@@ -45,8 +45,8 @@ public class CommandTestUtil {
     public static final String VALID_DOB_BOB = "13.10.1997";
     public static final String VALID_IMAGE_AMY = "";
     public static final String VALID_IMAGE_BOB = "";
-    public static final String VALID_REMARK_AMY = "Likes to drink coffee.";
-    public static final String VALID_REMARK_BOB = "Likes to drink coffee.";
+    public static final String VALID_REMARK_AMY = "CS2101/SEC/1";
+    public static final String VALID_REMARK_BOB = "CS2101/SEC/1";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friends";
     public static final String VALID_TAG_FAMILY = "family";

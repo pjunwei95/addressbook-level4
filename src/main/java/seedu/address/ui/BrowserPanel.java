@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -10,7 +11,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
-import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -20,9 +20,11 @@ import seedu.address.model.person.ReadOnlyPerson;
  */
 public class BrowserPanel extends UiPart<Region> {
 
-    public static final String DEFAULT_PAGE = "default.html";
+    //public static final String DEFAULT_PAGE = "default.html";
+    public static final String DEFAULT_PAGE = "https://nusmods.com/timetable/2017-2018/sem1";
     public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.google.com.sg/search?safe=off&q=";
     public static final String GOOGLE_SEARCH_URL_SUFFIX = "&cad=h";
+    public static final String NUSMODS_SEARCH_URL_PREFIX = "https://nusmods.com/timetable/2017-2018/sem1?";
     public static final String FACEBOOK_MESSENGER_URL_PREFIX = "https://www.facebook.com/messages/t/";
 
 
@@ -47,8 +49,7 @@ public class BrowserPanel extends UiPart<Region> {
      */
     private void loadPersonPage(ReadOnlyPerson person) {
 
-        loadPage(GOOGLE_SEARCH_URL_PREFIX + person.getName().fullName.replaceAll(" ", "+")
-                + GOOGLE_SEARCH_URL_SUFFIX);
+        loadPage(NUSMODS_SEARCH_URL_PREFIX + parse(person.getRemark().toString()));
 
     }
 
@@ -60,8 +61,30 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads a default HTML file with a background that matches the general theme.
      */
     private void loadDefaultPage() {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
-        loadPage(defaultPage.toExternalForm());
+        //URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
+        try {
+            URL defaultPage = new URL(DEFAULT_PAGE);
+            loadPage(defaultPage.toExternalForm());
+        } catch (MalformedURLException e) {
+            logger.info("Invalid URL");
+        }
+
+    }
+
+    /**
+     * Parse the modulelist to correct url format.
+     */
+    private String parse(String moduleLists) {
+        String[] mods = moduleLists.split(",");
+        String result = "";
+        for ( String m : mods ) {
+            String [] helper = m.split("/");
+            String mod = helper[0];
+            String kind = helper[1];
+            String num = helper[2];
+            result = result + "&" + mod + "[" + kind + "]" + "=" + num;
+        }
+        return result;
     }
 
     /**
