@@ -197,7 +197,7 @@ public class PersonCard extends UiPart<Region> {
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
         initTags(person, event.getFontSize());
         setFontSize(event.getFontSize());
-        setFontSizeForAllImages(event.getFontSize());
+        //setFontSizeForAllImages(event.getFontSize());
     }
 
     private void setFontSize(String newFontSize) {
