@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.Test;
 
 import seedu.address.logic.commands.FaceBookCommand;
-import seedu.address.model.person.FacebookUsername;
 
 
 /**
