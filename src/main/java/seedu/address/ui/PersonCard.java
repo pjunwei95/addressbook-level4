@@ -121,13 +121,14 @@ public class PersonCard extends UiPart<Region> {
                 url = filePath + "";
 
                 File file = new File(url);
-                boolean check = file.exists();
+                boolean FileExists = file.exists();
 
-                if(!check) {
+                if(!FileExists) {
 
                     url = "/images/address_book_32.png";
                     Image Display = new Image(url);
                     image.setImage(Display);
+
 
                     throw new ParseException(
                             String.format(MESSAGE_IMAGE_REMOVED, PhotoCommand.MESSAGE_USAGE)

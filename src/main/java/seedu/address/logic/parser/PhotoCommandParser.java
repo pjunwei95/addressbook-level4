@@ -42,14 +42,14 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
            //         String.format(MESSAGE_INVALID_IMAGE, PhotoCommand.MESSAGE_USAGE));
        // }
         File file = new File(url);
-        boolean check = file.exists();
+        boolean FileExists = file.exists();
 
         if (url.equalsIgnoreCase("delete")) {
 
-            check = true;
+            FileExists = true;
         }
 
-        if (check) {
+        if (FileExists) {
             try {
                 Index index = ParserUtil.parseIndex(keywords[0]);
                 return new PhotoCommand(index, (keywords[1]));
