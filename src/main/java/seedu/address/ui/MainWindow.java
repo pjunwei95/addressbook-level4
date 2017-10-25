@@ -22,6 +22,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.UserPrefs;
@@ -257,7 +258,7 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleIncreaseFontSize() throws CommandException, ParseException {
-        commandBox.handleCommandInputChanged(FontSize.INCREASE_FONT_SIZE_COMMAND);
+        commandBox.handleCommandInputChanged(ChangeFontSizeCommand.INCREASE_FONT_SIZE_COMMAND);
     }
 
     /**
@@ -265,7 +266,26 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleDecreaseFontSize() throws CommandException, ParseException {
-        commandBox.handleCommandInputChanged(FontSize.DECREASE_FONT_SIZE_COMMAND);
+        commandBox.handleCommandInputChanged(ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND);
+    }
+
+    /**
+    * Handles the key press event, {@code keyEvent}.
+    */
+    @FXML
+    private void handleKeyPress(KeyEvent keyEvent) throws CommandException, ParseException {
+        switch (keyEvent.getCode()) {
+            case PLUS:
+                keyEvent.consume();
+                handleIncreaseFontSize();
+                break;
+            case MINUS:
+                keyEvent.consume();
+                handleDecreaseFontSize();
+                break;
+            default:
+                // let JavaFx handle the keypress
+        }
     }
 
 }

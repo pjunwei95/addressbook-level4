@@ -20,6 +20,8 @@ public class TagColor {
     public static final String MESSAGE_TAG_COLOR_CONSTRAINTS = "Valid colors are: "
             + Arrays.toString(VALID_TAG_COLOR);
 
+    public static final String DEFAULT_TAG_COLOR = "orange";
+
     public final String tagColorName;
 
     /**

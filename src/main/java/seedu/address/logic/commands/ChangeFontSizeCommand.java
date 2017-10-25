@@ -19,6 +19,9 @@ public class ChangeFontSizeCommand extends UndoableCommand {
             + PREFIX_FONT_SIZE + "xs\n";
     public static final String MESSAGE_SUCCESS = "Changed font size to ";
 
+    public static final String INCREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " +";
+    public static final String DECREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " -";
+
     private final String fontSize;
 
     public ChangeFontSizeCommand(String fontSize) {

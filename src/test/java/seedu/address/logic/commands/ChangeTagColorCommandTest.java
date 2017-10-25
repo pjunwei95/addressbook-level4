@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAGLIST;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_COLOR_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAGLIST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COLOR_NAME_RED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;

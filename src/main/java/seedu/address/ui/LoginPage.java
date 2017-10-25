@@ -77,6 +77,7 @@ public class LoginPage extends UiPart<Region> {
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
         registerAsAnEventHandler(this);
+        handleLoginEvent();
     }
 
 
@@ -93,15 +94,15 @@ public class LoginPage extends UiPart<Region> {
         logger.info("Trying to login");
         String uname = username.getText();
         String pword = password.getText();
-        if (checkValid(uname, pword)) {
+//        if (checkValid(uname, pword)) {
             model = initModelManager(storage, prefs);
             prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
             mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-        } else {
-            logger.info("Wrong name or password!");
-        }
+//        } else {
+//            logger.info("Wrong name or password!");
+//        }
     }
 
     /**

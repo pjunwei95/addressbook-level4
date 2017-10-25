@@ -27,8 +27,6 @@ public class FontSize {
     public static final String FONT_SIZE_M_LABEL = "m";
     public static final String FONT_SIZE_L_LABEL = "l";
     public static final String FONT_SIZE_XL_LABEL = "xl";
-    public static final String INCREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " +";
-    public static final String DECREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " -";
 
     private static String currentFontSizeLabel = FONT_SIZE_M_LABEL;
 

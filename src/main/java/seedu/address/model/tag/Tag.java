@@ -12,7 +12,6 @@ public class Tag {
 
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
-    public static final String DEFAULT_TAG_COLOR = "blue";
 
     public final String tagName;
     public final TagColor tagColor;
@@ -29,7 +28,7 @@ public class Tag {
             throw new IllegalValueException(MESSAGE_TAG_CONSTRAINTS);
         }
         this.tagName = trimmedName;
-        this.tagColor = new TagColor(DEFAULT_TAG_COLOR);
+        this.tagColor = new TagColor(TagColor.DEFAULT_TAG_COLOR);
     }
 
     /**
