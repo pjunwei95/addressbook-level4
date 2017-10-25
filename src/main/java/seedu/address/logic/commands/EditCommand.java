@@ -19,7 +19,16 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfBirth;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.FacebookUsername;
+import seedu.address.model.person.FileImage;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -63,6 +72,7 @@ public class EditCommand extends UndoableCommand {
         requireNonNull(editPersonDescriptor);
 
         this.index = index;
+        System.out.println(editPersonDescriptor.getUsername().toString());
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -154,6 +164,7 @@ public class EditCommand extends UndoableCommand {
             this.dateOfBirth = toCopy.dateOfBirth;
             this.remark = toCopy.remark;
             this.image = toCopy.image;
+            this.username = toCopy.username;
             this.tags = toCopy.tags;
         }
 

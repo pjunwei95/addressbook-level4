@@ -27,7 +27,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         String[] argus = trimmedArgs.split("r/");
         String[] mods = argus[1].split(",");
 
-        for ( String m : mods) {
+        for (String m : mods) {
             m = m.trim();
         }
 

@@ -17,7 +17,7 @@ public class FaceBookCommand extends UndoableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Shows the profile of the user whose"
             + " index is entered\n"
-            + "Example: " + COMMAND_WORD + " 1 " ;
+            + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_FACEBOOK_SHOWN_SUCCESS = "Profile of Person: %1$s";
     public static final String MESSAGE_NO_USERNAME = "This Person has no Facebook username\n";

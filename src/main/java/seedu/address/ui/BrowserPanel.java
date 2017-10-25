@@ -15,8 +15,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.logic.commands.FaceBookCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -118,15 +116,8 @@ public class BrowserPanel extends UiPart<Region> {
      */
     public void loadPersonFaceBookPage(ReadOnlyPerson person) throws ParseException {
 
-        String MESSAGE_NO_USERNAME = person.getName().toString() + " has no username!";
-
-        if (!person.getUsername().toString().equalsIgnoreCase("")) {
-            String url = FACEBOOK_PROFILE_PAGE + person.getUsername().toString();
-            System.out.println(url);
-            loadPage(url);
-        } else {
-            throw new ParseException(String.format(MESSAGE_NO_USERNAME, FaceBookCommand.MESSAGE_USAGE));
-        }
+        String url = FACEBOOK_PROFILE_PAGE + person.getUsername().toString();
+        loadPage(url);
 
     }
 

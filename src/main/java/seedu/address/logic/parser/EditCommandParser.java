@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -37,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DOB,
-                        PREFIX_REMARK, PREFIX_IMAGE, PREFIX_TAG);
+                        PREFIX_REMARK, PREFIX_IMAGE, PREFIX_USERNAME, PREFIX_TAG);
 
         Index index;
 
@@ -57,6 +58,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                                         .ifPresent(editPersonDescriptor::setDateOfBirth);
             ParserUtil.parseImage(argMultimap.getValue(PREFIX_IMAGE)).ifPresent(editPersonDescriptor::setImage);
             ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)).ifPresent(editPersonDescriptor::setRemark);
+            ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME))
+                    .ifPresent(editPersonDescriptor::setUsername);
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);

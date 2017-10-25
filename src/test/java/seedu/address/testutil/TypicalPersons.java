@@ -16,6 +16,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +26,7 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+
 
 
 /**
@@ -92,12 +95,14 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withImage(VALID_IMAGE_AMY)
             .withRemark(VALID_REMARK_AMY).withDateOfBirth(VALID_DOB_AMY)
+            .withUsername(VALID_USERNAME_AMY)
             .withTags(VALID_TAG_FRIEND).build();
 
     public static final ReadOnlyPerson BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withImage(VALID_IMAGE_BOB)
             .withRemark(VALID_REMARK_BOB).withDateOfBirth(VALID_DOB_BOB)
+            .withUsername(VALID_USERNAME_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

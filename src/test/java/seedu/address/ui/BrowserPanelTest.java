@@ -68,7 +68,6 @@ public class BrowserPanelTest extends GuiUnitTest {
         //postNow(selectionChangedEventStub);
         postNow(selectionChanged);
 
-
         assertEquals(expectedFaceBookPersonUrl, browserPanelHandle.getLoadedUrl());
 
     }

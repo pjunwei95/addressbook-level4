@@ -1,11 +1,18 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IMAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.model.person.ReadOnlyPerson;
-
-import static seedu.address.logic.parser.CliSyntax.*;
-
 
 /**
  * A utility class for Person.
