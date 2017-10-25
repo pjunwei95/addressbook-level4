@@ -18,87 +18,160 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>W13-B2</code>      Since: <code>Aug 2017</code>      Licence: <code>MIT</code></p>
+<p>By: <code>W13-B2</code>      Since: <code>Aug 2017</code>      Licence: <code>MIT</code></p>
+</div>
+<div class="paragraph">
+<p><strong><code>Weaver</code></strong> is a command line based software for storing and managing contact information. It satisfies almost all functions might be needed by university students on storing and managing contact information.</p>
 </div>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#setting-up">1. Setting up</a>
+<li><a href="#introduction">1. Introduction</a>
 <ul class="sectlevel2">
-<li><a href="#prerequisites">1.1. Prerequisites</a></li>
-<li><a href="#setting-up-the-project-in-your-computer">1.2. Setting up the project in your computer</a></li>
-<li><a href="#verifying-the-setup">1.3. Verifying the setup</a></li>
-<li><a href="#configurations-to-do-before-writing-code">1.4. Configurations to do before writing code</a></li>
+<li><a href="#audiences">1.1. Audiences</a></li>
+<li><a href="#purposes">1.2. Purposes</a></li>
 </ul>
 </li>
-<li><a href="#design">2. Design</a>
+<li><a href="#introduction-2">2. Introduction</a>
 <ul class="sectlevel2">
-<li><a href="#architecture">2.1. Architecture</a></li>
-<li><a href="#ui-component">2.2. UI component</a></li>
-<li><a href="#logic-component">2.3. Logic component</a></li>
-<li><a href="#model-component">2.4. Model component</a></li>
-<li><a href="#storage-component">2.5. Storage component</a></li>
-<li><a href="#common-classes">2.6. Common classes</a></li>
+<li><a href="#audiences-2">2.1. Audiences</a></li>
+<li><a href="#purposes-2">2.2. Purposes</a></li>
 </ul>
 </li>
-<li><a href="#implementation">3. Implementation</a>
+<li><a href="#setting-up">3. Setting up</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></li>
-<li><a href="#login-logout-mechanism">3.2. Login / Logout mechanism</a></li>
-<li><a href="#customize-tag-color-mechanism">3.3. Customize tag color mechanism</a></li>
-<li><a href="#deleting-a-person-s-tag-mechanism">3.4. Deleting a person&#8217;s tag mechanism</a></li>
-<li><a href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">3.5. Adding a photo to a contact in your personalised Weaver.</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#configuration">3.7. Configuration</a></li>
+<li><a href="#prerequisites">3.1. Prerequisites</a></li>
+<li><a href="#setting-up-the-project-in-your-computer">3.2. Setting up the project in your computer</a></li>
+<li><a href="#verifying-the-setup">3.3. Verifying the setup</a></li>
+<li><a href="#configurations-to-do-before-writing-code">3.4. Configurations to do before writing code</a></li>
 </ul>
 </li>
-<li><a href="#documentation">4. Documentation</a>
+<li><a href="#design">4. Design</a>
 <ul class="sectlevel2">
-<li><a href="#editing-documentation">4.1. Editing Documentation</a></li>
-<li><a href="#publishing-documentation">4.2. Publishing Documentation</a></li>
-<li><a href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></li>
+<li><a href="#architecture">4.1. Architecture</a></li>
+<li><a href="#ui-component">4.2. UI component</a></li>
+<li><a href="#logic-component">4.3. Logic component</a></li>
+<li><a href="#model-component">4.4. Model component</a></li>
+<li><a href="#storage-component">4.5. Storage component</a></li>
+<li><a href="#common-classes">4.6. Common classes</a></li>
 </ul>
 </li>
-<li><a href="#testing">5. Testing</a>
+<li><a href="#implementation">5. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#running-tests">5.1. Running Tests</a></li>
-<li><a href="#types-of-tests">5.2. Types of tests</a></li>
-<li><a href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></li>
+<li><a href="#undo-redo-mechanism">5.1. Undo/Redo mechanism</a></li>
+<li><a href="#login-logout-mechanism">5.2. Login / Logout mechanism</a></li>
+<li><a href="#customize-tag-color-mechanism">5.3. Customize tag color mechanism</a></li>
+<li><a href="#deleting-a-person-s-tag-mechanism">5.4. Deleting a person&#8217;s tag mechanism</a></li>
+<li><a href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">5.5. Adding a photo to a contact in your personalised Weaver.</a></li>
+<li><a href="#facebook-integration">5.6. FaceBook Integration</a></li>
+<li><a href="#logging">5.7. Logging</a></li>
+<li><a href="#configuration">5.8. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#dev-ops">6. Dev Ops</a>
+<li><a href="#documentation">6. Documentation</a>
 <ul class="sectlevel2">
-<li><a href="#build-automation">6.1. Build Automation</a></li>
-<li><a href="#continuous-integration">6.2. Continuous Integration</a></li>
-<li><a href="#making-a-release">6.3. Making a Release</a></li>
-<li><a href="#managing-dependencies">6.4. Managing Dependencies</a></li>
+<li><a href="#editing-documentation">6.1. Editing documentation</a></li>
+<li><a href="#publishing-documentation">6.2. Publishing documentation</a></li>
+<li><a href="#converting-documentation-to-pdf-format">6.3. Converting documentation to PDF format</a></li>
 </ul>
 </li>
-<li><a href="#suggested-programming-tasks-to-get-started">Appendix A: Suggested Programming Tasks to Get Started</a>
+<li><a href="#testing">7. Testing</a>
+<ul class="sectlevel2">
+<li><a href="#running-tests">7.1. Running Tests</a></li>
+<li><a href="#types-of-tests">7.2. Types of tests</a></li>
+<li><a href="#troubleshooting-testing">7.3. Troubleshooting testing</a></li>
+</ul>
+</li>
+<li><a href="#dev-ops">8. Dev Ops</a>
+<ul class="sectlevel2">
+<li><a href="#build-automation">8.1. Build Automation</a></li>
+<li><a href="#continuous-integration">8.2. Continuous integration</a></li>
+<li><a href="#making-a-release">8.3. Making a release</a></li>
+<li><a href="#managing-dependencies">8.4. Managing dependencies</a></li>
+</ul>
+</li>
+<li><a href="#suggested-programming-tasks-to-get-started">Appendix A: Suggested programming tasks to get started</a>
 <ul class="sectlevel2">
 <li><a href="#improving-each-component">A.1. Improving each component</a></li>
 <li><a href="#creating-a-new-command-code-remark-code">A.2. Creating a new command: <code>remark</code></a></li>
 </ul>
 </li>
-<li><a href="#user-stories">Appendix B: User Stories</a></li>
-<li><a href="#use-cases">Appendix C: Use Cases</a>
+<li><a href="#user-stories">Appendix B: User stories</a></li>
+<li><a href="#use-cases">Appendix C: Use cases</a>
 <ul class="sectlevel2">
-<li><a href="#use-case-email-intents">C.1. Use case: Email Intents</a></li>
-<li><a href="#use-case-social-integration">C.2. Use case: Social Integration</a></li>
+<li><a href="#use-case-social-integration">C.1. Use case: Social integration</a></li>
 </ul>
 </li>
-<li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
+<li><a href="#non-functional-requirements">Appendix D: Non functional requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
-<li><a href="#product-survey">Appendix F: Product Survey</a></li>
 </ul>
 </div>
 </div>
 <div class="sect1">
-<h2 id="setting-up"><a class="link" href="#setting-up">1. Setting up</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="prerequisites"><a class="link" href="#prerequisites">1.1. Prerequisites</a></h3>
+<h3 id="audiences"><a class="link" href="#audiences">1.1. Audiences</a></h3>
+<div class="paragraph">
+<p>All university students.<br>
+People who have the need for storing and managing contact information efficiently are suggested to use <strong><code>Weaver</code></strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="purposes"><a class="link" href="#purposes">1.2. Purposes</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong><code>Weaver</code></strong> aims at providing efficient solution for university students to store and manage contact information.</p>
+</li>
+<li>
+<p>It devotes to improve the experience when users try to add person , delete person , edit person , remark person ect.</p>
+</li>
+<li>
+<p>Targeted at university students, <strong><code>Weaver</code></strong> is bringing shortcut for students to note meetings, calendars and course information.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong><code>Weaver</code></strong> is a command line based software for storing and managing contact information. It satisfies almost all functions might be needed by university students on storing and managing contact information.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction-2"><a class="link" href="#introduction-2">2. Introduction</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="audiences-2"><a class="link" href="#audiences-2">2.1. Audiences</a></h3>
+<div class="paragraph">
+<p>All university students.<br>
+People who have the need for storing and managing contact information efficiently are suggested to use <strong><code>Weaver</code></strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="purposes-2"><a class="link" href="#purposes-2">2.2. Purposes</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong><code>Weaver</code></strong> aims at providing efficient solution for university students to store and manage contact information.</p>
+</li>
+<li>
+<p>It devotes to improve the experience when users try to add person , delete person , edit person , remark person ect.</p>
+</li>
+<li>
+<p>Targeted at university students, <strong><code>Weaver</code></strong> is bringing shortcut for students to note meetings, calendars and course information.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setting-up"><a class="link" href="#setting-up">3. Setting up</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="prerequisites"><a class="link" href="#prerequisites">3.1. Prerequisites</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -137,7 +210,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 </div>
 </div>
 <div class="sect2">
-<h3 id="setting-up-the-project-in-your-computer"><a class="link" href="#setting-up-the-project-in-your-computer">1.2. Setting up the project in your computer</a></h3>
+<h3 id="setting-up-the-project-in-your-computer"><a class="link" href="#setting-up-the-project-in-your-computer">3.2. Setting up the project in your computer</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -179,7 +252,7 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="verifying-the-setup"><a class="link" href="#verifying-the-setup">1.3. Verifying the setup</a></h3>
+<h3 id="verifying-the-setup"><a class="link" href="#verifying-the-setup">3.3. Verifying the setup</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -192,9 +265,9 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configurations-to-do-before-writing-code"><a class="link" href="#configurations-to-do-before-writing-code">1.4. Configurations to do before writing code</a></h3>
+<h3 id="configurations-to-do-before-writing-code"><a class="link" href="#configurations-to-do-before-writing-code">3.4. Configurations to do before writing code</a></h3>
 <div class="sect3">
-<h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">1.4.1. Configuring the coding style</a></h4>
+<h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">3.4.1. Configuring the coding style</a></h4>
 <div class="paragraph">
 <p>This project follows <a href="https://github.com/oss-generic/process/blob/master/docs/CodingStandards.md">oss-generic coding standards</a>. IntelliJ&#8217;s default style is mostly compliant with ours but it uses a different import order from ours. To rectify,</p>
 </div>
@@ -226,13 +299,13 @@ This will generate all resources required by the application and tests.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">1.4.2. Updating documentation to match your fork</a></h4>
+<h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">3.4.2. Updating documentation to match your fork</a></h4>
 <div class="paragraph">
 <p>After forking the repo, links in the documentation will still point to the <code>se-edu/addressbook-level4</code> repo. If you plan to develop this as a separate product (i.e. instead of contributing to the <code>se-edu/addressbook-level4</code>) , you should replace the URL in the variable <code>repoURL</code> in <code>DeveloperGuide.adoc</code> and <code>UserGuide.adoc</code> with the URL of your fork.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="setting-up-ci"><a class="link" href="#setting-up-ci">1.4.3. Setting up CI</a></h4>
+<h4 id="setting-up-ci"><a class="link" href="#setting-up-ci">3.4.3. Setting up CI</a></h4>
 <div class="paragraph">
 <p>Set up Travis to perform Continuous Integration (CI) for your fork. See <a href="UsingTravis.html">UsingTravis.adoc</a> to learn how to set it up.</p>
 </div>
@@ -253,7 +326,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 </div>
 <div class="sect3">
-<h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">1.4.4. Getting started with coding</a></h4>
+<h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">3.4.4. Getting started with coding</a></h4>
 <div class="paragraph">
 <p>When you are ready to start coding,</p>
 </div>
@@ -272,10 +345,10 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 </div>
 <div class="sect1">
-<h2 id="design"><a class="link" href="#design">2. Design</a></h2>
+<h2 id="design"><a class="link" href="#design">4. Design</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="architecture"><a class="link" href="#architecture">2.1. Architecture</a></h3>
+<h3 id="architecture"><a class="link" href="#architecture">4.1. Architecture</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/Architecture.png" alt="Architecture" width="600">
@@ -286,18 +359,6 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 <div class="paragraph">
 <p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of each component.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The <code>.pptx</code> files used to create diagrams in this document can be found in the <a href="https://github.com/se-edu/addressbook-level4/tree/master/docs/diagrams/">diagrams</a> folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose <code>Save as picture</code>.
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p><code>Main</code> has only one class called <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
@@ -420,7 +481,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="ui-component"><a class="link" href="#ui-component">2.2. UI component</a></h3>
+<h3 id="ui-component"><a class="link" href="#ui-component">4.2. UI component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
@@ -433,7 +494,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>LoginPage</code> and a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code> and <code>LoginPage</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -456,7 +517,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="logic-component"><a class="link" href="#logic-component">2.3. Logic component</a></h3>
+<h3 id="logic-component"><a class="link" href="#logic-component">4.3. Logic component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
@@ -506,7 +567,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="model-component"><a class="link" href="#model-component">2.4. Model component</a></h3>
+<h3 id="model-component"><a class="link" href="#model-component">4.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
@@ -539,7 +600,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="storage-component"><a class="link" href="#storage-component">2.5. Storage component</a></h3>
+<h3 id="storage-component"><a class="link" href="#storage-component">4.5. Storage component</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
@@ -566,7 +627,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="common-classes"><a class="link" href="#common-classes">2.6. Common classes</a></h3>
+<h3 id="common-classes"><a class="link" href="#common-classes">4.6. Common classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
 </div>
@@ -574,13 +635,13 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementation"><a class="link" href="#implementation">3. Implementation</a></h2>
+<h2 id="implementation"><a class="link" href="#implementation">5. Implementation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-mechanism"><a class="link" href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></h3>
+<h3 id="undo-redo-mechanism"><a class="link" href="#undo-redo-mechanism">5.1. Undo/Redo mechanism</a></h3>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -732,7 +793,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.1. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">5.1.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br>
@@ -776,16 +837,21 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="login-logout-mechanism"><a class="link" href="#login-logout-mechanism">3.2. Login / Logout mechanism</a></h3>
+<h3 id="login-logout-mechanism"><a class="link" href="#login-logout-mechanism">5.2. Login / Logout mechanism</a></h3>
 <div class="paragraph">
-<p>The login / logout mechanism is a page which requires user to key in his username and password before he can use the addressbook. And Once he is logged in, there will be a automatically generated file named as "username + addressbook.xml" storing the information about his own addressbook.</p>
+<p>The <code>login / logout</code> mechanism is a page which requires user to key in his username and password before he can use the addressbook. And once he is logged in, there will be a automatically generated file named as <code>username + addressbook.xml</code> storing the information about his own addressbook.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>It uses files whloginich stores the information of legal username and password pair to check whether the username and password key in by users are valid.</p>
-</li>
-</ol>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It uses files which stores the information of legal username and password pair to check whether the username and password key in by users are valid.
+</td>
+</tr>
+</table>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -798,9 +864,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">loginPage = <span class="keyword">new</span> LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
-loginPage.show();
-<span class="comment">//mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);</span>
-<span class="comment">//mainWindow.show(); //This should be called before creating other UI parts</span></code></pre>
+loginPage.show();</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -858,11 +922,11 @@ If user key in wrong user name or password, he will stuck at login page until he
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.1. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">5.2.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>login / logout</code> feature<br>
 <strong>Alternative 1 (current choice):</strong> <code>login</code> is compulsory. User must login before he can use the addressbook <br>
-<strong>Pros:</strong> Faster to implement. Not changing the structure of code.<br>
+<strong>Pros:</strong> Easier to implement. Not changing the structure of code.<br>
 <strong>Cons:</strong> Previous test cases need to be rewrote to get use to this new page.<br>
 <strong>Alternative 2:</strong> <code>login</code> is  optional. User can still use this addressbook without login.<br>
 <strong>Pros:</strong> Previous test cases can still be used.<br>
@@ -884,7 +948,7 @@ multiple users.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="customize-tag-color-mechanism"><a class="link" href="#customize-tag-color-mechanism">3.3. Customize tag color mechanism</a></h3>
+<h3 id="customize-tag-color-mechanism"><a class="link" href="#customize-tag-color-mechanism">5.3. Customize tag color mechanism</a></h3>
 <div class="paragraph">
 <p>Tag color can be changed by typing a <code>ChangeTagColorCommand</code> in the command line.</p>
 </div>
@@ -944,7 +1008,7 @@ Tags with the same tag name are of the same color.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.1. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">5.3.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to associate each tag with a tag color?<br>
 <strong>Alternative 1 (current choice):</strong> Create a new class <code>TagColor</code> and add a new field to <code>Tag</code> class.<br>
@@ -967,15 +1031,10 @@ Tags with the same tag name are of the same color.
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-s-tag-mechanism"><a class="link" href="#deleting-a-person-s-tag-mechanism">3.4. Deleting a person&#8217;s tag mechanism</a></h3>
+<h3 id="deleting-a-person-s-tag-mechanism"><a class="link" href="#deleting-a-person-s-tag-mechanism">5.4. Deleting a person&#8217;s tag mechanism</a></h3>
 <div class="paragraph">
-<p>The Deleting a person&#8217;s tag mechanism consists of <code>DeleteTagCommand</code> and <code>DeleteTagCommandParser</code> classes.</p>
-</div>
-<div class="paragraph">
-<p>The <code>DeleteTagCommandParser</code> resides inside <code>LogicManager</code>.</p>
-</div>
-<div class="paragraph">
-<p><code>DeleteTagCommandParser</code> only deals with <code>Parser</code>. It is created from <code>AddressBookParser</code>. The following diagram shows the flow for parser:</p>
+<p>The Deleting a person&#8217;s tag mechanism consists of <code>DeleteTagCommand</code> and <code>DeleteTagCommandParser</code> classes.
+The <code>DeleteTagCommandParser</code> resides inside <code>LogicManager</code>. <code>DeleteTagCommandParser</code> only deals with <code>Parser</code>. It is created from <code>AddressBookParser</code>. The following diagram shows the flow for parser:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -983,7 +1042,19 @@ Tags with the same tag name are of the same color.
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see from the diagram, <code>XYZCommand Parser</code> inherits from the <code>Parser</code> interface and is created by the AddressBook Parser as the <code>DeleteTagCommandParser</code>. Note that the tags are parsed under <code>parseTagsForDelete</code>, while the person index is parsed under <code>parse</code> before execution. The tags are identified by the prefix <code>t/</code> to be parsed for deletion, and it must be fully matched.</p>
+<p><code>XYZCommand Parser</code> inherits from the <code>Parser</code> interface and is created by the AddressBook Parser as the <code>DeleteTagCommandParser</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The tags are parsed under <code>parseTagsForDelete</code>, while the person index is parsed under <code>parse</code> before execution. The tags are identified by the prefix <code>t/</code> to be parsed for deletion, and it must be fully matched.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>The <code>DeleteTagCommand</code> resides inside <code>LogicManager</code>. It supports undoing and redoing of that modifies the state of Weaver. Such commands will inherit from <code>UndoableCommand</code>.</p>
@@ -997,7 +1068,13 @@ Tags with the same tag name are of the same color.
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteTagCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
+<p><code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteTagCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command.</p>
+</div>
+<div class="paragraph">
+<p>Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are implemented this way:</p>
@@ -1085,7 +1162,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.1. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">5.4.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>DeleteTagCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> Access the <code>Person</code> and overwrite a new <code>Person</code> to it.<br>
@@ -1118,7 +1195,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">3.5. Adding a photo to a contact in your personalised Weaver.</a></h3>
+<h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">5.5. Adding a photo to a contact in your personalised Weaver.</a></h3>
 <div class="paragraph">
 <p>The add Photo command adds a display picture to a particular contact.The command takes in two parameters, TargetIndex
 that is the index of the person I want to add a photo and the image name with the extension.<br>
@@ -1171,9 +1248,9 @@ A new <code>Person</code> is created with the updated <code>FileImage</code> and
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>            person.imageProperty().setValue( new FileImage(FilePath));
-            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            indicateAddressBookChanged();</pre>
+<pre>    person.imageProperty().setValue( new FileImage(FilePath));
+    updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    indicateAddressBookChanged();</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1203,7 +1280,7 @@ ImageIO.write(image, "jpg", fileToWrite);</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">3.5.1. Reasons for this type of implementation</a></h4>
+<h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">5.5.1. Reasons for this type of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1219,7 +1296,7 @@ ImageIO.write(image, "jpg", fileToWrite);</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">5.5.2. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How should the user choose the Image.<br>
 <strong>Alternative1 (current choice): </strong> Enter the name of the File present on
@@ -1244,7 +1321,68 @@ any directory.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="facebook-integration"><a class="link" href="#facebook-integration">5.6. FaceBook Integration</a></h3>
+<div class="paragraph">
+<p>The facebook command helps the user to view the profile page of a person on the contact list.<br>
+It requires the user to login to his/her account before they can view the profile page.The profile<br>
+page is shown up on the browser panel.</p>
+</div>
+<div class="paragraph">
+<p>FORMAT - <code>facebook [INDEX] [USERNAME]</code></p>
+</div>
+<div class="paragraph">
+<p>e.g. - <code>facebook 1 ronak.lakhotia</code></p>
+</div>
+<div class="sect3">
+<h4 id="working-flow"><a class="link" href="#working-flow">5.6.1. Working flow</a></h4>
+<div class="paragraph">
+<p>The <code>FaceBookCommand Parser</code> class parses the arguments and throws an exception if the index entered
+is invalid. A new event is then raised in the ModelManager class.
+The Brower Panel class then loads the page with the url of the profile page to be viewed on Facebook.<br></p>
+</div>
+<hr>
+<div class="literalblock">
+<div class="content">
+<pre>public void loadPersonFaceBookPage(ReadOnlyPerson person, String username) {</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre> String url =  FACEBOOK_PROFILE_PAGE + username;
+loadPage(url);
+    }
+---</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reasons-for-this-kind-of-implementation"><a class="link" href="#reasons-for-this-kind-of-implementation">5.6.2. Reasons for this kind of implementation</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>This helps the user to take a quick glance of the the profile image of the contacts on his/her list.<br></p>
+</li>
+<li>
+<p>It is better than opening a brower on the desktop.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">5.6.3. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How should the user view the profile page.<br>
+<strong>Alternative1 : </strong> View the profile page on a web browser<br>
+<strong>Pros:</strong> Helps user exercise other functionalities like messaging.<br>
+<strong>Cons:</strong> Does not make use of Weaver in any useful way.<br>
+<strong>Alternative2:</strong> View the profile page on the browser panel.<br>
+<strong>Pros:</strong> Makes it quicker and adds a fucntion to the personalised Weaver.<br>
+<strong>Cons:</strong> Limits the functionalities that can be used on facebook.<br></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">5.7. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1282,7 +1420,7 @@ any directory.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.7. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">5.8. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1290,7 +1428,7 @@ any directory.<br>
 </div>
 </div>
 <div class="sect1">
-<h2 id="documentation"><a class="link" href="#documentation">4. Documentation</a></h2>
+<h2 id="documentation"><a class="link" href="#documentation">6. Documentation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We use asciidoc for writing documentation.</p>
@@ -1308,20 +1446,20 @@ We chose asciidoc over Markdown because asciidoc, although a bit more complex th
 </table>
 </div>
 <div class="sect2">
-<h3 id="editing-documentation"><a class="link" href="#editing-documentation">4.1. Editing Documentation</a></h3>
+<h3 id="editing-documentation"><a class="link" href="#editing-documentation">6.1. Editing documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview the end result of your edits.
 Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">4.2. Publishing Documentation</a></h3>
+<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">6.2. Publishing documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></h3>
+<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">6.3. Converting documentation to PDF format</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
 </div>
@@ -1356,10 +1494,10 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 </div>
 </div>
 <div class="sect1">
-<h2 id="testing"><a class="link" href="#testing">5. Testing</a></h2>
+<h2 id="testing"><a class="link" href="#testing">7. Testing</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="running-tests"><a class="link" href="#running-tests">5.1. Running Tests</a></h3>
+<h3 id="running-tests"><a class="link" href="#running-tests">7.1. Running Tests</a></h3>
 <div class="paragraph">
 <p>There are three ways to run tests.</p>
 </div>
@@ -1421,7 +1559,7 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 </div>
 </div>
 <div class="sect2">
-<h3 id="types-of-tests"><a class="link" href="#types-of-tests">5.2. Types of tests</a></h3>
+<h3 id="types-of-tests"><a class="link" href="#types-of-tests">7.2. Types of tests</a></h3>
 <div class="paragraph">
 <p>We have two types of tests:</p>
 </div>
@@ -1463,7 +1601,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></h3>
+<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">7.3. Troubleshooting testing</a></h3>
 <div class="paragraph">
 <p><strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
 </div>
@@ -1481,22 +1619,22 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="dev-ops"><a class="link" href="#dev-ops">6. Dev Ops</a></h2>
+<h2 id="dev-ops"><a class="link" href="#dev-ops">8. Dev Ops</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="build-automation"><a class="link" href="#build-automation">6.1. Build Automation</a></h3>
+<h3 id="build-automation"><a class="link" href="#build-automation">8.1. Build Automation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="continuous-integration"><a class="link" href="#continuous-integration">6.2. Continuous Integration</a></h3>
+<h3 id="continuous-integration"><a class="link" href="#continuous-integration">8.2. Continuous integration</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform <em>Continuous Integration</em> on our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="making-a-release"><a class="link" href="#making-a-release">6.3. Making a Release</a></h3>
+<h3 id="making-a-release"><a class="link" href="#making-a-release">8.3. Making a release</a></h3>
 <div class="paragraph">
 <p>Here are the steps to create a new release.</p>
 </div>
@@ -1518,7 +1656,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.4. Managing Dependencies</a></h3>
+<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">8.4. Managing dependencies</a></h3>
 <div class="paragraph">
 <p>A project often depends on third-party libraries. For example, Address Book depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
@@ -1528,7 +1666,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect1">
-<h2 id="suggested-programming-tasks-to-get-started"><a class="link" href="#suggested-programming-tasks-to-get-started">Appendix A: Suggested Programming Tasks to Get Started</a></h2>
+<h2 id="suggested-programming-tasks-to-get-started"><a class="link" href="#suggested-programming-tasks-to-get-started">Appendix A: Suggested programming tasks to get started</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Suggested path for new programmers:</p>
@@ -1915,7 +2053,7 @@ Removes the remark for the first person.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="step-by-step-instructions"><a class="link" href="#step-by-step-instructions">A.2.2. Step-by-step Instructions</a></h4>
+<h4 id="step-by-step-instructions"><a class="link" href="#step-by-step-instructions">A.2.2. Step-by-step instructions</a></h4>
 <div class="sect4">
 <h5 id="step-1-logic-teach-the-app-to-accept-remark-which-does-nothing"><a class="link" href="#step-1-logic-teach-the-app-to-accept-remark-which-does-nothing">[Step 1] Logic: Teach the app to accept 'remark' which does nothing</a></h5>
 <div class="paragraph">
@@ -2153,7 +2291,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="full-solution"><a class="link" href="#full-solution">A.2.3. Full Solution</a></h4>
+<h4 id="full-solution"><a class="link" href="#full-solution">A.2.3. Full solution</a></h4>
 <div class="paragraph">
 <p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/599">PR</a> for the step-by-step solution.</p>
 </div>
@@ -2162,7 +2300,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="user-stories"><a class="link" href="#user-stories">Appendix B: User Stories</a></h2>
+<h2 id="user-stories"><a class="link" href="#user-stories">Appendix B: User stories</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
@@ -2422,11 +2560,86 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
+<h3 id="use-case-login-logout" class="discrete">Use case: Login / Logout</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User key in username and password.</p>
+</li>
+<li>
+<p>User clicks <code>Login</code> or press <code>Enter</code></p>
+</li>
+<li>
+<p>Addressbook responses.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. Username and password are correct.</p>
+<div class="paragraph">
+<p>User manages to login and continue with the MainWindow.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="paragraph">
+<p>User resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="use-case-social-integration"><a class="link" href="#use-case-social-integration">C.1. Use case: Social integration</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User clicks on the button, 'Social Media'.</p>
+</li>
+<li>
+<p>AddressBook sends an intent to FaceBook where the homepage of the person&#8217;s account is displayed.</p>
+</li>
+<li>
+<p>User gets all the required information</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>EXTENSIONS</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The person does not have a FaceBook account.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
 <h3 id="use-case-delete-person" class="discrete">Use case: Delete person</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
@@ -2476,67 +2689,6 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="use-case-email-intents"><a class="link" href="#use-case-email-intents">C.1. Use case: Email Intents</a></h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User clicks on email button.</p>
-</li>
-<li>
-<p>AddressBook opens up the Gmail webpage.</p>
-</li>
-<li>
-<p>The email address of the person to be contacted is already filled in.</p>
-</li>
-<li>
-<p>User types in the message and sends the email.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="use-case-social-integration"><a class="link" href="#use-case-social-integration">C.2. Use case: Social Integration</a></h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User clicks on the button, 'Social Media'.</p>
-</li>
-<li>
-<p>AddressBook sends an intent to FaceBook where the homepage of the person&#8217;s account is displayed.</p>
-</li>
-<li>
-<p>User gets all the required information</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>EXTENSIONS</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. The person does not have a FaceBook account.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-<div class="exampleblock">
-<div class="content">
 <h3 id="use-case-edit-person" class="discrete">Use case: Edit person</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
@@ -2862,7 +3014,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non functional requirements</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -2938,47 +3090,10 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Product Name</strong></p>
-</div>
-<div class="paragraph">
-<p>Author: &#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>Pros:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Cons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-22 14:01:39 +00:00
+Last updated 2017-10-25 16:30:46 +00:00
 </div>
 </div>
 </body>
