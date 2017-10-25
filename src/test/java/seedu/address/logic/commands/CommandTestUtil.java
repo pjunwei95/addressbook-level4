@@ -90,8 +90,6 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final Set<Tag> VALID_TAGLIST;
     public static final Set<Tag> INVALID_TAGLIST;
-    public static final TagColor VALID_TAG_COLOR_RED;
-    public static final TagColor VALID_TAG_COLOR_YELLOW;
 
 
     static {
@@ -123,9 +121,6 @@ public class CommandTestUtil {
         } catch (IllegalValueException e) {
             e.printStackTrace();
         }
-
-        VALID_TAG_COLOR_RED = new TagColor(VALID_TAG_COLOR_NAME_RED, true);
-        VALID_TAG_COLOR_YELLOW = new TagColor(VALID_TAG_COLOR_NAME_YELLOW, true);
 
     }
 

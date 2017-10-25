@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAGLIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_COLOR_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAGLIST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COLOR_NAME_RED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COLOR_RED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -16,6 +15,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.AddressBook;
@@ -30,32 +30,23 @@ public class ChangeTagColorCommandTest {
 
     @Test
     public void executeChangeTagColorOfATagListSuccess() throws Exception {
-        ChangeTagColorCommand changeTagColorCommand = prepareCommand(VALID_TAGLIST, VALID_TAG_COLOR_RED);
+        TagColor tagColor = new TagColor(VALID_TAG_COLOR_NAME_RED);
+        ChangeTagColorCommand changeTagColorCommand = prepareCommand(VALID_TAGLIST, VALID_TAG_COLOR_NAME_RED);
 
         String expectedMessage = String.format(ChangeTagColorCommand.MESSAGE_CHANGE_TAG_COLOR_SUCCESS,
                 VALID_TAGLIST, VALID_TAG_COLOR_NAME_RED);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updateTagColorPair(VALID_TAGLIST, VALID_TAG_COLOR_RED);
+        expectedModel.updateTagColorPair(VALID_TAGLIST, tagColor);
 
         assertCommandSuccess(changeTagColorCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void executeChangeTagColorOfAnInvalidTagListFailure() throws Exception {
-        ChangeTagColorCommand changeTagColorCommand = prepareCommand(INVALID_TAGLIST, VALID_TAG_COLOR_RED);
+        ChangeTagColorCommand changeTagColorCommand = prepareCommand(INVALID_TAGLIST, VALID_TAG_COLOR_NAME_RED);
 
         String expectedMessage = String.format(ChangeTagColorCommand.MESSAGE_NOT_EXISTING_TAGS, INVALID_TAGLIST);
-
-        assertCommandFailure(changeTagColorCommand, model, expectedMessage);
-    }
-
-    @Test
-    public void executeChangeInvalidTagColorOfAValidTagListFailure() throws Exception {
-        ChangeTagColorCommand changeTagColorCommand = prepareCommand(VALID_TAGLIST,
-                new TagColor(INVALID_TAG_COLOR_NAME, false));
-
-        String expectedMessage = String.format(ChangeTagColorCommand.MESSAGE_INVALID_COLOR, INVALID_TAG_COLOR_NAME);
 
         assertCommandFailure(changeTagColorCommand, model, expectedMessage);
     }
@@ -95,8 +86,13 @@ public class ChangeTagColorCommandTest {
     /**
      * Returns an {@code ChangeTagColorCommand} with parameters {@code tags} and {@code color}
      */
-    private ChangeTagColorCommand prepareCommand(Set<Tag> tags, TagColor tagColor) {
-        ChangeTagColorCommand changeTagColorCommand = new ChangeTagColorCommand(tags, tagColor);
+    private ChangeTagColorCommand prepareCommand(Set<Tag> tags, String tagColor) {
+        ChangeTagColorCommand changeTagColorCommand = null;
+        try {
+            changeTagColorCommand = new ChangeTagColorCommand(tags, new TagColor(tagColor));
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
         changeTagColorCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return changeTagColorCommand;
     }

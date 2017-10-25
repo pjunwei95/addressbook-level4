@@ -37,19 +37,6 @@ public class TagColor {
     }
 
     /**
-     * Assume the given color name is valid.
-     * Only for testing purpose.
-     *
-     * @param name
-     * @param isValidColorName
-     */
-    public TagColor(String name, boolean isValidColorName) {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        this.tagColorName = trimmedName;
-    }
-
-    /**
      * Returns true if a given string is a valid tagColor name.
      */
     public static boolean isValidTagColorName(String test) {
