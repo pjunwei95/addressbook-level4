@@ -3,15 +3,7 @@ package seedu.address.testutil;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.DateOfBirth;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.FileImage;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -28,6 +20,7 @@ public class PersonBuilder {
     public static final String DEFAULT_DATE_OF_BIRTH = "13.10.1997";
     public static final String DEFAULT_REMARK = "CS2101/SEC/1";
     public static final String DEFAULT_TAGS = "friends";
+    public static final String DEFAULT_USERNAME = "";
 
     private Person person;
 
@@ -41,9 +34,10 @@ public class PersonBuilder {
             Remark defaultRemark = new Remark(DEFAULT_REMARK);
             Set<Tag> defaultTags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
             FileImage defaultImage = new FileImage(DEFAULT_IMAGE);
+            FacebookUsername defaultusername = new FacebookUsername(DEFAULT_USERNAME);
 
             this.person = new Person(defaultName, defaultPhone, defaultEmail,
-                    defaultAddress, defaultDateOfBirth, defaultRemark, defaultImage, defaultTags);
+                    defaultAddress, defaultDateOfBirth, defaultRemark, defaultImage, defaultusername, defaultTags);
         } catch (IllegalValueException ive) {
             throw new AssertionError("Default person's values are invalid.");
         }
@@ -146,6 +140,17 @@ public class PersonBuilder {
     public PersonBuilder withRemark(String remark) {
         try {
             this.person.setRemark(new Remark(remark));
+        } catch (IllegalValueException e) {
+            System.out.println();
+        }
+        return this;
+    }
+    /**
+     * Sets the {@code FacebookUsername} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withUsername(String username) {
+        try {
+            this.person.setUsername(new FacebookUsername(username));
         } catch (IllegalValueException e) {
             System.out.println();
         }

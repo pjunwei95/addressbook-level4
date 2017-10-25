@@ -63,7 +63,7 @@ public class PhotoCommand extends UndoableCommand {
             Person editedPerson = new Person(personToAddPhoto.getName(), personToAddPhoto.getPhone(),
                     personToAddPhoto.getEmail(),
                     personToAddPhoto.getAddress(), personToAddPhoto.getDateOfBirth(), personToAddPhoto.getRemark(),
-                    new FileImage(filePath), personToAddPhoto.getTags());
+                    new FileImage(filePath), personToAddPhoto.getUsername(), personToAddPhoto.getTags());
 
             model.addPhotoPerson(personToAddPhoto, filePath, targetIndex);
             model.updatePerson(personToAddPhoto, editedPerson);
@@ -75,7 +75,7 @@ public class PhotoCommand extends UndoableCommand {
             editedPerson = new Person(personToAddPhoto.getName(),
                     personToAddPhoto.getPhone(), personToAddPhoto.getEmail(),
                     personToAddPhoto.getAddress(), personToAddPhoto.getDateOfBirth(), personToAddPhoto.getRemark(),
-                    new FileImage(filePath), personToAddPhoto.getTags());
+                    new FileImage(filePath), personToAddPhoto.getUsername(), personToAddPhoto.getTags());
             model.updatePerson(personToAddPhoto, editedPerson);
 
         } catch (PersonNotFoundException pnfe) {

@@ -15,6 +15,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.logic.commands.FaceBookCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ReadOnlyPerson;
 
 
@@ -24,13 +27,9 @@ import seedu.address.model.person.ReadOnlyPerson;
  */
 public class BrowserPanel extends UiPart<Region> {
 
-    //public static final String DEFAULT_PAGE = "default.html";
     public static final String DEFAULT_PAGE = "https://nusmods.com/timetable/2017-2018/sem1";
-    public static final String GOOGLE_SEARCH_URL_PREFIX = "https://www.google.com.sg/search?safe=off&q=";
-    public static final String GOOGLE_SEARCH_URL_SUFFIX = "&cad=h";
-    public static final String FACEBOOK_PROFILE_PAGE = "https://www.facebook.com/";
+    public static final String FACEBOOK_PROFILE_PAGE = "https://m.facebook.com/";
     public static final String NUSMODS_SEARCH_URL_PREFIX = "https://nusmods.com/timetable/2017-2018/sem1?";
-    public static final String FACEBOOK_MESSENGER_URL_PREFIX = "https://www.facebook.com/messages/t/";
     public static final String GOOGLE_MAP_SEARCH_URL_PREFIX = "https://www.google.com.sg/maps/search/";
 
     private static final String FXML = "BrowserPanel.fxml";
@@ -51,6 +50,7 @@ public class BrowserPanel extends UiPart<Region> {
 
         registerAsAnEventHandler(this);
     }
+
     /**
      * The Browser Panel of the App.
      */
@@ -84,8 +84,8 @@ public class BrowserPanel extends UiPart<Region> {
     private String parse(String moduleLists) {
         String[] mods = moduleLists.split(",");
         String result = "";
-        for ( String m : mods ) {
-            String [] helper = m.split("/");
+        for (String m : mods) {
+            String[] helper = m.split("/");
             String mod = helper[0];
             String kind = helper[1];
             String num = helper[2];
@@ -116,18 +116,26 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Shows Facebook profile picture of user
      */
-    public void loadPersonFaceBookPage(ReadOnlyPerson person, String username) {
+    public void loadPersonFaceBookPage(ReadOnlyPerson person) throws ParseException {
 
-        String url = FACEBOOK_PROFILE_PAGE + username;
-        loadPage(url);
+        String MESSAGE_NO_USERNAME = person.getName().toString() + " has no username!";
+
+        if (!person.getUsername().toString().equalsIgnoreCase("")) {
+            String url = FACEBOOK_PROFILE_PAGE + person.getUsername().toString();
+            System.out.println(url);
+            loadPage(url);
+        } else {
+            throw new ParseException(String.format(MESSAGE_NO_USERNAME, FaceBookCommand.MESSAGE_USAGE));
+        }
+
     }
 
     @Subscribe
-    public void handleFaceBookEvent(FaceBookEvent event) {
+    public void handleFaceBookEvent(FaceBookEvent event) throws ParseException {
 
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
 
-        loadPersonFaceBookPage(event.getPerson(), event.getUsername());
+        loadPersonFaceBookPage(event.getPerson());
     }
 
 }

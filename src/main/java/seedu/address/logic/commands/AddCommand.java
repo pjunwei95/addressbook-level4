@@ -43,7 +43,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_DOB + "13.10.1997 "
             + PREFIX_REMARK + "remark "
             + PREFIX_IMAGE + " "
-            + PREFIX_USERNAME + "john.doe"
+            + PREFIX_USERNAME + "john.doe "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

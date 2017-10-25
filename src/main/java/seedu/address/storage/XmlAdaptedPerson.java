@@ -8,15 +8,7 @@ import java.util.Set;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.DateOfBirth;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.FileImage;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +28,8 @@ public class XmlAdaptedPerson {
     private String date;
     @XmlElement(required = true)
     private String remark;
+    @XmlElement (required = false)
+    private String username;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -62,7 +56,9 @@ public class XmlAdaptedPerson {
         date = source.getDateOfBirth().date;
         remark = source.getRemark().getModuleLists();
         image = source.getImage().filePath;
+        username = source.getUsername().username;
         tagged = new ArrayList<>();
+
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
         }
@@ -85,7 +81,8 @@ public class XmlAdaptedPerson {
         final DateOfBirth dateOfBirth = new DateOfBirth(this.date);
         final Remark remark = new Remark(this.remark);
         final FileImage image = new FileImage(this.image);
+        final FacebookUsername username = new FacebookUsername(this.username);
         final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, email, address, dateOfBirth, remark, image, tags);
+        return new Person(name, phone, email, address, dateOfBirth, remark, image, username, tags);
     }
 }

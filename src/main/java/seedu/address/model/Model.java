@@ -39,7 +39,7 @@ public interface Model {
             IOException;
 
     /** Searches for a person on facebook */
-    void faceBook(ReadOnlyPerson person, String username) throws PersonNotFoundException;
+    void faceBook(ReadOnlyPerson person) throws PersonNotFoundException;
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

@@ -6,7 +6,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Person's username on Facebook
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class FacebookUsername {
 
@@ -17,7 +16,7 @@ public class FacebookUsername {
      * The first character of the username must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
 
     public final String username;
 
@@ -29,17 +28,7 @@ public class FacebookUsername {
     public FacebookUsername(String username) throws IllegalValueException {
         requireNonNull(username);
         String trimmedName = username.trim();
-        if (!isValidName(trimmedName)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
-        }
         this.username = trimmedName;
-    }
-
-    /**
-     * Returns true if a given string is a valid person name.
-     */
-    public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
     }
 
 

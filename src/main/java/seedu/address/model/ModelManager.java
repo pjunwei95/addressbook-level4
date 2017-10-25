@@ -79,9 +79,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
     @Override
-    public synchronized void faceBook(ReadOnlyPerson person, String username) throws PersonNotFoundException {
+    public synchronized void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
 
-        raise(new FaceBookEvent(person, username));
+        raise(new FaceBookEvent(person));
     }
 
 
