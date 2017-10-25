@@ -11,13 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.font.FontSize;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.DateOfBirth;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.FileImage;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
@@ -82,6 +76,17 @@ public class ParserUtil {
     public static Optional<DateOfBirth> parseDateOfBirth(Optional<String> date) throws IllegalValueException {
         requireNonNull(date);
         return date.isPresent() ? Optional.of(new DateOfBirth(date.get())) : Optional.empty();
+    }
+
+
+    /**
+     * Parses a {@code Optional<String> date} into an {@code Optional<FacebookUsername>} if {@code dateOfBirth}
+     * is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<FacebookUsername> parseUsername(Optional<String> username) throws IllegalValueException {
+        requireNonNull(username);
+        return username.isPresent() ? Optional.of(new FacebookUsername(username.get())) : Optional.empty();
     }
 
     /**

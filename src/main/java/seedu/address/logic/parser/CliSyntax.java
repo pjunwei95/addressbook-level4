@@ -16,4 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_IMAGE = new Prefix("f/");
     public static final Prefix PREFIX_FONT_SIZE = new Prefix("");
+    public static final Prefix PREFIX_USERNAME = new Prefix("u/");
 }
