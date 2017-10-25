@@ -30,7 +30,7 @@ public class BrowserPanelTest extends GuiUnitTest {
     public void setUp() {
         selectionChangedEventStub = new PersonPanelSelectionChangedEvent(new PersonCard(ALICE, 0));
 
-        selectionChanged = new FaceBookEvent(ALICE, "ronak.lakhotia");
+        selectionChanged = new FaceBookEvent(ALICE);
 
         guiRobot.interact(() -> browserPanel = new BrowserPanel());
         uiPartRule.setUiPart(browserPanel);
@@ -67,8 +67,6 @@ public class BrowserPanelTest extends GuiUnitTest {
         URL expectedFaceBookPersonUrl = new URL(FACEBOOK_PROFILE_PAGE + "ronak.lakhotia");
         //postNow(selectionChangedEventStub);
         postNow(selectionChanged);
-
-        System.out.println(browserPanelHandle.getLoadedUrl() + " " + expectedFaceBookPersonUrl);
 
         assertEquals(expectedFaceBookPersonUrl, browserPanelHandle.getLoadedUrl());
 

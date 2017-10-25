@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -10,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -20,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FacebookUsername;
 import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -41,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DOB,
-                         PREFIX_REMARK, PREFIX_IMAGE, PREFIX_TAG);
+                         PREFIX_REMARK, PREFIX_IMAGE, PREFIX_USERNAME, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -59,6 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             Remark remark;
             DateOfBirth date;
+            FacebookUsername username;
             if (ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).isPresent()) {
                 date = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).get();
             } else {
@@ -69,9 +71,15 @@ public class AddCommandParser implements Parser<AddCommand> {
             } else {
                 remark = new Remark("");
             }
+            if (ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME)).isPresent()) {
+                username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME)).get();
+            } else {
+                username = new FacebookUsername("");
+            }
 
 
-            ReadOnlyPerson person = new Person(name, phone, email, address, date, remark, image, tagList);
+
+            ReadOnlyPerson person = new Person(name, phone, email, address, date, remark, image, username, tagList);
 
             return new AddCommand(person);
         } catch (IllegalValueException ive) {

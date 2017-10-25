@@ -21,15 +21,15 @@ public class FaceBookCommandParser implements Parser<FaceBookCommand> {
             String trimmedArgs = args.trim();
             String[] Keywords = trimmedArgs.split("\\s+");
 
-            if (trimmedArgs.isEmpty() || Keywords.length != 2) {
+            if (trimmedArgs.isEmpty() || Keywords.length != 1) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE));
             }
 
-            Index index = ParserUtil.parseIndex(Keywords[0]);
-            String username = Keywords[1];
 
-            return new FaceBookCommand(index, username);
+            Index index = ParserUtil.parseIndex(Keywords[0]);
+
+            return new FaceBookCommand(index);
 
         } catch (IllegalValueException ive) {
             throw new ParseException(

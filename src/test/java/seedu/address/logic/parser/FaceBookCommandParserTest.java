@@ -23,8 +23,7 @@ public class FaceBookCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
 
-        String username = "ronak.lakhotia";
-        assertParseSuccess(parser, "1 ronak.lakhotia", new FaceBookCommand(INDEX_FIRST_PERSON, username));
+        assertParseSuccess(parser, "1", new FaceBookCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
