@@ -28,9 +28,9 @@ public class PhotoCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
 
-        String FilePath = "src/main/resources/images/" + "clock" + ".jpg";
+        String FilePath = "src/main/resources/images/" + "clock" + ".png";
 
-        assertParseSuccess(parser, "1 /Users/ronaklakhotia/Desktop/Ronak.jpeg",
+        assertParseSuccess(parser, "1 src/main/resources/images/clock.png",
                 new PhotoCommand(INDEX_FIRST_PERSON, FilePath));
     }
 

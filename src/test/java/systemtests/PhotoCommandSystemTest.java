@@ -68,9 +68,9 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
 
         Model expectedModel = getModel();
         String command = "     " + PhotoCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased()
-                + "       " + "src/main/resources/images/" + uniquePath + ".jpg" + "   ";
+                + "       " + "src/main/resources/images/" + "clock" + ".png" + "   ";
 
-        String FilePath = "src/main/resources/images/" + uniquePath + ".jpg";
+        String FilePath = "src/main/resources/images/" + "clock" + ".png";
 
         ReadOnlyPerson photoPerson = getTargetPerson(expectedModel, INDEX_FIRST_PERSON, FilePath);
         String expectedResultMessage = String.format(MESSAGE_PHOTO_PERSON_SUCCESS, photoPerson);
@@ -84,7 +84,7 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, MESSAGE_INVALID_PHOTO_COMMAND_FORMAT);
 
         /* Case: invalid index (-1) -> rejected */
-        command = PhotoCommand.COMMAND_WORD + " -1" + FilePath;
+        command = PhotoCommand.COMMAND_WORD + " -1 " + FilePath;
         assertCommandFailure(command, MESSAGE_INVALID_PHOTO_COMMAND_FORMAT);
 
         /* Case: invalid index (size + 1) -> rejected */
@@ -162,8 +162,6 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Index expectedSelectedCardIndex) {
         executeCommand(command);
-        System.out.println(expectedResultMessage);
-        System.out.println(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
 
         if (expectedSelectedCardIndex != null) {
