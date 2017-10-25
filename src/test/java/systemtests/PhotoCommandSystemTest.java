@@ -62,9 +62,8 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
             ImageIO.write(image, "jpg", fileToWrite);
 
 
-        } catch (IOException e) {
-            throw  new ImageException(String.format(MESSAGE_INVALID_IMAGE,
-                    PhotoCommand.MESSAGE_FILE_PATH_NOT_FOUND));
+        } catch (IOException io) {
+            new AssertionError("Invalid input");
         }
 
 
