@@ -114,9 +114,9 @@ public class PersonCard extends UiPart<Region> {
 
             if (filePath.endsWith("g")) {
 
-                String home = System.getProperty("user.home");
-                java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", filePath);
-                url = path + "";
+                //String home = System.getProperty("user.home");
+                //java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", filePath);
+                url = filePath + "";
                 File file = new File(url);
 
                 Image display = new Image(file.toURI().toString());

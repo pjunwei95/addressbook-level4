@@ -67,16 +67,16 @@ public class PhotoCommand extends UndoableCommand {
 
             model.addPhotoPerson(personToAddPhoto, filePath, targetIndex);
             model.updatePerson(personToAddPhoto, editedPerson);
-            ImageStorage imageStorage = new ImageStorage();
+            //ImageStorage imageStorage = new ImageStorage();
 
-            filePath = (imageStorage.execute(filePath,
-                    personToAddPhoto.getEmail().hashCode()));
+            //filePath = (imageStorage.execute(filePath,
+            //        personToAddPhoto.getEmail().hashCode()));
 
-            editedPerson = new Person(personToAddPhoto.getName(),
-                    personToAddPhoto.getPhone(), personToAddPhoto.getEmail(),
-                    personToAddPhoto.getAddress(), personToAddPhoto.getDateOfBirth(), personToAddPhoto.getRemark(),
-                    new FileImage(filePath), personToAddPhoto.getUsername(), personToAddPhoto.getTags());
-            model.updatePerson(personToAddPhoto, editedPerson);
+            //editedPerson = new Person(personToAddPhoto.getName(),
+              //      personToAddPhoto.getPhone(), personToAddPhoto.getEmail(),
+                //    personToAddPhoto.getAddress(), personToAddPhoto.getDateOfBirth(), personToAddPhoto.getRemark(),
+                  //  new FileImage(filePath), personToAddPhoto.getUsername(), personToAddPhoto.getTags());
+           // model.updatePerson(personToAddPhoto, editedPerson);
 
         } catch (PersonNotFoundException pnfe) {
             assert false : "The target person cannot be missing";

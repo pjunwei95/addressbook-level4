@@ -31,11 +31,11 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
         }
-        String home = System.getProperty("user.home");
+       // String home = System.getProperty("user.home");
         String inputFile = keywords[1];
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop");
-        String url = path + "";
-        System.out.println(path + " " + inputFile);
+        //java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop");
+        String url = inputFile + "";
+
         File workingDirectory = new File(url);
         File testFile = new File(workingDirectory, inputFile);
         if (!testFile.exists() && !inputFile.equalsIgnoreCase("delete")) {
