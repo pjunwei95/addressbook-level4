@@ -20,7 +20,7 @@ public class FaceBookCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_FACEBOOK_SHOWN_SUCCESS = "Profile of Person: %1$s";
-    public static final String MESSAGE_NO_USERNAME = "This Person has no Facebook username\n";
+    public static final String MESSAGE_NO_USERNAME = "This Person has no Facebook username!\n";
 
     public final Index index;
 
@@ -40,14 +40,16 @@ public class FaceBookCommand extends UndoableCommand {
 
         ReadOnlyPerson personToShow = lastShownList.get(index.getZeroBased());
 
+        if (personToShow.getUsername().toString().equalsIgnoreCase("")) {
+            throw new CommandException(String.format(MESSAGE_NO_USERNAME, personToShow));
+        }
+
         try {
             model.faceBook(personToShow);
         } catch (PersonNotFoundException pnfe) {
             assert false : "The target person cannot be missing";
         }
-        if (personToShow.getUsername().toString().equalsIgnoreCase("")) {
-            throw new CommandException(String.format(MESSAGE_NO_USERNAME, personToShow));
-        }
+
         return new CommandResult(String.format(MESSAGE_FACEBOOK_SHOWN_SUCCESS, personToShow));
     }
 
