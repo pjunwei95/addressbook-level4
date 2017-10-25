@@ -21,6 +21,8 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.events.ui.ChangeTagColorEvent;
 import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
+import seedu.address.logic.commands.PhotoCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -78,6 +80,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private ImageView imageRemark;
 
+    public static final String MESSAGE_IMAGE_REMOVED = "The image may have been removed from the previous location!";
+
 
     public PersonCard(ReadOnlyPerson person, int displayedIndex) {
         super(FXML);
@@ -101,7 +105,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Adds a photo to a persons contact
      */
-    public void assignImage(String filePath) {
+    public void assignImage(String filePath) throws ParseException{
 
         String url;
 
@@ -114,13 +118,25 @@ public class PersonCard extends UiPart<Region> {
 
             if (filePath.endsWith("g")) {
 
-                //String home = System.getProperty("user.home");
-                //java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", filePath);
                 url = filePath + "";
-                File file = new File(url);
 
-                Image display = new Image(file.toURI().toString());
-                image.setImage(display);
+                File file = new File(url);
+                boolean check = file.exists();
+
+                if(!check) {
+
+                    url = "/images/address_book_32.png";
+                    Image Display = new Image(url);
+                    image.setImage(Display);
+
+                    throw new ParseException(
+                            String.format(MESSAGE_IMAGE_REMOVED, PhotoCommand.MESSAGE_USAGE)
+                    );
+                }
+                else {
+                    Image display = new Image(file.toURI().toString());
+                    image.setImage(display);
+                }
             } else {
 
                 url = "src/main/resources/images/" + person.getImage().getFilePath() + ".jpg";
@@ -151,7 +167,13 @@ public class PersonCard extends UiPart<Region> {
             initTags(person, FontSize.getCurrentFontSizeLabel());
 
         });
-        assignImage(person.getImage().getFilePath());
+        try {
+            assignImage(person.getImage().getFilePath());
+        }
+        catch (ParseException pe) {
+
+        }
+
     }
 
     @Subscribe

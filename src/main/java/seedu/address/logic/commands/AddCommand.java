@@ -41,7 +41,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_DOB + "13.10.1997 "
-            + PREFIX_REMARK + "remark "
+            + PREFIX_REMARK + "CS2103T/LEC/1 "
             + PREFIX_IMAGE + " "
             + PREFIX_USERNAME + "john.doe "
             + PREFIX_TAG + "friends "
