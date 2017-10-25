@@ -8,11 +8,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.model.person.ReadOnlyPerson;
-
 
 /**
  * A utility class for Person.
@@ -30,7 +30,7 @@ public class PersonUtil {
      * Returns an remark command string for adding the {@code person}.
      */
     public static String getRemarkCommand(ReadOnlyPerson person) {
-        return RemarkCommand.COMMAND_WORD + " " + "1 r/Likes to drink coffee.";
+        return RemarkCommand.COMMAND_WORD + " " + "1 r/CS2101/SEC/1";
     }
 
     /**
@@ -44,7 +44,8 @@ public class PersonUtil {
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_DOB + person.getDateOfBirth().date + " ");
         sb.append(PREFIX_IMAGE + person.getImage().filePath + " ");
-        sb.append(PREFIX_REMARK + person.getRemark().value + " ");
+        sb.append(PREFIX_USERNAME + person.getUsername().username + " ");
+        sb.append(PREFIX_REMARK + person.getRemark().getModuleLists() + " ");
 
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")

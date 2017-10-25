@@ -12,7 +12,39 @@ endif::[]
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `W13-B2`      Since: `Aug 2017`      Licence: `MIT`
+By: `W13-B2`      Since: `Aug 2017`      Licence: `MIT`
+
+*`Weaver`* is a command line based software for storing and managing contact information. It satisfies almost all functions might be needed by university students on storing and managing contact information.
+
+
+== Introduction
+
+=== Audiences
+
+All university students. +
+People who have the need for storing and managing contact information efficiently are suggested to use *`Weaver`*.
+
+=== Purposes
+
+. *`Weaver`* aims at providing efficient solution for university students to store and manage contact information.
+. It devotes to improve the experience when users try to add person , delete person , edit person , remark person ect.
+. Targeted at university students, *`Weaver`* is bringing shortcut for students to note meetings, calendars and course information.
+
+*`Weaver`* is a command line based software for storing and managing contact information. It satisfies almost all functions might be needed by university students on storing and managing contact information.
+
+
+== Introduction
+
+=== Audiences
+
+All university students. +
+People who have the need for storing and managing contact information efficiently are suggested to use *`Weaver`*.
+
+=== Purposes
+
+. *`Weaver`* aims at providing efficient solution for university students to store and manage contact information.
+. It devotes to improve the experience when users try to add person , delete person , edit person , remark person ect.
+. Targeted at university students, *`Weaver`* is bringing shortcut for students to note meetings, calendars and course information.
 
 == Setting up
 
@@ -95,9 +127,6 @@ _Figure 2.1.1 : Architecture Diagram_
 
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
-[TIP]
-The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
-
 `Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -153,7 +182,7 @@ _Figure 2.2.1 : Structure of the UI Component_
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `LoginPage` and a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow` and `LoginPage`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -303,7 +332,7 @@ The following activity diagram summarize what happens inside the `UndoRedoStack`
 
 image::UndoRedoActivityDiagram.png[width="200"]
 
-==== Design Considerations
+==== Design considerations
 
 **Aspect:** Implementation of `UndoableCommand` +
 **Alternative 1 (current choice):** Add a new abstract method `executeUndoableCommand()` +
@@ -347,9 +376,10 @@ image::UndoRedoActivityDiagram.png[width="200"]
 
 === Login / Logout mechanism
 
-The login / logout mechanism is a page which requires user to key in his username and password before he can use the addressbook. And Once he is logged in, there will be a automatically generated file named as "username + addressbook.xml" storing the information about his own addressbook.
+The `login / logout` mechanism is a page which requires user to key in his username and password before he can use the addressbook. And once he is logged in, there will be a automatically generated file named as `username + addressbook.xml` storing the information about his own addressbook.
 
-. It uses files whloginich stores the information of legal username and password pair to check whether the username and password key in by users are valid.
+[NOTE]
+It uses files which stores the information of legal username and password pair to check whether the username and password key in by users are valid.
 
 image::login.png[width="800"]
 
@@ -359,8 +389,7 @@ With the extra layer, the UiManager is calling login page before it calls the Ma
 
 loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
 loginPage.show();
-//mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
-//mainWindow.show(); //This should be called before creating other UI parts
+
 
 ----
 
@@ -402,11 +431,11 @@ private void handleLogoutEvent() {
 
 image::logout.png[width="200"]
 
-==== Design Considerations
+==== Design considerations
 
 **Aspect:** Implementation of `login / logout` feature +
 **Alternative 1 (current choice):** `login` is compulsory. User must login before he can use the addressbook  +
-**Pros:** Faster to implement. Not changing the structure of code. +
+**Pros:** Easier to implement. Not changing the structure of code. +
 **Cons:** Previous test cases need to be rewrote to get use to this new page. +
 **Alternative 2:** `login` is  optional. User can still use this addressbook without login. +
 **Pros:** Previous test cases can still be used. +
@@ -453,7 +482,7 @@ The sequence diagram below shows how the `ChangeTagColorCommand` works.
 
 image::ChangeTagColorSequenceDiagram.png[width="800"]
 
-==== Design Considerations
+==== Design considerations
 
 **Aspect:** How to associate each tag with a tag color? +
 **Alternative 1 (current choice):** Create a new class `TagColor` and add a new field to `Tag` class. +
@@ -478,14 +507,13 @@ image::ChangeTagColorSequenceDiagram.png[width="800"]
 === Deleting a person's tag mechanism
 
 The Deleting a person's tag mechanism consists of `DeleteTagCommand` and `DeleteTagCommandParser` classes.
-
-The `DeleteTagCommandParser` resides inside `LogicManager`.
-
-`DeleteTagCommandParser` only deals with `Parser`. It is created from `AddressBookParser`. The following diagram shows the flow for parser:
+The `DeleteTagCommandParser` resides inside `LogicManager`. `DeleteTagCommandParser` only deals with `Parser`. It is created from `AddressBookParser`. The following diagram shows the flow for parser:
 
 image::LogicClassDiagram.png[width="800"]
 
-As you can see from the diagram, `XYZCommand Parser` inherits from the `Parser` interface and is created by the AddressBook Parser as the `DeleteTagCommandParser`. Note that the tags are parsed under `parseTagsForDelete`, while the person index is parsed under `parse` before execution. The tags are identified by the prefix `t/` to be parsed for deletion, and it must be fully matched.
+`XYZCommand Parser` inherits from the `Parser` interface and is created by the AddressBook Parser as the `DeleteTagCommandParser`.
+[NOTE]
+The tags are parsed under `parseTagsForDelete`, while the person index is parsed under `parse` before execution. The tags are identified by the prefix `t/` to be parsed for deletion, and it must be fully matched.
 
 The `DeleteTagCommand` resides inside `LogicManager`. It supports undoing and redoing of that modifies the state of Weaver. Such commands will inherit from `UndoableCommand`.
 
@@ -493,7 +521,11 @@ The `DeleteTagCommand` resides inside `LogicManager`. It supports undoing and re
 
 image::LogicCommandClassDiagram.png[width="800"]
 
-As you can see from the diagram, `UndoableCommand` adds an extra layer between the abstract `Command` class and concrete commands that can be undone, such as the `DeleteTagCommand`. Note that extra tasks need to be done when executing a command in an _undoable_ way, such as saving the state of the address book before execution. `UndoableCommand` contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the https://www.tutorialspoint.com/design_pattern/template_pattern.htm[template pattern].
+`UndoableCommand` adds an extra layer between the abstract `Command` class and concrete commands that can be undone, such as the `DeleteTagCommand`.
+
+Note that extra tasks need to be done when executing a command in an _undoable_ way, such as saving the state of the address book before execution. `UndoableCommand` contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command.
+
+Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the https://www.tutorialspoint.com/design_pattern/template_pattern.htm[template pattern].
 
 Commands that are not undoable are implemented this way:
 [source,java]
@@ -547,7 +579,7 @@ Using the `Undo/Redo` stack, we will restore the address book to the state befor
 [NOTE]
 If the `undoStack` is empty, then there are no other commands left to be undone, and an `Exception` will be thrown when popping the `undoStack`.
 
-==== Design Considerations
+==== Design considerations
 
 **Aspect:** Implementation of `DeleteTagCommand` +
 **Alternative 1 (current choice):** Access the `Person` and overwrite a new `Person` to it. +
@@ -600,8 +632,6 @@ The photo command is done with the help of ImageView property in JAVAFX, hence i
 There is a pre-requisite for the command to work.The image that is going to be added to the contact must already be
 present on the user's desktop.If it is not so, Weaver is going to prompt the user to add a valid File name.
 
-
-
 The photo Command is inherited from the `UndoableCommand` class.
 
 *Working Flow* +
@@ -620,9 +650,9 @@ image::PhotoCommand.png[width="800"]
 The `ModelManager` class implements the `addPhotoToPerson` method that adds a valid file image as an attribute to the person.
 
 ----
-            person.imageProperty().setValue( new FileImage(FilePath));
-            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            indicateAddressBookChanged();
+    person.imageProperty().setValue( new FileImage(FilePath));
+    updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    indicateAddressBookChanged();
 ----
 
 `ImageStorage` class stores the image of each contact in the directory `/src/main/resources/images`.ImageIO class is used
@@ -653,7 +683,7 @@ image::PhotoSequenceDiagram.png[width="800"]
 
 * The image gets stored in the local directory , so the user wont have to keep track of his/her copy of the image. +
 
-==== Design Considerations
+==== Design considerations
 
 **Aspect:** How should the user choose the Image. +
 **Alternative1 (current choice): ** Enter the name of the File present on
@@ -676,6 +706,47 @@ any directory. +
 **Cons:** Two or more people may have the same id which is used to store the image. +
 
 // end::addPhoto[]
+
+=== FaceBook Integration
+
+The facebook command helps the user to view the profile page of a person on the contact list. +
+It requires the user to login to his/her account before they can view the profile page.The profile +
+page is shown up on the browser panel.
+
+FORMAT - `facebook [INDEX] [USERNAME]`
+
+e.g. - `facebook 1 ronak.lakhotia`
+
+==== Working flow
+
+The `FaceBookCommand Parser` class parses the arguments and throws an exception if the index entered
+is invalid. A new event is then raised in the ModelManager class.
+The Brower Panel class then loads the page with the url of the profile page to be viewed on Facebook. +
+
+---
+ public void loadPersonFaceBookPage(ReadOnlyPerson person, String username) {
+
+ String url =  FACEBOOK_PROFILE_PAGE + username;
+loadPage(url);
+    }
+---
+
+==== Reasons for this kind of implementation
+
+* This helps the user to take a quick glance of the the profile image of the contacts on his/her list. +
+
+* It is better than opening a brower on the desktop. +
+
+==== Design Considerations
+
+**Aspect:** How should the user view the profile page. +
+**Alternative1 : ** View the profile page on a web browser +
+**Pros:** Helps user exercise other functionalities like messaging. +
+**Cons:** Does not make use of Weaver in any useful way. +
+**Alternative2:** View the profile page on the browser panel. +
+**Pros:** Makes it quicker and adds a fucntion to the personalised Weaver. +
+**Cons:** Limits the functionalities that can be used on facebook. +
+
 
 // tag::Logging[]
 === Logging
@@ -704,16 +775,16 @@ We use asciidoc for writing documentation.
 [NOTE]
 We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
 
-=== Editing Documentation
+=== Editing documentation
 
 See <<UsingGradle#rendering-asciidoc-files, UsingGradle.adoc>> to learn how to render `.adoc` files locally to preview the end result of your edits.
 Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your `.adoc` files in real-time.
 
-=== Publishing Documentation
+=== Publishing documentation
 
 See <<UsingTravis#deploying-github-pages, UsingTravis.adoc>> to learn how to deploy GitHub Pages using Travis.
 
-=== Converting Documentation to PDF format
+=== Converting documentation to PDF format
 
 We use https://www.google.com/chrome/browser/desktop/[Google Chrome] for converting documentation to PDF format, as Chrome's PDF engine preserves hyperlinks used in webpages.
 
@@ -770,7 +841,8 @@ e.g. `seedu.address.storage.StorageManagerTest`
 e.g. `seedu.address.logic.LogicManagerTest`
 
 
-=== Troubleshooting Testing
+=== Troubleshooting testing
+
 **Problem: `HelpWindowTest` fails with a `NullPointerException`.**
 
 * Reason: One of its dependencies, `UserGuide.html` in `src/main/resources/docs` is missing.
@@ -782,11 +854,11 @@ e.g. `seedu.address.logic.LogicManagerTest`
 
 See <<UsingGradle#, UsingGradle.adoc>> to learn how to use Gradle for build automation.
 
-=== Continuous Integration
+=== Continuous integration
 
 We use https://travis-ci.org/[Travis CI] and https://www.appveyor.com/[AppVeyor] to perform _Continuous Integration_ on our projects. See <<UsingTravis#, UsingTravis.adoc>> and <<UsingAppVeyor#, UsingAppVeyor.adoc>> for more details.
 
-=== Making a Release
+=== Making a release
 
 Here are the steps to create a new release.
 
@@ -795,14 +867,14 @@ Here are the steps to create a new release.
 .  Tag the repo with the version number. e.g. `v0.1`
 .  https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
 
-=== Managing Dependencies
+=== Managing dependencies
 
 A project often depends on third-party libraries. For example, Address Book depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
 [appendix]
-== Suggested Programming Tasks to Get Started
+== Suggested programming tasks to get started
 
 Suggested path for new programmers:
 
@@ -943,7 +1015,7 @@ Edits the remark for the first person to `Likes to drink coffee.`
 * `remark 1 r/` +
 Removes the remark for the first person.
 
-==== Step-by-step Instructions
+==== Step-by-step instructions
 
 ===== [Step 1] Logic: Teach the app to accept 'remark' which does nothing
 Let's start by teaching the application how to parse a `remark` command. We will add the logic of `remark` later.
@@ -1042,12 +1114,12 @@ We now have everything set up... but we still can't modify the remarks. Let's fi
 
 . Update `RemarkCommandTest` to test that the `execute()` logic works.
 
-==== Full Solution
+==== Full solution
 
 See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
 
 [appendix]
-== User Stories
+== User stories
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
 
@@ -1136,9 +1208,49 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 
 [appendix]
-== Use Cases
+== Use cases
 
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+
+[discrete]
+=== Use case: Login / Logout
+
+*MSS*
+
+1.  User key in username and password.
+2.  User clicks `Login` or press `Enter`
+3.  Addressbook responses.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Username and password are correct.
++
+User manages to login and continue with the MainWindow.
+
+* 3a. The given index is invalid.
++
+User resumes at step 1.
+
+=== Use case: Social integration
+
+*MSS*
+
+1. User clicks on the button, 'Social Media'.
+2. AddressBook sends an intent to FaceBook where the homepage of the person's account is displayed.
+3. User gets all the required information
++
+Use case ends.
+
+*EXTENSIONS*
+
+[none]
+* 2a. The person does not have a FaceBook account.
++
+Use case ends.
+=======
 
 [discrete]
 === Use case: Delete person
@@ -1165,36 +1277,6 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
-
-
-=== Use case: Email Intents
-
-*MSS*
-
-1. User clicks on email button.
-2. AddressBook opens up the Gmail webpage.
-3. The email address of the person to be contacted is already filled in.
-4. User types in the message and sends the email.
-+
-Use case ends.
-
-=== Use case: Social Integration
-
-*MSS*
-
-1. User clicks on the button, 'Social Media'.
-2. AddressBook sends an intent to FaceBook where the homepage of the person's account is displayed.
-3. User gets all the required information
-+
-Use case ends.
-
-*EXTENSIONS*
-
-[none]
-* 2a. The person does not have a FaceBook account.
-+
-Use case ends.
-=======
 
 [discrete]
 === Use case: Edit person
@@ -1369,7 +1451,7 @@ Use case ends.
 =======
 
 [appendix]
-== Non Functional Requirements
+== Non functional requirements
 
 .  Should work on any link:#mainstream-os[mainstream OS] as long as it has Java `1.8.0_60` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -1410,18 +1492,3 @@ Environment Bit
 32/64 bits refer to the number of bits that compose a data element
 ....
 [appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...

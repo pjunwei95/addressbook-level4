@@ -16,6 +16,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.FileImage;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -34,6 +35,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
+
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -76,25 +79,31 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
     @Override
+    public synchronized void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
+
+        raise(new FaceBookEvent(person));
+    }
+
+
+    @Override
     public synchronized void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
 
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
 
-
     }
+
     @Override
-    public synchronized void addPhotoPerson(ReadOnlyPerson person, String FilePath, Index targetIndex)
+    public synchronized void addPhotoPerson(ReadOnlyPerson person, String filePath, Index targetIndex)
             throws PersonNotFoundException,
             FileNotFoundException, IOException {
 
         try {
-            person.imageProperty().setValue( new FileImage(FilePath));
+            person.imageProperty().setValue(new FileImage(filePath));
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
-        }
-        catch (IllegalValueException ive) {
+        } catch (IllegalValueException ive) {
             System.out.println("Error encountered");
         }
     }

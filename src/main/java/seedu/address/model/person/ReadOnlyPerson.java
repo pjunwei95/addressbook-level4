@@ -28,6 +28,8 @@ public interface ReadOnlyPerson {
     Set<Tag> getTags();
     ObjectProperty<FileImage> imageProperty();
     FileImage getImage();
+    ObjectProperty<FacebookUsername> usernameProperty();
+    FacebookUsername getUsername();
 
 
     /**
@@ -62,6 +64,8 @@ public interface ReadOnlyPerson {
                 .append(getRemark())
                 .append(" FilePath: ")
                 .append(getImage())
+                .append(" FacebookUsername ")
+                .append(getUsername())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

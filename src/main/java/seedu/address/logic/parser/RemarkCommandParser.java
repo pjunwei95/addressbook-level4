@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Remark;
@@ -24,11 +25,20 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         }
 
         String[] argus = trimmedArgs.split("r/");
+        String[] mods = argus[1].split(",");
 
-        Integer index = Integer.parseInt(argus[0].trim());
-        Remark remark = new Remark(argus[1].trim());
+        for (String m : mods) {
+            m = m.trim();
+        }
 
-        return new RemarkCommand(index, remark);
+        try {
+            Integer index = Integer.parseInt(argus[0].trim());
+            Remark remark = new Remark(argus[1].trim());
+            return new RemarkCommand(index, remark);
+        } catch (IllegalValueException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
+        }
     }
 
 }

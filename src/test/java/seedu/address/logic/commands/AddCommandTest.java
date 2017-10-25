@@ -149,6 +149,11 @@ public class AddCommandTest {
         public void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
             fail("This method should not be called.");
         }
+
+        @Override
+        public void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
+            fail("This method should not be called.");
+        }
     }
 
     /**
