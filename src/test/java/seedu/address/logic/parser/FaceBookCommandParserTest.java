@@ -8,6 +8,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.Test;
 
 import seedu.address.logic.commands.FaceBookCommand;
+import seedu.address.model.person.FacebookUsername;
+
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -21,7 +23,7 @@ public class FaceBookCommandParserTest {
     private FaceBookCommandParser parser = new FaceBookCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsFaceBookCommand() {
 
         assertParseSuccess(parser, "1", new FaceBookCommand(INDEX_FIRST_PERSON));
     }
@@ -30,5 +32,11 @@ public class FaceBookCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format
                 (MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FaceBookCommand.MESSAGE_USAGE));
     }
 }

@@ -7,10 +7,14 @@ import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.awt.image.BufferedImage;
+
+import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
 import org.junit.Test;
-import java.io.File;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PhotoCommand;
@@ -19,7 +23,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-import javax.imageio.ImageIO;
 
 
 public class PhotoCommandSystemTest extends AddressBookSystemTest {

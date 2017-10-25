@@ -47,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
+
+
     public final ReadOnlyPerson person;
 
     @FXML
@@ -80,7 +82,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private ImageView imageRemark;
 
-    public static final String MESSAGE_IMAGE_REMOVED = "The image may have been removed from the previous location!";
 
 
     public PersonCard(ReadOnlyPerson person, int displayedIndex) {
@@ -105,9 +106,11 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Adds a photo to a persons contact
      */
-    public void assignImage(String filePath) throws ParseException{
+    public void assignImage(String filePath) throws ParseException {
 
         String url;
+        String Message_Image_Removed = "The image may have been removed from"
+                + " the previous location!";
 
         if (filePath.equals("")) {
             url = "/images/address_book_32.png";
@@ -123,7 +126,7 @@ public class PersonCard extends UiPart<Region> {
                 File file = new File(url);
                 boolean FileExists = file.exists();
 
-                if(!FileExists) {
+                if (!FileExists) {
 
                     url = "/images/address_book_32.png";
                     Image Display = new Image(url);
@@ -131,7 +134,7 @@ public class PersonCard extends UiPart<Region> {
 
 
                     throw new ParseException(
-                            String.format(MESSAGE_IMAGE_REMOVED, PhotoCommand.MESSAGE_USAGE)
+                            String.format(Message_Image_Removed, PhotoCommand.MESSAGE_USAGE)
                     );
                 }
                 else {
@@ -168,11 +171,13 @@ public class PersonCard extends UiPart<Region> {
             initTags(person, FontSize.getCurrentFontSizeLabel());
 
         });
+
         try {
             assignImage(person.getImage().getFilePath());
         }
-        catch (ParseException pe) {
 
+        catch (ParseException pe) {
+            new AssertionError("Invalid input");
         }
 
     }

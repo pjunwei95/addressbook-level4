@@ -35,12 +35,7 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
         String inputFile = keywords[1];
         String url = inputFile + "";
 
-      //  File workingDirectory = new File(url);
-       // File testFile = new File(workingDirectory, inputFile);
-        //if (!testFile.exists() && !inputFile.equalsIgnoreCase("delete")) {
-         //   throw new ParseException(
-           //         String.format(MESSAGE_INVALID_IMAGE, PhotoCommand.MESSAGE_USAGE));
-       // }
+
         File file = new File(url);
         boolean FileExists = file.exists();
 
@@ -59,8 +54,10 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
             }
 
         }
-        else throw new ParseException(
-                String.format(MESSAGE_INVALID_IMAGE, PhotoCommand.MESSAGE_USAGE));
+        else {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_IMAGE, PhotoCommand.MESSAGE_USAGE));
+        }
 
     }
     /**
