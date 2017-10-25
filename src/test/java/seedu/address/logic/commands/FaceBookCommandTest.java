@@ -14,11 +14,13 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.FacebookUsername;
 import seedu.address.model.person.ReadOnlyPerson;
 
 /**
@@ -57,7 +59,6 @@ public class FaceBookCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showFirstPersonOnly(model);
 
-        String username = "ronak.lakhotia";
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
@@ -65,6 +66,15 @@ public class FaceBookCommandTest {
         FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex);
 
         assertCommandFailure(faceBookCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+    @Test
+    public void execute_no_usernameFacebookCommmand() throws IllegalValueException {
+
+        ReadOnlyPerson personToSearch = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        personToSearch.usernameProperty().setValue(new FacebookUsername(""));
+        FaceBookCommand faceBookCommand = prepareCommand(INDEX_FIRST_PERSON);
+
+        assertCommandFailure(faceBookCommand, model, Messages.MESSAGE_NO_USERNAME);
     }
 
     @Test

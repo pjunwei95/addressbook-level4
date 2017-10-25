@@ -26,10 +26,15 @@ public class PhotoCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
 
+    /**
+     *
+     * Out Of Bounds Exception Testing
+     */
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
+
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        String FilePath = "dummy.png";
+        String FilePath = "/Users/ronaklakhotia/Desktop/Ronak.jpeg";
         PhotoCommand photoCommand = prepareCommand(outOfBoundIndex, FilePath);
 
         assertCommandFailure(photoCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -46,14 +51,18 @@ public class PhotoCommandTest {
     }
     @Test
     public void equals() {
-        PhotoCommand photoCommand = new PhotoCommand(INDEX_FIRST_PERSON, "nus.jpg");
-        PhotoCommand photoSecondCommand = new PhotoCommand(INDEX_SECOND_PERSON, "nus.jpg");
+        PhotoCommand photoCommand = new PhotoCommand(INDEX_FIRST_PERSON,
+                "/Users/ronaklakhotia/Desktop/Ronak.jpeg");
+        PhotoCommand photoSecondCommand = new PhotoCommand(INDEX_SECOND_PERSON,
+                "/Users/ronaklakhotia/Desktop/Ronak.jpeg");
 
         // same object -> returns true
         assertTrue(photoCommand.equals(photoCommand));
 
         // same values -> returns true
-        PhotoCommand photoFirstCommandCopy = new PhotoCommand(INDEX_FIRST_PERSON, "nus.jpg");
+        PhotoCommand photoFirstCommandCopy = new PhotoCommand(INDEX_FIRST_PERSON,
+                "/Users/ronaklakhotia/Desktop/Ronak.jpeg");
+
         assertTrue(photoCommand.equals(photoFirstCommandCopy));
 
         // different types -> returns false

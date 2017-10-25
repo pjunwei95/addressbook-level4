@@ -31,25 +31,34 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
         }
-        String home = System.getProperty("user.home");
+
         String inputFile = keywords[1];
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop");
-        String url = path + "";
-        System.out.println(path + " " + inputFile);
-        File workingDirectory = new File(url);
-        File testFile = new File(workingDirectory, inputFile);
-        if (!testFile.exists() && !inputFile.equalsIgnoreCase("delete")) {
+        String url = inputFile + "";
+
+
+        File file = new File(url);
+        boolean FileExists = file.exists();
+
+        if (url.equalsIgnoreCase("delete")) {
+
+            FileExists = true;
+        }
+
+        if (FileExists) {
+            try {
+                Index index = ParserUtil.parseIndex(keywords[0]);
+                return new PhotoCommand(index, (keywords[1]));
+            } catch (IllegalValueException ive) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
+            }
+
+        }
+        else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_IMAGE, PhotoCommand.MESSAGE_USAGE));
         }
 
-        try {
-            Index index = ParserUtil.parseIndex(keywords[0]);
-            return new PhotoCommand(index, (keywords[1]));
-        } catch (IllegalValueException ive) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
-        }
     }
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
