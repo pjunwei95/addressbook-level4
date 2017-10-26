@@ -99,6 +99,10 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(PhotoCommand.COMMAND_WORD + " 1 abc "
+                + FilePath, MESSAGE_INVALID_IMAGE);
+
+        /* Case: No index entered -> rejected 8 */
+        assertCommandFailure(PhotoCommand.COMMAND_WORD + " "
                 + FilePath, MESSAGE_INVALID_PHOTO_COMMAND_FORMAT);
 
     }
