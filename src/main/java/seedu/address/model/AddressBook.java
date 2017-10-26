@@ -17,6 +17,11 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.DueDate;
+import seedu.address.model.reminder.Priority;
+import seedu.address.model.reminder.ReadOnlyReminder;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.ReminderDetails
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.UniqueTagList;
@@ -28,6 +33,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueReminderList reminders;
     private final UniqueTagList tags;
 
     /*
