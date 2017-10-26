@@ -19,8 +19,8 @@ public class Priority {
         requireNonNull(priority);
 
 
-            if (!isValidRemark(priority)) {
-                throw new IllegalValueException(PRIORITY_CONSTRAINTS);
+        if (!isValidRemark(priority)) {
+            throw new IllegalValueException(PRIORITY_CONSTRAINTS);
         }
         this.priority = priority;
     }
