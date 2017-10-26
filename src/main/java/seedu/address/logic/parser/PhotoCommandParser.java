@@ -30,12 +30,16 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
         String regex = "[\\s]+";
         String[] keywords = trimmedArgs.split(regex, 2);
 
+        if (keywords.length == 1) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE)
+            );
+        }
 
 
         String inputFile = keywords[1];
         String url = inputFile + "";
 
-        System.out.println(url);
         File file = new File(url);
         boolean FileExists = file.exists();
 
