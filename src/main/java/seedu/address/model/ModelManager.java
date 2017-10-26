@@ -22,6 +22,7 @@ import seedu.address.model.person.FileImage;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
@@ -35,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
+    private final FilteredList<ReadOnlyReminder> filteredReminders;
 
 
 
@@ -49,6 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredReminders = new FilteredList<>(this.addressBook.getReminderList());
     }
 
     public ModelManager() {
@@ -134,6 +137,10 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
     }
+    @Override
+    public ObservableList<ReadOnlyReminder> getFilteredReminderList() {
+        return FXCollections.unmodifiableObservableList(filteredReminders);
+    }
 
     @Override
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
@@ -156,6 +163,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredReminders.equals(other.filteredReminders);
     }
 }
