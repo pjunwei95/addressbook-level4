@@ -23,6 +23,8 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.reminder.ReadOnlyReminder;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
@@ -96,6 +98,21 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
     }
+    @Override
+    public synchronized void addReminder(ReadOnlyReminder target) throws DuplicateReminderException {
+
+        addressBook.addReminder(target);
+        updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
+        indicateAddressBookChanged();
+
+    }
+    @Override
+    public synchronized void deleteReminder(ReadOnlyReminder target) throws ReminderNotFoundException {
+
+        addressBook.removeReminder(target);
+        indicateAddressBookChanged();
+
+    }
 
     @Override
     public synchronized void addPhotoPerson(ReadOnlyPerson person, String filePath, Index targetIndex)
@@ -146,6 +163,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredReminderList(Predicate<ReadOnlyReminder> predicate) {
+        requireNonNull(predicate);
+        filteredReminders.setPredicate(predicate);
     }
 
     @Override

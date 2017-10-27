@@ -112,7 +112,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a reminder to the address book.
      * @throws DuplicateReminderException if an equivalent person already exists.
      */
-    public void addPerson(ReadOnlyReminder r) throws DuplicateReminderException {
+    public void addReminder(ReadOnlyReminder r) throws DuplicateReminderException {
         Reminder newReminder = new Reminder(r);
         reminders.add(newReminder);
     }

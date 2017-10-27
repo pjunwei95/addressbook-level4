@@ -19,7 +19,7 @@ public class Priority {
         requireNonNull(priority);
 
 
-        if (!isValidRemark(priority)) {
+        if (!isValidPriority(priority)) {
             throw new IllegalValueException(PRIORITY_CONSTRAINTS);
         }
         this.priority = priority;
@@ -28,7 +28,7 @@ public class Priority {
     /**
      * Returns true if a given string is a valid Priority.
      */
-    public static boolean isValidRemark(String priority) {
+    public static boolean isValidPriority(String priority) {
 
         if (!(priority.equalsIgnoreCase("High") || priority.equalsIgnoreCase("Medium")
                 || priority.equalsIgnoreCase("Low"))) {
@@ -41,7 +41,7 @@ public class Priority {
     /**
      * Get the priority Level of Reminder
      */
-    public String getModuleLists() {
+    public String getPriority() {
         return priority;
     }
 
