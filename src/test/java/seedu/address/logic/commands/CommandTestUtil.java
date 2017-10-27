@@ -25,7 +25,6 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColor;
 import seedu.address.testutil.DeleteTagDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -77,8 +76,8 @@ public class CommandTestUtil {
     public static final String INVALID_DATE_OF_BIRTH = " " + PREFIX_DOB; // empty string not allowed for dateOfBirth
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TAG = "notExistingTag";
-    public static final String INVALID_TAG_COLOR_NAME = "notExistingColor";
     public static final String INVALID_FONT_SIZE = "invalid font size";
+    public static final String INVALID_THEME_NAME = "invalid theme name";
 
 
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_AMY;

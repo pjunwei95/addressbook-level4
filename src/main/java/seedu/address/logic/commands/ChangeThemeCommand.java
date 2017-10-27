@@ -50,4 +50,11 @@ public class ChangeThemeCommand extends UndoableCommand{
         }
         return new CommandResult(String.format(MESSAGE_CHANGE_THEME_SUCCESS, theme));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ChangeThemeCommand // instanceof handles nulls
+                && this.theme.equals(((ChangeThemeCommand) other).theme)); // state check
+    }
 }
