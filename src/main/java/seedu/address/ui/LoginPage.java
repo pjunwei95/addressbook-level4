@@ -20,6 +20,7 @@ import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
+import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -28,7 +29,12 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AccountsStorage;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.XmlAddressBookStorage;
 
 /**
  * The login page. Users need to key in their username and password to login the MainWindow.
@@ -93,8 +99,12 @@ public class LoginPage extends UiPart<Region> {
         String uname = username.getText();
         String pword = password.getText();
         if (checkValid(uname, pword)) {
+            UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+            AddressBookStorage addressBookStorage = new XmlAddressBookStorage("./data/" + uname + "addressbook.xml");
+            storage = new StorageManager(addressBookStorage, userPrefsStorage);
             model = initModelManager(storage, prefs);
-            prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
+            logic = new LogicManager(model);
+
             mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
