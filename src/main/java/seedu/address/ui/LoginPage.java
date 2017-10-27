@@ -210,7 +210,7 @@ public class LoginPage extends UiPart<Region> {
      * Sets the command box style to user preferred font size.
      */
     private void setFontSize(String newFontSize) {
-        String fxFormatFontSize = FontSize.getassociatefxfontsizestring(newFontSize);
+        String fxFormatFontSize = FontSize.getAssociateFxFontSizeString(newFontSize);
         username.setStyle(fxFormatFontSize);
         password.setStyle(fxFormatFontSize);
     }

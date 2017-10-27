@@ -1,6 +1,14 @@
 package seedu.address.ui;
 
+import static seedu.address.model.font.FontSize.getAssociateFxFontSizeString;
+import static seedu.address.model.font.FontSize.getAssociateFxFontSizeStringForName;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Random;
+
 import com.google.common.eventbus.Subscribe;
+
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,12 +22,6 @@ import seedu.address.commons.events.ui.ChangeTagColorEvent;
 import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.Random;
-
-import static seedu.address.model.font.FontSize.getassociatefxfontsizestring;
 
 //import javax.swing.text.html.ImageView;
 
@@ -85,6 +87,7 @@ public class PersonCard extends UiPart<Region> {
         String currentFontSize = FontSize.getCurrentFontSizeLabel();
         setFontSize(currentFontSize);
         setSizeForAllImagesAccordingToFontSize(currentFontSize);
+        setSizeForPhotosAccordingToFontSize(currentFontSize);
         initTags(person, currentFontSize);
     }
 
@@ -164,7 +167,7 @@ public class PersonCard extends UiPart<Region> {
     private void initTags(ReadOnlyPerson person, String fontSizeLabel) {
         tags.getChildren().clear();
 
-        String fxFormatFontSize = FontSize.getassociatefxfontsizestring(fontSizeLabel);
+        String fxFormatFontSize = FontSize.getAssociateFxFontSizeString(fontSizeLabel);
 
         person.getTags().forEach(tag -> {
             Label tagLabel = new Label(tag.tagName);
@@ -193,22 +196,26 @@ public class PersonCard extends UiPart<Region> {
 
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
-        initTags(person, event.getFontSize());
-        setFontSize(event.getFontSize());
-        setSizeForAllImagesAccordingToFontSize(event.getFontSize());
+        String newFontSize = event.getFontSize();
+        initTags(person, newFontSize);
+        setFontSize(newFontSize);
+        setSizeForAllImagesAccordingToFontSize(newFontSize);
+        setSizeForPhotosAccordingToFontSize(newFontSize);
     }
 
     private void setFontSize(String newFontSize) {
         assert (FontSize.isValidFontSize(newFontSize));
 
-        String fxFormatFontSize = getassociatefxfontsizestring(newFontSize);
-        setFontSizeForAllAttributesExceptTag(fxFormatFontSize);
+        String fxFormatFontSize = getAssociateFxFontSizeString(newFontSize);
+        String fxFormatFontSizeForName = getAssociateFxFontSizeStringForName(newFontSize);
+
+        setFontSizeForAllAttributesExceptTag(fxFormatFontSizeForName, fxFormatFontSize);
     }
 
 
-    private void setFontSizeForAllAttributesExceptTag(String fontSize) {
-        name.setStyle(fontSize);
-        id.setStyle(fontSize);
+    private void setFontSizeForAllAttributesExceptTag(String nameFontSize, String fontSize) {
+        name.setStyle(nameFontSize);
+        id.setStyle(nameFontSize);
         phone.setStyle(fontSize);
         address.setStyle(fontSize);
         email.setStyle(fontSize);
@@ -228,6 +235,12 @@ public class PersonCard extends UiPart<Region> {
         imageBirth.setFitWidth(newImageSize);
         imageRemark.setFitHeight(newImageSize);
         imageRemark.setFitWidth(newImageSize);
+    }
+
+    private void setSizeForPhotosAccordingToFontSize(String fontSize) {
+        int newImageSize = FontSize.getAssociatePhotoSizeFromFontSize(fontSize);
+        image.setFitWidth(newImageSize);
+        image.setFitHeight(newImageSize);
     }
 
     @FXML

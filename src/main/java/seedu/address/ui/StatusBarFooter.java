@@ -114,7 +114,7 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     private void setFontSize(String fontSize) {
-        String fxFomatString = FontSize.getassociatefxfontsizestring(fontSize);
+        String fxFomatString = FontSize.getAssociateFxFontSizeString(fontSize);
         syncStatus.setStyle(fxFomatString);
         saveLocationStatus.setStyle(fxFomatString);
         totalPersons.setStyle(fxFomatString);

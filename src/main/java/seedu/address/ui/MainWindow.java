@@ -1,6 +1,10 @@
 package seedu.address.ui;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+
 import com.google.common.eventbus.Subscribe;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -25,9 +29,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.Storage;
-
-import java.io.IOException;
-import java.util.logging.Logger;
 
 /**
  * The Main Window. Provides the basic application layout containing

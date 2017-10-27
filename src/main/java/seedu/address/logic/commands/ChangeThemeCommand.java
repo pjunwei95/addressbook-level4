@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.ChangeThemeEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 public class ChangeThemeCommand extends UndoableCommand{
@@ -48,6 +50,9 @@ public class ChangeThemeCommand extends UndoableCommand{
         if (!isValidThemeName(theme)) {
             throw new CommandException(String.format(MESSAGE_INVALID_THEME_NAME, theme));
         }
+
+        EventsCenter.getInstance().post(new ChangeThemeEvent(theme));
+
         return new CommandResult(String.format(MESSAGE_CHANGE_THEME_SUCCESS, theme));
     }
 

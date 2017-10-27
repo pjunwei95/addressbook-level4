@@ -57,7 +57,7 @@ public class ResultDisplay extends UiPart<Region> {
     }
 
     private void setFontSize(String fontSize) {
-        String fxFomatString = FontSize.getassociatefxfontsizestring(fontSize);
+        String fxFomatString = FontSize.getAssociateFxFontSizeString(fontSize);
         resultDisplay.setStyle(fxFomatString);
     }
 
