@@ -56,6 +56,9 @@ public class AddressBookParser {
         case AddReminder.COMMAND_WORD:
             return new AddReminderParser().parse(arguments);
 
+        case RemoveReminderCommand.COMMAND_WORD:
+            return new RemoveCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 

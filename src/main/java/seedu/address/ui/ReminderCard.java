@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import static seedu.address.model.font.FontSize.getassociatefxfontsizestring;
 
+import java.io.File;
+
 import java.util.Random;
 
 import com.google.common.eventbus.Subscribe;
@@ -68,57 +70,6 @@ public class ReminderCard extends UiPart<Region> {
 
 
     /**
-     * Adds a photo to a persons contact
-     */
-  /*  public void assignImage(String filePath) throws ParseException {
-
-        String url;
-        String Message_Image_Removed = "The image may have been removed from"
-                + " the previous location!";
-
-        if (filePath.equals("")) {
-            url = "/images/address_book_32.png";
-            Image Display = new Image(url);
-            image.setImage(Display);
-        }
-        else {
-
-            if (filePath.endsWith("g")) {
-
-                url = filePath + "";
-
-                File file = new File(url);
-                boolean FileExists = file.exists();
-
-                if (!FileExists) {
-
-                    url = "/images/address_book_32.png";
-                    Image Display = new Image(url);
-                    image.setImage(Display);
-
-
-                    throw new ParseException(
-                            String.format(Message_Image_Removed, PhotoCommand.MESSAGE_USAGE)
-                    );
-                }
-                else {
-                    Image display = new Image(file.toURI().toString());
-                    image.setImage(display);
-                }
-            } else {
-
-                url = "src/main/resources/images/" + person.getImage().getFilePath() + ".jpg";
-                File stored = new File(url);
-                Image display = new Image(stored.toURI().toString(), 100, 100,
-                        false, false);
-
-                image.setImage(display);
-
-            }
-        }
-    }
-*/
-    /**
      * Binds the individual UI elements to observe their respective {@code Reminder} properties
      * so that they will be notified of any changes.
      */
@@ -126,9 +77,21 @@ public class ReminderCard extends UiPart<Region> {
         about.textProperty().bind(Bindings.convert(reminder.detailsProperty()));
         priority.textProperty().bind(Bindings.convert(reminder.priorityProperty()));
         date.textProperty().bind(Bindings.convert(reminder.dueDateProperty()));
-
+        String url = "";
+        if (reminder.getPriority().toString().equalsIgnoreCase("Priority Level: High")) {
+            url = "src/main/resources/images/high.png";
+        } else if (reminder.getPriority().toString().equalsIgnoreCase("Priority Level: Medium")) {
+            url = "src/main/resources/images/medium.png";
+        } else {
+            url = "src/main/resources/images/low.png";
+        }
+        File file = new File(url);
+        Image display = new Image(file.toURI().toString(), 100,
+                100, false, false);
+        image.setImage(display);
 
     }
+
 
 
     @Override

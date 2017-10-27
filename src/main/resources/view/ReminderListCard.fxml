@@ -34,7 +34,7 @@
                                 <Label fx:id="about" alignment="BOTTOM_LEFT" styleClass="cell_big_label" text="\$about" />
                             </children>
                             <padding>
-                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                <Insets bottom="0.0" left="3.0" right="5.0" top="5.0" />
                             </padding>
                         </HBox>
                     </children>
@@ -47,7 +47,7 @@
                         <Image url="/images/clock.png" />
                     </image>
                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="0.0" left="5.0" right="5.0" top="5.0" />
                     </HBox.margin>
                 </ImageView>
                 <padding>
@@ -58,22 +58,22 @@
             <HBox alignment="CENTER_LEFT" spacing="5">
                 <Label fx:id="priority" styleClass="cell_small_label" text="\$priority">
                     <padding>
-                        <Insets top="5.0" />
+                        <Insets top="1.0" left="10.0" />
                     </padding>
                 </Label>
                 <padding>
-                    <Insets top="5.0" />
+                    <Insets top="1.0" />
                 </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
 
                 <Label fx:id="date" styleClass="cell_small_label" text="\$date">
                     <padding>
-                        <Insets top="5.0" />
+                        <Insets top="5.0" left="4.0" />
                     </padding>
                 </Label>
                 <padding>
-                    <Insets top="5.0" />
+                    <Insets top="5.0" left="4.5" />
                 </padding>
             </HBox>
 
