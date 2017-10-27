@@ -1,10 +1,6 @@
 package seedu.address.ui;
 
-import java.io.IOException;
-import java.util.logging.Logger;
-
 import com.google.common.eventbus.Subscribe;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -29,6 +25,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.Storage;
+
+import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -267,25 +266,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleDecreaseFontSize() throws CommandException, ParseException {
         commandBox.handleCommandInputChanged(ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND);
-    }
-
-    /**
-    * Handles the key press event, {@code keyEvent}.
-    */
-    @FXML
-    private void handleKeyPress(KeyEvent keyEvent) throws CommandException, ParseException {
-        switch (keyEvent.getCode()) {
-            case PLUS:
-                keyEvent.consume();
-                handleIncreaseFontSize();
-                break;
-            case MINUS:
-                keyEvent.consume();
-                handleDecreaseFontSize();
-                break;
-            default:
-                // let JavaFx handle the keypress
-        }
     }
 
 }

@@ -1,14 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.model.font.FontSize.getassociatefxfontsizestring;
-
-import java.io.File;
-
-import java.util.HashMap;
-import java.util.Random;
-
 import com.google.common.eventbus.Subscribe;
-
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,12 +9,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.events.ui.ChangeTagColorEvent;
 import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Random;
+
+import static seedu.address.model.font.FontSize.getassociatefxfontsizestring;
 
 //import javax.swing.text.html.ImageView;
 
@@ -87,7 +84,7 @@ public class PersonCard extends UiPart<Region> {
         registerAsAnEventHandler(this);
         String currentFontSize = FontSize.getCurrentFontSizeLabel();
         setFontSize(currentFontSize);
-        setFontSizeForAllImages(currentFontSize);
+        setSizeForAllImagesAccordingToFontSize(currentFontSize);
         initTags(person, currentFontSize);
     }
 
@@ -198,7 +195,7 @@ public class PersonCard extends UiPart<Region> {
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
         initTags(person, event.getFontSize());
         setFontSize(event.getFontSize());
-        setFontSizeForAllImages(event.getFontSize());
+        setSizeForAllImagesAccordingToFontSize(event.getFontSize());
     }
 
     private void setFontSize(String newFontSize) {
@@ -219,7 +216,7 @@ public class PersonCard extends UiPart<Region> {
         remark.setStyle(fontSize);
     }
 
-    private void setFontSizeForAllImages(String fontSize) {
+    private void setSizeForAllImagesAccordingToFontSize(String fontSize) {
         int newImageSize = FontSize.getAssociateImageSizeFromFontSize(fontSize);
         imagePhone.setFitHeight(newImageSize);
         imagePhone.setFitWidth(newImageSize);

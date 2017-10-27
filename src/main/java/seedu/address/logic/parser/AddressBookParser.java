@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CancelClearCommand;
 import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.commands.ChangeTagColorCommand;
+import seedu.address.logic.commands.ChangeThemeCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearPopupCommand;
 import seedu.address.logic.commands.Command;
@@ -129,6 +130,8 @@ public class AddressBookParser {
         case ChangeFontSizeCommand.COMMAND_WORD:
             return new ChangeFontSizeCommandParser().parse(arguments);
 
+        case ChangeThemeCommand.COMMAND_WORD:
+            return new ChangeThemeCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
