@@ -11,9 +11,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
-import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 

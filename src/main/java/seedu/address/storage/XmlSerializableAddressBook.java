@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,6 +25,8 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     private List<XmlAdaptedPerson> persons;
     @XmlElement
     private List<XmlAdaptedTag> tags;
+    @XmlElement
+    private List<XmlAdaptedReminder> reminders;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -32,6 +35,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
         tags = new ArrayList<>();
+        reminders = new ArrayList<>();
     }
 
     /**
@@ -39,6 +43,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
+        reminders.addAll(src.getReminderList().stream().map(XmlAdaptedReminder::new).collect(Collectors.toList()));
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
@@ -55,6 +60,19 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
             }
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return FXCollections.unmodifiableObservableList(persons);
+    }
+
+    @Override
+    public ObservableList<ReadOnlyReminder> getReminderList() {
+        final ObservableList<ReadOnlyReminder> reminders = this.reminders.stream().map(r -> {
+            try {
+                return r.toModelType();
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }).collect(Collectors.toCollection(FXCollections::observableArrayList));
+        return FXCollections.unmodifiableObservableList(reminders);
     }
 
     @Override

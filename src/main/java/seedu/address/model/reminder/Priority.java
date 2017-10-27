@@ -13,7 +13,7 @@ public class Priority {
     public static final String PRIORITY_CONSTRAINTS =
             "Priority must have one of the three values which are - High, Low, and Medium";
 
-    private String priority;
+    public final String priority;
 
     public Priority(String priority) throws IllegalValueException {
         requireNonNull(priority);
