@@ -36,7 +36,8 @@ public class ReminderListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<ReadOnlyReminder> reminderList) {
         ObservableList<ReminderCard> mappedList = EasyBind.map(
-                reminderList, (reminder) -> new ReminderCard(reminder, reminderList.indexOf(reminder) + 1));
+                reminderList, (reminder) -> new ReminderCard(reminder,
+                        reminderList.indexOf(reminder) + 1));
         reminderListView.setItems(mappedList);
         reminderListView.setCellFactory(listView -> new ReminderListViewCell());
         setEventHandlerForSelectionChangeReminder();
@@ -70,7 +71,7 @@ public class ReminderListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code ReminderCard}.
      */
     class ReminderListViewCell extends ListCell<ReminderCard> {
 

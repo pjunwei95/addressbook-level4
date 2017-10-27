@@ -2,9 +2,6 @@ package seedu.address.ui;
 
 import static seedu.address.model.font.FontSize.getassociatefxfontsizestring;
 
-import java.io.File;
-
-import java.util.HashMap;
 import java.util.Random;
 
 import com.google.common.eventbus.Subscribe;
@@ -14,17 +11,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
-import seedu.address.commons.events.ui.ChangeTagColorEvent;
-import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
-import seedu.address.logic.commands.PhotoCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.font.FontSize;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.reminder.ReadOnlyReminder;
 
 //import javax.swing.text.html.ImageView;
@@ -75,12 +66,6 @@ public class ReminderCard extends UiPart<Region> {
         setFontSize(currentFontSize);
     }
 
-    /**
-     * Get the label about
-     */
-    public Label getAboutLabel() {
-        return about;
-    }
 
     /**
      * Adds a photo to a persons contact
