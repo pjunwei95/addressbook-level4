@@ -19,6 +19,9 @@ import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.reminder.DueDate;
+import seedu.address.model.reminder.Priority;
+import seedu.address.model.reminder.ReminderDetails;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
@@ -65,6 +68,31 @@ public class ParserUtil {
     public static Optional<Phone> parsePhone(Optional<String> phone) throws IllegalValueException {
         requireNonNull(phone);
         return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
+    }
+    /**
+     * Parses a {@code Optional<String> details} into an {@code Optional<ReminderDetails>}
+     * if {@code details} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<ReminderDetails> parseDetails(Optional<String> details) throws IllegalValueException {
+        requireNonNull(details);
+        return details.isPresent() ? Optional.of(new ReminderDetails(details.get())) : Optional.empty();
+    }
+    /**
+     * Parses a {@code Optional<String> priority} into an {@code Optional<Priority>} if {@code priority} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        requireNonNull(priority);
+        return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
+    }
+    /**
+     * Parses a {@code Optional<String> duedate} into an {@code Optional<DueDate>} if {@code duedate} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<DueDate> parseDueDate(Optional<String> dueDate) throws IllegalValueException {
+        requireNonNull(dueDate);
+        return dueDate.isPresent() ? Optional.of(new DueDate(dueDate.get())) : Optional.empty();
     }
 
     /**
