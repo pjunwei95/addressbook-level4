@@ -80,7 +80,6 @@ public class LoginPage extends UiPart<Region> {
     }
 
 
-
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -102,6 +101,14 @@ public class LoginPage extends UiPart<Region> {
         } else {
             logger.info("Wrong name or password!");
         }
+    }
+
+    @FXML
+    private void handleRegisterEvent() {
+        logger.info("Trying to register");
+        RegisterPage registerPage = new RegisterPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        this.hide();
+        registerPage.show();
     }
 
     /**

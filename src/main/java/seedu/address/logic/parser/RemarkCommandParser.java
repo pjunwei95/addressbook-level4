@@ -25,15 +25,15 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         }
 
         String[] argus = trimmedArgs.split("r/");
-        String[] mods = argus[1].split(",");
-
-        for (String m : mods) {
-            m = m.trim();
-        }
 
         try {
             Integer index = Integer.parseInt(argus[0].trim());
-            Remark remark = new Remark(argus[1].trim());
+            Remark remark;
+            if(argus.length > 1) {
+                remark = new Remark(argus[1].trim());
+            } else {
+                remark = new Remark("");
+            }
             return new RemarkCommand(index, remark);
         } catch (IllegalValueException e) {
             throw new ParseException(
