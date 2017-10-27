@@ -23,8 +23,6 @@ import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
 
-//import javax.swing.text.html.ImageView;
-
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -106,7 +104,7 @@ public class PersonCard extends UiPart<Region> {
         String url;
 
         if (filePath.equals("")) {
-            url = "/images/address_book_32.png";
+            url = "/images/user.png";
             Image Display = new Image(url);
             image.setImage(Display);
         }

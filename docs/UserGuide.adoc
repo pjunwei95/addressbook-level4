@@ -328,9 +328,9 @@ To logout, just click logout in the "file - > logout" button.
 Change the color of one or more than one tags. +
 Format: `color [c/COLOR] [t/TAG]...`
 ****
-* The default color of tags is blue.
+* The default color of tags is "orange".
 * You can change the color of more than one tag at a time
-* The colors supported are: blue, red, green and yellow
+* The colors supported are: "red", "blue", "green", "teal", "aqua", "black", "gray", "lime", "maroon", "navy","orange", "purple", "silver", "olive","white", "yellow" and "transparent"
 * You cannot change the color of a non existing tag.
 ****
 

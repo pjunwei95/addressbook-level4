@@ -64,7 +64,7 @@
             <HBox alignment="CENTER_LEFT" spacing="5.0">
                 <ImageView fx:id="imagePhone" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="/images/phone.png" />
+                        <Image url="/images/user.png" />
                     </image>
                 </ImageView>
                 <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">

@@ -16,4 +16,8 @@ public class ChangeTagColorEvent extends BaseEvent {
     public String toString() {
         return this.getClass().getSimpleName();
     }
+
+    public String getColor() {
+        return color;
+    }
 }

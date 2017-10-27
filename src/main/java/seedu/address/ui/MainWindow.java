@@ -1,5 +1,10 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.ChangeThemeCommand.BRIGHT_THEME;
+import static seedu.address.logic.commands.ChangeThemeCommand.BRIGHT_THEME_CSS_FILE_NAME;
+import static seedu.address.logic.commands.ChangeThemeCommand.DARK_THEME;
+import static seedu.address.logic.commands.ChangeThemeCommand.DARK_THEME_CSS_FILE_NAME;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -18,6 +23,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ChangeThemeEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
@@ -267,6 +273,35 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleDecreaseFontSize() throws CommandException, ParseException {
         commandBox.handleCommandInputChanged(ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND);
+    }
+
+    @Subscribe
+    private void handleChangeThemeEvent(ChangeThemeEvent changeThemeEvent) {
+        Scene scene = primaryStage.getScene();
+
+        // Clear the original theme
+        scene.getStylesheets().clear();
+
+        // Add new theme to scene
+        String newTheme = changeThemeEvent.getTheme();
+        String cssFileName = null;
+
+        // Get the associate CSS file path for theme
+        switch (newTheme) {
+        case DARK_THEME:
+            cssFileName = DARK_THEME_CSS_FILE_NAME;
+            break;
+        case BRIGHT_THEME:
+            cssFileName = BRIGHT_THEME_CSS_FILE_NAME;
+            break;
+        default:
+            cssFileName = DARK_THEME_CSS_FILE_NAME;
+            break;
+        }
+
+        // Set the theme to scene
+        scene.getStylesheets().add(cssFileName);
+        primaryStage.setScene(scene);
     }
 
 }

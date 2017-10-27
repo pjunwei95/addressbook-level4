@@ -12,7 +12,11 @@ public class ChangeThemeCommand extends UndoableCommand{
 
     public static final String COMMAND_WORD = "theme";
 
-    public static final String[] ALL_THEME_NAMES = {"dark", "bright"};
+    public static final String DARK_THEME = "dark";
+    public static final String BRIGHT_THEME = "bright";
+    public static final String[] ALL_THEME_NAMES = {DARK_THEME, BRIGHT_THEME};
+    public static final String DARK_THEME_CSS_FILE_NAME = "view/DarkTheme.css";
+    public static final String BRIGHT_THEME_CSS_FILE_NAME = "";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Change the theme of the application. "
             + "Parameters: " + COMMAND_WORD + " "
