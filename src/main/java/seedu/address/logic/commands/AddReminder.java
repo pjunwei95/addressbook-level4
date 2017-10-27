@@ -25,7 +25,7 @@ public class AddReminder extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_REMINDER_DETAILS + "CS2103T Assignment "
             + PREFIX_REMINDER_PRIORITY + "High "
-            + PREFIX_REMINDER_DUE_DATE + "12/05/2017 ";
+            + PREFIX_REMINDER_DUE_DATE + "12.05.2017 ";
 
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
     public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists!";

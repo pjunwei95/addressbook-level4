@@ -30,8 +30,10 @@ public class Priority {
      */
     public static boolean isValidPriority(String priority) {
 
-        if (!(priority.equalsIgnoreCase("High") || priority.equalsIgnoreCase("Medium")
-                || priority.equalsIgnoreCase("Low"))) {
+
+        if (!(priority.equalsIgnoreCase("Priority Level: High")
+                || priority.equalsIgnoreCase("Priority Level: Medium")
+                || priority.equalsIgnoreCase("Priority Level: Low"))) {
 
             return false;
         }

@@ -18,6 +18,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_FONT_SIZE = new Prefix("");
     public static final Prefix PREFIX_USERNAME = new Prefix("u/");
     public static final Prefix PREFIX_REMINDER_DUE_DATE = new Prefix("d/");
-    public static final Prefix PREFIX_REMINDER_PRIORITY = new Prefix("r/");
+    public static final Prefix PREFIX_REMINDER_PRIORITY = new Prefix("p/");
     public static final Prefix PREFIX_REMINDER_DETAILS = new Prefix("g/");
 }
