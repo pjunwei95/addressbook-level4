@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -47,18 +48,19 @@ public class AddressBookTest {
         assertEquals(newData, addressBook);
     }
 
-  /*  @Test
+    @Test
+    @Ignore
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         // Repeat ALICE twice
         List<Person> newPersons = Arrays.asList(new Person(ALICE), new Person(ALICE));
         List<Tag> newTags = new ArrayList<>(ALICE.getTags());
 
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        //AddressBookStub newData = new AddressBookStub(newPersons, newTags, );
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        //addressBook.resetData(newData);
     }
-    */
+
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {

@@ -62,6 +62,16 @@ public interface Model {
     void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
             throws DuplicatePersonException, PersonNotFoundException;
 
+    /**
+     * Replaces the given reminder {@code target} with {@code changedReminder}.
+     *
+     * @throws DuplicateReminderException if updating the reminder's details causes the reminder to be equivalent to
+     *      another existing reminder in the list.
+     * @throws ReminderNotFoundException if {@code target} could not be found in the list.
+     */
+    void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder)
+            throws DuplicateReminderException, ReminderNotFoundException;
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
 

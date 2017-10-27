@@ -10,6 +10,10 @@ import org.fxmisc.easybind.EasyBind;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 
@@ -46,6 +50,28 @@ public class UniqueReminderList implements Iterable<Reminder> {
             throw new DuplicateReminderException();
         }
         internalList.add(new Reminder(toAdd));
+    }
+
+    /**
+     * Replaces the reminder {@code target} in the list with {@code changedReminder}.
+     *
+     * @throws DuplicateReminderException if the replacement is equivalent to another existing reminder in the list.
+     * @throws ReminderNotFoundException if {@code target} could not be found in the list.
+     */
+    public void setReminder(ReadOnlyReminder target, ReadOnlyReminder changedPerson)
+            throws DuplicateReminderException, ReminderNotFoundException {
+        requireNonNull(changedPerson);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new ReminderNotFoundException();
+        }
+
+        if (!target.equals(changedPerson) && internalList.contains(changedPerson)) {
+            throw new DuplicateReminderException();
+        }
+
+        internalList.set(index, new Reminder(changedPerson));
     }
 
 

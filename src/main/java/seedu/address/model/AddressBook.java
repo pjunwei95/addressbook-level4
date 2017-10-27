@@ -140,6 +140,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given reminder {@code target} in the list with {@code changeReadOnlyReminder}.
+     * {@code Weaver}'s tag list will be updated with the tags of {@code changeReadOnlyReminder}.
+     *
+     * @throws DuplicateReminderException if updating the reminder's details causes the reminder to be equivalent to
+     *      another existing reminder in the list.
+     * @throws ReminderNotFoundException if {@code target} could not be found in the list.
+     *
+     */
+    public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changeReadOnlyReminder)
+            throws DuplicateReminderException, ReminderNotFoundException {
+        requireNonNull(changeReadOnlyReminder);
+
+        Reminder changedReminder = new Reminder(changeReadOnlyReminder);
+        reminders.setReminder(target, changedReminder);
+    }
+
+    /**
      * Ensures that every tag in this person:
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list

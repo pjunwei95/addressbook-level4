@@ -5,11 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.reminder.DueDate;
-import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.ReadOnlyReminder;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 
 /**

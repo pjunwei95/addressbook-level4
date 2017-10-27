@@ -143,7 +143,14 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
     }
+    @Override
+    public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder)
+            throws DuplicateReminderException, ReminderNotFoundException {
+        requireAllNonNull(target, changedReminder);
 
+        addressBook.updateReminder(target, changedReminder);
+        indicateAddressBookChanged();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
