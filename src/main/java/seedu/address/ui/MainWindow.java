@@ -21,6 +21,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ChangeThemeEvent;
@@ -239,9 +240,9 @@ public class MainWindow extends UiPart<Region> {
     private void handleLogoutEvent() throws IOException {
         logger.info("Trying to logout");
         this.hide();
-        this.releaseResources();
-        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        //this.releaseResources();
+        //prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
+        //LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
         loginPage.show();
     }
 
@@ -273,6 +274,16 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleDecreaseFontSize() throws CommandException, ParseException {
         commandBox.handleCommandInputChanged(ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND);
+    }
+
+    @FXML
+    private void handleChangeDarkTheme() {
+        EventsCenter.getInstance().post(new ChangeThemeEvent("dark"));
+    }
+
+    @FXML
+    private void handleChangeBrightTheme() {
+        EventsCenter.getInstance().post(new ChangeThemeEvent("bright"));
     }
 
     @Subscribe
