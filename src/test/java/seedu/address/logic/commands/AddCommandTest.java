@@ -143,6 +143,10 @@ public class AddCommandTest {
                 throws DuplicatePersonException {
             fail("This method should not be called.");
         }
+        @Override
+        public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder) {
+            fail("This method should not be called");
+        }
 
         @Override
         public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
