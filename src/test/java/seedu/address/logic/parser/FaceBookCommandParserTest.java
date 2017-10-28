@@ -38,4 +38,12 @@ public class FaceBookCommandParserTest {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FaceBookCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_invalidNumberOfArgs_throwsParseException() {
+
+        assertParseFailure(parser, "1 2", String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE
+        ));
+    }
 }

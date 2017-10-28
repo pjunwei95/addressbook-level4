@@ -48,7 +48,7 @@ public class FaceBookCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
 
-        String username = "ronak.lakhotia";
+
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex);
 

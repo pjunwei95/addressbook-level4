@@ -75,18 +75,19 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        //@@author RonakLakhotia
         case ChangeReminderCommand.COMMAND_WORD:
             return new ChangeReminderCommandParser().parse(arguments);
-
+        //@@author
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
-
+        //@@author RonakLakhotia
         case AddReminder.COMMAND_WORD:
             return new AddReminderParser().parse(arguments);
 
         case RemoveReminderCommand.COMMAND_WORD:
             return new RemoveCommandParser().parse(arguments);
-
+        //@@author
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -101,7 +102,7 @@ public class AddressBookParser {
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
+        //@@author RonakLakhotia
         case PhotoCommand.COMMAND_WORD:
             return new PhotoCommandParser().parse(arguments);
 
@@ -110,7 +111,7 @@ public class AddressBookParser {
 
         case FaceBookCommand.COMMAND_WORD:
             return new FaceBookCommandParser().parse(arguments);
-
+        //@@author
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
 

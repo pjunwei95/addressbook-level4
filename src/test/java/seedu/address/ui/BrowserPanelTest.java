@@ -51,7 +51,6 @@ public class BrowserPanelTest extends GuiUnitTest {
 
 
         URL expectedPersonUrl = new URL("https://nusmods.com/timetable/2017-2018/sem1?&CS2101[SEC]=1");
-        // System.out.println(browserPanelHandle.getLoadedUrl());
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
 
@@ -65,16 +64,10 @@ public class BrowserPanelTest extends GuiUnitTest {
     public void faceBookDisplay() throws Exception {
 
         URL expectedFaceBookPersonUrl = new URL(FACEBOOK_PROFILE_PAGE + "ronak.lakhotia");
-        //postNow(selectionChangedEventStub);
         postNow(selectionChanged);
-
         assertEquals(expectedFaceBookPersonUrl, browserPanelHandle.getLoadedUrl());
 
     }
-
-
-
-
 
 }
 

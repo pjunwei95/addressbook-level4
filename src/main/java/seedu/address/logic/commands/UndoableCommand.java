@@ -41,7 +41,9 @@ public abstract class UndoableCommand extends Command {
 
         model.resetData(previousAddressBook);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        //@@author RonakLakhotia
         model.updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
+        //@@author generated
 
         //Revert font size
         if (this instanceof ChangeFontSizeCommand) {
@@ -63,7 +65,9 @@ public abstract class UndoableCommand extends Command {
                     + "it should not fail now");
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        //@@author RonakLakhotia
         model.updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
+        //@@author generated
     }
 
     @Override

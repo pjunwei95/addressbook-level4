@@ -33,7 +33,9 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    //@@author RonakLakhotia
     private final UniqueReminderList reminders;
+    //@@author generated
     private final UniqueTagList tags;
 
     /*
@@ -44,7 +46,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
+        //@@author RonakLakhotia
         reminders = new UniqueReminderList();
+        //@@author generated
         persons = new UniquePersonList();
         tags = new UniqueTagList();
     }
@@ -69,10 +73,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
+    //@@author RonakLakhotia
     public void setReminders(List<? extends ReadOnlyReminder> reminders) throws DuplicateReminderException {
         this.reminders.setReminders(reminders);
     }
-
+    //@@author generated
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -108,6 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         // in the person list.
         persons.add(newPerson);
     }
+    //@@author RonakLakhotia
     /**
      * Adds a reminder to the address book.
      * @throws DuplicateReminderException if an equivalent person already exists.
@@ -116,6 +122,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         Reminder newReminder = new Reminder(r);
         reminders.add(newReminder);
     }
+    //@@author generated
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedReadOnlyPerson}.
@@ -139,6 +146,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    //@@author RonakLakhotia
     /**
      * Replaces the given reminder {@code target} in the list with {@code changeReadOnlyReminder}.
      * {@code Weaver}'s tag list will be updated with the tags of {@code changeReadOnlyReminder}.
@@ -156,6 +164,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         reminders.setReminder(target, changedReminder);
     }
 
+    //@@author generated
     /**
      * Ensures that every tag in this person:
      *  - exists in the master list {@link #tags}
@@ -198,6 +207,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+    //@@author RonakLakhotia
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * @throws ReminderNotFoundException if the {@code key} is not in this {@code AddressBook}.
@@ -210,6 +220,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+    //@@author generated
     //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
@@ -289,10 +300,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<ReadOnlyPerson> getPersonList() {
         return persons.asObservableList();
     }
+
+    //@@author RonakLakhotia
     @Override
     public ObservableList<ReadOnlyReminder> getReminderList() {
         return reminders.asObservableList();
     }
+    //@@author generated
 
     @Override
     public ObservableList<Tag> getTagList() {
@@ -304,6 +318,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && this.persons.equals(((AddressBook) other).persons)
+                && this.reminders.equals(((AddressBook) other).reminders)
                 && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
     }
 
