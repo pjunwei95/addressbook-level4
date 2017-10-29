@@ -191,7 +191,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">4.2. Adding a person: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH f/FILE_PATH [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH r/MODNAME/MODTYPE/MODNUM f/FILE_PATH [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -564,13 +564,13 @@ Format: <code>remark INDEX /r REMARK</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Remarks the person identified by the index number.</p>
+<p>Remarks a person&#8217;s module information identified by the index number.</p>
 </li>
 <li>
-<p>The content of remark is specified in REMARK.</p>
+<p>The content of remark should be in the format MODNAME/MODTYPE/GROUPNUM(Integer).</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+<p>All info shuold coexist in nusmods. This app dont check the validity of the module information.</p>
 </li>
 </ul>
 </div>
@@ -583,8 +583,8 @@ Format: <code>remark INDEX /r REMARK</code></p>
 <ul>
 <li>
 <p><code>list</code><br>
-<code>remark 2 /r Likes to swim</code><br>
-Remarks the 2nd person with "Likes to swim".</p>
+<code>remark 2 /r CS2104/LEC/1</code><br>
+Remarks the 2nd person&#8217;s module information as CS2104/LEC/1.</p>
 </li>
 </ul>
 </div>
@@ -969,7 +969,7 @@ e.g. <code>photo 1 nus.jpg</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-29 16:06:21 +00:00
+Last updated 2017-10-29 17:47:22 +00:00
 </div>
 </div>
 </body>
