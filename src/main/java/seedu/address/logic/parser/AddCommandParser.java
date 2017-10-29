@@ -44,7 +44,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DOB,
                          PREFIX_REMARK, PREFIX_IMAGE, PREFIX_USERNAME, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -52,15 +52,22 @@ public class AddCommandParser implements Parser<AddCommand> {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)).get();
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).get();
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get();
-            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
+
 
             FileImage image = ParserUtil.parseImage(argMultimap.getValue(PREFIX_IMAGE))
                     .orElse(new FileImage(""));
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+            Address address;
             Remark remark;
             DateOfBirth date;
             FacebookUsername username;
+            if (ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).isPresent()) {
+                address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
+            } else {
+                address = new Address("");
+            }
+
             if (ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).isPresent()) {
                 date = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).get();
             } else {

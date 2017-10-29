@@ -27,7 +27,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 import seedu.address.storage.AccountsStorage;
-import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -50,7 +50,7 @@ public class MainWindow extends UiPart<Region> {
     private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
-    private Storage storage;
+    private StorageManager storage;
     private AccountsStorage accPrefs;
 
     private CommandBox commandBox;
@@ -73,7 +73,7 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, Storage storage, UserPrefs prefs, Logic logic,
+    public MainWindow(Stage primaryStage, Config config, StorageManager storage, UserPrefs prefs, Logic logic,
                       AccountsStorage accPrefs) {
         super(FXML);
 
@@ -231,8 +231,6 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleLogoutEvent() throws IOException {
         logger.info("Trying to logout");
-        this.hide();
-        this.releaseResources();
         prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
         LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
         loginPage.show();

@@ -19,13 +19,13 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class RemarkCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "remark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the module information of the person identified "
-            + "by the index number used in the last person listing. "
-            + "Existing remark will be overwritten by the input.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Remark the module information of the person identified by the index. "
+            + "Existing modulelist will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_REMARK + "[MODULENAME/MODULETYPE/NUM]\n"
+            + PREFIX_REMARK + "MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_REMARK + "CS2101/SEC/1";
+            + PREFIX_REMARK + "CS2101/SEC/1, CS2104/LEC/1";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
@@ -40,7 +40,6 @@ public class RemarkCommand extends UndoableCommand {
     public RemarkCommand(Integer index, Remark remark) {
         requireNonNull(index);
         requireNonNull(remark);
-
         this.index = index - 1;
         this.remark = remark;
     }

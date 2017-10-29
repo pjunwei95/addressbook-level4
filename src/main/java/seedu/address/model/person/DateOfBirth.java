@@ -49,8 +49,9 @@ public class DateOfBirth {
     public static boolean isValidBirthday(String birthday) {
 
         String trimmedBirthday = birthday.trim();
+
         if (trimmedBirthday.isEmpty()) {
-            return false;
+            return true;
         }
         if (!trimmedBirthday.matches(BIRTHDAY_VALIDATION_REGEX)) {
             return false;

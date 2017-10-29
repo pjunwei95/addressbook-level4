@@ -18,7 +18,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.AccountsStorage;
-import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 
 /**
  * The manager of the UI component.
@@ -35,7 +35,7 @@ public class UiManager extends ComponentManager implements Ui {
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
     private Logic logic;
-    private Storage storage;
+    private StorageManager storage;
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
@@ -43,7 +43,7 @@ public class UiManager extends ComponentManager implements Ui {
     private AccountsStorage accPrefs;
 
     private int test;
-    public UiManager(Logic logic, Config config, Storage storage, UserPrefs prefs, AccountsStorage accPrefs) {
+    public UiManager(Logic logic, Config config, StorageManager storage, UserPrefs prefs, AccountsStorage accPrefs) {
         super();
         this.logic = logic;
         this.storage = storage;

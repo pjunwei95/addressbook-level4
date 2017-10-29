@@ -45,7 +45,6 @@ public class BrowserPanel extends UiPart<Region> {
 
         loadDefaultPage();
 
-
         registerAsAnEventHandler(this);
     }
 
@@ -54,12 +53,17 @@ public class BrowserPanel extends UiPart<Region> {
      */
     private void loadPersonPage(ReadOnlyPerson person) {
 
-        loadPage(NUSMODS_SEARCH_URL_PREFIX + parse(person.getRemark().toString()));
+        loadPage(NUSMODS_SEARCH_URL_PREFIX + person.getRemark().getParsedModuleLists());
 
     }
 
+    /**
+     * Method for load page.
+     */
     public void loadPage(String url) {
+
         Platform.runLater(() -> browser.getEngine().load(url));
+
     }
 
     /**
@@ -68,28 +72,16 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadDefaultPage() {
         //URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         try {
+
             URL defaultPage = new URL(DEFAULT_PAGE);
             loadPage(defaultPage.toExternalForm());
+
         } catch (MalformedURLException e) {
+
             logger.info("Invalid URL");
+
         }
 
-    }
-
-    /**
-     * Parse the modulelist to correct url format.
-     */
-    private String parse(String moduleLists) {
-        String[] mods = moduleLists.split(",");
-        String result = "";
-        for (String m : mods) {
-            String[] helper = m.split("/");
-            String mod = helper[0];
-            String kind = helper[1];
-            String num = helper[2];
-            result = result + "&" + mod + "[" + kind + "]" + "=" + num;
-        }
-        return result;
     }
 
     /**
