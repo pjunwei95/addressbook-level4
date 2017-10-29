@@ -52,7 +52,7 @@ public class LoginPage extends UiPart<Region> {
     private MainWindow mainWindow;
 
     private Config config;
-    private Storage storage;
+    private StorageManager storage;
     private UserPrefs prefs;
     private Logic logic;
     private Model model;
@@ -64,7 +64,7 @@ public class LoginPage extends UiPart<Region> {
     @FXML
     private TextField password;
 
-    public LoginPage(Stage primaryStage, Config config, Storage storage, UserPrefs prefs,
+    public LoginPage(Stage primaryStage, Config config, StorageManager storage, UserPrefs prefs,
                      Logic logic, AccountsStorage accPrefs) {
         super(FXML);
         this.logic = logic;
@@ -94,14 +94,18 @@ public class LoginPage extends UiPart<Region> {
      * Method for handle login event
      */
     @FXML
-    private void handleLoginEvent() {
+    private void handleLoginEvent() throws IOException {
         logger.info("Trying to login");
         String uname = username.getText();
         String pword = password.getText();
         if (checkValid(uname, pword)) {
+            String path = "data/" + uname + "addressbook.xml";
             UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-            AddressBookStorage addressBookStorage = new XmlAddressBookStorage("./data/" + uname + "addressbook.xml");
-            storage = new StorageManager(addressBookStorage, userPrefsStorage);
+            AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
+
+            //storage.setUserPrefsStorage(userPrefsStorage);
+            storage.setAddressBookStorage(addressBookStorage);
+
             model = initModelManager(storage, prefs);
             logic = new LogicManager(model);
 
@@ -113,6 +117,9 @@ public class LoginPage extends UiPart<Region> {
         }
     }
 
+    /**
+     * Handles the register event.
+     */
     @FXML
     private void handleRegisterEvent() {
         logger.info("Trying to register");
@@ -125,11 +132,10 @@ public class LoginPage extends UiPart<Region> {
      * Handles the key press event, {@code keyEvent}.
      */
     @FXML
-    private void handleKeyPress(KeyEvent keyEvent) {
+    private void handleKeyPress(KeyEvent keyEvent) throws IOException {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             handleLoginEvent();
         }
-
     }
 
     GuiSettings getCurrentGuiSetting() {
@@ -150,10 +156,6 @@ public class LoginPage extends UiPart<Region> {
         FxViewUtil.setStageIcon(primaryStage, iconSource);
     }
 
-    void show() {
-        primaryStage.show();
-    }
-
     private void setWindowDefaultSize(UserPrefs prefs) {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
@@ -162,6 +164,10 @@ public class LoginPage extends UiPart<Region> {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
         }
+    }
+
+    void show() {
+        primaryStage.show();
     }
 
     void hide() {
