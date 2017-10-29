@@ -36,7 +36,7 @@ public class Reminder implements ReadOnlyReminder {
         this(source.getDetails(), source.getPriority(), source.getDueDate());
     }
 
-    public void setName(ReminderDetails details) {
+    public void setDetails(ReminderDetails details) {
         this.details.set(requireNonNull(details));
     }
 
