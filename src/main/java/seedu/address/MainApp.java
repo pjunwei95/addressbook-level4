@@ -47,7 +47,7 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Logic logic;
-    protected Storage storage;
+    protected StorageManager storage;
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
@@ -77,10 +77,6 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, storage, userPrefs, accPrefs);
 
         initEventsCenter();
-    }
-
-    public void setModel(Model model) {
-        this.model = model;
     }
 
     private String getApplicationParameter(String parameterName) {

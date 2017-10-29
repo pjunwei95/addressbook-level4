@@ -62,9 +62,9 @@ public interface ReadOnlyPerson {
                 .append(getDateOfBirth())
                 .append(" Remark: ")
                 .append(getRemark())
-                .append(" FilePath: ")
+                .append(" Photo FilePath: ")
                 .append(getImage())
-                .append(" FacebookUsername ")
+                .append(" Facebook Username: ")
                 .append(getUsername())
                 .append(" Tags: ");
         getTags().forEach(builder::append);

@@ -29,7 +29,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         try {
             Integer index = Integer.parseInt(argus[0].trim());
             Remark remark;
-            if(argus.length > 1) {
+            if (argus.length > 1) {
                 remark = new Remark(argus[1].trim());
             } else {
                 remark = new Remark("");
