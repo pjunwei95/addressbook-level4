@@ -26,6 +26,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
+import seedu.address.model.theme.Theme;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.Storage;
@@ -76,11 +77,14 @@ public class LoginPage extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+        initTheme();
         registerAsAnEventHandler(this);
         handleLoginEvent();
     }
 
-
+    private void initTheme() {
+        Theme.changeTheme(primaryStage, Theme.getCurrentTheme());
+    }
 
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -94,15 +98,15 @@ public class LoginPage extends UiPart<Region> {
         logger.info("Trying to login");
         String uname = username.getText();
         String pword = password.getText();
-//        if (checkValid(uname, pword)) {
+        if (checkValid(uname, pword)) {
             model = initModelManager(storage, prefs);
             prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
             mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-//        } else {
-//            logger.info("Wrong name or password!");
-//        }
+        } else {
+            logger.info("Wrong name or password!");
+        }
     }
 
     /**
@@ -118,7 +122,8 @@ public class LoginPage extends UiPart<Region> {
 
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel(),
+                Theme.getCurrentTheme());
     }
 
     private void setTitle(String appTitle) {
@@ -142,6 +147,7 @@ public class LoginPage extends UiPart<Region> {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
         FontSize.setCurrentFontSizeLabel(prefs.getGuiSettings().getFontSize());
+        Theme.setCurrentTheme(prefs.getGuiSettings().getTheme());
         if (prefs.getGuiSettings().getWindowCoordinates() != null) {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
