@@ -13,7 +13,7 @@ public class Theme {
     public static final String BRIGHT_THEME = "bright";
     public static final String[] ALL_THEME_NAMES = {DARK_THEME, BRIGHT_THEME};
     public static final String DARK_THEME_CSS_FILE_NAME = "view/DarkTheme.css";
-    public static final String BRIGHT_THEME_CSS_FILE_NAME = "";
+    public static final String BRIGHT_THEME_CSS_FILE_NAME = "view/BrightTheme.css";
 
     private static String currentTheme;
 
