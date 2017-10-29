@@ -4,8 +4,6 @@ import static seedu.address.model.font.FontSize.getAssociateFxFontSizeString;
 import static seedu.address.model.font.FontSize.getAssociateFxFontSizeStringForName;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Random;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -19,7 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.events.ui.ChangeTagColorEvent;
-import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
+import seedu.address.commons.events.ui.ShowPersonAddressEvent;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -30,9 +28,6 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static String[] colors = {"red", "yellow", "blue", "orange", "brown", "green", "pink"};
-    private static HashMap<String, String> tagColors = new HashMap<String, String>();
-    private static Random random = new Random();
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -243,7 +238,7 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private void handleAddressClick() {
-        raise(new PersonPanelAddressPressedEvent(person.getName().fullName, address.getText()));
+        raise(new ShowPersonAddressEvent(address.getText()));
     }
 
 }

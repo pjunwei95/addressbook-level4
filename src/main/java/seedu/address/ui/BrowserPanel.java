@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.FaceBookEvent;
-import seedu.address.commons.events.ui.PersonPanelAddressPressedEvent;
+import seedu.address.commons.events.ui.ShowPersonAddressEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -108,7 +108,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handlePersonPanelAddressPressedEvent(PersonPanelAddressPressedEvent event) {
+    private void handleShowPersonAddressEvent(ShowPersonAddressEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPage(GOOGLE_MAP_SEARCH_URL_PREFIX + event.getAddress());
     }
