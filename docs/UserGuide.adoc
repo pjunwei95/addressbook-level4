@@ -377,6 +377,11 @@ image::MockUp.png[width="790"]
 
 ** You can change the display picture of a person by specifying the filepath of another image. +
 
+** The person must have a display picture for the delete operation to work else Weaver will notify you that the
+delete operation is not valid. +
+
+** Once the Image is set and the file is then removed from the specified directory, Weaver will no longer display the picture. +
+
 e.g. `Photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg` adds the image `Ronak.jpg` to the contact with
 index 1 in the address book.
 
