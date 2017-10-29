@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_THEME_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -17,18 +15,6 @@ import seedu.address.model.UserPrefs;
 public class ChangeThemeCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void isValidThemeName() throws Exception {
-        // invalid theme names
-        assertFalse(ChangeThemeCommand.isValidThemeName("")); // empty string
-        assertFalse(ChangeThemeCommand.isValidThemeName(null)); // null value
-        assertFalse(ChangeThemeCommand.isValidThemeName("a")); // random words
-
-        // valid theme names
-        assertTrue(ChangeThemeCommand.isValidThemeName("dark"));
-        assertTrue(ChangeThemeCommand.isValidThemeName("bright"));
-    }
 
     @Test
     public void executeChangeThemeCommandInvalidThemeNameFailure() throws Exception {

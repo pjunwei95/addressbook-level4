@@ -29,7 +29,7 @@ public class FontSize {
 
     private static String currentFontSizeLabel = FONT_SIZE_M_LABEL;
 
-    public final String value;
+    private final String value;
 
     /**
      * Validates given font size.
@@ -47,6 +47,13 @@ public class FontSize {
             throw new IllegalValueException(MESSAGE_FONT_SIZE_CONSTRAINTS);
         }
         this.value = fontSize;
+    }
+
+    /**
+     * Get the String value of the font size
+     */
+    public String getValue() {
+        return value;
     }
 
     /**

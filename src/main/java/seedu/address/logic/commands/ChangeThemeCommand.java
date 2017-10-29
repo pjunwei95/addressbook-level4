@@ -1,22 +1,24 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.theme.Theme.ALL_THEME_NAMES;
+import static seedu.address.model.theme.Theme.BRIGHT_THEME;
+import static seedu.address.model.theme.Theme.DARK_THEME;
+import static seedu.address.model.theme.Theme.isValidThemeName;
 
 import java.util.Arrays;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ChangeThemeEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.theme.Theme;
 
 public class ChangeThemeCommand extends UndoableCommand{
 
     public static final String COMMAND_WORD = "theme";
 
-    public static final String DARK_THEME = "dark";
-    public static final String BRIGHT_THEME = "bright";
-    public static final String[] ALL_THEME_NAMES = {DARK_THEME, BRIGHT_THEME};
-    public static final String DARK_THEME_CSS_FILE_NAME = "view/DarkTheme.css";
-    public static final String BRIGHT_THEME_CSS_FILE_NAME = "";
+    public static final String CHENG_TO_DARK_THEME_COMMAND = COMMAND_WORD + " " + DARK_THEME;
+    public static final String CHENG_TO_BRIGHT_THEME_COMMAND = COMMAND_WORD + " " + BRIGHT_THEME;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Change the theme of the application. "
             + "Parameters: " + COMMAND_WORD + " "
@@ -40,13 +42,6 @@ public class ChangeThemeCommand extends UndoableCommand{
         this.theme = theme;
     }
 
-    /**
-     * Returns true if a given string is a valid theme name.
-     */
-    public static boolean isValidThemeName(String test) {
-        return Arrays.asList(ALL_THEME_NAMES).contains(test);
-    }
-
     @Override
     protected CommandResult executeUndoableCommand() throws CommandException {
 
@@ -54,6 +49,8 @@ public class ChangeThemeCommand extends UndoableCommand{
         if (!isValidThemeName(theme)) {
             throw new CommandException(String.format(MESSAGE_INVALID_THEME_NAME, theme));
         }
+
+        Theme.setCurrentTheme(theme);
 
         EventsCenter.getInstance().post(new ChangeThemeEvent(theme));
 

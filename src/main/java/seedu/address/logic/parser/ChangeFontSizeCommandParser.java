@@ -33,7 +33,7 @@ public class ChangeFontSizeCommandParser implements Parser<ChangeFontSizeCommand
         try {
             FontSize fontSize = ParserUtil.parseFontSize(argMultimap.getValue(PREFIX_FONT_SIZE)).get();
 
-            return new ChangeFontSizeCommand(fontSize.value);
+            return new ChangeFontSizeCommand(fontSize.getValue());
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }

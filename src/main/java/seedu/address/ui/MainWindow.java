@@ -1,10 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.logic.commands.ChangeThemeCommand.BRIGHT_THEME;
-import static seedu.address.logic.commands.ChangeThemeCommand.BRIGHT_THEME_CSS_FILE_NAME;
-import static seedu.address.logic.commands.ChangeThemeCommand.DARK_THEME;
-import static seedu.address.logic.commands.ChangeThemeCommand.DARK_THEME_CSS_FILE_NAME;
-
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -21,7 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
-import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ChangeThemeEvent;
@@ -30,10 +24,12 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.ChangeFontSizeCommand;
+import seedu.address.logic.commands.ChangeThemeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
+import seedu.address.model.theme.Theme;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.Storage;
 
@@ -100,7 +96,7 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-
+        initTheme();
         setAccelerators();
         registerAsAnEventHandler(this);
     }
@@ -117,6 +113,9 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
+    private void initTheme() {
+        Theme.changeTheme(primaryStage, Theme.getCurrentTheme());
+    }
     /**
      * Sets the accelerator of a MenuItem.
      *
@@ -193,6 +192,7 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
         FontSize.setCurrentFontSizeLabel(prefs.getGuiSettings().getFontSize());
+        Theme.setCurrentTheme(prefs.getGuiSettings().getTheme());
         if (prefs.getGuiSettings().getWindowCoordinates() != null) {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
@@ -209,7 +209,8 @@ public class MainWindow extends UiPart<Region> {
      */
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel(),
+                Theme.getCurrentTheme());
     }
 
     /**
@@ -240,9 +241,9 @@ public class MainWindow extends UiPart<Region> {
     private void handleLogoutEvent() throws IOException {
         logger.info("Trying to logout");
         this.hide();
-        //this.releaseResources();
-        //prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-        //LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        this.releaseResources();
+        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
+        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
         loginPage.show();
     }
 
@@ -278,41 +279,17 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private void handleChangeDarkTheme() {
-        EventsCenter.getInstance().post(new ChangeThemeEvent("dark"));
+        commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_DARK_THEME_COMMAND);
     }
 
     @FXML
     private void handleChangeBrightTheme() {
-        EventsCenter.getInstance().post(new ChangeThemeEvent("bright"));
+        commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_BRIGHT_THEME_COMMAND);
     }
 
     @Subscribe
     private void handleChangeThemeEvent(ChangeThemeEvent changeThemeEvent) {
-        Scene scene = primaryStage.getScene();
-
-        // Clear the original theme
-        scene.getStylesheets().clear();
-
-        // Add new theme to scene
-        String newTheme = changeThemeEvent.getTheme();
-        String cssFileName = null;
-
-        // Get the associate CSS file path for theme
-        switch (newTheme) {
-        case DARK_THEME:
-            cssFileName = DARK_THEME_CSS_FILE_NAME;
-            break;
-        case BRIGHT_THEME:
-            cssFileName = BRIGHT_THEME_CSS_FILE_NAME;
-            break;
-        default:
-            cssFileName = DARK_THEME_CSS_FILE_NAME;
-            break;
-        }
-
-        // Set the theme to scene
-        scene.getStylesheets().add(cssFileName);
-        primaryStage.setScene(scene);
+        Theme.changeTheme(primaryStage, changeThemeEvent.getTheme());
     }
 
 }
