@@ -76,7 +76,7 @@ Format: `help`
 === Adding a person: `add`
 
 Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH f/FILE_PATH [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH r/MODNAME/MODTYPE/MODNUM f/FILE_PATH [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0)
@@ -243,16 +243,16 @@ Remarks the person identified by the index number. +
 Format: `remark INDEX /r REMARK`
 
 ****
-* Remarks the person identified by the index number.
-* The content of remark is specified in REMARK.
-* The index *must be a positive integer* `1, 2, 3, ...`
+* Remarks a person's module information identified by the index number.
+* The content of remark should be in the format MODNAME/MODTYPE/GROUPNUM(Integer).
+* All info shuold coexist in nusmods. This app dont check the validity of the module information.
 ****
 
 Examples:
 
 * `list` +
-`remark 2 /r Likes to swim` +
-Remarks the 2nd person with "Likes to swim".
+`remark 2 /r CS2104/LEC/1` +
+Remarks the 2nd person's module information as CS2104/LEC/1.
 
 
 === Listing entered commands : `history`
