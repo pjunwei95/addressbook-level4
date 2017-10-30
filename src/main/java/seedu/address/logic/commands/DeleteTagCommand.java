@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-
+//@@author pjunwei95
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -18,7 +18,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
-//@@author pjunwei95
+
 /**
  * Deletes tags from a person identified using it's last displayed index from the address book.
  */
