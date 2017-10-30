@@ -105,7 +105,9 @@ public class CommandTestUtil {
     public static final String INVALID_TAG = "notExistingTag";
     public static final String INVALID_TAG_COLOR_NAME = "notExistingColor";
     public static final String INVALID_FONT_SIZE = "invalid font size";
-
+    public static final String INVALID_DETAILS_DESC = " " + PREFIX_REMINDER_DETAILS + "@Meeting";
+    public static final String INVALID_PRIORITY_DESC = " " + PREFIX_REMINDER_PRIORITY + "!High";
+    public static final String INVALID_DUE_DATE_DESC = " " + PREFIX_REMINDER_DUE_DATE + "@13.10.1997";
 
 
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_AMY;
