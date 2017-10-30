@@ -1,11 +1,18 @@
-package seedu.address.commons.events.ui;
+package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
+import seedu.address.model.ReadOnlyAddressBook;
 
 /**
- * An event requesting to view the help page.
+ * An event requesting to backup the address book.
  */
-public class ShowHelpRequestEvent extends BaseEvent {
+public class BackUpEvent extends BaseEvent {
+
+    public final ReadOnlyAddressBook data;
+
+    public BackUpEvent(ReadOnlyAddressBook data) {
+        this.data = data;
+    }
 
     @Override
     public String toString() {
