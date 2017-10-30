@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BackUpCommand;
 import seedu.address.logic.commands.CancelClearCommand;
 import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.commands.ChangeTagColorCommand;
@@ -128,6 +129,9 @@ public class AddressBookParser {
 
         case ChangeFontSizeCommand.COMMAND_WORD:
             return new ChangeFontSizeCommandParser().parse(arguments);
+
+        case BackUpCommand.COMMAND_WORD:
+            return new BackUpCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
