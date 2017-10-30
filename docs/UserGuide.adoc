@@ -194,10 +194,10 @@ Deletes the 2nd person in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
-=== Deleting a person's tag : `delete/t`
+=== Deleting a person's tag : `deletetag`
 
 Deletes the tag(s) of an existing person in the address book. +
-Format: `delete/t INDEX [t/TAG]...`
+Format: `deletetag INDEX [t/TAG]...`
 
 ****
 * Deletes the tag of the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
@@ -208,9 +208,9 @@ Format: `delete/t INDEX [t/TAG]...`
 
 Examples:
 
-* `delete/t 1 t/friends` +
+* `deletetag 1 t/friends` +
 Deletes the tag `friends` from the person index `1`.
-* `delete/t 2 t/friends t/colleagues` +
+* `deletetag 2 t/friends t/colleagues` +
 Deletes the tag `friends` and `colleagues` from the person index `2`.
 
 [TIP]
