@@ -396,6 +396,14 @@ e.g. - `facebook 1 ronak.lakhotia`
 
 image::facebook.png[width="790"]
 
+=== Auto-completion
+
+Auto-complete your commands by providing suggestions. +
+
+image::autocompletion.png[]
+
+Type any letters to get some suggestions on what command to use.
+
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
@@ -404,7 +412,9 @@ Format: `clear` +
 
 A clear confirmation will pop-up to reaffirm your clear command in the event of accidental clearing. +
 
-You will be able to confirm clearing by pressing `ENTER` on the keyboard, or clicking `OK`.
+image::clearconfirmation.png[]
+
+By default, you will be able to confirm clearing by pressing `ENTER` on the keyboard, or clicking `OK`.
 
 Otherwise, you can cancel by highlighting the `Cancel` button with the keyboard followed by the `SPACE` button.
 Alternatively, you can also click the `X` button or the `Cancel` button. +
