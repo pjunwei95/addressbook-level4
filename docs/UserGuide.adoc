@@ -396,6 +396,40 @@ e.g. - `facebook 1 ronak.lakhotia`
 
 image::facebook.png[width="790"]
 
+=== Show address of a person : `map` (SINCE V1.3)
+
+Shows the address of a person in Google Map in the browser panel.+
+
+Format: `map INDEX`
+****
+* Selects the person and loads the Google Map showing address of the person at the specified `INDEX`.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `map 1`
+
+* `map 2`
+
+=== Change the theme : `theme` (SINCE V1.4)
+
+Changes the theme of entire application.+
+
+Format: `theme [THEME]`
+****
+* Supported themes are: dark, bright
+* The default theme is bright
+* You can also change the theme via theme button
+****
+
+Examples:
+
+* `theme dark`
+
+* `theme bright`
+
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
@@ -449,6 +483,10 @@ e.g. `fs xs` `fs +` `fs -`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
+* *Change theme* : `theme [THEME]` +
+e.g.`theme bright`
+* *Show address in map* : `map INDEX` +
+e.g.`map 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
