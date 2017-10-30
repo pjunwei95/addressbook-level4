@@ -79,7 +79,6 @@ public class CommandTestUtil {
     public static final String INVALID_FONT_SIZE = "invalid font size";
     public static final String INVALID_THEME_NAME = "invalid theme name";
 
-
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_AMY;
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_BOB;
     public static final EditCommand.EditPersonDescriptor DESC_AMY;

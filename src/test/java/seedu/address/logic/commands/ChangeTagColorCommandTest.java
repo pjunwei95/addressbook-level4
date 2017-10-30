@@ -24,6 +24,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
+ */
 public class ChangeTagColorCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
