@@ -155,7 +155,7 @@ import seedu.address.model.tag.Tag;
  */
 public class DeleteTagCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "delete/t";
+    public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tag identified by the index number used in the last person listing.\n"
@@ -330,7 +330,7 @@ import seedu.address.model.tag.TagContainsKeywordsPredicate;
  */
 public class FindTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "find/t";
+    public static final String COMMAND_WORD = "findtag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tag(s) contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
@@ -632,7 +632,8 @@ public class TagContainsKeywordsPredicate implements Predicate<ReadOnlyPerson> {
 ``` java
     private static final String[] suggestedWords = {"add", "delete", "edit", "help", "find", "list",
                                                     "select", "search", "clear", "undo", "redo", "history",
-                                                    "c/", "t/", "p/", "n/", "a/", "e/"};
+                                                    "deletetag", "findtag", "photo", "facebook", "color",
+                                                    "exit", "fs", "remark"};
 ```
 ###### \java\seedu\address\ui\CommandBox.java
 ``` java
@@ -805,7 +806,8 @@ public class TagContainsKeywordsPredicate implements Predicate<ReadOnlyPerson> {
 ``` java
     @FXML
     /**
-     * Sets the command box style to user preferred font size.
+     * Sets the command box style allow autocompletion.
+     * @param suggestedWords - list of words that will autocomplete
      */
     private void initialize() {
         TextFields.bindAutoCompletion(commandTextField, suggestedWords);
