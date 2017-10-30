@@ -44,7 +44,7 @@ public class StringUtil {
         }
         return false;
     }
-
+    //@@author pjunwei95
     /**
      * Returns true if the {@code tagSet} contains the {@code word}.
      *   Ignores case, but a full word match is required.
