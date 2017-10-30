@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFirstReminderOnly;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_REMINDER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_REMINDER;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_REMINDER;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;

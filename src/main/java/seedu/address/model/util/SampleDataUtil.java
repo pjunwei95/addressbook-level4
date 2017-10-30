@@ -69,10 +69,10 @@ public class SampleDataUtil {
 
         try {
             return new Reminder[]{
-                    new Reminder(new ReminderDetails("CS2103T Assignment"), new Priority(
-                            "High"), new DueDate("12.11.2017")),
-                    new Reminder(new ReminderDetails("Group meeting"), new Priority(
-                            "High"), new DueDate("12.11.2017"))
+                new Reminder(new ReminderDetails("CS2103T Assignment"), new Priority(
+                            "Priority Level: High"), new DueDate("12.11.2017")),
+                new Reminder(new ReminderDetails("Group meeting"), new Priority(
+                        "Priority Level: High"), new DueDate("12.11.2017"))
             };
         } catch (IllegalValueException ive) {
             throw new AssertionError("Date cannot be invalid");

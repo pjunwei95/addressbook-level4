@@ -32,9 +32,9 @@ import seedu.address.model.reminder.DetailsContainsKeywordsPredicate;
 import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
+import seedu.address.testutil.ChangeReminderDescriptorBuilder;
 import seedu.address.testutil.DeleteTagDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.ChangeReminderDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
