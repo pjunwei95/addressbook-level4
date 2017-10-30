@@ -405,6 +405,7 @@ Format: `map INDEX`
 * Selects the person and loads the Google Map showing address of the person at the specified `INDEX`.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
+* You can also view the address by clicking the address panel of a person.
 ****
 
 Examples:
