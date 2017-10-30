@@ -31,7 +31,8 @@ public class CommandBox extends UiPart<Region> {
     //@@author pjunwei95
     private static final String[] suggestedWords = {"add", "delete", "edit", "help", "find", "list",
                                                     "select", "search", "clear", "undo", "redo", "history",
-                                                    "c/", "t/", "p/", "n/", "a/", "e/"};
+                                                    "deletetag", "findtag", "photo", "facebook", "color",
+                                                    "exit", "fs", "remark"};
     //@@author pjunwei95
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
@@ -200,7 +201,8 @@ public class CommandBox extends UiPart<Region> {
     //@@author pjunwei95
     @FXML
     /**
-     * Sets the command box style to user preferred font size.
+     * Sets the command box style allow autocompletion.
+     * @param suggestedWords - list of words that will autocomplete
      */
     private void initialize() {
         TextFields.bindAutoCompletion(commandTextField, suggestedWords);
