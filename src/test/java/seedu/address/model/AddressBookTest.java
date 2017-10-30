@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ASSIGNMENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -20,6 +20,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.reminder.ReadOnlyReminder;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
 
 public class AddressBookTest {
@@ -49,16 +50,17 @@ public class AddressBookTest {
     }
 
     @Test
-    @Ignore
+
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         // Repeat ALICE twice
         List<Person> newPersons = Arrays.asList(new Person(ALICE), new Person(ALICE));
         List<Tag> newTags = new ArrayList<>(ALICE.getTags());
+        List<Reminder> newReminders = Arrays.asList(new Reminder(ASSIGNMENT), new Reminder(ASSIGNMENT));
 
-        //AddressBookStub newData = new AddressBookStub(newPersons, newTags, );
+        AddressBookStub newData = new AddressBookStub(newPersons, newReminders, newTags);
 
         thrown.expect(AssertionError.class);
-        //addressBook.resetData(newData);
+        addressBook.resetData(newData);
     }
 
 
