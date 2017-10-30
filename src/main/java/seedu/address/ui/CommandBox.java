@@ -28,10 +28,11 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    //@@author pjunwei95
     private static final String[] suggestedWords = {"add", "delete", "edit", "help", "find", "list",
                                                     "select", "search", "clear", "undo", "redo", "history",
                                                     "c/", "t/", "p/", "n/", "a/", "e/"};
-
+    //@@author pjunwei95
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
@@ -198,6 +199,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setStyle(fxFormatFontSize);
     }
 
+    //@@author pjunwei95
     @FXML
     /**
      * Sets the command box style to user preferred font size.
