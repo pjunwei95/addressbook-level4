@@ -141,13 +141,13 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Locating persons by tag: `find/t`
+=== Locating persons by tag: `findtag`
 
 Finds persons whose tags contain any of the given keywords. +
-Format: `find/t KEYWORD [MORE_KEYWORDS]`
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
 [TIP]
-Make sure there are no whitespaces between `find` and `/t`!
+Make sure there are no whitespaces between `find` and `tag`!
 
 ****
 * Given three people with tags: `John Doe t/Friends`, `Hans Gruber t/Friends`, and `Bo Yang t/Colleagues`
@@ -159,9 +159,9 @@ Make sure there are no whitespaces between `find` and `/t`!
 
 Examples:
 
-* `find/t friends` +
+* `findtag friends` +
 Returns `John Doe` and `Hans Gruber`
-* `find/t friends colleagues` +
+* `findtag friends colleagues` +
 Returns any person having tags `Friends` or `Colleagues`
 
 image::Search.png[width="600"]
