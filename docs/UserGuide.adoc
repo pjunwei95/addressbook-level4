@@ -494,7 +494,18 @@ The above command will change the due date of the reminder to the new date. +
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
-Format: `clear`
+
+Format: `clear` +
+
+A clear confirmation will pop-up to reaffirm your clear command in the event of accidental clearing. +
+
+You will be able to confirm clearing by pressing `ENTER` on the keyboard, or clicking `OK`.
+
+Otherwise, you can cancel by highlighting the `Cancel` button with the keyboard followed by the `SPACE` button.
+Alternatively, you can also click the `X` button or the `Cancel` button. +
+
+[TIP]
+To interact solely with the keyboard, make your selection and press `SPACE` instead of `ENTER`!
 
 === Exiting the program : `exit`
 
