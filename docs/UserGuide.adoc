@@ -432,7 +432,6 @@ If the person does not have a facebook account or the username is not entered in
 
 image::facebook.png[width="790"]
 
-<<<<<<< HEAD
 === Show address of a person : `map` (SINCE V1.3)
 
 Shows the address of a person in Google Map in the browser panel.+
@@ -491,6 +490,14 @@ e.g. `Remove 1` +
 Command Format - `Change d/13.11.1997` +
 The above command will change the due date of the reminder to the new date. +
 
+=== Auto-completion
+
+Auto-complete your commands by providing suggestions. +
+
+image::autocompletion.png[]
+
+Type any letters to get some suggestions on what command to use.
+
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
@@ -499,7 +506,9 @@ Format: `clear` +
 
 A clear confirmation will pop-up to reaffirm your clear command in the event of accidental clearing. +
 
-You will be able to confirm clearing by pressing `ENTER` on the keyboard, or clicking `OK`.
+image::clearconfirmation.png[]
+
+By default, you will be able to confirm clearing by pressing `ENTER` on the keyboard, or clicking `OK`.
 
 Otherwise, you can cancel by highlighting the `Cancel` button with the keyboard followed by the `SPACE` button.
 Alternatively, you can also click the `X` button or the `Cancel` button. +
