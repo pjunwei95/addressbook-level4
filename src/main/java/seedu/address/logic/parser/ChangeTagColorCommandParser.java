@@ -14,6 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
+//@@author ChenXiaoman
 /**
  * Parses input arguments and creates a new ChangeTagColorCommand object
  */

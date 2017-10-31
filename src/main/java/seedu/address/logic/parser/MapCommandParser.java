@@ -7,6 +7,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+//@@author ChenXiaoman
+/**
+ * Parses input arguments and creates a new MapCommand object
+ */
 public class MapCommandParser implements Parser<MapCommand> {
 
     /**

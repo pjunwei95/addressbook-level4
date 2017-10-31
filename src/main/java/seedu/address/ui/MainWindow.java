@@ -260,7 +260,7 @@ public class MainWindow extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
-
+    //@@author ChenXiaoman
     /**
      * Increase the font size.
      */
@@ -277,16 +277,26 @@ public class MainWindow extends UiPart<Region> {
         commandBox.handleCommandInputChanged(ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND);
     }
 
+    /**
+     * Change the theme to dark theme
+     */
     @FXML
     private void handleChangeDarkTheme() {
         commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_DARK_THEME_COMMAND);
     }
 
+    /**
+     * Change the theme to bright theme
+     */
     @FXML
     private void handleChangeBrightTheme() {
         commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_BRIGHT_THEME_COMMAND);
     }
 
+    /**
+     * Change the theme when a ChangeThemeEvent is raised
+     * @param changeThemeEvent
+     */
     @Subscribe
     private void handleChangeThemeEvent(ChangeThemeEvent changeThemeEvent) {
         Theme.changeTheme(primaryStage, changeThemeEvent.getTheme());

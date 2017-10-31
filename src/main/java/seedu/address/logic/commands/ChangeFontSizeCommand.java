@@ -6,9 +6,9 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.font.FontSize;
-
+//@@author ChenXiaoman
 /**
- * Customise the look of the Address Book application.
+ * Customise the font size of the Address Book application.
  */
 public class ChangeFontSizeCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "fs";

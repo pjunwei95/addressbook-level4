@@ -6,11 +6,9 @@ import java.util.Arrays;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
-
-
-
+//@@author ChenXiaoman
 /**
- * Represent a color for a tag
+ * Represent a color of a tag
  */
 public class TagColor {
     public static final String[] VALID_TAG_COLOR = {"red", "blue", "green", "teal", "aqua",

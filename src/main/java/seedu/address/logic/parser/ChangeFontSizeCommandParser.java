@@ -10,7 +10,7 @@ import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.font.FontSize;
 
-
+//@@author ChenXiaoman
 /**
  * Parses input arguments and creates a new ChangeFontSizeCommand object
  */

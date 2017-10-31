@@ -108,6 +108,7 @@ public class StatusBarFooter extends UiPart<Region> {
         setTotalPerson(abce.data.getPersonList().size());
     }
 
+    //@@author ChenXiaoman
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
         setFontSize(event.getFontSize());

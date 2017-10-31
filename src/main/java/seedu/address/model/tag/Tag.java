@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+//@@author ChenXiaoman
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag of a person.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {

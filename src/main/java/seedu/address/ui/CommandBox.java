@@ -179,6 +179,7 @@ public class CommandBox extends UiPart<Region> {
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
+    //@@author ChenXiaoman
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
         setFontSize(event.getFontSize());

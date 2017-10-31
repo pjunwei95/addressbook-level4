@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+//@@author ChenXiaoman
 public class ThemeTest {
     @Test
     public void isValidThemeName() throws Exception {

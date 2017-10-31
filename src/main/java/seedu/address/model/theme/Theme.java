@@ -7,6 +7,11 @@ import java.util.Arrays;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+//@@author ChenXiaoman
+/**
+ * Represent a theme of an application
+ * Guarantees: immutable; name is valid as declared in {@link #isValidThemeName(String)}
+ */
 public class Theme {
 
     public static final String DARK_THEME = "dark";

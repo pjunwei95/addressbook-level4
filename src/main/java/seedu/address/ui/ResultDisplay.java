@@ -49,7 +49,7 @@ public class ResultDisplay extends UiPart<Region> {
             setStyleToDefault();
         }
     }
-
+    //@@author ChenXiaoman
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
         setFontSize(event.getFontSize());
@@ -59,7 +59,7 @@ public class ResultDisplay extends UiPart<Region> {
         String fxFomatString = FontSize.getAssociateFxFontSizeString(fontSize);
         resultDisplay.setStyle(fxFomatString);
     }
-
+    //@@author
     /**
      * Sets the {@code ResultDisplay} style to use the default style.
      */

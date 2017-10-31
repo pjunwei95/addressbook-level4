@@ -124,7 +124,7 @@ public class AddressBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-
+        //@@author ChenXiaoman
         case ChangeTagColorCommand.COMMAND_WORD:
             return new ChangeTagColorCommandParser().parse(arguments);
 
@@ -136,7 +136,7 @@ public class AddressBookParser {
 
         case MapCommand.COMMAND_WORD:
             return new MapCommandParser().parse(arguments);
-            
+        //@@author
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

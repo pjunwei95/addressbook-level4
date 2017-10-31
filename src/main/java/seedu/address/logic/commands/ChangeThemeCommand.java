@@ -13,7 +13,11 @@ import seedu.address.commons.events.ui.ChangeThemeEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.theme.Theme;
 
-public class ChangeThemeCommand extends UndoableCommand{
+//@@author ChenXiaoman
+/**
+ * Change the theme of the application
+ */
+public class ChangeThemeCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "theme";
 

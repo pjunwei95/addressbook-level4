@@ -416,7 +416,7 @@ Examples:
 
 === Change the theme : `theme` (SINCE V1.4)
 
-Changes the theme of entire application.+
+Changes the theme of entire application. +
 
 Format: `theme [THEME]`
 ****

@@ -19,7 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.theme.Theme;
-
+//@@author ChenXiaoman
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
  */
@@ -51,7 +51,6 @@ public class ChangeThemeCommandTest {
                 guiSettings.getFontSize(), DARK_THEME);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), expectedUserPrefs);
-        
         assertCommandSuccess(changeThemeCommand, model, expectedMessage, expectedModel);
     }
 

@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.model.font.FontSize;
-
+//@@author ChenXiaoman
 public class ChangeFontSizeCommandParserTest {
     private ChangeFontSizeCommandParser parser = new ChangeFontSizeCommandParser();
 

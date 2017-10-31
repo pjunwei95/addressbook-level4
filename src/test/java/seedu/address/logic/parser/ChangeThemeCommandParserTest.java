@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.ChangeThemeCommand;
 
+//@@author ChenXiaoman
 public class ChangeThemeCommandParserTest {
 
     private ChangeThemeCommandParser parser = new ChangeThemeCommandParser();

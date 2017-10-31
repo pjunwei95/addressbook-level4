@@ -21,7 +21,7 @@ import seedu.address.commons.events.ui.ShowPersonAddressEvent;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.person.ReadOnlyPerson;
 
-
+//@@author ChenXiaoman
 /**
  * An UI component that displays information of a {@code Person}.
  */
@@ -102,8 +102,7 @@ public class PersonCard extends UiPart<Region> {
             url = "/images/user.png";
             Image Display = new Image(url);
             image.setImage(Display);
-        }
-        else {
+        } else {
 
             if (filePath.endsWith("g")) {
 

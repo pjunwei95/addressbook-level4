@@ -23,7 +23,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
-
+//@@author ChenXiaoman
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
  */

@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_FONT_SIZE;
 import org.junit.Test;
 
 public class FontSizeTest {
+    //@@author ChenXiaoman
     @Test
     public void isValidFontSize() throws Exception {
         assertTrue(FontSize.isValidFontSize(FontSize.FONT_SIZE_L_LABEL));
