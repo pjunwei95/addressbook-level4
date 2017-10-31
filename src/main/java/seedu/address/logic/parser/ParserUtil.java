@@ -69,7 +69,6 @@ public class ParserUtil {
         requireNonNull(phone);
         return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
     }
-    //@@author RonakLakhotia
     /**
      * Parses a {@code Optional<String> details} into an {@code Optional<ReminderDetails>}
      * if {@code details} is present.
@@ -95,7 +94,6 @@ public class ParserUtil {
         requireNonNull(dueDate);
         return dueDate.isPresent() ? Optional.of(new DueDate(dueDate.get())) : Optional.empty();
     }
-    //@@author generated
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
@@ -106,7 +104,6 @@ public class ParserUtil {
         return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
     }
 
-    //@@author RonakLakhotia
     /**
      * Parses a {@code Optional<String> date} into an {@code Optional<DateOfBirth>} if {@code dateOfBirth} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
@@ -126,7 +123,6 @@ public class ParserUtil {
         requireNonNull(username);
         return username.isPresent() ? Optional.of(new FacebookUsername(username.get())) : Optional.empty();
     }
-    //@@author
     /**
      * Parses a {@code Optional<String> remark} into an {@code Optional<Remark>} if {@code remark} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
@@ -135,7 +131,6 @@ public class ParserUtil {
         requireNonNull(remark);
         return remark.isPresent() ? Optional.of(new Remark(remark.get())) : Optional.empty();
     }
-    //@@author RonakLakhotia
     /**
      * Parses a {@code Optional<String> FilePath} into an {@code Optional<FileImage>} if {@code FilePath} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
@@ -144,7 +139,6 @@ public class ParserUtil {
         requireNonNull(image);
         return image.isPresent() ? Optional.of(new FileImage(image.get())) : Optional.empty();
     }
-    //@@author generated
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.

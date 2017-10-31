@@ -26,9 +26,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "https://nusmods.com/timetable/2017-2018/sem1";
-    //@@author RonakLakhotia
     public static final String FACEBOOK_PROFILE_PAGE = "https://m.facebook.com/";
-    //@@author
     public static final String NUSMODS_SEARCH_URL_PREFIX = "https://nusmods.com/timetable/2017-2018/sem1?";
     public static final String GOOGLE_MAP_SEARCH_URL_PREFIX = "https://www.google.com.sg/maps/search/";
 
@@ -113,7 +111,6 @@ public class BrowserPanel extends UiPart<Region> {
         loadPage(GOOGLE_MAP_SEARCH_URL_PREFIX + event.getAddress());
     }
 
-    //@@author RonakLakhotia
     /**
      * Shows Facebook profile picture of user
      */

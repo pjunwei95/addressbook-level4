@@ -38,9 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
-    //@@author RonakLakhotia
     private final FilteredList<ReadOnlyReminder> filteredReminders;
-    //@@author
 
 
 
@@ -55,9 +53,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        //@@author RonakLakhotia
         filteredReminders = new FilteredList<>(this.addressBook.getReminderList());
-        //@@author
+
     }
 
     public ModelManager() {
@@ -87,13 +84,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
     }
-    //@@author RonakLakhotia
     @Override
     public synchronized void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
 
         raise(new FaceBookEvent(person));
     }
-    //@@author generated
 
     @Override
     public synchronized void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
@@ -103,7 +98,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
     }
-    //@@author RonakLakhotia
     @Override
     public synchronized void addReminder(ReadOnlyReminder target) throws DuplicateReminderException {
 
@@ -133,7 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
             System.out.println("Error encountered");
         }
     }
-    //@@author
+
     @Override
     public synchronized void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
         addressBook.updateTagColorPair(tagList, color);
@@ -149,7 +143,6 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
     }
-    //@@author RonakLakhotia
     @Override
     public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder)
             throws DuplicateReminderException, ReminderNotFoundException {
@@ -158,7 +151,6 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updateReminder(target, changedReminder);
         indicateAddressBookChanged();
     }
-    //@@author generated
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -169,7 +161,6 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
     }
-    //@@author RonakLakhotia
     /**
      * Returns an unmodifiable view of the list of {@code ReadOnlyReminder} backed by the internal list of
      * {@code weaver}
@@ -178,20 +169,17 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<ReadOnlyReminder> getFilteredReminderList() {
         return FXCollections.unmodifiableObservableList(filteredReminders);
     }
-    //@@author
     @Override
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
 
-    //@@author RonakLakhotia
     @Override
     public void updateFilteredReminderList(Predicate<ReadOnlyReminder> predicate) {
         requireNonNull(predicate);
         filteredReminders.setPredicate(predicate);
     }
-    //@@author
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

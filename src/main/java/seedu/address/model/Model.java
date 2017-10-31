@@ -23,9 +23,8 @@ import seedu.address.model.tag.TagColor;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<ReadOnlyPerson> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    //@@author RonakLakhotia
     Predicate<ReadOnlyReminder> PREDICATE_SHOW_ALL_REMINDERS = unused->true;
-    //@@author generated
+
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
@@ -38,7 +37,6 @@ public interface Model {
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
 
-    //@@author RonakLakhotia
     /** Deletes the given reminder. */
     void deleteReminder(ReadOnlyReminder target) throws ReminderNotFoundException;
 
@@ -73,14 +71,12 @@ public interface Model {
     void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder)
             throws DuplicateReminderException, ReminderNotFoundException;
 
-    //@@author generated
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
 
-    //@@author RonakLakhotia
     /** Returns an unmodifiable view of the filtered reminders list */
     ObservableList<ReadOnlyReminder> getFilteredReminderList();
-    //@@author generated
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

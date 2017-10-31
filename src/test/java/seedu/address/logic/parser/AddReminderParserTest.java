@@ -2,21 +2,21 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_ASSIGNMENT;
+import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_MEETING;
+import static seedu.address.logic.commands.CommandTestUtil.DUE_DATE_DESC_ASSIGNMENT;
+import static seedu.address.logic.commands.CommandTestUtil.DUE_DATE_DESC_MEETING;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DETAILS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DUE_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_ASSIGNMENT;
+import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_MEETING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_MEETING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DUE_DATE_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DUE_DATE_MEETING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_MEETING;
-import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_ASSIGNMENT;
-import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_MEETING;
-import static seedu.address.logic.commands.CommandTestUtil.DUE_DATE_DESC_ASSIGNMENT;
-import static seedu.address.logic.commands.CommandTestUtil.DUE_DATE_DESC_MEETING;
-import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_ASSIGNMENT;
-import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_MEETING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -30,6 +30,7 @@ import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.ReminderDetails;
 import seedu.address.testutil.ReminderBuilder;
 
+//@@author RonakLakhotia
 public class AddReminderParserTest {
     private AddReminderParser parser = new AddReminderParser();
 

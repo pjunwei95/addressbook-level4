@@ -33,7 +33,7 @@ import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.testutil.ReminderBuilder;
-
+//@@author RonakLakhotia
 public class AddReminderTest {
 
     @Rule

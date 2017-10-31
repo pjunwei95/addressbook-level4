@@ -22,15 +22,11 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Phone> phone;
     private ObjectProperty<Email> email;
     private ObjectProperty<Address> address;
-    //@@author RonakLakhotia
     private ObjectProperty<DateOfBirth> date;
-    //@@author
     private ObjectProperty<Remark> remark;
     private ObjectProperty<UniqueTagList> tags;
-    //@@author RonakLakhotia
     private ObjectProperty<FileImage> image;
     private ObjectProperty<FacebookUsername> username;
-    //@@author generated
 
     /**
      * Every field must be present and not null.
@@ -42,14 +38,10 @@ public class Person implements ReadOnlyPerson {
         this.phone = new SimpleObjectProperty<>(phone);
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
-        //@@author RonakLakhotia
         this.date = new SimpleObjectProperty<>(dateOfBirth);
-        //@@author
         this.remark = new SimpleObjectProperty<>(remark);
-        //@@author RonakLakhotia
         this.image = new SimpleObjectProperty<>(image);
         this.username = new SimpleObjectProperty<>(username);
-        //@@author
         // protect internal tags from changes in the arg list
         this.tags = new SimpleObjectProperty<> (new UniqueTagList(tags));
     }
@@ -76,7 +68,6 @@ public class Person implements ReadOnlyPerson {
         return name.get();
     }
 
-    //@@author RonakLakhotia
     public void setUsername(FacebookUsername username) {
         this.username.set(requireNonNull(username));
     }
@@ -89,7 +80,6 @@ public class Person implements ReadOnlyPerson {
     public FacebookUsername getUsername() {
         return username.get();
     }
-    //@@author generated
 
     public void setPhone(Phone phone) {
         this.phone.set(requireNonNull(phone));
@@ -133,8 +123,6 @@ public class Person implements ReadOnlyPerson {
         return address.get();
     }
 
-    //@@author RonakLakhotia
-
     public void setDateOfBirth(DateOfBirth date) {
         this.date.set(requireNonNull(date));
     }
@@ -151,7 +139,6 @@ public class Person implements ReadOnlyPerson {
     public  DateOfBirth getDateOfBirth() {
         return date.get();
     }
-    //@@author
 
     public void setRemark(Remark remark) {
         this.remark.set(requireNonNull(remark));
@@ -166,12 +153,10 @@ public class Person implements ReadOnlyPerson {
     public Remark getRemark() {
         return remark.get();
     }
-    //@@author RonakLakhotia
     @Override
     public FileImage getImage() {
         return image.get();
     }
-    //@@author generated
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -186,11 +171,9 @@ public class Person implements ReadOnlyPerson {
         return tags;
     }
 
-    //@@author RonakLakhotia
     public ObjectProperty<FileImage> imageProperty() {
         return image;
     }
-    //@@author
     /**
      * Replaces this person's tags with the tags in the argument tag set.
      */

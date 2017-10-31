@@ -61,20 +61,16 @@ public class PersonCard extends UiPart<Region> {
     private Label phone;
     @FXML
     private Label address;
-    //@@author RonakLakhotia
     @FXML
     private Label date;
-    //@@author
     @FXML
     private Label email;
     @FXML
     private FlowPane tags;
     @FXML
     private Label remark;
-    //@@author RonakLakhotia
     @FXML
     private ImageView image;
-    //@@author
     @FXML
     private ImageView imagePhone;
     @FXML
@@ -107,7 +103,6 @@ public class PersonCard extends UiPart<Region> {
         return address;
     }
 
-    //@@author RonakLakhotia
     /**
      * Adds a photo to a persons contact
      */
@@ -158,7 +153,6 @@ public class PersonCard extends UiPart<Region> {
             }
         }
     }
-    //@@author generated
 
     /**
      * Binds the individual UI elements to observe their respective {@code Person} properties
@@ -177,15 +171,12 @@ public class PersonCard extends UiPart<Region> {
             initTags(person, FontSize.getCurrentFontSizeLabel());
 
         });
-        //@@author RonakLakhotia
         try {
             assignImage(person.getImage().getFilePath());
         }
-
         catch (ParseException pe) {
             new AssertionError("Invalid input");
         }
-        //@@author
 
     }
 

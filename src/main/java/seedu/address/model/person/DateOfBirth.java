@@ -1,5 +1,5 @@
 package seedu.address.model.person;
-//@@author RonakLakhotia
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -26,7 +26,6 @@ public class DateOfBirth {
     public DateOfBirth(String date) throws IllegalValueException {
 
         String trimmedDate;
-        //@@author
         if (!isValidBirthday(date)) {
             throw new IllegalValueException(MESSAGE_BIRTHDAY_CONSTRAINTS);
         }
@@ -38,7 +37,6 @@ public class DateOfBirth {
         }
 
     }
-    //@@author RonakLakhotia
     @Override
     public String toString() {
         return date;

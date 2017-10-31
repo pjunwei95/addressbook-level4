@@ -157,10 +157,8 @@ public class MainWindow extends UiPart<Region> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        //@@author RonakLakhotia
         reminderListPanel = new ReminderListPanel(logic.getFilteredReminderList());
         reminderListPlaceholder.getChildren().add(reminderListPanel.getRoot());
-        //@@author generated
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -254,11 +252,9 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
-    //@@author RonakLakhotia
     public ReminderListPanel getReminderListPanel() {
         return this.reminderListPanel;
     }
-    //@@author generated
 
     void releaseResources() {
         browserPanel.freeResources();

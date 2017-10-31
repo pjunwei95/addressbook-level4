@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.ChangeReminderCommand.ChangeReminderDescriptor;
 import seedu.address.testutil.ChangeReminderDescriptorBuilder;
-
+//@@author RonakLakhotia
 public class ChangeReminderDescriptorTest {
 
     @Test

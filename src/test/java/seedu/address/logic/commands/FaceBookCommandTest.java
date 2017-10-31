@@ -26,6 +26,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code MapCommand}.
  */
+//@@author RonakLakhotia
 public class FaceBookCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
