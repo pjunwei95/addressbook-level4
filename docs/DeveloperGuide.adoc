@@ -725,7 +725,7 @@ e.g. - `facebook 1`
 ==== Working flow
 
 The `FaceBookCommand Parser` class parses the arguments and throws an exception if the index entered
-is invalid. A new event is then raised in the ModelManager class.
+is invalid. A new event `handleFaceBookEvent`  is then raised.
 The Brower Panel class then loads the page with the url of the profile page to be viewed on Facebook. +
 
 ---
@@ -735,6 +735,12 @@ The Brower Panel class then loads the page with the url of the profile page to b
 loadPage(url);
     }
 ---
+
+image::FaceBookSequence.png[width="800"]
+
+Above is the sequence diagram. +
+
+
 
 ==== Reasons for this kind of implementation
 
@@ -751,6 +757,32 @@ loadPage(url);
 **Alternative2:** View the profile page on the browser panel. +
 **Pros:** Makes it quicker and adds a fucntion to the personalised Weaver. +
 **Cons:** Limits the functionalities that can be used on facebook. +
+
+=== Adding a reminders list to Weaver.
+
+** The reminders panel displays the list of reminders that the user has entered. +
+** The Reminder object contains three main attributes which are as follows +
+
+* Details of the reminder. +
+
+* The priority level of the reminder which can be high, low or medium. +
+
+* The DueDate of the assignment.
+
+** An image is also assigned to the reminder indicating the priority level of the reminder. +
+
+** There are three main commands associated with this feature. +
+
+* Adding a reminder to the list. +
+e.g. - `reminder g/CS2103T Assignmet p/High d/12.11.2017`. +
+
+* Removing a reminder. +
+e.g. - `remove 1`. +
+
+* Changing a reminder. +
+e.g. - `change 1 d/12.12.2017`. +
+
+** The commands to add and remove reminders will inherit from Undoable Command. +
 
 
 // tag::Logging[]
