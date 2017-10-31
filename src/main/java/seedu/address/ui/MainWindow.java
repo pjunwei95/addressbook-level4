@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.core.CipherUnit.encrypt;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -27,7 +29,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 import seedu.address.storage.AccountsStorage;
-import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -53,8 +55,9 @@ public class MainWindow extends UiPart<Region> {
     //@@author generated
     private Config config;
     private UserPrefs prefs;
-    private Storage storage;
+    private StorageManager storage;
     private AccountsStorage accPrefs;
+    private UiManager uiManager;
 
     private CommandBox commandBox;
 
@@ -80,8 +83,8 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, Storage storage, UserPrefs prefs, Logic logic,
-                      AccountsStorage accPrefs) {
+    public MainWindow(Stage primaryStage, Config config, StorageManager storage, UserPrefs prefs, Logic logic,
+                      AccountsStorage accPrefs, UiManager uiManager) {
         super(FXML);
 
         // Set dependencies
@@ -91,6 +94,8 @@ public class MainWindow extends UiPart<Region> {
         this.prefs = prefs;
         this.storage = storage;
         this.accPrefs = accPrefs;
+        this.uiManager = uiManager;
+        uiManager.setMainWindow(this);
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -172,6 +177,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void hide() {
+        logout();
         primaryStage.hide();
     }
 
@@ -228,6 +234,16 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
+    * logout
+    */
+    public void logout() {
+        logger.info("Trying to logout");
+        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
+        encrypt(storage.getAddressBookFilePath());
+        logger.info("File encypted");
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -240,11 +256,8 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleLogoutEvent() throws IOException {
-        logger.info("Trying to logout");
-        this.hide();
-        this.releaseResources();
-        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        logout();
+        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
         loginPage.show();
     }
 
@@ -257,6 +270,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void releaseResources() {
+        logout();
         browserPanel.freeResources();
     }
 

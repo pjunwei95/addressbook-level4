@@ -140,7 +140,6 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser, false));
-
         } catch (CommandException | ParseException e) {
             initHistory();
             // handle command failure

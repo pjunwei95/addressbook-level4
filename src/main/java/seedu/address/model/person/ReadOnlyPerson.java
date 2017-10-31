@@ -66,12 +66,10 @@ public interface ReadOnlyPerson {
                 .append(getDateOfBirth())
                 .append(" Remark: ")
                 .append(getRemark())
-                //@@author RonakLakhotia
                 .append(" FilePath: ")
                 .append(getImage())
-                .append(" FacebookUsername ")
+                .append(" Facebook Username: ")
                 .append(getUsername())
-                //@@author generated
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

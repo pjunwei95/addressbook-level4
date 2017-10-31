@@ -1,4 +1,7 @@
 package seedu.address.ui;
+import static seedu.address.commons.core.CipherUnit.decrypt;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -20,6 +23,7 @@ import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
+import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -28,7 +32,12 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AccountsStorage;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.XmlAddressBookStorage;
 
 /**
  * The login page. Users need to key in their username and password to login the MainWindow.
@@ -46,11 +55,12 @@ public class LoginPage extends UiPart<Region> {
     private MainWindow mainWindow;
 
     private Config config;
-    private Storage storage;
+    private StorageManager storage;
     private UserPrefs prefs;
     private Logic logic;
     private Model model;
     private AccountsStorage accPrefs;
+    private UiManager uiManager;
 
     @FXML
     private TextField username;
@@ -58,8 +68,8 @@ public class LoginPage extends UiPart<Region> {
     @FXML
     private TextField password;
 
-    public LoginPage(Stage primaryStage, Config config, Storage storage, UserPrefs prefs,
-                     Logic logic, AccountsStorage accPrefs) {
+    public LoginPage(Stage primaryStage, Config config, StorageManager storage, UserPrefs prefs,
+                     Logic logic, AccountsStorage accPrefs, UiManager uiManager) {
         super(FXML);
         this.logic = logic;
         // Set dependencies
@@ -68,6 +78,8 @@ public class LoginPage extends UiPart<Region> {
         this.prefs = prefs;
         this.accPrefs = accPrefs;
         this.storage = storage;
+        this.uiManager = uiManager;
+        uiManager.setLoginPage(this);
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -80,23 +92,42 @@ public class LoginPage extends UiPart<Region> {
     }
 
 
-
     public Stage getPrimaryStage() {
         return primaryStage;
     }
+
+    public MainWindow getMainWindow() { return mainWindow; }
 
     /**
      * Method for handle login event
      */
     @FXML
-    private void handleLoginEvent() {
+    private void handleLoginEvent() throws IOException {
         logger.info("Trying to login");
         String uname = username.getText();
         String pword = password.getText();
         if (checkValid(uname, pword)) {
+
+            String path = "data/" + uname + "addressbook.xml";
+            String tempPath = "data/temp.xml";
+
+            File addressBookFile = new File(path);
+            if (addressBookFile.exists()) {
+                decrypt(path);
+                logger.info("File decypted");
+            }
+
+            UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+            AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
+
+            //storage.setUserPrefsStorage(userPrefsStorage);
+            prefs.setAddressBookFilePath(path);
+            storage.setAddressBookStorage(addressBookStorage);
+
             model = initModelManager(storage, prefs);
-            prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-            mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
+            logic = new LogicManager(model);
+
+            mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
         } else {
@@ -105,14 +136,24 @@ public class LoginPage extends UiPart<Region> {
     }
 
     /**
+     * Handles the register event.
+     */
+    @FXML
+    private void handleRegisterEvent() {
+        logger.info("Trying to register");
+        RegisterPage registerPage = new RegisterPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
+        this.hide();
+        registerPage.show();
+    }
+
+    /**
      * Handles the key press event, {@code keyEvent}.
      */
     @FXML
-    private void handleKeyPress(KeyEvent keyEvent) {
+    private void handleKeyPress(KeyEvent keyEvent) throws IOException {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             handleLoginEvent();
         }
-
     }
 
     GuiSettings getCurrentGuiSetting() {
@@ -133,10 +174,6 @@ public class LoginPage extends UiPart<Region> {
         FxViewUtil.setStageIcon(primaryStage, iconSource);
     }
 
-    void show() {
-        primaryStage.show();
-    }
-
     private void setWindowDefaultSize(UserPrefs prefs) {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
@@ -147,12 +184,20 @@ public class LoginPage extends UiPart<Region> {
         }
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
     void hide() {
         primaryStage.hide();
     }
 
+    /**
+    * release the resources
+     */
     void releaseResources() {
         if (mainWindow != null) {
+            mainWindow.logout();
             mainWindow.getBrowserPanel().freeResources();
         }
     }

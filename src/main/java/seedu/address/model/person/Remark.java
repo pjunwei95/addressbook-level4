@@ -30,7 +30,14 @@ public class Remark {
      * Returns true if a given string is a valid Remark.
      */
     public static boolean isValidRemark(String test) {
-        return test.matches(REMARK_VALIDATION_REGEX);
+        return (test.matches(REMARK_VALIDATION_REGEX) || test.equals(""));
+    }
+
+    /**
+     * Get the moduleLists.
+     */
+    public String getParsedModuleLists() {
+        return parse(moduleLists);
     }
 
     /**
@@ -38,6 +45,22 @@ public class Remark {
      */
     public String getModuleLists() {
         return moduleLists;
+    }
+
+    /**
+     * Parse the modulelist to correct url format.
+     */
+    private String parse(String moduleLists) {
+        String[] mods = moduleLists.split(",");
+        String result = "";
+        for (String m : mods) {
+            String[] helper = m.split("/");
+            String mod = helper[0];
+            String kind = helper[1];
+            String num = helper[2];
+            result = result + "&" + mod + "[" + kind + "]" + "=" + num;
+        }
+        return result;
     }
 
     @Override
