@@ -1,6 +1,6 @@
 package seedu.address.ui;
 //@@author RonakLakhotia
-import static seedu.address.model.font.FontSize.getassociatefxfontsizestring;
+import static seedu.address.model.font.FontSize.getAssociateFxFontSizeString;
 
 import java.io.File;
 
@@ -121,7 +121,7 @@ public class ReminderCard extends UiPart<Region> {
     private void setFontSize(String newFontSize) {
         assert (FontSize.isValidFontSize(newFontSize));
 
-        String fxFormatFontSize = getassociatefxfontsizestring(newFontSize);
+        String fxFormatFontSize = getAssociateFxFontSizeString(newFontSize);
         setFontSizeForAllAttributesExceptTag(fxFormatFontSize);
     }
 

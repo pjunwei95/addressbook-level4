@@ -108,13 +108,14 @@ public class StatusBarFooter extends UiPart<Region> {
         setTotalPerson(abce.data.getPersonList().size());
     }
 
+    //@@author ChenXiaoman
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
         setFontSize(event.getFontSize());
     }
 
     private void setFontSize(String fontSize) {
-        String fxFomatString = FontSize.getassociatefxfontsizestring(fontSize);
+        String fxFomatString = FontSize.getAssociateFxFontSizeString(fontSize);
         syncStatus.setStyle(fxFomatString);
         saveLocationStatus.setStyle(fxFomatString);
         totalPersons.setStyle(fxFomatString);

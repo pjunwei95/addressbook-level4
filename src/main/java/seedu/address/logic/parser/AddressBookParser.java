@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CancelClearCommand;
 import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.commands.ChangeReminderCommand;
 import seedu.address.logic.commands.ChangeTagColorCommand;
+import seedu.address.logic.commands.ChangeThemeCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearPopupCommand;
 import seedu.address.logic.commands.Command;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.commands.PhotoCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
@@ -134,13 +136,19 @@ public class AddressBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-
+        //@@author ChenXiaoman
         case ChangeTagColorCommand.COMMAND_WORD:
             return new ChangeTagColorCommandParser().parse(arguments);
 
         case ChangeFontSizeCommand.COMMAND_WORD:
             return new ChangeFontSizeCommandParser().parse(arguments);
 
+        case ChangeThemeCommand.COMMAND_WORD:
+            return new ChangeThemeCommandParser().parse(arguments);
+
+        case MapCommand.COMMAND_WORD:
+            return new MapCommandParser().parse(arguments);
+        //@@author
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

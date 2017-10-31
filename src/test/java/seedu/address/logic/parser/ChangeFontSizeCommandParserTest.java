@@ -1,19 +1,19 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.commands.ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND;
+import static seedu.address.logic.commands.ChangeFontSizeCommand.INCREASE_FONT_SIZE_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FONT_SIZE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.model.font.FontSize.DECREASE_FONT_SIZE_COMMAND;
 import static seedu.address.model.font.FontSize.FONT_SIZE_L_LABEL;
 import static seedu.address.model.font.FontSize.FONT_SIZE_XL_LABEL;
 import static seedu.address.model.font.FontSize.FONT_SIZE_XS_LABEL;
-import static seedu.address.model.font.FontSize.INCREASE_FONT_SIZE_COMMAND;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.model.font.FontSize;
-
+//@@author ChenXiaoman
 public class ChangeFontSizeCommandParserTest {
     private ChangeFontSizeCommandParser parser = new ChangeFontSizeCommandParser();
 

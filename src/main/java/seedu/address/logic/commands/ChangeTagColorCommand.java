@@ -13,7 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
-
+//@@author ChenXiaoman
 /**
  * Change color of tags
  */
@@ -29,8 +29,6 @@ public class ChangeTagColorCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " t/friend "
             + "c/red";
 
-    public static final String MESSAGE_ARGUMENTS = "Tag: %1$s, Color: %2$s";
-
     public static final String MESSAGE_NOT_EXISTING_TAGS = "Cannot change color of not existing tags: %1$s";
 
     public static final String MESSAGE_INVALID_COLOR = "Color %1$s is invalid."
@@ -44,6 +42,7 @@ public class ChangeTagColorCommand extends UndoableCommand {
     private final TagColor color;
 
     /**
+     * Constructor
      * @param tagList to edit the color
      * @param color of the tagList
      */
@@ -56,7 +55,7 @@ public class ChangeTagColorCommand extends UndoableCommand {
     }
 
     /**
-     *Check whether a given tag exists in current database
+     * Check whether a given tag exists in current database
      */
     private boolean isExistingTagName(Tag t) {
         for (Tag tag : model.getAddressBook().getTagList()) {

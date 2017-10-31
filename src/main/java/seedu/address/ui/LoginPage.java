@@ -30,6 +30,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
+import seedu.address.model.theme.Theme;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.AddressBookStorage;
@@ -88,9 +89,13 @@ public class LoginPage extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+        initTheme();
         registerAsAnEventHandler(this);
     }
 
+    private void initTheme() {
+        Theme.changeTheme(primaryStage, Theme.getCurrentTheme());
+    }
 
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -158,7 +163,8 @@ public class LoginPage extends UiPart<Region> {
 
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel(),
+                Theme.getCurrentTheme());
     }
 
     private void setTitle(String appTitle) {
@@ -178,6 +184,7 @@ public class LoginPage extends UiPart<Region> {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
         FontSize.setCurrentFontSizeLabel(prefs.getGuiSettings().getFontSize());
+        Theme.setCurrentTheme(prefs.getGuiSettings().getTheme());
         if (prefs.getGuiSettings().getWindowCoordinates() != null) {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
@@ -254,7 +261,7 @@ public class LoginPage extends UiPart<Region> {
      * Sets the command box style to user preferred font size.
      */
     private void setFontSize(String newFontSize) {
-        String fxFormatFontSize = FontSize.getassociatefxfontsizestring(newFontSize);
+        String fxFormatFontSize = FontSize.getAssociateFxFontSizeString(newFontSize);
         username.setStyle(fxFormatFontSize);
         password.setStyle(fxFormatFontSize);
     }

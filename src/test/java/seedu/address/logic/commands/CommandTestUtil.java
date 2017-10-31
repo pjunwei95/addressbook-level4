@@ -31,7 +31,6 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.reminder.DetailsContainsKeywordsPredicate;
 import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagColor;
 import seedu.address.testutil.ChangeReminderDescriptorBuilder;
 import seedu.address.testutil.DeleteTagDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -59,9 +58,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friends";
     public static final String VALID_TAG_FAMILY = "family";
     public static final String VALID_TAG_COLOR_NAME_RED = "red";
-    public static final String VALID_TAG_COLOR_NAME_YELLOW = "yellow";
-    public static final String VALID_INCREASE_FONT_SIZE = "+";
-    public static final String VALID_DECREASE_FONT_SIZE = "-";
+
     public static final String VALID_USERNAME_AMY = "";
     public static final String VALID_USERNAME_BOB = "";
     public static final String VALID_DETAILS_ASSIGNMENT = "Assignment";
@@ -103,12 +100,11 @@ public class CommandTestUtil {
     public static final String INVALID_DATE_OF_BIRTH = " " + PREFIX_DOB; // empty string not allowed for dateOfBirth
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TAG = "notExistingTag";
-    public static final String INVALID_TAG_COLOR_NAME = "notExistingColor";
     public static final String INVALID_FONT_SIZE = "invalid font size";
+    public static final String INVALID_THEME_NAME = "invalid theme name";
     public static final String INVALID_DETAILS_DESC = " " + PREFIX_REMINDER_DETAILS + "@Meeting";
     public static final String INVALID_PRIORITY_DESC = " " + PREFIX_REMINDER_PRIORITY + "!High";
     public static final String INVALID_DUE_DATE_DESC = " " + PREFIX_REMINDER_DUE_DATE + "@13.10.1997";
-
 
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_AMY;
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_BOB;
@@ -118,8 +114,6 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final Set<Tag> VALID_TAGLIST;
     public static final Set<Tag> INVALID_TAGLIST;
-    public static final TagColor VALID_TAG_COLOR_RED;
-    public static final TagColor VALID_TAG_COLOR_YELLOW;
 
 
     static {
@@ -151,9 +145,6 @@ public class CommandTestUtil {
         } catch (IllegalValueException e) {
             e.printStackTrace();
         }
-
-        VALID_TAG_COLOR_RED = new TagColor(VALID_TAG_COLOR_NAME_RED, true);
-        VALID_TAG_COLOR_YELLOW = new TagColor(VALID_TAG_COLOR_NAME_YELLOW, true);
 
     }
     static {

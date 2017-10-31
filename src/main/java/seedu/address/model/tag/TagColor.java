@@ -6,11 +6,9 @@ import java.util.Arrays;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
-
-
-
+//@@author ChenXiaoman
 /**
- * Represent a color for a tag
+ * Represent a color of a tag
  */
 public class TagColor {
     public static final String[] VALID_TAG_COLOR = {"red", "blue", "green", "teal", "aqua",
@@ -19,6 +17,8 @@ public class TagColor {
                                                     "white", "yellow", "transparent"};
     public static final String MESSAGE_TAG_COLOR_CONSTRAINTS = "Valid colors are: "
             + Arrays.toString(VALID_TAG_COLOR);
+
+    public static final String DEFAULT_TAG_COLOR = "orange";
 
     public final String tagColorName;
 
@@ -33,19 +33,6 @@ public class TagColor {
         if (!isValidTagColorName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_TAG_COLOR_CONSTRAINTS);
         }
-        this.tagColorName = trimmedName;
-    }
-
-    /**
-     * Assume the given color name is valid.
-     * Only for testing purpose.
-     *
-     * @param name
-     * @param isValidColorName
-     */
-    public TagColor(String name, boolean isValidColorName) {
-        requireNonNull(name);
-        String trimmedName = name.trim();
         this.tagColorName = trimmedName;
     }
 

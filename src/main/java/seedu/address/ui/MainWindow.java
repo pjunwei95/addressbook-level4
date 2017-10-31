@@ -20,14 +20,18 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ChangeThemeEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.ChangeFontSizeCommand;
+import seedu.address.logic.commands.ChangeThemeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
+import seedu.address.model.theme.Theme;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.StorageManager;
 
@@ -104,7 +108,7 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-
+        initTheme();
         setAccelerators();
         registerAsAnEventHandler(this);
     }
@@ -121,6 +125,9 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
+    private void initTheme() {
+        Theme.changeTheme(primaryStage, Theme.getCurrentTheme());
+    }
     /**
      * Sets the accelerator of a MenuItem.
      *
@@ -201,6 +208,7 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
         FontSize.setCurrentFontSizeLabel(prefs.getGuiSettings().getFontSize());
+        Theme.setCurrentTheme(prefs.getGuiSettings().getTheme());
         if (prefs.getGuiSettings().getWindowCoordinates() != null) {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
@@ -217,7 +225,8 @@ public class MainWindow extends UiPart<Region> {
      */
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel(),
+                Theme.getCurrentTheme());
     }
 
     /**
@@ -279,13 +288,13 @@ public class MainWindow extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
-
+    //@@author ChenXiaoman
     /**
      * Increase the font size.
      */
     @FXML
     private void handleIncreaseFontSize() throws CommandException, ParseException {
-        commandBox.handleCommandInputChanged(FontSize.INCREASE_FONT_SIZE_COMMAND);
+        commandBox.handleCommandInputChanged(ChangeFontSizeCommand.INCREASE_FONT_SIZE_COMMAND);
     }
 
     /**
@@ -293,7 +302,32 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleDecreaseFontSize() throws CommandException, ParseException {
-        commandBox.handleCommandInputChanged(FontSize.DECREASE_FONT_SIZE_COMMAND);
+        commandBox.handleCommandInputChanged(ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND);
+    }
+
+    /**
+     * Change the theme to dark theme
+     */
+    @FXML
+    private void handleChangeDarkTheme() {
+        commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_DARK_THEME_COMMAND);
+    }
+
+    /**
+     * Change the theme to bright theme
+     */
+    @FXML
+    private void handleChangeBrightTheme() {
+        commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_BRIGHT_THEME_COMMAND);
+    }
+
+    /**
+     * Change the theme when a ChangeThemeEvent is raised
+     * @param changeThemeEvent
+     */
+    @Subscribe
+    private void handleChangeThemeEvent(ChangeThemeEvent changeThemeEvent) {
+        Theme.changeTheme(primaryStage, changeThemeEvent.getTheme());
     }
 
 }

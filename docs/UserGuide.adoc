@@ -44,7 +44,7 @@ This app will not work with earlier versions of Java 8.
 
 . After login, you will see the GUI below.
 
-image::MockUp.png[width="790"]
+image::Ui.png[width="790"]
 
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -345,9 +345,9 @@ The new account's username must be different from all previous ones.
 Change the color of one or more than one tags. +
 Format: `color [c/COLOR] [t/TAG]...`
 ****
-* The default color of tags is blue.
+* The default color of tags is "orange".
 * You can change the color of more than one tag at a time
-* The colors supported are: blue, red, green and yellow
+* The colors supported are: "red", "blue", "green", "teal", "aqua", "black", "gray", "lime", "maroon", "navy","orange", "purple", "silver", "olive","white", "yellow" and "transparent"
 * You cannot change the color of a non existing tag.
 ****
 
@@ -413,11 +413,8 @@ this will delete the photo attached with the person at index 1.
 ****
 
 
-<<<<<<< HEAD
-=== FaceBook Integration (SINCE V1.3) +
-=======
+
 === FaceBook Integration SINCE V1.3
->>>>>>> 354a8ccf7981533a46244ed84dbee59d910e0508
 
 Helps you view the profile page of a person in your contact list. +
 
@@ -434,6 +431,43 @@ e.g. - `facebook 1` +
 If the person does not have a facebook account or the username is not entered in Weaver,you will be notified by Weaver.
 
 image::facebook.png[width="790"]
+
+<<<<<<< HEAD
+=== Show address of a person : `map` (SINCE V1.3)
+
+Shows the address of a person in Google Map in the browser panel.+
+
+Format: `map INDEX`
+****
+* Selects the person and loads the Google Map showing address of the person at the specified `INDEX`.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* You can also view the address by clicking the address panel of a person.
+****
+
+Examples:
+
+* `map 1`
+
+* `map 2`
+
+=== Change the theme : `theme` (SINCE V1.4)
+
+Changes the theme of entire application. +
+
+Format: `theme [THEME]`
+****
+* Supported themes are: dark, bright
+* The default theme is bright
+* You can also change the theme via theme button
+****
+
+Examples:
+
+* `theme dark`
+
+* `theme bright`
+
 
 === Reminders Panel (SINCE V1.4) +
 
@@ -456,8 +490,6 @@ e.g. `Remove 1` +
 ** Change an existing reminder. +
 Command Format - `Change d/13.11.1997` +
 The above command will change the due date of the reminder to the new date. +
-
-
 
 === Clearing all entries : `clear`
 
@@ -512,6 +544,10 @@ e.g. `fs xs` `fs +` `fs -`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
+* *Change theme* : `theme [THEME]` +
+e.g.`theme bright`
+* *Show address in map* : `map INDEX` +
+e.g.`map 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
