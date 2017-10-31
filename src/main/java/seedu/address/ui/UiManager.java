@@ -41,6 +41,7 @@ public class UiManager extends ComponentManager implements Ui {
     private MainWindow mainWindow;
     private LoginPage loginPage;
     private AccountsStorage accPrefs;
+    private RegisterPage registerPage;
 
     private int test;
     public UiManager(Logic logic, Config config, StorageManager storage, UserPrefs prefs, AccountsStorage accPrefs) {
@@ -55,6 +56,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
+
         primaryStage.setTitle(config.getAppTitle());
 
         //Set the application icon.
@@ -62,7 +64,7 @@ public class UiManager extends ComponentManager implements Ui {
 
 
         try {
-            loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+            loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, this);
             loginPage.show();
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -80,7 +82,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
+            mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs, this);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
         } catch (Throwable e) {
@@ -93,12 +95,13 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         if (test == 1) {
             prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
-            mainWindow.hide();
             mainWindow.releaseResources();
+            mainWindow.hide();
         } else {
             prefs.updateLastUsedGuiSetting(loginPage.getCurrentGuiSetting());
-            loginPage.hide();
             loginPage.releaseResources();
+            loginPage.hide();
+
         }
     }
 
@@ -109,6 +112,30 @@ public class UiManager extends ComponentManager implements Ui {
 
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
+    }
+
+    public MainWindow getMainWindow() {
+        return mainWindow;
+    }
+
+    public LoginPage getLoginPage() {
+        return loginPage;
+    }
+
+    public RegisterPage getRegisterPage() {
+        return registerPage;
+    }
+
+    public void setLoginPage(LoginPage loginPage) {
+        this.loginPage = loginPage;
+    }
+
+    public void setMainWindow(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+    }
+
+    public void setRegisterPage(RegisterPage registerPage) {
+        this.registerPage = registerPage;
     }
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {

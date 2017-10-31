@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.core.CipherUnit.encrypt;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -52,6 +54,7 @@ public class MainWindow extends UiPart<Region> {
     private UserPrefs prefs;
     private StorageManager storage;
     private AccountsStorage accPrefs;
+    private UiManager uiManager;
 
     private CommandBox commandBox;
 
@@ -74,7 +77,7 @@ public class MainWindow extends UiPart<Region> {
     private StackPane statusbarPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, StorageManager storage, UserPrefs prefs, Logic logic,
-                      AccountsStorage accPrefs) {
+                      AccountsStorage accPrefs, UiManager uiManager) {
         super(FXML);
 
         // Set dependencies
@@ -84,6 +87,8 @@ public class MainWindow extends UiPart<Region> {
         this.prefs = prefs;
         this.storage = storage;
         this.accPrefs = accPrefs;
+        this.uiManager = uiManager;
+        uiManager.setMainWindow(this);
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -162,6 +167,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void hide() {
+        logout();
         primaryStage.hide();
     }
 
@@ -218,6 +224,16 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
+    * logout
+    */
+    public void logout() {
+        logger.info("Trying to logout");
+        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
+        encrypt(storage.getAddressBookFilePath());
+        logger.info("File encypted");
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -230,9 +246,8 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleLogoutEvent() throws IOException {
-        logger.info("Trying to logout");
-        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        logout();
+        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
         loginPage.show();
     }
 
@@ -241,6 +256,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void releaseResources() {
+        logout();
         browserPanel.freeResources();
     }
 

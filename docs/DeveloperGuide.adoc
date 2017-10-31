@@ -32,20 +32,6 @@ People who have the need for storing and managing contact information efficientl
 
 *`Weaver`* is a command line based software for storing and managing contact information. It satisfies almost all functions might be needed by university students on storing and managing contact information.
 
-
-== Introduction
-
-=== Audiences
-
-All university students. +
-People who have the need for storing and managing contact information efficiently are suggested to use *`Weaver`*.
-
-=== Purposes
-
-. *`Weaver`* aims at providing efficient solution for university students to store and manage contact information.
-. It devotes to improve the experience when users try to add person , delete person , edit person , remark person ect.
-. Targeted at university students, *`Weaver`* is bringing shortcut for students to note meetings, calendars and course information.
-
 == Setting up
 
 === Prerequisites
@@ -455,6 +441,56 @@ multiple users. +
 // end::undoredo[]
 
 ---
+
+=== Register mechanism
+
+The register feature enables users to put new valid accounts inside the accounts.json file. The file operations are similar to the one used in Login/Logout feature.
+
+[NOTE]
+It puts account information in the accounts.json file. Users must key in the same password twice for confirm.
+
+image::Register.png[width="800"]
+
+The check mechanism requires the username to be unique from all different ones:
+[source,java]
+----
+private boolean checkValid() {
+    if (accPrefs.getHm().get(username.getText()) != null) {
+        logger.info("Register faild");
+        return false;
+    } else {
+        logger.info("Register successful");
+        return password.getText().equals(password1.getText());
+    }
+}
+
+----
+
+[NOTE]
+If user key in wrong password, he will stuck at login page until he manages to get in.
+
+Register is implemented using JavaFX.
+[source,java]
+----
+@FXML
+private void handleRegisterEvent() {
+    try {
+        logger.info("Trying to register");
+        if (checkValid()) {
+            accPrefs.getHm().put(username.getText(), password.getText());
+            accPrefs.saveAccountsPrefs(accPrefs, accPrefs.getUserPrefsFilePath());
+            loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+            this.hide();
+            loginPage.show();
+        }
+    } catch (IOException e) {
+        logger.info("Invalid input");
+    }
+}
+----
+
+[NOTE]
+A user can go back using the back button.
 
 // tag::customizetagcolor[]
 === Customize tag color mechanism
