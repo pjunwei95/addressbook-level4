@@ -2,8 +2,6 @@ package seedu.address.ui;
 //@@author RonakLakhotia
 import static seedu.address.model.font.FontSize.getAssociateFxFontSizeString;
 
-import java.io.File;
-
 import java.util.Random;
 
 import com.google.common.eventbus.Subscribe;
@@ -11,8 +9,6 @@ import com.google.common.eventbus.Subscribe;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
