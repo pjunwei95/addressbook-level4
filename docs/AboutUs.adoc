@@ -18,7 +18,10 @@ image::ronaklakhotia.png[width="150", align="left"]
 {empty}[https://github.com/RonakLakhotia[github]]
 
 Role: Co-ordination and Testing +
-Responsibilities: Overall co-ordination of the project is taken care of.Ensures that any code pushed to the team repositiory is tested and passes all test cases.Also suggests modifications to be made in the features.Also in charge of Logic Component of the project.
+
+** Responsibilities: Overall co-ordination of the project is taken care of.
+** Ensures that any code pushed to the team repositiory is tested and passes all test cases.
+** Also suggests modifications to be made in the features.Also in charge of Logic Component of the project.
 
 '''
 
@@ -27,7 +30,10 @@ image::chenxiaoman.png[width="150", align="left"]
 {empty}[https://github.com/ChenXiaoman[github]]
 
 Role: Scheduling and Tracking +
-Responsibilities: Ensure that all deadlines and Deliverables are met on time.Send out timely reminders to the other team members to finish the assigned task.Make sure that all work is done in the correct format.In addition,in charge of Model Component of project.
+
+** Responsibilities: Ensure that all deadlines and Deliverables are met on time. +
+** Send out timely reminders to the other team members to finish the assigned task. +
+** Make sure that all work is done in the correct format.In addition,in charge of Model Component of project. +
 
 '''
 
@@ -36,7 +42,10 @@ image::yangminxing.png[width="150", align="left"]
 {empty}[https://github.com/yangminxingnus[github]]
 
 Role: In charhe of Storage and UI +
-Responsibilities: Ensure that the interface of the Application is of good quality.Be well werse with JAVAFX in particular.As for main components,in charge of storage therby by overlooking the changes made to storage component.
+
+** Responsibilities: Ensure that the interface of the Application is of good quality.
+** Be well werse with JAVAFX in particular.
+** As for main components,in charge of storage therby by overlooking the changes made to storage component.
 
 '''
 
@@ -45,6 +54,9 @@ image::pjunwei.png[width="150", align="left"]
 {empty}[https://github.com/pjunwei95[github]]
 
 Role: Code Quality,Integration and Documentation +
-Responsibilities: Ensure the code quality of the SUT is maintained at all times.Ensure that the code is not broken at any given time.In charge of documentation as well.Makes sure that the User Guide and Developer Guide are updated from time to time.
+
+** Responsibilities: Ensure the code quality of the SUT is maintained at all times.
+** Ensure that the code is not broken at any given time.In charge of documentation as well.
+** Makes sure that the User Guide and Developer Guide are updated from time to time.
 
 '''

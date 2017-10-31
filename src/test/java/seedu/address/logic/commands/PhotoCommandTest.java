@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-
+//@@author RonakLakhotia
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code PhotoCommand}.
  */

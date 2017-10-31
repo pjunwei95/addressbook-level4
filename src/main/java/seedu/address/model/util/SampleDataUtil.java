@@ -16,6 +16,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.reminder.DueDate;
+import seedu.address.model.reminder.Priority;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.ReminderDetails;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -60,6 +65,20 @@ public class SampleDataUtil {
             throw new AssertionError("sample data cannot be invalid", e);
         }
     }
+    public static Reminder[] getSampleReminder() {
+
+        try {
+            return new Reminder[]{
+                new Reminder(new ReminderDetails("CS2103T Assignment"), new Priority(
+                            "Priority Level: High"), new DueDate("12.11.2017")),
+                new Reminder(new ReminderDetails("Group meeting"), new Priority(
+                        "Priority Level: High"), new DueDate("12.11.2017"))
+            };
+        } catch (IllegalValueException ive) {
+            throw new AssertionError("Date cannot be invalid");
+        }
+    }
+
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
@@ -67,9 +86,14 @@ public class SampleDataUtil {
             for (Person samplePerson : getSamplePersons()) {
                 sampleAb.addPerson(samplePerson);
             }
+            for (Reminder sampleReminder : getSampleReminder()) {
+                sampleAb.addReminder(sampleReminder);
+            }
             return sampleAb;
         } catch (DuplicatePersonException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
+        } catch (DuplicateReminderException ef) {
+            throw new AssertionError("sample data cannot contain duplicate reminders", ef);
         }
     }
 

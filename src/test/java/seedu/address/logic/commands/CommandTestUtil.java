@@ -9,6 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IMAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
@@ -25,8 +28,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.DetailsContainsKeywordsPredicate;
+import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
+import seedu.address.testutil.ChangeReminderDescriptorBuilder;
 import seedu.address.testutil.DeleteTagDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -58,6 +64,12 @@ public class CommandTestUtil {
     public static final String VALID_DECREASE_FONT_SIZE = "-";
     public static final String VALID_USERNAME_AMY = "";
     public static final String VALID_USERNAME_BOB = "";
+    public static final String VALID_DETAILS_ASSIGNMENT = "Assignment";
+    public static final String VALID_PRIORITY_ASSIGNMENT = "Low";
+    public static final String VALID_DUE_DATE_ASSIGNMENT = "12.11.2017";
+    public static final String VALID_DETAILS_MEETING = "Meeting";
+    public static final String VALID_PRIORITY_MEETING = "High";
+    public static final String VALID_DUE_DATE_MEETING = "12.11.2017";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -77,6 +89,12 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String USERNAME_AMY = " " + PREFIX_USERNAME + VALID_USERNAME_AMY;
     public static final String USERNAME_BOB = " " + PREFIX_USERNAME + VALID_USERNAME_BOB;
+    public static final String DETAILS_DESC_ASSIGNMENT = " " + PREFIX_REMINDER_DETAILS + VALID_DETAILS_ASSIGNMENT;
+    public static final String PRIORITY_DESC_ASSIGNMENT = " " + PREFIX_REMINDER_PRIORITY + VALID_PRIORITY_ASSIGNMENT;
+    public static final String DUE_DATE_DESC_ASSIGNMENT = " " + PREFIX_REMINDER_DUE_DATE + VALID_DUE_DATE_ASSIGNMENT;
+    public static final String DETAILS_DESC_MEETING = " " + PREFIX_REMINDER_DETAILS + VALID_DETAILS_MEETING;
+    public static final String PRIORITY_DESC_MEETING = " " + PREFIX_REMINDER_PRIORITY + VALID_PRIORITY_MEETING;
+    public static final String DUE_DATE_DESC_MEETING = " " + PREFIX_REMINDER_DUE_DATE + VALID_DUE_DATE_MEETING;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -87,10 +105,15 @@ public class CommandTestUtil {
     public static final String INVALID_TAG = "notExistingTag";
     public static final String INVALID_TAG_COLOR_NAME = "notExistingColor";
     public static final String INVALID_FONT_SIZE = "invalid font size";
+    public static final String INVALID_DETAILS_DESC = " " + PREFIX_REMINDER_DETAILS + "@Meeting";
+    public static final String INVALID_PRIORITY_DESC = " " + PREFIX_REMINDER_PRIORITY + "!High";
+    public static final String INVALID_DUE_DATE_DESC = " " + PREFIX_REMINDER_DUE_DATE + "@13.10.1997";
 
 
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_AMY;
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_BOB;
+    public static final ChangeReminderCommand.ChangeReminderDescriptor DESC_ASSIGNMENT;
+    public static final ChangeReminderCommand.ChangeReminderDescriptor DESC_MEETING;
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final Set<Tag> VALID_TAGLIST;
@@ -133,6 +156,16 @@ public class CommandTestUtil {
         VALID_TAG_COLOR_YELLOW = new TagColor(VALID_TAG_COLOR_NAME_YELLOW, true);
 
     }
+    static {
+
+        DESC_ASSIGNMENT = new ChangeReminderDescriptorBuilder().withDetails(VALID_DETAILS_ASSIGNMENT)
+                .withPriority(VALID_PRIORITY_ASSIGNMENT).withDueDate(VALID_DUE_DATE_ASSIGNMENT).build();
+
+        DESC_MEETING = new ChangeReminderDescriptorBuilder().withDetails(VALID_DETAILS_MEETING)
+                .withPriority(VALID_PRIORITY_MEETING).withDueDate(VALID_DUE_DATE_MEETING).build();
+
+
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -161,15 +194,16 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<ReadOnlyPerson> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
-
+        List<ReadOnlyPerson> expectedFilteredListPerson = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<ReadOnlyReminder> expectedFilteredListReminder = new ArrayList<>(actualModel.getFilteredReminderList());
         try {
             command.execute();
             fail("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedAddressBook, actualModel.getAddressBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertEquals(expectedFilteredListPerson, actualModel.getFilteredPersonList());
+            assertEquals(expectedFilteredListReminder, actualModel.getFilteredReminderList());
         }
     }
 
@@ -182,6 +216,16 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assert model.getFilteredPersonList().size() == 1;
+    }
+    /**
+     * Updates {@code model}'s filtered list to show only the first reminder in the {@code model}'s address book.
+     */
+    public static void showFirstReminderOnly(Model model) {
+        ReadOnlyReminder reminder = model.getAddressBook().getReminderList().get(0);
+        final String[] splitDetails = reminder.getDetails().details.split("\\s+");
+        model.updateFilteredReminderList(new DetailsContainsKeywordsPredicate(Arrays.asList(splitDetails[0])));
+
+        assert model.getFilteredReminderList().size() == 1;
     }
 
     /**

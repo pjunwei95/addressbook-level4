@@ -17,6 +17,11 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.ReadOnlyReminder;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.model.reminder.UniqueReminderList;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 import seedu.address.model.tag.UniqueTagList;
@@ -28,6 +33,9 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    //@@author RonakLakhotia
+    private final UniqueReminderList reminders;
+    //@@author generated
     private final UniqueTagList tags;
 
     /*
@@ -38,6 +46,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
+        //@@author RonakLakhotia
+        reminders = new UniqueReminderList();
+        //@@author generated
         persons = new UniquePersonList();
         tags = new UniqueTagList();
     }
@@ -45,7 +56,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons, Reminders and Tags in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -62,15 +73,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
+    //@@author RonakLakhotia
+    public void setReminders(List<? extends ReadOnlyReminder> reminders) throws DuplicateReminderException {
+        this.reminders.setReminders(reminders);
+    }
+    //@@author generated
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         try {
+            setReminders(newData.getReminderList());
             setPersons(newData.getPersonList());
         } catch (DuplicatePersonException e) {
             assert false : "AddressBooks should not have duplicate persons";
+        } catch (DuplicateReminderException ee) {
+            assert false : "AddressBooks should not have duplicate reminders";
         }
 
         setTags(new HashSet<>(newData.getTagList()));
@@ -94,6 +113,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         // in the person list.
         persons.add(newPerson);
     }
+    //@@author RonakLakhotia
+    /**
+     * Adds a reminder to the address book.
+     * @throws DuplicateReminderException if an equivalent person already exists.
+     */
+    public void addReminder(ReadOnlyReminder r) throws DuplicateReminderException {
+        Reminder newReminder = new Reminder(r);
+        reminders.add(newReminder);
+    }
+    //@@author generated
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedReadOnlyPerson}.
@@ -117,6 +146,25 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    //@@author RonakLakhotia
+    /**
+     * Replaces the given reminder {@code target} in the list with {@code changeReadOnlyReminder}.
+     * {@code Weaver}'s tag list will be updated with the tags of {@code changeReadOnlyReminder}.
+     *
+     * @throws DuplicateReminderException if updating the reminder's details causes the reminder to be equivalent to
+     *      another existing reminder in the list.
+     * @throws ReminderNotFoundException if {@code target} could not be found in the list.
+     *
+     */
+    public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changeReadOnlyReminder)
+            throws DuplicateReminderException, ReminderNotFoundException {
+        requireNonNull(changeReadOnlyReminder);
+
+        Reminder changedReminder = new Reminder(changeReadOnlyReminder);
+        reminders.setReminder(target, changedReminder);
+    }
+
+    //@@author generated
     /**
      * Ensures that every tag in this person:
      *  - exists in the master list {@link #tags}
@@ -159,6 +207,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+    //@@author RonakLakhotia
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * @throws ReminderNotFoundException if the {@code key} is not in this {@code AddressBook}.
+     */
+    public boolean removeReminder(ReadOnlyReminder key) throws ReminderNotFoundException {
+        if (reminders.remove(key)) {
+            return true;
+        } else {
+            throw new ReminderNotFoundException();
+        }
+    }
+
+    //@@author generated
     //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
@@ -230,7 +292,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return persons.asObservableList().size() + " persons, "
+                + tags.asObservableList().size() +  " tags" + reminders.asObservableList().size() + " reminders";
         // TODO: refine later
     }
 
@@ -238,6 +301,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<ReadOnlyPerson> getPersonList() {
         return persons.asObservableList();
     }
+
+    //@@author RonakLakhotia
+    @Override
+    public ObservableList<ReadOnlyReminder> getReminderList() {
+        return reminders.asObservableList();
+    }
+    //@@author generated
 
     @Override
     public ObservableList<Tag> getTagList() {
@@ -249,6 +319,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && this.persons.equals(((AddressBook) other).persons)
+                && this.reminders.equals(((AddressBook) other).reminders)
                 && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
     }
 

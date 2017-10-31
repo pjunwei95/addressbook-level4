@@ -7,8 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddReminder;
 import seedu.address.logic.commands.CancelClearCommand;
 import seedu.address.logic.commands.ChangeFontSizeCommand;
+import seedu.address.logic.commands.ChangeReminderCommand;
 import seedu.address.logic.commands.ChangeTagColorCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearPopupCommand;
@@ -26,6 +28,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PhotoCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.RemoveReminderCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -72,8 +75,17 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case ChangeReminderCommand.COMMAND_WORD:
+            return new ChangeReminderCommandParser().parse(arguments);
+
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
+
+        case AddReminder.COMMAND_WORD:
+            return new AddReminderParser().parse(arguments);
+
+        case RemoveReminderCommand.COMMAND_WORD:
+            return new RemoveCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

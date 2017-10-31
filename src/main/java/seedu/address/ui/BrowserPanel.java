@@ -120,5 +120,4 @@ public class BrowserPanel extends UiPart<Region> {
 
         loadPersonFaceBookPage(event.getPerson());
     }
-
 }

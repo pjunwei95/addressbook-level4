@@ -50,6 +50,9 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    //@@author RonakLakhotia
+    private ReminderListPanel reminderListPanel;
+    //@@author generated
     private Config config;
     private UserPrefs prefs;
     private StorageManager storage;
@@ -60,6 +63,10 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private StackPane browserPlaceholder;
+    //@@author RonakLakhotia
+    @FXML
+    private StackPane reminderListPlaceholder;
+    //@@author generated
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -154,6 +161,9 @@ public class MainWindow extends UiPart<Region> {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        reminderListPanel = new ReminderListPanel(logic.getFilteredReminderList());
+        reminderListPlaceholder.getChildren().add(reminderListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -253,6 +263,10 @@ public class MainWindow extends UiPart<Region> {
 
     public PersonListPanel getPersonListPanel() {
         return this.personListPanel;
+    }
+
+    public ReminderListPanel getReminderListPanel() {
+        return this.reminderListPanel;
     }
 
     void releaseResources() {

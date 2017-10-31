@@ -171,11 +171,9 @@ public class PersonCard extends UiPart<Region> {
             initTags(person, FontSize.getCurrentFontSizeLabel());
 
         });
-
         try {
             assignImage(person.getImage().getFilePath());
         }
-
         catch (ParseException pe) {
             new AssertionError("Invalid input");
         }

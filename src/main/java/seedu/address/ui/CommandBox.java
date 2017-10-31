@@ -132,6 +132,7 @@ public class CommandBox extends UiPart<Region> {
      */
     public void handleCommandInputChanged(String inputCommand) {
         try {
+            System.out.println(inputCommand);
             CommandResult commandResult = logic.execute(inputCommand);
             initHistory();
             historySnapshot.next();
