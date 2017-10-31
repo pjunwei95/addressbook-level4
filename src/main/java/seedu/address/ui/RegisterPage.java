@@ -39,6 +39,7 @@ public class RegisterPage extends UiPart<Region> {
     private Config config;
     private Logic logic;
     private LoginPage loginPage;
+    private UiManager uiManager;
 
     @FXML
     private TextField username;
@@ -50,7 +51,7 @@ public class RegisterPage extends UiPart<Region> {
     private TextField password1;
 
     public RegisterPage(Stage primaryStage, Config config, StorageManager storage, UserPrefs prefs,
-                        Logic logic, AccountsStorage accPrefs) {
+                        Logic logic, AccountsStorage accPrefs, UiManager uiManager) {
         super(FXML);
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -59,6 +60,8 @@ public class RegisterPage extends UiPart<Region> {
         this.storage = storage;
         this.prefs = prefs;
         this.logic = logic;
+        this.uiManager = uiManager;
+        uiManager.setRegisterPage(this);
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -94,7 +97,7 @@ public class RegisterPage extends UiPart<Region> {
             if (checkValid()) {
                 accPrefs.getHm().put(username.getText(), password.getText());
                 accPrefs.saveAccountsPrefs(accPrefs, accPrefs.getUserPrefsFilePath());
-                loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+                loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
                 this.hide();
                 loginPage.show();
             }
@@ -109,7 +112,7 @@ public class RegisterPage extends UiPart<Region> {
     @FXML
     private void handleBackEvent() {
         logger.info("Going back to login page");
-        loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
         this.hide();
         loginPage.show();
     }
