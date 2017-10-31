@@ -26,12 +26,13 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Remark> remark;
     private ObjectProperty<UniqueTagList> tags;
     private ObjectProperty<FileImage> image;
+    private ObjectProperty<FacebookUsername> username;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, DateOfBirth dateOfBirth,
-                  Remark remark, FileImage image, Set<Tag> tags) {
+                  Remark remark, FileImage image, FacebookUsername username, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
@@ -40,6 +41,7 @@ public class Person implements ReadOnlyPerson {
         this.date = new SimpleObjectProperty<>(dateOfBirth);
         this.remark = new SimpleObjectProperty<>(remark);
         this.image = new SimpleObjectProperty<>(image);
+        this.username = new SimpleObjectProperty<>(username);
         // protect internal tags from changes in the arg list
         this.tags = new SimpleObjectProperty<> (new UniqueTagList(tags));
     }
@@ -49,7 +51,7 @@ public class Person implements ReadOnlyPerson {
      */
     public Person(ReadOnlyPerson source) {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getDateOfBirth(),
-                source.getRemark(), source.getImage(), source.getTags());
+                source.getRemark(), source.getImage(), source.getUsername(), source.getTags());
     }
 
     public void setName(Name name) {
@@ -64,6 +66,19 @@ public class Person implements ReadOnlyPerson {
     @Override
     public Name getName() {
         return name.get();
+    }
+
+    public void setUsername(FacebookUsername username) {
+        this.username.set(requireNonNull(username));
+    }
+    @Override
+    public ObjectProperty<FacebookUsername> usernameProperty() {
+        return username;
+    }
+
+    @Override
+    public FacebookUsername getUsername() {
+        return username.get();
     }
 
     public void setPhone(Phone phone) {
@@ -138,7 +153,6 @@ public class Person implements ReadOnlyPerson {
     public Remark getRemark() {
         return remark.get();
     }
-
     @Override
     public FileImage getImage() {
         return image.get();
@@ -156,6 +170,7 @@ public class Person implements ReadOnlyPerson {
     public ObjectProperty<UniqueTagList> tagProperty() {
         return tags;
     }
+
     public ObjectProperty<FileImage> imageProperty() {
         return image;
     }

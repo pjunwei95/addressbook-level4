@@ -11,6 +11,7 @@ import org.junit.Test;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.model.person.SearchContainsKeywordsPredicate;
 
+//@@author RonakLakhotia
 public class SearchCommandParserTest {
 
     private SearchCommandParser parser = new SearchCommandParser();

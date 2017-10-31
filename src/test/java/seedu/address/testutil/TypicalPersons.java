@@ -16,6 +16,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +26,8 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.reminder.ReadOnlyReminder;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 
 
 /**
@@ -71,7 +75,11 @@ public class TypicalPersons {
             .withImage("")
             .withTags("family").build();
 
+    public static final ReadOnlyReminder ASSIGNMENT = new ReminderBuilder().withDetails("CS2103T")
+            .withPriority("Priority Level: High").withDueDate("12.11.2017").build();
 
+    public static final ReadOnlyReminder MEETING = new ReminderBuilder().withDetails("Group meeting")
+            .withPriority("Priority Level: High").withDueDate("12.11.2017").build();
 
     // Manually added
     public static final ReadOnlyPerson HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -92,12 +100,14 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withImage(VALID_IMAGE_AMY)
             .withRemark(VALID_REMARK_AMY).withDateOfBirth(VALID_DOB_AMY)
+            .withUsername(VALID_USERNAME_AMY)
             .withTags(VALID_TAG_FRIEND).build();
 
     public static final ReadOnlyPerson BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withImage(VALID_IMAGE_BOB)
             .withRemark(VALID_REMARK_BOB).withDateOfBirth(VALID_DOB_BOB)
+            .withUsername(VALID_USERNAME_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
@@ -122,7 +132,16 @@ public class TypicalPersons {
         for (ReadOnlyPerson person : getTypicalPersons()) {
             try {
                 ab.addPerson(person);
-            } catch (DuplicatePersonException e) {
+            }
+            catch (DuplicatePersonException e) {
+                assert false : "not possible";
+            }
+        }
+        for (ReadOnlyReminder reminder : getTypicalReminders()) {
+            try {
+                ab.addReminder(reminder);
+            }
+            catch (DuplicateReminderException de) {
                 assert false : "not possible";
             }
         }
@@ -131,5 +150,9 @@ public class TypicalPersons {
 
     public static List<ReadOnlyPerson> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<ReadOnlyReminder> getTypicalReminders() {
+        return new ArrayList<>(Arrays.asList(ASSIGNMENT, MEETING));
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_REMINDERS;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
@@ -44,6 +45,9 @@ public abstract class UndoableCommand extends Command {
 
         model.resetData(previousAddressBook);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        //@@author RonakLakhotia
+        model.updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
+        //@@author generated
 
         //Revert font size
         if (this instanceof ChangeFontSizeCommand) {
@@ -71,6 +75,9 @@ public abstract class UndoableCommand extends Command {
                     + "it should not fail now");
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        //@@author RonakLakhotia
+        model.updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
+        //@@author generated
     }
 
     @Override

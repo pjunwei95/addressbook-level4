@@ -22,6 +22,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.SearchContainsKeywordsPredicate;
 
+//@@author RonakLakhotia
 /**
  * Contains integration tests (interaction with the Model) for {@code SearchCommand}.
  */

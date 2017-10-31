@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowPersonAddressEvent;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ReadOnlyPerson;
 
 /**
@@ -23,9 +24,8 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "https://nusmods.com/timetable/2017-2018/sem1";
-    public static final String FACEBOOK_PROFILE_PAGE = "https://www.facebook.com/";
+    public static final String FACEBOOK_PROFILE_PAGE = "https://m.facebook.com/";
     public static final String NUSMODS_SEARCH_URL_PREFIX = "https://nusmods.com/timetable/2017-2018/sem1?";
-    public static final String FACEBOOK_MESSENGER_URL_PREFIX = "https://www.facebook.com/messages/t/";
     public static final String GOOGLE_MAP_SEARCH_URL_PREFIX = "https://www.google.com.sg/maps/search/";
 
     private static final String FXML = "BrowserPanel.fxml";
@@ -43,20 +43,25 @@ public class BrowserPanel extends UiPart<Region> {
 
         loadDefaultPage();
 
-
         registerAsAnEventHandler(this);
     }
+
     /**
      * The Browser Panel of the App.
      */
     private void loadPersonPage(ReadOnlyPerson person) {
 
-        loadPage(NUSMODS_SEARCH_URL_PREFIX + parse(person.getRemark().toString()));
+        loadPage(NUSMODS_SEARCH_URL_PREFIX + person.getRemark().getParsedModuleLists());
 
     }
 
+    /**
+     * Method for load page.
+     */
     public void loadPage(String url) {
+
         Platform.runLater(() -> browser.getEngine().load(url));
+
     }
 
     /**
@@ -65,28 +70,16 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadDefaultPage() {
         //URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         try {
+
             URL defaultPage = new URL(DEFAULT_PAGE);
             loadPage(defaultPage.toExternalForm());
+
         } catch (MalformedURLException e) {
+
             logger.info("Invalid URL");
+
         }
 
-    }
-
-    /**
-     * Parse the modulelist to correct url format.
-     */
-    private String parse(String moduleLists) {
-        String[] mods = moduleLists.split(",");
-        String result = "";
-        for ( String m : mods ) {
-            String [] helper = m.split("/");
-            String mod = helper[0];
-            String kind = helper[1];
-            String num = helper[2];
-            result = result + "&" + mod + "[" + kind + "]" + "=" + num;
-        }
-        return result;
     }
 
     /**
@@ -111,18 +104,18 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Shows Facebook profile picture of user
      */
-    public void loadPersonFaceBookPage(ReadOnlyPerson person, String username) {
+    public void loadPersonFaceBookPage(ReadOnlyPerson person) throws ParseException {
 
-        String url = FACEBOOK_PROFILE_PAGE + username;
+        String url = FACEBOOK_PROFILE_PAGE + person.getUsername().toString();
         loadPage(url);
+
     }
 
     @Subscribe
-    public void handleFaceBookEvent(FaceBookEvent event) {
+    public void handleFaceBookEvent(FaceBookEvent event) throws ParseException {
 
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
 
-        loadPersonFaceBookPage(event.getPerson(), event.getUsername());
+        loadPersonFaceBookPage(event.getPerson());
     }
-
 }

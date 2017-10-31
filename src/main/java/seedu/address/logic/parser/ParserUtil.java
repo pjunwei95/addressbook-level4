@@ -14,10 +14,14 @@ import seedu.address.model.font.FontSize;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FacebookUsername;
 import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.reminder.DueDate;
+import seedu.address.model.reminder.Priority;
+import seedu.address.model.reminder.ReminderDetails;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
@@ -65,6 +69,31 @@ public class ParserUtil {
         requireNonNull(phone);
         return phone.isPresent() ? Optional.of(new Phone(phone.get())) : Optional.empty();
     }
+    /**
+     * Parses a {@code Optional<String> details} into an {@code Optional<ReminderDetails>}
+     * if {@code details} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<ReminderDetails> parseDetails(Optional<String> details) throws IllegalValueException {
+        requireNonNull(details);
+        return details.isPresent() ? Optional.of(new ReminderDetails(details.get())) : Optional.empty();
+    }
+    /**
+     * Parses a {@code Optional<String> priority} into an {@code Optional<Priority>} if {@code priority} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
+        requireNonNull(priority);
+        return priority.isPresent() ? Optional.of(new Priority("Priority Level: " + priority.get())) : Optional.empty();
+    }
+    /**
+     * Parses a {@code Optional<String> duedate} into an {@code Optional<DueDate>} if {@code duedate} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<DueDate> parseDueDate(Optional<String> dueDate) throws IllegalValueException {
+        requireNonNull(dueDate);
+        return dueDate.isPresent() ? Optional.of(new DueDate(dueDate.get())) : Optional.empty();
+    }
 
     /**
      * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
@@ -84,6 +113,16 @@ public class ParserUtil {
         return date.isPresent() ? Optional.of(new DateOfBirth(date.get())) : Optional.empty();
     }
 
+
+    /**
+     * Parses a {@code Optional<String> date} into an {@code Optional<FacebookUsername>} if {@code dateOfBirth}
+     * is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<FacebookUsername> parseUsername(Optional<String> username) throws IllegalValueException {
+        requireNonNull(username);
+        return username.isPresent() ? Optional.of(new FacebookUsername(username.get())) : Optional.empty();
+    }
     /**
      * Parses a {@code Optional<String> remark} into an {@code Optional<Remark>} if {@code remark} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
@@ -100,7 +139,6 @@ public class ParserUtil {
         requireNonNull(image);
         return image.isPresent() ? Optional.of(new FileImage(image.get())) : Optional.empty();
     }
-
     /**
      * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.

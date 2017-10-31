@@ -1,3 +1,4 @@
+//@@author RonakLakhotia
 package seedu.address.commons.events.storage;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_IMAGE;

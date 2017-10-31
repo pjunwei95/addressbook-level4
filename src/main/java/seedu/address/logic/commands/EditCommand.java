@@ -22,6 +22,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FacebookUsername;
 import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -111,10 +112,11 @@ public class EditCommand extends UndoableCommand {
         DateOfBirth updatedDate = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         FileImage updatedImage = editPersonDescriptor.getImage().orElse(personToEdit.getImage());
+        FacebookUsername updatedusername = editPersonDescriptor.getUsername().orElse(personToEdit.getUsername());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                          updatedDate, updatedRemark, updatedImage, updatedTags);
+                          updatedDate, updatedRemark, updatedImage, updatedusername, updatedTags);
     }
 
     @Override
@@ -146,7 +148,7 @@ public class EditCommand extends UndoableCommand {
         private Address address;
         private DateOfBirth dateOfBirth;
         private Remark remark;
-
+        private FacebookUsername username;
         private Set<Tag> tags;
 
         private FileImage image;
@@ -161,6 +163,7 @@ public class EditCommand extends UndoableCommand {
             this.dateOfBirth = toCopy.dateOfBirth;
             this.remark = toCopy.remark;
             this.image = toCopy.image;
+            this.username = toCopy.username;
             this.tags = toCopy.tags;
         }
 
@@ -189,8 +192,12 @@ public class EditCommand extends UndoableCommand {
         public Optional<DateOfBirth> getDateOfBirth() {
             return Optional.ofNullable(dateOfBirth);
         }
+
         public Optional<FileImage> getImage() {
             return Optional.ofNullable(image);
+        }
+        public Optional<FacebookUsername> getUsername() {
+            return Optional.ofNullable(username);
         }
         public void setPhone(Phone phone) {
             this.phone = phone;
@@ -218,6 +225,9 @@ public class EditCommand extends UndoableCommand {
 
         public void setRemark(Remark remark) {
             this.remark = remark;
+        }
+        public void setUsername(FacebookUsername username) {
+            this.username = username;
         }
 
         public Optional<Remark> getRemark() {

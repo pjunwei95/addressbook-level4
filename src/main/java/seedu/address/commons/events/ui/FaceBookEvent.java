@@ -1,19 +1,17 @@
 package seedu.address.commons.events.ui;
-
+//@@author RonakLakhotia
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
 /**
- * To raise a FacebOOK EVENT
+ * To raise a Facebook Event
  */
 public class FaceBookEvent extends BaseEvent {
 
     private final ReadOnlyPerson person;
-    private final String username;
 
-    public FaceBookEvent(ReadOnlyPerson person, String username) {
+    public FaceBookEvent(ReadOnlyPerson person) {
         this.person = person;
-        this.username = username;
     }
 
     @Override
@@ -25,7 +23,4 @@ public class FaceBookEvent extends BaseEvent {
         return person;
     }
 
-    public String getUsername() {
-        return username;
-    }
 }

@@ -132,6 +132,7 @@ public class CommandBox extends UiPart<Region> {
      */
     public void handleCommandInputChanged(String inputCommand) {
         try {
+            System.out.println(inputCommand);
             CommandResult commandResult = logic.execute(inputCommand);
             initHistory();
             historySnapshot.next();
@@ -139,7 +140,6 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser, false));
-
         } catch (CommandException | ParseException e) {
             initHistory();
             // handle command failure

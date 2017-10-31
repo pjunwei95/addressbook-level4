@@ -138,7 +138,7 @@ public class DeleteTagCommand extends UndoableCommand {
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getDateOfBirth(), personToEdit.getRemark(),
-                personToEdit.getImage(), updatedTags);
+                personToEdit.getImage(), personToEdit.getUsername(), updatedTags);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- @@author ChenXiaoman -->
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -10,13 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
-<!-- @@author ChenXiaoman -->
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 
     <stylesheets>
         <URL value="@Extensions.css"/>
     </stylesheets>
+
     <SplitPane dividerPositions="0.5, 0.5" prefHeight="0.0" prefWidth="690.0">
         <items>
             <MenuBar fx:id="menuBar" prefHeight="29.0">
@@ -28,7 +28,8 @@
                     <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Theme">
-                    <MenuItem fx:id="brightTheme" mnemonicParsing="false" onAction="#handleChangeBrightTheme" text="Bright"/>
+                    <MenuItem fx:id="brightTheme" mnemonicParsing="false" onAction="#handleChangeBrightTheme"
+                              text="Bright"/>
                     <MenuItem fx:id="darkTheme" mnemonicParsing="false" onAction="#handleChangeDarkTheme" text="Dark"/>
                 </Menu>
             </MenuBar>
@@ -39,37 +40,40 @@
                     wrapText="true"/>
         </items>
     </SplitPane>
-
-    <HBox/>
-
     <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
         <padding>
-            <Insets bottom="5" left="10" right="10" top="5"/>
+            <Insets bottom="5" left="10" right="10" top="5" />
         </padding>
     </StackPane>
 
-    <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100"
-               styleClass="pane-with-border" VBox.vgrow="NEVER">
+    <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
         <padding>
-            <Insets bottom="5" left="10" right="10" top="5"/>
+            <Insets bottom="5" left="10" right="10" top="5" />
         </padding>
     </StackPane>
 
     <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-        <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+        <VBox fx:id="personList" maxWidth="350.0" minWidth="159.0" prefWidth="350.0" SplitPane.resizableWithParent="false">
             <padding>
-                <Insets bottom="10" left="10" right="10" top="10"/>
+                <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="personListPanelPlaceholder" maxWidth="400.0" prefWidth="375.0" VBox.vgrow="ALWAYS" />
         </VBox>
 
-        <StackPane fx:id="browserPlaceholder" prefWidth="340">
+        <StackPane fx:id="browserPlaceholder" prefWidth="700.0" SplitPane.resizableWithParent="false">
             <padding>
-                <Insets bottom="10" left="10" right="10" top="10"/>
+                <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
+
         </StackPane>
+        <VBox fx:id="reminders" maxWidth="340.0" prefWidth="320.0">
+            <children>
+                <StackPane fx:id="reminderListPlaceholder" layoutX="20.0" layoutY="20.0" prefHeight="590.0" />
+            </children>
+        </VBox>
     </SplitPane>
 
-    <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>
+
+    <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
 
 </VBox>

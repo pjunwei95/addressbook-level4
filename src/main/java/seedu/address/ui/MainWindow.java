@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.core.CipherUnit.encrypt;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -31,7 +33,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.theme.Theme;
 import seedu.address.storage.AccountsStorage;
-import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -52,15 +54,23 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    //@@author RonakLakhotia
+    private ReminderListPanel reminderListPanel;
+    //@@author generated
     private Config config;
     private UserPrefs prefs;
-    private Storage storage;
+    private StorageManager storage;
     private AccountsStorage accPrefs;
+    private UiManager uiManager;
 
     private CommandBox commandBox;
 
     @FXML
     private StackPane browserPlaceholder;
+    //@@author RonakLakhotia
+    @FXML
+    private StackPane reminderListPlaceholder;
+    //@@author generated
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -77,8 +87,8 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, Storage storage, UserPrefs prefs, Logic logic,
-                      AccountsStorage accPrefs) {
+    public MainWindow(Stage primaryStage, Config config, StorageManager storage, UserPrefs prefs, Logic logic,
+                      AccountsStorage accPrefs, UiManager uiManager) {
         super(FXML);
 
         // Set dependencies
@@ -88,6 +98,8 @@ public class MainWindow extends UiPart<Region> {
         this.prefs = prefs;
         this.storage = storage;
         this.accPrefs = accPrefs;
+        this.uiManager = uiManager;
+        uiManager.setMainWindow(this);
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -157,6 +169,9 @@ public class MainWindow extends UiPart<Region> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        reminderListPanel = new ReminderListPanel(logic.getFilteredReminderList());
+        reminderListPlaceholder.getChildren().add(reminderListPanel.getRoot());
+
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -169,6 +184,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void hide() {
+        logout();
         primaryStage.hide();
     }
 
@@ -227,6 +243,16 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
+    * logout
+    */
+    public void logout() {
+        logger.info("Trying to logout");
+        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
+        encrypt(storage.getAddressBookFilePath());
+        logger.info("File encypted");
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -239,11 +265,8 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleLogoutEvent() throws IOException {
-        logger.info("Trying to logout");
-        this.hide();
-        this.releaseResources();
-        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        logout();
+        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
         loginPage.show();
     }
 
@@ -251,7 +274,12 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
+    public ReminderListPanel getReminderListPanel() {
+        return this.reminderListPanel;
+    }
+
     void releaseResources() {
+        logout();
         browserPanel.freeResources();
     }
 
