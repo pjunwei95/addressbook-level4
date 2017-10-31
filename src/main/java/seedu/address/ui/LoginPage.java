@@ -1,4 +1,7 @@
 package seedu.address.ui;
+import static seedu.address.commons.core.CipherUnit.decrypt;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -27,6 +30,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
+import seedu.address.model.theme.Theme;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.AddressBookStorage;
@@ -57,6 +61,7 @@ public class LoginPage extends UiPart<Region> {
     private Logic logic;
     private Model model;
     private AccountsStorage accPrefs;
+    private UiManager uiManager;
 
     @FXML
     private TextField username;
@@ -65,7 +70,7 @@ public class LoginPage extends UiPart<Region> {
     private TextField password;
 
     public LoginPage(Stage primaryStage, Config config, StorageManager storage, UserPrefs prefs,
-                     Logic logic, AccountsStorage accPrefs) {
+                     Logic logic, AccountsStorage accPrefs, UiManager uiManager) {
         super(FXML);
         this.logic = logic;
         // Set dependencies
@@ -74,6 +79,8 @@ public class LoginPage extends UiPart<Region> {
         this.prefs = prefs;
         this.accPrefs = accPrefs;
         this.storage = storage;
+        this.uiManager = uiManager;
+        uiManager.setLoginPage(this);
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -82,13 +89,19 @@ public class LoginPage extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+        initTheme();
         registerAsAnEventHandler(this);
     }
 
+    private void initTheme() {
+        Theme.changeTheme(primaryStage, Theme.getCurrentTheme());
+    }
 
     public Stage getPrimaryStage() {
         return primaryStage;
     }
+
+    public MainWindow getMainWindow() { return mainWindow; }
 
     /**
      * Method for handle login event
@@ -99,17 +112,27 @@ public class LoginPage extends UiPart<Region> {
         String uname = username.getText();
         String pword = password.getText();
         if (checkValid(uname, pword)) {
+
             String path = "data/" + uname + "addressbook.xml";
+            String tempPath = "data/temp.xml";
+
+            File addressBookFile = new File(path);
+            if (addressBookFile.exists()) {
+                decrypt(path);
+                logger.info("File decypted");
+            }
+
             UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
             AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
 
             //storage.setUserPrefsStorage(userPrefsStorage);
+            prefs.setAddressBookFilePath(path);
             storage.setAddressBookStorage(addressBookStorage);
 
             model = initModelManager(storage, prefs);
             logic = new LogicManager(model);
 
-            mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs);
+            mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
         } else {
@@ -123,7 +146,7 @@ public class LoginPage extends UiPart<Region> {
     @FXML
     private void handleRegisterEvent() {
         logger.info("Trying to register");
-        RegisterPage registerPage = new RegisterPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        RegisterPage registerPage = new RegisterPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
         this.hide();
         registerPage.show();
     }
@@ -140,7 +163,8 @@ public class LoginPage extends UiPart<Region> {
 
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel(),
+                Theme.getCurrentTheme());
     }
 
     private void setTitle(String appTitle) {
@@ -160,6 +184,7 @@ public class LoginPage extends UiPart<Region> {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
         FontSize.setCurrentFontSizeLabel(prefs.getGuiSettings().getFontSize());
+        Theme.setCurrentTheme(prefs.getGuiSettings().getTheme());
         if (prefs.getGuiSettings().getWindowCoordinates() != null) {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
@@ -174,8 +199,12 @@ public class LoginPage extends UiPart<Region> {
         primaryStage.hide();
     }
 
+    /**
+    * release the resources
+     */
     void releaseResources() {
         if (mainWindow != null) {
+            mainWindow.logout();
             mainWindow.getBrowserPanel().freeResources();
         }
     }
@@ -232,7 +261,7 @@ public class LoginPage extends UiPart<Region> {
      * Sets the command box style to user preferred font size.
      */
     private void setFontSize(String newFontSize) {
-        String fxFormatFontSize = FontSize.getassociatefxfontsizestring(newFontSize);
+        String fxFormatFontSize = FontSize.getAssociateFxFontSizeString(newFontSize);
         username.setStyle(fxFormatFontSize);
         password.setStyle(fxFormatFontSize);
     }

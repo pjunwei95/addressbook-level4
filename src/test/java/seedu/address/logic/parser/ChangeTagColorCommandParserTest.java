@@ -15,7 +15,7 @@ import seedu.address.logic.commands.ChangeTagColorCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
-
+//@@author ChenXiaoman
 public class ChangeTagColorCommandParserTest {
     private ChangeTagColorCommandParser parser = new ChangeTagColorCommandParser();
 

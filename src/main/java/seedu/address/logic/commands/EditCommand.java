@@ -72,7 +72,6 @@ public class EditCommand extends UndoableCommand {
         requireNonNull(editPersonDescriptor);
 
         this.index = index;
-        System.out.println(editPersonDescriptor.getUsername().toString());
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 

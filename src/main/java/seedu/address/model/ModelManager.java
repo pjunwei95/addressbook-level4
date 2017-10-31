@@ -22,6 +22,9 @@ import seedu.address.model.person.FileImage;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.ReadOnlyReminder;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
@@ -35,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<ReadOnlyPerson> filteredPersons;
+    private final FilteredList<ReadOnlyReminder> filteredReminders;
 
 
 
@@ -49,6 +53,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredReminders = new FilteredList<>(this.addressBook.getReminderList());
+
     }
 
     public ModelManager() {
@@ -84,12 +90,26 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new FaceBookEvent(person));
     }
 
-
     @Override
     public synchronized void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
 
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
+
+    }
+    @Override
+    public synchronized void addReminder(ReadOnlyReminder target) throws DuplicateReminderException {
+
+        addressBook.addReminder(target);
+        updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
+        indicateAddressBookChanged();
+
+    }
+    @Override
+    public synchronized void deleteReminder(ReadOnlyReminder target) throws ReminderNotFoundException {
+
+        addressBook.removeReminder(target);
         indicateAddressBookChanged();
 
     }
@@ -123,7 +143,14 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
     }
+    @Override
+    public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder)
+            throws DuplicateReminderException, ReminderNotFoundException {
+        requireAllNonNull(target, changedReminder);
 
+        addressBook.updateReminder(target, changedReminder);
+        indicateAddressBookChanged();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -134,13 +161,25 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
     }
-
+    /**
+     * Returns an unmodifiable view of the list of {@code ReadOnlyReminder} backed by the internal list of
+     * {@code weaver}
+     */
+    @Override
+    public ObservableList<ReadOnlyReminder> getFilteredReminderList() {
+        return FXCollections.unmodifiableObservableList(filteredReminders);
+    }
     @Override
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
 
+    @Override
+    public void updateFilteredReminderList(Predicate<ReadOnlyReminder> predicate) {
+        requireNonNull(predicate);
+        filteredReminders.setPredicate(predicate);
+    }
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -156,6 +195,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredReminders.equals(other.filteredReminders);
     }
 }

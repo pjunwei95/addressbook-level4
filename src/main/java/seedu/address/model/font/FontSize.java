@@ -3,10 +3,10 @@ package seedu.address.model.font;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.ChangeFontSizeCommand;
 
+//@@author ChenXiaoman
 /**
- * Represents the font size of the AddressBook.
+ * Represents the font size of the application.
  * Guarantees: immutable; is valid as declared in {@link #isValidFontSize(String)}
  */
 public class FontSize {
@@ -27,12 +27,10 @@ public class FontSize {
     public static final String FONT_SIZE_M_LABEL = "m";
     public static final String FONT_SIZE_L_LABEL = "l";
     public static final String FONT_SIZE_XL_LABEL = "xl";
-    public static final String INCREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " +";
-    public static final String DECREASE_FONT_SIZE_COMMAND = ChangeFontSizeCommand.COMMAND_WORD + " -";
 
     private static String currentFontSizeLabel = FONT_SIZE_M_LABEL;
 
-    public final String value;
+    private final String value;
 
     /**
      * Validates given font size.
@@ -50,6 +48,13 @@ public class FontSize {
             throw new IllegalValueException(MESSAGE_FONT_SIZE_CONSTRAINTS);
         }
         this.value = fontSize;
+    }
+
+    /**
+     * Get the String value of the font size
+     */
+    public String getValue() {
+        return value;
     }
 
     /**
@@ -152,7 +157,7 @@ public class FontSize {
      * Get the associate fx format string for a give font size
      * @param inputFontSize
      */
-    public static String getassociatefxfontsizestring(String inputFontSize) {
+    public static String getAssociateFxFontSizeString(String inputFontSize) {
         assert (FontSize.isValidFontSize(inputFontSize));
         String fxFontSizeString = "-fx-font-size: ";
         switch (inputFontSize) {
@@ -178,6 +183,40 @@ public class FontSize {
 
         default:
             fxFontSizeString += "large;";
+        }
+        return fxFontSizeString;
+    }
+
+    /**
+     * Get the associate fx format string for a give font size of name
+     * @param inputFontSize
+     */
+    public static String getAssociateFxFontSizeStringForName(String inputFontSize) {
+        assert (FontSize.isValidFontSize(inputFontSize));
+        String fxFontSizeString = "-fx-font-size: ";
+        switch (inputFontSize) {
+        case FONT_SIZE_XS_LABEL:
+            fxFontSizeString += "15;";
+            break;
+
+        case FONT_SIZE_S_LABEL:
+            fxFontSizeString += "20;";
+            break;
+
+        case FONT_SIZE_M_LABEL:
+            fxFontSizeString += "25;";
+            break;
+
+        case FONT_SIZE_L_LABEL:
+            fxFontSizeString += "30;";
+            break;
+
+        case FONT_SIZE_XL_LABEL:
+            fxFontSizeString += "35;";
+            break;
+
+        default:
+            fxFontSizeString += "25;";
         }
         return fxFontSizeString;
     }
@@ -215,6 +254,41 @@ public class FontSize {
             imageSize = 25;
         }
         return imageSize;
+    }
+
+    /**
+     * Get associate photo size from a given font size
+     * @param inputFontSize
+     * @return
+     */
+    public static int getAssociatePhotoSizeFromFontSize(String inputFontSize) {
+        assert (FontSize.isValidFontSize(inputFontSize));
+        int photoSize;
+        switch (inputFontSize) {
+        case FONT_SIZE_XS_LABEL:
+            photoSize = 45;
+            break;
+
+        case FONT_SIZE_S_LABEL:
+            photoSize = 50;
+            break;
+
+        case FONT_SIZE_M_LABEL:
+            photoSize = 55;
+            break;
+
+        case FONT_SIZE_L_LABEL:
+            photoSize = 60;
+            break;
+
+        case FONT_SIZE_XL_LABEL:
+            photoSize = 65;
+            break;
+
+        default:
+            photoSize = 55;
+        }
+        return photoSize;
     }
 
 }

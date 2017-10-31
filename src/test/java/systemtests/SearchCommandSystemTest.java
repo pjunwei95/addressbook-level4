@@ -14,7 +14,7 @@ import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 
-
+//@@author RonakLakhotia
 public class SearchCommandSystemTest extends AddressBookSystemTest {
 
     @Test

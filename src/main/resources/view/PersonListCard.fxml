@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
+<!-- @@author ChenXiaoman -->
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -21,7 +21,7 @@
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="130.0" spacing="5">
+            <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="130.0" spacing="5.0" HBox.hgrow="ALWAYS">
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                     <children>
                         <HBox alignment="CENTER_LEFT">
@@ -32,16 +32,13 @@
                                         <Region fx:constant="USE_PREF_SIZE" />
                                     </minWidth>
                                 </Label>
-                                <Label fx:id="name" alignment="BOTTOM_LEFT" text="\$first" styleClass="cell_big_label"/>
+                                <Label fx:id="name" alignment="BOTTOM_LEFT" styleClass="cell_big_label" text="\$first" />
                             </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                         </HBox>
                         <FlowPane fx:id="tags">
-                            <padding>
-                                <Insets top="5.0" />
-                            </padding>
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -51,23 +48,25 @@
                   <Insets top="5.0" />
                </padding>
                 </VBox>
+                <!-- @@author RonakLakhotia -->
                 <ImageView fx:id="image" fitHeight="100.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="/images/clock.png" />
+                        <Image url="/images/user.png" />
                     </image>
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
                 </ImageView>
+                <!-- @@author  -->
                 <padding>
                     <Insets top="5.0" />
                 </padding>
 
             </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="5">
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
                 <ImageView fx:id="imagePhone" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="/images/phone.png" />
+                        <Image url="/images/user.png" />
                     </image>
                 </ImageView>
                 <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">
