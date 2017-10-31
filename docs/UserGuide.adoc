@@ -131,13 +131,13 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Locating persons by tag: `find/t`
+=== Locating persons by tag: `findtag`
 
 Finds persons whose tags contain any of the given keywords. +
-Format: `find/t KEYWORD [MORE_KEYWORDS]`
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
 [TIP]
-Make sure there are no whitespaces between `find` and `/t`!
+Make sure there are no whitespaces between `find` and `tag`!
 
 ****
 * Given three people with tags: `John Doe t/Friends`, `Hans Gruber t/Friends`, and `Bo Yang t/Colleagues`
@@ -149,9 +149,9 @@ Make sure there are no whitespaces between `find` and `/t`!
 
 Examples:
 
-* `find/t friends` +
+* `findtag friends` +
 Returns `John Doe` and `Hans Gruber`
-* `find/t friends colleagues` +
+* `findtag friends colleagues` +
 Returns any person having tags `Friends` or `Colleagues`
 
 image::Search.png[width="600"]
@@ -194,10 +194,10 @@ Deletes the 2nd person in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
-=== Deleting a person's tag : `delete/t`
+=== Deleting a person's tag : `deletetag`
 
 Deletes the tag(s) of an existing person in the address book. +
-Format: `delete/t INDEX [t/TAG]...`
+Format: `deletetag INDEX [t/TAG]...`
 
 ****
 * Deletes the tag of the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
@@ -208,9 +208,9 @@ Format: `delete/t INDEX [t/TAG]...`
 
 Examples:
 
-* `delete/t 1 t/friends` +
+* `deletetag 1 t/friends` +
 Deletes the tag `friends` from the person index `1`.
-* `delete/t 2 t/friends t/colleagues` +
+* `deletetag 2 t/friends t/colleagues` +
 Deletes the tag `friends` and `colleagues` from the person index `2`.
 
 [TIP]
@@ -396,10 +396,31 @@ e.g. - `facebook 1 ronak.lakhotia`
 
 image::facebook.png[width="790"]
 
+=== Auto-completion
+
+Auto-complete your commands by providing suggestions. +
+
+image::autocompletion.png[]
+
+Type any letters to get some suggestions on what command to use.
+
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
-Format: `clear`
+
+Format: `clear` +
+
+A clear confirmation will pop-up to reaffirm your clear command in the event of accidental clearing. +
+
+image::clearconfirmation.png[]
+
+By default, you will be able to confirm clearing by pressing `ENTER` on the keyboard, or clicking `OK`.
+
+Otherwise, you can cancel by highlighting the `Cancel` button with the keyboard followed by the `SPACE` button.
+Alternatively, you can also click the `X` button or the `Cancel` button. +
+
+[TIP]
+To interact solely with the keyboard, make your selection and press `SPACE` instead of `ENTER`!
 
 === Exiting the program : `exit`
 

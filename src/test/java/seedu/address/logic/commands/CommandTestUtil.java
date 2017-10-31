@@ -108,11 +108,12 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withDateOfBirth(VALID_DOB_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        //@@author pjunwei95
         TAG_DESC_AMY = new DeleteTagDescriptorBuilder()
                 .withTags(VALID_TAG_FRIEND).build();
         TAG_DESC_BOB = new DeleteTagDescriptorBuilder()
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-
+        //@@author pjunwei95
 
         VALID_TAGLIST = new HashSet<>();
         try {
