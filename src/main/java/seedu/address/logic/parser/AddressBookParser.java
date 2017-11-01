@@ -80,6 +80,7 @@ public class AddressBookParser {
         case ChangeReminderCommand.COMMAND_WORD:
             return new ChangeReminderCommandParser().parse(arguments);
 
+        //@@author pjunwei95
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
 
@@ -91,7 +92,7 @@ public class AddressBookParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
+        //@@author pjunwei95
         case ClearPopupCommand.COMMAND_WORD: {
             ClearConfirmation clearConfirmation = new ClearConfirmation();
             if (clearConfirmation.isClearCommand()) {
@@ -115,7 +116,7 @@ public class AddressBookParser {
 
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
-
+        //@@author pjunwei95
         case FindTagCommand.COMMAND_WORD:
             return new FindTagCommandParser().parse(arguments);
 
