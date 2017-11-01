@@ -54,9 +54,7 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
-    //@@author RonakLakhotia
     private ReminderListPanel reminderListPanel;
-    //@@author generated
     private Config config;
     private UserPrefs prefs;
     private StorageManager storage;
@@ -288,7 +286,7 @@ public class MainWindow extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
-    //@@author ChenXiaoman
+
     /**
      * Increase the font size.
      */
