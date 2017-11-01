@@ -32,10 +32,10 @@
 <li><a href="#viewing-help-code-help-code">4.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-a-person-code-add-code">4.2. Adding a person: <code>add</code></a></li>
 <li><a href="#locating-persons-by-name-code-find-code">4.3. Locating persons by name: <code>find</code></a></li>
-<li><a href="#locating-persons-by-tag-code-find-t-code">4.4. Locating persons by tag: <code>find/t</code></a></li>
+<li><a href="#locating-persons-by-tag-code-findtag-code">4.4. Locating persons by tag: <code>findtag</code></a></li>
 <li><a href="#searching-a-person-code-search-code">4.5. Searching a person : <code>search</code></a></li>
 <li><a href="#deleting-a-person-code-delete-code">4.6. Deleting a person : <code>delete</code></a></li>
-<li><a href="#deleting-a-person-s-tag-code-delete-t-code">4.7. Deleting a person&#8217;s tag : <code>delete/t</code></a></li>
+<li><a href="#deleting-a-person-s-tag-code-deletetag-code">4.7. Deleting a person&#8217;s tag : <code>deletetag</code></a></li>
 <li><a href="#selecting-a-person-code-select-code">4.8. Selecting a person : <code>select</code></a></li>
 <li><a href="#remarking-a-person-code-remark-code">4.9. Remarking a person : <code>remark</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code">4.10. Listing entered commands : <code>history</code></a></li>
@@ -47,12 +47,14 @@
 <li><a href="#change-font-size-code-fs-code-since-v1-2">4.16. Change font size : <code>fs</code> SINCE V1.2</a></li>
 <li><a href="#add-photo-to-contacts-code-photo-code-since-v1-2-br">4.17. Add Photo to contacts : <code>photo</code> SINCE V1.2<br></a></li>
 <li><a href="#facebook-integration-since-v1-3">4.18. FaceBook Integration SINCE V1.3</a></li>
-<li><a href="#change-the-theme-code-theme-code-since-v1-4">4.19. Change the theme : <code>theme</code> (SINCE V1.4)</a></li>
-<li><a href="#reminders-panel-since-v1-4-br">4.20. Reminders Panel (SINCE V1.4)<br></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">4.21. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">4.22. Exiting the program : <code>exit</code></a></li>
-<li><a href="#coming-in-v2-0">4.23. Coming in V2.0</a></li>
-<li><a href="#saving-the-data">4.24. Saving the data</a></li>
+<li><a href="#show-address-of-a-person-code-map-code-since-v1-3">4.19. Show address of a person : <code>map</code> (SINCE V1.3)</a></li>
+<li><a href="#change-the-theme-code-theme-code-since-v1-4">4.20. Change the theme : <code>theme</code> (SINCE V1.4)</a></li>
+<li><a href="#reminders-panel-since-v1-4-br">4.21. Reminders Panel (SINCE V1.4)<br></a></li>
+<li><a href="#auto-completion">4.22. Auto-completion</a></li>
+<li><a href="#clearing-all-entries-code-clear-code">4.23. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">4.24. Exiting the program : <code>exit</code></a></li>
+<li><a href="#coming-in-v2-0">4.25. Coming in V2.0</a></li>
+<li><a href="#saving-the-data">4.26. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -336,10 +338,10 @@ Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>J
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-tag-code-find-t-code"><a class="link" href="#locating-persons-by-tag-code-find-t-code">4.4. Locating persons by tag: <code>find/t</code></a></h3>
+<h3 id="locating-persons-by-tag-code-findtag-code"><a class="link" href="#locating-persons-by-tag-code-findtag-code">4.4. Locating persons by tag: <code>findtag</code></a></h3>
 <div class="paragraph">
 <p>Finds persons whose tags contain any of the given keywords.<br>
-Format: <code>find/t KEYWORD [MORE_KEYWORDS]</code></p>
+Format: <code>findtag KEYWORD [MORE_KEYWORDS]</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -348,7 +350,7 @@ Format: <code>find/t KEYWORD [MORE_KEYWORDS]</code></p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Make sure there are no whitespaces between <code>find</code> and <code>/t</code>!
+Make sure there are no whitespaces between <code>find</code> and <code>tag</code>!
 </td>
 </tr>
 </table>
@@ -382,11 +384,11 @@ Make sure there are no whitespaces between <code>find</code> and <code>/t</code>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find/t friends</code><br>
+<p><code>findtag friends</code><br>
 Returns <code>John Doe</code> and <code>Hans Gruber</code></p>
 </li>
 <li>
-<p><code>find/t friends colleagues</code><br>
+<p><code>findtag friends colleagues</code><br>
 Returns any person having tags <code>Friends</code> or <code>Colleagues</code></p>
 </li>
 </ul>
@@ -477,10 +479,10 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-s-tag-code-delete-t-code"><a class="link" href="#deleting-a-person-s-tag-code-delete-t-code">4.7. Deleting a person&#8217;s tag : <code>delete/t</code></a></h3>
+<h3 id="deleting-a-person-s-tag-code-deletetag-code"><a class="link" href="#deleting-a-person-s-tag-code-deletetag-code">4.7. Deleting a person&#8217;s tag : <code>deletetag</code></a></h3>
 <div class="paragraph">
 <p>Deletes the tag(s) of an existing person in the address book.<br>
-Format: <code>delete/t INDEX [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>deletetag INDEX [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -508,11 +510,11 @@ Format: <code>delete/t INDEX [t/TAG]&#8230;&#8203;</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete/t 1 t/friends</code><br>
+<p><code>deletetag 1 t/friends</code><br>
 Deletes the tag <code>friends</code> from the person index <code>1</code>.</p>
 </li>
 <li>
-<p><code>delete/t 2 t/friends t/colleagues</code><br>
+<p><code>deletetag 2 t/friends t/colleagues</code><br>
 Deletes the tag <code>friends</code> and <code>colleagues</code> from the person index <code>2</code>.</p>
 </li>
 </ul>
@@ -901,10 +903,9 @@ this will delete the photo attached with the person at index 1.</p>
 <img src="images/facebook.png" alt="facebook" width="790">
 </div>
 </div>
-<div class="paragraph">
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-=== Show address of a person : <code>map</code> (SINCE V1.3)</p>
 </div>
+<div class="sect2">
+<h3 id="show-address-of-a-person-code-map-code-since-v1-3"><a class="link" href="#show-address-of-a-person-code-map-code-since-v1-3">4.19. Show address of a person : <code>map</code> (SINCE V1.3)</a></h3>
 <div class="paragraph">
 <p>Shows the address of a person in Google Map in the browser panel.+</p>
 </div>
@@ -946,7 +947,7 @@ this will delete the photo attached with the person at index 1.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="change-the-theme-code-theme-code-since-v1-4"><a class="link" href="#change-the-theme-code-theme-code-since-v1-4">4.19. Change the theme : <code>theme</code> (SINCE V1.4)</a></h3>
+<h3 id="change-the-theme-code-theme-code-since-v1-4"><a class="link" href="#change-the-theme-code-theme-code-since-v1-4">4.20. Change the theme : <code>theme</code> (SINCE V1.4)</a></h3>
 <div class="paragraph">
 <p>Changes the theme of entire application.<br></p>
 </div>
@@ -985,7 +986,7 @@ this will delete the photo attached with the person at index 1.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="reminders-panel-since-v1-4-br"><a class="link" href="#reminders-panel-since-v1-4-br">4.20. Reminders Panel (SINCE V1.4)<br></a></h3>
+<h3 id="reminders-panel-since-v1-4-br"><a class="link" href="#reminders-panel-since-v1-4-br">4.21. Reminders Panel (SINCE V1.4)<br></a></h3>
 <div class="paragraph">
 <p>Have you ever felt the need to be constantly reminded of your daily assignments.Fret not!Weaver helps you keep up to
 date with your daily school assignments.Just add your reminders using a single command and weaver will display your
@@ -993,7 +994,7 @@ reminders with a image depicting the priority level of that assignment.That way,
 reminders panel when you open the application and be aware of the upcoming tasks.</p>
 </div>
 <div class="sect3">
-<h4 id="there-are-three-basic-commands-br"><a class="link" href="#there-are-three-basic-commands-br">4.20.1. There are three basic commands.<br></a></h4>
+<h4 id="there-are-three-basic-commands-br"><a class="link" href="#there-are-three-basic-commands-br">4.21.1. There are three basic commands.<br></a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1016,21 +1017,64 @@ The above command will change the due date of the reminder to the new date.<br><
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.21. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="auto-completion"><a class="link" href="#auto-completion">4.22. Auto-completion</a></h3>
 <div class="paragraph">
-<p>Clears all entries from the address book.<br>
-Format: <code>clear</code></p>
+<p>Auto-complete your commands by providing suggestions.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocompletion.png" alt="autocompletion">
+</div>
+</div>
+<div class="paragraph">
+<p>Type any letters to get some suggestions on what command to use.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.22. Exiting the program : <code>exit</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.23. Clearing all entries : <code>clear</code></a></h3>
+<div class="paragraph">
+<p>Clears all entries from the address book.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>clear</code><br></p>
+</div>
+<div class="paragraph">
+<p>A clear confirmation will pop-up to reaffirm your clear command in the event of accidental clearing.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/clearconfirmation.png" alt="clearconfirmation">
+</div>
+</div>
+<div class="paragraph">
+<p>By default, you will be able to confirm clearing by pressing <code>ENTER</code> on the keyboard, or clicking <code>OK</code>.</p>
+</div>
+<div class="paragraph">
+<p>Otherwise, you can cancel by highlighting the <code>Cancel</code> button with the keyboard followed by the <code>SPACE</code> button.
+Alternatively, you can also click the <code>X</code> button or the <code>Cancel</code> button.<br></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To interact solely with the keyboard, make your selection and press <code>SPACE</code> instead of <code>ENTER</code>!
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">4.24. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="coming-in-v2-0"><a class="link" href="#coming-in-v2-0">4.23. Coming in V2.0</a></h3>
+<h3 id="coming-in-v2-0"><a class="link" href="#coming-in-v2-0">4.25. Coming in V2.0</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/EmailThem.png" alt="EmailThem" width="600">
@@ -1057,7 +1101,7 @@ Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.24. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.26. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -1156,7 +1200,7 @@ e.g. <code>photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-01 08:52:15 +00:00
+Last updated 2017-11-01 08:57:34 +00:00
 </div>
 </div>
 </body>
