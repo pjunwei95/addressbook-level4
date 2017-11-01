@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-
+//@@author pjunwei95
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -24,7 +24,7 @@ import seedu.address.model.tag.Tag;
  */
 public class DeleteTagCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "delete/t";
+    public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tag identified by the index number used in the last person listing.\n"

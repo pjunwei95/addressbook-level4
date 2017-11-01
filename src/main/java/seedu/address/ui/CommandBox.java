@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.ObservableList;
@@ -26,7 +28,12 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-
+    //@@author pjunwei95
+    private static final String[] suggestedWords = {"add", "delete", "edit", "help", "find", "list",
+                                                    "select", "search", "clear", "undo", "redo", "history",
+                                                    "deletetag", "findtag", "photo", "facebook", "color",
+                                                    "exit", "fs", "remark"};
+    //@@author pjunwei95
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
@@ -191,6 +198,16 @@ public class CommandBox extends UiPart<Region> {
     private void setFontSize(String newFontSize) {
         String fxFormatFontSize = FontSize.getAssociateFxFontSizeString(newFontSize);
         commandTextField.setStyle(fxFormatFontSize);
+    }
+
+    //@@author pjunwei95
+    @FXML
+    /**
+     * Sets the command box style allow autocompletion.
+     * @param suggestedWords - list of words that will autocomplete
+     */
+    private void initialize() {
+        TextFields.bindAutoCompletion(commandTextField, suggestedWords);
     }
 
 }

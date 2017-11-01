@@ -1,5 +1,5 @@
 # ChenXiaoman
-###### /java/seedu/address/commons/events/ui/ChangeFontSizeEvent.java
+###### \java\seedu\address\commons\events\ui\ChangeFontSizeEvent.java
 ``` java
 /**
  * Indicates a request to change the font size of the application
@@ -30,7 +30,7 @@ public class ChangeFontSizeEvent extends BaseEvent {
 
 }
 ```
-###### /java/seedu/address/commons/events/ui/ChangeTagColorEvent.java
+###### \java\seedu\address\commons\events\ui\ChangeTagColorEvent.java
 ``` java
 /**
  * Indicates a request to change the tag color of the application
@@ -52,7 +52,7 @@ public class ChangeTagColorEvent extends BaseEvent {
     }
 }
 ```
-###### /java/seedu/address/commons/events/ui/ChangeThemeEvent.java
+###### \java\seedu\address\commons\events\ui\ChangeThemeEvent.java
 ``` java
 /**
  * Indicates a request to change the theme of the application
@@ -74,7 +74,7 @@ public class ChangeThemeEvent extends BaseEvent {
     }
 }
 ```
-###### /java/seedu/address/commons/events/ui/ShowPersonAddressEvent.java
+###### \java\seedu\address\commons\events\ui\ShowPersonAddressEvent.java
 ``` java
 /**
  * Indicates a request to show a person's address in Google Map
@@ -99,7 +99,7 @@ public class ShowPersonAddressEvent extends BaseEvent {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeFontSizeCommand.java
+###### \java\seedu\address\logic\commands\ChangeFontSizeCommand.java
 ``` java
 /**
  * Customise the font size of the Address Book application.
@@ -146,7 +146,7 @@ public class ChangeFontSizeCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeTagColorCommand.java
+###### \java\seedu\address\logic\commands\ChangeTagColorCommand.java
 ``` java
 /**
  * Change color of tags
@@ -252,7 +252,7 @@ public class ChangeTagColorCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeThemeCommand.java
+###### \java\seedu\address\logic\commands\ChangeThemeCommand.java
 ``` java
 /**
  * Change the theme of the application
@@ -309,7 +309,7 @@ public class ChangeThemeCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/MapCommand.java
+###### \java\seedu\address\logic\commands\MapCommand.java
 ``` java
 /**
  * Shows a person's address identified using person's last displayed index from the list.
@@ -356,7 +356,7 @@ public class MapCommand extends Command {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/UndoableCommand.java
+###### \java\seedu\address\logic\commands\UndoableCommand.java
 ``` java
 /**
  * Represents a command which can be undone and redone.
@@ -389,43 +389,8 @@ public abstract class UndoableCommand extends Command {
 
         model.resetData(previousAddressBook);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-        //Revert font size
-        if (this instanceof ChangeFontSizeCommand) {
-            FontSize.setCurrentFontSizeLabel(previousFontSize);
-            EventsCenter.getInstance().post(new ChangeFontSizeEvent("", previousFontSize));
-        }
-
-        //Revert theme
-        if (this instanceof ChangeThemeCommand) {
-            Theme.setCurrentTheme(previousTheme);
-            EventsCenter.getInstance().post(new ChangeThemeEvent(previousTheme));
-        }
-    }
-
-    /**
-     * Executes the command and updates the filtered person
-     * list to show all persons.
-     */
-    protected final void redo() {
-        requireNonNull(model);
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError("The command has been successfully executed previously; "
-                    + "it should not fail now");
-        }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public final CommandResult execute() throws CommandException {
-        saveAddressBookSnapshot();
-        return executeUndoableCommand();
-    }
-}
 ```
-###### /java/seedu/address/logic/parser/AddressBookParser.java
+###### \java\seedu\address\logic\parser\AddressBookParser.java
 ``` java
         case ChangeTagColorCommand.COMMAND_WORD:
             return new ChangeTagColorCommandParser().parse(arguments);
@@ -439,7 +404,7 @@ public abstract class UndoableCommand extends Command {
         case MapCommand.COMMAND_WORD:
             return new MapCommandParser().parse(arguments);
 ```
-###### /java/seedu/address/logic/parser/ChangeFontSizeCommandParser.java
+###### \java\seedu\address\logic\parser\ChangeFontSizeCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new ChangeFontSizeCommand object
@@ -479,7 +444,7 @@ public class ChangeFontSizeCommandParser implements Parser<ChangeFontSizeCommand
 
 }
 ```
-###### /java/seedu/address/logic/parser/ChangeTagColorCommandParser.java
+###### \java\seedu\address\logic\parser\ChangeTagColorCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new ChangeTagColorCommand object
@@ -519,7 +484,7 @@ public class ChangeTagColorCommandParser implements Parser<ChangeTagColorCommand
     }
 }
 ```
-###### /java/seedu/address/logic/parser/ChangeThemeCommandParser.java
+###### \java\seedu\address\logic\parser\ChangeThemeCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new ChangeThemeCommand object
@@ -541,7 +506,7 @@ public class ChangeThemeCommandParser implements Parser<ChangeThemeCommand> {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/MapCommandParser.java
+###### \java\seedu\address\logic\parser\MapCommandParser.java
 ``` java
 /**
  * Parses input arguments and creates a new MapCommand object
@@ -564,7 +529,7 @@ public class MapCommandParser implements Parser<MapCommand> {
     }
 }
 ```
-###### /java/seedu/address/model/font/FontSize.java
+###### \java\seedu\address\model\font\FontSize.java
 ``` java
 /**
  * Represents the font size of the application.
@@ -854,7 +819,7 @@ public class FontSize {
 
 }
 ```
-###### /java/seedu/address/model/tag/Tag.java
+###### \java\seedu\address\model\tag\Tag.java
 ``` java
 /**
  * Represents a Tag of a person.
@@ -926,65 +891,14 @@ public class Tag {
 
 }
 ```
-###### /java/seedu/address/model/tag/TagColor.java
+###### \java\seedu\address\model\tag\TagColor.java
 ``` java
 /**
  * Represent a color of a tag
  */
 public class TagColor {
-    public static final String[] VALID_TAG_COLOR = {"red", "blue", "green", "teal", "aqua",
-                                                    "black", "gray", "lime", "maroon", "navy",
-                                                    "orange", "purple", "silver", "olive",
-                                                    "white", "yellow", "transparent"};
-    public static final String MESSAGE_TAG_COLOR_CONSTRAINTS = "Valid colors are: "
-            + Arrays.toString(VALID_TAG_COLOR);
-
-    public static final String DEFAULT_TAG_COLOR = "orange";
-
-    public final String tagColorName;
-
-    /**
-     * Validates given tagColor name.
-     *
-     * @throws IllegalValueException if the given tagColor name string is invalid.
-     */
-    public TagColor(String name) throws IllegalValueException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!isValidTagColorName(trimmedName)) {
-            throw new IllegalValueException(MESSAGE_TAG_COLOR_CONSTRAINTS);
-        }
-        this.tagColorName = trimmedName;
-    }
-
-    /**
-     * Returns true if a given string is a valid tagColor name.
-     */
-    public static boolean isValidTagColorName(String test) {
-        return Arrays.asList(VALID_TAG_COLOR).contains(test);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof TagColor // instanceof handles nulls
-                && this.tagColorName.equals(((TagColor) other).tagColorName)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        return tagColorName.hashCode();
-    }
-
-    /**
-     * Format state as text for viewing.
-     */
-    public String toString() {
-        return tagColorName;
-    }
-}
 ```
-###### /java/seedu/address/model/theme/Theme.java
+###### \java\seedu\address\model\theme\Theme.java
 ``` java
 /**
  * Represent a theme of an application
@@ -1062,7 +976,7 @@ public class Theme {
     }
 }
 ```
-###### /java/seedu/address/ui/CommandBox.java
+###### \java\seedu\address\ui\CommandBox.java
 ``` java
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
@@ -1077,54 +991,8 @@ public class Theme {
         commandTextField.setStyle(fxFormatFontSize);
     }
 
-}
 ```
-###### /java/seedu/address/ui/MainWindow.java
-``` java
-    /**
-     * Increase the font size.
-     */
-    @FXML
-    private void handleIncreaseFontSize() throws CommandException, ParseException {
-        commandBox.handleCommandInputChanged(ChangeFontSizeCommand.INCREASE_FONT_SIZE_COMMAND);
-    }
-
-    /**
-     * Decrease the font size.
-     */
-    @FXML
-    private void handleDecreaseFontSize() throws CommandException, ParseException {
-        commandBox.handleCommandInputChanged(ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND);
-    }
-
-    /**
-     * Change the theme to dark theme
-     */
-    @FXML
-    private void handleChangeDarkTheme() {
-        commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_DARK_THEME_COMMAND);
-    }
-
-    /**
-     * Change the theme to bright theme
-     */
-    @FXML
-    private void handleChangeBrightTheme() {
-        commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_BRIGHT_THEME_COMMAND);
-    }
-
-    /**
-     * Change the theme when a ChangeThemeEvent is raised
-     * @param changeThemeEvent
-     */
-    @Subscribe
-    private void handleChangeThemeEvent(ChangeThemeEvent changeThemeEvent) {
-        Theme.changeTheme(primaryStage, changeThemeEvent.getTheme());
-    }
-
-}
-```
-###### /java/seedu/address/ui/PersonCard.java
+###### \java\seedu\address\ui\PersonCard.java
 ``` java
 /**
  * An UI component that displays information of a {@code Person}.
@@ -1140,6 +1008,8 @@ public class PersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
+
+
 
     public final ReadOnlyPerson person;
 
@@ -1175,6 +1045,7 @@ public class PersonCard extends UiPart<Region> {
     private ImageView imageRemark;
 
 
+
     public PersonCard(ReadOnlyPerson person, int displayedIndex) {
         super(FXML);
         this.person = person;
@@ -1198,9 +1069,11 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Adds a photo to a persons contact
      */
-    public void assignImage(String filePath) {
+    public void assignImage(String filePath) throws ParseException {
 
         String url;
+        String Message_Image_Removed = "The image may have been removed from"
+                + " the previous location!";
 
         if (filePath.equals("")) {
             url = "/images/user.png";
@@ -1210,13 +1083,26 @@ public class PersonCard extends UiPart<Region> {
 
             if (filePath.endsWith("g")) {
 
-                String home = System.getProperty("user.home");
-                java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", filePath);
-                url = path + "";
-                File file = new File(url);
+                url = filePath + "";
 
-                Image display = new Image(file.toURI().toString());
-                image.setImage(display);
+                File file = new File(url);
+                boolean FileExists = file.exists();
+
+                if (!FileExists) {
+
+                    url = "/images/address_book_32.png";
+                    Image Display = new Image(url);
+                    image.setImage(Display);
+
+
+                    throw new ParseException(
+                            String.format(Message_Image_Removed, PhotoCommand.MESSAGE_USAGE)
+                    );
+                }
+                else {
+                    Image display = new Image(file.toURI().toString());
+                    image.setImage(display);
+                }
             } else {
 
                 url = "src/main/resources/images/" + person.getImage().getFilePath() + ".jpg";
@@ -1247,7 +1133,13 @@ public class PersonCard extends UiPart<Region> {
             initTags(person, FontSize.getCurrentFontSizeLabel());
 
         });
-        assignImage(person.getImage().getFilePath());
+        try {
+            assignImage(person.getImage().getFilePath());
+        }
+        catch (ParseException pe) {
+            new AssertionError("Invalid input");
+        }
+
     }
 
     @Subscribe
@@ -1346,7 +1238,7 @@ public class PersonCard extends UiPart<Region> {
 
 }
 ```
-###### /java/seedu/address/ui/ResultDisplay.java
+###### \java\seedu\address\ui\ResultDisplay.java
 ``` java
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
@@ -1358,7 +1250,7 @@ public class PersonCard extends UiPart<Region> {
         resultDisplay.setStyle(fxFomatString);
     }
 ```
-###### /java/seedu/address/ui/StatusBarFooter.java
+###### \java\seedu\address\ui\StatusBarFooter.java
 ``` java
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
@@ -1373,13 +1265,24 @@ public class PersonCard extends UiPart<Region> {
     }
 }
 ```
-###### /resources/view/MainWindow.fxml
+###### \resources\view\MainWindow.fxml
 ``` fxml
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 
     <stylesheets>
         <URL value="@Extensions.css"/>
     </stylesheets>
+
     <SplitPane dividerPositions="0.5, 0.5" prefHeight="0.0" prefWidth="690.0">
         <items>
             <MenuBar fx:id="menuBar" prefHeight="29.0">
@@ -1391,7 +1294,8 @@ public class PersonCard extends UiPart<Region> {
                     <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Theme">
-                    <MenuItem fx:id="brightTheme" mnemonicParsing="false" onAction="#handleChangeBrightTheme" text="Bright"/>
+                    <MenuItem fx:id="brightTheme" mnemonicParsing="false" onAction="#handleChangeBrightTheme"
+                              text="Bright"/>
                     <MenuItem fx:id="darkTheme" mnemonicParsing="false" onAction="#handleChangeDarkTheme" text="Dark"/>
                 </Menu>
             </MenuBar>
@@ -1402,42 +1306,45 @@ public class PersonCard extends UiPart<Region> {
                     wrapText="true"/>
         </items>
     </SplitPane>
-
-    <HBox/>
-
     <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
         <padding>
-            <Insets bottom="5" left="10" right="10" top="5"/>
+            <Insets bottom="5" left="10" right="10" top="5" />
         </padding>
     </StackPane>
 
-    <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100"
-               styleClass="pane-with-border" VBox.vgrow="NEVER">
+    <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
         <padding>
-            <Insets bottom="5" left="10" right="10" top="5"/>
+            <Insets bottom="5" left="10" right="10" top="5" />
         </padding>
     </StackPane>
 
     <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-        <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+        <VBox fx:id="personList" maxWidth="350.0" minWidth="159.0" prefWidth="350.0" SplitPane.resizableWithParent="false">
             <padding>
-                <Insets bottom="10" left="10" right="10" top="10"/>
+                <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="personListPanelPlaceholder" maxWidth="400.0" prefWidth="375.0" VBox.vgrow="ALWAYS" />
         </VBox>
 
-        <StackPane fx:id="browserPlaceholder" prefWidth="340">
+        <StackPane fx:id="browserPlaceholder" prefWidth="700.0" SplitPane.resizableWithParent="false">
             <padding>
-                <Insets bottom="10" left="10" right="10" top="10"/>
+                <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
+
         </StackPane>
+        <VBox fx:id="reminders" maxWidth="340.0" prefWidth="320.0">
+            <children>
+                <StackPane fx:id="reminderListPlaceholder" layoutX="20.0" layoutY="20.0" prefHeight="590.0" />
+            </children>
+        </VBox>
     </SplitPane>
 
-    <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>
+
+    <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
 
 </VBox>
 ```
-###### /resources/view/PersonListCard.fxml
+###### \resources\view\PersonListCard.fxml
 ``` fxml
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
@@ -1475,98 +1382,4 @@ public class PersonCard extends UiPart<Region> {
                   <Insets top="5.0" />
                </padding>
                 </VBox>
-                <ImageView fx:id="image" fitHeight="100.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="/images/user.png" />
-                    </image>
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-                </ImageView>
-                <padding>
-                    <Insets top="5.0" />
-                </padding>
-
-            </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="5.0">
-                <ImageView fx:id="imagePhone" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="/images/user.png" />
-                    </image>
-                </ImageView>
-                <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">
-                    <padding>
-                        <Insets top="5.0" />
-                    </padding>
-                </Label>
-                <padding>
-                    <Insets top="5.0" />
-                </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="5">
-                <ImageView fx:id="imageAddress" onMousePressed="#handleAddressClick" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="/images/address.png" />
-                    </image>
-                </ImageView>
-                <Label fx:id="address" onMousePressed="#handleAddressClick" styleClass="cell_small_label" text="\$address">
-                    <padding>
-                        <Insets top="5.0" />
-                    </padding>
-                </Label>
-                <padding>
-                    <Insets top="5.0" />
-                </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="5">
-                <ImageView fx:id="imageEmail" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="/images/email.png" />
-                    </image>
-                </ImageView>
-                <Label fx:id="email" styleClass="cell_small_label" text="\$email">
-                    <padding>
-                        <Insets top="5.0" />
-                    </padding>
-                </Label>
-                <padding>
-                    <Insets top="5.0" />
-                </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="5">
-                <ImageView fx:id="imageBirth" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="/images/birthday.png" />
-                    </image>
-                </ImageView>
-                <Label fx:id="date" styleClass="cell_small_label" text="\$dateOfBirth">
-                    <padding>
-                        <Insets top="5.0" />
-                    </padding>
-                </Label>
-                <padding>
-                    <Insets top="5.0" />
-                </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="5">
-                <ImageView fx:id="imageRemark" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="/images/remark.png" />
-                    </image>
-                </ImageView>
-                <Label fx:id="remark" styleClass="cell_small_label" text="\$remark">
-                    <padding>
-                        <Insets top="5.0" />
-                    </padding>
-                </Label>
-                <padding>
-                    <Insets top="5.0" />
-                </padding>
-            </HBox>
-        </VBox>
-        <rowConstraints>
-            <RowConstraints />
-        </rowConstraints>
-    </GridPane>
-</HBox>
 ```
