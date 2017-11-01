@@ -362,6 +362,12 @@ public class FindTagCommand extends Command {
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
 
+        case AddReminder.COMMAND_WORD:
+            return new AddReminderParser().parse(arguments);
+
+        case RemoveReminderCommand.COMMAND_WORD:
+            return new RemoveCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 ```
@@ -413,19 +419,6 @@ public class FindTagCommand extends Command {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-
-        case ChangeTagColorCommand.COMMAND_WORD:
-            return new ChangeTagColorCommandParser().parse(arguments);
-
-        case ChangeFontSizeCommand.COMMAND_WORD:
-            return new ChangeFontSizeCommandParser().parse(arguments);
-
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-        }
-    }
-
-}
 ```
 ###### \java\seedu\address\logic\parser\DeleteTagCommandParser.java
 ``` java
@@ -545,6 +538,8 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
     public static final String MESSAGE_TAG_COLOR_CONSTRAINTS = "Valid colors are: "
             + Arrays.toString(VALID_TAG_COLOR);
 
+    public static final String DEFAULT_TAG_COLOR = "orange";
+
     public final String tagColorName;
 
     /**
@@ -558,19 +553,6 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
         if (!isValidTagColorName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_TAG_COLOR_CONSTRAINTS);
         }
-        this.tagColorName = trimmedName;
-    }
-
-    /**
-     * Assume the given color name is valid.
-     * Only for testing purpose.
-     *
-     * @param name
-     * @param isValidColorName
-     */
-    public TagColor(String name, boolean isValidColorName) {
-        requireNonNull(name);
-        String trimmedName = name.trim();
         this.tagColorName = trimmedName;
     }
 
@@ -742,6 +724,7 @@ public class TagContainsKeywordsPredicate implements Predicate<ReadOnlyPerson> {
      */
     public void handleCommandInputChanged(String inputCommand) {
         try {
+            System.out.println(inputCommand);
             CommandResult commandResult = logic.execute(inputCommand);
             initHistory();
             historySnapshot.next();
@@ -786,19 +769,6 @@ public class TagContainsKeywordsPredicate implements Predicate<ReadOnlyPerson> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
-    }
-
-    @Subscribe
-    private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
-        setFontSize(event.getFontSize());
-    }
-
-    /**
-     * Sets the command box style to user preferred font size.
-     */
-    private void setFontSize(String newFontSize) {
-        String fxFormatFontSize = FontSize.getassociatefxfontsizestring(newFontSize);
-        commandTextField.setStyle(fxFormatFontSize);
     }
 
 ```

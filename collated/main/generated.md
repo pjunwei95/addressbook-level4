@@ -1,11 +1,17 @@
 # generated
-###### /java/seedu/address/logic/commands/UndoableCommand.java
+###### \java\seedu\address\logic\commands\UndoableCommand.java
 ``` java
 
         //Revert font size
         if (this instanceof ChangeFontSizeCommand) {
             FontSize.setCurrentFontSizeLabel(previousFontSize);
             EventsCenter.getInstance().post(new ChangeFontSizeEvent("", previousFontSize));
+        }
+
+        //Revert theme
+        if (this instanceof ChangeThemeCommand) {
+            Theme.setCurrentTheme(previousTheme);
+            EventsCenter.getInstance().post(new ChangeThemeEvent(previousTheme));
         }
     }
 
@@ -23,7 +29,7 @@
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 ```
-###### /java/seedu/address/logic/commands/UndoableCommand.java
+###### \java\seedu\address\logic\commands\UndoableCommand.java
 ``` java
     }
 
@@ -34,95 +40,7 @@
     }
 }
 ```
-###### /java/seedu/address/logic/Logic.java
-``` java
-
-    /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
-    ListElementPointer getHistorySnapshot();
-}
-```
-###### /java/seedu/address/logic/LogicManager.java
-``` java
-    @Override
-    public ListElementPointer getHistorySnapshot() {
-        return new ListElementPointer(history.getHistory());
-    }
-}
-```
-###### /java/seedu/address/logic/parser/AddCommandParser.java
-``` java
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Remark remark;
-            DateOfBirth date;
-            FacebookUsername username;
-            if (ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).isPresent()) {
-                date = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).get();
-            } else {
-                date = new DateOfBirth("");;
-            }
-            if (ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)).isPresent()) {
-                remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)).get();
-            } else {
-                remark = new Remark("");
-            }
-```
-###### /java/seedu/address/logic/parser/ParserUtil.java
-``` java
-
-    /**
-     * Parses a {@code Optional<String> address} into an {@code Optional<Address>} if {@code address} is present.
-     * See header comment of this class regarding the use of {@code Optional} parameters.
-     */
-    public static Optional<Address> parseAddress(Optional<String> address) throws IllegalValueException {
-        requireNonNull(address);
-        return address.isPresent() ? Optional.of(new Address(address.get())) : Optional.empty();
-    }
-
-```
-###### /java/seedu/address/logic/parser/ParserUtil.java
-``` java
-    /**
-     * Parses a {@code Optional<String> email} into an {@code Optional<Email>} if {@code email} is present.
-     * See header comment of this class regarding the use of {@code Optional} parameters.
-     */
-    public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
-        requireNonNull(email);
-        return email.isPresent() ? Optional.of(new Email(email.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> tagColor} into an {@code Optional<TagColor>} if {@code tagColor} is present.
-     * See header comment of this class regarding the use of {@code Optional} parameters.
-     */
-    public static Optional<TagColor> parseTagColor(Optional<String> tagColor) throws IllegalValueException {
-        requireNonNull(tagColor);
-        return tagColor.isPresent() ? Optional.of(new TagColor(tagColor.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses a {@code Optional<String> fontSize} into an {@code Optional<FontSize>} if {@code fontSize} is present.
-     * See header comment of this class regarding the use of {@code Optional} parameters.
-     */
-    public static Optional<FontSize> parseFontSize(Optional<String> fontSize) throws IllegalValueException {
-        requireNonNull(fontSize);
-        return fontSize.isPresent() ? Optional.of(new FontSize(fontSize.get())) : Optional.empty();
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws IllegalValueException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
-        }
-        return tagSet;
-    }
-}
-```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     private final UniqueTagList tags;
 
@@ -135,7 +53,7 @@
      */
     {
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
         persons = new UniquePersonList();
         tags = new UniqueTagList();
@@ -162,7 +80,7 @@
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -200,7 +118,7 @@
         persons.add(newPerson);
     }
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
 
     /**
@@ -226,7 +144,7 @@
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      * Ensures that every tag in this person:
@@ -271,7 +189,7 @@
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     //// tag-level operations
 
@@ -344,7 +262,8 @@
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return persons.asObservableList().size() + " persons, "
+                + tags.asObservableList().size() +  " tags" + reminders.asObservableList().size() + " reminders";
         // TODO: refine later
     }
 
@@ -354,7 +273,7 @@
     }
 
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
 
     @Override
@@ -379,164 +298,7 @@
 
 }
 ```
-###### /java/seedu/address/model/Model.java
-``` java
-    /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
-
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
-
-    /** Deletes the given person. */
-    void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException;
-
-    /** Adds the given person */
-    void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
-
-```
-###### /java/seedu/address/model/Model.java
-``` java
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<ReadOnlyPerson> getFilteredPersonList();
-
-```
-###### /java/seedu/address/model/Model.java
-``` java
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate);
-
-    /**
-     * Update color of tags
-     * @param tagList
-     * @param color
-     */
-    void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException;
-
-    /**
-     * Updates the filter of the filtered reminder list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredReminderList(Predicate<ReadOnlyReminder> predicate);
-
-
-
-}
-```
-###### /java/seedu/address/model/ModelManager.java
-``` java
-
-    @Override
-    public synchronized void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
-
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
-
-    }
-```
-###### /java/seedu/address/model/ModelManager.java
-``` java
-    //=========== Filtered Person List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code ReadOnlyPerson} backed by the internal list of
-     * {@code addressBook}
-     */
-    @Override
-    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return FXCollections.unmodifiableObservableList(filteredPersons);
-    }
-```
-###### /java/seedu/address/model/person/Person.java
-``` java
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, DateOfBirth dateOfBirth,
-                  Remark remark, FileImage image, FacebookUsername username, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = new SimpleObjectProperty<>(name);
-        this.phone = new SimpleObjectProperty<>(phone);
-        this.email = new SimpleObjectProperty<>(email);
-        this.address = new SimpleObjectProperty<>(address);
-```
-###### /java/seedu/address/model/person/Person.java
-``` java
-
-    public void setPhone(Phone phone) {
-        this.phone.set(requireNonNull(phone));
-    }
-
-    @Override
-    public ObjectProperty<Phone> phoneProperty() {
-        return phone;
-    }
-
-    @Override
-    public Phone getPhone() {
-        return phone.get();
-    }
-
-    public void setEmail(Email email) {
-        this.email.set(requireNonNull(email));
-    }
-
-    @Override
-    public ObjectProperty<Email> emailProperty() {
-        return email;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email.get();
-    }
-
-    public void setAddress(Address address) {
-        this.address.set(requireNonNull(address));
-    }
-
-    @Override
-    public ObjectProperty<Address> addressProperty() {
-        return address;
-    }
-
-    @Override
-    public Address getAddress() {
-        return address.get();
-    }
-
-```
-###### /java/seedu/address/model/person/Person.java
-``` java
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    @Override
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags.get().toSet());
-    }
-
-    public ObjectProperty<UniqueTagList> tagProperty() {
-        return tags;
-    }
-
-```
-###### /java/seedu/address/model/person/ReadOnlyPerson.java
-``` java
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
-        return builder.toString();
-    }
-
-}
-```
-###### /java/seedu/address/storage/XmlSerializableAddressBook.java
+###### \java\seedu\address\storage\XmlSerializableAddressBook.java
 ``` java
 
     /**
@@ -547,7 +309,7 @@
         persons = new ArrayList<>();
         tags = new ArrayList<>();
 ```
-###### /java/seedu/address/storage/XmlSerializableAddressBook.java
+###### \java\seedu\address\storage\XmlSerializableAddressBook.java
 ``` java
     }
 
@@ -558,7 +320,7 @@
         this();
         reminders.addAll(src.getReminderList().stream().map(XmlAdaptedReminder::new).collect(Collectors.toList()));
 ```
-###### /java/seedu/address/storage/XmlSerializableAddressBook.java
+###### \java\seedu\address\storage\XmlSerializableAddressBook.java
 ``` java
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
@@ -577,7 +339,7 @@
         return FXCollections.unmodifiableObservableList(persons);
     }
 ```
-###### /java/seedu/address/storage/XmlSerializableAddressBook.java
+###### \java\seedu\address\storage\XmlSerializableAddressBook.java
 ``` java
     @Override
     public ObservableList<Tag> getTagList() {
@@ -595,19 +357,7 @@
 
 }
 ```
-###### /java/seedu/address/ui/MainWindow.java
-``` java
-    private Config config;
-    private UserPrefs prefs;
-    private Storage storage;
-    private AccountsStorage accPrefs;
-
-    private CommandBox commandBox;
-
-    @FXML
-    private StackPane browserPlaceholder;
-```
-###### /java/seedu/address/ui/MainWindow.java
+###### \java\seedu\address\ui\MainWindow.java
 ``` java
 
     @FXML
@@ -625,8 +375,8 @@
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, Storage storage, UserPrefs prefs, Logic logic,
-                      AccountsStorage accPrefs) {
+    public MainWindow(Stage primaryStage, Config config, StorageManager storage, UserPrefs prefs, Logic logic,
+                      AccountsStorage accPrefs, UiManager uiManager) {
         super(FXML);
 
         // Set dependencies
@@ -636,6 +386,8 @@
         this.prefs = prefs;
         this.storage = storage;
         this.accPrefs = accPrefs;
+        this.uiManager = uiManager;
+        uiManager.setMainWindow(this);
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -644,7 +396,7 @@
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-
+        initTheme();
         setAccelerators();
         registerAsAnEventHandler(this);
     }
@@ -661,6 +413,9 @@
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
+    private void initTheme() {
+        Theme.changeTheme(primaryStage, Theme.getCurrentTheme());
+    }
     /**
      * Sets the accelerator of a MenuItem.
      *
@@ -702,9 +457,8 @@
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-```
-###### /java/seedu/address/ui/MainWindow.java
-``` java
+        reminderListPanel = new ReminderListPanel(logic.getFilteredReminderList());
+        reminderListPlaceholder.getChildren().add(reminderListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -718,6 +472,7 @@
     }
 
     void hide() {
+        logout();
         primaryStage.hide();
     }
 
@@ -741,6 +496,7 @@
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
         FontSize.setCurrentFontSizeLabel(prefs.getGuiSettings().getFontSize());
+        Theme.setCurrentTheme(prefs.getGuiSettings().getTheme());
         if (prefs.getGuiSettings().getWindowCoordinates() != null) {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
@@ -757,7 +513,8 @@
      */
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel(),
+                Theme.getCurrentTheme());
     }
 
     /**
@@ -774,6 +531,16 @@
     }
 
     /**
+    * logout
+    */
+    public void logout() {
+        logger.info("Trying to logout");
+        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
+        encrypt(storage.getAddressBookFilePath());
+        logger.info("File encypted");
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -786,11 +553,8 @@
      */
     @FXML
     private void handleLogoutEvent() throws IOException {
-        logger.info("Trying to logout");
-        this.hide();
-        this.releaseResources();
-        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        logout();
+        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
         loginPage.show();
     }
 
@@ -798,11 +562,12 @@
         return this.personListPanel;
     }
 
-```
-###### /java/seedu/address/ui/MainWindow.java
-``` java
+    public ReminderListPanel getReminderListPanel() {
+        return this.reminderListPanel;
+    }
 
     void releaseResources() {
+        logout();
         browserPanel.freeResources();
     }
 
@@ -817,7 +582,7 @@
      */
     @FXML
     private void handleIncreaseFontSize() throws CommandException, ParseException {
-        commandBox.handleCommandInputChanged(FontSize.INCREASE_FONT_SIZE_COMMAND);
+        commandBox.handleCommandInputChanged(ChangeFontSizeCommand.INCREASE_FONT_SIZE_COMMAND);
     }
 
     /**
@@ -825,29 +590,33 @@
      */
     @FXML
     private void handleDecreaseFontSize() throws CommandException, ParseException {
-        commandBox.handleCommandInputChanged(FontSize.DECREASE_FONT_SIZE_COMMAND);
+        commandBox.handleCommandInputChanged(ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND);
+    }
+
+    /**
+     * Change the theme to dark theme
+     */
+    @FXML
+    private void handleChangeDarkTheme() {
+        commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_DARK_THEME_COMMAND);
+    }
+
+    /**
+     * Change the theme to bright theme
+     */
+    @FXML
+    private void handleChangeBrightTheme() {
+        commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_BRIGHT_THEME_COMMAND);
+    }
+
+    /**
+     * Change the theme when a ChangeThemeEvent is raised
+     * @param changeThemeEvent
+     */
+    @Subscribe
+    private void handleChangeThemeEvent(ChangeThemeEvent changeThemeEvent) {
+        Theme.changeTheme(primaryStage, changeThemeEvent.getTheme());
     }
 
 }
-```
-###### /java/seedu/address/ui/PersonCard.java
-``` java
-
-    /**
-     * Binds the individual UI elements to observe their respective {@code Person} properties
-     * so that they will be notified of any changes.
-     */
-    private void bindListeners(ReadOnlyPerson person) {
-        name.textProperty().bind(Bindings.convert(person.nameProperty()));
-        phone.textProperty().bind(Bindings.convert(person.phoneProperty()));
-        address.textProperty().bind(Bindings.convert(person.addressProperty()));
-        date.textProperty().bind(Bindings.convert(person.dateOfBirthProperty()));
-        email.textProperty().bind(Bindings.convert(person.emailProperty()));
-        remark.textProperty().bind(Bindings.convert(person.remarkProperty()));
-        person.tagProperty().addListener((observable, oldValue, newValue) -> {
-            tags.getChildren().clear();
-
-            initTags(person, FontSize.getCurrentFontSizeLabel());
-
-        });
 ```

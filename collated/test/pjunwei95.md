@@ -98,8 +98,15 @@ public class ClearPopupCommandTest {
             e.printStackTrace();
         }
 
-        VALID_TAG_COLOR_RED = new TagColor(VALID_TAG_COLOR_NAME_RED, true);
-        VALID_TAG_COLOR_YELLOW = new TagColor(VALID_TAG_COLOR_NAME_YELLOW, true);
+    }
+    static {
+
+        DESC_ASSIGNMENT = new ChangeReminderDescriptorBuilder().withDetails(VALID_DETAILS_ASSIGNMENT)
+                .withPriority(VALID_PRIORITY_ASSIGNMENT).withDueDate(VALID_DUE_DATE_ASSIGNMENT).build();
+
+        DESC_MEETING = new ChangeReminderDescriptorBuilder().withDetails(VALID_DETAILS_MEETING)
+                .withPriority(VALID_PRIORITY_MEETING).withDueDate(VALID_DUE_DATE_MEETING).build();
+
 
     }
 
@@ -130,15 +137,16 @@ public class ClearPopupCommandTest {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<ReadOnlyPerson> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
-
+        List<ReadOnlyPerson> expectedFilteredListPerson = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<ReadOnlyReminder> expectedFilteredListReminder = new ArrayList<>(actualModel.getFilteredReminderList());
         try {
             command.execute();
             fail("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedAddressBook, actualModel.getAddressBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertEquals(expectedFilteredListPerson, actualModel.getFilteredPersonList());
+            assertEquals(expectedFilteredListReminder, actualModel.getFilteredReminderList());
         }
     }
 
@@ -151,6 +159,16 @@ public class ClearPopupCommandTest {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assert model.getFilteredPersonList().size() == 1;
+    }
+    /**
+     * Updates {@code model}'s filtered list to show only the first reminder in the {@code model}'s address book.
+     */
+    public static void showFirstReminderOnly(Model model) {
+        ReadOnlyReminder reminder = model.getAddressBook().getReminderList().get(0);
+        final String[] splitDetails = reminder.getDetails().details.split("\\s+");
+        model.updateFilteredReminderList(new DetailsContainsKeywordsPredicate(Arrays.asList(splitDetails[0])));
+
+        assert model.getFilteredReminderList().size() == 1;
     }
 
     /**

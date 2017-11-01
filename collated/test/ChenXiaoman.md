@@ -1,5 +1,5 @@
 # ChenXiaoman
-###### /java/seedu/address/logic/commands/ChangeFontSizeCommandTest.java
+###### \java\seedu\address\logic\commands\ChangeFontSizeCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
@@ -70,7 +70,7 @@ public class ChangeFontSizeCommandTest {
 
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeTagColorCommandTest.java
+###### \java\seedu\address\logic\commands\ChangeTagColorCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
@@ -148,7 +148,7 @@ public class ChangeTagColorCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeThemeCommandTest.java
+###### \java\seedu\address\logic\commands\ChangeThemeCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
@@ -226,7 +226,7 @@ public class ChangeThemeCommandTest {
 
 }
 ```
-###### /java/seedu/address/logic/commands/MapCommandTest.java
+###### \java\seedu\address\logic\commands\MapCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
@@ -281,7 +281,7 @@ public class MapCommandTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/ChangeFontSizeCommandParserTest.java
+###### \java\seedu\address\logic\parser\ChangeFontSizeCommandParserTest.java
 ``` java
 public class ChangeFontSizeCommandParserTest {
     private ChangeFontSizeCommandParser parser = new ChangeFontSizeCommandParser();
@@ -315,7 +315,7 @@ public class ChangeFontSizeCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/ChangeTagColorCommandParserTest.java
+###### \java\seedu\address\logic\parser\ChangeTagColorCommandParserTest.java
 ``` java
 public class ChangeTagColorCommandParserTest {
     private ChangeTagColorCommandParser parser = new ChangeTagColorCommandParser();
@@ -349,7 +349,7 @@ public class ChangeTagColorCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/ChangeThemeCommandParserTest.java
+###### \java\seedu\address\logic\parser\ChangeThemeCommandParserTest.java
 ``` java
 public class ChangeThemeCommandParserTest {
 
@@ -374,7 +374,7 @@ public class ChangeThemeCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/MapCommandParserTest.java
+###### \java\seedu\address\logic\parser\MapCommandParserTest.java
 ``` java
 public class MapCommandParserTest {
     private MapCommandParser parser = new MapCommandParser();
@@ -390,7 +390,7 @@ public class MapCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/model/font/FontSizeTest.java
+###### \java\seedu\address\model\font\FontSizeTest.java
 ``` java
     @Test
     public void isValidFontSize() throws Exception {
@@ -401,7 +401,7 @@ public class MapCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/model/tag/TagColorTest.java
+###### \java\seedu\address\model\tag\TagColorTest.java
 ``` java
 public class TagColorTest {
 
@@ -419,7 +419,7 @@ public class TagColorTest {
 
 }
 ```
-###### /java/seedu/address/model/theme/ThemeTest.java
+###### \java\seedu\address\model\theme\ThemeTest.java
 ``` java
 public class ThemeTest {
     @Test
