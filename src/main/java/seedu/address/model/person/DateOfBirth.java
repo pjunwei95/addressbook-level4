@@ -18,7 +18,8 @@ public class DateOfBirth {
 
 
     public static final String MESSAGE_BIRTHDAY_CONSTRAINTS =
-            "Date of Birth must be a Valid Date and in the following format: \n"
+            "Date of Birth must be a Valid Date that is days should be less than 32 and months should be less"
+                    + " than 32 and in the following format: \n"
             + "'.' and '/' can be used as separators. \n";
 
     public final String date;

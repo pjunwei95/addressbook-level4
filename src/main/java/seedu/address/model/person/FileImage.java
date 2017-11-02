@@ -1,24 +1,46 @@
 package seedu.address.model.person;
-//@@author RonakLakhotia
+
+import java.io.File;
+
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Person's name in the address book.
+ * Represents a Person's Date Of birth
+ * Guarantees: immutable; is valid as declared in {@link #isValidImage(String)}
  */
 public class FileImage {
 
     public static final String MESSAGE_IMAGE_CONSTRAINTS =
-            "File Path must be correctly entered";
+            "File Path must be correctly entered, that is the image must exist in the path specified\n"
+            + "For example: src/resources/images/clock.png";
 
     public final String filePath;
 
     public FileImage(String filePath) throws IllegalValueException {
         requireNonNull(filePath);
+        if (!isValidImage(filePath)) {
+            throw new IllegalValueException(MESSAGE_IMAGE_CONSTRAINTS);
+        }
         String trimmedName = filePath.trim();
 
         this.filePath = trimmedName;
+    }
+
+    /**
+     * Returns true if a given string is a valid Image path.
+     */
+    public static boolean isValidImage(String filePath) {
+
+        String trimmedPath = filePath.trim();
+
+        if (trimmedPath.isEmpty()) {
+            return true;
+        }
+        File file = new File(trimmedPath);
+        return file.exists();
+
     }
 
 
