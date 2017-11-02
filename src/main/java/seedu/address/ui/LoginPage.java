@@ -91,6 +91,11 @@ public class LoginPage extends UiPart<Region> {
         primaryStage.setScene(scene);
         initTheme();
         registerAsAnEventHandler(this);
+        try {
+            handleLoginEvent();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initTheme() {
@@ -111,7 +116,7 @@ public class LoginPage extends UiPart<Region> {
         logger.info("Trying to login");
         String uname = username.getText();
         String pword = password.getText();
-        if (checkValid(uname, pword)) {
+//        if (checkValid(uname, pword)) {
 
             String path = "data/" + uname + "addressbook.xml";
             String tempPath = "data/temp.xml";
@@ -135,9 +140,9 @@ public class LoginPage extends UiPart<Region> {
             mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-        } else {
-            logger.info("Wrong name or password!");
-        }
+//        } else {
+//            logger.info("Wrong name or password!");
+//        }
     }
 
     /**

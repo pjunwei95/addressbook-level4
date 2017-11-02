@@ -494,7 +494,7 @@ A user can go back using the back button.
 
 // tag::customizetagcolor[]
 === Customize tag color mechanism
-Tag color can be changed by typing a `ChangeTagColorCommand` in the command line.
+Tag color can be changed by giving a `ChangeTagColorCommand`.
 [NOTE]
 User can change one or more than one tag to a different color in one command.
 
@@ -512,7 +512,8 @@ The diagram below shows the hierarchy of TagColor class.
 
 image::TagColorClassDiagram.png[width="400"]
 
-After every `ChangeTagColorCommand`, the tag and tag color pair will be stored in the storage file. The tag color in the UI is also updated accordingly. +
+After every `ChangeTagColorCommand`, the tag and tag color pair will be stored in the storage file.
+An `ChangeTagColorEvent` is raised so that the tag color in the UI is also updated accordingly. +
 
 The sequence diagram below shows how the `ChangeTagColorCommand` works.
 
