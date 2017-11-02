@@ -25,7 +25,7 @@ public class EmailCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Opens the default browser on the desktop with the Gmail "
             + "compose box open and specific details pre-filled.\n"
-            + "Parameters: " + PREFIX_TAG + "TAG (must match tag) \n"
+            + "Parameters: " + PREFIX_TAG + "Only one TAG must be entered (must match tag) \n"
             + PREFIX_SUBJECT + "Subject of the email."
             + "Example: " + COMMAND_WORD + " t/friends s/birthday.";
 

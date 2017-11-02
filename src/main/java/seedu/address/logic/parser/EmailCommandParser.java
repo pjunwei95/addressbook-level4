@@ -2,51 +2,60 @@ package seedu.address.logic.parser;
 //@@author RonakLakhotia
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_IMAGE;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.io.File;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.commands.PhotoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmailSubject;
+import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new PhotoCommand object
+ * Parses input arguments and creates a new EmailCommand object
  */
 public class EmailCommandParser implements Parser<EmailCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the PhotoCommand
-     * and returns an PhotoCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EmailCommand
+     * and returns an EmailCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    public static final String MULTIPLE_TAGS_FALIURE = "Multiple tags cannot be entered";
+
     public EmailCommand parse(String args) throws ParseException {
 
-        String trimmedArgs = args.trim();
 
+        EmailSubject subject;
+        Set<Tag> tagList;
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT, PREFIX_TAG);
 
-        String regex = "[\\s]+";
-        String[] keywords = trimmedArgs.split(regex, 2);
-
-        if (keywords.length == 1) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE)
-            );
+        if (!arePrefixesPresent(argMultimap, PREFIX_SUBJECT, PREFIX_TAG)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE));
         }
-        else if (keywords.length != 1) {
+        try {
+            subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT)).get();
+            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-                return new EmailCommand(keywords[0], (keywords[1]));
-
-
+        } catch (IllegalValueException ive) {
+            throw new AssertionError("Invalid input");
         }
-        else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_IMAGE, PhotoCommand.MESSAGE_USAGE));
+        if (tagList.size() > 1) {
+            throw new ParseException(String.format(MULTIPLE_TAGS_FALIURE, EmailCommand.MESSAGE_USAGE));
         }
-
+        Tag[] dummyArrayToGetTagName = tagList.toArray(new Tag[1]);
+        String tagName = dummyArrayToGetTagName[0].tagName.toString();
+        return new EmailCommand(tagName, subject.toString());
     }
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
