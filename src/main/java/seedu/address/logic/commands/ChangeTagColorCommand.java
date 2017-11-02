@@ -1,3 +1,4 @@
+//@@author ChenXiaoman
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -13,7 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
-//@@author ChenXiaoman
+
 /**
  * Change color of tags
  */

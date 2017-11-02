@@ -363,27 +363,6 @@ The `color` command fails as `invalid_color` is not supported.
 * `color t/not_existing_tag c/yellow` +
 The `color` command fails as `not_existing_tag` does not exit in current database.
 
-=== Change font size : `fs` SINCE V1.2
-
-Change the font size of the entire application +
-Format: `fs [FONT SIZE]` or `fs [+/-]`
-****
-* The available font sizes are: xs(extra small), s(small), m(medium), l(large), xl(extra large).
-* The default font size is m.
-* The font size changed will be auto stored.
-* You can increase (or decrease) the font size by pressing the "+" (or "-") button in the right top corner.
-****
-
-Examples:
-
-* `fs xl`
-
-* `fs s`
-
-* `fs +`
-
-* `fs -` +
-
 === Add Photo to contacts : `photo` SINCE V1.2 +
 
 image::MockUp.png[width="790"]
@@ -412,7 +391,26 @@ Command - `Photo 1 Delete` +
 this will delete the photo attached with the person at index 1.
 ****
 
+=== Change font size : `fs` SINCE V1.3
 
+Change the font size of the entire application +
+Format: `fs [FONT SIZE]` or `fs [+/-]`
+****
+* The available font sizes are: xs(extra small), s(small), m(medium), l(large), xl(extra large).
+* The default font size is m.
+* The font size changed will be auto stored.
+* You can increase (or decrease) the font size by pressing the "+" (or "-") button in the right top corner.
+****
+
+Examples:
+
+* `fs xl`
+
+* `fs s`
+
+* `fs +`
+
+* `fs -` +
 
 === FaceBook Integration SINCE V1.3
 
