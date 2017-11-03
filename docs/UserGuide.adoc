@@ -163,8 +163,11 @@ image::Search.png[width="600"]
 
 === Searching a person : `search`
 
-Lists persons with the given name and Date Of Birth.
+Lists persons with the given name and Date Of Birth. +
+This makes the find command more powerful. +
+The name and Date Of Birth must be valid. +
 Format: `search NAME DATE_OF_BIRTH`
+
 
 
 ****
@@ -176,7 +179,7 @@ Format: `search NAME DATE_OF_BIRTH`
 
 Examples:
 
-* `search John 13.10.1997` +
+* `search n/John b/13.10.1997` +
 Returns persons with name `John` and Date of Birth `13.10.1997`.
 
 === Deleting a person : `delete`

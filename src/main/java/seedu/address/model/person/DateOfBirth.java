@@ -24,10 +24,13 @@ public class DateOfBirth {
             + "'.' and '/' can be used as separators. \n";
 
     public final String date;
-    public static final int lastIndex = 1;
-    public static final int firstIndex = 0;
+    public static final int LAST_INDEX = 1;
+    public static final int FIRST_INDEX = 0;
     public static final int FEBRUARY = 2;
     public static final int DAYS_IN_FEBRUARY = 28;
+    public static final int MAXIMUM_DAYS_IN_MONTH = 31;
+    public static final int [] MONTHS_WITH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
 
     public DateOfBirth(String date) throws IllegalValueException {
 
@@ -69,17 +72,18 @@ public class DateOfBirth {
     public static boolean checkIfValidDate(String date) {
 
         int dayNumber, monthNumber, yearNumber;
-        boolean isLeapYear, isValidDateOfFebruary;
+        boolean isLeapYear, isValidDateOfFebruary, isValidNumberOfDaysInMonth;
 
-        int lastIndexOfSeparator = getIndexOfSeparator(date, lastIndex);
-        int firstIndexOfSeparator = getIndexOfSeparator(date, firstIndex);
+        int lastIndexOfSeparator = getIndexOfSeparator(date, LAST_INDEX);
+        int firstIndexOfSeparator = getIndexOfSeparator(date, FIRST_INDEX);
         yearNumber = getYearNumber(lastIndexOfSeparator, date);
         monthNumber = getMonthNumber(firstIndexOfSeparator, lastIndexOfSeparator, date);
         isLeapYear = checkIfLeapYear(yearNumber);
         dayNumber = getDayNumber(firstIndexOfSeparator, date);
         isValidDateOfFebruary = checkIfValidDateOfFebruary(date, monthNumber, yearNumber, dayNumber, isLeapYear);
+        isValidNumberOfDaysInMonth = checkIfValidNumberOfDaysInMonth(monthNumber, dayNumber);
 
-        if (isValidDateOfFebruary) {
+        if (isValidDateOfFebruary && isValidNumberOfDaysInMonth) {
             return true;
         }
         return false;
@@ -94,6 +98,14 @@ public class DateOfBirth {
             }
         }
         return true;
+    }
+    public static boolean checkIfValidNumberOfDaysInMonth(int month, int day) {
+
+        if (MONTHS_WITH_DAYS[month - 1] < day)
+            return false;
+
+        return true;
+
     }
 
     public static boolean checkIfLeapYear(int yearNumber) {
@@ -128,7 +140,7 @@ public class DateOfBirth {
             if (date.charAt(loopVariable) == '.' || date.charAt(loopVariable) == '-') {
                 storesIndex = loopVariable;
 
-                if (position == firstIndex) {
+                if (position == FIRST_INDEX) {
                     break;
                 }
             }

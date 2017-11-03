@@ -75,6 +75,15 @@ public class TypicalPersons {
             .withImage("")
             .withTags("family").build();
 
+    public static final ReadOnlyPerson RONAK = new PersonBuilder().withName("Ronak Lakhotia")
+            .withPhone("9391111").withEmail("dumm@gmail.com").withAddress("3rd street")
+            .withDateOfBirth("13.10.1997").withImage("").withTags("friends").build();
+
+    public static final ReadOnlyPerson SHARMA = new PersonBuilder().withName("Ronak Sharma")
+            .withPhone("9391111").withEmail("dumm@gmail.com").withAddress("3rd street")
+            .withDateOfBirth("13.10.1997").withImage("").withTags("friends").build();
+
+
     public static final ReadOnlyReminder ASSIGNMENT = new ReminderBuilder().withDetails("CS2103T")
             .withPriority("Priority Level: High").withDueDate("12.11.2017").build();
 
@@ -90,6 +99,11 @@ public class TypicalPersons {
             .withImage("").build();
     public static final ReadOnlyPerson IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withDateOfBirth("13.10.1997")
+            .withEmail("hans@example.com").withAddress("chicago ave")
+            .withImage("").build();
+
+    public static final ReadOnlyPerson DUMMY = new PersonBuilder().withName("Ronak").withPhone("8482131")
+            .withDateOfBirth("19.12.1998")
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withImage("").build();
 
@@ -113,7 +127,7 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
     public static final String KEYWORD_MATCHING_RONAK = "Ronak";
-    public static final String KEYWORD_MATCHING_RANDOM = "Ronak";
+    public static final String KEYWORD_MATCHING_LAKHOTIA = "Ronak";
 
     public static final ReadOnlyPerson LAKHOTIA = new PersonBuilder().withName("Ronak Lakhotia").withPhone("93911558")
             .withEmail("email@gmail.com").withAddress("Prince Georges Park").withDateOfBirth("13.10.1997")
@@ -150,7 +164,8 @@ public class TypicalPersons {
     }
 
     public static List<ReadOnlyPerson> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE,
+                RONAK, SHARMA, DUMMY));
     }
 
     public static List<ReadOnlyReminder> getTypicalReminders() {

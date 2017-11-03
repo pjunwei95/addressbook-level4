@@ -31,6 +31,7 @@ public class EmailCommandParser implements Parser<EmailCommand> {
 
         EmailSubject subject;
         Set<Tag> tagList;
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT, PREFIX_TAG);
 
