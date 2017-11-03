@@ -30,23 +30,13 @@ public class FaceBookCommandParserTest {
         /* multiple whitespaces */
         assertParseSuccess(parser, "   1   ", new FaceBookCommand(INDEX_FIRST_PERSON));
 
-    }
-
-    @Test
-    public void parse_invalidArgs_throwsParseException() {
-
-        assertParseFailure(parser, "a", String.format
-                (MESSAGE_INVALID_INDEX, FaceBookCommand.MESSAGE_USAGE));
-
-        assertParseFailure(parser, "0", String.format(
-                MESSAGE_INVALID_INDEX));
-    }
-
-    @Test
-    public void parse_emptyArg_throwsParseException() {
 
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FaceBookCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser,"a", String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE
+        ));
 
     }
 

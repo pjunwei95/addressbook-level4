@@ -62,14 +62,15 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FAMILY = "family";
     public static final String VALID_TAG_COLOR_NAME_RED = "red";
 
-    public static final String VALID_USERNAME_AMY = "";
-    public static final String VALID_USERNAME_BOB = "";
+    public static final String VALID_USERNAME_AMY = "amy";
+    public static final String VALID_USERNAME_BOB = "bob";
     public static final String VALID_DETAILS_ASSIGNMENT = "Assignment";
     public static final String VALID_PRIORITY_ASSIGNMENT = "Low";
     public static final String VALID_DUE_DATE_ASSIGNMENT = "12.11.2017";
     public static final String VALID_DETAILS_MEETING = "Meeting";
     public static final String VALID_PRIORITY_MEETING = "High";
     public static final String VALID_DUE_DATE_MEETING = "12.11.2017";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -85,6 +86,8 @@ public class CommandTestUtil {
     public static final String IMAGE_BOB = " " + PREFIX_IMAGE + VALID_IMAGE_BOB;
     public static final String EMAIL_TAG = " " + PREFIX_TAG + VALID_TAG_EMAIL;
     public static final String EMAIL_SUBJECT = " " + PREFIX_SUBJECT + VALID_EMAIL_SUBJECT;
+    public static final String USERNAME_DESC_BOB = " " + PREFIX_USERNAME + VALID_USERNAME_BOB;
+    public static final String USERNAME_DESC_AMY = " " + PREFIX_USERNAME + VALID_USERNAME_AMY;
 
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
@@ -114,6 +117,7 @@ public class CommandTestUtil {
     public static final String INVALID_DETAILS_DESC = " " + PREFIX_REMINDER_DETAILS + "@Meeting";
     public static final String INVALID_PRIORITY_DESC = " " + PREFIX_REMINDER_PRIORITY + "!High";
     public static final String INVALID_DUE_DATE_DESC = " " + PREFIX_REMINDER_DUE_DATE + "@13.10.1997";
+    public static final String INVALID_DATE_OF_BIRTH_DESC_BOUNDS = " " + PREFIX_DOB + "30.02.2017";
 
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_AMY;
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_BOB;

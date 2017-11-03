@@ -35,7 +35,7 @@ public class FaceBookCommandParser implements Parser<FaceBookCommand> {
 
         } catch (IllegalValueException ive) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_INDEX, FaceBookCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE));
         }
     }
 }
