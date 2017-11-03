@@ -100,7 +100,6 @@ public class ModelManager extends ComponentManager implements Model {
             throw new AssertionError("invalid input");
         }
         openUpDesktopBrowser(appendEmailAddress, subject);
-        indicateAddressBookChanged();
     }
     private String getAppendedEmailIdOfContacts(String tag, List<ReadOnlyPerson> lastShownList,
                                                 String appendEmailAddress) throws IllegalValueException {

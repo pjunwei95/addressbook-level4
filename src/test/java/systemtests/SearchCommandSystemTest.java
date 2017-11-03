@@ -1,9 +1,15 @@
 package systemtests;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.testutil.TypicalPersons.*;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_OF_BIRTH_DESC_BOUNDS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_RONAK;
+import static seedu.address.testutil.TypicalPersons.LAKHOTIA;
+import static seedu.address.testutil.TypicalPersons.RANDOM;
+import static seedu.address.testutil.TypicalPersons.RONAK;
+import static seedu.address.testutil.TypicalPersons.SHARMA;
 
 import org.junit.Test;
 
@@ -16,6 +22,7 @@ import seedu.address.model.Model;
 //@@author RonakLakhotia
 public class SearchCommandSystemTest extends AddressBookSystemTest {
 
+    public static final String INVALID_DETAILS = "You might have entered invalid date or name with invalid characters!";
     @Test
 
     public void search() {
@@ -26,8 +33,8 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
                 + "b/13.10.1997" + "   ";
 
         Model expectedModel = getModel();
-        System.out.println(expectedModel.getFilteredPersonList());
-        ModelHelper.setFilteredList(expectedModel, LAKHOTIA, RANDOM, RONAK, SHARMA);// first names of Lakhotia and Random are "Ronak"
+        ModelHelper.setFilteredList(expectedModel,
+                LAKHOTIA, RANDOM, RONAK, SHARMA); // first names of Lakhotia and Random are "Ronak"
         assertCommandSuccess(command, expectedModel);
 
         assertSelectedCardUnchanged();
@@ -62,6 +69,22 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
+        /* missing name */
+        command = SearchCommand.COMMAND_WORD + " " +  "b/13.10.1997";
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        /* missing date */
+        command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        /* invalid name */
+        command = SearchCommand.COMMAND_WORD + " " + INVALID_NAME_DESC + " " + "b/13.10.1997";
+        assertCommandFailure(command, String.format(INVALID_DETAILS));
+
+        /* Invalid date */
+        command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " "
+                + INVALID_DATE_OF_BIRTH_DESC_BOUNDS;
+        assertCommandFailure(command, String.format(INVALID_DETAILS));
 
 
     }
