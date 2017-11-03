@@ -86,6 +86,7 @@ public class TypicalPersons {
             .withEmail("stefan@example.com")
             .withDateOfBirth("13.10.1997")
             .withAddress("little india")
+            .withUsername("meier")
             .withImage("").build();
     public static final ReadOnlyPerson IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withDateOfBirth("13.10.1997")

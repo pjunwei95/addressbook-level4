@@ -54,6 +54,8 @@ public class FaceBookCommandTest {
         FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex);
 
         assertCommandFailure(faceBookCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+
     }
 
     @Test
@@ -67,6 +69,7 @@ public class FaceBookCommandTest {
         FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex);
 
         assertCommandFailure(faceBookCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
     }
     @Test
     public void execute_no_usernameFacebookCommmand() throws IllegalValueException {

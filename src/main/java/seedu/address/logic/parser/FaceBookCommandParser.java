@@ -16,7 +16,7 @@ public class FaceBookCommandParser implements Parser<FaceBookCommand> {
      * and returns an MapCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public static final String MESSAGE_INVALID_INDEX = "Index entered in invlaid";
+    public static final String MESSAGE_INVALID_INDEX = "Index entered is invalid";
 
     public FaceBookCommand parse(String args) throws ParseException {
         try {

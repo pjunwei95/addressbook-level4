@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -25,18 +26,28 @@ public class FaceBookCommandParserTest {
     public void parse_validArgs_returnsFaceBookCommand() {
 
         assertParseSuccess(parser, "1", new FaceBookCommand(INDEX_FIRST_PERSON));
+
+        /* multiple whitespaces */
+        assertParseSuccess(parser, "   1   ", new FaceBookCommand(INDEX_FIRST_PERSON));
+
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+
         assertParseFailure(parser, "a", String.format
-                (MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE));
+                (MESSAGE_INVALID_INDEX, FaceBookCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "0", String.format(
+                MESSAGE_INVALID_INDEX));
     }
 
     @Test
     public void parse_emptyArg_throwsParseException() {
+
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FaceBookCommand.MESSAGE_USAGE));
+
     }
 
     @Test
