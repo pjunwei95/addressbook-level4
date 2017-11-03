@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
-import seedu.address.logic.parser.SearchCommandParser;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -30,7 +29,6 @@ import seedu.address.model.person.SearchContainsKeywordsPredicate;
 public class SearchCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    SearchCommandParser parser = new SearchCommandParser();
     @Test
     public void equals() {
         SearchContainsKeywordsPredicate firstPredicate =

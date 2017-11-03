@@ -23,12 +23,11 @@ import seedu.address.model.person.SearchContainsKeywordsPredicate;
 //@@author RonakLakhotia
 public class SearchCommandParserTest {
 
+    public static final String INVALID_DETAILS = "You might have entered invalid date or name with invalid characters!";
     private SearchCommandParser parser = new SearchCommandParser();
 
-
-    public static final String INVALID_DETAILS = "You might have entered invalid date or name with invalid characters!";
     @Test
-    public void parse_emptyArg_InvalidArg_throwsParseException() {
+    public void parse_emptyArg_throwsParseException() {
 
         /* no input */
         assertParseFailure(parser, "     ",
@@ -58,7 +57,7 @@ public class SearchCommandParserTest {
     public void parse_allFieldsPresent_success() throws ParseException {
 
         /* Multiple names last one taken */
-        assertParseSuccess(parser,SearchCommand.COMMAND_WORD + NAME_DESC_BOB
+        assertParseSuccess(parser, SearchCommand.COMMAND_WORD + NAME_DESC_BOB
                 + NAME_DESC_AMY + DOB_DESC_AMY, new SearchCommand(
                         new SearchContainsKeywordsPredicate(Arrays.asList(VALID_NAME_AMY, VALID_DOB_AMY)))
         );
@@ -79,7 +78,7 @@ public class SearchCommandParserTest {
                 expectedMessage);
 
         // missing date
-        assertParseFailure(parser,SearchCommand.COMMAND_WORD + VALID_NAME_AMY,
+        assertParseFailure(parser, SearchCommand.COMMAND_WORD + VALID_NAME_AMY,
                 expectedMessage);
 
 

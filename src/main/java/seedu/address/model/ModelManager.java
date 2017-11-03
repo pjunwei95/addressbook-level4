@@ -131,9 +131,9 @@ public class ModelManager extends ComponentManager implements Model {
 
             if (Desktop.isDesktopSupported())
             {
-                Desktop.getDesktop().browse(new URI(Gmail_Url ));
+                Desktop.getDesktop().browse(new URI(Gmail_Url));
             }
-        } catch (URISyntaxException U ) {
+        } catch (URISyntaxException U) {
             throw new AssertionError("URISyntax error");
 
         } catch (IOException Ie) {

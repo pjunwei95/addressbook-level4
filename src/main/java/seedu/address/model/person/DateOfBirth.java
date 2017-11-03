@@ -17,6 +17,13 @@ public class DateOfBirth {
             + "(0[1-9]|1[0-2]|[1-9])[///./-](19|20)[0-9][0-9]";
 
 
+    public static final int DAYS_IN_FEBRUARY = 28;
+    public static final int FEBRUARY = 2;
+    public static final int FIRST_INDEX = 0;
+    public static final int LAST_INDEX = 1;
+
+    public static final int [] MONTHS_WITH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
     public static final String MESSAGE_BIRTHDAY_CONSTRAINTS =
             "Date of Birth must be a Valid Date that is days should be less than 32 , months should be less"
                     + " than 12\n.For the month of February make sure days are less than 29 unless it is a leap year.\n"
@@ -24,12 +31,6 @@ public class DateOfBirth {
             + "'.' and '/' can be used as separators. \n";
 
     public final String date;
-    public static final int LAST_INDEX = 1;
-    public static final int FIRST_INDEX = 0;
-    public static final int FEBRUARY = 2;
-    public static final int DAYS_IN_FEBRUARY = 28;
-    public static final int MAXIMUM_DAYS_IN_MONTH = 31;
-    public static final int [] MONTHS_WITH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 
     public DateOfBirth(String date) throws IllegalValueException {
@@ -68,20 +69,21 @@ public class DateOfBirth {
 
         return isValidDate;
     }
-
+    /**
+     * Checks for invalid conditions of a date
+     */
     public static boolean checkIfValidDate(String date) {
 
-        int dayNumber, monthNumber, yearNumber;
-        boolean isLeapYear, isValidDateOfFebruary, isValidNumberOfDaysInMonth;
 
         int lastIndexOfSeparator = getIndexOfSeparator(date, LAST_INDEX);
         int firstIndexOfSeparator = getIndexOfSeparator(date, FIRST_INDEX);
-        yearNumber = getYearNumber(lastIndexOfSeparator, date);
-        monthNumber = getMonthNumber(firstIndexOfSeparator, lastIndexOfSeparator, date);
-        isLeapYear = checkIfLeapYear(yearNumber);
-        dayNumber = getDayNumber(firstIndexOfSeparator, date);
-        isValidDateOfFebruary = checkIfValidDateOfFebruary(date, monthNumber, yearNumber, dayNumber, isLeapYear);
-        isValidNumberOfDaysInMonth = checkIfValidNumberOfDaysInMonth(monthNumber, dayNumber);
+        int yearNumber = getYearNumber(lastIndexOfSeparator, date);
+        int monthNumber = getMonthNumber(firstIndexOfSeparator, lastIndexOfSeparator, date);
+        boolean isLeapYear = checkIfLeapYear(yearNumber);
+        int dayNumber = getDayNumber(firstIndexOfSeparator, date);
+        boolean isValidDateOfFebruary = checkIfValidDateOfFebruary(
+                date, monthNumber, yearNumber, dayNumber, isLeapYear);
+        boolean isValidNumberOfDaysInMonth = checkIfValidNumberOfDaysInMonth(monthNumber, dayNumber);
 
         if (isValidDateOfFebruary && isValidNumberOfDaysInMonth) {
             return true;
@@ -89,6 +91,9 @@ public class DateOfBirth {
         return false;
 
     }
+    /**
+     * Checks if number of days in February are valid
+     */
     public static boolean checkIfValidDateOfFebruary(String date, int month, int year, int day, boolean isLeapYear) {
 
         if (month == FEBRUARY) {
@@ -99,15 +104,21 @@ public class DateOfBirth {
         }
         return true;
     }
+    /**
+     * Checks if number of days in a given month are valid
+     */
     public static boolean checkIfValidNumberOfDaysInMonth(int month, int day) {
 
-        if (MONTHS_WITH_DAYS[month - 1] < day)
+        if (MONTHS_WITH_DAYS[month - 1] < day) {
             return false;
+        }
 
         return true;
 
     }
-
+    /**
+     * Checks if it is a leap year
+     */
     public static boolean checkIfLeapYear(int yearNumber) {
 
         if (yearNumber % 400 == 0 || (yearNumber % 4 == 0 && yearNumber % 100 != 0)) {
@@ -135,7 +146,7 @@ public class DateOfBirth {
     public static int getIndexOfSeparator(String date, int position) {
 
         int storesIndex = -1;
-        for (int loopVariable = 0;loopVariable < date.length();loopVariable++) {
+        for (int loopVariable = 0; loopVariable < date.length(); loopVariable++) {
 
             if (date.charAt(loopVariable) == '.' || date.charAt(loopVariable) == '-') {
                 storesIndex = loopVariable;

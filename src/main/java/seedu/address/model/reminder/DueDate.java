@@ -13,19 +13,21 @@ public class DueDate {
      * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
      */
 
+    public static final int DAYS_IN_FEBRUARY = 28;
     public static final String DUE_DATE_VALIDATION_REGEX = "(0[1-9]|[1-9]|1[0-9]|2[0-9]|3[01])[///./-]"
             + "(0[1-9]|1[0-2]|[1-9])[///./-](19|20)[0-9][0-9]";
 
+    public static final int FEBRUARY = 2;
+    public static final int FIRST_INDEX = 0;
 
+    public static final int LAST_INDEX = 1;
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Due Date must be a Valid Date and in the following format: \n"
                     + "'.' and '/' can be used as separators. \n";
 
     public final String date;
-    public static final int lastIndex = 1;
-    public static final int firstIndex = 0;
-    public static final int FEBRUARY = 2;
-    public static final int DAYS_IN_FEBRUARY = 28;
+
+
 
     public DueDate(String date) throws IllegalValueException {
 
@@ -59,18 +61,20 @@ public class DueDate {
 
     }
 
+    /**
+     * Checks if number of days in a given month are valid
+     */
     public static boolean checkIfValidDate(String date) {
 
-        int dayNumber, monthNumber, yearNumber;
-        boolean isLeapYear, isValidDateOfFebruary;
 
-        int lastIndexOfSeparator = getIndexOfSeparator(date, lastIndex);
-        int firstIndexOfSeparator = getIndexOfSeparator(date, firstIndex);
-        yearNumber = getYearNumber(lastIndexOfSeparator, date);
-        monthNumber = getMonthNumber(firstIndexOfSeparator, lastIndexOfSeparator, date);
-        isLeapYear = checkIfLeapYear(yearNumber);
-        dayNumber = getDayNumber(firstIndexOfSeparator, date);
-        isValidDateOfFebruary = checkIfValidDateOfFebruary(date, monthNumber, yearNumber, dayNumber, isLeapYear);
+        int lastIndexOfSeparator = getIndexOfSeparator(date, LAST_INDEX);
+        int firstIndexOfSeparator = getIndexOfSeparator(date, FIRST_INDEX);
+        int yearNumber = getYearNumber(lastIndexOfSeparator, date);
+        int monthNumber = getMonthNumber(firstIndexOfSeparator, lastIndexOfSeparator, date);
+        boolean isLeapYear = checkIfLeapYear(yearNumber);
+        int dayNumber = getDayNumber(firstIndexOfSeparator, date);
+        boolean isValidDateOfFebruary = checkIfValidDateOfFebruary(
+                date, monthNumber, yearNumber, dayNumber, isLeapYear);
 
         if (isValidDateOfFebruary) {
             return true;
@@ -78,6 +82,9 @@ public class DueDate {
         return false;
 
     }
+    /**
+     * Checks if number of days in February are valid
+     */
     public static boolean checkIfValidDateOfFebruary(String date, int month, int year, int day, boolean isLeapYear) {
 
         if (month == FEBRUARY) {
@@ -89,6 +96,9 @@ public class DueDate {
         return true;
     }
 
+    /**
+     * Checks if it is a leap year
+     */
     public static boolean checkIfLeapYear(int yearNumber) {
 
         if (yearNumber % 400 == 0 || (yearNumber % 4 == 0 && yearNumber % 100 != 0)) {
@@ -116,12 +126,12 @@ public class DueDate {
     public static int getIndexOfSeparator(String date, int position) {
 
         int storesIndex = -1;
-        for (int loopVariable = 0;loopVariable < date.length();loopVariable++) {
+        for (int loopVariable = 0; loopVariable < date.length(); loopVariable++) {
 
             if (date.charAt(loopVariable) == '.' || date.charAt(loopVariable) == '-') {
                 storesIndex = loopVariable;
 
-                if (position == firstIndex) {
+                if (position == FIRST_INDEX) {
                     break;
                 }
             }

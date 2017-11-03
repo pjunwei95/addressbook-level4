@@ -165,7 +165,7 @@ public class TypicalPersons {
 
     public static List<ReadOnlyPerson> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE,
-                RONAK, SHARMA, DUMMY));
+                RONAK, SHARMA, DUMMY, LAKHOTIA, RANDOM));
     }
 
     public static List<ReadOnlyReminder> getTypicalReminders() {
