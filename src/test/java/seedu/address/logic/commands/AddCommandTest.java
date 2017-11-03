@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -107,6 +108,10 @@ public class AddCommandTest {
         @Override
         public void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
             fail("This method should not be called.");
+        }
+        @Override
+        public void sendMailToContacts(String tagName, String subject, List<ReadOnlyPerson> lastShownList) {
+            fail("This method should never be called");
         }
         @Override
         public void addReminder(ReadOnlyReminder reminder) throws DuplicateReminderException {

@@ -3,8 +3,12 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.awt.Desktop;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -82,6 +86,61 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook.removePerson(target);
         indicateAddressBookChanged();
+
+    }
+    @Override
+    public synchronized void sendMailToContacts(String tag, String subject, List<ReadOnlyPerson> lastShownList) {
+
+        String appendEmailAddress = "";
+
+        try {
+            appendEmailAddress = getAppendedEmailIdOfContacts(tag, lastShownList, appendEmailAddress);
+
+        } catch (IllegalValueException ive) {
+            throw new AssertionError("invalid input");
+        }
+        openUpDesktopBrowser(appendEmailAddress, subject);
+        indicateAddressBookChanged();
+    }
+    private String getAppendedEmailIdOfContacts(String tag, List<ReadOnlyPerson> lastShownList,
+                                                String appendEmailAddress) throws IllegalValueException {
+
+        ReadOnlyPerson getPerson;
+        int loopVariable = 0;
+
+        while (loopVariable < lastShownList.size()) {
+            getPerson = lastShownList.get(loopVariable);
+
+            if (getPerson.getTags().contains(new Tag(tag))) {
+                appendEmailAddress = appendEmailAddress + getPerson.getEmail().toString() + "+";
+            }
+            loopVariable++;
+
+        }
+        return appendEmailAddress;
+    }
+    /** Opens the default browser in your desktop */
+    private void openUpDesktopBrowser(String appendEmailAddress, String subject) {
+
+        appendEmailAddress = appendEmailAddress.substring(0, appendEmailAddress.length() - 1);
+
+        String Gmail_Url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + appendEmailAddress + "&su=" + subject;
+
+
+        try {
+
+            if (Desktop.isDesktopSupported())
+            {
+                Desktop.getDesktop().browse(new URI(Gmail_Url ));
+            }
+        } catch (URISyntaxException U ) {
+            throw new AssertionError("URISyntax error");
+
+        } catch (IOException Ie) {
+            throw new AssertionError("IOE error");
+
+        }
+
 
     }
     @Override

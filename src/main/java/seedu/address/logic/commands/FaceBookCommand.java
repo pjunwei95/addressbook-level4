@@ -15,7 +15,7 @@ public class FaceBookCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "facebook";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Shows the profile of the user whose"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " Shows the profile of the user whose"
             + " index is entered\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
@@ -34,7 +34,7 @@ public class FaceBookCommand extends UndoableCommand {
 
         List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() <= 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 

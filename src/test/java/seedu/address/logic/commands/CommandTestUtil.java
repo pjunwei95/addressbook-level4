@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
@@ -42,6 +43,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_TAG_EMAIL = "friends";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -56,6 +58,7 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_BOB = "CS2101/SEC/1";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friends";
+    public static final String VALID_EMAIL_SUBJECT = "party";
     public static final String VALID_TAG_FAMILY = "family";
     public static final String VALID_TAG_COLOR_NAME_RED = "red";
 
@@ -80,6 +83,9 @@ public class CommandTestUtil {
     public static final String DOB_DESC_BOB = " " + PREFIX_DOB + VALID_DOB_BOB;
     public static final String IMAGE_AMY = " " + PREFIX_IMAGE + VALID_IMAGE_AMY;
     public static final String IMAGE_BOB = " " + PREFIX_IMAGE + VALID_IMAGE_BOB;
+    public static final String EMAIL_TAG = " " + PREFIX_TAG + VALID_TAG_EMAIL;
+    public static final String EMAIL_SUBJECT = " " + PREFIX_SUBJECT + VALID_EMAIL_SUBJECT;
+
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -100,7 +106,7 @@ public class CommandTestUtil {
     public static final String INVALID_DATE_OF_BIRTH_DESC = " " + PREFIX_DOB + "33.10.1997"; // out of bounds days
     // not allowed for dateOfBirth
     public static final String INVALID_IMAGE_PATH_DESC = " " + PREFIX_IMAGE
-            + "src/images/clock.png";//incorrect file path
+            + "src/images/clock.png"; //incorrect file path
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TAG = "notExistingTag";
     public static final String INVALID_FONT_SIZE = "invalid font size";

@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import java.io.File;
-
 import static java.util.Objects.requireNonNull;
+
+import java.io.File;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 

@@ -1,10 +1,6 @@
 package seedu.address.ui;
 
-import java.awt.Desktop;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -110,20 +106,8 @@ public class BrowserPanel extends UiPart<Region> {
      */
     public void loadPersonFaceBookPage(ReadOnlyPerson person) throws ParseException {
 
-        //String url = FACEBOOK_PROFILE_PAGE + person.getUsername().toString();
-        //loadPage(url);
-        try {
-
-            if(Desktop.isDesktopSupported())
-            {
-                String check = "";
-                Desktop.getDesktop().browse(new URI("https://mail.google.com/mail/u/0/?view=cm&fs=1&to=someone@example.com&su=SUBJECT&body=BODY&tf=1"+check));
-            }
-        } catch (URISyntaxException U ) {
-
-        } catch (IOException IE) {
-
-        }
+        String url = FACEBOOK_PROFILE_PAGE + person.getUsername().toString();
+        loadPage(url);
 
     }
 

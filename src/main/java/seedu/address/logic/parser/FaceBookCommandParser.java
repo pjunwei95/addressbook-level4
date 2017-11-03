@@ -16,6 +16,8 @@ public class FaceBookCommandParser implements Parser<FaceBookCommand> {
      * and returns an MapCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    public static final String MESSAGE_INVALID_INDEX = "Index entered in invlaid";
+
     public FaceBookCommand parse(String args) throws ParseException {
         try {
             String trimmedArgs = args.trim();
@@ -33,7 +35,7 @@ public class FaceBookCommandParser implements Parser<FaceBookCommand> {
 
         } catch (IllegalValueException ive) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_INDEX, FaceBookCommand.MESSAGE_USAGE));
         }
     }
 }
