@@ -16,6 +16,7 @@ import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
+import seedu.address.model.theme.Theme;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.StorageManager;
 
@@ -70,8 +71,13 @@ public class RegisterPage extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+        initTheme();
         registerAsAnEventHandler(this);
         //loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+    }
+
+    private void initTheme() {
+        Theme.changeTheme(primaryStage, Theme.getCurrentTheme());
     }
 
     /**
@@ -140,6 +146,7 @@ public class RegisterPage extends UiPart<Region> {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
         FontSize.setCurrentFontSizeLabel(prefs.getGuiSettings().getFontSize());
+        Theme.setCurrentTheme(prefs.getGuiSettings().getTheme());
         if (prefs.getGuiSettings().getWindowCoordinates() != null) {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
