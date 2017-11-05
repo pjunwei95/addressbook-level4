@@ -90,6 +90,12 @@ public class TypicalPersons {
     public static final ReadOnlyReminder MEETING = new ReminderBuilder().withDetails("Group meeting")
             .withPriority("Priority Level: High").withDueDate("12.11.2017").build();
 
+    public static final ReadOnlyReminder TUTORIAL = new ReminderBuilder().withDetails("Tutorial meeting")
+            .withPriority("Priority Level: Medium").withDueDate("12.10.2017").build();
+
+    public static final ReadOnlyReminder PRACTICE = new ReminderBuilder().withDetails("Practice meeting")
+            .withPriority("Priority Level: Medium").withDueDate("11.10.2017").build();
+
     // Manually added
     public static final ReadOnlyPerson HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com")

@@ -67,9 +67,12 @@ public class CommandTestUtil {
     public static final String VALID_DETAILS_ASSIGNMENT = "Assignment";
     public static final String VALID_PRIORITY_ASSIGNMENT = "Low";
     public static final String VALID_DUE_DATE_ASSIGNMENT = "12.11.2017";
-    public static final String VALID_DETAILS_MEETING = "Meeting";
+    public static final String VALID_DETAILS_MEETING = " Group meeting";
     public static final String VALID_PRIORITY_MEETING = "High";
     public static final String VALID_DUE_DATE_MEETING = "12.11.2017";
+    public static final String VALID_DETAILS_TUTORIAL = "Tutorial meeting";
+    public static final String VALID_DUE_DATE_TUTORIAL = "12.10.2017";
+    public static final String VALID_PRIORITY_TUTORIAL = "Medium";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -86,8 +89,6 @@ public class CommandTestUtil {
     public static final String IMAGE_BOB = " " + PREFIX_IMAGE + VALID_IMAGE_BOB;
     public static final String EMAIL_TAG = " " + PREFIX_TAG + VALID_TAG_EMAIL;
     public static final String EMAIL_SUBJECT = " " + PREFIX_SUBJECT + VALID_EMAIL_SUBJECT;
-    public static final String USERNAME_DESC_BOB = " " + PREFIX_USERNAME + VALID_USERNAME_BOB;
-    public static final String USERNAME_DESC_AMY = " " + PREFIX_USERNAME + VALID_USERNAME_AMY;
 
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
@@ -101,6 +102,9 @@ public class CommandTestUtil {
     public static final String DETAILS_DESC_MEETING = " " + PREFIX_REMINDER_DETAILS + VALID_DETAILS_MEETING;
     public static final String PRIORITY_DESC_MEETING = " " + PREFIX_REMINDER_PRIORITY + VALID_PRIORITY_MEETING;
     public static final String DUE_DATE_DESC_MEETING = " " + PREFIX_REMINDER_DUE_DATE + VALID_DUE_DATE_MEETING;
+    public static final String DETAILS_DESC_TUTORIAL = " " + PREFIX_REMINDER_DETAILS + VALID_DETAILS_TUTORIAL;
+    public static final String PRIORITY_DESC_TUTORIAL = " " + PREFIX_REMINDER_PRIORITY + VALID_PRIORITY_TUTORIAL;
+    public static final String DUE_DATE_DESC_TUTORIAL = " " + PREFIX_REMINDER_DUE_DATE + VALID_DUE_DATE_TUTORIAL;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
