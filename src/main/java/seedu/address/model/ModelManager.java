@@ -131,7 +131,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
         addressBook.updateTagColorPair(tagList, color);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
     //@@author

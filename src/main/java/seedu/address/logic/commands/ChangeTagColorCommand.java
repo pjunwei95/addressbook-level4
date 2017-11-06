@@ -32,9 +32,6 @@ public class ChangeTagColorCommand extends UndoableCommand {
 
     public static final String MESSAGE_NOT_EXISTING_TAGS = "Cannot change color of not existing tags: %1$s";
 
-    public static final String MESSAGE_INVALID_COLOR = "Color %1$s is invalid."
-            + "\n" + TagColor.MESSAGE_TAG_COLOR_CONSTRAINTS;
-
     public static final String MESSAGE_FAILED = "Change tag color command failed";
 
     public static final String MESSAGE_CHANGE_TAG_COLOR_SUCCESS = "Change tag color of %1$s to %2$s";
@@ -82,11 +79,6 @@ public class ChangeTagColorCommand extends UndoableCommand {
         // There are tags that are not existing tags
         if (nonExistingTagList.size() != 0) {
             throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS, nonExistingTagList));
-        }
-
-        // Check whether the input tag color is a valid color name
-        if (!TagColor.isValidTagColorName(color.tagColorName)) {
-            throw new CommandException(String.format(MESSAGE_INVALID_COLOR, color));
         }
 
         try {
