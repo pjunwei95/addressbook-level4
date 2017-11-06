@@ -13,14 +13,11 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 
 public class ChangeFontSizeSystemTest extends AddressBookSystemTest {
-    private UserPrefs userPrefs;
     private Model modelXS;
     private Model modelS;
     private Model modelM;
     private Model modelL;
     private Model modelXL;
-    private Model[] models = {modelXS, modelS, modelM, modelL, modelXL};
-    private GuiSettings guiSettings;
 
     @Test
     public void changeFontSize() throws Exception {
@@ -109,8 +106,6 @@ public class ChangeFontSizeSystemTest extends AddressBookSystemTest {
      * Generates five different models with five font sizes
      */
     private void prepareExpectedModels(){
-        userPrefs = new UserPrefs();
-        guiSettings = userPrefs.getGuiSettings();
 
         // Generate five models with five font size symbols
         modelXS = prepareExpectedModelGivenFontSize("xs");
@@ -131,6 +126,7 @@ public class ChangeFontSizeSystemTest extends AddressBookSystemTest {
 
         // Generate new user preference with given font size
         UserPrefs newUserPrefs = new UserPrefs();
+        GuiSettings guiSettings = newUserPrefs.getGuiSettings();
         newUserPrefs.setGuiSettings(
                 guiSettings.getWindowHeight(),
                 guiSettings.getWindowWidth(),
