@@ -27,6 +27,15 @@ public class GuiTestAssert {
         assertEquals(expectedCard.getPhone(), actualCard.getPhone());
         assertEquals(expectedCard.getTags(), actualCard.getTags());
     }
+    /**
+     * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
+     */
+    public static void assertCardEqualsReminders(ReminderCardHandle expectedCard, ReminderCardHandle actualCard) {
+        assertEquals(expectedCard.getId(), actualCard.getId());
+        assertEquals(expectedCard.getDetails(), actualCard.getDetails());
+        assertEquals(expectedCard.getDueDate(), actualCard.getDueDate());
+        assertEquals(expectedCard.getPriority(), actualCard.getPriority());
+    }
 
     /**
      * Asserts that {@code actualCard} displays the details of {@code expectedPerson}.
