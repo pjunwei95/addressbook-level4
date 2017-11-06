@@ -20,7 +20,7 @@ public class ChangeThemeCommandSystemTest extends AddressBookSystemTest {
     private Model modelDarkTheme;
 
     @Test
-    public void changeFontSize() throws Exception {
+    public void changeTheme() throws Exception {
         prepareExpectedModels();
 
         /* Case: change the theme to Dark -> them changed to dark */
