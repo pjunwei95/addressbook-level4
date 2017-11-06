@@ -89,7 +89,7 @@ public class ChangeThemeCommandSystemTest extends AddressBookSystemTest {
     /**
      * Generates different models with different themes
      */
-    private void prepareExpectedModels(){
+    private void prepareExpectedModels() {
 
         modelBrightTheme = prepareExpectedModelGivenThemeName(Theme.BRIGHT_THEME);
         modelDarkTheme = prepareExpectedModelGivenThemeName(Theme.DARK_THEME);
@@ -101,7 +101,7 @@ public class ChangeThemeCommandSystemTest extends AddressBookSystemTest {
      * @param theme
      * @return new model with given theme
      */
-    private Model prepareExpectedModelGivenThemeName(String theme){
+    private Model prepareExpectedModelGivenThemeName(String theme) {
         assert (Theme.isValidThemeName(theme));
 
         // Generate new user preference with given theme

@@ -108,8 +108,8 @@ public class MapCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
-        ReadOnlyPerson readOnlyPerson = expectedModel.getFilteredPersonList().
-                get(expectedSelectedCardIndex.getZeroBased());
+        ReadOnlyPerson readOnlyPerson = expectedModel.getFilteredPersonList()
+                .get(expectedSelectedCardIndex.getZeroBased());
         String expectedResultMessage = String.format(
                 MapCommand.MESSAGE_SELECT_PERSON_SUCCESS, readOnlyPerson.getName());
 

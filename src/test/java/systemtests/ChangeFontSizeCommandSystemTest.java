@@ -14,11 +14,11 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 
 public class ChangeFontSizeCommandSystemTest extends AddressBookSystemTest {
-    private Model modelXS;
+    private Model modelXs;
     private Model modelS;
     private Model modelM;
     private Model modelL;
-    private Model modelXL;
+    private Model modelXl;
 
     @Test
     public void changeFontSize() throws Exception {
@@ -40,9 +40,9 @@ public class ChangeFontSizeCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, modelL, expectedResultMessage);
 
         /* Case: increase font size -> font size increases to XL */
-        changeFontSizeCommand= ChangeFontSizeCommand.COMMAND_WORD + " +";
+        changeFontSizeCommand = ChangeFontSizeCommand.COMMAND_WORD + " +";
         expectedMessage = ChangeFontSizeCommand.MESSAGE_SUCCESS + "xl.";
-        assertCommandSuccess(changeFontSizeCommand, modelXL, expectedMessage);
+        assertCommandSuccess(changeFontSizeCommand, modelXl, expectedMessage);
 
         /* Case: increase font size when the current font size is the largest one -> rejected */
         changeFontSizeCommand = ChangeFontSizeCommand.COMMAND_WORD + " +";
@@ -54,9 +54,9 @@ public class ChangeFontSizeCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(changeFontSizeCommand, modelS, expectedMessage);
 
         /* Case: decrease font size -> font size decreases to XS */
-        changeFontSizeCommand= ChangeFontSizeCommand.COMMAND_WORD + " -";
+        changeFontSizeCommand = ChangeFontSizeCommand.COMMAND_WORD + " -";
         expectedMessage = ChangeFontSizeCommand.MESSAGE_SUCCESS + "xs.";
-        assertCommandSuccess(changeFontSizeCommand, modelXS, expectedMessage);
+        assertCommandSuccess(changeFontSizeCommand, modelXs, expectedMessage);
 
         /* Case: decrease font size when the current font size is the smallest one -> rejected */
         changeFontSizeCommand = ChangeFontSizeCommand.COMMAND_WORD + " -";
@@ -106,14 +106,14 @@ public class ChangeFontSizeCommandSystemTest extends AddressBookSystemTest {
     /**
      * Generates five different models with five font sizes
      */
-    private void prepareExpectedModels(){
+    private void prepareExpectedModels() {
 
         // Generate five models with five font size symbols
-        modelXS = prepareExpectedModelGivenFontSize("xs");
+        modelXs = prepareExpectedModelGivenFontSize("xs");
         modelS = prepareExpectedModelGivenFontSize("s");
         modelM = prepareExpectedModelGivenFontSize("m");
         modelL = prepareExpectedModelGivenFontSize("l");
-        modelXL = prepareExpectedModelGivenFontSize("xl");
+        modelXl = prepareExpectedModelGivenFontSize("xl");
 
     }
 
@@ -122,7 +122,7 @@ public class ChangeFontSizeCommandSystemTest extends AddressBookSystemTest {
      * @param fontSize
      * @return new model with given font size
      */
-    private Model prepareExpectedModelGivenFontSize(String fontSize){
+    private Model prepareExpectedModelGivenFontSize(String fontSize) {
         assert (FontSize.isValidFontSize(fontSize));
 
         // Generate new user preference with given font size
