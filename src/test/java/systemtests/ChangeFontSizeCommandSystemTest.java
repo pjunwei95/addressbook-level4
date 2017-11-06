@@ -1,3 +1,4 @@
+//@@author ChenXiaoman
 package systemtests;
 
 import org.junit.Test;
@@ -12,7 +13,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 
-public class ChangeFontSizeSystemTest extends AddressBookSystemTest {
+public class ChangeFontSizeCommandSystemTest extends AddressBookSystemTest {
     private Model modelXS;
     private Model modelS;
     private Model modelM;
