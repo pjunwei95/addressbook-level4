@@ -51,12 +51,18 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
         }
 
     }
+    /**
+     * Checks if the number of arguments entered by the user are valid
+     */
     public static boolean checkIfInvalidNumberOfArgs(String [] keywords) {
         if (keywords.length < 2) {
             return true;
         }
         return false;
     }
+    /**
+     * Checks if the image exists in the given filepath
+     */
     public static boolean checkIfFileExists(String inputFilePath) {
 
         String url = inputFilePath + "";

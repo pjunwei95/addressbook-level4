@@ -84,10 +84,13 @@ public class PhotoCommand extends UndoableCommand {
             return new CommandResult(String.format(MESSAGE_PHOTO_PERSON_SUCCESS, personToAddPhoto));
         }
     }
+    /**
+     * Checks if the person has any photo to be deleted
+     */
     public static boolean checkIfThereIsAnyPhotoToDelete(ReadOnlyPerson personToAddPhoto, String filePath) {
-        if (personToAddPhoto.getImage().getFilePath().equals("") && filePath.equalsIgnoreCase("delete"))
+        if (personToAddPhoto.getImage().getFilePath().equals("") && filePath.equalsIgnoreCase("delete")) {
             return false;
-
+        }
         return true;
     }
 

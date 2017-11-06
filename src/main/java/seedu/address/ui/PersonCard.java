@@ -111,22 +111,22 @@ public class PersonCard extends UiPart<Region> {
             image.setImage(Display);
 
         } else {
-                url = filePath + "";
-                File file = new File(url);
-                boolean isFileExists = file.exists();
+            url = filePath + "";
+            File file = new File(url);
+            boolean isFileExists = file.exists();
 
-                if (!isFileExists) {
-                    url = "/images/address_book_32.png";
-                    Image Display = new Image(url);
-                    image.setImage(Display);
-                    throw new ParseException(
+            if (!isFileExists) {
+                url = "/images/address_book_32.png";
+                Image Display = new Image(url);
+                image.setImage(Display);
+                throw new ParseException(
                             String.format(Message_Image_Removed, PhotoCommand.MESSAGE_USAGE)
                     );
-                }
-                else {
-                    Image display = new Image(file.toURI().toString());
-                    image.setImage(display);
-                }
+            }
+            else {
+                Image display = new Image(file.toURI().toString());
+                image.setImage(display);
+            }
 
         }
     }

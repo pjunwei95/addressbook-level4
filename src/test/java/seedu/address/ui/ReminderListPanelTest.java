@@ -52,7 +52,8 @@ public class ReminderListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_FIRST_EVENT);
         guiRobot.pauseForHuman();
 
-        ReminderCardHandle expectedCard = reminderListPanelHandle.getReminderCardHandle(INDEX_FIRST_REMINDER.getZeroBased());
+        ReminderCardHandle expectedCard = reminderListPanelHandle.getReminderCardHandle(INDEX_FIRST_REMINDER
+                .getZeroBased());
         ReminderCardHandle selectedCard = reminderListPanelHandle.getHandleToSelectedCard();
         assertCardEqualsReminders(expectedCard, selectedCard);
     }
