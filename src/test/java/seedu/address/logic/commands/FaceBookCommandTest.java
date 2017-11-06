@@ -118,13 +118,9 @@ public class FaceBookCommandTest {
     }
 
     @Test
-    public void checkIfFacebookEventCollected() {
+    public void checkIfFacebookEventCollected() throws CommandException {
         FaceBookCommand faceBookCommand = prepareCommand(INDEX_FIRST_PERSON);
-        try {
-            faceBookCommand.execute();
-        } catch (CommandException ce) {
-
-        }
+        faceBookCommand.execute();
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof FaceBookEvent);
         assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
     }

@@ -45,9 +45,7 @@ public class EmailCommand extends Command {
 
         boolean isExistingTagName = checkIfExistingTagName(tag);
 
-
         if (!isExistingTagName) {
-
             throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS));
         }
         else {
@@ -72,6 +70,5 @@ public class EmailCommand extends Command {
         }
         return false;
     }
-
 
 }

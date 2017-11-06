@@ -122,6 +122,8 @@ public class CommandTestUtil {
     public static final String INVALID_PRIORITY_DESC = " " + PREFIX_REMINDER_PRIORITY + "!High";
     public static final String INVALID_DUE_DATE_DESC = " " + PREFIX_REMINDER_DUE_DATE + "@13.10.1997";
     public static final String INVALID_DATE_OF_BIRTH_DESC_BOUNDS = " " + PREFIX_DOB + "30.02.2017";
+    public static final String INVALID_EMAIL_TAG = " " + PREFIX_TAG + "FRIEN";
+    public static final String INVALID_EMAIL_SUBJECT = " " + PREFIX_SUBJECT + "s.s";
 
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_AMY;
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_BOB;

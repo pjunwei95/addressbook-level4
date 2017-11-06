@@ -1,12 +1,11 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddReminder;
-import seedu.address.logic.commands.RemarkCommand;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.reminder.ReadOnlyReminder;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
 
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.logic.commands.AddReminder;
+import seedu.address.model.reminder.ReadOnlyReminder;
 
 /**
  * A utility class for Person.

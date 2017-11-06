@@ -11,7 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class EmailSubject {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Subject lines should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Subject lines should only contain alphanumeric characters and spaces, and it should not be blank.";
 
     /*
      * The first character of the subject must not be a whitespace,

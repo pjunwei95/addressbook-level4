@@ -43,7 +43,7 @@ public class EmailCommandParser implements Parser<EmailCommand> {
             tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         } catch (IllegalValueException ive) {
-            throw new AssertionError("Invalid input");
+            throw new ParseException(ive.getMessage(), ive);
         }
         if (tagList.size() > 1) {
             throw new ParseException(String.format(MULTIPLE_TAGS_FALIURE, EmailCommand.MESSAGE_USAGE));

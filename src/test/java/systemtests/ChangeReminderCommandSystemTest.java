@@ -15,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_ASSIGN
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_REMINDERS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_REMINDER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_REMINDER;
+import static seedu.address.testutil.TypicalPersons.MEETING;
 
 import org.junit.Test;
 
@@ -32,7 +33,6 @@ import seedu.address.model.reminder.ReminderDetails;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.testutil.ReminderBuilder;
-import static seedu.address.testutil.TypicalPersons.MEETING;
 
 public class ChangeReminderCommandSystemTest extends AddressBookSystemTest {
 

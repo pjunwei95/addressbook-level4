@@ -3,12 +3,14 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_SUBJECT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmailSubject;
 
 
 public class EmailCommandParserTest {
@@ -16,7 +18,7 @@ public class EmailCommandParserTest {
     private EmailCommandParser parser = new EmailCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() throws ParseException {
+    public void parse_allFieldsPresent_faliure() throws ParseException {
 
 
         //multiple tags -> rejected
@@ -24,6 +26,10 @@ public class EmailCommandParserTest {
                 + EMAIL_SUBJECT, String.format(
                         EmailCommandParser.MULTIPLE_TAGS_FALIURE, EmailCommand.MESSAGE_USAGE
         ));
+
+        //incorrect subject
+        assertParseFailure(parser, EmailCommand.COMMAND_WORD + EMAIL_TAG + INVALID_EMAIL_SUBJECT,
+                EmailSubject.MESSAGE_NAME_CONSTRAINTS);
 
 
     }
