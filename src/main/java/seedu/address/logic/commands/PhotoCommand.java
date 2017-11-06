@@ -51,7 +51,10 @@ public class PhotoCommand extends UndoableCommand {
 
         ReadOnlyPerson personToAddPhoto = lastShownList.get(targetIndex.getZeroBased());
 
-        if (personToAddPhoto.getImage().getFilePath().equals("") && filePath.equalsIgnoreCase("delete")) {
+        boolean isThereAnyPhotoToDelete;
+        isThereAnyPhotoToDelete = checkIfThereIsAnyPhotoToDelete(personToAddPhoto, filePath);
+
+        if (!isThereAnyPhotoToDelete) {
             throw new CommandException(Messages.MESSAGE_NO_IMAGE_TO_DELETE);
         }
         if (filePath.equalsIgnoreCase("Delete")) {
@@ -80,6 +83,12 @@ public class PhotoCommand extends UndoableCommand {
         } else {
             return new CommandResult(String.format(MESSAGE_PHOTO_PERSON_SUCCESS, personToAddPhoto));
         }
+    }
+    public static boolean checkIfThereIsAnyPhotoToDelete(ReadOnlyPerson personToAddPhoto, String filePath) {
+        if (personToAddPhoto.getImage().getFilePath().equals("") && filePath.equalsIgnoreCase("delete"))
+            return false;
+
+        return true;
     }
 
     @Override
