@@ -14,7 +14,6 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.commons.events.ui.ShowCommandUsageEvent;
 import seedu.address.model.font.FontSize;
 
 /**
@@ -50,13 +49,8 @@ public class ResultDisplay extends UiPart<Region> {
             setStyleToDefault();
         }
     }
+
     //@@author ChenXiaoman
-    @Subscribe
-    private void handleShowCommandUsageEvent(ShowCommandUsageEvent showCommandUsageEvent) {
-        String commandWord = showCommandUsageEvent.getCommandWord();
-    }
-
-
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
         setFontSize(event.getFontSize());

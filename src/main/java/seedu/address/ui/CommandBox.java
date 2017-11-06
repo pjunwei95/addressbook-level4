@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -42,12 +41,6 @@ public class CommandBox extends UiPart<Region> {
     private ListElementPointer historySnapshot;
     private AddressBookParser addressBookParser;
 
-
-    /**
-     * Used for initial separation of command word and args.
-     */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-
     @FXML
     private TextField commandTextField;
 
@@ -84,42 +77,6 @@ public class CommandBox extends UiPart<Region> {
             break;
         default:
             // let JavaFx handle the keypress
-        }
-    }
-
-    /**
-     * Handles the key released event, {@code keyEvent}.
-     */
-    @FXML
-    private void handleKeyReleased(KeyEvent keyEvent) {
-        logger.info("Handling key release.");
-
-        String userInput = commandTextField.getText();
-
-        // If the user has not type in anything yet, there is no need to show error message
-        if(userInput.length() != 0) {
-
-            // Parse the user input while user is typing and show the error message if the command is invalid
-            parseInput(keyEvent.getCode(), userInput);
-        }
-    }
-
-    private void parseInput(KeyCode keyCode, String userInput) {
-        logger.info("Parsing user input: " + userInput);
-        try {
-            // Try to parse the command to check whether the command is valid
-            addressBookParser.parseCommand(userInput);
-
-            if (!keyCode.equals(KeyCode.ENTER)) {
-
-                // If the command is valid, show format valid message
-                // If user presses enter key to execute the command, don't show parse message
-                raise(new NewResultAvailableEvent("Command format is valid", false));
-            }
-        } catch (ParseException e) {
-
-            // If user is entering invalid command, shows error message
-            raise(new NewResultAvailableEvent(e.getMessage(), true));
         }
     }
 
@@ -234,6 +191,45 @@ public class CommandBox extends UiPart<Region> {
     }
 
     //@@author ChenXiaoman
+
+    /**
+     * Handles the key released event, {@code keyEvent}.
+     */
+    @FXML
+    private void handleKeyReleased(KeyEvent keyEvent) {
+
+        String userInput = commandTextField.getText();
+
+        // If the user has not type in anything yet, there is no need to show error message
+        if (userInput.length() != 0) {
+
+            // Parse the user input while user is typing and show the error message if the command is invalid
+            parseInput(keyEvent.getCode(), userInput);
+        }
+    }
+
+    /**
+     * Parse user input and raise event to show corresponding message
+     */
+    private void parseInput(KeyCode keyCode, String userInput) {
+        logger.info("Parsing user input: " + userInput);
+        try {
+            // Try to parse the command to check whether the command is valid
+            addressBookParser.parseCommand(userInput);
+
+            if (!keyCode.equals(KeyCode.ENTER)) {
+
+                // If the command is valid, show format valid message
+                // If user presses enter key to execute the command, don't show parse message
+                raise(new NewResultAvailableEvent("Command format is valid", false));
+            }
+        } catch (ParseException e) {
+
+            // If user is entering invalid command, shows error message
+            raise(new NewResultAvailableEvent(e.getMessage(), true));
+        }
+    }
+
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
         setFontSize(event.getFontSize());
