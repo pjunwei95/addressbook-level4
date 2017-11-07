@@ -47,6 +47,7 @@ public class GuiTestAssert {
         assertEquals(expectedPerson.getAddress().value, actualCard.getAddress());
         assertEquals(expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
+        assertEquals(expectedPerson.getDateOfBirth().date, actualCard.getDate());
     }
     /**
      * Asserts that {@code actualCard} displays the details of {@code expectedReminder}.
