@@ -1,5 +1,5 @@
 # RonakLakhotia
-###### \java\seedu\address\commons\events\storage\ImageStorage.java
+###### /java/seedu/address/commons/events/storage/ImageStorage.java
 ``` java
 package seedu.address.commons.events.storage;
 
@@ -55,7 +55,7 @@ public class ImageStorage {
 
 }
 ```
-###### \java\seedu\address\commons\events\ui\ReminderPanelSelectionChangedEvent.java
+###### /java/seedu/address/commons/events/ui/ReminderPanelSelectionChangedEvent.java
 ``` java
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.ui.ReminderCard;
@@ -82,7 +82,7 @@ public class ReminderPanelSelectionChangedEvent extends BaseEvent {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\AddReminder.java
+###### /java/seedu/address/logic/commands/AddReminder.java
 ``` java
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
@@ -143,7 +143,7 @@ public class AddReminder extends UndoableCommand {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\ChangeReminderCommand.java
+###### /java/seedu/address/logic/commands/ChangeReminderCommand.java
 ``` java
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
@@ -328,7 +328,7 @@ public class ChangeReminderCommand extends UndoableCommand {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\FaceBookCommand.java
+###### /java/seedu/address/logic/commands/FaceBookCommand.java
 ``` java
 import java.util.List;
 
@@ -391,7 +391,7 @@ public class FaceBookCommand extends UndoableCommand {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\PhotoCommand.java
+###### /java/seedu/address/logic/commands/PhotoCommand.java
 ``` java
 import java.io.IOException;
 
@@ -497,7 +497,7 @@ public class PhotoCommand extends UndoableCommand {
 
 
 ```
-###### \java\seedu\address\logic\commands\RemoveReminderCommand.java
+###### /java/seedu/address/logic/commands/RemoveReminderCommand.java
 ``` java
 import java.util.List;
 
@@ -556,7 +556,7 @@ public class RemoveReminderCommand extends UndoableCommand {
     }
 }
 ```
-###### \java\seedu\address\logic\commands\SearchCommand.java
+###### /java/seedu/address/logic/commands/SearchCommand.java
 ``` java
 import seedu.address.model.person.SearchContainsKeywordsPredicate;
 
@@ -594,15 +594,15 @@ public class SearchCommand extends Command {
 
 }
 ```
-###### \java\seedu\address\logic\commands\UndoableCommand.java
+###### /java/seedu/address/logic/commands/UndoableCommand.java
 ``` java
         model.updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
 ```
-###### \java\seedu\address\logic\commands\UndoableCommand.java
+###### /java/seedu/address/logic/commands/UndoableCommand.java
 ``` java
         model.updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
 ```
-###### \java\seedu\address\logic\parser\AddReminderParser.java
+###### /java/seedu/address/logic/parser/AddReminderParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
@@ -663,7 +663,7 @@ public class AddReminderParser implements Parser<AddReminder> {
 
 }
 ```
-###### \java\seedu\address\logic\parser\ChangeReminderCommandParser.java
+###### /java/seedu/address/logic/parser/ChangeReminderCommandParser.java
 ``` java
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -725,18 +725,18 @@ public class ChangeReminderCommandParser implements Parser<ChangeReminderCommand
 
 }
 ```
-###### \java\seedu\address\logic\parser\EditCommandParser.java
+###### /java/seedu/address/logic/parser/EditCommandParser.java
 ``` java
             ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB))
                                         .ifPresent(editPersonDescriptor::setDateOfBirth);
             ParserUtil.parseImage(argMultimap.getValue(PREFIX_IMAGE)).ifPresent(editPersonDescriptor::setImage);
 ```
-###### \java\seedu\address\logic\parser\EditCommandParser.java
+###### /java/seedu/address/logic/parser/EditCommandParser.java
 ``` java
             ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME))
                     .ifPresent(editPersonDescriptor::setUsername);
 ```
-###### \java\seedu\address\logic\parser\EmailCommandParser.java
+###### /java/seedu/address/logic/parser/EmailCommandParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -802,7 +802,7 @@ public class EmailCommandParser implements Parser<EmailCommand> {
 
 }
 ```
-###### \java\seedu\address\logic\parser\FaceBookCommandParser.java
+###### /java/seedu/address/logic/parser/FaceBookCommandParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -845,7 +845,7 @@ public class FaceBookCommandParser implements Parser<FaceBookCommand> {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\PhotoCommandParser.java
+###### /java/seedu/address/logic/parser/PhotoCommandParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_IMAGE;
@@ -933,7 +933,7 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
 
 }
 ```
-###### \java\seedu\address\logic\parser\RemoveCommandParser.java
+###### /java/seedu/address/logic/parser/RemoveCommandParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -964,7 +964,7 @@ public class RemoveCommandParser implements Parser<RemoveReminderCommand> {
 
 }
 ```
-###### \java\seedu\address\logic\parser\SearchCommandParser.java
+###### /java/seedu/address/logic/parser/SearchCommandParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
@@ -1031,21 +1031,21 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     }
 }
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     private final UniqueReminderList reminders;
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
         reminders = new UniqueReminderList();
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     public void setReminders(List<? extends ReadOnlyReminder> reminders) throws DuplicateReminderException {
         this.reminders.setReminders(reminders);
     }
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     /**
      * Adds a reminder to the address book.
@@ -1056,7 +1056,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         reminders.add(newReminder);
     }
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     /**
      * Replaces the given reminder {@code target} in the list with {@code changeReadOnlyReminder}.
@@ -1076,7 +1076,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     }
 
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     /**
      * Removes {@code key} from this {@code AddressBook}.
@@ -1091,14 +1091,14 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     }
 
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### /java/seedu/address/model/AddressBook.java
 ``` java
     @Override
     public ObservableList<ReadOnlyReminder> getReminderList() {
         return reminders.asObservableList();
     }
 ```
-###### \java\seedu\address\model\person\FacebookUsername.java
+###### /java/seedu/address/model/person/FacebookUsername.java
 ``` java
 import static java.util.Objects.requireNonNull;
 
@@ -1152,19 +1152,19 @@ public class FacebookUsername {
 }
 
 ```
-###### \java\seedu\address\model\person\ReadOnlyPerson.java
+###### /java/seedu/address/model/person/ReadOnlyPerson.java
 ``` java
     ObjectProperty<DateOfBirth> dateOfBirthProperty();
     DateOfBirth getDateOfBirth();
 ```
-###### \java\seedu\address\model\person\ReadOnlyPerson.java
+###### /java/seedu/address/model/person/ReadOnlyPerson.java
 ``` java
     ObjectProperty<FileImage> imageProperty();
     FileImage getImage();
     ObjectProperty<FacebookUsername> usernameProperty();
     FacebookUsername getUsername();
 ```
-###### \java\seedu\address\model\person\SearchContainsKeywordsPredicate.java
+###### /java/seedu/address/model/person/SearchContainsKeywordsPredicate.java
 ``` java
 import java.util.List;
 import java.util.function.Predicate;
@@ -1203,7 +1203,7 @@ public class SearchContainsKeywordsPredicate implements Predicate<ReadOnlyPerson
     }
 }
 ```
-###### \java\seedu\address\model\ReadOnlyAddressBook.java
+###### /java/seedu/address/model/ReadOnlyAddressBook.java
 ``` java
     /**
      * Returns an unmodifiable view of the reminders list.
@@ -1212,7 +1212,7 @@ public class SearchContainsKeywordsPredicate implements Predicate<ReadOnlyPerson
 
     ObservableList<ReadOnlyReminder> getReminderList();
 ```
-###### \java\seedu\address\model\reminder\DueDate.java
+###### /java/seedu/address/model/reminder/DueDate.java
 ``` java
 import seedu.address.commons.exceptions.IllegalValueException;
 
@@ -1372,7 +1372,7 @@ public class DueDate {
 
 }
 ```
-###### \java\seedu\address\model\reminder\exceptions\DuplicateReminderException.java
+###### /java/seedu/address/model/reminder/exceptions/DuplicateReminderException.java
 ``` java
 import seedu.address.commons.exceptions.DuplicateDataException;
 
@@ -1385,14 +1385,14 @@ public class DuplicateReminderException extends DuplicateDataException {
     }
 }
 ```
-###### \java\seedu\address\model\reminder\exceptions\ReminderNotFoundException.java
+###### /java/seedu/address/model/reminder/exceptions/ReminderNotFoundException.java
 ``` java
 /**
  * Signals that the operation is unable to find the specified reminder.
  */
 public class ReminderNotFoundException extends Exception {}
 ```
-###### \java\seedu\address\model\reminder\Priority.java
+###### /java/seedu/address/model/reminder/Priority.java
 ``` java
 import static java.util.Objects.requireNonNull;
 
@@ -1459,7 +1459,7 @@ public class Priority {
     }
 }
 ```
-###### \java\seedu\address\model\reminder\ReadOnlyReminder.java
+###### /java/seedu/address/model/reminder/ReadOnlyReminder.java
 ``` java
 import javafx.beans.property.ObjectProperty;
 
@@ -1503,7 +1503,7 @@ public interface ReadOnlyReminder {
 
 }
 ```
-###### \java\seedu\address\model\reminder\Reminder.java
+###### /java/seedu/address/model/reminder/Reminder.java
 ``` java
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -1604,7 +1604,7 @@ public class Reminder implements ReadOnlyReminder {
 
 }
 ```
-###### \java\seedu\address\model\reminder\ReminderDetails.java
+###### /java/seedu/address/model/reminder/ReminderDetails.java
 ``` java
 import static java.util.Objects.requireNonNull;
 
@@ -1668,7 +1668,7 @@ public class ReminderDetails {
 
 }
 ```
-###### \java\seedu\address\model\reminder\UniqueReminderList.java
+###### /java/seedu/address/model/reminder/UniqueReminderList.java
 ``` java
 import static java.util.Objects.requireNonNull;
 
@@ -1792,7 +1792,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 }
 ```
-###### \java\seedu\address\storage\XmlAdaptedReminder.java
+###### /java/seedu/address/storage/XmlAdaptedReminder.java
 ``` java
 import javax.xml.bind.annotation.XmlElement;
 
@@ -1850,20 +1850,20 @@ public class XmlAdaptedReminder {
 }
 
 ```
-###### \java\seedu\address\storage\XmlSerializableAddressBook.java
+###### /java/seedu/address/storage/XmlSerializableAddressBook.java
 ``` java
     @XmlElement
     private List<XmlAdaptedReminder> reminders;
 ```
-###### \java\seedu\address\storage\XmlSerializableAddressBook.java
+###### /java/seedu/address/storage/XmlSerializableAddressBook.java
 ``` java
         reminders = new ArrayList<>();
 ```
-###### \java\seedu\address\storage\XmlSerializableAddressBook.java
+###### /java/seedu/address/storage/XmlSerializableAddressBook.java
 ``` java
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
 ```
-###### \java\seedu\address\storage\XmlSerializableAddressBook.java
+###### /java/seedu/address/storage/XmlSerializableAddressBook.java
 ``` java
     @Override
     public ObservableList<ReadOnlyReminder> getReminderList() {
@@ -1878,12 +1878,12 @@ public class XmlAdaptedReminder {
         return FXCollections.unmodifiableObservableList(reminders);
     }
 ```
-###### \java\seedu\address\ui\MainWindow.java
+###### /java/seedu/address/ui/MainWindow.java
 ``` java
     @FXML
     private StackPane reminderListPlaceholder;
 ```
-###### \java\seedu\address\ui\ReminderCard.java
+###### /java/seedu/address/ui/ReminderCard.java
 ``` java
 import static seedu.address.model.font.FontSize.getAssociateFxFontSizeString;
 
@@ -2003,7 +2003,7 @@ public class ReminderCard extends UiPart<Region> {
 
 }
 ```
-###### \java\seedu\address\ui\ReminderListPanel.java
+###### /java/seedu/address/ui/ReminderListPanel.java
 ``` java
 import java.util.logging.Logger;
 
@@ -2095,7 +2095,7 @@ public class ReminderListPanel extends UiPart<Region> {
 
 }
 ```
-###### \resources\view\PersonListCard.fxml
+###### /resources/view/PersonListCard.fxml
 ``` fxml
                 <ImageView fx:id="image" fitHeight="100.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                     <image>
