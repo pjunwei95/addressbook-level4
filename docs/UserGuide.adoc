@@ -411,7 +411,7 @@ this will delete the photo attached with the person at index 1.
 ****
 
 
-
+// tag::facebook[]
 === FaceBook Integration SINCE V1.3
 
 Helps you view the profile page of a person in your contact list. +
@@ -429,6 +429,8 @@ e.g. - `facebook 1` +
 If the person does not have a facebook account or the username is not entered in Weaver,you will be notified by Weaver.
 
 image::facebook.png[width="790"]
+
+// end::facebook[]
 
 === Show address of a person : `map` (SINCE V1.3)
 
