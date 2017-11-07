@@ -1,4 +1,5 @@
 package seedu.address.ui;
+
 import static seedu.address.commons.core.CipherUnit.decrypt;
 
 import java.io.File;
@@ -15,7 +16,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -106,7 +106,9 @@ public class LoginPage extends UiPart<Region> {
         return primaryStage;
     }
 
-    public MainWindow getMainWindow() { return mainWindow; }
+    public MainWindow getMainWindow() {
+        return mainWindow;
+    }
 
     /**
      * Method for handle login event
@@ -116,33 +118,33 @@ public class LoginPage extends UiPart<Region> {
         logger.info("Trying to login");
         String uname = username.getText();
         String pword = password.getText();
-//        if (checkValid(uname, pword)) {
+        if (checkValid(uname, pword)) {
 
-            String path = "data/" + uname + "addressbook.xml";
-            String tempPath = "data/temp.xml";
+        String path = "data/" + uname + "addressbook.xml";
+        String tempPath = "data/temp.xml";
 
-            File addressBookFile = new File(path);
-            if (addressBookFile.exists()) {
-                decrypt(path);
-                logger.info("File decypted");
-            }
+        File addressBookFile = new File(path);
+        if (addressBookFile.exists()) {
+            decrypt(path);
+            logger.info("File decypted");
+        }
 
-            UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-            AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
+        UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
 
-            //storage.setUserPrefsStorage(userPrefsStorage);
-            prefs.setAddressBookFilePath(path);
-            storage.setAddressBookStorage(addressBookStorage);
+        //storage.setUserPrefsStorage(userPrefsStorage);
+        prefs.setAddressBookFilePath(path);
+        storage.setAddressBookStorage(addressBookStorage);
 
-            model = initModelManager(storage, prefs);
-            logic = new LogicManager(model);
+        model = initModelManager(storage, prefs);
+        logic = new LogicManager(model);
 
-            mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
-            mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts();
-//        } else {
-//            logger.info("Wrong name or password!");
-//        }
+        mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
+        mainWindow.show(); //This should be called before creating other UI parts
+        mainWindow.fillInnerParts();
+        } else {
+            logger.info("Wrong name or password!");
+        }
     }
 
     /**
@@ -205,7 +207,7 @@ public class LoginPage extends UiPart<Region> {
     }
 
     /**
-    * release the resources
+     * release the resources
      */
     void releaseResources() {
         if (mainWindow != null) {
@@ -220,7 +222,6 @@ public class LoginPage extends UiPart<Region> {
     }
 
     /**
-     *
      * @param username
      * @param password
      * @return validity of account

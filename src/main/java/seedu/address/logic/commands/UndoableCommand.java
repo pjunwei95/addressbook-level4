@@ -46,7 +46,7 @@ public abstract class UndoableCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         //@@author RonakLakhotia
         model.updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
-        //@@author Chen Xiaoman
+        //@@author ChenXiaoman
 
         //Revert font size
         if (this instanceof ChangeFontSizeCommand) {
