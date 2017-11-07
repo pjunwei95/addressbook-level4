@@ -140,6 +140,9 @@ functionality to backup in a file that is identifiable to the user.
 * Updated new colors to be included in tags.
 (Pull request https://github.com/pjunwei95/addressbook-level4/commit/e9a411bc29b1154e7b5012850e44329371da5dfa[#64])
 
+
+* Fixed global bug for help window. (Issue https://github.com/se-edu/addressbook-level4/issues/727[#727])
+
 * Wrote additional tests to increase coverage from 88% to 92%
 //(Pull requests https://github.com[#36], https://github.com[#38])
 
