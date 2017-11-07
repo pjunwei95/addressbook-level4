@@ -484,11 +484,14 @@ The above command will change the due date of the reminder to the new date. +
 
 === Auto-completion
 
-Auto-complete your commands by providing suggestions. +
+The command box has a auto-complete feature to provide suggestions to your commands. +
 
 image::autocompletion.png[width="790"]
 
 Type any letters to get some suggestions on what command to use.
+
+[TIP]
+To avoid accidentally auto-completion, you can press `ESC` to cancel and continue your input.
 
 === Clearing all entries : `clear`
 
@@ -507,6 +510,19 @@ Alternatively, you can also click the `X` button or the `Cancel` button. +
 
 [TIP]
 To interact solely with the keyboard, make your selection and press `SPACE` instead of `ENTER`!
+
+=== Backing up your Weaver : `backup`
+
+Backup your address book information in Weaver. +
+
+Format: `backup` +
+
+****
+* Back up your address book information in Weaver according to your own accounts.
+* The file will be saved in the data folder of the following format:
+* [Account Username]addressbook-backup.xml
+****
+
 
 === Exiting the program : `exit`
 
