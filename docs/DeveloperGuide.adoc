@@ -647,7 +647,7 @@ If the `undoStack` is empty, then there are no other commands left to be undone,
 
 // end::deletepersontag[]
 
-// tag::addPhoto to Person[]
+// tag::addphoto[]
 === Adding a photo to a contact in your personalised Weaver.
 
 The add Photo command adds a display picture to a particular contact.The command takes in two parameters, TargetIndex
@@ -745,7 +745,7 @@ any directory. +
 **Pros:** Easy for new developers to comprehend. +
 **Cons:** If the image is removed from the directory, Weaver will have no access to the image. +
 
-// end::addPhoto[]
+// end::addphoto[]
 
 // tag::facebook[]
 === FaceBook Integration

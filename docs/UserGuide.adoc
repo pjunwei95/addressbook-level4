@@ -382,6 +382,7 @@ Examples:
 
 * `fs -` +
 
+// tag::addphoto[]
 === Add Photo to contacts : `photo` SINCE V1.2 +
 
 image::MockUp.png[width="790"]
@@ -409,7 +410,7 @@ If the file is not present in the specified path, a prompt will be displayed to 
 Command - `Photo 1 Delete` +
 this will delete the photo attached with the person at index 1.
 ****
-
+// end::addphoto[]
 
 // tag::facebook[]
 === FaceBook Integration SINCE V1.3

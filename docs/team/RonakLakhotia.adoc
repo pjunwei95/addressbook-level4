@@ -32,21 +32,43 @@ Weaver, therby saving them the trouble of opening a browser on their desktop. +
 ---
 #Start of Extract [from: Developer Guide]#
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=facebook]
 
 #End of Extract#
 
 ---
 
-=== Enhancement Proposed: Add command `remark`
+=== Enhancement Proposed: Add command `photo`
 
-{Explain similar to the Undo/Redo feature above.}
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=facebook]
+
+#End of Extract#
+
+---
+==== Justification
+
+Allows user to choose any image in their pc and use CLI to specify the path of the image. +
+This way the user can display the pictures on their contact lists. +
+
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=facebook]
+
+#End of Extract#
+
+---
 
 === Other contributions
 
-* Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-* Wrote additional tests to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+* Set up a reminders panel (Pull requests https://github.com[#33], https://github.com[#34])
+* Wrote additional tests to increase coverage (Pull requests https://github.com[#36], https://github.com[#38])
 
-== Project: PowerPointLabs
 
-{Optionally (not graded), you may include other projects in your portfolio.}
