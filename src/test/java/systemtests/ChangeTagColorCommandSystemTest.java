@@ -43,7 +43,7 @@ public class ChangeTagColorCommandSystemTest extends AddressBookSystemTest {
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, getModel(), expectedResultMessage);
 
-        /* Case: undo changing font size  -> font size changes back to L again */
+        /* Case: undo changing tag color  -> tag color changes back to red again */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
@@ -89,6 +89,15 @@ public class ChangeTagColorCommandSystemTest extends AddressBookSystemTest {
                 ChangeTagColorCommand.MESSAGE_USAGE);
         assertCommandFailure(changeTagColorCommand, expectedMessage);
 
+        /* Case: tag name is null-> rejected */
+        changeTagColorCommand = ChangeTagColorCommand.COMMAND_WORD + " c/red t/";
+        expectedMessage = Tag.MESSAGE_TAG_CONSTRAINTS;
+        assertCommandFailure(changeTagColorCommand, expectedMessage);
+
+        /* Case: color is null-> rejected */
+        changeTagColorCommand = ChangeTagColorCommand.COMMAND_WORD + " t/friend c/";
+        expectedMessage = TagColor.MESSAGE_TAG_COLOR_CONSTRAINTS;
+        assertCommandFailure(changeTagColorCommand, expectedMessage);
     }
 
     /**
