@@ -11,6 +11,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new MapCommand object
  */
 public class FaceBookCommandParser implements Parser<FaceBookCommand> {
+
+    public static final String MESSAGE_INVALID_INDEX = "Index entered is invalid";
+
     /**
      * Parses the given {@code String} of arguments in the context of the MapCommand
      * and returns an MapCommand object for execution.

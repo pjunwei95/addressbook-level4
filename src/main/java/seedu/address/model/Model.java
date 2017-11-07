@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -36,6 +37,8 @@ public interface Model {
 
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
+
+    void sendMailToContacts(String tagName, String subject, List<ReadOnlyPerson> lastShownList);
 
     /** Deletes the given reminder. */
     void deleteReminder(ReadOnlyReminder target) throws ReminderNotFoundException;
@@ -82,14 +85,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate);
-
+    //@@author ChenXiaoman
     /**
      * Update color of tags
      * @param tagList
      * @param color
      */
     void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException;
-
+    //@@author
     /**
      * Updates the filter of the filtered reminder list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

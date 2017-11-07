@@ -25,7 +25,7 @@ public class RemarkCommand extends UndoableCommand {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_REMARK + "MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_REMARK + "CS2101/SEC/1, CS2104/LEC/1";
+            + PREFIX_REMARK + "CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";

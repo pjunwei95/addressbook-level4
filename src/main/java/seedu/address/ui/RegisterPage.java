@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -16,6 +17,7 @@ import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
+import seedu.address.model.theme.Theme;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.StorageManager;
 
@@ -70,8 +72,13 @@ public class RegisterPage extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
+        initTheme();
         registerAsAnEventHandler(this);
         //loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+    }
+
+    private void initTheme() {
+        Theme.changeTheme(primaryStage, Theme.getCurrentTheme());
     }
 
     /**
@@ -80,10 +87,25 @@ public class RegisterPage extends UiPart<Region> {
     private boolean checkValid() {
         if (accPrefs.getHm().get(username.getText()) != null) {
             logger.info("Register faild");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Username already exist.");
+            alert.setContentText("This username is already taken, please choose another one.");
+            alert.showAndWait();
             return false;
         } else {
             logger.info("Register successful");
-            return password.getText().equals(password1.getText());
+            boolean result = password.getText().equals(password1.getText());
+
+            if (!result) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Password inconformity.");
+                alert.setContentText("You must key in indentical password twice");
+                alert.showAndWait();
+            }
+
+            return result;
         }
     }
 
@@ -96,12 +118,22 @@ public class RegisterPage extends UiPart<Region> {
             logger.info("Trying to register");
             if (checkValid()) {
                 accPrefs.getHm().put(username.getText(), password.getText());
-                accPrefs.saveAccountsPrefs(accPrefs, accPrefs.getUserPrefsFilePath());
+                accPrefs.saveAccountsPrefs(accPrefs, accPrefs.getAccPrefsFilePath());
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setTitle("Register Successful");
+                alert.setContentText("You have registered a new account!");
                 loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
+                uiManager.setLoginPage(loginPage);
                 this.hide();
                 loginPage.show();
             }
         } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setTitle("Register failed");
+            alert.setContentText("You need to use a unique username. "
+                    + "And you need to key in indentical password twice!");
             logger.info("Invalid input");
         }
     }
@@ -140,6 +172,7 @@ public class RegisterPage extends UiPart<Region> {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
         FontSize.setCurrentFontSizeLabel(prefs.getGuiSettings().getFontSize());
+        Theme.setCurrentTheme(prefs.getGuiSettings().getTheme());
         if (prefs.getGuiSettings().getWindowCoordinates() != null) {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());

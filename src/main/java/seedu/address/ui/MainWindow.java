@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.commons.core.CipherUnit.encrypt;
-
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -22,6 +20,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ChangeThemeEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
@@ -182,7 +181,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void hide() {
-        logout();
         primaryStage.hide();
     }
 
@@ -246,8 +244,7 @@ public class MainWindow extends UiPart<Region> {
     public void logout() {
         logger.info("Trying to logout");
         prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-        encrypt(storage.getAddressBookFilePath());
-        logger.info("File encypted");
+        this.releaseResources();
     }
 
     /**
@@ -263,9 +260,22 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleLogoutEvent() throws IOException {
-        logout();
+        this.logout();
         LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
+        uiManager.setLoginPage(loginPage);
         loginPage.show();
+    }
+
+    /**
+     * Logout from the current MainWindow.
+     */
+    @Subscribe
+    public void handleLogoutEvent(LogoutEvent event) throws ParseException, IOException {
+
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        this.handleLogoutEvent();
+
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -277,7 +287,6 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void releaseResources() {
-        logout();
         browserPanel.freeResources();
     }
 
@@ -327,5 +336,4 @@ public class MainWindow extends UiPart<Region> {
     private void handleChangeThemeEvent(ChangeThemeEvent changeThemeEvent) {
         Theme.changeTheme(primaryStage, changeThemeEvent.getTheme());
     }
-
 }
