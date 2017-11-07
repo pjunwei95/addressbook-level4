@@ -1,4 +1,24 @@
 # pjunwei95
+###### \java\seedu\address\commons\events\model\BackUpEvent.java
+``` java
+/**
+ * An event requesting to backup the address book.
+ */
+public class BackUpEvent extends BaseEvent {
+
+    public final ReadOnlyAddressBook data;
+
+    public BackUpEvent(ReadOnlyAddressBook data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
+
+}
+```
 ###### \java\seedu\address\commons\util\StringUtil.java
 ``` java
     /**
@@ -60,6 +80,41 @@
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+}
+```
+###### \java\seedu\address\logic\commands\BackUpCommand.java
+``` java
+/**
+ * Backup the Address Book
+ */
+public class BackUpCommand extends UndoableCommand {
+
+    public static final String COMMAND_WORD = "backup";
+    public static final String MESSAGE_SUCCESS = "A backup of Weaver has been created!";
+
+    @Override
+    protected CommandResult executeUndoableCommand() throws CommandException {
+        requireNonNull(model);
+        EventsCenter.getInstance().post(new BackUpEvent(model.getAddressBook()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof BackUpCommand)) {
+            return false;
+        }
+
+        // state check
+        BackUpCommand e = (BackUpCommand) other;
+        return model.getAddressBook().equals(e.model.getAddressBook());
     }
 }
 ```
@@ -359,20 +414,12 @@ public class FindTagCommand extends Command {
 ```
 ###### \java\seedu\address\logic\parser\AddressBookParser.java
 ``` java
+        case FindTagCommand.COMMAND_WORD:
+            return new FindTagCommandParser().parse(arguments);
+
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
 
-        case AddReminder.COMMAND_WORD:
-            return new AddReminderParser().parse(arguments);
-
-        case RemoveReminderCommand.COMMAND_WORD:
-            return new RemoveCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-```
-###### \java\seedu\address\logic\parser\AddressBookParser.java
-``` java
         case ClearPopupCommand.COMMAND_WORD: {
             ClearConfirmation clearConfirmation = new ClearConfirmation();
             if (clearConfirmation.isClearCommand()) {
@@ -382,43 +429,9 @@ public class FindTagCommand extends Command {
             }
         }
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case BackUpCommand.COMMAND_WORD:
+            return new BackUpCommand();
 
-        case PhotoCommand.COMMAND_WORD:
-            return new PhotoCommandParser().parse(arguments);
-
-        case SearchCommand.COMMAND_WORD:
-            return new SearchCommandParser().parse(arguments);
-
-        case FaceBookCommand.COMMAND_WORD:
-            return new FaceBookCommandParser().parse(arguments);
-
-        case RemarkCommand.COMMAND_WORD:
-            return new RemarkCommandParser().parse(arguments);
-```
-###### \java\seedu\address\logic\parser\AddressBookParser.java
-``` java
-        case FindTagCommand.COMMAND_WORD:
-            return new FindTagCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
-
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
 ```
 ###### \java\seedu\address\logic\parser\DeleteTagCommandParser.java
 ``` java
@@ -608,6 +621,41 @@ public class TagContainsKeywordsPredicate implements Predicate<ReadOnlyPerson> {
                 && this.keywords.equals(((TagContainsKeywordsPredicate) other).keywords)); // state check
     }
 
+}
+```
+###### \java\seedu\address\storage\StorageManager.java
+``` java
+    @Override
+    public void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        logger.fine("Attempting to create backup for: " + addressBook);
+        addressBookStorage.backupAddressBook(addressBook);
+    }
+
+    @Subscribe
+    public void handleBackUpEvent(BackUpEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Backup requested, creating backup file"));
+        try {
+            backupAddressBook(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+}
+```
+###### \java\seedu\address\storage\XmlAddressBookStorage.java
+``` java
+    /**
+     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}
+     * @param addressBook data. Cannot be null
+     */
+    public void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        requireNonNull(addressBook);
+        requireNonNull(filePath);
+
+        String trimmedFilePath = filePath.substring(0, filePath.length() - 4);
+        saveAddressBook(addressBook, trimmedFilePath + "-backup.xml");
+    }
 }
 ```
 ###### \java\seedu\address\ui\CommandBox.java

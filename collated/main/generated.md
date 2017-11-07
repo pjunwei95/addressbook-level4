@@ -472,7 +472,6 @@
     }
 
     void hide() {
-        logout();
         primaryStage.hide();
     }
 
@@ -536,8 +535,7 @@
     public void logout() {
         logger.info("Trying to logout");
         prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-        encrypt(storage.getAddressBookFilePath());
-        logger.info("File encypted");
+        this.releaseResources();
     }
 
     /**
@@ -553,9 +551,22 @@
      */
     @FXML
     private void handleLogoutEvent() throws IOException {
-        logout();
+        this.logout();
         LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
+        uiManager.setLoginPage(loginPage);
         loginPage.show();
+    }
+
+    /**
+     * Logout from the current MainWindow.
+     */
+    @Subscribe
+    public void handleLogoutEvent(LogoutEvent event) throws ParseException, IOException {
+
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        this.handleLogoutEvent();
+
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -567,7 +578,6 @@
     }
 
     void releaseResources() {
-        logout();
         browserPanel.freeResources();
     }
 
@@ -617,6 +627,5 @@
     private void handleChangeThemeEvent(ChangeThemeEvent changeThemeEvent) {
         Theme.changeTheme(primaryStage, changeThemeEvent.getTheme());
     }
-
 }
 ```
