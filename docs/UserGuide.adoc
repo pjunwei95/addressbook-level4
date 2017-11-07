@@ -339,7 +339,7 @@ Users now can register new valid accounts.
 
 The new account's username must be different from all previous ones.
 
-
+// tag::customizetagcolor[]
 === Customize tags' color : `color` SINCE V1.2
 
 Change the color of one or more than one tags. +
@@ -362,6 +362,8 @@ The `color` command fails as `invalid_color` is not supported.
 
 * `color t/not_existing_tag c/yellow` +
 The `color` command fails as `not_existing_tag` does not exit in current database.
+
+// end::customizetagcolor[]
 
 === Add Photo to contacts : `photo` SINCE V1.2 +
 
@@ -391,6 +393,7 @@ Command - `Photo 1 Delete` +
 this will delete the photo attached with the person at index 1.
 ****
 
+// tag::customizefontsize[]
 === Change font size : `fs` SINCE V1.3
 
 Change the font size of the entire application +
@@ -411,6 +414,7 @@ Examples:
 * `fs +`
 
 * `fs -` +
+// end::customizefontsize[]
 
 === FaceBook Integration SINCE V1.3
 
@@ -430,9 +434,10 @@ If the person does not have a facebook account or the username is not entered in
 
 image::facebook.png[width="790"]
 
+// tag::map[]
 === Show address of a person : `map` (SINCE V1.3)
 
-Shows the address of a person in Google Map in the browser panel.+
+Shows the address of a person in Google Map in the browser panel. +
 
 Format: `map INDEX`
 ****
@@ -448,6 +453,9 @@ Examples:
 
 * `map 2`
 
+// end::map[]
+
+// tag::theme[]
 === Change the theme : `theme` (SINCE V1.4)
 
 Changes the theme of entire application. +
@@ -464,7 +472,7 @@ Examples:
 * `theme dark`
 
 * `theme bright`
-
+// end::theme[]
 
 === Reminders Panel (SINCE V1.4) +
 
