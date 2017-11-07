@@ -86,6 +86,21 @@ include::../UserGuide.adoc[tag=theme]
 Having different themes make the app looks more beautiful.
 When users are allowed to choose the theme for the app, the user experience will become nicer.
 
+=== Enhancement Added: Parse the command while the user is typing
+
+==== External behavior
+
+---
+
+include::../UserGuide.adoc[tag=parse]
+
+---
+
+==== Justification
+
+User can know whether the command typed is valid while typing. User does not need to press enter key and then discover
+an error message and then fix the command typed earlier.
+
 === Other contributions
 
 * Bugs reported and suggestions posted for other team's products (Issues
