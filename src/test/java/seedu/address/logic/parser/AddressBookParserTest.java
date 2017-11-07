@@ -5,7 +5,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_REMINDER;
 
@@ -17,7 +19,29 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.*;
+
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddReminder;
+import seedu.address.logic.commands.ChangeFontSizeCommand;
+import seedu.address.logic.commands.ChangeReminderCommand;
+import seedu.address.logic.commands.ChangeTagColorCommand;
+import seedu.address.logic.commands.ChangeThemeCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FaceBookCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MapCommand;
+import seedu.address.logic.commands.PhotoCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.RemoveReminderCommand;
+import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ChangeReminderCommand.ChangeReminderDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,7 +50,12 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.SearchContainsKeywordsPredicate;
 import seedu.address.model.reminder.Reminder;
-import seedu.address.testutil.*;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.ChangeReminderDescriptorBuilder;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ReminderBuilder;
+import seedu.address.testutil.ReminderUtil;
 
 public class AddressBookParserTest {
     @Rule
@@ -46,8 +75,8 @@ public class AddressBookParserTest {
         SearchCommand command = new SearchCommand(new
                 SearchContainsKeywordsPredicate(Arrays.asList("Alice", "13.10.1997")));
 
-        SearchCommand commandCheck = (SearchCommand) parser.parseCommand(SearchCommand.COMMAND_WORD + " " +
-        PREFIX_NAME + "Alice" + " " + PREFIX_DOB + "13.10.1997");
+        SearchCommand commandCheck = (SearchCommand) parser.parseCommand(SearchCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + "Alice" + " " + PREFIX_DOB + "13.10.1997");
         assertEquals(commandCheck, command);
     }
     @Test

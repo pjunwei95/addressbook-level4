@@ -38,7 +38,7 @@ public class ModelManagerTest {
         modelManager.getFilteredPersonList().remove(0);
     }
     @Test
-    public void facebookEvent_Raised() throws IOException {
+    public void facebook_eventRaised() throws IOException {
         ModelManager model = new ModelManager();
         try {
             model.faceBook(ALICE);
