@@ -85,7 +85,7 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
-        String trimmedFilePath = filePath.substring(0, filePath.length()-4);
+        String trimmedFilePath = filePath.substring(0, filePath.length() - 4);
         saveAddressBook(addressBook, trimmedFilePath + "-backup.xml");
     }
 }
