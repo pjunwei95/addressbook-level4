@@ -42,4 +42,17 @@ public class JsonAccountsStorage implements UserPrefsStorage {
         JsonUtil.saveJsonFile(userPrefs, filePath);
     }
 
+    public Optional<AccountsStorage> readAccountsPrefs() throws DataConversionException, IOException {
+        return readAccountsPrefs(filePath);
+    }
+
+    public Optional<AccountsStorage> readAccountsPrefs(String prefsFilePath)
+            throws DataConversionException, IOException {
+        return JsonUtil.readJsonFile(prefsFilePath, AccountsStorage.class);
+    }
+
+    public void saveAccountsPrefs(AccountsStorage accStorage) throws IOException {
+        JsonUtil.saveJsonFile(accStorage, filePath);
+    }
+
 }
