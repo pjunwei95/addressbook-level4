@@ -12,7 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class BackUpCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "backup";
-    public static final String MESSAGE_SUCCESS = "A backup of Address book has been created!";
+    public static final String MESSAGE_SUCCESS = "A backup of Weaver has been created!";
 
     @Override
     protected CommandResult executeUndoableCommand() throws CommandException {
