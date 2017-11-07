@@ -9,6 +9,8 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.testutil.PersonBuilder;
@@ -71,7 +73,22 @@ public class PersonCardTest extends GuiUnitTest {
     }
     @Test
     public void displayImage() {
+        Person personWithDisplayPicture = new PersonBuilder().withImage("src/main/resources/images/clock.png")
+                .build();
+        PersonCard personCard = new PersonCard(personWithDisplayPicture, 1);
+        uiPartRule.setUiPart(personCard);
+        assertCardDisplay(personCard, personWithDisplayPicture, 1);
 
+        // changes made to Person reflects on card
+        guiRobot.interact(() -> {
+            personWithDisplayPicture.setName(ALICE.getName());
+            personWithDisplayPicture.setAddress(ALICE.getAddress());
+            personWithDisplayPicture.setEmail(ALICE.getEmail());
+            personWithDisplayPicture.setPhone(ALICE.getPhone());
+            personWithDisplayPicture.setRemark(ALICE.getRemark());
+            personWithDisplayPicture.setImage(ALICE.getImage());
+            personWithDisplayPicture.setTags(ALICE.getTags());
+        });
     }
 
     /**
