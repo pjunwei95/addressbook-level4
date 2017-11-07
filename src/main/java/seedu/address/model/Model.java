@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -36,6 +37,8 @@ public interface Model {
 
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
+
+    void sendMailToContacts(String tagName, String subject, List<ReadOnlyPerson> lastShownList);
 
     /** Deletes the given reminder. */
     void deleteReminder(ReadOnlyReminder target) throws ReminderNotFoundException;

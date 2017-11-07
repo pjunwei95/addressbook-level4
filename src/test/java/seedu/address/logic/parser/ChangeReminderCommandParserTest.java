@@ -10,10 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_ASSIGNM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DUE_DATE_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_ASSIGNMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_MEETING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_REMINDER;
 
 import org.junit.Test;
 
@@ -74,6 +74,10 @@ public class ChangeReminderCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PRIORITY_DESC
                 + DUE_DATE_DESC_ASSIGNMENT, Priority.PRIORITY_CONSTRAINTS);
 
+        // valid priority followed by invalid priority
+        assertParseFailure(parser, "1" + INVALID_PRIORITY_DESC + VALID_PRIORITY_MEETING,
+                Priority.PRIORITY_CONSTRAINTS);
+
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_DETAILS_DESC + INVALID_DUE_DATE_DESC
                         + VALID_PRIORITY_ASSIGNMENT ,
@@ -82,7 +86,7 @@ public class ChangeReminderCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_REMINDER;
         String userInput = targetIndex.getOneBased() + DETAILS_DESC_ASSIGNMENT + PRIORITY_DESC_ASSIGNMENT
                 + DUE_DATE_DESC_ASSIGNMENT;
 
@@ -94,11 +98,57 @@ public class ChangeReminderCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+    @Test
+    public void parse_someFieldsSpecified_success() {
+
+        Index targetIndex = INDEX_SECOND_REMINDER;
+        String userInput = targetIndex.getOneBased() + DETAILS_DESC_ASSIGNMENT + PRIORITY_DESC_ASSIGNMENT;
+
+        ChangeReminderDescriptor descriptor = new ChangeReminderDescriptorBuilder()
+                .withDetails(VALID_DETAILS_ASSIGNMENT)
+                .withPriority(VALID_PRIORITY_ASSIGNMENT).build();
+
+        ChangeReminderCommand expectedCommand = new ChangeReminderCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+    }
+    @Test
+    public void parse_oneFieldSpecified_success() {
+
+        Index targetIndex = INDEX_SECOND_REMINDER;
+        //details
+        String userInput = targetIndex.getOneBased() + DETAILS_DESC_ASSIGNMENT;
+
+        ChangeReminderDescriptor descriptor = new ChangeReminderDescriptorBuilder()
+                .withDetails(VALID_DETAILS_ASSIGNMENT).build();
+
+        ChangeReminderCommand expectedCommand = new ChangeReminderCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // PRIORITY
+        userInput = targetIndex.getOneBased() + PRIORITY_DESC_ASSIGNMENT;
+        descriptor = new ChangeReminderDescriptorBuilder().withPriority(VALID_PRIORITY_ASSIGNMENT)
+                .build();
+
+        expectedCommand = new ChangeReminderCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        //due date
+        userInput = targetIndex.getOneBased() + DUE_DATE_DESC_ASSIGNMENT;
+        descriptor = new ChangeReminderDescriptorBuilder().withDueDate(VALID_DUE_DATE_ASSIGNMENT)
+                .build();
+
+        expectedCommand = new ChangeReminderCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+
+    }
 
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_SECOND_REMINDER;
 
         String userInput = targetIndex.getOneBased()  + PRIORITY_DESC_ASSIGNMENT + DETAILS_DESC_ASSIGNMENT
                 + DUE_DATE_DESC_ASSIGNMENT;
@@ -113,6 +163,20 @@ public class ChangeReminderCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    @Test
+    public void parse_invalidValueFollowedByValidValue_success() {
 
+        Index targetIndex = INDEX_SECOND_REMINDER;
+
+        String userInput = targetIndex.getOneBased() + INVALID_PRIORITY_DESC + PRIORITY_DESC_ASSIGNMENT;
+
+        ChangeReminderDescriptor descriptor = new ChangeReminderDescriptorBuilder()
+                .withPriority(VALID_PRIORITY_ASSIGNMENT)
+                .build();
+
+        ChangeReminderCommand expectedCommand = new ChangeReminderCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+    }
 
 }

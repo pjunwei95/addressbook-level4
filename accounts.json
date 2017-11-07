@@ -1,6 +1,7 @@
 {
   "accountsPath" : "accounts.json",
   "hm" : {
+    "a" : "a",
     "admin" : "admin",
     "user" : "user"
   }

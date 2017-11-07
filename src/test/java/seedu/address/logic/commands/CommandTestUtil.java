@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
@@ -42,6 +43,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_TAG_EMAIL = "friends";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -56,18 +58,23 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_BOB = "CS2101/SEC/1";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friends";
+    public static final String VALID_EMAIL_SUBJECT = "party";
     public static final String VALID_TAG_FAMILY = "family";
     public static final String VALID_TAG_COLOR_NAME_RED = "red";
     public static final String VALID_TAG_COLOR_NAME_YELLOW = "yellow";
 
-    public static final String VALID_USERNAME_AMY = "";
-    public static final String VALID_USERNAME_BOB = "";
+    public static final String VALID_USERNAME_AMY = "amy";
+    public static final String VALID_USERNAME_BOB = "bob";
     public static final String VALID_DETAILS_ASSIGNMENT = "Assignment";
     public static final String VALID_PRIORITY_ASSIGNMENT = "Low";
     public static final String VALID_DUE_DATE_ASSIGNMENT = "12.11.2017";
-    public static final String VALID_DETAILS_MEETING = "Meeting";
+    public static final String VALID_DETAILS_MEETING = " Group meeting";
     public static final String VALID_PRIORITY_MEETING = "High";
     public static final String VALID_DUE_DATE_MEETING = "12.11.2017";
+    public static final String VALID_DETAILS_TUTORIAL = "Tutorial meeting";
+    public static final String VALID_DUE_DATE_TUTORIAL = "12.10.2017";
+    public static final String VALID_PRIORITY_TUTORIAL = "Medium";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -81,6 +88,9 @@ public class CommandTestUtil {
     public static final String DOB_DESC_BOB = " " + PREFIX_DOB + VALID_DOB_BOB;
     public static final String IMAGE_AMY = " " + PREFIX_IMAGE + VALID_IMAGE_AMY;
     public static final String IMAGE_BOB = " " + PREFIX_IMAGE + VALID_IMAGE_BOB;
+    public static final String EMAIL_TAG = " " + PREFIX_TAG + VALID_TAG_EMAIL;
+    public static final String EMAIL_SUBJECT = " " + PREFIX_SUBJECT + VALID_EMAIL_SUBJECT;
+
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -93,11 +103,20 @@ public class CommandTestUtil {
     public static final String DETAILS_DESC_MEETING = " " + PREFIX_REMINDER_DETAILS + VALID_DETAILS_MEETING;
     public static final String PRIORITY_DESC_MEETING = " " + PREFIX_REMINDER_PRIORITY + VALID_PRIORITY_MEETING;
     public static final String DUE_DATE_DESC_MEETING = " " + PREFIX_REMINDER_DUE_DATE + VALID_DUE_DATE_MEETING;
+    public static final String DETAILS_DESC_TUTORIAL = " " + PREFIX_REMINDER_DETAILS + VALID_DETAILS_TUTORIAL;
+    public static final String PRIORITY_DESC_TUTORIAL = " " + PREFIX_REMINDER_PRIORITY + VALID_PRIORITY_TUTORIAL;
+    public static final String DUE_DATE_DESC_TUTORIAL = " " + PREFIX_REMINDER_DUE_DATE + VALID_DUE_DATE_TUTORIAL;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+
+    public static final String INVALID_DATE_OF_BIRTH_DESC = " " + PREFIX_DOB + "33.10.1997"; // out of bounds days
+    // not allowed for dateOfBirth
+    public static final String INVALID_IMAGE_PATH_DESC = " " + PREFIX_IMAGE
+            + "src/images/clock.png"; //incorrect file path
+
     public static final String INVALID_DATE_OF_BIRTH = " " + PREFIX_DOB; // empty string not allowed for dateOfBirth
     public static final String INVALID_REMARK_AMY = "Dummy";
     public static final String INVALID_REMARK_BOB = "Dummy";
@@ -110,6 +129,9 @@ public class CommandTestUtil {
     public static final String INVALID_PRIORITY_DESC = " " + PREFIX_REMINDER_PRIORITY + "!High";
     public static final String INVALID_DUE_DATE_DESC = " " + PREFIX_REMINDER_DUE_DATE + "@13.10.1997";
     public static final String INVALID_TAG_COLOR_NAME = "invalid tag color name";
+    public static final String INVALID_DATE_OF_BIRTH_DESC_BOUNDS = " " + PREFIX_DOB + "30.02.2017";
+    public static final String INVALID_EMAIL_TAG = " " + PREFIX_TAG + "FRIEN";
+    public static final String INVALID_EMAIL_SUBJECT = " " + PREFIX_SUBJECT + "s.s";
 
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_AMY;
     public static final DeleteTagCommand.DeleteTagDescriptor TAG_DESC_BOB;

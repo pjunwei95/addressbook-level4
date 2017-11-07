@@ -1,10 +1,15 @@
 package systemtests;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_OF_BIRTH_DESC_BOUNDS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_RONAK;
 import static seedu.address.testutil.TypicalPersons.LAKHOTIA;
 import static seedu.address.testutil.TypicalPersons.RANDOM;
+import static seedu.address.testutil.TypicalPersons.RONAK;
+import static seedu.address.testutil.TypicalPersons.SHARMA;
 
 import org.junit.Test;
 
@@ -17,24 +22,27 @@ import seedu.address.model.Model;
 //@@author RonakLakhotia
 public class SearchCommandSystemTest extends AddressBookSystemTest {
 
+    public static final String INVALID_DETAILS = "You might have entered invalid date or name with invalid characters!";
     @Test
 
     public void search() {
         /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
          * -> 2 persons found
          */
-        String command = "   " + SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " "
-                + "13.10.1997" + "   ";
+        String command = "   " + SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " "
+                + "b/13.10.1997" + "   ";
 
         Model expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, LAKHOTIA, RANDOM); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setFilteredList(expectedModel,
+                LAKHOTIA, RANDOM, RONAK, SHARMA); // first names of Lakhotia and Random are "Ronak"
         assertCommandSuccess(command, expectedModel);
+
         assertSelectedCardUnchanged();
 
         /* Case: repeat previous find command where person list is displaying the persons we are Searching
          * -> 2 persons found
          */
-        command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " " + "13.10.1997";
+        command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " " + "b/13.10.1997";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -48,24 +56,35 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-        /* Case: mixed case command word -> success */
-        command = "SeaRch RonAk 13.10.1997";
-        command = command.toLowerCase();
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: search person in empty address book -> 0 persons found */
         executeCommand(ClearCommand.COMMAND_WORD);
         assert getModel().getAddressBook().getPersonList().size() == 0;
 
 
-        command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " " +  "13.10.1997";
+        command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " " +  "b/13.10.1997";
 
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
+        /* missing name */
+        command = SearchCommand.COMMAND_WORD + " " +  "b/13.10.1997";
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        /* missing date */
+        command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        /* invalid name */
+        command = SearchCommand.COMMAND_WORD + " " + INVALID_NAME_DESC + " " + "b/13.10.1997";
+        assertCommandFailure(command, String.format(INVALID_DETAILS));
+
+        /* Invalid date */
+        command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " "
+                + INVALID_DATE_OF_BIRTH_DESC_BOUNDS;
+        assertCommandFailure(command, String.format(INVALID_DETAILS));
 
 
     }
