@@ -109,7 +109,7 @@ public class AddressBookParserTest {
         ChangeReminderDescriptor descriptor = new ChangeReminderDescriptorBuilder(reminder).build();
         ChangeReminderCommand command = (ChangeReminderCommand) parser
                 .parseCommand(ChangeReminderCommand.COMMAND_WORD + " "
-                + "1 " + "g/CS2103T Assignment" + " p/high" + " d/12.11 .2017");
+                + "1 " + "g/CS2103T Assignment" + " p/high" + " d/12.11.2017");
         assertEquals(new ChangeReminderCommand(INDEX_FIRST_REMINDER, descriptor), command);
     }
 

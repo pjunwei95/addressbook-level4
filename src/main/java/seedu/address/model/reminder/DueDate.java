@@ -25,6 +25,8 @@ public class DueDate {
             "Due Date must be a Valid Date and in the following format: \n"
                     + "'.' and '/' can be used as separators. \n";
 
+    public static final int [] MONTHS_WITH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
     public final String date;
 
 
@@ -75,8 +77,9 @@ public class DueDate {
         int dayNumber = getDayNumber(firstIndexOfSeparator, date);
         boolean isValidDateOfFebruary = checkIfValidDateOfFebruary(
                 date, monthNumber, yearNumber, dayNumber, isLeapYear);
+        boolean isValidNumberOfDaysInMonth = checkIfValidNumberOfDaysInMonth(monthNumber, dayNumber);
 
-        if (isValidDateOfFebruary) {
+        if (isValidDateOfFebruary && isValidNumberOfDaysInMonth) {
             return true;
         }
         return false;
@@ -94,6 +97,18 @@ public class DueDate {
             }
         }
         return true;
+    }
+    /**
+     * Checks if number of days in a given month are valid
+     */
+    public static boolean checkIfValidNumberOfDaysInMonth(int month, int day) {
+
+        if (MONTHS_WITH_DAYS[month - 1] < day) {
+            return false;
+        }
+
+        return true;
+
     }
 
     /**
