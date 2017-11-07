@@ -19,7 +19,7 @@ Weaver is a desktop address book application used for CS2103T Software
 ---
 #Start of Extract [from: User Guide]#
 
-//include::../UserGuide.adoc[tag=deletetag]
+include::../UserGuide.adoc[tag=deletetag]
 
 #End of Extract#
 
@@ -37,7 +37,7 @@ with ease.
 ---
 #Start of Extract [from: Developer Guide]#
 
-//include::../DeveloperGuide.adoc[tag=deletepersontag]
+include::../DeveloperGuide.adoc[tag=deletepersontag]
 
 #End of Extract#
 
@@ -49,7 +49,7 @@ with ease.
 ---
 #Start of Extract [from: User Guide]#
 
-//include::../UserGuide.adoc[tag=findtag]
+include::../UserGuide.adoc[tag=findtag]
 
 #End of Extract#
 
@@ -62,18 +62,15 @@ based on the tags they created. By locating a person by tag, the user can sort t
 and find the tags as a result. This also remove the need for a favourite contact
 as the user just need to tag the address as "favourite" and find that tag.
 
-=== Enhancement Added: Undo/Redo
+---
+=== Enhancement Added: Auto-completion
 
 ==== External behavior
 
 ---
 #Start of Extract [from: User Guide]#
 
-//include::../UserGuide.adoc[tag=findtag]
-//include::../UserGuide.adoc[tag=deletetag]
-//include::../UserGuide.adoc[tag=autocompletion]
-//include::../UserGuide.adoc[tag=backup]
-//include::../UserGuide.adoc[tag=clear]
+include::../UserGuide.adoc[tag=autocompletion]
 
 #End of Extract#
 
@@ -81,11 +78,55 @@ as the user just need to tag the address as "favourite" and find that tag.
 
 ==== Justification
 
-{Justify the need for, and the current design (i.e. external behavior) of, the feature}
+Typing all the commands out can be a hassle, so this implementation of the auto-complete
+function allows the user to select frequently used commands with convenience.
 
-=== Enhancement Proposed: User Stories
+---
+=== Enhancement Added: Clearing all entries
 
-Suggested features to be implemented in the future in the user stories.
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=clear]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+Initially, the clear command can be done in one step. However, new users might not be
+accustomed to the application. Also, they probably skipped the user guide as well, so
+are unsure of the undo and redo features. Therefore, they may be alarmed when they
+clear their contacts. This seeks to remedy this problem by providing a confirmation
+popup to allow the user the option to consider before clearing their contacts.
+
+---
+=== Enhancement Added: Backing up your Weaver
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=backup]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+While the address book data in Weaver is saved automatically after each changes, a
+user may want to back up his/her copy just in case. This feature allows the additional
+functionality to backup in a file that is identifiable to the user.
+
+---
+=== Enhancement Proposed: Future implementations
+
+* Suggested features to be implemented in the future in the user stories.
 (Pull request https://github.com/pjunwei95/addressbook-level4/commit/e50666704484046e231e1c2a33f1eadffd0b51ae[#13])
 
 === Other contributions
@@ -96,8 +137,11 @@ Suggested features to be implemented in the future in the user stories.
     https://github.com/CS2103AUG2017-W09-B2/main/issues/122[#122]),
     https://github.com/CS2103AUG2017-W09-B2/main/issues/124[#124])
 
-* Updated new colors to be included in tags (Pull requests https://github.com[#33], https://github.com[#34])
-* Wrote additional tests to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+* Updated new colors to be included in tags.
+(Pull request https://github.com/pjunwei95/addressbook-level4/commit/e9a411bc29b1154e7b5012850e44329371da5dfa[#64])
+
+* Wrote additional tests to increase coverage from 88% to 92%
+//(Pull requests https://github.com[#36], https://github.com[#38])
 
 == Project: NUSeekers
 
