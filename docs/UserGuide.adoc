@@ -504,6 +504,10 @@ image::autocompletion.png[]
 
 Type any letters to get some suggestions on what command to use.
 
+=== Check whether the command is valid while the user is typing
+
+The result display panel will show whether the command is valid while the user is typing.
+
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
