@@ -20,16 +20,20 @@ public interface ReadOnlyPerson {
     Email getEmail();
     ObjectProperty<Address> addressProperty();
     Address getAddress();
+    //@@author RonakLakhotia
     ObjectProperty<DateOfBirth> dateOfBirthProperty();
     DateOfBirth getDateOfBirth();
+    //@@author
     ObjectProperty<Remark> remarkProperty();
     Remark getRemark();
     ObjectProperty<UniqueTagList> tagProperty();
     Set<Tag> getTags();
+    //@@author RonakLakhotia
     ObjectProperty<FileImage> imageProperty();
     FileImage getImage();
     ObjectProperty<FacebookUsername> usernameProperty();
     FacebookUsername getUsername();
+    //@@author
 
 
     /**
@@ -62,7 +66,7 @@ public interface ReadOnlyPerson {
                 .append(getDateOfBirth())
                 .append(" Remark: ")
                 .append(getRemark())
-                .append(" Photo FilePath: ")
+                .append(" FilePath: ")
                 .append(getImage())
                 .append(" Facebook Username: ")
                 .append(getUsername())

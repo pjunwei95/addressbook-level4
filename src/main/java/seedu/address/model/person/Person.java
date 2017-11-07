@@ -68,7 +68,6 @@ public class Person implements ReadOnlyPerson {
         return name.get();
     }
 
-
     public void setUsername(FacebookUsername username) {
         this.username.set(requireNonNull(username));
     }
@@ -154,7 +153,6 @@ public class Person implements ReadOnlyPerson {
     public Remark getRemark() {
         return remark.get();
     }
-
     @Override
     public FileImage getImage() {
         return image.get();
@@ -172,6 +170,7 @@ public class Person implements ReadOnlyPerson {
     public ObjectProperty<UniqueTagList> tagProperty() {
         return tags;
     }
+
     public ObjectProperty<FileImage> imageProperty() {
         return image;
     }

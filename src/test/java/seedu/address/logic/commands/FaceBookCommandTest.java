@@ -26,6 +26,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code MapCommand}.
  */
+//@@author RonakLakhotia
 public class FaceBookCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -48,7 +49,7 @@ public class FaceBookCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
 
-        String username = "ronak.lakhotia";
+
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex);
 

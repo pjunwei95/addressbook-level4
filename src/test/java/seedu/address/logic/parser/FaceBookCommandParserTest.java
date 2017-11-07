@@ -10,6 +10,7 @@ import org.junit.Test;
 import seedu.address.logic.commands.FaceBookCommand;
 
 
+
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
  * outside of the MapCommand code. For example, inputs "1" and "1 abc" take the
@@ -17,6 +18,7 @@ import seedu.address.logic.commands.FaceBookCommand;
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
+//@@author RonakLakhotia
 public class FaceBookCommandParserTest {
 
     private FaceBookCommandParser parser = new FaceBookCommandParser();
@@ -37,5 +39,13 @@ public class FaceBookCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FaceBookCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidNumberOfArgs_throwsParseException() {
+
+        assertParseFailure(parser, "1 2", String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE
+        ));
     }
 }

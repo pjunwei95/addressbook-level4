@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.core.CipherUnit.encrypt;
+
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -18,14 +20,18 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ChangeThemeEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.util.FxViewUtil;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.ChangeFontSizeCommand;
+import seedu.address.logic.commands.ChangeThemeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
+import seedu.address.model.theme.Theme;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.StorageManager;
 
@@ -48,15 +54,21 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    private ReminderListPanel reminderListPanel;
     private Config config;
     private UserPrefs prefs;
     private StorageManager storage;
     private AccountsStorage accPrefs;
+    private UiManager uiManager;
 
     private CommandBox commandBox;
 
     @FXML
     private StackPane browserPlaceholder;
+    //@@author RonakLakhotia
+    @FXML
+    private StackPane reminderListPlaceholder;
+    //@@author generated
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -74,7 +86,7 @@ public class MainWindow extends UiPart<Region> {
     private StackPane statusbarPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, StorageManager storage, UserPrefs prefs, Logic logic,
-                      AccountsStorage accPrefs) {
+                      AccountsStorage accPrefs, UiManager uiManager) {
         super(FXML);
 
         // Set dependencies
@@ -84,6 +96,8 @@ public class MainWindow extends UiPart<Region> {
         this.prefs = prefs;
         this.storage = storage;
         this.accPrefs = accPrefs;
+        this.uiManager = uiManager;
+        uiManager.setMainWindow(this);
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -92,7 +106,7 @@ public class MainWindow extends UiPart<Region> {
         setWindowDefaultSize(prefs);
         Scene scene = new Scene(getRoot());
         primaryStage.setScene(scene);
-
+        initTheme();
         setAccelerators();
         registerAsAnEventHandler(this);
     }
@@ -109,6 +123,9 @@ public class MainWindow extends UiPart<Region> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
+    private void initTheme() {
+        Theme.changeTheme(primaryStage, Theme.getCurrentTheme());
+    }
     /**
      * Sets the accelerator of a MenuItem.
      *
@@ -150,6 +167,9 @@ public class MainWindow extends UiPart<Region> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        reminderListPanel = new ReminderListPanel(logic.getFilteredReminderList());
+        reminderListPlaceholder.getChildren().add(reminderListPanel.getRoot());
+
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -162,6 +182,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
     void hide() {
+        logout();
         primaryStage.hide();
     }
 
@@ -185,6 +206,7 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setHeight(prefs.getGuiSettings().getWindowHeight());
         primaryStage.setWidth(prefs.getGuiSettings().getWindowWidth());
         FontSize.setCurrentFontSizeLabel(prefs.getGuiSettings().getFontSize());
+        Theme.setCurrentTheme(prefs.getGuiSettings().getTheme());
         if (prefs.getGuiSettings().getWindowCoordinates() != null) {
             primaryStage.setX(prefs.getGuiSettings().getWindowCoordinates().getX());
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
@@ -201,7 +223,8 @@ public class MainWindow extends UiPart<Region> {
      */
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), FontSize.getCurrentFontSizeLabel(),
+                Theme.getCurrentTheme());
     }
 
     /**
@@ -218,6 +241,16 @@ public class MainWindow extends UiPart<Region> {
     }
 
     /**
+    * logout
+    */
+    public void logout() {
+        logger.info("Trying to logout");
+        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
+        encrypt(storage.getAddressBookFilePath());
+        logger.info("File encypted");
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -230,9 +263,8 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleLogoutEvent() throws IOException {
-        logger.info("Trying to logout");
-        prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
+        logout();
+        LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
         loginPage.show();
     }
 
@@ -240,7 +272,12 @@ public class MainWindow extends UiPart<Region> {
         return this.personListPanel;
     }
 
+    public ReminderListPanel getReminderListPanel() {
+        return this.reminderListPanel;
+    }
+
     void releaseResources() {
+        logout();
         browserPanel.freeResources();
     }
 
@@ -255,7 +292,7 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleIncreaseFontSize() throws CommandException, ParseException {
-        commandBox.handleCommandInputChanged(FontSize.INCREASE_FONT_SIZE_COMMAND);
+        commandBox.handleCommandInputChanged(ChangeFontSizeCommand.INCREASE_FONT_SIZE_COMMAND);
     }
 
     /**
@@ -263,7 +300,32 @@ public class MainWindow extends UiPart<Region> {
      */
     @FXML
     private void handleDecreaseFontSize() throws CommandException, ParseException {
-        commandBox.handleCommandInputChanged(FontSize.DECREASE_FONT_SIZE_COMMAND);
+        commandBox.handleCommandInputChanged(ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND);
+    }
+
+    /**
+     * Change the theme to dark theme
+     */
+    @FXML
+    private void handleChangeDarkTheme() {
+        commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_DARK_THEME_COMMAND);
+    }
+
+    /**
+     * Change the theme to bright theme
+     */
+    @FXML
+    private void handleChangeBrightTheme() {
+        commandBox.handleCommandInputChanged(ChangeThemeCommand.CHENG_TO_BRIGHT_THEME_COMMAND);
+    }
+
+    /**
+     * Change the theme when a ChangeThemeEvent is raised
+     * @param changeThemeEvent
+     */
+    @Subscribe
+    private void handleChangeThemeEvent(ChangeThemeEvent changeThemeEvent) {
+        Theme.changeTheme(primaryStage, changeThemeEvent.getTheme());
     }
 
 }

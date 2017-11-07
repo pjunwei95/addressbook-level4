@@ -17,7 +17,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.commands.ChangeTagColorCommand;
+import seedu.address.logic.commands.ChangeThemeCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -26,6 +28,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -135,6 +138,27 @@ public class AddressBookParserTest {
         SelectCommand command = (SelectCommand) parser.parseCommand(
                 SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_map() throws Exception {
+        MapCommand command = (MapCommand) parser.parseCommand(
+                MapCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new MapCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_changeFontSize() throws Exception {
+        ChangeFontSizeCommand command = (ChangeFontSizeCommand) parser.parseCommand(
+                ChangeFontSizeCommand.COMMAND_WORD + " " + "xl");
+        assertEquals(new ChangeFontSizeCommand("xl"), command);
+    }
+
+    @Test
+    public void parseCommand_changeTheme() throws Exception {
+        ChangeThemeCommand command = (ChangeThemeCommand) parser.parseCommand(
+                ChangeThemeCommand.COMMAND_WORD + " " + "dark");
+        assertEquals(new ChangeThemeCommand("dark"), command);
     }
 
     @Test

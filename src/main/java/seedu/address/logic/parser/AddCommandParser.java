@@ -53,7 +53,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).get();
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get();
 
-
             FileImage image = ParserUtil.parseImage(argMultimap.getValue(PREFIX_IMAGE))
                     .orElse(new FileImage(""));
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
@@ -83,7 +82,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             } else {
                 username = new FacebookUsername("");
             }
-
 
 
             ReadOnlyPerson person = new Person(name, phone, email, address, date, remark, image, username, tagList);

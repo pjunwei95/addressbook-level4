@@ -11,6 +11,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.reminder.ReadOnlyReminder;
+import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
@@ -20,6 +23,7 @@ import seedu.address.model.tag.TagColor;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<ReadOnlyPerson> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<ReadOnlyReminder> PREDICATE_SHOW_ALL_REMINDERS = unused->true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
@@ -32,6 +36,12 @@ public interface Model {
 
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
+
+    /** Deletes the given reminder. */
+    void deleteReminder(ReadOnlyReminder target) throws ReminderNotFoundException;
+
+    /** Adds the given reminder */
+    void addReminder(ReadOnlyReminder person) throws DuplicateReminderException;
 
     /** Adds photo to person */
     void addPhotoPerson(ReadOnlyPerson person, String filePath, Index targetIndex)
@@ -51,8 +61,21 @@ public interface Model {
     void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
             throws DuplicatePersonException, PersonNotFoundException;
 
+    /**
+     * Replaces the given reminder {@code target} with {@code changedReminder}.
+     *
+     * @throws DuplicateReminderException if updating the reminder's details causes the reminder to be equivalent to
+     *      another existing reminder in the list.
+     * @throws ReminderNotFoundException if {@code target} could not be found in the list.
+     */
+    void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder)
+            throws DuplicateReminderException, ReminderNotFoundException;
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered reminders list */
+    ObservableList<ReadOnlyReminder> getFilteredReminderList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -66,6 +89,12 @@ public interface Model {
      * @param color
      */
     void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException;
+
+    /**
+     * Updates the filter of the filtered reminder list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredReminderList(Predicate<ReadOnlyReminder> predicate);
 
 
 

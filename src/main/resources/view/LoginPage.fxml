@@ -9,7 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox minHeight="400.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-      <StackPane styleClass="pane-with-border" stylesheets="@DarkTheme.css" VBox.vgrow="ALWAYS">
+
+      <StackPane VBox.vgrow="ALWAYS" styleClass="pane-with-border">
+
          <children>
             <TextField fx:id="username" alignment="CENTER" onKeyPressed="#handleKeyPress" promptText="username" StackPane.alignment="CENTER">
                <StackPane.margin>
@@ -36,8 +38,4 @@
          </Button>
          </children>
       </StackPane>
-   <stylesheets>
-      <URL value="@DarkTheme.css" />
-      <URL value="@Extensions.css" />
-   </stylesheets>
 </VBox>
