@@ -77,4 +77,16 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
     }
 
+    //@@author pjunwei95
+    /**
+     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}
+     * @param addressBook data. Cannot be null
+     */
+    public void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        requireNonNull(addressBook);
+        requireNonNull(filePath);
+
+        String trimmedFilePath = filePath.substring(0, filePath.length() - 4);
+        saveAddressBook(addressBook, trimmedFilePath + "-backup.xml");
+    }
 }
