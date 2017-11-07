@@ -8,7 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DOB_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_OF_BIRTH_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_IMAGE_PATH_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -52,7 +54,9 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -205,6 +209,17 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 + ADDRESS_DESC_AMY + DOB_DESC_AMY + REMARK_DESC_AMY
                 + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        /* Case: invalid date of birth -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY + INVALID_DATE_OF_BIRTH_DESC + REMARK_DESC_AMY;
+        assertCommandFailure(command, DateOfBirth.MESSAGE_BIRTHDAY_CONSTRAINTS);
+
+        /* Case: invalid image path -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY + DOB_DESC_AMY + REMARK_DESC_AMY + INVALID_IMAGE_PATH_DESC;
+        assertCommandFailure(command, FileImage.MESSAGE_IMAGE_CONSTRAINTS);
+
     }
 
     /**

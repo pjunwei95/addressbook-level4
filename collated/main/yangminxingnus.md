@@ -1,96 +1,131 @@
 # yangminxingnus
-###### /java/seedu/address/commons/core/CipherUnit.java
+###### /java/seedu/address/commons/events/ui/LogoutEvent.java
 ``` java
 /**
- * method for encrypt / decrypt the files
+ * Indicates a request to logout
  */
-public class CipherUnit {
-    private static String key = "squirrel123"; // needs to be at least 8 characters for DES
-    private static String dest;
-
-    /**
-    * class for encrypting files
-    */
-    public static void encrypt(String path) {
-        try {
-            dest = path;
-            FileInputStream fis = new FileInputStream(path);
-            FileOutputStream fos = new FileOutputStream("data/temp.xml");
-            encryptOrDecrypt(key, Cipher.ENCRYPT_MODE, fis, fos);
-            swapName("data/temp.xml");
-        } catch (Throwable e) {
-            e.printStackTrace();
+public class LogoutEvent extends BaseEvent {
+    @Override
+    public String toString() {
+        return "logout";
+    }
+}
+```
+###### /java/seedu/address/logic/commands/AddCommand.java
+``` java
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_DOB + "Date of Birth "
+            + PREFIX_REMARK + "REMARK "
+            + "[" + PREFIX_IMAGE + "IMAGE] "
+            + "[" + PREFIX_USERNAME + "USERNAME]"
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_DOB + "13.10.1997 "
+            + PREFIX_REMARK + "CS2103T/LEC/1 "
+            + PREFIX_IMAGE + " "
+            + PREFIX_USERNAME + "john.doe "
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney";
+```
+###### /java/seedu/address/logic/commands/EditCommand.java
+``` java
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+            + "by the index number used in the last person listing. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_DOB + "DATE_OF_BIRTH] "
+            + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_IMAGE + "IMAGE"
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
+```
+###### /java/seedu/address/logic/commands/EditCommand.java
+``` java
+        private Remark remark;
+```
+###### /java/seedu/address/logic/commands/EditCommand.java
+``` java
+            this.remark = toCopy.remark;
+```
+###### /java/seedu/address/logic/commands/EditCommand.java
+``` java
+        public Optional<DateOfBirth> getDateOfBirth() {
+            return Optional.ofNullable(dateOfBirth);
+        }
+```
+###### /java/seedu/address/logic/commands/EditCommand.java
+``` java
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+        public void setUsername(FacebookUsername username) {
+            this.username = username;
         }
 
-    }
-
-    /**
-    * class for decrypting files
-    */
-    public static void decrypt(String path) {
-        try {
-            dest = path;
-            FileInputStream fis = new FileInputStream(path);
-            FileOutputStream fos = new FileOutputStream("data/temp.xml");
-            encryptOrDecrypt(key, Cipher.DECRYPT_MODE, fis, fos);
-            swapName("data/temp.xml");
-        } catch (Throwable e) {
-            e.printStackTrace();
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
         }
+```
+###### /java/seedu/address/logic/commands/EditCommand.java
+``` java
+            return getName().equals(e.getName())
+                    && getPhone().equals(e.getPhone())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getDateOfBirth().equals(e.getDateOfBirth())
+                    && getRemark().equals(e.getRemark())
+                    && getImage().equals(e.getImage())
+                    && getTags().equals(e.getTags());
+```
+###### /java/seedu/address/logic/commands/LogoutCommand.java
+``` java
+/**
+ * Command of logout.
+ */
+public class LogoutCommand extends Command {
+    public static final String COMMAND_WORD = "logout";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD;
+
+    public static final String MESSAGE_SUCCESS = "Logout succeeded.";
+
+    @Override
+    public CommandResult execute() {
+        EventsCenter.getInstance().post(new LogoutEvent());
+        return new CommandResult(MESSAGE_SUCCESS);
     }
-
-    /**
-    * translating method
-    */
-    public static void encryptOrDecrypt(String key, int mode, InputStream is, OutputStream os) throws Throwable {
-
-        DESKeySpec dks = new DESKeySpec(key.getBytes());
-        SecretKeyFactory skf = SecretKeyFactory.getInstance("DES");
-        SecretKey desKey = skf.generateSecret(dks);
-        Cipher cipher = Cipher.getInstance("DES"); // DES/ECB/PKCS5Padding for SunJCE
-
-        if (mode == Cipher.ENCRYPT_MODE) {
-            cipher.init(Cipher.ENCRYPT_MODE, desKey);
-            CipherInputStream cis = new CipherInputStream(is, cipher);
-            doCopy(cis, os);
-        } else if (mode == Cipher.DECRYPT_MODE) {
-            cipher.init(Cipher.DECRYPT_MODE, desKey);
-            CipherOutputStream cos = new CipherOutputStream(os, cipher);
-            doCopy(is, cos);
-        }
-    }
-
-    /**
-    * do a copy
-    */
-    public static void doCopy(InputStream is, OutputStream os) throws IOException {
-        byte[] bytes = new byte[64];
-        int numBytes;
-        while ((numBytes = is.read(bytes)) != -1) {
-            os.write(bytes, 0, numBytes);
-        }
-        os.flush();
-        os.close();
-        is.close();
-    }
-
-    /**
-    * used to replace files encypted/decrypted with the dectypted/encrypted one.
-    */
-    public static boolean swapName(String source) {
-        File tmp = new File(source);
-
-        File swapFile1 = new File(dest);
-
-        return tmp.renameTo(swapFile1);
-
-    }
-
 }
 ```
 ###### /java/seedu/address/logic/commands/RemarkCommand.java
 ``` java
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+
+import java.util.List;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
+
 /**
  * Add a remark for a specified person
  */
@@ -103,7 +138,7 @@ public class RemarkCommand extends UndoableCommand {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_REMARK + "MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_REMARK + "CS2101/SEC/1, CS2104/LEC/1";
+            + PREFIX_REMARK + "CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
@@ -154,57 +189,15 @@ public class RemarkCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/AddCommandParser.java
-``` java
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)).get();
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).get();
-            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get();
-
-            FileImage image = ParserUtil.parseImage(argMultimap.getValue(PREFIX_IMAGE))
-                    .orElse(new FileImage(""));
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-            Address address;
-            Remark remark;
-            DateOfBirth date;
-            FacebookUsername username;
-            if (ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).isPresent()) {
-                address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
-            } else {
-                address = new Address("");
-            }
-
-            if (ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).isPresent()) {
-                date = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).get();
-            } else {
-                date = new DateOfBirth("");;
-            }
-            if (ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)).isPresent()) {
-                remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)).get();
-            } else {
-                remark = new Remark("");
-            }
-            if (ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME)).isPresent()) {
-                username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME)).get();
-            } else {
-                username = new FacebookUsername("");
-            }
-
-
-            ReadOnlyPerson person = new Person(name, phone, email, address, date, remark, image, username, tagList);
-
-            return new AddCommand(person);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(ive.getMessage(), ive);
-        }
-```
 ###### /java/seedu/address/logic/parser/RemarkCommandParser.java
 ``` java
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Remark;
+
 /**
  * Parses input arguments and creates a new FindCommand object
  */
@@ -218,8 +211,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
     public RemarkCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
         }
 
         String[] argus = trimmedArgs.split("r/");
@@ -241,36 +233,53 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
 
 }
 ```
-###### /java/seedu/address/model/person/Address.java
+###### /java/seedu/address/MainApp.java
 ``` java
-        return test.matches(ADDRESS_VALIDATION_REGEX) || test.equals("");
+        AccountsStorage accountsPrefs = new AccountsStorage(config.getAccountsPath());
+
+        accPrefs = initAccPrefs(accountsPrefs);
 ```
-###### /java/seedu/address/model/person/DateOfBirth.java
+###### /java/seedu/address/MainApp.java
 ``` java
-        String trimmedBirthday = birthday.trim();
+    /**
+     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
+     * or a new {@code UserPrefs} with default configuration if errors occur when
+     * reading from the file.
+     */
+    protected AccountsStorage initAccPrefs(AccountsStorage storage) {
+        String prefsFilePath = storage.getAccPrefsFilePath();
+        logger.info("Using account prefs file : " + prefsFilePath);
 
-        if (trimmedBirthday.isEmpty()) {
-            return true;
+        AccountsStorage initializedPrefs;
+        try {
+            Optional<AccountsStorage> prefsOptional = storage.readAccountsPrefs(prefsFilePath);
+            initializedPrefs = prefsOptional.orElse(new AccountsStorage());
+        } catch (DataConversionException e) {
+            logger.warning("Account Prefs file at " + prefsFilePath + " is not in the correct format. "
+                    + "Using default account prefs");
+            initializedPrefs = new AccountsStorage();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. "
+                    + "Will be starting with default account information");
+            initializedPrefs = new AccountsStorage();
         }
-        if (!trimmedBirthday.matches(BIRTHDAY_VALIDATION_REGEX)) {
-            return false;
+
+        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        try {
+            storage.saveAccountsPrefs(initializedPrefs, prefsFilePath);
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
 
-        return true;
-```
-###### /java/seedu/address/model/person/Person.java
-``` java
-    @Override
-    public  DateOfBirth getDateOfBirth() {
-        return date.get();
-    }
-
-    public void setRemark(Remark remark) {
-        this.remark.set(requireNonNull(remark));
+        return initializedPrefs;
     }
 ```
 ###### /java/seedu/address/model/person/Remark.java
 ``` java
+import static java.util.Objects.requireNonNull;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+
 /**
  * Represents a Person's remark in the address book.
  */
@@ -285,12 +294,17 @@ public class Remark {
         requireNonNull(remark);
         String[] test = remark.split(",");
         for (String t : test) {
+            t = t.trim();
             if (!isValidRemark(t)) {
                 System.out.println(t);
                 throw new IllegalValueException(REMARK_CONSTRAINTS);
             }
         }
         this.moduleLists = remark;
+    }
+
+    public void setModuleLists(String mods) {
+        this.moduleLists = mods;
     }
 
     /**
@@ -322,9 +336,9 @@ public class Remark {
         String result = "";
         for (String m : mods) {
             String[] helper = m.split("/");
-            String mod = helper[0];
-            String kind = helper[1];
-            String num = helper[2];
+            String mod = helper[0].trim();
+            String kind = helper[1].trim();
+            String num = helper[2].trim();
             result = result + "&" + mod + "[" + kind + "]" + "=" + num;
         }
         return result;
@@ -348,18 +362,58 @@ public class Remark {
     }
 }
 ```
+###### /java/seedu/address/model/util/SampleDataUtil.java
+``` java
+            return new Person[] {
+                new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                    new Address("Blk 30 Geylang Street 29, #06-40"), new DateOfBirth("13.10.1997"),
+                    new Remark("CS2105/LEC/1,CS2104/LEC/1"), new FileImage(""),
+                    new FacebookUsername(""), getTagSet("friends")),
+                new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new DateOfBirth("13.10.1997"),
+                    new Remark("CS2101/SEC/1,CS2102/LEC/1"), new FileImage(""),
+                    new FacebookUsername(""), getTagSet("colleagues", "friends")),
+                new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new DateOfBirth("13.10.1997"),
+                    new Remark("CS2104/LEC/1,CS2102/LEC/1"), new FileImage(""),
+                    new FacebookUsername(""),    getTagSet("neighbours")),
+                new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new DateOfBirth("13.10.1997"),
+                    new Remark("CS2101/SEC/1,CS2102/LEC/1"), new FileImage(""),
+                    new FacebookUsername(""), getTagSet("family")),
+                new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+                    new Address("Blk 47 Tampines Street 20, #17-35"), new DateOfBirth("13.10.1997"),
+                    new Remark("CS2101/SEC/1,CS2102/LEC/1"), new FileImage(""),
+                    new FacebookUsername(""), getTagSet("classmates")),
+                new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+                    new Address("Blk 45 Aljunied Street 85, #11-31"), new DateOfBirth("13.10.1997"),
+                    new Remark("CS2101/SEC/1,CS2102/LEC/1"), new FileImage(""),
+                    new FacebookUsername(""),
+                    getTagSet("colleagues")),
+                new Person(new Name("Ronak Lakhotia"), new Phone("93911558"), new Email("email@gmail.com"),
+                    new Address("Prince Georges Park"), new DateOfBirth(("13.10.1997")),
+                    new Remark("CS2101/SEC/1,CS2102/LEC/1"), new FileImage(""),
+                    new FacebookUsername(""),
+                    getTagSet("colleagues"))
+            };
+```
 ###### /java/seedu/address/storage/AccountsStorage.java
 ``` java
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Optional;
+
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.util.JsonUtil;
+
 /**
  * Represents a storage for account information.
  */
 
-public class AccountsStorage implements UserPrefsStorage {
+public class AccountsStorage {
     public static final String DEFAULT_ACCOUNTS_PATH = "accounts.json";
 
     private String accountsPath;
-    private String usernames;
-    private String passwords;
     private HashMap<String, String> hm;
 
     public AccountsStorage() {
@@ -373,65 +427,17 @@ public class AccountsStorage implements UserPrefsStorage {
         this.accountsPath = accountsPath;
     }
 
-    @Override
-    public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
-        return readUserPrefs(accountsPath);
-    }
-
-    /**
-     * Returns UserPrefs data from storage.
-     *   Returns {@code Optional.empty()} if storage file is not found.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
-     */
-    public Optional<UserPrefs> readUserPrefs(String prefsFilePath) throws DataConversionException, IOException {
-        return JsonUtil.readJsonFile(prefsFilePath, UserPrefs.class);
+    public String getAccPrefsFilePath() {
+        return accountsPath;
     }
 
     public void saveAccountsPrefs(AccountsStorage accStorage, String filePath) throws IOException {
         JsonUtil.saveJsonFile(accStorage, filePath);
     }
 
-    public AccountsStorage setAccountMsg() throws DataConversionException, IOException {
-        String accountMsg = this.readAccountsPrefs(this.accountsPath).toString();
-        this.hm = makeMap(accountMsg);
-        return this;
-    }
-
-    /**
-     * Returns the file path of the UserPrefs data file.
-     */
-    public String getUserPrefsFilePath() {
-        return accountsPath;
-    }
-
     public Optional<AccountsStorage> readAccountsPrefs(String prefsFilePath)
             throws DataConversionException, IOException {
         return JsonUtil.readJsonFile(prefsFilePath, AccountsStorage.class);
-    }
-
-    /**
-     * Saves the given {@link seedu.address.model.UserPrefs} to the storage.
-     * @param userPrefs cannot be null.
-     * @throws IOException if there was any problem writing to the file.
-     */
-    public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
-        JsonUtil.saveJsonFile(userPrefs, accountsPath);
-    }
-
-    /**
-     * Returns the map of username and password.
-     */
-    public HashMap<String, String> makeMap(String rawValue) {
-        HashMap<String, String> hm = new HashMap<String, String>();
-        rawValue = rawValue.substring(9, rawValue.length() - 1);
-        String[] value = rawValue.split("/");
-        String[] username = value[0].split(",");
-        String[] password = value[1].split(",");
-        for (int i = 0; i < username.length; i++) {
-            hm.put(username[i].trim(), password[i].trim());
-        }
-        return hm;
     }
 
     public HashMap<String, String> getHm() {
@@ -441,15 +447,118 @@ public class AccountsStorage implements UserPrefsStorage {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(usernames);
+        sb.append(getHm().keySet());
         sb.append("/");
-        sb.append(passwords);
+        sb.append(getHm().values());
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return ((AccountsStorage) o).getHm().equals(this.getHm());
+    }
+}
+```
+###### /java/seedu/address/storage/JsonAccountsStorage.java
+``` java
+import java.io.IOException;
+import java.util.Optional;
+
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.UserPrefs;
+
+/**
+ * A class to access UserPrefs stored in the hard disk as a json file
+ */
+public class JsonAccountsStorage implements UserPrefsStorage {
+
+    private String filePath;
+
+    public JsonAccountsStorage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    @Override
+    public String getUserPrefsFilePath() {
+        return filePath;
+    }
+
+    @Override
+    public Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException {
+        return readUserPrefs(filePath);
+    }
+
+    /**
+     * Similar to {@link #readUserPrefs()}
+     * @param prefsFilePath location of the data. Cannot be null.
+     * @throws DataConversionException if the file format is not as expected.
+     */
+    public Optional<UserPrefs> readUserPrefs(String prefsFilePath) throws DataConversionException {
+        return JsonUtil.readJsonFile(prefsFilePath, UserPrefs.class);
+    }
+
+    @Override
+    public void saveUserPrefs(UserPrefs userPrefs) throws IOException {
+        JsonUtil.saveJsonFile(userPrefs, filePath);
+    }
+
+    public Optional<AccountsStorage> readAccountsPrefs() throws DataConversionException, IOException {
+        return readAccountsPrefs(filePath);
+    }
+
+    public Optional<AccountsStorage> readAccountsPrefs(String prefsFilePath)
+            throws DataConversionException, IOException {
+        return JsonUtil.readJsonFile(prefsFilePath, AccountsStorage.class);
+    }
+
+    public void saveAccountsPrefs(AccountsStorage accStorage) throws IOException {
+        JsonUtil.saveJsonFile(accStorage, filePath);
+    }
+
 }
 ```
 ###### /java/seedu/address/ui/LoginPage.java
 ``` java
+import java.io.IOException;
+import java.util.Optional;
+import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
+
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+
+import seedu.address.commons.core.Config;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ChangeFontSizeEvent;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.util.FxViewUtil;
+import seedu.address.logic.Logic;
+import seedu.address.logic.LogicManager;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.font.FontSize;
+import seedu.address.model.theme.Theme;
+import seedu.address.model.util.SampleDataUtil;
+import seedu.address.storage.AccountsStorage;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.XmlAddressBookStorage;
+
 /**
  * The login page. Users need to key in their username and password to login the MainWindow.
  */
@@ -524,13 +633,6 @@ public class LoginPage extends UiPart<Region> {
         if (checkValid(uname, pword)) {
 
             String path = "data/" + uname + "addressbook.xml";
-            String tempPath = "data/temp.xml";
-
-            File addressBookFile = new File(path);
-            if (addressBookFile.exists()) {
-                decrypt(path);
-                logger.info("File decypted");
-            }
 
             UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
             AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
@@ -543,9 +645,15 @@ public class LoginPage extends UiPart<Region> {
             logic = new LogicManager(model);
 
             mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
+            uiManager.setMainWindow(mainWindow);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
         } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Incorrect username or password.");
+            alert.setContentText("Your username or password is not correct, please try again.");
+            alert.showAndWait();
             logger.info("Wrong name or password!");
         }
     }
@@ -679,14 +787,24 @@ public class LoginPage extends UiPart<Region> {
 ```
 ###### /java/seedu/address/ui/MainWindow.java
 ``` java
+    private AccountsStorage accPrefs;
+    private UiManager uiManager;
+```
+###### /java/seedu/address/ui/MainWindow.java
+``` java
+        this.accPrefs = accPrefs;
+        this.uiManager = uiManager;
+        uiManager.setMainWindow(this);
+```
+###### /java/seedu/address/ui/MainWindow.java
+``` java
     /**
     * logout
     */
     public void logout() {
         logger.info("Trying to logout");
         prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
-        encrypt(storage.getAddressBookFilePath());
-        logger.info("File encypted");
+        this.releaseResources();
     }
 ```
 ###### /java/seedu/address/ui/MainWindow.java
@@ -696,13 +814,46 @@ public class LoginPage extends UiPart<Region> {
      */
     @FXML
     private void handleLogoutEvent() throws IOException {
-        logout();
+        this.logout();
         LoginPage loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
+        uiManager.setLoginPage(loginPage);
         loginPage.show();
+    }
+
+    /**
+     * Logout from the current MainWindow.
+     */
+    @Subscribe
+    public void handleLogoutEvent(LogoutEvent event) throws ParseException, IOException {
+
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        this.handleLogoutEvent();
+
     }
 ```
 ###### /java/seedu/address/ui/RegisterPage.java
 ``` java
+import java.io.IOException;
+import java.util.logging.Logger;
+
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import seedu.address.commons.core.Config;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.FxViewUtil;
+import seedu.address.logic.Logic;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.font.FontSize;
+import seedu.address.storage.AccountsStorage;
+import seedu.address.storage.StorageManager;
+
 /**
  * The register page.
  */
@@ -764,10 +915,25 @@ public class RegisterPage extends UiPart<Region> {
     private boolean checkValid() {
         if (accPrefs.getHm().get(username.getText()) != null) {
             logger.info("Register faild");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Username already exist.");
+            alert.setContentText("This username is already taken, please choose another one.");
+            alert.showAndWait();
             return false;
         } else {
             logger.info("Register successful");
-            return password.getText().equals(password1.getText());
+            boolean result = password.getText().equals(password1.getText());
+
+            if (!result) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Password inconformity.");
+                alert.setContentText("You must key in indentical password twice");
+                alert.showAndWait();
+            }
+
+            return result;
         }
     }
 
@@ -780,12 +946,22 @@ public class RegisterPage extends UiPart<Region> {
             logger.info("Trying to register");
             if (checkValid()) {
                 accPrefs.getHm().put(username.getText(), password.getText());
-                accPrefs.saveAccountsPrefs(accPrefs, accPrefs.getUserPrefsFilePath());
+                accPrefs.saveAccountsPrefs(accPrefs, accPrefs.getAccPrefsFilePath());
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setTitle("Register Successful");
+                alert.setContentText("You have registered a new account!");
                 loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
+                uiManager.setLoginPage(loginPage);
                 this.hide();
                 loginPage.show();
             }
         } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setTitle("Register failed");
+            alert.setContentText("You need to use a unique username. "
+                    + "And you need to key in indentical password twice!");
             logger.info("Invalid input");
         }
     }
@@ -854,6 +1030,35 @@ public class RegisterPage extends UiPart<Region> {
 ```
 ###### /java/seedu/address/ui/UiManager.java
 ``` java
+    private Logic logic;
+    private StorageManager storage;
+    private Config config;
+    private UserPrefs prefs;
+    private MainWindow mainWindow;
+    private LoginPage loginPage;
+    private AccountsStorage accPrefs;
+    private RegisterPage registerPage;
+
+    private int test;
+    public UiManager(Logic logic, Config config, StorageManager storage, UserPrefs prefs, AccountsStorage accPrefs) {
+        super();
+        this.logic = logic;
+        this.storage = storage;
+        this.config = config;
+        this.prefs = prefs;
+        this.accPrefs = accPrefs;
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        logger.info("Starting UI...");
+
+        primaryStage.setTitle(config.getAppTitle());
+
+        //Set the application icon.
+        primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+
+
         try {
             loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, this);
             loginPage.show();
@@ -861,9 +1066,8 @@ public class RegisterPage extends UiPart<Region> {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
-```
-###### /java/seedu/address/ui/UiManager.java
-``` java
+    }
+
     @Override
     public void start(Stage primaryStage, int test) {
         this.test = 1;
@@ -882,9 +1086,7 @@ public class RegisterPage extends UiPart<Region> {
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }
-```
-###### /java/seedu/address/ui/UiManager.java
-``` java
+
     @Override
     public void stop() {
         if (test == 1) {
@@ -897,11 +1099,6 @@ public class RegisterPage extends UiPart<Region> {
             loginPage.hide();
 
         }
-    }
-
-    private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
-        final String content = details + ":\n" + cause.toString();
-        showAlertDialogAndWait(AlertType.ERROR, FILE_OPS_ERROR_DIALOG_STAGE_TITLE, description, content);
     }
 ```
 ###### /java/seedu/address/ui/UiManager.java
@@ -925,4 +1122,99 @@ public class RegisterPage extends UiPart<Region> {
     public void setMainWindow(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
+
+    public void setRegisterPage(RegisterPage registerPage) {
+        this.registerPage = registerPage;
+    }
+```
+###### /resources/view/LoginPage.fxml
+``` fxml
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox minHeight="400.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+
+      <StackPane VBox.vgrow="ALWAYS" styleClass="pane-with-border">
+
+         <children>
+            <TextField fx:id="username" alignment="CENTER" onKeyPressed="#handleKeyPress" promptText="username" StackPane.alignment="CENTER">
+               <StackPane.margin>
+                  <Insets bottom="100.0" left="300.0" right="300.0" />
+               </StackPane.margin>
+            </TextField>
+            <PasswordField fx:id="password" alignment="CENTER" onKeyPressed="#handleKeyPress" prefHeight="33.0" prefWidth="300.0" promptText="password" StackPane.alignment="BOTTOM_CENTER">
+               <StackPane.margin>
+                  <Insets bottom="80.0" left="300.0" right="300.0" />
+               </StackPane.margin>
+            </PasswordField>
+         </children>
+      </StackPane>
+      <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+         <children>
+            <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#handleRegisterEvent" prefHeight="70.0" prefWidth="159.0" text="Register" textAlignment="CENTER">
+            <StackPane.margin>
+               <Insets left="200.0" />
+            </StackPane.margin></Button>
+         <Button fx:id="loginButton1" alignment="CENTER" layoutX="382.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#handleLoginEvent" prefHeight="70.0" prefWidth="159.0" text="Login" textAlignment="CENTER">
+            <StackPane.margin>
+               <Insets right="200.0" />
+            </StackPane.margin>
+         </Button>
+         </children>
+      </StackPane>
+</VBox>
+```
+###### /resources/view/RegisterPage.fxml
+``` fxml
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox minHeight="400.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+      <children>
+         <TextField fx:id="username" alignment="CENTER" onKeyPressed="#handleKeyPress" promptText="username" StackPane.alignment="CENTER">
+            <StackPane.margin>
+               <Insets bottom="140.0" left="300.0" right="300.0" />
+            </StackPane.margin>
+         </TextField>
+         <PasswordField fx:id="password" alignment="CENTER" onKeyPressed="#handleKeyPress" prefHeight="33.0" prefWidth="300.0" promptText="password" StackPane.alignment="CENTER">
+            <StackPane.margin>
+               <Insets bottom="20.0" left="300.0" right="300.0" />
+            </StackPane.margin>
+         </PasswordField>
+         <PasswordField fx:id="password1" alignment="CENTER" layoutX="311.0" layoutY="127.0" onKeyPressed="#handleKeyPress" prefHeight="33.0" prefWidth="300.0" promptText="reenter password" StackPane.alignment="CENTER">
+            <StackPane.margin>
+               <Insets bottom="-100.0" left="300.0" right="300.0" />
+            </StackPane.margin>
+         </PasswordField>
+      </children>
+   </StackPane>
+   <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+      <children>
+         <Button fx:id="registerButton" alignment="CENTER" layoutX="344.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#handleRegisterEvent" prefHeight="70.0" prefWidth="143.0" text="Register" textAlignment="CENTER" StackPane.alignment="CENTER">
+            <StackPane.margin>
+               <Insets left="-200.0" />
+            </StackPane.margin>
+         </Button>
+         <Button fx:id="backButton" alignment="CENTER" layoutX="390.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#handleBackEvent" prefHeight="70.0" prefWidth="143.0" text="Back" textAlignment="CENTER" StackPane.alignment="CENTER">
+            <StackPane.margin>
+               <Insets right="-200.0" />
+            </StackPane.margin>
+         </Button>
+      </children>
+   </StackPane>
+   <stylesheets>
+      <URL value="@Extensions.css" />
+   </stylesheets>
+</VBox>
 ```

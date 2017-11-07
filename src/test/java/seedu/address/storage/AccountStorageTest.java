@@ -26,19 +26,21 @@ public class AccountStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readUserPrefs_nullFilePath_throwsNullPointerException() throws DataConversionException {
+    public void readAccPrefs_nullFilePath_throwsNullPointerException() throws
+            DataConversionException, IOException {
         thrown.expect(NullPointerException.class);
-        readUserPrefs(null);
+        readAccountsPrefs(null);
     }
 
-    private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataConversionException {
+    private Optional<AccountsStorage> readAccountsPrefs(String userPrefsFileInTestDataFolder) throws
+            DataConversionException, IOException {
         String prefsFilePath = addToTestDataPathIfNotNull(userPrefsFileInTestDataFolder);
-        return new JsonUserPrefsStorage(prefsFilePath).readUserPrefs(prefsFilePath);
+        return new AccountsStorage(prefsFilePath).readAccountsPrefs(prefsFilePath);
     }
 
     @Test
-    public void readUserPrefs_missingFile_emptyResult() throws DataConversionException {
-        assertFalse(readUserPrefs("NonExistentFile.json").isPresent());
+    public void readAccPrefs_missingFile_emptyResult() throws DataConversionException, IOException {
+        assertFalse(readAccountsPrefs("NonExistentFile.json").isPresent());
     }
 
     private String addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
@@ -72,23 +74,17 @@ public class AccountStorageTest {
     }
 
     @Test
-    public void saveUserPrefs_allInOrder_success() throws DataConversionException, IOException {
+    public void saveAccPrefs_allInOrder_success() throws DataConversionException, IOException {
 
-        UserPrefs original = new UserPrefs();
-        original.setGuiSettings(1200, 200, 0, 2);
+        AccountsStorage original = new AccountsStorage();
+        original.getHm().put("test", "test");
 
         String pefsFilePath = testFolder.getRoot() + File.separator + "TempPrefs.json";
-        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
+        JsonAccountsStorage jsonAccountsPrefsStorage = new JsonAccountsStorage(pefsFilePath);
 
         //Try writing when the file doesn't exist
-        jsonUserPrefsStorage.saveUserPrefs(original);
-        UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
-        assertEquals(original, readBack);
-
-        //Try saving when the file exists
-        original.setGuiSettings(5, 5, 5, 5);
-        jsonUserPrefsStorage.saveUserPrefs(original);
-        readBack = jsonUserPrefsStorage.readUserPrefs().get();
+        jsonAccountsPrefsStorage.saveAccountsPrefs(original);
+        AccountsStorage readBack = jsonAccountsPrefsStorage.readAccountsPrefs().get();
         assertEquals(original, readBack);
     }
 }

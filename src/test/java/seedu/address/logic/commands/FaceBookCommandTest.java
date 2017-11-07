@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -10,24 +11,31 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.Rule;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.FacebookUsername;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code MapCommand}.
  */
 //@@author RonakLakhotia
 public class FaceBookCommandTest {
+
+    @Rule
+    public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -44,6 +52,10 @@ public class FaceBookCommandTest {
         expectedModel.faceBook(personToShow);
 
         assertCommandSuccess(faceBookCommand, model, expectedMessage, expectedModel);
+
+        FaceBookEvent lastFacebookEvent = (FaceBookEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+        assertEquals(model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased()), lastFacebookEvent.getPerson());
     }
 
     @Test
@@ -54,6 +66,7 @@ public class FaceBookCommandTest {
         FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex);
 
         assertCommandFailure(faceBookCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
     }
 
     @Test
@@ -67,6 +80,7 @@ public class FaceBookCommandTest {
         FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex);
 
         assertCommandFailure(faceBookCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
     }
     @Test
     public void execute_no_usernameFacebookCommmand() throws IllegalValueException {
@@ -100,6 +114,15 @@ public class FaceBookCommandTest {
 
         // different person -> returns false
         assertFalse(faceBookCommandFirst.equals(faceBookCommandSecond));
+
+    }
+
+    @Test
+    public void checkIfFacebookEventCollected() throws CommandException {
+        FaceBookCommand faceBookCommand = prepareCommand(INDEX_FIRST_PERSON);
+        faceBookCommand.execute();
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof FaceBookEvent);
+        assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
     }
 
     /**

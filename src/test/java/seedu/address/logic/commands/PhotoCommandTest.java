@@ -17,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-//@@author RonakLakhotia
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code PhotoCommand}.
  */
@@ -73,14 +72,6 @@ public class PhotoCommandTest {
 
         // different person -> returns false
         assertFalse(photoCommand.equals(photoSecondCommand));
-    }
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assert model.getFilteredPersonList().isEmpty();
     }
 
 }

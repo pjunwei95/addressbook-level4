@@ -25,30 +25,18 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
     public PhotoCommand parse(String args) throws ParseException {
 
         String trimmedArgs = args.trim();
-
-
         String regex = "[\\s]+";
         String[] keywords = trimmedArgs.split(regex, 2);
+        boolean isInvalidNumberOfArgs = checkIfInvalidNumberOfArgs(keywords);
 
-        if (keywords.length == 1) {
+        if (isInvalidNumberOfArgs) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE)
             );
         }
 
-
-        String inputFile = keywords[1];
-        String url = inputFile + "";
-
-        File file = new File(url);
-        boolean FileExists = file.exists();
-
-        if (url.equalsIgnoreCase("delete")) {
-
-            FileExists = true;
-        }
-
-        if (FileExists) {
+        boolean isFileExists = checkIfFileExists(keywords[1]);
+        if (isFileExists) {
             try {
                 Index index = ParserUtil.parseIndex(keywords[0]);
                 return new PhotoCommand(index, (keywords[1]));
@@ -57,11 +45,35 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
             }
 
-        }
-        else {
+        } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_IMAGE, PhotoCommand.MESSAGE_USAGE));
         }
+
+    }
+    /**
+     * Checks if the number of arguments entered by the user are valid
+     */
+    public static boolean checkIfInvalidNumberOfArgs(String [] keywords) {
+        if (keywords.length < 2) {
+            return true;
+        }
+        return false;
+    }
+    /**
+     * Checks if the image exists in the given filepath
+     */
+    public static boolean checkIfFileExists(String inputFilePath) {
+
+        String url = inputFilePath + "";
+        File file = new File(url);
+        boolean isFileExists = file.exists();
+
+        if (url.equalsIgnoreCase("delete")) {
+
+            isFileExists = true;
+        }
+        return isFileExists;
 
     }
     /**

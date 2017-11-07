@@ -14,6 +14,7 @@ import seedu.address.model.font.FontSize;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmailSubject;
 import seedu.address.model.person.FacebookUsername;
 import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Name;
@@ -112,7 +113,13 @@ public class ParserUtil {
         requireNonNull(date);
         return date.isPresent() ? Optional.of(new DateOfBirth(date.get())) : Optional.empty();
     }
-
+    /**
+     * Parses a {@code Optional<String> emailSubject}
+     */
+    public static Optional<EmailSubject> parseSubject(Optional<String> subject) throws IllegalValueException {
+        requireNonNull(subject);
+        return subject.isPresent() ? Optional.of(new EmailSubject(subject.get())) : Optional.empty();
+    }
 
     /**
      * Parses a {@code Optional<String> date} into an {@code Optional<FacebookUsername>} if {@code dateOfBirth}

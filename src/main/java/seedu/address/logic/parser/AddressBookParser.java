@@ -20,6 +20,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FaceBookCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -27,6 +28,7 @@ import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.commands.PhotoCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -93,6 +95,9 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case EmailCommand.COMMAND_WORD:
+            return new EmailCommandParser().parse(arguments);
+
         case PhotoCommand.COMMAND_WORD:
             return new PhotoCommandParser().parse(arguments);
 
@@ -122,6 +127,9 @@ public class AddressBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommandParser().parse(arguments);
 
         //@@author pjunwei95
         case FindTagCommand.COMMAND_WORD:
@@ -156,6 +164,7 @@ public class AddressBookParser {
             return new MapCommandParser().parse(arguments);
 
         //@@author
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

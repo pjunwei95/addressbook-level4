@@ -1,0 +1,9 @@
+{
+  "accountsPath" : "accounts.json",
+  "usernames" : null,
+  "passwords" : null,
+  "hm" : {
+    "admin" : "admin",
+    "user" : "user"
+  }
+}

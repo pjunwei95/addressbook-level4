@@ -76,7 +76,8 @@ Format: `help`
 === Adding a person: `add`
 
 Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH r/MODNAME/MODTYPE/MODNUM f/FILE_PATH [t/TAG]...`
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH f/FILE_PATH r/MODULES_TAKEN_IN_SCHOOL u/[FACEBOOK USERNAME] [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0).
@@ -96,7 +97,8 @@ Format: `list`
 === Editing a person : `edit`
 
 Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATE_OF_BIRTH] [r/MODNAME/MODTYPE/MODNUM] [t/TAG]...`
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATE_OF_BIRTH] [u/FACEBOOK_USERNAME] [r/MODULES] [f/FILE_IMAGE] [t/TAG]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
@@ -137,8 +139,11 @@ image::Search.png[width="600"]
 
 === Searching a person : `search`
 
-Lists persons with the given name and Date Of Birth.
+Lists persons with the given name and Date Of Birth. +
+This makes the find command more powerful. +
+The name and Date Of Birth must be valid. +
 Format: `search NAME DATE_OF_BIRTH`
+
 
 
 ****
@@ -150,7 +155,7 @@ Format: `search NAME DATE_OF_BIRTH`
 
 Examples:
 
-* `search John 13.10.1997` +
+* `search n/John b/13.10.1997` +
 Returns persons with name `John` and Date of Birth `13.10.1997`.
 
 === Deleting a person : `delete`
@@ -330,6 +335,7 @@ Examples:
 
 * `fs -` +
 
+// tag::addphoto[]
 === Add Photo to contacts : `photo` SINCE V1.2 +
 
 image::MockUp.png[width="790"]
@@ -357,9 +363,9 @@ If the file is not present in the specified path, a prompt will be displayed to 
 Command - `Photo 1 Delete` +
 this will delete the photo attached with the person at index 1.
 ****
+// end::addphoto[]
 
-
-
+// tag::facebook[]
 === FaceBook Integration SINCE V1.3
 
 Helps you view the profile page of a person in your contact list. +
@@ -377,6 +383,8 @@ e.g. - `facebook 1` +
 If the person does not have a facebook account or the username is not entered in Weaver,you will be notified by Weaver.
 
 image::facebook.png[width="790"]
+
+// end::facebook[]
 
 === Show address of a person : `map` (SINCE V1.3)
 
