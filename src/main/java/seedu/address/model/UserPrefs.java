@@ -43,10 +43,6 @@ public class UserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
-    public String getAddressBookName() {
-        return addressBookName;
-    }
-
     public void setAddressBookName(String addressBookName) {
         this.addressBookName = addressBookName;
     }

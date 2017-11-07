@@ -278,14 +278,6 @@ public class MainWindow extends UiPart<Region> {
 
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
-    }
-
-    public ReminderListPanel getReminderListPanel() {
-        return this.reminderListPanel;
-    }
-
     void releaseResources() {
         browserPanel.freeResources();
     }
