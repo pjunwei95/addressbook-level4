@@ -18,12 +18,17 @@ public class Remark {
         requireNonNull(remark);
         String[] test = remark.split(",");
         for (String t : test) {
+            t = t.trim();
             if (!isValidRemark(t)) {
                 System.out.println(t);
                 throw new IllegalValueException(REMARK_CONSTRAINTS);
             }
         }
         this.moduleLists = remark;
+    }
+
+    public void setModuleLists(String mods) {
+        this.moduleLists = mods;
     }
 
     /**
@@ -55,9 +60,9 @@ public class Remark {
         String result = "";
         for (String m : mods) {
             String[] helper = m.split("/");
-            String mod = helper[0];
-            String kind = helper[1];
-            String num = helper[2];
+            String mod = helper[0].trim();
+            String kind = helper[1].trim();
+            String num = helper[2].trim();
             result = result + "&" + mod + "[" + kind + "]" + "=" + num;
         }
         return result;

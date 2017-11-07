@@ -27,6 +27,7 @@ import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.commands.PhotoCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -153,7 +154,10 @@ public class AddressBookParser {
 
         case MapCommand.COMMAND_WORD:
             return new MapCommandParser().parse(arguments);
-        //@@author
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
