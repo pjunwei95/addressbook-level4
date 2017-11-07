@@ -624,4 +624,4 @@ e.g.`map 2`
 e.g. `facebook 1`
 * *Photo Index FilePath* : photo [Index] [FilePath] +
 e.g. `photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg`
-* *Backup* : `backup` 
+* *Backup* : `backup`
