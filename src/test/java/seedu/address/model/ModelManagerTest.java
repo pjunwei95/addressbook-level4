@@ -25,6 +25,12 @@ public class ModelManagerTest {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
     }
+    @Test
+    public void getFilteredReminderList_modifyList_throwsUnsupportedOperationException() {
+        ModelManager modelManager = new ModelManager();
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getFilteredPersonList().remove(0);
+    }
 
     @Test
     public void equals() {

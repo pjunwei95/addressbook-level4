@@ -182,7 +182,7 @@ public class ModelManager extends ComponentManager implements Model {
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
         } catch (IllegalValueException ive) {
-            System.out.println("Error encountered");
+            throw new AssertionError("Invalid input");
         }
     }
 

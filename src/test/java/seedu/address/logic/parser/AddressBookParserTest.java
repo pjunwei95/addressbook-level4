@@ -5,8 +5,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_REMINDER;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,30 +17,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ChangeFontSizeCommand;
-import seedu.address.logic.commands.ChangeTagColorCommand;
-import seedu.address.logic.commands.ChangeThemeCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.MapCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.RemarkCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ChangeReminderCommand.ChangeReminderDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.person.SearchContainsKeywordsPredicate;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.testutil.*;
 
 public class AddressBookParserTest {
     @Rule
@@ -54,12 +41,39 @@ public class AddressBookParserTest {
             + 1 + " " + PREFIX_REMARK + " " + "CS2101/SEC/1");
         assertEquals(new RemarkCommand(1, remark), command);
     }
+    @Test
+    public void parseCommand_search() throws Exception {
+        SearchCommand command = new SearchCommand(new
+                SearchContainsKeywordsPredicate(Arrays.asList("Alice", "13.10.1997")));
 
+        SearchCommand commandCheck = (SearchCommand) parser.parseCommand(SearchCommand.COMMAND_WORD + " " +
+        PREFIX_NAME + "Alice" + " " + PREFIX_DOB + "13.10.1997");
+        assertEquals(commandCheck, command);
+    }
+    @Test
+    public void parseCommand_facebook() throws Exception {
+        FaceBookCommand command = (FaceBookCommand) parser.parseCommand(
+                FaceBookCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new FaceBookCommand(INDEX_FIRST_PERSON), command);
+    }
+    @Test
+    public void parseCommand_photo() throws Exception {
+        String path = "src/main/resources/images/clock.png";
+        PhotoCommand command = (PhotoCommand) parser.parseCommand(
+                PhotoCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + path);
+        assertEquals(new PhotoCommand(INDEX_FIRST_PERSON, path), command);
+    }
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+    @Test
+    public void parseCommand_addReminder() throws Exception {
+        Reminder reminder = new ReminderBuilder().build();
+        AddReminder command = (AddReminder) parser.parseCommand(ReminderUtil.getAddCommand(reminder));
+        assertEquals(new AddReminder(reminder), command);
     }
 
     @Test
@@ -73,6 +87,23 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+    @Test
+    public void parseCommand_remove() throws Exception {
+        RemoveReminderCommand command = (RemoveReminderCommand) parser.parseCommand(
+                RemoveReminderCommand.COMMAND_WORD + " " + INDEX_FIRST_REMINDER.getOneBased());
+        assertEquals(new RemoveReminderCommand(INDEX_FIRST_REMINDER), command);
+    }
+    @Test
+    public void parseCommand_change() throws Exception {
+        Reminder reminder = new ReminderBuilder().build();
+        ChangeReminderDescriptor descriptor = new ChangeReminderDescriptorBuilder(reminder).build();
+
+        ChangeReminderCommand command = (ChangeReminderCommand) parser.parseCommand(
+                ChangeReminderCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_REMINDER.getOneBased() + " " + ReminderUtil.getReminderDetails(reminder));
+
+        assertEquals(new ChangeReminderCommand(INDEX_FIRST_REMINDER, descriptor), command);
     }
 
     @Test
