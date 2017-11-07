@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- @@author yangminxingnus -->
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -9,27 +9,27 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox minHeight="400.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-      <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-         <children>
-            <TextField fx:id="username" alignment="CENTER" onKeyPressed="#handleKeyPress" promptText="username" StackPane.alignment="CENTER">
-               <StackPane.margin>
-                  <Insets bottom="140.0" left="300.0" right="300.0" />
-               </StackPane.margin>
-            </TextField>
-            <PasswordField fx:id="password" alignment="CENTER" onKeyPressed="#handleKeyPress" prefHeight="33.0" prefWidth="300.0" promptText="password" StackPane.alignment="CENTER">
-               <StackPane.margin>
-                  <Insets bottom="20.0" left="300.0" right="300.0" />
-               </StackPane.margin>
-            </PasswordField>
+   <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+      <children>
+         <TextField fx:id="username" alignment="CENTER" onKeyPressed="#handleKeyPress" promptText="username" StackPane.alignment="CENTER">
+            <StackPane.margin>
+               <Insets bottom="140.0" left="300.0" right="300.0" />
+            </StackPane.margin>
+         </TextField>
+         <PasswordField fx:id="password" alignment="CENTER" onKeyPressed="#handleKeyPress" prefHeight="33.0" prefWidth="300.0" promptText="password" StackPane.alignment="CENTER">
+            <StackPane.margin>
+               <Insets bottom="20.0" left="300.0" right="300.0" />
+            </StackPane.margin>
+         </PasswordField>
          <PasswordField fx:id="password1" alignment="CENTER" layoutX="311.0" layoutY="127.0" onKeyPressed="#handleKeyPress" prefHeight="33.0" prefWidth="300.0" promptText="reenter password" StackPane.alignment="CENTER">
             <StackPane.margin>
                <Insets bottom="-100.0" left="300.0" right="300.0" />
             </StackPane.margin>
          </PasswordField>
-         </children>
-      </StackPane>
-      <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-         <children>
+      </children>
+   </StackPane>
+   <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+      <children>
          <Button fx:id="registerButton" alignment="CENTER" layoutX="344.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#handleRegisterEvent" prefHeight="70.0" prefWidth="143.0" text="Register" textAlignment="CENTER" StackPane.alignment="CENTER">
             <StackPane.margin>
                <Insets left="-200.0" />
@@ -40,8 +40,8 @@
                <Insets right="-200.0" />
             </StackPane.margin>
          </Button>
-         </children>
-      </StackPane>
+      </children>
+   </StackPane>
    <stylesheets>
       <URL value="@Extensions.css" />
    </stylesheets>

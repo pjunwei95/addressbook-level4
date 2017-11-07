@@ -1,4 +1,5 @@
 package seedu.address.storage;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -15,9 +16,9 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.UserPrefs;
 
-public class AccountStorageTest {
+public class JsonAccountsStorageTest {
 
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/AccountStorageTest/");
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/JsonAccountsStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -26,21 +27,21 @@ public class AccountStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readAccPrefs_nullFilePath_throwsNullPointerException() throws
-            DataConversionException, IOException {
+    public void readAccPrefs_nullFilePath_throwsNullPointerException()
+            throws DataConversionException, IOException {
         thrown.expect(NullPointerException.class);
-        readAccountsPrefs(null);
+        readAccPrefs(null);
     }
 
-    private Optional<AccountsStorage> readAccountsPrefs(String userPrefsFileInTestDataFolder) throws
-            DataConversionException, IOException {
+    private Optional<AccountsStorage> readAccPrefs(String userPrefsFileInTestDataFolder)
+            throws DataConversionException, IOException {
         String prefsFilePath = addToTestDataPathIfNotNull(userPrefsFileInTestDataFolder);
-        return new AccountsStorage(prefsFilePath).readAccountsPrefs(prefsFilePath);
+        return new JsonAccountsStorage(prefsFilePath).readAccountsPrefs(prefsFilePath);
     }
 
     @Test
     public void readAccPrefs_missingFile_emptyResult() throws DataConversionException, IOException {
-        assertFalse(readAccountsPrefs("NonExistentFile.json").isPresent());
+        assertFalse(readAccPrefs("NonExistentFile.json").isPresent());
     }
 
     private String addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
@@ -74,17 +75,39 @@ public class AccountStorageTest {
     }
 
     @Test
-    public void saveAccPrefs_allInOrder_success() throws DataConversionException, IOException {
+    public void saveUserPrefs_allInOrder_success() throws DataConversionException, IOException {
 
-        AccountsStorage original = new AccountsStorage();
-        original.getHm().put("test", "test");
+        UserPrefs original = new UserPrefs();
+        original.setGuiSettings(1200, 200, 0, 2);
 
         String pefsFilePath = testFolder.getRoot() + File.separator + "TempPrefs.json";
-        JsonAccountsStorage jsonAccountsPrefsStorage = new JsonAccountsStorage(pefsFilePath);
+        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
 
         //Try writing when the file doesn't exist
-        jsonAccountsPrefsStorage.saveAccountsPrefs(original);
-        AccountsStorage readBack = jsonAccountsPrefsStorage.readAccountsPrefs().get();
+        jsonUserPrefsStorage.saveUserPrefs(original);
+        UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
+
+        //Try saving when the file exists
+        original.setGuiSettings(5, 5, 5, 5);
+        jsonUserPrefsStorage.saveUserPrefs(original);
+        readBack = jsonUserPrefsStorage.readUserPrefs().get();
+        assertEquals(original, readBack);
+    }
+
+    @Test
+    public void readUserPrefs_nullFilePath_throwsNullPointerException() throws DataConversionException {
+        thrown.expect(NullPointerException.class);
+        readUserPrefs(null);
+    }
+
+    private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataConversionException {
+        String prefsFilePath = addToTestDataPathIfNotNull(userPrefsFileInTestDataFolder);
+        return new JsonUserPrefsStorage(prefsFilePath).readUserPrefs(prefsFilePath);
+    }
+
+    @Test
+    public void readUserPrefs_missingFile_emptyResult() throws DataConversionException {
+        assertFalse(readUserPrefs("NonExistentFile.json").isPresent());
     }
 }

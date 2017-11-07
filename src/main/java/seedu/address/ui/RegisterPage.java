@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -86,10 +87,25 @@ public class RegisterPage extends UiPart<Region> {
     private boolean checkValid() {
         if (accPrefs.getHm().get(username.getText()) != null) {
             logger.info("Register faild");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Username already exist.");
+            alert.setContentText("This username is already taken, please choose another one.");
+            alert.showAndWait();
             return false;
         } else {
             logger.info("Register successful");
-            return password.getText().equals(password1.getText());
+            boolean result = password.getText().equals(password1.getText());
+
+            if (!result) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Password inconformity.");
+                alert.setContentText("You must key in indentical password twice");
+                alert.showAndWait();
+            }
+
+            return result;
         }
     }
 
@@ -102,12 +118,22 @@ public class RegisterPage extends UiPart<Region> {
             logger.info("Trying to register");
             if (checkValid()) {
                 accPrefs.getHm().put(username.getText(), password.getText());
-                accPrefs.saveAccountsPrefs(accPrefs, accPrefs.getUserPrefsFilePath());
+                accPrefs.saveAccountsPrefs(accPrefs, accPrefs.getAccPrefsFilePath());
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setTitle("Register Successful");
+                alert.setContentText("You have registered a new account!");
                 loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
+                uiManager.setLoginPage(loginPage);
                 this.hide();
                 loginPage.show();
             }
         } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setTitle("Register failed");
+            alert.setContentText("You need to use a unique username. "
+                    + "And you need to key in indentical password twice!");
             logger.info("Invalid input");
         }
     }

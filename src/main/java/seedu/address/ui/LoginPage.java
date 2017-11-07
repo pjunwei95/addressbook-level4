@@ -1,8 +1,5 @@
 package seedu.address.ui;
-
-import static seedu.address.commons.core.CipherUnit.decrypt;
-
-import java.io.File;
+//@@author yangminxingnus
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -11,11 +8,13 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -91,11 +90,6 @@ public class LoginPage extends UiPart<Region> {
         primaryStage.setScene(scene);
         initTheme();
         registerAsAnEventHandler(this);
-        try {
-            handleLoginEvent();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void initTheme() {
@@ -106,9 +100,7 @@ public class LoginPage extends UiPart<Region> {
         return primaryStage;
     }
 
-    public MainWindow getMainWindow() {
-        return mainWindow;
-    }
+    public MainWindow getMainWindow() { return mainWindow; }
 
     /**
      * Method for handle login event
@@ -121,13 +113,6 @@ public class LoginPage extends UiPart<Region> {
         if (checkValid(uname, pword)) {
 
             String path = "data/" + uname + "addressbook.xml";
-            String tempPath = "data/temp.xml";
-
-            File addressBookFile = new File(path);
-            if (addressBookFile.exists()) {
-                decrypt(path);
-                logger.info("File decypted");
-            }
 
             UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
             AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
@@ -140,9 +125,15 @@ public class LoginPage extends UiPart<Region> {
             logic = new LogicManager(model);
 
             mainWindow = new MainWindow(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
+            uiManager.setMainWindow(mainWindow);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
         } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Incorrect username or password.");
+            alert.setContentText("Your username or password is not correct, please try again.");
+            alert.showAndWait();
             logger.info("Wrong name or password!");
         }
     }
@@ -222,6 +213,7 @@ public class LoginPage extends UiPart<Region> {
     }
 
     /**
+     *
      * @param username
      * @param password
      * @return validity of account
@@ -272,3 +264,4 @@ public class LoginPage extends UiPart<Region> {
         password.setStyle(fxFormatFontSize);
     }
 }
+//@@author
