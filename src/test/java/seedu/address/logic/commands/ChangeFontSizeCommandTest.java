@@ -20,7 +20,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.font.FontSize;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
+ * Contains integration tests (interaction with the Model) for {@code ChangeFontSizeCommand}.
  */
 public class ChangeFontSizeCommandTest {
     private UserPrefs userPrefs = new UserPrefs();
