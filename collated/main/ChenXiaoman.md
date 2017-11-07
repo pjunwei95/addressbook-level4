@@ -403,6 +403,7 @@ public abstract class UndoableCommand extends Command {
 
         case MapCommand.COMMAND_WORD:
             return new MapCommandParser().parse(arguments);
+
 ```
 ###### \java\seedu\address\logic\parser\ChangeFontSizeCommandParser.java
 ``` java
@@ -503,29 +504,6 @@ public class ChangeThemeCommandParser implements Parser<ChangeThemeCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangeThemeCommand.MESSAGE_USAGE));
         }
         return new ChangeThemeCommand(trimmedArgs);
-    }
-}
-```
-###### \java\seedu\address\logic\parser\MapCommandParser.java
-``` java
-/**
- * Parses input arguments and creates a new MapCommand object
- */
-public class MapCommandParser implements Parser<MapCommand> {
-
-    /**
-     * Parses the given {@code String} of arguments in the context of the MapCommand
-     * and returns an MapCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public MapCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new MapCommand(index);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MapCommand.MESSAGE_USAGE));
-        }
     }
 }
 ```
@@ -1069,7 +1047,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Adds a photo to a persons contact
      */
-    public void assignImage(String filePath) throws ParseException {
+    public void assignImageToPerson(String filePath) throws ParseException {
 
         String url;
         String Message_Image_Removed = "The image may have been removed from"
@@ -1079,40 +1057,25 @@ public class PersonCard extends UiPart<Region> {
             url = "/images/user.png";
             Image Display = new Image(url);
             image.setImage(Display);
+
         } else {
+            url = filePath + "";
+            File file = new File(url);
+            boolean isFileExists = file.exists();
 
-            if (filePath.endsWith("g")) {
-
-                url = filePath + "";
-
-                File file = new File(url);
-                boolean FileExists = file.exists();
-
-                if (!FileExists) {
-
-                    url = "/images/address_book_32.png";
-                    Image Display = new Image(url);
-                    image.setImage(Display);
-
-
-                    throw new ParseException(
+            if (!isFileExists) {
+                url = "/images/address_book_32.png";
+                Image Display = new Image(url);
+                image.setImage(Display);
+                throw new ParseException(
                             String.format(Message_Image_Removed, PhotoCommand.MESSAGE_USAGE)
                     );
-                }
-                else {
-                    Image display = new Image(file.toURI().toString());
-                    image.setImage(display);
-                }
-            } else {
-
-                url = "src/main/resources/images/" + person.getImage().getFilePath() + ".jpg";
-                File stored = new File(url);
-                Image display = new Image(stored.toURI().toString(), 100, 100,
-                        false, false);
-
-                image.setImage(display);
-
             }
+            else {
+                Image display = new Image(file.toURI().toString());
+                image.setImage(display);
+            }
+
         }
     }
 
@@ -1134,7 +1097,7 @@ public class PersonCard extends UiPart<Region> {
 
         });
         try {
-            assignImage(person.getImage().getFilePath());
+            assignImageToPerson(person.getImage().getFilePath());
         }
         catch (ParseException pe) {
             new AssertionError("Invalid input");

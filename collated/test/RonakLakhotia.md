@@ -129,6 +129,10 @@ public class AddReminderTest {
         public void updateFilteredReminderList(Predicate<ReadOnlyReminder> predicate) {
             fail("This method should not be called.");
         }
+        @Override
+        public void sendMailToContacts(String tagName, String subject, List<ReadOnlyPerson> lastShownList) {
+            fail("This method should never be called.");
+        }
 
         @Override
         public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
@@ -216,6 +220,9 @@ public class ChangeReminderDescriptorTest {
 ``` java
 public class FaceBookCommandTest {
 
+    @Rule
+    public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -231,6 +238,10 @@ public class FaceBookCommandTest {
         expectedModel.faceBook(personToShow);
 
         assertCommandSuccess(faceBookCommand, model, expectedMessage, expectedModel);
+
+        FaceBookEvent lastFacebookEvent = (FaceBookEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+        assertEquals(model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased()), lastFacebookEvent.getPerson());
     }
 
     @Test
@@ -241,6 +252,7 @@ public class FaceBookCommandTest {
         FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex);
 
         assertCommandFailure(faceBookCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
     }
 
     @Test
@@ -254,6 +266,7 @@ public class FaceBookCommandTest {
         FaceBookCommand faceBookCommand = prepareCommand(outOfBoundIndex);
 
         assertCommandFailure(faceBookCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
     }
     @Test
     public void execute_no_usernameFacebookCommmand() throws IllegalValueException {
@@ -287,6 +300,15 @@ public class FaceBookCommandTest {
 
         // different person -> returns false
         assertFalse(faceBookCommandFirst.equals(faceBookCommandSecond));
+
+    }
+
+    @Test
+    public void checkIfFacebookEventCollected() throws CommandException {
+        FaceBookCommand faceBookCommand = prepareCommand(INDEX_FIRST_PERSON);
+        faceBookCommand.execute();
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof FaceBookEvent);
+        assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
     }
 
     /**
@@ -297,75 +319,6 @@ public class FaceBookCommandTest {
         faceBookCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return faceBookCommand;
     }
-}
-```
-###### \java\seedu\address\logic\commands\PhotoCommandTest.java
-``` java
-/**
- * Contains integration tests (interaction with the Model) and unit tests for {@code PhotoCommand}.
- */
-public class PhotoCommandTest {
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-
-    /**
-     *
-     * Out Of Bounds Exception Testing
-     */
-    @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
-
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        String FilePath = "/Users/ronaklakhotia/Desktop/Ronak.jpeg";
-        PhotoCommand photoCommand = prepareCommand(outOfBoundIndex, FilePath);
-
-        assertCommandFailure(photoCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    /**
-     * Returns a {@code PhotoCommand} with the parameter {@code index and Filepath}.
-     */
-    private PhotoCommand prepareCommand(Index index, String FilePath) {
-        //DeleteCommand deleteCommand = new DeleteCommand(index);
-        PhotoCommand photoCommand = new PhotoCommand(index, FilePath);
-        photoCommand.setData(model, new CommandHistory(), new UndoRedoStack());
-        return photoCommand;
-    }
-    @Test
-    public void equals() {
-        PhotoCommand photoCommand = new PhotoCommand(INDEX_FIRST_PERSON,
-                "/Users/ronaklakhotia/Desktop/Ronak.jpeg");
-        PhotoCommand photoSecondCommand = new PhotoCommand(INDEX_SECOND_PERSON,
-                "/Users/ronaklakhotia/Desktop/Ronak.jpeg");
-
-        // same object -> returns true
-        assertTrue(photoCommand.equals(photoCommand));
-
-        // same values -> returns true
-        PhotoCommand photoFirstCommandCopy = new PhotoCommand(INDEX_FIRST_PERSON,
-                "/Users/ronaklakhotia/Desktop/Ronak.jpeg");
-
-        assertTrue(photoCommand.equals(photoFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(photoCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(photoCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(photoCommand.equals(photoSecondCommand));
-    }
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assert model.getFilteredPersonList().isEmpty();
-    }
-
 }
 ```
 ###### \java\seedu\address\logic\commands\SearchCommandTest.java
@@ -401,6 +354,9 @@ public class SearchCommandTest {
         // different types -> returns false
         assertFalse(searchFirstCommand.equals(1));
 
+        // different types -> return false
+        assertFalse(searchFirstCommand.equals(searchSecondCommand));
+
     }
     @Test
     public void execute_zeroKeywords_noPersonFound() {
@@ -409,12 +365,6 @@ public class SearchCommandTest {
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
-    @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        SearchCommand command = prepareCommand("Kurz 13.10.1997");
-        assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL));
-    }
 
 
     /**
@@ -459,25 +409,17 @@ public class AddReminderParserTest {
                         + PRIORITY_DESC_MEETING + DUE_DATE_DESC_MEETING,
                 new AddReminder(expectedReminder));
 
-        // multiple emails - last email accepted
+        // multiple priorities - last priority accepted
         assertParseSuccess(parser, AddReminder.COMMAND_WORD + DETAILS_DESC_MEETING
-                         + PRIORITY_DESC_MEETING + DUE_DATE_DESC_MEETING,
+                        + PRIORITY_DESC_ASSIGNMENT + PRIORITY_DESC_MEETING + DUE_DATE_DESC_MEETING,
+                new AddReminder(expectedReminder));
+
+        // multiple due dates - last due date accepted
+        assertParseSuccess(parser, AddReminder.COMMAND_WORD + DETAILS_DESC_MEETING
+                        + PRIORITY_DESC_MEETING + DUE_DATE_DESC_ASSIGNMENT + DETAILS_DESC_MEETING,
                 new AddReminder(expectedReminder));
 
     }
-
-    @Test
-    public void parse_optionalFieldsMissing_success() {
-
-        Reminder expectedReminder = new ReminderBuilder().withDetails(VALID_DETAILS_ASSIGNMENT)
-                .withPriority("Priority Level: " + VALID_PRIORITY_ASSIGNMENT)
-                .withDueDate(VALID_DUE_DATE_ASSIGNMENT).build();
-
-        assertParseSuccess(parser, AddReminder.COMMAND_WORD + DETAILS_DESC_ASSIGNMENT
-                        + PRIORITY_DESC_ASSIGNMENT + DUE_DATE_DESC_ASSIGNMENT,
-                new AddReminder(expectedReminder));
-    }
-
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddReminder.MESSAGE_USAGE);
@@ -515,7 +457,7 @@ public class AddReminderParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, AddReminder.COMMAND_WORD + INVALID_DETAILS_DESC + PRIORITY_DESC_MEETING
-                        + INVALID_DUE_DATE_DESC , ReminderDetails.MESSAGE_REMINDER_CONSTRAINTS);
+                + INVALID_DUE_DATE_DESC , ReminderDetails.MESSAGE_REMINDER_CONSTRAINTS);
 
     }
 }
@@ -570,6 +512,10 @@ public class ChangeReminderCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PRIORITY_DESC
                 + DUE_DATE_DESC_ASSIGNMENT, Priority.PRIORITY_CONSTRAINTS);
 
+        // valid priority followed by invalid priority
+        assertParseFailure(parser, "1" + INVALID_PRIORITY_DESC + VALID_PRIORITY_MEETING,
+                Priority.PRIORITY_CONSTRAINTS);
+
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_DETAILS_DESC + INVALID_DUE_DATE_DESC
                         + VALID_PRIORITY_ASSIGNMENT ,
@@ -578,7 +524,7 @@ public class ChangeReminderCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_REMINDER;
         String userInput = targetIndex.getOneBased() + DETAILS_DESC_ASSIGNMENT + PRIORITY_DESC_ASSIGNMENT
                 + DUE_DATE_DESC_ASSIGNMENT;
 
@@ -590,11 +536,57 @@ public class ChangeReminderCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+    @Test
+    public void parse_someFieldsSpecified_success() {
+
+        Index targetIndex = INDEX_SECOND_REMINDER;
+        String userInput = targetIndex.getOneBased() + DETAILS_DESC_ASSIGNMENT + PRIORITY_DESC_ASSIGNMENT;
+
+        ChangeReminderDescriptor descriptor = new ChangeReminderDescriptorBuilder()
+                .withDetails(VALID_DETAILS_ASSIGNMENT)
+                .withPriority(VALID_PRIORITY_ASSIGNMENT).build();
+
+        ChangeReminderCommand expectedCommand = new ChangeReminderCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+    }
+    @Test
+    public void parse_oneFieldSpecified_success() {
+
+        Index targetIndex = INDEX_SECOND_REMINDER;
+        //details
+        String userInput = targetIndex.getOneBased() + DETAILS_DESC_ASSIGNMENT;
+
+        ChangeReminderDescriptor descriptor = new ChangeReminderDescriptorBuilder()
+                .withDetails(VALID_DETAILS_ASSIGNMENT).build();
+
+        ChangeReminderCommand expectedCommand = new ChangeReminderCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // PRIORITY
+        userInput = targetIndex.getOneBased() + PRIORITY_DESC_ASSIGNMENT;
+        descriptor = new ChangeReminderDescriptorBuilder().withPriority(VALID_PRIORITY_ASSIGNMENT)
+                .build();
+
+        expectedCommand = new ChangeReminderCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        //due date
+        userInput = targetIndex.getOneBased() + DUE_DATE_DESC_ASSIGNMENT;
+        descriptor = new ChangeReminderDescriptorBuilder().withDueDate(VALID_DUE_DATE_ASSIGNMENT)
+                .build();
+
+        expectedCommand = new ChangeReminderCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+
+    }
 
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_SECOND_REMINDER;
 
         String userInput = targetIndex.getOneBased()  + PRIORITY_DESC_ASSIGNMENT + DETAILS_DESC_ASSIGNMENT
                 + DUE_DATE_DESC_ASSIGNMENT;
@@ -609,7 +601,21 @@ public class ChangeReminderCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    @Test
+    public void parse_invalidValueFollowedByValidValue_success() {
 
+        Index targetIndex = INDEX_SECOND_REMINDER;
+
+        String userInput = targetIndex.getOneBased() + INVALID_PRIORITY_DESC + PRIORITY_DESC_ASSIGNMENT;
+
+        ChangeReminderDescriptor descriptor = new ChangeReminderDescriptorBuilder()
+                .withPriority(VALID_PRIORITY_ASSIGNMENT)
+                .build();
+
+        ChangeReminderCommand expectedCommand = new ChangeReminderCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+    }
 
 }
 ```
@@ -623,18 +629,18 @@ public class FaceBookCommandParserTest {
     public void parse_validArgs_returnsFaceBookCommand() {
 
         assertParseSuccess(parser, "1", new FaceBookCommand(INDEX_FIRST_PERSON));
-    }
 
-    @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format
-                (MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE));
-    }
+        /* multiple whitespaces */
+        assertParseSuccess(parser, "   1   ", new FaceBookCommand(INDEX_FIRST_PERSON));
 
-    @Test
-    public void parse_emptyArg_throwsParseException() {
+
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FaceBookCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "a", String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE
+        ));
+
     }
 
     @Test
@@ -650,23 +656,88 @@ public class FaceBookCommandParserTest {
 ``` java
 public class SearchCommandParserTest {
 
+    public static final String INVALID_DETAILS = "You might have entered invalid date or name with invalid characters!";
     private SearchCommandParser parser = new SearchCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
+
+        /* no input */
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        /* only name -> rejected */
+        assertParseFailure(parser, "n/Ronak",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        /* only date of birth -> rejected */
+        assertParseFailure(parser, "b/13.10.1997",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        /* prefixes missing */
+        assertParseFailure(parser, "ronak 13.10.1997",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        /* Invalid date */
+        assertParseFailure(parser, " n/ronak b/31.02.1997",
+                String.format(INVALID_DETAILS));
+
+        /* Invalid name */
+        assertParseFailure(parser, " n/ronak. b/31.01.1997",
+                String.format(INVALID_DETAILS));
+    }
+    @Test
+    public void parse_allFieldsPresent_success() throws ParseException {
+
+        /* Multiple names last one taken */
+        assertParseSuccess(parser, SearchCommand.COMMAND_WORD + NAME_DESC_BOB
+                + NAME_DESC_AMY + DOB_DESC_AMY, new SearchCommand(
+                        new SearchContainsKeywordsPredicate(Arrays.asList(VALID_NAME_AMY, VALID_DOB_AMY)))
+        );
+
+        /* Multiple dates last one taken */
+        assertParseSuccess(parser, SearchCommand.COMMAND_WORD + NAME_DESC_AMY
+                + DOB_DESC_BOB + DOB_DESC_AMY, new SearchCommand(
+                        new SearchContainsKeywordsPredicate(Arrays.asList(VALID_NAME_AMY, VALID_DOB_AMY))
+        ));
+    }
+
+    @Test
+    public void parse_compulsoryFieldMissing_failure() {
+
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE);
+        // missing name
+        assertParseFailure(parser, SearchCommand.COMMAND_WORD + VALID_DOB_AMY,
+                expectedMessage);
+
+        // missing date
+        assertParseFailure(parser, SearchCommand.COMMAND_WORD + VALID_NAME_AMY,
+                expectedMessage);
+
+
+    }
+    @Test
+    public void parse_invalidValue_failure() {
+
+        // Invalid name
+        assertParseFailure(parser, SearchCommand.COMMAND_WORD + INVALID_NAME_DESC
+                + INVALID_DATE_OF_BIRTH_DESC, String.format(INVALID_DETAILS));
+
+        // Invalid date
+        assertParseFailure(parser, SearchCommand.COMMAND_WORD + NAME_DESC_AMY
+                + INVALID_DATE_OF_BIRTH_DESC, String.format((INVALID_DETAILS)));
+
     }
 
     @Test
     public void parse_validArgs_returnsSearchCommand() {
         // no leading and trailing whitespaces
         SearchCommand expectedSearchCommand =
-                new SearchCommand(new SearchContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedSearchCommand);
+                new SearchCommand(new SearchContainsKeywordsPredicate(Arrays.asList("Alice", "13.10.1997")));
+        assertParseSuccess(parser, " n/Alice b/13.10.1997", expectedSearchCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedSearchCommand);
+        assertParseSuccess(parser, " \n n/Alice \n \t b/13.10.1997  \t", expectedSearchCommand);
     }
 
 }
@@ -836,24 +907,27 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
 ``` java
 public class SearchCommandSystemTest extends AddressBookSystemTest {
 
+    public static final String INVALID_DETAILS = "You might have entered invalid date or name with invalid characters!";
     @Test
 
     public void search() {
         /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
          * -> 2 persons found
          */
-        String command = "   " + SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " "
-                + "13.10.1997" + "   ";
+        String command = "   " + SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " "
+                + "b/13.10.1997" + "   ";
 
         Model expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, LAKHOTIA, RANDOM); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setFilteredList(expectedModel,
+                LAKHOTIA, RANDOM, RONAK, SHARMA); // first names of Lakhotia and Random are "Ronak"
         assertCommandSuccess(command, expectedModel);
+
         assertSelectedCardUnchanged();
 
         /* Case: repeat previous find command where person list is displaying the persons we are Searching
          * -> 2 persons found
          */
-        command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " " + "13.10.1997";
+        command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " " + "b/13.10.1997";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -867,24 +941,35 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-        /* Case: mixed case command word -> success */
-        command = "SeaRch RonAk 13.10.1997";
-        command = command.toLowerCase();
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: search person in empty address book -> 0 persons found */
         executeCommand(ClearCommand.COMMAND_WORD);
         assert getModel().getAddressBook().getPersonList().size() == 0;
 
 
-        command = SearchCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_RONAK + " " +  "13.10.1997";
+        command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " " +  "b/13.10.1997";
 
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
+        /* missing name */
+        command = SearchCommand.COMMAND_WORD + " " +  "b/13.10.1997";
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        /* missing date */
+        command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        /* invalid name */
+        command = SearchCommand.COMMAND_WORD + " " + INVALID_NAME_DESC + " " + "b/13.10.1997";
+        assertCommandFailure(command, String.format(INVALID_DETAILS));
+
+        /* Invalid date */
+        command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " "
+                + INVALID_DATE_OF_BIRTH_DESC_BOUNDS;
+        assertCommandFailure(command, String.format(INVALID_DETAILS));
 
 
     }
