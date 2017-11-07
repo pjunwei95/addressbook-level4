@@ -747,6 +747,7 @@ any directory. +
 
 // end::addPhoto[]
 
+// tag::facebook[]
 === FaceBook Integration
 
 ** The facebook command helps the user to view the profile page of a person on the contact list. +
@@ -794,6 +795,7 @@ Above is the sequence diagram. +
 **Pros:** Makes it quicker and adds a fucntion to the personalised Weaver. +
 **Cons:** Limits the functionalities that can be used on facebook. +
 
+// end::facebook[]
 === Adding a reminders list to Weaver.
 
 ** The reminders panel displays the list of reminders that the user has entered. +

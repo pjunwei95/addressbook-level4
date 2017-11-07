@@ -24,7 +24,8 @@ include::../UserGuide.adoc[tag=facebook]
 
 ==== Justification
 
-{Justify the need for, and the current design (i.e. external behavior) of, the feature}
+This implementation is very useful for users as they can connect with their friends and family through
+Weaver, therby saving them the trouble of opening a browser on their desktop. +
 
 ==== Implementation
 
