@@ -15,5 +15,6 @@ public class Messages {
     public static final String MESSAGE_NO_IMAGE_TO_DELETE = "The person has no Photo to be deleted.";
     public static final String MESSAGE_NO_USERNAME = "This Person has no Facebook username!\n";
     public static final String MESSAGE_INVALID_REMINDER_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_INDEX = "Index entered is invalid";
 
 }

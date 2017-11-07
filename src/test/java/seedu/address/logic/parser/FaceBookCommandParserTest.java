@@ -9,8 +9,6 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.FaceBookCommand;
 
-
-
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
  * outside of the MapCommand code. For example, inputs "1" and "1 abc" take the
@@ -27,18 +25,18 @@ public class FaceBookCommandParserTest {
     public void parse_validArgs_returnsFaceBookCommand() {
 
         assertParseSuccess(parser, "1", new FaceBookCommand(INDEX_FIRST_PERSON));
-    }
 
-    @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format
-                (MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE));
-    }
+        /* multiple whitespaces */
+        assertParseSuccess(parser, "   1   ", new FaceBookCommand(INDEX_FIRST_PERSON));
 
-    @Test
-    public void parse_emptyArg_throwsParseException() {
+
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FaceBookCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "a", String.format(
+                MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE
+        ));
+
     }
 
     @Test
