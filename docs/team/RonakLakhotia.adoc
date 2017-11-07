@@ -45,7 +45,7 @@ include::../DeveloperGuide.adoc[tag=facebook]
 ---
 #Start of Extract [from: User Guide]#
 
-include::../UserGuide.adoc[tag=facebook]
+include::../UserGuide.adoc[tag=addphoto]
 
 #End of Extract#
 
@@ -60,7 +60,7 @@ This way the user can display the pictures on their contact lists. +
 ---
 #Start of Extract [from: Developer Guide]#
 
-include::../DeveloperGuide.adoc[tag=facebook]
+include::../DeveloperGuide.adoc[tag=addphoto]
 
 #End of Extract#
 
