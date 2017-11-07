@@ -1,21 +1,16 @@
 package systemtests;
 
 import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_ASSIGNMENT;
-import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_MEETING;
 import static seedu.address.logic.commands.CommandTestUtil.DUE_DATE_DESC_ASSIGNMENT;
-import static seedu.address.logic.commands.CommandTestUtil.DUE_DATE_DESC_MEETING;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DETAILS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DUE_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_ASSIGNMENT;
-import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_MEETING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DETAILS_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DUE_DATE_ASSIGNMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_ASSIGNMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_REMINDERS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_REMINDER;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_REMINDER;
-import static seedu.address.testutil.TypicalPersons.MEETING;
 
 import org.junit.Test;
 
@@ -46,7 +41,7 @@ public class ChangeReminderCommandSystemTest extends AddressBookSystemTest {
         /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
          * -> edited
          */
-        Index index = INDEX_SECOND_REMINDER;
+        Index index = INDEX_FIRST_REMINDER;
         String command = " " + ChangeReminderCommand.COMMAND_WORD + "  " + index.getOneBased() + "  "
                 + DETAILS_DESC_ASSIGNMENT + "  " + PRIORITY_DESC_ASSIGNMENT + " " + DUE_DATE_DESC_ASSIGNMENT;
 
@@ -64,13 +59,9 @@ public class ChangeReminderCommandSystemTest extends AddressBookSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         model.updateReminder(
-                getModel().getFilteredReminderList().get(INDEX_SECOND_REMINDER.getZeroBased()), editedReminder);
+                getModel().getFilteredReminderList().get(INDEX_FIRST_REMINDER.getZeroBased()), editedReminder);
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: edit a person with new values same as existing values -> edited */
-        command = ChangeReminderCommand.COMMAND_WORD + " " + index.getOneBased() + DETAILS_DESC_MEETING
-                + PRIORITY_DESC_MEETING + DUE_DATE_DESC_MEETING;
-        assertCommandSuccess(command, index, MEETING);
 
         /* Case: edit some fields -> edited */
         index = INDEX_FIRST_REMINDER;

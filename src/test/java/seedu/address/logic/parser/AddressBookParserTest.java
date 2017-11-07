@@ -22,8 +22,6 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddReminder;
 import seedu.address.logic.commands.ChangeFontSizeCommand;
-import seedu.address.logic.commands.ChangeReminderCommand;
-import seedu.address.logic.commands.ChangeReminderCommand.ChangeReminderDescriptor;
 import seedu.address.logic.commands.ChangeTagColorCommand;
 import seedu.address.logic.commands.ChangeThemeCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -49,7 +47,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.SearchContainsKeywordsPredicate;
 import seedu.address.model.reminder.Reminder;
-import seedu.address.testutil.ChangeReminderDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -122,17 +119,7 @@ public class AddressBookParserTest {
                 RemoveReminderCommand.COMMAND_WORD + " " + INDEX_FIRST_REMINDER.getOneBased());
         assertEquals(new RemoveReminderCommand(INDEX_FIRST_REMINDER), command);
     }
-    @Test
-    public void parseCommand_change() throws Exception {
-        Reminder reminder = new ReminderBuilder().withPriority("high").build();
-        ChangeReminderDescriptor descriptor = new ChangeReminderDescriptorBuilder(reminder).build();
 
-        ChangeReminderCommand command = (ChangeReminderCommand) parser.parseCommand(
-                ChangeReminderCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_REMINDER.getOneBased() + " " + ReminderUtil.getReminderDetails(reminder));
-
-        assertEquals(new ChangeReminderCommand(INDEX_FIRST_REMINDER, descriptor), command);
-    }
 
     @Test
     public void parseCommand_edit() throws Exception {

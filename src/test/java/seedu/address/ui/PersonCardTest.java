@@ -69,6 +69,10 @@ public class PersonCardTest extends GuiUnitTest {
         // same person, different index -> returns false
         assertFalse(personCard.equals(new PersonCard(person, 1)));
     }
+    @Test
+    public void displayImage() {
+
+    }
 
     /**
      * Asserts that {@code personCard} displays the details of {@code expectedPerson} correctly and matches

@@ -85,11 +85,7 @@ public class ParserUtil {
      */
     public static Optional<Priority> parsePriority(Optional<String> priority) throws IllegalValueException {
         requireNonNull(priority);
-        if (priority.get().equalsIgnoreCase("Priority Level: high")
-                || priority.get().equalsIgnoreCase("Priority Level: low")
-                || priority.get().equalsIgnoreCase("Priority Level: medium")) {
-            return priority.isPresent() ? Optional.of(new Priority(priority.get())) : Optional.empty();
-        }
+
         return priority.isPresent() ? Optional.of(new Priority("Priority Level: " + priority.get())) : Optional.empty();
     }
     /**
