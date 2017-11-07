@@ -83,15 +83,25 @@ as the user just need to tag the address as "favourite" and find that tag.
 
 {Justify the need for, and the current design (i.e. external behavior) of, the feature}
 
-=== Enhancement Proposed: Add command `remark`
+=== Enhancement Proposed: User Stories
 
-{Explain similar to the Undo/Redo feature above.}
+Suggested features to be implemented in the future in the user stories.
+(Pull request https://github.com/pjunwei95/addressbook-level4/commit/e50666704484046e231e1c2a33f1eadffd0b51ae[#13])
 
 === Other contributions
 
-* Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+* Helped in reporting bugs for a team's [CS2103AUG2017-W09-B2] open-sourced software.
+    (Issues https://github.com/CS2103AUG2017-W09-B2/main/issues/119[#119],
+    https://github.com/CS2103AUG2017-W09-B2/main/issues/120[#120],
+    https://github.com/CS2103AUG2017-W09-B2/main/issues/122[#122]),
+    https://github.com/CS2103AUG2017-W09-B2/main/issues/124[#124])
+
+* Updated new colors to be included in tags (Pull requests https://github.com[#33], https://github.com[#34])
 * Wrote additional tests to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 
-== Project: PowerPointLabs
+== Project: NUSeekers
 
-{Optionally (not graded), you may include other projects in your portfolio.}
+A paired software project in developing an inclusive community
+within the National University of Singapore. +
+It is written in with Meteor, using JavaScript, HTML5, CSS, JSON, and MongoDB.
+
