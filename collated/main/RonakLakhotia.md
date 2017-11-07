@@ -55,33 +55,6 @@ public class ImageStorage {
 
 }
 ```
-###### /java/seedu/address/commons/events/ui/FaceBookEvent.java
-``` java
-import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.person.ReadOnlyPerson;
-
-/**
- * To raise a Facebook Event
- */
-public class FaceBookEvent extends BaseEvent {
-
-    private final ReadOnlyPerson person;
-
-    public FaceBookEvent(ReadOnlyPerson person) {
-        this.person = person;
-    }
-
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName();
-    }
-
-    public ReadOnlyPerson getPerson() {
-        return person;
-    }
-
-}
-```
 ###### /java/seedu/address/commons/events/ui/ReminderPanelSelectionChangedEvent.java
 ``` java
 import seedu.address.commons.events.BaseEvent;
@@ -372,7 +345,7 @@ public class FaceBookCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "facebook";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Shows the profile of the user whose"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " Shows the profile of the user whose"
             + " index is entered\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
@@ -471,7 +444,10 @@ public class PhotoCommand extends UndoableCommand {
 
         ReadOnlyPerson personToAddPhoto = lastShownList.get(targetIndex.getZeroBased());
 
-        if (personToAddPhoto.getImage().getFilePath().equals("") && filePath.equalsIgnoreCase("delete")) {
+        boolean isThereAnyPhotoToDelete;
+        isThereAnyPhotoToDelete = checkIfThereIsAnyPhotoToDelete(personToAddPhoto, filePath);
+
+        if (!isThereAnyPhotoToDelete) {
             throw new CommandException(Messages.MESSAGE_NO_IMAGE_TO_DELETE);
         }
         if (filePath.equalsIgnoreCase("Delete")) {
@@ -500,6 +476,15 @@ public class PhotoCommand extends UndoableCommand {
         } else {
             return new CommandResult(String.format(MESSAGE_PHOTO_PERSON_SUCCESS, personToAddPhoto));
         }
+    }
+    /**
+     * Checks if the person has any photo to be deleted
+     */
+    public static boolean checkIfThereIsAnyPhotoToDelete(ReadOnlyPerson personToAddPhoto, String filePath) {
+        if (personToAddPhoto.getImage().getFilePath().equals("") && filePath.equalsIgnoreCase("delete")) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -586,8 +571,8 @@ public class SearchCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose name and Date Of Birth "
             + "contain any of the specified keyowrds and displays them as a list with index number. \n"
-            + "Parameters: Name and Date O Birth\n"
-            + "Example: " + COMMAND_WORD + " alice 13.10.1997";
+            + "Parameters: Name and Date Of Birth\n"
+            + "Example: " + COMMAND_WORD + " search n/ronak b/13.10.1997";
 
     private final SearchContainsKeywordsPredicate predicate;
 
@@ -751,6 +736,72 @@ public class ChangeReminderCommandParser implements Parser<ChangeReminderCommand
             ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME))
                     .ifPresent(editPersonDescriptor::setUsername);
 ```
+###### /java/seedu/address/logic/parser/EmailCommandParser.java
+``` java
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
+import java.util.stream.Stream;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.EmailCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmailSubject;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Parses input arguments and creates a new EmailCommand object
+ */
+public class EmailCommandParser implements Parser<EmailCommand> {
+
+
+    public static final String MULTIPLE_TAGS_FALIURE = "Multiple tags cannot be entered";
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the EmailCommand
+     * and returns an EmailCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public EmailCommand parse(String args) throws ParseException {
+
+
+        EmailSubject subject;
+        Set<Tag> tagList;
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT, PREFIX_TAG);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_SUBJECT, PREFIX_TAG)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE));
+        }
+        try {
+            subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT)).get();
+            tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
+        if (tagList.size() > 1) {
+            throw new ParseException(String.format(MULTIPLE_TAGS_FALIURE, EmailCommand.MESSAGE_USAGE));
+        }
+
+        Tag[] dummyArrayToGetTagName = tagList.toArray(new Tag[1]);
+        String tagName = dummyArrayToGetTagName[0].tagName.toString();
+        return new EmailCommand(tagName, subject.toString());
+    }
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+
+}
+```
 ###### /java/seedu/address/logic/parser/FaceBookCommandParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -764,6 +815,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new MapCommand object
  */
 public class FaceBookCommandParser implements Parser<FaceBookCommand> {
+
+    public static final String MESSAGE_INVALID_INDEX = "Index entered is invalid";
+
     /**
      * Parses the given {@code String} of arguments in the context of the MapCommand
      * and returns an MapCommand object for execution.
@@ -818,30 +872,18 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
     public PhotoCommand parse(String args) throws ParseException {
 
         String trimmedArgs = args.trim();
-
-
         String regex = "[\\s]+";
         String[] keywords = trimmedArgs.split(regex, 2);
+        boolean isInvalidNumberOfArgs = checkIfInvalidNumberOfArgs(keywords);
 
-        if (keywords.length == 1) {
+        if (isInvalidNumberOfArgs) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE)
             );
         }
 
-
-        String inputFile = keywords[1];
-        String url = inputFile + "";
-
-        File file = new File(url);
-        boolean FileExists = file.exists();
-
-        if (url.equalsIgnoreCase("delete")) {
-
-            FileExists = true;
-        }
-
-        if (FileExists) {
+        boolean isFileExists = checkIfFileExists(keywords[1]);
+        if (isFileExists) {
             try {
                 Index index = ParserUtil.parseIndex(keywords[0]);
                 return new PhotoCommand(index, (keywords[1]));
@@ -850,11 +892,35 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
             }
 
-        }
-        else {
+        } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_IMAGE, PhotoCommand.MESSAGE_USAGE));
         }
+
+    }
+    /**
+     * Checks if the number of arguments entered by the user are valid
+     */
+    public static boolean checkIfInvalidNumberOfArgs(String [] keywords) {
+        if (keywords.length < 2) {
+            return true;
+        }
+        return false;
+    }
+    /**
+     * Checks if the image exists in the given filepath
+     */
+    public static boolean checkIfFileExists(String inputFilePath) {
+
+        String url = inputFilePath + "";
+        File file = new File(url);
+        boolean isFileExists = file.exists();
+
+        if (url.equalsIgnoreCase("delete")) {
+
+            isFileExists = true;
+        }
+        return isFileExists;
 
     }
     /**
@@ -901,11 +967,17 @@ public class RemoveCommandParser implements Parser<RemoveReminderCommand> {
 ###### /java/seedu/address/logic/parser/SearchCommandParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.DateOfBirth;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.SearchContainsKeywordsPredicate;
 
 /**
@@ -913,25 +985,50 @@ import seedu.address.model.person.SearchContainsKeywordsPredicate;
  */
 public class SearchCommandParser implements Parser<SearchCommand> {
 
+    public static final String INVALID_DETAILS = "You might have entered invalid date or name with invalid characters!";
+    private String name;
+    private String date;
+
+
     /**
      * Parses the given {@code String} of arguments in the context of the SearchCommand
      * and returns an SearchCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public SearchCommand parse(String args) throws ParseException {
 
-        String trimmedArgs = args.trim();
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DOB);
 
-        if (trimmedArgs.isEmpty() || nameKeywords.length != 2) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DOB)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
+        try {
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)).get();
+            DateOfBirth date = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB)).get();
+            this.name = name.toString();
+            this.date = date.toString();
 
+        } catch (IllegalValueException ive) {
+            throw new ParseException(String.format(INVALID_DETAILS));
+        }
+        String [] keywords = new String[2];
+        keywords[0] = this.name;
+        keywords[1] = this.date;
 
-        return new SearchCommand(new SearchContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new SearchCommand(new SearchContainsKeywordsPredicate(Arrays.asList(keywords)));
+
     }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }
 ```
 ###### /java/seedu/address/model/AddressBook.java
@@ -1055,54 +1152,6 @@ public class FacebookUsername {
 }
 
 ```
-###### /java/seedu/address/model/person/FileImage.java
-``` java
-import static java.util.Objects.requireNonNull;
-
-import seedu.address.commons.exceptions.IllegalValueException;
-
-/**
- * Represents a Person's name in the address book.
- */
-public class FileImage {
-
-    public static final String MESSAGE_IMAGE_CONSTRAINTS =
-            "File Path must be correctly entered";
-
-    public final String filePath;
-
-    public FileImage(String filePath) throws IllegalValueException {
-        requireNonNull(filePath);
-        String trimmedName = filePath.trim();
-
-        this.filePath = trimmedName;
-    }
-
-
-    @Override
-    public String toString() {
-        return filePath;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FileImage // instanceof handles nulls
-                && this.filePath.equals(((FileImage) other).filePath)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        return filePath.hashCode();
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-
-}
-```
 ###### /java/seedu/address/model/person/ReadOnlyPerson.java
 ``` java
     ObjectProperty<DateOfBirth> dateOfBirthProperty();
@@ -1178,15 +1227,21 @@ public class DueDate {
      * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
      */
 
+    public static final int DAYS_IN_FEBRUARY = 28;
     public static final String DUE_DATE_VALIDATION_REGEX = "(0[1-9]|[1-9]|1[0-9]|2[0-9]|3[01])[///./-]"
             + "(0[1-9]|1[0-2]|[1-9])[///./-](19|20)[0-9][0-9]";
 
+    public static final int FEBRUARY = 2;
+    public static final int FIRST_INDEX = 0;
 
+    public static final int LAST_INDEX = 1;
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Due Date must be a Valid Date and in the following format: \n"
                     + "'.' and '/' can be used as separators. \n";
 
     public final String date;
+
+
 
     public DueDate(String date) throws IllegalValueException {
 
@@ -1202,12 +1257,6 @@ public class DueDate {
         }
 
     }
-
-    @Override
-    public String toString() {
-        return date;
-    }
-
     /**
      * Returns true if a given string is a valid person birthday.
      */
@@ -1220,8 +1269,93 @@ public class DueDate {
         if (!trimmedDate.matches(DUE_DATE_VALIDATION_REGEX)) {
             return false;
         }
+        boolean isValidDate = checkIfValidDate(dueDate);
 
+        return isValidDate;
+
+    }
+
+    /**
+     * Checks if number of days in a given month are valid
+     */
+    public static boolean checkIfValidDate(String date) {
+
+
+        int lastIndexOfSeparator = getIndexOfSeparator(date, LAST_INDEX);
+        int firstIndexOfSeparator = getIndexOfSeparator(date, FIRST_INDEX);
+        int yearNumber = getYearNumber(lastIndexOfSeparator, date);
+        int monthNumber = getMonthNumber(firstIndexOfSeparator, lastIndexOfSeparator, date);
+        boolean isLeapYear = checkIfLeapYear(yearNumber);
+        int dayNumber = getDayNumber(firstIndexOfSeparator, date);
+        boolean isValidDateOfFebruary = checkIfValidDateOfFebruary(
+                date, monthNumber, yearNumber, dayNumber, isLeapYear);
+
+        if (isValidDateOfFebruary) {
+            return true;
+        }
+        return false;
+
+    }
+    /**
+     * Checks if number of days in February are valid
+     */
+    public static boolean checkIfValidDateOfFebruary(String date, int month, int year, int day, boolean isLeapYear) {
+
+        if (month == FEBRUARY) {
+
+            if (isLeapYear && day > (DAYS_IN_FEBRUARY + 1) || (!isLeapYear && day > DAYS_IN_FEBRUARY)) {
+                return false;
+            }
+        }
         return true;
+    }
+
+    /**
+     * Checks if it is a leap year
+     */
+    public static boolean checkIfLeapYear(int yearNumber) {
+
+        if (yearNumber % 400 == 0 || (yearNumber % 4 == 0 && yearNumber % 100 != 0)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static int getYearNumber(int lastIndexOfSeparator, String date) {
+
+        String year = date.substring(lastIndexOfSeparator + 1);
+        return Integer.parseInt(year);
+    }
+    public static int getMonthNumber(int firstIndexOfSeparator, int lastIndexOfSeparator, String date) {
+
+        String month = date.substring(firstIndexOfSeparator + 1, lastIndexOfSeparator);
+        return Integer.parseInt(month);
+    }
+    public static int getDayNumber(int firstIndexOfSeparator, String date) {
+
+        String dayNumber = date.substring(0, firstIndexOfSeparator);
+        return Integer.parseInt(dayNumber);
+    }
+
+    public static int getIndexOfSeparator(String date, int position) {
+
+        int storesIndex = -1;
+        for (int loopVariable = 0; loopVariable < date.length(); loopVariable++) {
+
+            if (date.charAt(loopVariable) == '.' || date.charAt(loopVariable) == '-') {
+                storesIndex = loopVariable;
+
+                if (position == FIRST_INDEX) {
+                    break;
+                }
+            }
+        }
+        return storesIndex;
+    }
+
+    @Override
+    public String toString() {
+        return date;
     }
 
     @Override

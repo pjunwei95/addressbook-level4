@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddReminder;
+import seedu.address.logic.commands.BackUpCommand;
 import seedu.address.logic.commands.CancelClearCommand;
 import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.commands.ChangeReminderCommand;
@@ -82,10 +83,6 @@ public class AddressBookParser {
         case ChangeReminderCommand.COMMAND_WORD:
             return new ChangeReminderCommandParser().parse(arguments);
 
-        //@@author pjunwei95
-        case DeleteTagCommand.COMMAND_WORD:
-            return new DeleteTagCommandParser().parse(arguments);
-
         case AddReminder.COMMAND_WORD:
             return new AddReminderParser().parse(arguments);
 
@@ -94,15 +91,6 @@ public class AddressBookParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-        //@@author pjunwei95
-        case ClearPopupCommand.COMMAND_WORD: {
-            ClearConfirmation clearConfirmation = new ClearConfirmation();
-            if (clearConfirmation.isClearCommand()) {
-                return new ClearPopupCommand();
-            } else {
-                return new CancelClearCommand();
-            }
-        }
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -121,9 +109,6 @@ public class AddressBookParser {
 
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
-        //@@author pjunwei95
-        case FindTagCommand.COMMAND_WORD:
-            return new FindTagCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -142,6 +127,29 @@ public class AddressBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommandParser().parse(arguments);
+
+        //@@author pjunwei95
+        case FindTagCommand.COMMAND_WORD:
+            return new FindTagCommandParser().parse(arguments);
+
+        case DeleteTagCommand.COMMAND_WORD:
+            return new DeleteTagCommandParser().parse(arguments);
+
+        case ClearPopupCommand.COMMAND_WORD: {
+            ClearConfirmation clearConfirmation = new ClearConfirmation();
+            if (clearConfirmation.isClearCommand()) {
+                return new ClearPopupCommand();
+            } else {
+                return new CancelClearCommand();
+            }
+        }
+
+        case BackUpCommand.COMMAND_WORD:
+            return new BackUpCommand();
+
         //@@author ChenXiaoman
         case ChangeTagColorCommand.COMMAND_WORD:
             return new ChangeTagColorCommandParser().parse(arguments);
@@ -155,8 +163,7 @@ public class AddressBookParser {
         case MapCommand.COMMAND_WORD:
             return new MapCommandParser().parse(arguments);
 
-        case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommandParser().parse(arguments);
+        //@@author
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

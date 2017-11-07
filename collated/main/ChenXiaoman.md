@@ -426,6 +426,7 @@ public class MapCommand extends Command {
 
         case MapCommand.COMMAND_WORD:
             return new MapCommandParser().parse(arguments);
+
 ```
 ###### /java/seedu/address/logic/parser/ChangeFontSizeCommandParser.java
 ``` java
@@ -550,29 +551,6 @@ public class ChangeThemeCommandParser implements Parser<ChangeThemeCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangeThemeCommand.MESSAGE_USAGE));
         }
         return new ChangeThemeCommand(trimmedArgs);
-    }
-}
-```
-###### /java/seedu/address/logic/parser/MapCommandParser.java
-``` java
-/**
- * Parses input arguments and creates a new MapCommand object
- */
-public class MapCommandParser implements Parser<MapCommand> {
-
-    /**
-     * Parses the given {@code String} of arguments in the context of the MapCommand
-     * and returns an MapCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public MapCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new MapCommand(index);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MapCommand.MESSAGE_USAGE));
-        }
     }
 }
 ```
@@ -1288,7 +1266,7 @@ public class PersonCard extends UiPart<Region> {
 
         });
         try {
-            assignImage(person.getImage().getFilePath());
+            assignImageToPerson(person.getImage().getFilePath());
         }
         catch (ParseException pe) {
             new AssertionError("Invalid input");
