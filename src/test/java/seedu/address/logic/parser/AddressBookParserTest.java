@@ -124,7 +124,7 @@ public class AddressBookParserTest {
     }
     @Test
     public void parseCommand_change() throws Exception {
-        Reminder reminder = new ReminderBuilder().build();
+        Reminder reminder = new ReminderBuilder().withPriority("high").build();
         ChangeReminderDescriptor descriptor = new ChangeReminderDescriptorBuilder(reminder).build();
 
         ChangeReminderCommand command = (ChangeReminderCommand) parser.parseCommand(
