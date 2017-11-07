@@ -36,6 +36,10 @@ public class PersonCardTest extends GuiUnitTest {
             personWithTags.setEmail(ALICE.getEmail());
             personWithTags.setPhone(ALICE.getPhone());
             personWithTags.setTags(ALICE.getTags());
+            personWithTags.setRemark(ALICE.getRemark());
+            personWithTags.setImage(ALICE.getImage());
+            personWithTags.setUsername(ALICE.getUsername());
+
         });
         assertCardDisplay(personCard, personWithTags, 2);
     }
