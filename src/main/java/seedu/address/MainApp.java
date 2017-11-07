@@ -155,7 +155,7 @@ public class MainApp extends Application {
      * reading from the file.
      */
     protected AccountsStorage initAccPrefs(AccountsStorage storage) {
-        String prefsFilePath = storage.getUserPrefsFilePath();
+        String prefsFilePath = storage.getAccPrefsFilePath();
         logger.info("Using account prefs file : " + prefsFilePath);
 
         AccountsStorage initializedPrefs;
@@ -167,7 +167,8 @@ public class MainApp extends Application {
                     + "Using default account prefs");
             initializedPrefs = new AccountsStorage();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with default account messages");
+            logger.warning("Problem while reading from the file. "
+                    + "Will be starting with default account information");
             initializedPrefs = new AccountsStorage();
         }
 
