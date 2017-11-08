@@ -4,12 +4,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 public class EmailSubjectTest {
 
     @Test
-    public void isValidSubject() throws IllegalValueException{
+    public void isValidSubject() throws IllegalValueException {
         // invalid subject
         assertFalse(EmailSubject.isValidSubject("ss."));
 

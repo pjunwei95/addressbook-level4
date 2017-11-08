@@ -35,8 +35,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.commands.PhotoCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -77,7 +77,7 @@ public class AddressBookParserTest {
         assertEquals(command, command);
     }
     @Test
-    public void parseCommand_FindTagCommand() throws Exception {
+    public void parseCommand_findTagCommand() throws Exception {
 
         List<String> keywords = Arrays.asList("friends");
         final FindTagCommand command = new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
