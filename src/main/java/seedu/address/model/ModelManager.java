@@ -70,6 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyAddressBook newData) {
         addressBook.resetData(newData);
         indicateAddressBookChanged();
+        raise(new ClearBrowserPanelEvent());
     }
 
     @Override
@@ -140,11 +141,6 @@ public class ModelManager extends ComponentManager implements Model {
             throw new AssertionError("IOE error");
 
         }
-    }
-    @Override
-    public synchronized void clearBrowserPanel() {
-
-        raise(new ClearBrowserPanelEvent());
     }
     @Override
     public synchronized void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
