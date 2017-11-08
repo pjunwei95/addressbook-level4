@@ -20,6 +20,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.ui.ClearBrowserPanelEvent;
 import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.FileImage;
@@ -89,6 +90,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
     @Override
+    public synchronized void clearBrowserPanel() {
+        raise(new ClearBrowserPanelEvent());
+    }
+    @Override
     public synchronized void sendMailToContacts(String tag, String subject, List<ReadOnlyPerson> lastShownList) {
 
         String appendEmailAddress = "";
@@ -139,8 +144,6 @@ public class ModelManager extends ComponentManager implements Model {
             throw new AssertionError("IOE error");
 
         }
-
-
     }
     @Override
     public synchronized void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
@@ -182,7 +185,7 @@ public class ModelManager extends ComponentManager implements Model {
             updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             indicateAddressBookChanged();
         } catch (IllegalValueException ive) {
-            System.out.println("Error encountered");
+            throw new AssertionError("Invalid input");
         }
     }
     //@@author ChenXiaoman

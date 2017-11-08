@@ -42,6 +42,13 @@ public class TypicalPersons {
             .withImage("")
             .withPhone("85355255")
             .withTags("friends", "family").build();
+    public static final ReadOnlyPerson ALEX = new PersonBuilder().withName("Alex Pauline")
+            .withAddress("PGP")
+            .withEmail("alice@example.com")
+            .withDateOfBirth("13.10.1997")
+            .withImage("")
+            .withPhone("85355255")
+            .withTags("friends", "family").build();
     public static final ReadOnlyPerson BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com")

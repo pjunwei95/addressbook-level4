@@ -12,7 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import seedu.address.logic.commands.PhotoCommand;
-import seedu.address.logic.parser.exceptions.ImageException;
+
 
 /** Reads and stores image file
  */

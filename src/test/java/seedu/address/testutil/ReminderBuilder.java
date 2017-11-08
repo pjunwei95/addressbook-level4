@@ -13,7 +13,7 @@ import seedu.address.model.reminder.ReminderDetails;
 public class ReminderBuilder {
 
     public static final String DEFAULT_DETAILS = "CS2103T Assignment";
-    public static final String DEFAULT_PRIORITY = "Priority Level: High";
+    public static final String TEST_PRIORITY = "high";
     public static final String DEFAULT_DUE_DATE = "12.11.2017";
 
 
@@ -22,7 +22,7 @@ public class ReminderBuilder {
     public ReminderBuilder() {
         try {
             ReminderDetails defaultDetails = new ReminderDetails(DEFAULT_DETAILS);
-            Priority defaultPriority = new Priority(DEFAULT_PRIORITY);
+            Priority defaultPriority = new Priority("Priority Level: " + TEST_PRIORITY);
             DueDate defaultDueDate = new DueDate(DEFAULT_DUE_DATE);
             this.reminder = new Reminder(defaultDetails, defaultPriority, defaultDueDate);
         } catch (IllegalValueException ive) {
