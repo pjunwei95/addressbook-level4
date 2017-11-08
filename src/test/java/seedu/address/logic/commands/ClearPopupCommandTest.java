@@ -10,6 +10,7 @@ import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.ui.ClearConfirmation;
 
 public class ClearPopupCommandTest {
 
@@ -30,6 +31,8 @@ public class ClearPopupCommandTest {
      */
     private ClearPopupCommand prepareCommand(Model model) {
         ClearPopupCommand command = new ClearPopupCommand();
+        ClearConfirmation clearConfirmation = new ClearConfirmation();
+        clearConfirmation.isClearCommand();
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }
