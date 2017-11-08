@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Ronak Lakhotia - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Ronak Lakhotia - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-weaver"><a class="link" href="#project-weaver">Project: Weaver</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Weaver is a desktop address book application meant for NUS students.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/RonakLakhotia/addressbook-level4/blob/master/collated/main/RonakLakhotia.md">Functional code</a>] [<a href="https://github.com/RonakLakhotia/addressbook-level4/blob/master/collated/test/RonakLakhotia.md">Test code</a>] {give links to collated code files}</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-facebook-integration"><a class="link" href="#enhancement-added-facebook-integration">Enhancement Added: Facebook Integration</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="facebook-integration-since-v1-3"><a class="link" href="#facebook-integration-since-v1-3">FaceBook Integration SINCE V1.3</a></h3>
+<div class="paragraph">
+<p>Helps you view the profile page of a person in your contact list.<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The index of the person must be valid.<br></p>
+</li>
+<li>
+<p>The person must have the username he/she uses on Facebook.<br></p>
+</li>
+<li>
+<p>You will have to log in to your own account before you view the profile page of the person.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Command Format - `Facebook [INDEX]<br></p>
+</div>
+<div class="paragraph">
+<p>e.g. - <code>facebook 1</code><br></p>
+</div>
+<div class="paragraph">
+<p>If the person does not have a facebook account or the username is not entered in Weaver,you will be notified by Weaver.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/facebook.png" alt="facebook" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>This implementation is very useful for users as they can connect with their friends and family through
+Weaver, therby saving them the trouble of opening a browser on their desktop.<br></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="facebook-integration"><a class="link" href="#facebook-integration">FaceBook Integration</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The facebook command helps the user to view the profile page of a person on the contact list.<br></p>
+</li>
+<li>
+<p>It requires the user to login to his/her account before they can view the profile page.The profile<br>
+page is shown up on the browser panel.</p>
+</li>
+<li>
+<p>If the user has no username the facebook page will not be loaded in the browser panel.<br></p>
+</li>
+<li>
+<p>FORMAT - <code>facebook [INDEX]</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>e.g. - <code>facebook 1</code></p>
+</div>
+<div class="sect3">
+<h4 id="working-flow"><a class="link" href="#working-flow">Working flow</a></h4>
+<div class="paragraph">
+<p>The <code>FaceBookCommand Parser</code> class parses the arguments and throws an exception if the index entered
+is invalid. A new event <code>handleFaceBookEvent</code>  is then raised.
+The Brower Panel class then loads the page with the url of the profile page to be viewed on Facebook.<br></p>
+</div>
+<hr>
+<div class="literalblock">
+<div class="content">
+<pre>public void loadPersonFaceBookPage(ReadOnlyPerson person, String username) {</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre> String url =  FACEBOOK_PROFILE_PAGE + username;
+loadPage(url);
+    }
+---</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FaceBookSequence.png" alt="FaceBookSequence" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Above is the sequence diagram.<br></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reasons-for-this-kind-of-implementation"><a class="link" href="#reasons-for-this-kind-of-implementation">Reasons for this kind of implementation</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>This helps the user to take a quick glance of the the profile image of the contacts on his/her list.<br></p>
+</li>
+<li>
+<p>It is better than opening a brower on the desktop.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How should the user view the profile page.<br>
+<strong>Alternative1 : </strong> View the profile page on a web browser<br>
+<strong>Pros:</strong> Helps user exercise other functionalities like messaging.<br>
+<strong>Cons:</strong> Does not make use of Weaver in any useful way.<br>
+<strong>Alternative2:</strong> View the profile page on the browser panel.<br>
+<strong>Pros:</strong> Makes it quicker and adds a fucntion to the personalised Weaver.<br>
+<strong>Cons:</strong> Limits the functionalities that can be used on facebook.<br></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-add-command-code-photo-code"><a class="link" href="#enhancement-proposed-add-command-code-photo-code">Enhancement Proposed: Add command <code>photo</code></a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-photo-to-contacts-code-photo-code-since-v1-2-br"><a class="link" href="#add-photo-to-contacts-code-photo-code-since-v1-2-br">Add Photo to contacts : <code>photo</code> SINCE V1.2<br></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/MockUp.png" alt="MockUp" width="790">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Adds a Display picture to the contact.The image file must be present in your PC.<br></p>
+</li>
+<li>
+<p>Each person in your contact list can have atmost one display picture.<br></p>
+</li>
+<li>
+<p>You can change the display picture of a person by specifying the filepath of another image.<br></p>
+</li>
+<li>
+<p>The person must have a display picture for the delete operation to work else Weaver will notify you that the
+delete operation is not valid.<br></p>
+</li>
+<li>
+<p>Once the Image is set and the file is then removed from the specified directory, Weaver will no longer display the picture.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>e.g. <code>Photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg</code> adds the image <code>Ronak.jpg</code> to the contact with
+index 1 in the address book.</p>
+</div>
+<div class="paragraph">
+<p><strong>Different Scenarios</strong> :</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>1) Incorrect File entered - e.g <code>Photo 1 /Users/ronaklakhotia/Ronak.jpeg</code>
+If the file is not present in the specified path, a prompt will be displayed to enter the correct path of the image.</p>
+</div>
+<div class="paragraph">
+<p>2) Delete an existing File -<br>
+Command - <code>Photo 1 Delete</code><br>
+this will delete the photo attached with the person at index 1.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>Allows user to choose any image in their pc and use CLI to specify the path of the image.<br>
+This way the user can display the pictures on their contact lists.<br></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">Adding a photo to a contact in your personalised Weaver.</a></h3>
+<div class="paragraph">
+<p>The add Photo command adds a display picture to a particular contact.The command takes in two parameters, TargetIndex
+that is the index of the person I want to add a photo and the image filepath.<br>
+The command can also be used to delete an existing picture of a person.If the person has no display picture and the user attempts to delete a picture, an exception
+will be thrown.</p>
+</div>
+<div class="paragraph">
+<p>Format - photo [INDEX] [IMAGE_FILEPATH]<br>
+e.g. <code>photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg</code> to add an image
+e.g. <code>photo 1 delete</code> to delete an existing image.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/MockUp.png" alt="MockUp" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The photo command is done with the help of ImageView property in JAVAFX, hence it is an attempt to enhance the UI.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>PRE-REQUISITE</strong><br>
+There is a pre-requisite for the command to work.The image that is going to be added to the contact must already be
+present on the user&#8217;s local PC.If it is not so, Weaver is going to prompt the user to add a valid File path.</p>
+</div>
+<div class="paragraph">
+<p>The photo Command is inherited from the <code>UndoableCommand</code> class.</p>
+</div>
+<div class="paragraph">
+<p><strong>Working Flow</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>PhotoCommandParser</code> Class parses the arguments entered in the photo command.The class then throws an Exception with the
+appropriate message depending on whether the File name is not present in the path specified by the user or if the number of arguments entered
+is not equal to two.<br></p>
+</li>
+<li>
+<p>The <code>PhotoCommand</code> class takes care of Invalid conditions like incorrect index.<br></p>
+</li>
+<li>
+<p>It then creates a new instance of the <code>FileImage</code> class. <code>FileImage</code> is an attribute that every person must have.
+A new <code>Person</code> is created with the updated <code>FileImage</code> and the existing model is updated.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PhotoCommand.png" alt="PhotoCommand" width="800">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>ModelManager</code> class implements the <code>addPhotoToPerson</code> method that adds a valid file image as an attribute to the person.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    person.imageProperty().setValue( new FileImage(FilePath));
+    updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    indicateAddressBookChanged();</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The filePath entered must be a valid one, else Weaver will throw an exception.<br></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre> if (FileExists) {
+    try {
+    Index index = ParserUtil.parseIndex(keywords[0]);
+    return new PhotoCommand(index, (keywords[1]));
+            }
+  catch (IllegalValueException ive) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
+            }
+
+        }</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Once the Image is set and the file is then removed from the specified directory, Weaver will no longer display the picture.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Sequence Diagram</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/PhotoSequenceDiagram.png" alt="PhotoSequenceDiagram" width="800">
+</div>
+</div>
+<div class="sect3">
+<h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">Reasons for this type of implementation</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>The feature can be implemented using CommandLine by just stating name of the file.<br></p>
+</li>
+<li>
+<p>The index can be used easily used to reference the person.<br></p>
+</li>
+<li>
+<p>The user can access the image from any directory in the PC.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How should the user choose the Image.<br>
+<strong>Alternative1 (current choice): </strong> Enter the File path present on
+the desktop.<br>
+<strong>Pros:</strong> Makes use of Commad Line Interface.<br>
+<strong>Cons:</strong> User has to make sure the file exists on his/her Desktop.<br>
+<strong>Alternative2:</strong> Make use of FileChooser that prompts user to choose file from
+any directory.<br>
+<strong>Pros:</strong> User can choose any image from any location.<br>
+<strong>Cons:</strong> Makes use of a dialog box instead of Command Line.<br></p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How should the image be stored.<br>
+<strong>Alternative1:</strong> Image is stored in the <code>images</code> directory of the project by invoking <code>ImageStorage</code> class.<br>
+<strong>Pros:</strong> Each image is assigned a unique hashcode.<br>
+<strong>Cons:</strong> The working flow is not easy for incomimg developers to follow.<br>
+<strong>Alternative2:</strong> Image should be stored in the directory whose path is satisfied.<br>
+<strong>Pros:</strong> Easy for new developers to comprehend.<br>
+<strong>Cons:</strong> If the image is removed from the directory, Weaver will have no access to the image.<br></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Set up a reminders panel (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+</li>
+<li>
+<p>Wrote additional tests to increase coverage (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-08 07:42:47 +00:00
+</div>
+</div>
+</body>
+</html>

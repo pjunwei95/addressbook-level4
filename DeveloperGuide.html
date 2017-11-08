@@ -57,12 +57,13 @@
 <li><a href="#login-logout-mechanism">4.2. Login / Logout mechanism</a></li>
 <li><a href="#register-mechanism">4.3. Register mechanism</a></li>
 <li><a href="#customize-tag-color-mechanism">4.4. Customize tag color mechanism</a></li>
-<li><a href="#deleting-a-person-s-tag-mechanism">4.5. Deleting a person&#8217;s tag mechanism</a></li>
-<li><a href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.6. Adding a photo to a contact in your personalised Weaver.</a></li>
-<li><a href="#facebook-integration">4.7. FaceBook Integration</a></li>
-<li><a href="#adding-a-reminders-list-to-weaver">4.8. Adding a reminders list to Weaver.</a></li>
-<li><a href="#logging">4.9. Logging</a></li>
-<li><a href="#configuration">4.10. Configuration</a></li>
+<li><a href="#customize-font-size-mechanism">4.5. Customize font size mechanism</a></li>
+<li><a href="#deleting-a-person-s-tag-mechanism">4.6. Deleting a person&#8217;s tag mechanism</a></li>
+<li><a href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.7. Adding a photo to a contact in your personalised Weaver.</a></li>
+<li><a href="#facebook-integration">4.8. FaceBook Integration</a></li>
+<li><a href="#adding-a-reminders-list-to-weaver">4.9. Adding a reminders list to Weaver.</a></li>
+<li><a href="#logging">4.10. Logging</a></li>
+<li><a href="#configuration">4.11. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -1003,7 +1004,7 @@ A user can go back using the back button.
 <div class="sect2">
 <h3 id="customize-tag-color-mechanism"><a class="link" href="#customize-tag-color-mechanism">4.4. Customize tag color mechanism</a></h3>
 <div class="paragraph">
-<p>Tag color can be changed by typing a <code>ChangeTagColorCommand</code> in the command line.</p>
+<p>Tag color can be changed by giving a <code>ChangeTagColorCommand</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1035,7 +1036,7 @@ User can change one or more than one tag to a different color in one command.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-When the tag color of a tag has not specified by the user yet, it is in default color blue.<br>
+When the tag color of a tag has not specified by the user yet, it is in default color orange.<br>
 Tags with the same tag name are of the same color.
 </td>
 </tr>
@@ -1050,7 +1051,59 @@ Tags with the same tag name are of the same color.
 </div>
 </div>
 <div class="paragraph">
-<p>After every <code>ChangeTagColorCommand</code>, the tag and tag color pair will be stored in the storage file. The tag color in the UI is also updated accordingly.<br></p>
+<p>After every <code>ChangeTagColorCommand</code>, the tag and tag color pair will be stored in the storage file.
+An <code>ChangeTagColorEvent</code> is raised so that the tag color in the UI is also updated accordingly.<br>
+The structure in .xml storage file is like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="css"><span class="error">&lt;</span><span class="tag">persons</span>&gt;
+    <span class="error">&lt;</span><span class="tag">name</span>&gt;<span class="tag">John</span> <span class="tag">Doe</span><span class="error">&lt;</span>/<span class="tag">name</span>&gt;
+    <span class="error">&lt;</span><span class="tag">phone</span>&gt;<span class="float">98765432</span><span class="error">&lt;</span>/<span class="tag">phone</span>&gt;
+    <span class="error">&lt;</span><span class="tag">email</span>&gt;<span class="tag">johnd</span><span class="directive">@example</span><span class="class">.com</span><span class="error">&lt;</span>/<span class="tag">email</span>&gt;
+    <span class="error">&lt;</span><span class="tag">tagged</span>&gt;
+        <span class="error">&lt;</span><span class="tag">name</span>&gt;<span class="tag">friends</span><span class="error">&lt;</span>/<span class="tag">name</span>&gt;
+        <span class="error">&lt;</span><span class="tag">color</span>&gt;<span class="tag">orange</span><span class="error">&lt;</span>/<span class="tag">color</span>&gt;
+    <span class="error">&lt;</span>/<span class="tag">tagged</span>&gt;
+<span class="error">&lt;</span>/<span class="tag">persons</span>&gt;
+<span class="error">&lt;</span><span class="tag">tags</span>&gt;
+    <span class="error">&lt;</span><span class="tag">name</span>&gt;<span class="tag">friends</span><span class="error">&lt;</span>/<span class="tag">name</span>&gt;
+    <span class="error">&lt;</span><span class="tag">color</span>&gt;<span class="tag">orange</span><span class="error">&lt;</span>/<span class="tag">color</span>&gt;
+<span class="error">&lt;</span>/<span class="tag">tags</span>&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following code shows the execution of <code>ChangeTagColorCommand</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">protected</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+        <span class="comment">// Store all non existing tags</span>
+        <span class="predefined-type">Set</span>&lt;Tag&gt; nonExistingTagList = <span class="keyword">new</span> <span class="predefined-type">HashSet</span>&lt;&gt;();
+
+        <span class="comment">// Check whether tags in the tagList are not existing tags</span>
+        <span class="keyword">for</span> (Tag tag: tagList) {
+            <span class="keyword">if</span> (!isExistingTagName(tag)) {
+                nonExistingTagList.add(tag);
+            }
+        }
+
+        <span class="comment">// There are tags that are not existing tags</span>
+        <span class="keyword">if</span> (nonExistingTagList.size() != <span class="integer">0</span>) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(<span class="predefined-type">String</span>.format(MESSAGE_NOT_EXISTING_TAGS, nonExistingTagList));
+        }
+
+        <span class="keyword">try</span> {
+            model.updateTagColorPair(tagList, color);
+        } <span class="keyword">catch</span> (IllegalValueException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_FAILED);
+        }
+
+        EventsCenter.getInstance().post(<span class="keyword">new</span> ChangeTagColorEvent(color.tagColorName));
+
+        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_CHANGE_TAG_COLOR_SUCCESS, tagList, color.tagColorName));
+    }</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>The sequence diagram below shows how the <code>ChangeTagColorCommand</code> works.</p>
@@ -1084,7 +1137,102 @@ Tags with the same tag name are of the same color.
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-s-tag-mechanism"><a class="link" href="#deleting-a-person-s-tag-mechanism">4.5. Deleting a person&#8217;s tag mechanism</a></h3>
+<h3 id="customize-font-size-mechanism"><a class="link" href="#customize-font-size-mechanism">4.5. Customize font size mechanism</a></h3>
+<div class="paragraph">
+<p>The font size of the application can be changed via <code>ChangeFontSizeCommand</code> or by pressing the '+' or '-' button on the right top corner.</p>
+</div>
+<div class="paragraph">
+<p>A new class FontSize is used to represent a font size.</p>
+</div>
+<div class="paragraph">
+<p>The following diagram shows the hierarchy of FontSize class</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FontSizeClassDiagram.png" alt="FontSizeClassDiagram" width="500">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only five font sizes are supported: XS, S, M, L, XL
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>User can change the font size by giving the name of the exact font size which they want the app to be changed to. E.g. <code>fs xl</code>. Or they can
+type in "+" or "-" symbol to increase or decrease the current font size. E.g. <code>fs +</code><br></p>
+</div>
+<div class="paragraph">
+<p>Pressing the "+" button equals to giving <code>fs +</code> command and similarly for "-" button.<br></p>
+</div>
+<div class="paragraph">
+<p>If the current font size is the largest one and the user still gives <code>fs +</code> command or presses the "+" button to increase font sizes, a warning
+will be shown on the display box saying "The current font size is the largest one." Similarly for decreasing the font size.</p>
+</div>
+<div class="paragraph">
+<p>When a <code>ChangeFontSizeCommand</code> is made, a <code>ChangeFontSizeEvent</code> is raised. This event will be received by UI components such as
+PersonCard. So that the font size in UI components will be updated accordingly. The following code shows how the event is handled
+in the PersonCard.java.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Subscribe</span>
+<span class="directive">private</span> <span class="type">void</span> handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
+    <span class="predefined-type">String</span> newFontSize = event.getFontSize();
+    initTags(person, newFontSize);
+    setFontSize(newFontSize);
+    setSizeForAllImagesAccordingToFontSize(newFontSize);
+    setSizeForPhotosAccordingToFontSize(newFontSize);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Noted that not only the font size is changed, the size of images and icons also are enlarged or reduced according to the
+new font size.<br></p>
+</div>
+<div class="paragraph">
+<p>When the user exits the app, the current font size will be stored in the preferences.json in the following format.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">{
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">guiSettings</span><span class="delimiter">&quot;</span></span> : {
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowWidth</span><span class="delimiter">&quot;</span></span> : <span class="float">781.0</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowHeight</span><span class="delimiter">&quot;</span></span> : <span class="float">600.0</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">windowCoordinates</span><span class="delimiter">&quot;</span></span> : {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">x</span><span class="delimiter">&quot;</span></span> : <span class="integer">426</span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">y</span><span class="delimiter">&quot;</span></span> : <span class="integer">111</span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">fontSize</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">m</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">theme</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">bright</span><span class="delimiter">&quot;</span></span>
+  },
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookFilePath</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">data/addressbook.xml</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">addressBookName</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">MyAddressBook</span><span class="delimiter">&quot;</span></span>
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to represent a font size?<br>
+<strong>Alternative 1 (current choice):</strong> Create a new class <code>FontSize</code>.<br>
+<strong>Pros:</strong> The methods associated with font size can be encapsulated inside one class.<br>
+<strong>Cons:</strong> It increases coupling as a lot of UI components need to call the method of <code>FontSize</code> class.<br>
+<strong>Alternative 2:</strong> Create a new field of <code>String</code> type in <code>GuiSetting</code> class.<br>
+<strong>Pros:</strong> It is easy to implement.<br>
+<strong>Cons:</strong> The methods associated with font size will appear repeatedly in many UI component classes.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person-s-tag-mechanism"><a class="link" href="#deleting-a-person-s-tag-mechanism">4.6. Deleting a person&#8217;s tag mechanism</a></h3>
 <div class="paragraph">
 <p>The Deleting a person&#8217;s tag mechanism consists of <code>DeleteTagCommand</code> and <code>DeleteTagCommandParser</code> classes.
 The <code>DeleteTagCommandParser</code> resides inside <code>LogicManager</code>. <code>DeleteTagCommandParser</code> only deals with <code>Parser</code>. It is created from <code>AddressBookParser</code>. The following diagram shows the flow for parser:</p>
@@ -1215,7 +1363,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>DeleteTagCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> Access the <code>Person</code> and overwrite a new <code>Person</code> to it.<br>
@@ -1248,7 +1396,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.6. Adding a photo to a contact in your personalised Weaver.</a></h3>
+<h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.7. Adding a photo to a contact in your personalised Weaver.</a></h3>
 <div class="paragraph">
 <p>The add Photo command adds a display picture to a particular contact.The command takes in two parameters, TargetIndex
 that is the index of the person I want to add a photo and the image filepath.<br>
@@ -1352,7 +1500,7 @@ A new <code>Person</code> is created with the updated <code>FileImage</code> and
 </div>
 </div>
 <div class="sect3">
-<h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">4.6.1. Reasons for this type of implementation</a></h4>
+<h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">4.7.1. Reasons for this type of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1368,7 +1516,7 @@ A new <code>Person</code> is created with the updated <code>FileImage</code> and
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.2. Design considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.2. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How should the user choose the Image.<br>
 <strong>Alternative1 (current choice): </strong> Enter the File path present on
@@ -1393,7 +1541,7 @@ any directory.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="facebook-integration"><a class="link" href="#facebook-integration">4.7. FaceBook Integration</a></h3>
+<h3 id="facebook-integration"><a class="link" href="#facebook-integration">4.8. FaceBook Integration</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1415,7 +1563,7 @@ page is shown up on the browser panel.</p>
 <p>e.g. - <code>facebook 1</code></p>
 </div>
 <div class="sect3">
-<h4 id="working-flow"><a class="link" href="#working-flow">4.7.1. Working flow</a></h4>
+<h4 id="working-flow"><a class="link" href="#working-flow">4.8.1. Working flow</a></h4>
 <div class="paragraph">
 <p>The <code>FaceBookCommand Parser</code> class parses the arguments and throws an exception if the index entered
 is invalid. A new event <code>handleFaceBookEvent</code>  is then raised.
@@ -1445,7 +1593,7 @@ loadPage(url);
 </div>
 </div>
 <div class="sect3">
-<h4 id="reasons-for-this-kind-of-implementation"><a class="link" href="#reasons-for-this-kind-of-implementation">4.7.2. Reasons for this kind of implementation</a></h4>
+<h4 id="reasons-for-this-kind-of-implementation"><a class="link" href="#reasons-for-this-kind-of-implementation">4.8.2. Reasons for this kind of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1458,7 +1606,7 @@ loadPage(url);
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.3. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.8.3. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How should the user view the profile page.<br>
 <strong>Alternative1 : </strong> View the profile page on a web browser<br>
@@ -1471,7 +1619,7 @@ loadPage(url);
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-reminders-list-to-weaver"><a class="link" href="#adding-a-reminders-list-to-weaver">4.8. Adding a reminders list to Weaver.</a></h3>
+<h3 id="adding-a-reminders-list-to-weaver"><a class="link" href="#adding-a-reminders-list-to-weaver">4.9. Adding a reminders list to Weaver.</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1522,7 +1670,7 @@ e.g. - <code>change 1 d/12.12.2017</code>.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.9. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.10. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1560,7 +1708,7 @@ e.g. - <code>change 1 d/12.12.2017</code>.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">4.10. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">4.11. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3233,7 +3381,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-06 15:52:34 +00:00
+Last updated 2017-11-08 07:42:47 +00:00
 </div>
 </div>
 </body>
