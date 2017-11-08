@@ -87,7 +87,7 @@ public class ChangeTagColorCommand extends UndoableCommand {
             throw new CommandException(MESSAGE_FAILED);
         }
 
-        EventsCenter.getInstance().post(new ChangeTagColorEvent(color.tagColorName));
+        EventsCenter.getInstance().post(new ChangeTagColorEvent());
 
         return new CommandResult(String.format(MESSAGE_CHANGE_TAG_COLOR_SUCCESS, tagList, color.tagColorName));
     }
