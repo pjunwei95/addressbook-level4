@@ -43,6 +43,9 @@ public interface Model {
     /** Deletes the given reminder. */
     void deleteReminder(ReadOnlyReminder target) throws ReminderNotFoundException;
 
+    /** Clear the browser panel */
+    void clearBrowserPanel();
+
     /** Adds the given reminder */
     void addReminder(ReadOnlyReminder person) throws DuplicateReminderException;
 

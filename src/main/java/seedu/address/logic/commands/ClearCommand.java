@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 //@@author pjunwei95
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.events.ui.ClearBrowserPanelEvent;
 import seedu.address.model.AddressBook;
 
 /**
@@ -17,6 +18,7 @@ public class ClearCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() {
         requireNonNull(model);
         model.resetData(new AddressBook());
+        model.clearBrowserPanel();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

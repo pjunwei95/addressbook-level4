@@ -70,7 +70,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyAddressBook newData) {
         addressBook.resetData(newData);
         indicateAddressBookChanged();
-        raise(new ClearBrowserPanelEvent());
     }
 
     @Override
@@ -89,6 +88,10 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.removePerson(target);
         indicateAddressBookChanged();
 
+    }
+    @Override
+    public synchronized void clearBrowserPanel() {
+        raise(new ClearBrowserPanelEvent());
     }
     @Override
     public synchronized void sendMailToContacts(String tag, String subject, List<ReadOnlyPerson> lastShownList) {

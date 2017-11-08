@@ -133,6 +133,10 @@ public class AddReminderTest {
             fail("This method should not be called.");
 
         }
+        @Override
+        public void clearBrowserPanel() {
+            fail("This method should not be called.");
+        }
 
         @Override
         public void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
