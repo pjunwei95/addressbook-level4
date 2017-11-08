@@ -107,6 +107,10 @@ an error message and then fix the command typed earlier.
 https://github.com/CS2103AUG2017-T13-B1/main/issues/126[#126],
 https://github.com/CS2103AUG2017-T13-B1/main/issues/129[#129],
 https://github.com/CS2103AUG2017-T13-B1/main/issues/131[#131])
+* Wrote additional tests to increase coverage from 80% to 82%
+(Pull request https://github.com/CS2103AUG2017-W13-B2/main/pull/120[#120])
+* Made suggestion for AddressBook level 4 (Issue
+https://github.com/nus-cs2103-AY1718S1/forum/issues/195[#195])
 * Made suggestion for CS2103 website (Issue
 https://github.com/nus-cs2103/website/issues/42[#42])
 * Offering features for others to reuse (Issues

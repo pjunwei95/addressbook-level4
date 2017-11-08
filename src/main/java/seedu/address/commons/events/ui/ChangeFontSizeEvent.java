@@ -16,11 +16,6 @@ public class ChangeFontSizeEvent extends BaseEvent {
         this.message = message;
     }
 
-    public ChangeFontSizeEvent(String fontSize) {
-        this.fontSize = fontSize;
-        this.message = "";
-    }
-
     public String getFontSize() {
         return fontSize;
     }

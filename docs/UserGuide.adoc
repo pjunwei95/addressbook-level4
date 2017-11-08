@@ -543,7 +543,6 @@ Format: `backup` +
 // end::backup[]
 
 // tag::clear[]
->>>>>>> a7145a649b0cd02ade13c7c27248752cffdaf924
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +

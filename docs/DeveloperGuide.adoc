@@ -550,11 +550,6 @@ protected CommandResult executeUndoableCommand() throws CommandException {
             throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS, nonExistingTagList));
         }
 
-        // Check whether the input tag color is a valid color name
-        if (!TagColor.isValidTagColorName(color.tagColorName)) {
-            throw new CommandException(String.format(MESSAGE_INVALID_COLOR, color));
-        }
-
         try {
             model.updateTagColorPair(tagList, color);
         } catch (IllegalValueException e) {
