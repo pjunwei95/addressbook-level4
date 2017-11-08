@@ -6,12 +6,7 @@ import static seedu.address.logic.commands.PhotoCommand.MESSAGE_PHOTO_PERSON_SUC
 import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.awt.image.BufferedImage;
-
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import org.junit.Test;
 

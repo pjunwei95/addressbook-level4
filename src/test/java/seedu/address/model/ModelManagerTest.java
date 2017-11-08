@@ -51,7 +51,7 @@ public class ModelManagerTest {
     @Test
     public void clearBrowserPanel_eventRaised() throws IOException {
         ModelManager model = new ModelManager();
-            model.clearBrowserPanel();
+        model.clearBrowserPanel();
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ClearBrowserPanelEvent);
     }
 

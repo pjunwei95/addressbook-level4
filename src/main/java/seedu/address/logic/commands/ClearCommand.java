@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 //@@author pjunwei95
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.events.ui.ClearBrowserPanelEvent;
 import seedu.address.model.AddressBook;
 
 /**

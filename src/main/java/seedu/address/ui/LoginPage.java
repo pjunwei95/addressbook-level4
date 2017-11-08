@@ -33,10 +33,8 @@ import seedu.address.model.theme.Theme;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AccountsStorage;
 import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
 
 /**
