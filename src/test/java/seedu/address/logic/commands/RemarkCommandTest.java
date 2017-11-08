@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-
+//@@author yangminxingnus
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -34,3 +34,4 @@ public class RemarkCommandTest {
     }
 
 }
+//@@author

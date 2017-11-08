@@ -1,5 +1,5 @@
 package seedu.address.ui;
-
+//@@author yangminxingnus
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -264,3 +264,4 @@ public class LoginPage extends UiPart<Region> {
         password.setStyle(fxFormatFontSize);
     }
 }
+//@@author

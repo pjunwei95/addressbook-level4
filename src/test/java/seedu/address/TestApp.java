@@ -98,12 +98,12 @@ public class TestApp extends MainApp {
         ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         return copy;
     }
-
+    //@@author yangminxing
     @Override
     public void start(Stage primaryStage) {
         ui.start(primaryStage, 1);
     }
-
+    //@@author
     public static void main(String[] args) {
         launch(args);
     }

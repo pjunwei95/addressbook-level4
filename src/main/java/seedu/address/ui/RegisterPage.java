@@ -1,5 +1,5 @@
 package seedu.address.ui;
-
+//@@author yangminxingnus
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -193,3 +193,4 @@ public class RegisterPage extends UiPart<Region> {
         this.hide();
     }
 }
+//@@author

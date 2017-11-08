@@ -61,9 +61,11 @@ public class MainApp extends Application {
 
         config = initConfig(getApplicationParameter("config"));
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+        //@@author yangminxingnus
         AccountsStorage accountsPrefs = new AccountsStorage(config.getAccountsPath());
 
         accPrefs = initAccPrefs(accountsPrefs);
+        //@@author
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -149,6 +151,7 @@ public class MainApp extends Application {
         return initializedConfig;
     }
 
+    //@@author yangminxingnus
     /**
      * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
      * or a new {@code UserPrefs} with default configuration if errors occur when
@@ -181,6 +184,7 @@ public class MainApp extends Application {
 
         return initializedPrefs;
     }
+    //@@author
 
 
     /**

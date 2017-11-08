@@ -1,5 +1,5 @@
 package seedu.address.model.person;
-
+//@@author yangminxingnus
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -85,3 +85,4 @@ public class Remark {
         return moduleLists.hashCode();
     }
 }
+//@@author

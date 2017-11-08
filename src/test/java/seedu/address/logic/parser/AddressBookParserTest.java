@@ -46,7 +46,7 @@ public class AddressBookParserTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private final AddressBookParser parser = new AddressBookParser();
-
+    //@@author yangminxingnus
     @Test
     public void parseCommand_remark() throws Exception {
         final Remark remark = new Remark("CS2101/SEC/1");
@@ -61,7 +61,7 @@ public class AddressBookParserTest {
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
-
+    //@@author
     @Test
     public void parseCommand_clear() throws Exception {
         //assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);

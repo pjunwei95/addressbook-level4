@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-
+//@@author yangminxingnus
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
@@ -75,3 +75,4 @@ public class RemarkCommand extends UndoableCommand {
                 && this.index == ((RemarkCommand) other).index);
     }
 }
+//@@author
