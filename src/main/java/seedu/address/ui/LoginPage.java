@@ -112,7 +112,7 @@ public class LoginPage extends UiPart<Region> {
         String pword = password.getText();
         if (checkValid(uname, pword)) {
 
-            String path = "data/" + uname + "addressbook.xml";
+            String path = "data/" + uname + ".xml";
 
             UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
             AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
