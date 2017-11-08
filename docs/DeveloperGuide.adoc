@@ -360,6 +360,21 @@ image::UndoRedoActivityDiagram.png[width="200"]
 **Cons:** Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things. +
 // end::undoredo[]
 
+// tag::remark[]
+=== Remark mechanism
+
+The remark mechanism remarks contacts with their module information.
+The command takes two parameters, Index and ModuleInfo. TargetIndex specifies the person you want to remark to. And the module information specifies the person's module information.
+If the index is invalid or the module information is not in the correct format, exceptions will be thrown.+
+Format - photo [INDEX] [MODULEINFO]
+e.g. remark 1 CS2103/LEC/1
+
+[NOTE]
+The correct format for module information is: +
+MODULETITLE/MODULETYPE/MODULENUM
+// end::remark[]
+
+// tag::loginlogout[]
 === Login / Logout mechanism
 
 The `login / logout` mechanism is a page which requires user to key in his username and password before he can use the addressbook. And once he is logged in, there will be a automatically generated file named as `username + addressbook.xml` storing the information about his own addressbook.
@@ -438,10 +453,11 @@ multiple users. +
 **Alternative 2:** `login` is  optional. User can still use this addressbook without login.  +
 **Pros:** Multiple choices for users. More flexible. +
 **Cons:** The default page becomes public, anyone can read and modify it. +
-// end::undoredo[]
+// end::loginlogout[]
 
 ---
 
+// tag::register[]
 === Register mechanism
 
 The register feature enables users to put new valid accounts inside the accounts.json file. The file operations are similar to the one used in Login/Logout feature.
@@ -491,6 +507,8 @@ private void handleRegisterEvent() {
 
 [NOTE]
 A user can go back using the back button.
+// end::register[]
+
 
 // tag::customizetagcolor[]
 === Customize tag color mechanism
@@ -793,6 +811,63 @@ Above is the sequence diagram. +
 **Alternative2:** View the profile page on the browser panel. +
 **Pros:** Makes it quicker and adds a fucntion to the personalised Weaver. +
 **Cons:** Limits the functionalities that can be used on facebook. +
+
+=== Adding a reminders list to Weaver.
+
+** The reminders panel displays the list of reminders that the user has entered. +
+** The Reminder object contains three main attributes which are as follows +
+
+* Details of the reminder. +
+
+* The priority level of the reminder which can be high, low or medium. +
+
+* The DueDate of the assignment.
+
+** An image is also assigned to the reminder indicating the priority level of the reminder. +
+
+** There are three main commands associated with this feature. +
+
+* Adding a reminder to the list. +
+e.g. - `reminder g/CS2103T Assignmet p/High d/12.11.2017`. +
+
+* Removing a reminder. +
+e.g. - `remove 1`. +
+
+* Changing a reminder. +
+e.g. - `change 1 d/12.12.2017`. +
+
+** The commands to add and remove reminders will inherit from Undoable Command. +
+
+// tag::nusmods[]
+=== Nusmods Integration
+
+** The nusmods command helps the user to view the nusmods website which displays module information stored in the
+person's remark.
+** If the module information are not stored in the correct format or there is no such module in nusmods, it will not be
+displayed.
+
+** FORMAT - `nusmods [INDEX]`
+
+e.g. - `nusmods 1`
+
+==== Working flow
+
+The `nusmodsParser` class parses the arguments and throws an exception if the index entered
+is invalid. A new event `handleNusmodsEvent`  is then raised.
+The Brower Panel class then loads the page with the url of the profile page to be displayed. +
+
+
+image::FaceBookSequence.png[width="800"]
+
+Above is the sequence diagram. +
+// end::nusmods[]
+
+==== Reasons for this kind of implementation
+
+* This helps the user to take a quick glance of the the Nusmods information.
+* It is better than opening a brower on the desktop. +
+* It is convenient for users to shedule their time using this feature. +
+
 
 === Adding a reminders list to Weaver.
 

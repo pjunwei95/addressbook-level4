@@ -247,6 +247,7 @@ Selects the 2nd person in the address book.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
+// tag::remark[]
 === Remarking a person : `remark`
 
 Remarks the person identified by the index number. +
@@ -254,7 +255,7 @@ Format: `remark INDEX /r REMARK`
 
 ****
 * Remarks a person's module information identified by the index number.
-* The content of remark should be in the format MODNAME/MODTYPE/GROUPNUM(Integer).
+* The content of remark should be in the format MODNAME/MODTYPE/GROUPNUM.
 * All info shuold coexist in nusmods. This app dont check the validity of the module information.
 ****
 
@@ -263,7 +264,19 @@ Examples:
 * `list` +
 `remark 2 /r CS2104/LEC/1` +
 Remarks the 2nd person's module information as CS2104/LEC/1.
+// end::remark[]
 
+// tag::nusmods[]
+=== List out a person's module information
+
+On click of a person's panel, this person's module lists will be list out in the panel.
+
+****
+* The nusmods information here displays according to the information in the remark field.
+* All info shuold coexist in nusmods. This app dont check the validity of the module information.
+****
+
+// end::nusmods[]
 
 === Listing entered commands : `history`
 
@@ -327,18 +340,22 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 *SINCE V1.2*
 
+// tag::loginlogout[]
 === Login / Logout SINCE V1.2
 
 Users now can login using valid accounts. And their files are seperated.
 
 To logout, just click logout in the "file - > logout" button.
+User can also logout using the logout command.
+// end::loginlogout[]
 
+// tag::register[]
 === Register SINCE V1.3
 
 Users now can register new valid accounts.
 
 The new account's username must be different from all previous ones.
-
+// end::register[]
 
 === Customize tags' color : `color` SINCE V1.2
 
