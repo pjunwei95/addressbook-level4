@@ -71,16 +71,13 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads a default HTML file with a background that matches the general theme.
      */
     private void loadDefaultPage() {
-        //URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         try {
 
             URL defaultPage = new URL(DEFAULT_PAGE);
             loadPage(defaultPage.toExternalForm());
 
         } catch (MalformedURLException e) {
-
             logger.info("Invalid URL");
-
         }
 
     }
@@ -110,7 +107,6 @@ public class BrowserPanel extends UiPart<Region> {
 
     @Subscribe
     private void handleShowPersonAddressEvent(ShowPersonAddressEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPage(GOOGLE_MAP_SEARCH_URL_PREFIX + event.getAddress());
     }
 
