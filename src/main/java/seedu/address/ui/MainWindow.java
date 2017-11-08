@@ -280,7 +280,7 @@ public class MainWindow extends UiPart<Region> {
         this.handleLogoutEvent();
 
     }
-    //@@author
+
     public PersonListPanel getPersonListPanel() {
         return this.personListPanel;
     }

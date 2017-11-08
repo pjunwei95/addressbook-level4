@@ -10,7 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.IMAGE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.IMAGE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_OF_BIRTH_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_OF_BIRTH_DESC_BOUNDS;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_IMAGE_PATH_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -22,6 +25,8 @@ import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.USERNAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.USERNAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_AMY;
@@ -45,7 +50,9 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -70,6 +77,22 @@ public class AddCommandParserTest {
         // multiple phones - last phone accepted
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DOB_DESC_BOB + REMARK_DESC_BOB + IMAGE_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expectedPerson));
+
+        // multiple dates - last date accepted
+        assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + DOB_DESC_AMY + DOB_DESC_BOB + REMARK_DESC_BOB + IMAGE_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expectedPerson));
+
+        // multiple filepaths - last filepath accepted
+        assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + DOB_DESC_AMY +  REMARK_DESC_BOB + IMAGE_BOB + IMAGE_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedPerson));
+
+        // multiple username - last username accepted
+        assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + DOB_DESC_AMY +  REMARK_DESC_BOB + IMAGE_BOB + USERNAME_AMY
+                        + USERNAME_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         // multiple emails - last email accepted
@@ -150,6 +173,21 @@ public class AddCommandParserTest {
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + DOB_DESC_BOB + REMARK_DESC_BOB + IMAGE_BOB + INVALID_TAG_DESC
                 + VALID_TAG_FRIEND, Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        // invalid Date
+        assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + INVALID_DATE_OF_BIRTH_DESC + REMARK_DESC_BOB + IMAGE_BOB + TAG_DESC_HUSBAND
+                + VALID_TAG_FRIEND, DateOfBirth.MESSAGE_BIRTHDAY_CONSTRAINTS);
+
+        //out of bounds date
+        assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + INVALID_DATE_OF_BIRTH_DESC_BOUNDS + REMARK_DESC_BOB + IMAGE_BOB + TAG_DESC_HUSBAND
+                + VALID_TAG_FRIEND, DateOfBirth.MESSAGE_BIRTHDAY_CONSTRAINTS);
+
+        // invalid Image path
+        assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + DOB_DESC_BOB + REMARK_DESC_BOB + INVALID_IMAGE_PATH_DESC + TAG_DESC_HUSBAND
+                + VALID_TAG_FRIEND, FileImage.MESSAGE_IMAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_BOB

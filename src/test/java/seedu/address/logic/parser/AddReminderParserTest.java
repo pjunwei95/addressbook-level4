@@ -45,25 +45,17 @@ public class AddReminderParserTest {
                         + PRIORITY_DESC_MEETING + DUE_DATE_DESC_MEETING,
                 new AddReminder(expectedReminder));
 
-        // multiple emails - last email accepted
+        // multiple priorities - last priority accepted
         assertParseSuccess(parser, AddReminder.COMMAND_WORD + DETAILS_DESC_MEETING
-                         + PRIORITY_DESC_MEETING + DUE_DATE_DESC_MEETING,
+                        + PRIORITY_DESC_ASSIGNMENT + PRIORITY_DESC_MEETING + DUE_DATE_DESC_MEETING,
+                new AddReminder(expectedReminder));
+
+        // multiple due dates - last due date accepted
+        assertParseSuccess(parser, AddReminder.COMMAND_WORD + DETAILS_DESC_MEETING
+                        + PRIORITY_DESC_MEETING + DUE_DATE_DESC_ASSIGNMENT + DETAILS_DESC_MEETING,
                 new AddReminder(expectedReminder));
 
     }
-
-    @Test
-    public void parse_optionalFieldsMissing_success() {
-
-        Reminder expectedReminder = new ReminderBuilder().withDetails(VALID_DETAILS_ASSIGNMENT)
-                .withPriority("Priority Level: " + VALID_PRIORITY_ASSIGNMENT)
-                .withDueDate(VALID_DUE_DATE_ASSIGNMENT).build();
-
-        assertParseSuccess(parser, AddReminder.COMMAND_WORD + DETAILS_DESC_ASSIGNMENT
-                        + PRIORITY_DESC_ASSIGNMENT + DUE_DATE_DESC_ASSIGNMENT,
-                new AddReminder(expectedReminder));
-    }
-
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddReminder.MESSAGE_USAGE);
@@ -101,7 +93,7 @@ public class AddReminderParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, AddReminder.COMMAND_WORD + INVALID_DETAILS_DESC + PRIORITY_DESC_MEETING
-                        + INVALID_DUE_DATE_DESC , ReminderDetails.MESSAGE_REMINDER_CONSTRAINTS);
+                + INVALID_DUE_DATE_DESC , ReminderDetails.MESSAGE_REMINDER_CONSTRAINTS);
 
     }
 }

@@ -198,7 +198,7 @@ public class LoginPage extends UiPart<Region> {
     }
 
     /**
-    * release the resources
+     * release the resources
      */
     void releaseResources() {
         if (mainWindow != null) {
@@ -264,4 +264,3 @@ public class LoginPage extends UiPart<Region> {
         password.setStyle(fxFormatFontSize);
     }
 }
-//@@author
