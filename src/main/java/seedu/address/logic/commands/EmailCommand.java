@@ -26,6 +26,7 @@ public class EmailCommand extends Command {
 
     private final String tag;
     private final String subject;
+    private String modifiedSubject;
 
     /**
      * @param tag     of the persons to whom the email has to be sent
@@ -49,11 +50,28 @@ public class EmailCommand extends Command {
             throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS));
         }
         else {
-            model.sendMailToContacts(tag, subject, model.getFilteredPersonList());
+            modifiedSubject = getSubjectForBrowser(subject);
+            model.sendMailToContacts(tag, modifiedSubject, model.getFilteredPersonList());
             return new CommandResult(MESSAGE_EMAIL_SUCCESS);
         }
 
 
+    }
+    /**
+     * Get subject with '+' appended
+     */
+    private String getSubjectForBrowser(String subject) {
+
+        String modifiedSubject = "";
+        int loopVariable;
+        for (loopVariable = 0; loopVariable < subject.length(); loopVariable++) {
+            if (subject.charAt(loopVariable) == ' ') {
+                modifiedSubject = modifiedSubject + '+';
+            } else {
+                modifiedSubject = modifiedSubject + subject.charAt(loopVariable);
+            }
+        }
+        return modifiedSubject;
     }
 
     /**
