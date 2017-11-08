@@ -32,8 +32,10 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FaceBookCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MapCommand;
 import seedu.address.logic.commands.PhotoCommand;
@@ -49,6 +51,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.SearchContainsKeywordsPredicate;
 import seedu.address.model.reminder.Reminder;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
 import seedu.address.testutil.ChangeReminderDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -67,6 +70,18 @@ public class AddressBookParserTest {
         RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
             + 1 + " " + PREFIX_REMARK + " " + "CS2101/SEC/1");
         assertEquals(new RemarkCommand(1, remark), command);
+    }
+    @Test
+    public void parseCommand_logout() throws Exception {
+        final LogoutCommand command = new LogoutCommand();
+        assertEquals(command, command);
+    }
+    @Test
+    public void parseCommand_FindTagCommand() throws Exception {
+
+        List<String> keywords = Arrays.asList("friends");
+        final FindTagCommand command = new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
+        assertEquals(command, new FindTagCommand(new TagContainsKeywordsPredicate(keywords)));
     }
     @Test
     public void parseCommand_search() throws Exception {

@@ -43,22 +43,11 @@ public class EmailSubject {
         return test.matches(NAME_VALIDATION_REGEX);
     }
 
-
-    @Override
-    public String toString() {
-        return subject;
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EmailSubject // instanceof handles nulls
                 && this.subject.equals(((EmailSubject) other).subject)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        return subject.hashCode();
     }
 
 }
