@@ -36,36 +36,6 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
         /* Case: Add photo to the first person in the list, command with leading spaces and
           trailing spaces -> deleted */
 
-        //Find the relative path of a file.
-
-        String path = "/Users/ronaklakhotia/Desktop/Ronak.jpeg";
-        String base = "/Users/ronaklakhotia/Desktop";
-        String relative = new File(base).toURI().relativize(new File(path).toURI()).getPath();
-
-        File fileToRead = null;
-        BufferedImage image = null;
-
-        File fileToWrite = null;
-
-        String uniquePath = null;
-        //System.out.println(relative);
-
-        try {
-
-            String url = path + "";
-            image = new BufferedImage(963, 640, BufferedImage.TYPE_INT_ARGB);
-            fileToRead = new File(url);
-            image = ImageIO.read(fileToRead);
-            uniquePath = Integer.toString(path.hashCode());
-            fileToWrite = new File("src/main/resources/images/" + uniquePath + ".jpg");
-            ImageIO.write(image, "jpg", fileToWrite);
-
-
-        } catch (IOException io) {
-            new AssertionError("Invalid input");
-        }
-
-
         Model expectedModel = getModel();
         String command = "     " + PhotoCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased()
                 + "       " + "src/main/resources/images/" + "clock" + ".png" + "   ";

@@ -44,7 +44,6 @@ import seedu.address.storage.XmlAddressBookStorage;
  */
 public class LoginPage extends UiPart<Region> {
 
-    public static final String DEFAULT_PAGE = "default.html";
     private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "LoginPage.fxml";
     private static final int MIN_HEIGHT = 600;
@@ -107,17 +106,13 @@ public class LoginPage extends UiPart<Region> {
      */
     @FXML
     private void handleLoginEvent() throws IOException {
-        logger.info("Trying to login");
         String uname = username.getText();
         String pword = password.getText();
         if (checkValid(uname, pword)) {
 
             String path = "data/" + uname + ".xml";
-
-            UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
             AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
 
-            //storage.setUserPrefsStorage(userPrefsStorage);
             prefs.setAddressBookFilePath(path);
             storage.setAddressBookStorage(addressBookStorage);
 
@@ -134,7 +129,6 @@ public class LoginPage extends UiPart<Region> {
             alert.setTitle("Incorrect username or password.");
             alert.setContentText("Your username or password is not correct, please try again.");
             alert.showAndWait();
-            logger.info("Wrong name or password!");
         }
     }
 
@@ -143,7 +137,6 @@ public class LoginPage extends UiPart<Region> {
      */
     @FXML
     private void handleRegisterEvent() {
-        logger.info("Trying to register");
         RegisterPage registerPage = new RegisterPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
         this.hide();
         registerPage.show();
@@ -237,14 +230,11 @@ public class LoginPage extends UiPart<Region> {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
         return new ModelManager(initialData, userPrefs);

@@ -13,6 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.events.ui.ClearBrowserPanelEvent;
 import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -46,6 +47,12 @@ public class ModelManagerTest {
             throw new AssertionError("Person not found");
         }
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof FaceBookEvent);
+    }
+    @Test
+    public void clearBrowserPanel_eventRaised() throws IOException {
+        ModelManager model = new ModelManager();
+            model.clearBrowserPanel();
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ClearBrowserPanelEvent);
     }
 
     @Test

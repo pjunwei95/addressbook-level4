@@ -30,8 +30,6 @@ public class PhotoCommand extends UndoableCommand {
     public static final String DELETE_SUCCESS = "Deleted photo of Person: %1$s";
     public static final String MESSAGE_PHOTO_PERSON_SUCCESS = "Added Photo to Person: %1$s";
 
-    public static final String MESSAGE_FILE_PATH_NOT_FOUND = "Incorrect file path";
-
     private final Index targetIndex;
     private  String filePath;
 
