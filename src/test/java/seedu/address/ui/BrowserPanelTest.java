@@ -75,7 +75,7 @@ public class BrowserPanelTest extends GuiUnitTest {
     @Test
     public void addressDisplay() throws Exception {
 
-        String expectedUrl = GOOGLE_MAP_SEARCH_URL_PREFIX + "PGP";
+        String expectedUrl = GOOGLE_MAP_SEARCH_URL_PREFIX + "PGP?dg=dbrw&newdg=1";
         URL expectedaddressPersonUrl = new URL(expectedUrl);
         postNow(selectionAddress);
         assertEquals(expectedaddressPersonUrl, browserPanelHandle.getLoadedUrl());
