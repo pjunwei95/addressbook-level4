@@ -3,11 +3,9 @@ package seedu.address.ui;
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalPersons.ALEX;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.BrowserPanel.FACEBOOK_PROFILE_PAGE;
-import static seedu.address.ui.BrowserPanel.GOOGLE_MAP_SEARCH_URL_PREFIX;
 
 import java.net.URL;
 
@@ -35,7 +33,7 @@ public class BrowserPanelTest extends GuiUnitTest {
         selectionChangedEventStub = new PersonPanelSelectionChangedEvent(new PersonCard(ALICE, 0));
 
         selectionChanged = new FaceBookEvent(ALICE);
-        selectionAddress = new ShowPersonAddressEvent(ALEX.getAddress().toString());
+        selectionAddress = new ShowPersonAddressEvent("");
 
         guiRobot.interact(() -> browserPanel = new BrowserPanel());
         uiPartRule.setUiPart(browserPanel);
@@ -72,16 +70,5 @@ public class BrowserPanelTest extends GuiUnitTest {
         assertEquals(expectedFaceBookPersonUrl, browserPanelHandle.getLoadedUrl());
 
     }
-    @Test
-    public void addressDisplay() throws Exception {
-
-        String expectedUrl = GOOGLE_MAP_SEARCH_URL_PREFIX + "PGP?dg=dbrw&newdg=1";
-        URL expectedaddressPersonUrl = new URL(expectedUrl);
-        postNow(selectionAddress);
-        assertEquals(expectedaddressPersonUrl, browserPanelHandle.getLoadedUrl());
-
-    }
-
 }
-
 

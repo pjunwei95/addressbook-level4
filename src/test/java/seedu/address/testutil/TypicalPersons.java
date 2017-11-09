@@ -148,6 +148,11 @@ public class TypicalPersons {
 
     public static final ReadOnlyPerson RANDOM = new PersonBuilder().withName("Ronak Lakhotia").withPhone("12345678")
             .withEmail("ronak@gmail.com").withAddress("Pgp").withDateOfBirth("13.10.1997")
+            .withImage("")
+            .build();
+    public static final ReadOnlyPerson RANDOMNEW = new PersonBuilder().withName("Ronak Lakhotia").withPhone("12345678")
+            .withEmail("ronak@gmail.com").withAddress("Pgp").withDateOfBirth("13.10.1997")
+            .withImage("")
             .build();
 
     private TypicalPersons() {} // prevents instantiation

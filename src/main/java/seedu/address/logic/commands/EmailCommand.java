@@ -60,7 +60,7 @@ public class EmailCommand extends Command {
     /**
      * Get subject with '+' appended
      */
-    private String getSubjectForBrowser(String subject) {
+    public String getSubjectForBrowser(String subject) {
 
         String modifiedSubject = "";
         int loopVariable;
@@ -79,7 +79,7 @@ public class EmailCommand extends Command {
      *
      * @param tagName tag that is to be checked
      */
-    private boolean checkIfExistingTagName(String tagName) {
+    public boolean checkIfExistingTagName(String tagName) {
 
         for (Tag tag : model.getAddressBook().getTagList()) {
             if (tag.tagName.equalsIgnoreCase(tagName)) {
