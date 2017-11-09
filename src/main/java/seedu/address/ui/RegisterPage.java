@@ -86,7 +86,6 @@ public class RegisterPage extends UiPart<Region> {
      */
     private boolean checkValid() {
         if (accPrefs.getHm().get(username.getText()) != null) {
-            logger.info("Register faild");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Username already exist.");
@@ -94,7 +93,6 @@ public class RegisterPage extends UiPart<Region> {
             alert.showAndWait();
             return false;
         } else {
-            logger.info("Register successful");
             boolean result = password.getText().equals(password1.getText());
 
             if (!result) {
@@ -115,7 +113,6 @@ public class RegisterPage extends UiPart<Region> {
     @FXML
     private void handleRegisterEvent() {
         try {
-            logger.info("Trying to register");
             if (checkValid()) {
                 accPrefs.getHm().put(username.getText(), password.getText());
                 accPrefs.saveAccountsPrefs(accPrefs, accPrefs.getAccPrefsFilePath());
@@ -143,7 +140,6 @@ public class RegisterPage extends UiPart<Region> {
      */
     @FXML
     private void handleBackEvent() {
-        logger.info("Going back to login page");
         loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
         this.hide();
         loginPage.show();

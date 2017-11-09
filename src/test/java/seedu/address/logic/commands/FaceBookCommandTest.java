@@ -130,6 +130,7 @@ public class FaceBookCommandTest {
      */
     private FaceBookCommand prepareCommand(Index index) {
         FaceBookCommand faceBookCommand = new FaceBookCommand(index);
+        BackUpCommand back = new BackUpCommand();
         faceBookCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return faceBookCommand;
     }
