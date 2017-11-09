@@ -10,11 +10,12 @@
 ** Start the app again. +
 
 === Command 0
+
 * `undo`  +
 * *Result* - No more commands to undo! +
 
 
-== Help Command
+=== Help Command
 
 * `help` +
 * *Result* - A new window appears with a summary of all commands,FAQS and shortcuts.
@@ -26,8 +27,10 @@ It is like the Weaver handbook. +
 
 * *Result* +
 Invalid command format!
-add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS b/Date of Birth r/REMARK [f/IMAGE] [u/USERNAME][t/TAG]...
-Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/13.10.1997 r/CS2103T/LEC/1 f/ u/john.doe t/friends t/owesMoney +
+add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS b/Date of Birth r/REMARK [f/IMAGE]
+[u/USERNAME][t/TAG]...
+Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/13.10.1997 r/CS2103T/LEC/1 f/
+u/john.doe t/friends t/owesMoney +
 
 *COMMAND 1* - `add n/User p/999222 e/user@gmail.com a/Prince Georges Park b/29.02.2017 r/CS2103T/LEC/1 f/ u/ t/friends`+
 
@@ -43,13 +46,15 @@ The following format should be followed:
 New person added: User Phone: 999222 Email: user@gmail.com Address: Prince Georges Park Date of birth: 29.02.2000
 Remark: CS2103T/LEC/1 FilePath:  Facebook Username:  Tags: [friends]
 
-*COMMAND 3* - `add n/Dummy p/999222 e/dummy@gmail.com a/Prince Georges Park b/29.02.2017 r/CS2103T/LEC/1 f/random.png u/ t/friends`+
+*COMMAND 3* - `add n/Dummy p/999222 e/dummy@gmail.com a/Prince Georges Park b/29.02.2017 r/CS2103T/LEC/1 f/random.png
+u/ t/friends`+
 
 * *Result* +
 File Path must be correctly entered, that is the image must exist in the path specified
 For example: src/resources/images/clock.png +
 
-*COMMAND 4* - `add n/Dummy p/999222 e/dummy@gmail.com a/Prince Georges Park b/31.04.2017 r/CS2103T/LEC/1 f/ u/ t/friends`+
+*COMMAND 4* - `add n/Dummy p/999222 e/dummy@gmail.com a/Prince Georges Park b/31.04.2017 r/CS2103T/LEC/1 f/
+u/ t/friends`+
 
 * *Result* +
 Date of Birth must be a Valid Date that is days should be less than 32 , months should be less than 12
@@ -60,14 +65,17 @@ The following format should be followed:
 *COMMAND 5* - `add n/Dummy p/999222 e/dummy@gmail.com` +
 
 * *Result* +
-New person added: Dummy Phone: 999222 Email: dummy@gmail.com Address:  Date of birth:  Remark:  FilePath:  Facebook Username:  Tags: +
+New person added: Dummy Phone: 999222 Email: dummy@gmail.com Address:  Date of birth:  Remark:  FilePath:
+Facebook Username:  Tags: +
 
-*COMMAND 6* - `add n/new.user p/191919 e/dummy@gmail.com a/Prince Georges Park b/31.04.2017 r/CS2103T/LEC/1 f/ u/ t/friends` +
+*COMMAND 6* - `add n/new.user p/191919 e/dummy@gmail.com a/Prince Georges Park b/31.04.2017 r/CS2103T/LEC/1 f/ u/
+t/friends` +
 
 * *Result* +
 Person names should only contain alphanumeric characters and spaces, and it should not be blank +
 
-*COMMAND 7* - `add n/newuser p/191919 e/dummygmail.com a/Prince Georges Park b/31.04.2017 r/CS2103T/LEC/1 f/ u/ t/friends` +
+*COMMAND 7* - `add n/newuser p/191919 e/dummygmail.com a/Prince Georges Park b/31.04.2017 r/CS2103T/LEC/1 f/ u/
+t/friends` +
 
 * *Result* +
 Person emails should be 2 alphanumeric/period strings separated by '@' +
@@ -82,7 +90,8 @@ At least one field to edit must be provided. +
 *COMMAND 1* - `edit 1 n/ChangeIt` +
 
 * *Result* +
-Edited Person: changeit Phone: 98765432 Email: johnd@example.com Address: 311, Clementi Ave 2, #02-25 Date of birth: 13.10.1997 Remark: CS2101/SEC/1 FilePath:  Facebook Username: john.doe Tags: [owesMoney][friends] +
+Edited Person: changeit Phone: 98765432 Email: johnd@example.com Address: 311, Clementi Ave 2, #02-25
+Date of birth: 13.10.1997 Remark: CS2101/SEC/1 FilePath:  Facebook Username: john.doe Tags: [owesMoney][friends] +
 
 *COMMAND 3* - `edit 1 u/ronak.lakhotia` +
 
@@ -93,8 +102,10 @@ At least one field to edit must be provided. +
 
 * *Result* +
 Invalid command format!
-edit: Edits the details of the person identified by the index number used in the last person listing. Existing values will be overwritten by the input values.
-Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATE_OF_BIRTH] [r/REMARK] [f/IMAGE[t/TAG]...
+edit: Edits the details of the person identified by the index number used in the last person listing. Existing values
+will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATE_OF_BIRTH] [r/REMARK]
+[f/IMAGE[t/TAG]...
 Example: edit 1 p/91234567 e/johndoe@example.com +
 
 *COMMAND 5* - `edit 1 f/*please enter a valid file path*` +
@@ -105,14 +116,16 @@ Success message is displayed. +
 *COMMAND 6* - `edit 1 n/another a/PGP p/91234567 e/another@example.com` +
 
 * *Result* +
-Edited Person: another Phone: 91234567 Email: another@example.com Address: PGP Date of birth: 13.10.1997 Remark: CS2101/SEC/1 FilePath:  Facebook Username: john.doe Tags: [owesMoney][friends]
+Edited Person: another Phone: 91234567 Email: another@example.com Address: PGP Date of birth: 13.10.1997
+Remark: CS2101/SEC/1 FilePath:  Facebook Username: john.doe Tags: [owesMoney][friends]
 
 === Delete Command
 
 *COMMAND 0* - `delete 1` +
 
 * *Result* +
-Deleted Person: another Phone: 91234567 Email: another@example.com Address: PGP Date of birth: 13.10.1997 Remark: CS2101/SEC/1 FilePath:  Facebook Username: john.doe Tags: [owesMoney][friends] +
+Deleted Person: another Phone: 91234567 Email: another@example.com Address: PGP Date of birth: 13.10.1997
+Remark: CS2101/SEC/1 FilePath:  Facebook Username: john.doe Tags: [owesMoney][friends] +
 *Follow up with undo* +
 * *Result* +
 Undo success! +
@@ -125,7 +138,7 @@ delete: Deletes the person identified by the index number used in the last perso
 Parameters: INDEX (must be a positive integer)
 Example: delete 1 +
 
-==== Reminders panel Commands
+=== Reminders panel Commands
 
 === Add a reminder
 
@@ -195,7 +208,8 @@ Success message displayed.Clears the person list and reminder list panel.Also cl
 
 
 * *Result* +
-0 persons listed! if no person with those credentials or lists the number of people with exactly same name and date of birth. +
+0 persons listed! if no person with those credentials or lists the number of
+people with exactly same name and date of birth. +
 
 *COMMAND 1* - `search n/ronak`
 
@@ -242,7 +256,9 @@ You may have entered the incorrect name of the file! +
 Now /Users/ronaklakhotia/Desktop/Ronak.jpeg is a valid path on my PC, you must enter a valid path in your pc. +
 
 * *Result* +
-Added Photo to Person: John Doe Phone: 98765432 Email: johnd@example.com Address: 311, Clementi Ave 2, #02-25 Date of birth: 13.10.1997 Remark: CS2103T/LEC/1 FilePath: /Users/ronaklakhotia/Desktop/Ronak.jpeg Facebook Username: john.doe Tags: [owesMoney][friends] +
+Added Photo to Person: John Doe Phone: 98765432 Email: johnd@example.com Address: 311, Clementi Ave 2, #02-25
+Date of birth: 13.10.1997 Remark: CS2103T/LEC/1 FilePath: /Users/ronaklakhotia/Desktop/Ronak.jpeg
+Facebook Username: john.doe Tags: [owesMoney][friends] +
 Photo appears next to person. +
 
 *COMMAND 2* = `photo 1 delete`. +
