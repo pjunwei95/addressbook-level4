@@ -79,9 +79,6 @@ public class BrowserPanelTest extends GuiUnitTest {
         URL expectedaddressPersonUrl = new URL(expectedUrl);
         postNow(selectionAddress);
         assertEquals(expectedaddressPersonUrl, browserPanelHandle.getLoadedUrl());
-
     }
-
 }
-
 
