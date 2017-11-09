@@ -23,7 +23,7 @@ public class DueDate {
     public static final int LAST_INDEX = 1;
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Due Date must be a Valid Date and in the following format: \n"
-                    + "'.' and '/' can be used as separators. \n";
+                    + "'.' and '-' can be used as separators. \n";
 
     public static final int [] MONTHS_WITH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
@@ -103,7 +103,7 @@ public class DueDate {
      */
     public static boolean checkIfValidNumberOfDaysInMonth(int month, int day) {
 
-        if (MONTHS_WITH_DAYS[month - 1] < day) {
+        if (MONTHS_WITH_DAYS[month - 1] < day && month != FEBRUARY) {
             return false;
         }
 

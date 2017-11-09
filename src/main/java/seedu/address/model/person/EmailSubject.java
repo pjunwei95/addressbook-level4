@@ -50,4 +50,8 @@ public class EmailSubject {
                 && this.subject.equals(((EmailSubject) other).subject)); // state check
     }
 
+    @Override
+    public String toString() {
+        return subject;
+    }
 }
