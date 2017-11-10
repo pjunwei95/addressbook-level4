@@ -98,7 +98,7 @@ public class TestApp extends MainApp {
         ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         return copy;
     }
-    //@@author yangminxing
+    //@@author yangminxingnus
     @Override
     public void start(Stage primaryStage) {
         ui.start(primaryStage, 1);

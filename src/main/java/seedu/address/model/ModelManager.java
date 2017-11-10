@@ -190,7 +190,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //@@author yangminxing
+    //@@author yangminxingnus
     @Override
     public synchronized void addRemarkPerson(ReadOnlyPerson person, String remark, Index targetIndex) {
         try {

@@ -1,5 +1,5 @@
 package systemtests;
-
+//@@author yangminxingnus
 import static seedu.address.logic.commands.RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.TestUtil.getPerson;
@@ -109,3 +109,4 @@ public class RemarkCommandSystemTest extends AddressBookSystemTest {
 
 
 }
+//@@author
