@@ -111,7 +111,6 @@ public class AddressBookParserTest {
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
-    
     @Test
     public void parseCommand_addReminder() throws Exception {
         Reminder reminder = new ReminderBuilder().build();

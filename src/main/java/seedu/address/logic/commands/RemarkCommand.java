@@ -50,6 +50,8 @@ public class RemarkCommand extends UndoableCommand {
 
         if (index >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        } else if (index < 0) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         ReadOnlyPerson personToEdit = lastShownList.get(index);
@@ -64,14 +66,12 @@ public class RemarkCommand extends UndoableCommand {
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("The target person cannot be missing");
         }
-
         return new CommandResult(String.format(MESSAGE_ADD_REMARK_SUCCESS, personToEdit));
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (this.remark.equals(((RemarkCommand) other).remark)
+        return other == this || (this.remark.equals(((RemarkCommand) other).remark)
                 && this.index == ((RemarkCommand) other).index);
     }
 }

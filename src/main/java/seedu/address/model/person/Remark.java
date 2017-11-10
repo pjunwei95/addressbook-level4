@@ -75,8 +75,7 @@ public class Remark {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Remark // instanceof handles nulls
+        return other == this || (other instanceof Remark // instanceof handles nulls
                 && this.moduleLists.equals(((Remark) other).moduleLists)); // state check
     }
 
