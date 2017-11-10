@@ -61,7 +61,7 @@ public class EmailCommand extends Command {
             }
         } catch (IOException io) {
             throw new AssertionError("Invalid Input");
-        } catch (URISyntaxException UR) {
+        } catch (URISyntaxException ur) {
             throw new AssertionError("urisyntax erro");
         } catch (IllegalValueException ie) {
             throw new AssertionError("Illegal values");

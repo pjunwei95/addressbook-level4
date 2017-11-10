@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.awt.Desktop;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -102,10 +101,12 @@ public class ModelManager extends ComponentManager implements Model {
         String appendEmailAddress = getAppendedEmailIdOfContacts(tag, lastShownList);
         openUpDesktopBrowser(appendEmailAddress, subject);
     }
-    public String getAppendedEmailIdOfContacts(String tag, List<ReadOnlyPerson> lastShownList) throws IllegalValueException {
+    public String getAppendedEmailIdOfContacts(String tag, List<ReadOnlyPerson> lastShownList) throws
+            IllegalValueException {
 
         ReadOnlyPerson getPerson;
-        int loopVariable = 0; String appendEmailAddress = "";
+        int loopVariable = 0;
+        String appendEmailAddress = "";
 
         while (loopVariable < lastShownList.size()) {
             getPerson = lastShownList.get(loopVariable);
@@ -118,18 +119,19 @@ public class ModelManager extends ComponentManager implements Model {
         return appendEmailAddress;
     }
     /** Opens the default browser in your desktop */
-    private void openUpDesktopBrowser(String appendEmailAddress, String subject) throws IOException, URISyntaxException{
+    private void openUpDesktopBrowser(String appendEmailAddress, String subject) throws IOException,
+            URISyntaxException {
 
         appendEmailAddress = appendEmailAddress.substring(0, appendEmailAddress.length() - 1);
 
         String Gmail_Url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + appendEmailAddress + "&su=" + subject;
 
-            if (Desktop.isDesktopSupported())
-            {
-                Desktop.getDesktop().browse(new URI(Gmail_Url));
-            }
+         if (Desktop.isDesktopSupported()) {
 
+            Desktop.getDesktop().browse(new URI(Gmail_Url));
         }
+
+     }
 
     @Override
     public synchronized void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
@@ -163,13 +165,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addPhotoPerson(ReadOnlyPerson person, String filePath, Index targetIndex)
-            throws PersonNotFoundException
-            , IOException, IllegalValueException {
+            throws PersonNotFoundException, IOException, IllegalValueException {
 
 
-            person.imageProperty().setValue(new FileImage(filePath));
-            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            indicateAddressBookChanged();
+        person.imageProperty().setValue(new FileImage(filePath));
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
 
     }
 
