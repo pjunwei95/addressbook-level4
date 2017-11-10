@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.awt.Desktop;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -94,24 +93,20 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void clearBrowserPanel() {
         raise(new ClearBrowserPanelEvent());
     }
+
     @Override
-    public synchronized void sendMailToContacts(String tag, String subject, List<ReadOnlyPerson> lastShownList) {
+    public synchronized void sendMailToContacts(String tag, String subject, List<ReadOnlyPerson> lastShownList) throws
+            IOException, URISyntaxException, IllegalValueException {
 
-        String appendEmailAddress = "";
-
-        try {
-            appendEmailAddress = getAppendedEmailIdOfContacts(tag, lastShownList, appendEmailAddress);
-
-        } catch (IllegalValueException ive) {
-            throw new AssertionError("invalid input");
-        }
+        String appendEmailAddress = getAppendedEmailIdOfContacts(tag, lastShownList);
         openUpDesktopBrowser(appendEmailAddress, subject);
     }
-    private String getAppendedEmailIdOfContacts(String tag, List<ReadOnlyPerson> lastShownList,
-                                                String appendEmailAddress) throws IllegalValueException {
+    public String getAppendedEmailIdOfContacts(String tag, List<ReadOnlyPerson> lastShownList) throws
+            IllegalValueException {
 
         ReadOnlyPerson getPerson;
         int loopVariable = 0;
+        String appendEmailAddress = "";
 
         while (loopVariable < lastShownList.size()) {
             getPerson = lastShownList.get(loopVariable);
@@ -120,32 +115,24 @@ public class ModelManager extends ComponentManager implements Model {
                 appendEmailAddress = appendEmailAddress + getPerson.getEmail().toString() + "+";
             }
             loopVariable++;
-
         }
         return appendEmailAddress;
     }
     /** Opens the default browser in your desktop */
-    private void openUpDesktopBrowser(String appendEmailAddress, String subject) {
+    private void openUpDesktopBrowser(String appendEmailAddress, String subject) throws IOException,
+            URISyntaxException {
 
         appendEmailAddress = appendEmailAddress.substring(0, appendEmailAddress.length() - 1);
 
         String Gmail_Url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + appendEmailAddress + "&su=" + subject;
 
+        if (Desktop.isDesktopSupported()) {
 
-        try {
-
-            if (Desktop.isDesktopSupported())
-            {
-                Desktop.getDesktop().browse(new URI(Gmail_Url));
-            }
-        } catch (URISyntaxException U) {
-            throw new AssertionError("URISyntax error");
-
-        } catch (IOException Ie) {
-            throw new AssertionError("IOE error");
-
+            Desktop.getDesktop().browse(new URI(Gmail_Url));
         }
+
     }
+
     @Override
     public synchronized void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
 
@@ -178,16 +165,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addPhotoPerson(ReadOnlyPerson person, String filePath, Index targetIndex)
-            throws PersonNotFoundException,
-            FileNotFoundException, IOException {
+            throws PersonNotFoundException, IOException, IllegalValueException {
 
-        try {
-            person.imageProperty().setValue(new FileImage(filePath));
-            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            indicateAddressBookChanged();
-        } catch (IllegalValueException ive) {
-            throw new AssertionError("Invalid input");
-        }
+
+        person.imageProperty().setValue(new FileImage(filePath));
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
+
     }
 
     //@@author yangminxingnus

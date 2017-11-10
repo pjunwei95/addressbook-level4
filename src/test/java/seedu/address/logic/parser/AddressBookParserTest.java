@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -29,6 +30,7 @@ import seedu.address.logic.commands.ChangeThemeCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FaceBookCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -75,6 +77,11 @@ public class AddressBookParserTest {
     public void parseCommand_logout() throws Exception {
         final LogoutCommand command = new LogoutCommand();
         assertEquals(command, command);
+    }
+    @Test
+    public void parseCommand_email() throws Exception {
+        final EmailCommand command = new EmailCommand("friends", "party");
+        assertFalse(new EmailCommand("colleagues", "birthday").equals(command));
     }
     @Test
     public void parseCommand_findTagCommand() throws Exception {
