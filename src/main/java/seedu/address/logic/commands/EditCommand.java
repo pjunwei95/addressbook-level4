@@ -39,7 +39,7 @@ import seedu.address.model.tag.Tag;
 public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
-
+    //@@author yangminxingnus
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing values will be overwritten by the input values.\n"
@@ -55,6 +55,7 @@ public class EditCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
+    //@@author
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -147,7 +148,9 @@ public class EditCommand extends UndoableCommand {
         private Email email;
         private Address address;
         private DateOfBirth dateOfBirth;
+        //@@author yangminxingnus
         private Remark remark;
+        //@@author
         private FacebookUsername username;
         private Set<Tag> tags;
 
@@ -161,7 +164,9 @@ public class EditCommand extends UndoableCommand {
             this.email = toCopy.email;
             this.address = toCopy.address;
             this.dateOfBirth = toCopy.dateOfBirth;
+            //@@author yangminxingnus
             this.remark = toCopy.remark;
+            //@@author
             this.image = toCopy.image;
             this.username = toCopy.username;
             this.tags = toCopy.tags;
@@ -189,10 +194,11 @@ public class EditCommand extends UndoableCommand {
             this.image = image;
         }
 
+        //@@author yangminxingnus
         public Optional<DateOfBirth> getDateOfBirth() {
             return Optional.ofNullable(dateOfBirth);
         }
-
+        //@@author
         public Optional<FileImage> getImage() {
             return Optional.ofNullable(image);
         }
@@ -222,7 +228,7 @@ public class EditCommand extends UndoableCommand {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
-
+        //@@author yangminxingnus
         public void setRemark(Remark remark) {
             this.remark = remark;
         }
@@ -233,6 +239,7 @@ public class EditCommand extends UndoableCommand {
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
         }
+        //@@author
 
         public void setTags(Set<Tag> tags) {
             this.tags = tags;
@@ -256,7 +263,7 @@ public class EditCommand extends UndoableCommand {
 
             // state check
             EditPersonDescriptor e = (EditPersonDescriptor) other;
-
+            //@@author yangminxingnus
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
@@ -265,6 +272,7 @@ public class EditCommand extends UndoableCommand {
                     && getRemark().equals(e.getRemark())
                     && getImage().equals(e.getImage())
                     && getTags().equals(e.getTags());
+            //@@author
         }
     }
 }
