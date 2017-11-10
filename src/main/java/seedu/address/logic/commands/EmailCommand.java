@@ -4,11 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.exceptions.CommandException;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+
+import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.tag.Tag;
 
