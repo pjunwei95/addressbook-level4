@@ -530,16 +530,27 @@ Type any letters to get some suggestions on what command to use.
 To avoid accidentally auto-completion, you can press `ESC` to cancel and continue your input.
 
 // tag::parse[]
-=== Check whether the command is valid while the user is typing (SINCE V1.5)
+=== Check whether the command's format is valid while the user is typing (SINCE V1.5)
 
-The result display panel will show whether the command is valid while you are typing.
+The result display panel will show whether the command is valid while you are typing without pressing an enter key.
 Also, the message displayed will tell you exactly which part goes wrong.
 
-image::valid.png[width="720"]
+[NOTE]
+The "Command format is valid" displayed in the result display panel doesn't guarantee that
+the command typed is always valid. +
+This feature only checks the basic format of a command such as whether
+an input field is missing. Some underlying errors won't be detected until the command is executed. +
+For example, when the user is giving a `ChangeTagColor` command,
+it can't check whether a tag name given exists or not
+until this command is executed.
 
-image::pink.png[width="850"]
+image::valid.png[width="400"]
 
-image::invalid.png[width="790"]
+image::pink.png[width="950"]
+
+image::invalid.png[width="630"]
+
+image::invalidbutok.png[width="430"]
 // end::parse[]
 
 
