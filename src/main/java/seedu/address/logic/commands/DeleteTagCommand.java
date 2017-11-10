@@ -128,7 +128,7 @@ public class DeleteTagCommand extends UndoableCommand {
      * Creates and returns a {@code Person} with the tags of {@code personToEdit}
      * deleted with {@code DeleteTagDescriptor}.
      */
-    private static Person createTagDeletedPerson(ReadOnlyPerson personToEdit,
+    public Person createTagDeletedPerson(ReadOnlyPerson personToEdit,
                                              DeleteTagDescriptor deleteTagDescriptor) {
         assert personToEdit != null;
 

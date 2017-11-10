@@ -295,7 +295,6 @@ public class MainWindow extends UiPart<Region> {
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
 

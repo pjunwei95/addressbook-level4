@@ -11,7 +11,9 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
+import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ClearBrowserPanelEvent;
 import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowPersonAddressEvent;
@@ -23,6 +25,7 @@ import seedu.address.model.person.ReadOnlyPerson;
  */
 public class BrowserPanel extends UiPart<Region> {
 
+    public static final String DEFUALT_PAGE_OF_BROWSER = "default.html";
     public static final String DEFAULT_PAGE = "https://nusmods.com/timetable/2017-2018/sem1";
     public static final String FACEBOOK_PROFILE_PAGE = "https://m.facebook.com/";
     public static final String NUSMODS_SEARCH_URL_PREFIX = "https://nusmods.com/timetable/2017-2018/sem1?";
@@ -68,18 +71,20 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads a default HTML file with a background that matches the general theme.
      */
     private void loadDefaultPage() {
-        //URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         try {
 
             URL defaultPage = new URL(DEFAULT_PAGE);
             loadPage(defaultPage.toExternalForm());
 
         } catch (MalformedURLException e) {
-
             logger.info("Invalid URL");
-
         }
 
+    }
+    private void loadDeafultPageBrowser() {
+
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFUALT_PAGE_OF_BROWSER);
+        loadPage(defaultPage.toExternalForm());
     }
 
     /**
@@ -94,10 +99,14 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonPage(event.getNewSelection().person);
     }
+    @Subscribe
+    private void handleClearCommandExecutionEvent (ClearBrowserPanelEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadDeafultPageBrowser();
+    }
 
     @Subscribe
     private void handleShowPersonAddressEvent(ShowPersonAddressEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPage(GOOGLE_MAP_SEARCH_URL_PREFIX + event.getAddress());
     }
 

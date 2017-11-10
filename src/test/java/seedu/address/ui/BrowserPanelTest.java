@@ -17,11 +17,13 @@ import guitests.guihandles.BrowserPanelHandle;
 import seedu.address.commons.events.ui.FaceBookEvent;
 
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.ShowPersonAddressEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
     private FaceBookEvent selectionChanged;
+    private ShowPersonAddressEvent selectionAddress;
 
     private BrowserPanel browserPanel;
     private BrowserPanelHandle browserPanelHandle;
@@ -31,13 +33,13 @@ public class BrowserPanelTest extends GuiUnitTest {
         selectionChangedEventStub = new PersonPanelSelectionChangedEvent(new PersonCard(ALICE, 0));
 
         selectionChanged = new FaceBookEvent(ALICE);
+        selectionAddress = new ShowPersonAddressEvent("");
 
         guiRobot.interact(() -> browserPanel = new BrowserPanel());
         uiPartRule.setUiPart(browserPanel);
 
         browserPanelHandle = new BrowserPanelHandle(browserPanel.getRoot());
     }
-
     @Test
     public void display() throws Exception {
         // default web page
@@ -68,7 +70,5 @@ public class BrowserPanelTest extends GuiUnitTest {
         assertEquals(expectedFaceBookPersonUrl, browserPanelHandle.getLoadedUrl());
 
     }
-
 }
-
 
