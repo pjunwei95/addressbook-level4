@@ -65,7 +65,6 @@ public class RegisterPage extends UiPart<Region> {
         this.uiManager = uiManager;
         uiManager.setRegisterPage(this);
 
-        // Configure the UI
         setTitle(config.getAppTitle());
         setIcon(ICON);
         setWindowMinSize();
@@ -74,7 +73,6 @@ public class RegisterPage extends UiPart<Region> {
         primaryStage.setScene(scene);
         initTheme();
         registerAsAnEventHandler(this);
-        //loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
     }
 
     private void initTheme() {
@@ -190,10 +188,6 @@ public class RegisterPage extends UiPart<Region> {
 
     void hide() {
         primaryStage.hide();
-    }
-
-    void releaseResources() {
-        this.hide();
     }
 }
 //@@author
