@@ -66,7 +66,7 @@ public class RemarkCommand extends UndoableCommand {
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("The target person cannot be missing");
         }
-        return new CommandResult(String.format(MESSAGE_ADD_REMARK_SUCCESS, personToEdit));
+        return new CommandResult(String.format(MESSAGE_ADD_REMARK_SUCCESS, editedPerson));
     }
 
     @Override
