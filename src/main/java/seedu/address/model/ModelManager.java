@@ -126,12 +126,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         String Gmail_Url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + appendEmailAddress + "&su=" + subject;
 
-         if (Desktop.isDesktopSupported()) {
+        if (Desktop.isDesktopSupported()) {
 
             Desktop.getDesktop().browse(new URI(Gmail_Url));
         }
 
-     }
+    }
 
     @Override
     public synchronized void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {

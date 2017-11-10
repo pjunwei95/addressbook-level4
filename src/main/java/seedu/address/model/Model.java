@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;

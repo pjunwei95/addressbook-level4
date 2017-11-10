@@ -6,10 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.tag.Tag;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Sends an Email to all contacts with the specified tag.
