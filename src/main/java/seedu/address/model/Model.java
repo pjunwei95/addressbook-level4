@@ -56,6 +56,9 @@ public interface Model {
             throws PersonNotFoundException,
             IOException, IllegalValueException;
 
+    /** Adds remark to person */
+    void addRemarkPerson(ReadOnlyPerson person, String remark, Index targetIndex);
+
     /** Searches for a person on facebook */
     void faceBook(ReadOnlyPerson person) throws PersonNotFoundException;
 

@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-
+//@@author yangminxingnus
 import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -54,6 +54,7 @@ public class RemarkCommandTest {
     @Test
     public void executeCommandSuccess() throws IllegalValueException {
         ReadOnlyPerson personToAdd = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        personToAdd.remarkProperty().set(new Remark("CS2103T/SEC/1"));
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, personToAdd);
         RemarkCommand remarkCommand = prepareCommand(INDEX_SECOND_PERSON, "CS2103T/SEC/1");
         assertCommandSuccessRemark(remarkCommand, model, expectedMessage);
@@ -87,3 +88,4 @@ public class RemarkCommandTest {
 
 
 }
+//@@author

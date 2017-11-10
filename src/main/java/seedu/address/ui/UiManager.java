@@ -33,7 +33,7 @@ public class UiManager extends ComponentManager implements Ui {
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
-
+    //@@author yangminxingnus
     private Logic logic;
     private StorageManager storage;
     private Config config;
@@ -104,6 +104,7 @@ public class UiManager extends ComponentManager implements Ui {
 
         }
     }
+    //@@author
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
         final String content = details + ":\n" + cause.toString();
@@ -113,7 +114,7 @@ public class UiManager extends ComponentManager implements Ui {
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
-
+    //@@author yangminxingnus
     public MainWindow getMainWindow() {
         return mainWindow;
     }
@@ -137,7 +138,7 @@ public class UiManager extends ComponentManager implements Ui {
     public void setRegisterPage(RegisterPage registerPage) {
         this.registerPage = registerPage;
     }
-
+    //@@author
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
         showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }

@@ -25,6 +25,7 @@ import seedu.address.commons.events.ui.FaceBookEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.FileImage;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.reminder.ReadOnlyReminder;
@@ -171,6 +172,19 @@ public class ModelManager extends ComponentManager implements Model {
             indicateAddressBookChanged();
 
     }
+
+    //@@author yangminxingnus
+    @Override
+    public synchronized void addRemarkPerson(ReadOnlyPerson person, String remark, Index targetIndex) {
+        try {
+            person.remarkProperty().setValue(new Remark(remark));
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            indicateAddressBookChanged();
+        } catch (IllegalValueException ive) {
+            throw new AssertionError("Invalid input");
+        }
+    }
+
     //@@author ChenXiaoman
     @Override
     public synchronized void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {

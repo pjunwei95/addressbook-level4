@@ -93,12 +93,6 @@ public class LoginPage extends UiPart<Region> {
         Theme.changeTheme(primaryStage, Theme.getCurrentTheme());
     }
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
-    public MainWindow getMainWindow() { return mainWindow; }
-
     /**
      * Method for handle login event
      */
@@ -106,7 +100,7 @@ public class LoginPage extends UiPart<Region> {
     private void handleLoginEvent() throws IOException {
         String uname = username.getText();
         String pword = password.getText();
-        if (checkValid(uname, pword)) {
+        if (isValid(uname, pword)) {
 
             String path = "data/" + uname + ".xml";
             AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
@@ -204,12 +198,12 @@ public class LoginPage extends UiPart<Region> {
     }
 
     /**
-     *
+     * Check whether the username and password matches in the account.json file
      * @param username
      * @param password
      * @return validity of account
      */
-    private boolean checkValid(String username, String password) {
+    private boolean isValid(String username, String password) {
         if (accPrefs.getHm().get(username) != null) {
             return accPrefs.getHm().get(username).equals(password);
         } else {
@@ -227,8 +221,6 @@ public class LoginPage extends UiPart<Region> {
         ReadOnlyAddressBook initialData;
         try {
             addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             initialData = new AddressBook();
@@ -252,4 +244,3 @@ public class LoginPage extends UiPart<Region> {
         password.setStyle(fxFormatFontSize);
     }
 }
-//@@author
