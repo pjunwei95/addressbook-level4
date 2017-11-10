@@ -16,6 +16,7 @@ public class ClearPopupCommand extends UndoableCommand {
     @Override
     public CommandResult executeUndoableCommand() {
         requireNonNull(model);
+        model.clearBrowserPanel();
         model.resetData(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }

@@ -126,7 +126,7 @@ public class FaceBookCommandTest {
     }
 
     /**
-     * Returns a {@code MapCommand} with the parameter {@code index}.
+     * Returns a {@code FacebookCommand} with the parameter {@code index}.
      */
     private FaceBookCommand prepareCommand(Index index) {
         FaceBookCommand faceBookCommand = new FaceBookCommand(index);

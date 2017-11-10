@@ -44,10 +44,4 @@ public class FacebookUsername {
                 && this.username.equals(((FacebookUsername) other).username)); // state check
     }
 
-    @Override
-    public int hashCode() {
-        return username.hashCode();
-    }
-
 }
-
