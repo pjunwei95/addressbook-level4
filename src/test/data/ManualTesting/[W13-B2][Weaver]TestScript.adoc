@@ -324,11 +324,14 @@ Invalid command format message displayed. +
 *COMMAND 2* - `search b/12.10.1997`
 
 * *Result* +
-Invalid command format message displayed. +
+Weaver has been cleared!
 
 === Clear Command
 
 *COMMAND 0* - `cls` +
+
+* *Result* +
+Displays success message if ronak is there in person list else shows 0 persons listed. +
 
 === Find Command
 
@@ -740,6 +743,49 @@ Invalid command format!
 deletetag: Deletes the tag identified by the index number used in the last person listing.
 Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
 Example: deletetag 1 t/friends
+
+=== Clear Popup command
+
+*COMMAND 0* - `clear` +
+
+* *Result* +
+A clear confirmation dialog would appear.
+
+*COMMAND 1* - `clear 1` +
+
+* *Result* +
+A clear confirmation dialog would appear.
+
+*COMMAND 2* - `clear` + click `OK` / press `Enter` / press `Space`
+
+* *Result* +
+Weaver has been cleared!
+
+*COMMAND 3* - `clear` + click `X` / `Cancel` / press `->` + `Space` / press `Tab` + `Space`
+
+* *Result* +
+Weaver has not been cleared!
+=== Clear Popup command
+
+*COMMAND 0* - `clear` +
+
+* *Result* +
+A clear confirmation dialog would appear.
+
+*COMMAND 1* - `clear 1` +
+
+* *Result* +
+A clear confirmation dialog would appear.
+
+*COMMAND 2* - `clear` + click `OK` / press `Enter` / press `Space`
+
+* *Result* +
+Weaver has been cleared!
+
+*COMMAND 3* - `clear` + click `X` / `Cancel` / press `->` + `Space` / press `Tab` + `Space`
+
+* *Result* +
+Weaver has not been cleared!
 
 
 
