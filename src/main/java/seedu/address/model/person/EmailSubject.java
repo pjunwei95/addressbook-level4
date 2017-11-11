@@ -43,12 +43,6 @@ public class EmailSubject {
         return test.matches(NAME_VALIDATION_REGEX);
     }
 
-
-    @Override
-    public String toString() {
-        return subject;
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -57,8 +51,7 @@ public class EmailSubject {
     }
 
     @Override
-    public int hashCode() {
-        return subject.hashCode();
+    public String toString() {
+        return subject;
     }
-
 }

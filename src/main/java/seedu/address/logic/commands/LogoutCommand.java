@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.LogoutEvent;
-
+//@@author yangminxingnus
 /**
  * Command of logout.
  */
@@ -19,3 +19,4 @@ public class LogoutCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
+//@@author

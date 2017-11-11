@@ -1,5 +1,7 @@
+//@@author ChenXiaoman
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FONT_SIZE;
 
@@ -10,7 +12,6 @@ import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.font.FontSize;
 
-//@@author ChenXiaoman
 /**
  * Parses input arguments and creates a new ChangeFontSizeCommand object
  */
@@ -22,6 +23,7 @@ public class ChangeFontSizeCommandParser implements Parser<ChangeFontSizeCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public ChangeFontSizeCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_FONT_SIZE);
 

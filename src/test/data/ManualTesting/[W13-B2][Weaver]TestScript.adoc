@@ -324,7 +324,7 @@ Invalid command format message displayed. +
 *COMMAND 2* - `search b/12.10.1997`
 
 * *Result* +
-Weaver has been cleared!
+Invalid command format message displayed. +
 
 === Clear Command
 

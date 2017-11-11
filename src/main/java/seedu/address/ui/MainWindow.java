@@ -57,17 +57,17 @@ public class MainWindow extends UiPart<Region> {
     private Config config;
     private UserPrefs prefs;
     private StorageManager storage;
+    //@@author yangminxingnus
     private AccountsStorage accPrefs;
     private UiManager uiManager;
-
+    //@@author
     private CommandBox commandBox;
 
     @FXML
     private StackPane browserPlaceholder;
-    //@@author RonakLakhotia
+
     @FXML
     private StackPane reminderListPlaceholder;
-    //@@author generated
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -94,9 +94,11 @@ public class MainWindow extends UiPart<Region> {
         this.config = config;
         this.prefs = prefs;
         this.storage = storage;
+        //@@author yangminxingnus
         this.accPrefs = accPrefs;
         this.uiManager = uiManager;
         uiManager.setMainWindow(this);
+        //@@author
 
         // Configure the UI
         setTitle(config.getAppTitle());
@@ -237,7 +239,7 @@ public class MainWindow extends UiPart<Region> {
     void show() {
         primaryStage.show();
     }
-
+    //@@author yangminxingnus
     /**
     * logout
     */
@@ -246,6 +248,7 @@ public class MainWindow extends UiPart<Region> {
         prefs.updateLastUsedGuiSetting(this.getCurrentGuiSetting());
         this.releaseResources();
     }
+    //@@author
 
     /**
      * Closes the application.
@@ -254,7 +257,7 @@ public class MainWindow extends UiPart<Region> {
     private void handleExit() {
         raise(new ExitAppRequestEvent());
     }
-
+    //@@author yangminxingnus
     /**
      * Method for handle logout event.
      */
@@ -278,13 +281,20 @@ public class MainWindow extends UiPart<Region> {
 
     }
 
+    public PersonListPanel getPersonListPanel() {
+        return this.personListPanel;
+    }
+
+    public ReminderListPanel getReminderListPanel() {
+        return this.reminderListPanel;
+    }
+
     void releaseResources() {
         browserPanel.freeResources();
     }
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
 

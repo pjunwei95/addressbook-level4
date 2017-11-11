@@ -36,7 +36,7 @@ So lets get Started! +
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `Weaver.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -44,7 +44,7 @@ This app will not work with earlier versions of Java 8.
 
 . After login, you will see the GUI below.
 
-image::Ui.png[width="790"]
+image::UIExplain.png[width="790"]
 
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -135,8 +135,6 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-image::Search.png[width="600"]
-
 === Searching a person : `search`
 
 Lists persons with the given name and Date Of Birth. +
@@ -198,6 +196,7 @@ Selects the 2nd person in the address book.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
+// tag::remark[]
 === Remarking a person : `remark`
 
 Remarks the person identified by the index number. +
@@ -214,6 +213,16 @@ Examples:
 * `list` +
 `remark 2 /r CS2104/LEC/1` +
 Remarks the 2nd person's module information as CS2104/LEC/1.
+// end::remark[]
+
+// tag::nusmods[]
+=== NUSMODS Integration SINCE V1.2
+
+Helps you view your contacts' module information corresponding to this person's remark on nusmods by clicking on the person. +
+
+image::nusmods.png[width="790"]
+
+// end::nusmods[]
 
 
 === Listing entered commands : `history`
@@ -279,16 +288,26 @@ The `redo` command fails as there are no `undo` commands executed previously.
 *SINCE V1.2*
 
 === Login / Logout SINCE V1.2
+image::Login.png[width="790"]
 
-Users now can login using valid accounts. And their files are seperated.
+Users now can login using valid accounts. And their files are seperated. +
+To start with, there are to default pair os username and password. They are
+{admin, admin} and {user, user}. +
+To logout, just click logout in the "file - > logout" button. Or, use the "logout" command. +
 
-To logout, just click logout in the "file - > logout" button.
+image::Logout.png[width="790"]
 
+// tag::register[]
 === Register SINCE V1.3
 
-Users now can register new valid accounts.
+Users now can register new valid accounts. Just click the "Register" button on the bottom
+of the login page. Registering has two requirements: +
+1. The username registering should be different
+with all previous ones. +
+2. You have to key in identical password twice.
 
-The new account's username must be different from all previous ones.
+image::Register.png[width="790"]
+// end::register[]
 
 // tag::customizetagcolor[]
 === Customize tags' color : `color` SINCE V1.2
@@ -296,10 +315,11 @@ The new account's username must be different from all previous ones.
 Change the color of one or more than one tags. +
 Format: `color [c/COLOR] [t/TAG]...`
 ****
-* The default color of tags is "orange".
+* The default color of tags is "orange"
 * You can change the color of more than one tag at a time
 * The colors supported are: "red", "blue", "green", "teal", "aqua", "black", "gray", "lime", "maroon", "navy","orange", "purple", "silver", "olive","white", "yellow" and "transparent"
-* You cannot change the color of a non existing tag.
+* You cannot change the color of a non existing tag
+* The color for tags that you have set will be stored in user preference
 ****
 
 Examples:
@@ -313,6 +333,8 @@ The `color` command fails as `invalid_color` is not supported.
 
 * `color t/not_existing_tag c/yellow` +
 The `color` command fails as `not_existing_tag` does not exit in current database.
+
+image::tagcolor.png[width="790"]
 
 // end::customizetagcolor[]
 
@@ -357,6 +379,7 @@ Format: `fs [FONT SIZE]` or `fs [+/-]`
 * The default font size is m.
 * The font size changed will be auto stored.
 * You can increase (or decrease) the font size by pressing the "+" (or "-") button in the right top corner.
+* The font size that you have choosen will be stored in user preference
 ****
 
 Examples:
@@ -368,6 +391,9 @@ Examples:
 * `fs +`
 
 * `fs -` +
+
+image::fs.png[width="790"]
+
 // end::customizefontsize[]
 
 // tag::facebook[]
@@ -390,6 +416,7 @@ If the person does not have a facebook account or the username is not entered in
 image::facebook.png[width="790"]
 
 // end::facebook[]
+
 // tag::map[]
 === Show address of a person : `map` (SINCE V1.3)
 
@@ -409,6 +436,7 @@ Examples:
 
 * `map 2`
 
+image::map.png[width="790"]
 // end::map[]
 
 // tag::theme[]
@@ -420,7 +448,8 @@ Format: `theme [THEME]`
 ****
 * Supported themes are: dark, bright
 * The default theme is bright
-* You can also change the theme via theme button
+* You can also change the theme via "theme" button
+* The theme that you have choosen will be stored in user preference
 ****
 
 Examples:
@@ -428,6 +457,9 @@ Examples:
 * `theme dark`
 
 * `theme bright`
+
+image::theme.png[width="840"]
+
 // end::theme[]
 
 === Reminders Panel (SINCE V1.4) +
@@ -518,10 +550,27 @@ Type any letters to get some suggestions on what command to use.
 To avoid accidentally auto-completion, you can press `ESC` to cancel and continue your input.
 
 // tag::parse[]
-=== Check whether the command is valid while the user is typing (SINCE V1.5)
+=== Check whether the command's format is valid while the user is typing (SINCE V1.5)
 
-The result display panel will show whether the command is valid while the user is typing.
-Also, the message displayed will tell the user exactly which part goes wrong.
+The result display panel will show whether the command is valid while you are typing without pressing an enter key.
+Also, the message displayed will tell you exactly which part goes wrong.
+
+[NOTE]
+The "Command format is valid" displayed in the result display panel doesn't guarantee that
+the command typed is always valid. +
+This feature only checks the basic format of a command such as whether
+an input field is missing. Some underlying errors won't be detected until the command is executed. +
+For example, when the user is giving a `ChangeTagColor` command,
+it can't check whether a tag name given exists or not
+until this command is executed.
+
+image::valid.png[width="400"]
+
+image::pink.png[width="950"]
+
+image::invalid.png[width="630"]
+
+image::invalidbutok.png[width="430"]
 // end::parse[]
 
 

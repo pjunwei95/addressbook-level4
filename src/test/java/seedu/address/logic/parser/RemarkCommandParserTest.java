@@ -1,5 +1,5 @@
 package seedu.address.logic.parser;
-
+//@@author yangminxingnus
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
@@ -47,3 +47,4 @@ public class RemarkCommandParserTest {
 
     }
 }
+//@@author

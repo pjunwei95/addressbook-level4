@@ -1,5 +1,5 @@
 package seedu.address.ui;
-
+//@@author yangminxingnus
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -65,7 +65,6 @@ public class RegisterPage extends UiPart<Region> {
         this.uiManager = uiManager;
         uiManager.setRegisterPage(this);
 
-        // Configure the UI
         setTitle(config.getAppTitle());
         setIcon(ICON);
         setWindowMinSize();
@@ -74,7 +73,6 @@ public class RegisterPage extends UiPart<Region> {
         primaryStage.setScene(scene);
         initTheme();
         registerAsAnEventHandler(this);
-        //loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs);
     }
 
     private void initTheme() {
@@ -86,7 +84,6 @@ public class RegisterPage extends UiPart<Region> {
      */
     private boolean checkValid() {
         if (accPrefs.getHm().get(username.getText()) != null) {
-            logger.info("Register faild");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Username already exist.");
@@ -94,7 +91,6 @@ public class RegisterPage extends UiPart<Region> {
             alert.showAndWait();
             return false;
         } else {
-            logger.info("Register successful");
             boolean result = password.getText().equals(password1.getText());
 
             if (!result) {
@@ -115,7 +111,6 @@ public class RegisterPage extends UiPart<Region> {
     @FXML
     private void handleRegisterEvent() {
         try {
-            logger.info("Trying to register");
             if (checkValid()) {
                 accPrefs.getHm().put(username.getText(), password.getText());
                 accPrefs.saveAccountsPrefs(accPrefs, accPrefs.getAccPrefsFilePath());
@@ -143,7 +138,6 @@ public class RegisterPage extends UiPart<Region> {
      */
     @FXML
     private void handleBackEvent() {
-        logger.info("Going back to login page");
         loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, uiManager);
         this.hide();
         loginPage.show();
@@ -195,8 +189,5 @@ public class RegisterPage extends UiPart<Region> {
     void hide() {
         primaryStage.hide();
     }
-
-    void releaseResources() {
-        this.hide();
-    }
 }
+//@@author

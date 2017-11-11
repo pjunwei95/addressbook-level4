@@ -228,14 +228,19 @@ public class PersonCard extends UiPart<Region> {
 
     private void setSizeForAllImagesAccordingToFontSize(String fontSize) {
         int newImageSize = FontSize.getAssociateImageSizeFromFontSize(fontSize);
+
         imagePhone.setFitHeight(newImageSize);
         imagePhone.setFitWidth(newImageSize);
+
         imageAddress.setFitHeight(newImageSize);
         imageAddress.setFitWidth(newImageSize);
+
         imageEmail.setFitHeight(newImageSize);
         imageEmail.setFitWidth(newImageSize);
+
         imageBirth.setFitHeight(newImageSize);
         imageBirth.setFitWidth(newImageSize);
+
         imageRemark.setFitHeight(newImageSize);
         imageRemark.setFitWidth(newImageSize);
     }

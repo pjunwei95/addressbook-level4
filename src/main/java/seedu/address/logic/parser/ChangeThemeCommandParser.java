@@ -1,6 +1,7 @@
 //@@author ChenXiaoman
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.ChangeThemeCommand;
@@ -17,6 +18,7 @@ public class ChangeThemeCommandParser implements Parser<ChangeThemeCommand> {
      */
     @Override
     public ChangeThemeCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(

@@ -4,8 +4,7 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :stylesDir: ../stylesheets
 
 == Project: Weaver
-Weaver is a desktop address book application. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.
-It helps students store and manage contact information. It satisfies almost all functions might be needed by university students on storing and managing contact information.
+Weaver is a desktop address book application meant for NUS students. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 *Code contributed*: [https://github.com/CS2103AUG2017-W13-B2/main/blob/master/collated/main/yangminxingnus.md[Code contributed]] [https://github.com/CS2103AUG2017-W13-B2/main/blob/master/collated/test/yangminxingnus.md[Test code]]
 
@@ -24,7 +23,7 @@ include::../UserGuide.adoc[tag=remark]
 
 ==== Justification
 
-This feature will be frequently used by most of the university students. And it's the pre-resquisite for the nusmods integration.
+This feature will be frequently used by most of the NUS students. And it's the pre-resquisite for the nusmods integration.
 
 ==== Implementation
 
@@ -53,7 +52,7 @@ include::../UserGuide.adoc[tag=nusmods]
 
 ==== Justification
 
-{Justify the need for, and the current design (i.e. external behavior) of, the feature}
+It is convenient for users to shedule their time using this feature.
 
 ==== Implementation
 
@@ -66,7 +65,7 @@ include::../DeveloperGuide.adoc[tag=nusmods]
 
 ---
 
-=== Enhancement Added: register
+=== Enhancement Added: Register
 
 ==== External behavior
 
@@ -96,131 +95,17 @@ include::../DeveloperGuide.adoc[tag=register]
 
 === Enhancement Added but not used: Encryption/Decryption
 
-==== External behavior
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=encrypt]
+
+#End of Extract#
 
 ---
-=== Encrypt / Decrypt user's file
-
-This feature have no commands, it's embedded inside the software. When a user logout from his account,
-the system will encrypt his file, make it human unreadable. And before he login, the system
-will decrypt the file and make it readable for him. This mechanism is originally designed
-due to the existence of the login feature. Because we want the files to be both unreadable and unreachable
-if someone don't have the account.
-
-=== Implementation
-
-On click of a person's panel, this person's module lists will be list out in the panel.
-
-[source,java]
-----
-/**
- * method for encrypt / decrypt the files
- */
-public class CipherUnit {
-    private static String key = "squirrel123"; // needs to be at least 8 characters for DES
-    private static String dest;
-
-    /**
-    * class for encrypting files
-    */
-    public static void encrypt(String path) {
-        try {
-            dest = path;
-            FileInputStream fis = new FileInputStream(path);
-            FileOutputStream fos = new FileOutputStream("data/temp.xml");
-            encryptOrDecrypt(key, Cipher.ENCRYPT_MODE, fis, fos);
-            swapName("data/temp.xml");
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
-    * class for decrypting files
-    */
-    public static void decrypt(String path) {
-        try {
-            dest = path;
-            FileInputStream fis = new FileInputStream(path);
-            FileOutputStream fos = new FileOutputStream("data/temp.xml");
-            encryptOrDecrypt(key, Cipher.DECRYPT_MODE, fis, fos);
-            swapName("data/temp.xml");
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
-    * translating method
-    */
-    public static void encryptOrDecrypt(String key, int mode, InputStream is, OutputStream os) throws Throwable {
-
-        DESKeySpec dks = new DESKeySpec(key.getBytes());
-        SecretKeyFactory skf = SecretKeyFactory.getInstance("DES");
-        SecretKey desKey = skf.generateSecret(dks);
-        Cipher cipher = Cipher.getInstance("DES"); // DES/ECB/PKCS5Padding for SunJCE
-
-        if (mode == Cipher.ENCRYPT_MODE) {
-            cipher.init(Cipher.ENCRYPT_MODE, desKey);
-            CipherInputStream cis = new CipherInputStream(is, cipher);
-            doCopy(cis, os);
-        } else if (mode == Cipher.DECRYPT_MODE) {
-            cipher.init(Cipher.DECRYPT_MODE, desKey);
-            CipherOutputStream cos = new CipherOutputStream(os, cipher);
-            doCopy(is, cos);
-        }
-    }
-
-    /**
-    * do a copy
-    */
-    public static void doCopy(InputStream is, OutputStream os) throws IOException {
-        byte[] bytes = new byte[64];
-        int numBytes;
-        while ((numBytes = is.read(bytes)) != -1) {
-            os.write(bytes, 0, numBytes);
-        }
-        os.flush();
-        os.close();
-        is.close();
-    }
-
-    /**
-    * used to replace files encypted/decrypted with the dectypted/encrypted one.
-    */
-    public static boolean swapName(String source) {
-        File tmp = new File(source);
-
-        File swapFile1 = new File(dest);
-
-        return tmp.renameTo(swapFile1);
-
-    }
-
-}
-----
-
-
----
-
-==== Consideration
-
-However, this feature is not working well crossing operation systems.
-As you can see from the code above, the file ecryption / decryption is implemented
-in a way that the data are read and operated then stored into aonther file called
-temp.xml first. Then I replace the file name using the original file name to try to
-replace the file with the original one. This is because I tried to achieve that the encryption / decryption
-is done like "within the same file". However, different operating system have different
-ways to decide wether to replace a file or not. Therefore on OSX, it works well. But on windows, the replacing
-failed. It won't influence user until he tries to login another account. The temp.xml
-will be replaced because it was kept separately when I tried to replace it to another file.
-
-So I decided to delete this feature in current version. I'll try to figure out better ways and add it
-back in feature 2.0.
 
 === Other contributions
 
-* Wrote additional tests to increase coverage.
-* Help change friends' code structure.
+* Wrote additional tests to increase coverage, finally up to 84.24.
+* Made enhancements on coding styles: javadoc, uppercase / lowercase, refactoring of static variables,
+optinal fileds in add commands, remove of redundant testcase and unused codes.
+* Made optimization on UI, mainlly on login page and register page.

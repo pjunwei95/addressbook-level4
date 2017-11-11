@@ -1,3 +1,4 @@
+//@@author ChenXiaoman
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
@@ -6,17 +7,16 @@ import java.util.Arrays;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
-//@@author ChenXiaoman
 /**
  * Represent a color of a tag
  */
 public class TagColor {
-    //@@author pjunwei95
+
     public static final String[] VALID_TAG_COLOR = {"red", "blue", "green", "teal", "aqua",
                                                     "black", "gray", "lime", "maroon", "navy",
                                                     "orange", "purple", "silver", "olive",
                                                     "white", "yellow", "transparent"};
-    //@pjunwei95 until here ONLY
+
     public static final String MESSAGE_TAG_COLOR_CONSTRAINTS = "Valid colors are: "
             + Arrays.toString(VALID_TAG_COLOR);
 
@@ -27,6 +27,7 @@ public class TagColor {
     /**
      * Validates given tagColor name.
      *
+     * @param name
      * @throws IllegalValueException if the given tagColor name string is invalid.
      */
     public TagColor(String name) throws IllegalValueException {
@@ -39,7 +40,10 @@ public class TagColor {
     }
 
     /**
-     * Returns true if a given string is a valid tagColor name.
+     * Check if a given string is a valid tag color name.
+     *
+     * @param test
+     * @return validity of a tag color name
      */
     public static boolean isValidTagColorName(String test) {
         return Arrays.asList(VALID_TAG_COLOR).contains(test);

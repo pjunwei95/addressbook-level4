@@ -28,7 +28,7 @@ public class DateOfBirth {
             "Date of Birth must be a Valid Date that is days should be less than 32 , months should be less"
                     + " than 12\n.For the month of February make sure days are less than 29 unless it is a leap year.\n"
                     + "The following format should be followed: \n"
-            + "'.' and '/' can be used as separators. \n";
+            + "'.' and '-' can be used as separators. \n";
 
     public final String date;
 
@@ -109,7 +109,7 @@ public class DateOfBirth {
      */
     public static boolean checkIfValidNumberOfDaysInMonth(int month, int day) {
 
-        if (MONTHS_WITH_DAYS[month - 1] < day) {
+        if (MONTHS_WITH_DAYS[month - 1] < day && month != FEBRUARY) {
             return false;
         }
 
@@ -165,10 +165,5 @@ public class DateOfBirth {
                 || (other instanceof DateOfBirth
                 && this.date.equals(((DateOfBirth) other).date));
     }
-    @Override
-    public int hashCode() {
-        return date.hashCode();
-    }
-
 
 }

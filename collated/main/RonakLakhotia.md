@@ -1,60 +1,4 @@
 # RonakLakhotia
-###### /java/seedu/address/commons/events/storage/ImageStorage.java
-``` java
-package seedu.address.commons.events.storage;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_IMAGE;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import seedu.address.logic.commands.PhotoCommand;
-import seedu.address.logic.parser.exceptions.ImageException;
-
-/** Reads and stores image file
- */
-
-public class ImageStorage {
-
-    /** Reads and stores image file
-     */
-
-    public String execute(String path, int newPath) throws IOException {
-
-
-        File fileToRead = null;
-        BufferedImage image = null;
-
-        File fileToWrite = null;
-
-        String uniquePath = null;
-
-        try {
-            String home = System.getProperty("user.home");
-            java.nio.file.Path path1 = java.nio.file.Paths.get(home, "Desktop", path);
-            String url = path1 + "";
-            image = new BufferedImage(963, 640, BufferedImage.TYPE_INT_ARGB);
-            fileToRead = new File(url);
-            image = ImageIO.read(fileToRead);
-            uniquePath = Integer.toString(newPath);
-            fileToWrite = new File("src/main/resources/images/" + uniquePath + ".jpg");
-            ImageIO.write(image, "jpg", fileToWrite);
-
-
-        } catch (IOException e) {
-            throw  new ImageException(String.format(MESSAGE_INVALID_IMAGE,
-                    PhotoCommand.MESSAGE_FILE_PATH_NOT_FOUND));
-        }
-
-        return uniquePath;
-
-    }
-
-}
-```
 ###### /java/seedu/address/commons/events/ui/ReminderPanelSelectionChangedEvent.java
 ``` java
 import seedu.address.commons.events.BaseEvent;
@@ -422,8 +366,6 @@ public class PhotoCommand extends UndoableCommand {
 
     public static final String DELETE_SUCCESS = "Deleted photo of Person: %1$s";
     public static final String MESSAGE_PHOTO_PERSON_SUCCESS = "Added Photo to Person: %1$s";
-
-    public static final String MESSAGE_FILE_PATH_NOT_FOUND = "Incorrect file path";
 
     private final Index targetIndex;
     private  String filePath;
@@ -1144,13 +1086,7 @@ public class FacebookUsername {
                 && this.username.equals(((FacebookUsername) other).username)); // state check
     }
 
-    @Override
-    public int hashCode() {
-        return username.hashCode();
-    }
-
 }
-
 ```
 ###### /java/seedu/address/model/person/ReadOnlyPerson.java
 ``` java
@@ -1237,7 +1173,9 @@ public class DueDate {
     public static final int LAST_INDEX = 1;
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Due Date must be a Valid Date and in the following format: \n"
-                    + "'.' and '/' can be used as separators. \n";
+                    + "'.' and '-' can be used as separators. \n";
+
+    public static final int [] MONTHS_WITH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     public final String date;
 
@@ -1289,8 +1227,9 @@ public class DueDate {
         int dayNumber = getDayNumber(firstIndexOfSeparator, date);
         boolean isValidDateOfFebruary = checkIfValidDateOfFebruary(
                 date, monthNumber, yearNumber, dayNumber, isLeapYear);
+        boolean isValidNumberOfDaysInMonth = checkIfValidNumberOfDaysInMonth(monthNumber, dayNumber);
 
-        if (isValidDateOfFebruary) {
+        if (isValidDateOfFebruary && isValidNumberOfDaysInMonth) {
             return true;
         }
         return false;
@@ -1308,6 +1247,18 @@ public class DueDate {
             }
         }
         return true;
+    }
+    /**
+     * Checks if number of days in a given month are valid
+     */
+    public static boolean checkIfValidNumberOfDaysInMonth(int month, int day) {
+
+        if (MONTHS_WITH_DAYS[month - 1] < day && month != FEBRUARY) {
+            return false;
+        }
+
+        return true;
+
     }
 
     /**
@@ -1877,11 +1828,6 @@ public class XmlAdaptedReminder {
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
         return FXCollections.unmodifiableObservableList(reminders);
     }
-```
-###### /java/seedu/address/ui/MainWindow.java
-``` java
-    @FXML
-    private StackPane reminderListPlaceholder;
 ```
 ###### /java/seedu/address/ui/ReminderCard.java
 ``` java

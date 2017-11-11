@@ -1,3 +1,4 @@
+//@@author ChenXiaoman
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.commands.ChangeFontSizeCommand.DECREASE_FONT_SIZE_COMMAND;
@@ -13,7 +14,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.model.font.FontSize;
-//@@author ChenXiaoman
+
 public class ChangeFontSizeCommandParserTest {
     private ChangeFontSizeCommandParser parser = new ChangeFontSizeCommandParser();
 

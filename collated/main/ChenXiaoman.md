@@ -1,4 +1,112 @@
 # ChenXiaoman
+###### /java/seedu/address/commons/core/GuiSettings.java
+``` java
+package seedu.address.commons.core;
+
+import java.awt.Point;
+import java.io.Serializable;
+import java.util.Objects;
+
+import seedu.address.model.font.FontSize;
+import seedu.address.model.theme.Theme;
+
+/**
+ * A Serializable class that contains the GUI settings.
+ */
+public class GuiSettings implements Serializable {
+
+    private static final double DEFAULT_HEIGHT = 600;
+    private static final double DEFAULT_WIDTH = 740;
+    private static final String DEFAULT_FONT_SIZE = FontSize.FONT_SIZE_M_LABEL;
+    private static final String DEFAULT_THEME = Theme.BRIGHT_THEME;
+
+    private Double windowWidth;
+    private Double windowHeight;
+    private Point windowCoordinates;
+    private String fontSize;
+    private String theme;
+
+    public GuiSettings() {
+        this.windowWidth = DEFAULT_WIDTH;
+        this.windowHeight = DEFAULT_HEIGHT;
+        this.windowCoordinates = null; // null represent no coordinates
+        this.fontSize = DEFAULT_FONT_SIZE;
+        this.theme = DEFAULT_THEME;
+    }
+
+    public GuiSettings(Double windowWidth, Double windowHeight, int xPosition, int yPosition, String fontSize,
+                       String theme) {
+        this.windowWidth = windowWidth;
+        this.windowHeight = windowHeight;
+        this.windowCoordinates = new Point(xPosition, yPosition);
+        this.fontSize = fontSize;
+        this.theme = theme;
+    }
+
+    public GuiSettings(Double windowWidth, Double windowHeight, int xPosition, int yPosition) {
+        this.windowWidth = windowWidth;
+        this.windowHeight = windowHeight;
+        this.windowCoordinates = new Point(xPosition, yPosition);
+        this.fontSize = DEFAULT_FONT_SIZE;
+        this.theme = DEFAULT_THEME;
+    }
+
+    public Double getWindowWidth() {
+        return windowWidth;
+    }
+
+    public Double getWindowHeight() {
+        return windowHeight;
+    }
+
+    public Point getWindowCoordinates() {
+        return windowCoordinates;
+    }
+
+    public String getFontSize() {
+        return fontSize;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof GuiSettings)) { //this handles null as well.
+            return false;
+        }
+
+        GuiSettings o = (GuiSettings) other;
+
+        return Objects.equals(windowWidth, o.windowWidth)
+                && Objects.equals(windowHeight, o.windowHeight)
+                && Objects.equals(windowCoordinates.x, o.windowCoordinates.x)
+                && Objects.equals(windowCoordinates.y, o.windowCoordinates.y)
+                && Objects.equals(fontSize, o.fontSize)
+                && Objects.equals(theme, o.theme);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(windowWidth, windowHeight, windowCoordinates, fontSize, theme);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Width : " + windowWidth + "\n");
+        sb.append("Height : " + windowHeight + "\n");
+        sb.append("Position : " + windowCoordinates + "\n");
+        sb.append("Font size: " + fontSize + "\n");
+        sb.append("Theme: " + theme);
+        return sb.toString();
+    }
+}
+```
 ###### /java/seedu/address/commons/events/ui/ChangeFontSizeEvent.java
 ``` java
 package seedu.address.commons.events.ui;
@@ -16,11 +124,6 @@ public class ChangeFontSizeEvent extends BaseEvent {
     public ChangeFontSizeEvent(String message, String fontSize) {
         this.fontSize = fontSize;
         this.message = message;
-    }
-
-    public ChangeFontSizeEvent(String fontSize) {
-        this.fontSize = fontSize;
-        this.message = "";
     }
 
     public String getFontSize() {
@@ -44,24 +147,19 @@ import seedu.address.commons.events.BaseEvent;
  * Indicates a request to change the tag color of the application
  */
 public class ChangeTagColorEvent extends BaseEvent {
-    private String color;
-
-    public ChangeTagColorEvent(String color) {
-        this.color = color;
-    }
 
     @Override
     public String toString() {
         return this.getClass().getSimpleName();
     }
-
-    public String getColor() {
-        return color;
-    }
 }
 ```
 ###### /java/seedu/address/commons/events/ui/ChangeThemeEvent.java
 ``` java
+package seedu.address.commons.events.ui;
+
+import seedu.address.commons.events.BaseEvent;
+
 /**
  * Indicates a request to change the theme of the application
  */
@@ -84,6 +182,10 @@ public class ChangeThemeEvent extends BaseEvent {
 ```
 ###### /java/seedu/address/commons/events/ui/ShowPersonAddressEvent.java
 ``` java
+package seedu.address.commons.events.ui;
+
+import seedu.address.commons.events.BaseEvent;
+
 /**
  * Indicates a request to show a person's address in Google Map
  */
@@ -109,8 +211,17 @@ public class ShowPersonAddressEvent extends BaseEvent {
 ```
 ###### /java/seedu/address/logic/commands/ChangeFontSizeCommand.java
 ``` java
+package seedu.address.logic.commands;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FONT_SIZE;
+
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.ChangeFontSizeEvent;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.font.FontSize;
+
 /**
- * Customise the font size of the Address Book application.
+ * Customise the font size of the application.
  */
 public class ChangeFontSizeCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "fs";
@@ -210,7 +321,9 @@ public class ChangeTagColorCommand extends UndoableCommand {
     }
 
     /**
-     * Check whether a given tag exists in current database
+     * Check whether a given tag exists in current database.
+     * @param t
+     * @return whether a given tag exists
      */
     private boolean isExistingTagName(Tag t) {
         for (Tag tag : model.getAddressBook().getTagList()) {
@@ -223,17 +336,17 @@ public class ChangeTagColorCommand extends UndoableCommand {
 
     @Override
     protected CommandResult executeUndoableCommand() throws CommandException {
-        // Store all non existing tags
+        // Store all non existing tags.
         Set<Tag> nonExistingTagList = new HashSet<>();
 
-        // Check whether tags in the tagList are not existing tags
+        // Check whether tags in the tagList are not existing tags.
         for (Tag tag: tagList) {
             if (!isExistingTagName(tag)) {
                 nonExistingTagList.add(tag);
             }
         }
 
-        // There are tags that are not existing tags
+        // There are tags that are not existing tags.
         if (nonExistingTagList.size() != 0) {
             throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS, nonExistingTagList));
         }
@@ -244,7 +357,7 @@ public class ChangeTagColorCommand extends UndoableCommand {
             throw new CommandException(MESSAGE_FAILED);
         }
 
-        EventsCenter.getInstance().post(new ChangeTagColorEvent(color.tagColorName));
+        EventsCenter.getInstance().post(new ChangeTagColorEvent());
 
         return new CommandResult(String.format(MESSAGE_CHANGE_TAG_COLOR_SUCCESS, tagList, color.tagColorName));
     }
@@ -381,10 +494,10 @@ public class MapCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        // Get the peron with the index
+        // Get the peron with the index.
         ReadOnlyPerson person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
 
-        // Post an event to show the address
+        // Post an event to show the address.
         EventsCenter.getInstance().post(new ShowPersonAddressEvent(person.getAddress().value));
 
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, person.getName().fullName));
@@ -430,6 +543,19 @@ public class MapCommand extends Command {
 ```
 ###### /java/seedu/address/logic/parser/ChangeFontSizeCommandParser.java
 ``` java
+package seedu.address.logic.parser;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FONT_SIZE;
+
+import java.util.stream.Stream;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.ChangeFontSizeCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.font.FontSize;
+
 /**
  * Parses input arguments and creates a new ChangeFontSizeCommand object
  */
@@ -441,6 +567,7 @@ public class ChangeFontSizeCommandParser implements Parser<ChangeFontSizeCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public ChangeFontSizeCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_FONT_SIZE);
 
@@ -529,6 +656,7 @@ public class ChangeTagColorCommandParser implements Parser<ChangeTagColorCommand
 ``` java
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.ChangeThemeCommand;
@@ -545,12 +673,47 @@ public class ChangeThemeCommandParser implements Parser<ChangeThemeCommand> {
      */
     @Override
     public ChangeThemeCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangeThemeCommand.MESSAGE_USAGE));
         }
         return new ChangeThemeCommand(trimmedArgs);
+    }
+}
+```
+###### /java/seedu/address/logic/parser/MapCommandParser.java
+``` java
+package seedu.address.logic.parser;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.MapCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * Parses input arguments and creates a new MapCommand object
+ */
+public class MapCommandParser implements Parser<MapCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the MapCommand
+     * and returns an MapCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public MapCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+        try {
+            Index index = ParserUtil.parseIndex(args);
+            return new MapCommand(index);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MapCommand.MESSAGE_USAGE));
+        }
     }
 }
 ```
@@ -647,6 +810,31 @@ public class FontSize {
     public static final String FONT_SIZE_L_LABEL = "l";
     public static final String FONT_SIZE_XL_LABEL = "xl";
 
+    private static final String JAVAFX_FONT_SIZE_PREFIX = "-fx-font-size: ";
+    private static final String JAVAFX_FONT_SIZE_XS = "small";
+    private static final String JAVAFX_FONT_SIZE_S = "medium";
+    private static final String JAVAFX_FONT_SIZE_M = "large";
+    private static final String JAVAFX_FONT_SIZE_L = "x-large";
+    private static final String JAVAFX_FONT_SIZE_XL = "xx-large";
+
+    private static final String NAME_LABEL_SIZE_XS = "15";
+    private static final String NAME_LABEL_SIZE_S = "20";
+    private static final String NAME_LABEL_SIZE_M = "25";
+    private static final String NAME_LABEL_SIZE_L = "30";
+    private static final String NAME_LABEL_SIZE_XL = "35";
+
+    private static final int IMAGE_SIZE_XS = 15;
+    private static final int IMAGE_SIZE_S = 20;
+    private static final int IMAGE_SIZE_M = 25;
+    private static final int IMAGE_SIZE_L = 30;
+    private static final int IMAGE_SIZE_XL = 35;
+
+    private static final int PHOTO_SIZE_XS = 45;
+    private static final int PHOTO_SIZE_S = 50;
+    private static final int PHOTO_SIZE_M = 55;
+    private static final int PHOTO_SIZE_L = 60;
+    private static final int PHOTO_SIZE_XL = 65;
+
     private static String currentFontSizeLabel = FONT_SIZE_M_LABEL;
 
     private final String value;
@@ -654,11 +842,12 @@ public class FontSize {
     /**
      * Validates given font size.
      *
+     * @param fontSize
      * @throws IllegalValueException if given font size is invalid.
      */
     public FontSize(String fontSize) throws IllegalValueException {
         requireNonNull(fontSize);
-        if (isValidFontSizeChangeSymbol(fontSize)) {
+        if (isValidChangeFontSizeSymbol(fontSize)) {
 
             // Get the new font size from "+" or "-" symbol base on current font size
             fontSize = getFontSizeFromChangeSymbol(fontSize);
@@ -677,7 +866,11 @@ public class FontSize {
     }
 
     /**
-     * Get the new font size from "+" or "-" symbol and change the current font size
+     * Get a increased/decreased font size from "+" or "-"  symbol
+     *
+     * @param symbol
+     * @return increased/decreased font size based on current font size
+     * @throws IllegalValueException
      */
     private String getFontSizeFromChangeSymbol(String symbol) throws IllegalValueException {
         int fontSizeListLength = FONT_SIZE_LIST.length;
@@ -719,8 +912,11 @@ public class FontSize {
 
     /**
      * Check whether the change symbol is valid
+     *
+     * @param symbol
+     * @return validity of a symbol
      */
-    private boolean isValidFontSizeChangeSymbol(String symbol) {
+    private boolean isValidChangeFontSizeSymbol(String symbol) {
         for (String s : FONT_SIZE_CHANGE_SYMBOL) {
             if (symbol.equals(s)) {
                 return true;
@@ -730,7 +926,10 @@ public class FontSize {
     }
 
     /**
-     * Returns true if a given string is a valid font size.
+     * Check if a given string is a valid font size
+     *
+     * @param test
+     * @return validity of a the String
      */
     public static boolean isValidFontSize(String test) {
         for (String s : FONT_SIZE_LIST) {
@@ -742,6 +941,8 @@ public class FontSize {
     }
 
     /**
+     * Get the current font size
+     *
      * @return the current font size
      */
     public static String getCurrentFontSizeLabel() {
@@ -749,7 +950,8 @@ public class FontSize {
     }
 
     /**
-     * Set the current font size to a new font size
+     * Set the current font size to a given new font size
+     *
      * @param newFontSizeLabel
      */
     public static void setCurrentFontSizeLabel(String newFontSizeLabel) {
@@ -773,139 +975,148 @@ public class FontSize {
 
 
     /**
-     * Get the associate fx format string for a give font size
+     * Get the associate JavaFX format String for a give font size
+     *
      * @param inputFontSize
      */
     public static String getAssociateFxFontSizeString(String inputFontSize) {
         assert (FontSize.isValidFontSize(inputFontSize));
-        String fxFontSizeString = "-fx-font-size: ";
+        String fxFontSizeString = JAVAFX_FONT_SIZE_PREFIX;
         switch (inputFontSize) {
         case FONT_SIZE_XS_LABEL:
-            fxFontSizeString += "small;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_XS;
             break;
 
         case FONT_SIZE_S_LABEL:
-            fxFontSizeString += "medium;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_S;
             break;
 
         case FONT_SIZE_M_LABEL:
-            fxFontSizeString += "large;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_M;
             break;
 
         case FONT_SIZE_L_LABEL:
-            fxFontSizeString += "x-large;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_L;
             break;
 
         case FONT_SIZE_XL_LABEL:
-            fxFontSizeString += "xx-large;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_XL;
             break;
 
         default:
-            fxFontSizeString += "large;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_M;
         }
+
+        fxFontSizeString += ";";
         return fxFontSizeString;
     }
 
     /**
-     * Get the associate fx format string for a give font size of name
+     * Get the associate JavaFX format String for a give font size of name
+     *
      * @param inputFontSize
+     * @return JavaFX format String
      */
     public static String getAssociateFxFontSizeStringForName(String inputFontSize) {
         assert (FontSize.isValidFontSize(inputFontSize));
-        String fxFontSizeString = "-fx-font-size: ";
+        String fxFontSizeString = JAVAFX_FONT_SIZE_PREFIX;
         switch (inputFontSize) {
         case FONT_SIZE_XS_LABEL:
-            fxFontSizeString += "15;";
+            fxFontSizeString += NAME_LABEL_SIZE_XS;
             break;
 
         case FONT_SIZE_S_LABEL:
-            fxFontSizeString += "20;";
+            fxFontSizeString += NAME_LABEL_SIZE_S;
             break;
 
         case FONT_SIZE_M_LABEL:
-            fxFontSizeString += "25;";
+            fxFontSizeString += NAME_LABEL_SIZE_M;
             break;
 
         case FONT_SIZE_L_LABEL:
-            fxFontSizeString += "30;";
+            fxFontSizeString += NAME_LABEL_SIZE_L;
             break;
 
         case FONT_SIZE_XL_LABEL:
-            fxFontSizeString += "35;";
+            fxFontSizeString += NAME_LABEL_SIZE_XL;
             break;
 
         default:
-            fxFontSizeString += "25;";
+            fxFontSizeString += NAME_LABEL_SIZE_M;
         }
+
+        fxFontSizeString += ";";
         return fxFontSizeString;
     }
 
     /**
      * Get associate image size from a given font size
+     *
      * @param inputFontSize
-     * @return
+     * @return image size
      */
     public static int getAssociateImageSizeFromFontSize(String inputFontSize) {
         assert (FontSize.isValidFontSize(inputFontSize));
         int imageSize;
         switch (inputFontSize) {
         case FONT_SIZE_XS_LABEL:
-            imageSize = 15;
+            imageSize = IMAGE_SIZE_XS;
             break;
 
         case FONT_SIZE_S_LABEL:
-            imageSize = 20;
+            imageSize = IMAGE_SIZE_S;
             break;
 
         case FONT_SIZE_M_LABEL:
-            imageSize = 25;
+            imageSize = IMAGE_SIZE_M;
             break;
 
         case FONT_SIZE_L_LABEL:
-            imageSize = 30;
+            imageSize = IMAGE_SIZE_L;
             break;
 
         case FONT_SIZE_XL_LABEL:
-            imageSize = 35;
+            imageSize = IMAGE_SIZE_XL;
             break;
 
         default:
-            imageSize = 25;
+            imageSize = IMAGE_SIZE_M;
         }
         return imageSize;
     }
 
     /**
      * Get associate photo size from a given font size
+     *
      * @param inputFontSize
-     * @return
+     * @return photo size
      */
     public static int getAssociatePhotoSizeFromFontSize(String inputFontSize) {
         assert (FontSize.isValidFontSize(inputFontSize));
         int photoSize;
         switch (inputFontSize) {
         case FONT_SIZE_XS_LABEL:
-            photoSize = 45;
+            photoSize = PHOTO_SIZE_XS;
             break;
 
         case FONT_SIZE_S_LABEL:
-            photoSize = 50;
+            photoSize = PHOTO_SIZE_S;
             break;
 
         case FONT_SIZE_M_LABEL:
-            photoSize = 55;
+            photoSize = PHOTO_SIZE_M;
             break;
 
         case FONT_SIZE_L_LABEL:
-            photoSize = 60;
+            photoSize = PHOTO_SIZE_L;
             break;
 
         case FONT_SIZE_XL_LABEL:
-            photoSize = 65;
+            photoSize = PHOTO_SIZE_XL;
             break;
 
         default:
-            photoSize = 55;
+            photoSize = PHOTO_SIZE_M;
         }
         return photoSize;
     }
@@ -1009,10 +1220,75 @@ public class Tag {
 ```
 ###### /java/seedu/address/model/tag/TagColor.java
 ``` java
+package seedu.address.model.tag;
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.Arrays;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+
 /**
  * Represent a color of a tag
  */
 public class TagColor {
+
+    public static final String[] VALID_TAG_COLOR = {"red", "blue", "green", "teal", "aqua",
+                                                    "black", "gray", "lime", "maroon", "navy",
+                                                    "orange", "purple", "silver", "olive",
+                                                    "white", "yellow", "transparent"};
+
+    public static final String MESSAGE_TAG_COLOR_CONSTRAINTS = "Valid colors are: "
+            + Arrays.toString(VALID_TAG_COLOR);
+
+    public static final String DEFAULT_TAG_COLOR = "orange";
+
+    public final String tagColorName;
+
+    /**
+     * Validates given tagColor name.
+     *
+     * @param name
+     * @throws IllegalValueException if the given tagColor name string is invalid.
+     */
+    public TagColor(String name) throws IllegalValueException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!isValidTagColorName(trimmedName)) {
+            throw new IllegalValueException(MESSAGE_TAG_COLOR_CONSTRAINTS);
+        }
+        this.tagColorName = trimmedName;
+    }
+
+    /**
+     * Check if a given string is a valid tag color name.
+     *
+     * @param test
+     * @return validity of a tag color name
+     */
+    public static boolean isValidTagColorName(String test) {
+        return Arrays.asList(VALID_TAG_COLOR).contains(test);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TagColor // instanceof handles nulls
+                && this.tagColorName.equals(((TagColor) other).tagColorName)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return tagColorName.hashCode();
+    }
+
+    /**
+     * Format state as text for viewing.
+     */
+    public String toString() {
+        return tagColorName;
+    }
+}
 ```
 ###### /java/seedu/address/model/theme/Theme.java
 ``` java
@@ -1345,14 +1621,19 @@ public class PersonCard extends UiPart<Region> {
 
     private void setSizeForAllImagesAccordingToFontSize(String fontSize) {
         int newImageSize = FontSize.getAssociateImageSizeFromFontSize(fontSize);
+
         imagePhone.setFitHeight(newImageSize);
         imagePhone.setFitWidth(newImageSize);
+
         imageAddress.setFitHeight(newImageSize);
         imageAddress.setFitWidth(newImageSize);
+
         imageEmail.setFitHeight(newImageSize);
         imageEmail.setFitWidth(newImageSize);
+
         imageBirth.setFitHeight(newImageSize);
         imageBirth.setFitWidth(newImageSize);
+
         imageRemark.setFitHeight(newImageSize);
         imageRemark.setFitWidth(newImageSize);
     }

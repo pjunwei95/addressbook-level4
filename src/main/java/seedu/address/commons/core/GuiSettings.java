@@ -1,3 +1,4 @@
+//@@author ChenXiaoman
 package seedu.address.commons.core;
 
 import java.awt.Point;

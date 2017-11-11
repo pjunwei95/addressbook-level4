@@ -51,6 +51,17 @@ public class DeleteTagCommandTest {
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+    @Test
+    public void checkTagDeletedPerson() {
+
+        ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND)
+                .build();
+        DeleteTagCommand command = new DeleteTagCommand(INDEX_SECOND_PERSON, descriptor);
+        ReadOnlyPerson changed = command.createTagDeletedPerson(personInList, descriptor);
+        assertTrue(changed.getTags().isEmpty() == false);
+    }
+
 
     /**
      * Edit filtered list where index is larger than size of filtered list,

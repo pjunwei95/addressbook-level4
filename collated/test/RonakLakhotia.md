@@ -99,90 +99,6 @@ public class AddReminderTest {
             fail("This method should not be called.");
 
         }
-
-        @Override
-        public void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
-            fail("This method should not be called.");
-        }
-
-        @Override
-        public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
-                throws DuplicatePersonException {
-            fail("This method should not be called.");
-        }
-        @Override
-        public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder) {
-            fail("This method should not be called");
-        }
-
-        @Override
-        public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
-            fail("This method should not be called.");
-            return null;
-        }
-        @Override
-        public ObservableList<ReadOnlyReminder> getFilteredReminderList() {
-            fail("This method should not be called.");
-            return null;
-        }
-        @Override
-        public void updateFilteredReminderList(Predicate<ReadOnlyReminder> predicate) {
-            fail("This method should not be called.");
-        }
-        @Override
-        public void sendMailToContacts(String tagName, String subject, List<ReadOnlyPerson> lastShownList) {
-            fail("This method should never be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
-            fail("This method should not be called.");
-        }
-
-        @Override
-        public void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
-            fail("This method should not be called.");
-        }
-
-        @Override
-        public void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
-            fail("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that always throw a DuplicateReminderException when trying to add a reminder.
-     */
-    private class ModelStubThrowingDuplicateReminderException extends ModelStub {
-        @Override
-        public void addReminder(ReadOnlyReminder reminder) throws DuplicateReminderException {
-            throw new DuplicateReminderException();
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
-    /**
-     * A Model stub that always accept the reminder being added.
-     */
-    private class ModelStubAcceptingReminderAdded extends ModelStub {
-        final ArrayList<Reminder> remindersAdded = new ArrayList<>();
-
-        @Override
-        public void addReminder(ReadOnlyReminder reminder) throws DuplicateReminderException {
-            remindersAdded.add(new Reminder(reminder));
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
-}
 ```
 ###### /java/seedu/address/logic/commands/ChangeReminderDescriptorTest.java
 ``` java
@@ -312,7 +228,7 @@ public class FaceBookCommandTest {
     }
 
     /**
-     * Returns a {@code MapCommand} with the parameter {@code index}.
+     * Returns a {@code FacebookCommand} with the parameter {@code index}.
      */
     private FaceBookCommand prepareCommand(Index index) {
         FaceBookCommand faceBookCommand = new FaceBookCommand(index);
@@ -756,36 +672,6 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
         /* Case: Add photo to the first person in the list, command with leading spaces and
           trailing spaces -> deleted */
 
-        //Find the relative path of a file.
-
-        String path = "/Users/ronaklakhotia/Desktop/Ronak.jpeg";
-        String base = "/Users/ronaklakhotia/Desktop";
-        String relative = new File(base).toURI().relativize(new File(path).toURI()).getPath();
-
-        File fileToRead = null;
-        BufferedImage image = null;
-
-        File fileToWrite = null;
-
-        String uniquePath = null;
-        //System.out.println(relative);
-
-        try {
-
-            String url = path + "";
-            image = new BufferedImage(963, 640, BufferedImage.TYPE_INT_ARGB);
-            fileToRead = new File(url);
-            image = ImageIO.read(fileToRead);
-            uniquePath = Integer.toString(path.hashCode());
-            fileToWrite = new File("src/main/resources/images/" + uniquePath + ".jpg");
-            ImageIO.write(image, "jpg", fileToWrite);
-
-
-        } catch (IOException io) {
-            new AssertionError("Invalid input");
-        }
-
-
         Model expectedModel = getModel();
         String command = "     " + PhotoCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased()
                 + "       " + "src/main/resources/images/" + "clock" + ".png" + "   ";
@@ -849,6 +735,8 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
             throw new AssertionError("targetPerson is retrieved from model.");
         } catch (IOException ioe) {
             throw new AssertionError("Illegal values entered");
+        } catch (IllegalValueException ive) {
+            throw new AssertionError("Illegal value");
         }
         return targetPerson;
     }

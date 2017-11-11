@@ -122,6 +122,10 @@ public class AddCommandTest {
             fail("This method should not be called.");
         }
         @Override
+        public void clearBrowserPanel() {
+            fail("This method should not be called.");
+        }
+        @Override
         public void resetData(ReadOnlyAddressBook newData) {
             fail("This method should not be called.");
         }
@@ -135,9 +139,13 @@ public class AddCommandTest {
         public void addPhotoPerson(ReadOnlyPerson person, String FilePath, Index targetIndex)
                 throws PersonNotFoundException {
             fail("This method should not be called.");
-
         }
-
+        //@@author yangminxingnus
+        @Override
+        public void addRemarkPerson(ReadOnlyPerson person, String FilePath, Index targetIndex) {
+            fail("This method should not be called.");
+        }
+        //@@author
         @Override
         public void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
             fail("This method should not be called.");
