@@ -143,8 +143,7 @@ functionality to backup in a file that is identifiable to the user.
 
 * Fixed global bug for help window. (Issue https://github.com/se-edu/addressbook-level4/issues/727[#727])
 
-* Wrote additional tests to increase coverage from 88% to 92%
-//(Pull requests https://github.com[#36], https://github.com[#38])
+* Wrote additional tests to increase coverage to 85%
 
 == Project: NUSeekers
 
