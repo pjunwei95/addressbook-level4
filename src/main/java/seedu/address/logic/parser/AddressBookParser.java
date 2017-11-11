@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddReminder;
 import seedu.address.logic.commands.BackUpCommand;
-import seedu.address.logic.commands.CancelClearCommand;
 import seedu.address.logic.commands.ChangeFontSizeCommand;
 import seedu.address.logic.commands.ChangeReminderCommand;
 import seedu.address.logic.commands.ChangeTagColorCommand;
@@ -38,7 +37,6 @@ import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.ui.ClearConfirmation;
 
 /**
  * Parses user input.
@@ -139,12 +137,7 @@ public class AddressBookParser {
             return new DeleteTagCommandParser().parse(arguments);
 
         case ClearPopupCommand.COMMAND_WORD: {
-            ClearConfirmation clearConfirmation = new ClearConfirmation();
-            if (clearConfirmation.isClearCommand()) {
-                return new ClearPopupCommand();
-            } else {
-                return new CancelClearCommand();
-            }
+            return new ClearPopupCommand();
         }
 
         case BackUpCommand.COMMAND_WORD:

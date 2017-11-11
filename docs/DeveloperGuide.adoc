@@ -740,9 +740,9 @@ As you can see from the `Model` diagram, the `Person` retains the attributes tha
 
 Suppose that the user has just launched the application.
 
-The user executes a new `DeleteTagCommand`, `delete/t 5 t/friends`, to delete the tag `friends` of the 5th person in the address book. The tags and the index are parsed into `DeleteTagCommandParser` before the `delete/t` command executes.
+The user executes a new `DeleteTagCommand`, `deletetag 5 t/friends`, to delete the tag `friends` of the 5th person in the address book. The tags and the index are parsed into `DeleteTagCommandParser` before the `deletetag` command executes.
 
-As the user continues to use the program, he might decide to delete more than one tags. For example, the user may execute `delete/t 2 t/colleagues t/friends` to delete multiple tags.
+As the user continues to use the program, he might decide to delete more than one tags. For example, the user may execute `deletetag 2 t/colleagues t/friends` to delete multiple tags.
 
 [NOTE]
 If the tags are not fully matched, it will throw an `Exception`.

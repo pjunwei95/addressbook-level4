@@ -651,7 +651,7 @@ e.g. `deletetag 3 t/colleagues`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
-* *Find by Tags* : `find/t KEYWORD [MORE_KEYWORDS]` +
+* *Find by Tags* : `findtag KEYWORD [MORE_KEYWORDS]` +
 e.g. `findtag friends family`
 * *Customize tag color* : `color c/[COLOR] t/[TAG] t/[TAG] t/[MORE_TAGS]` +
 e.g. `color c/red t/friend t/family`

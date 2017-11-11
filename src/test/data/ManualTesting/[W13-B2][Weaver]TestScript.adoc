@@ -9,11 +9,22 @@
 ** Change file path in file to data/SampleData.xml. +
 ** Start the app again. +
 
+== Test login feature
+** Start the app, and now the only valid username and password pairs are {admin, admin} and {user, user}. +
+** Try to login with any name and password that are not valid and see the warning window poping up. +
+** Try to login with valid username and password pair and see the mainWindow(the effect of correctly login) +
+
+== Test register feature
+** Go to the register page using the button “register” on the right bottom of login page.
+** Choose any username and password to register. If you use duplicate username, you will get a pop up window and need to choose other valid username.
+** Choose a valid username, but key in different password purposely to see the effect.
+** Register using username “SampleData” and whatever password to see the effect of correct registering. Meanwhile, to load the “SampleData.xml”, you need to use the username “SampleData” to get start with.
+** Login with valid username and password pair and see the mainWindow(the effect of correctly login) +
+
 === Command 0
 
 * `undo`  +
 * *Result* - No more commands to undo! +
-
 
 === Help Command
 
@@ -118,6 +129,100 @@ Success message is displayed. +
 * *Result* +
 Edited Person: another Phone: 91234567 Email: another@example.com Address: PGP Date of birth: 13.10.1997
 Remark: CS2101/SEC/1 FilePath:  Facebook Username: john.doe Tags: [owesMoney][friends]
+
+
+
+
+
+=== Remark Command
+*COMMAND 0* - `remark` +
+
+* *Result* +
+Invalid command format!
+remark: Remark the module information of the person identified by the index. Existing modulelist will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) r/MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2
+Example: remark 1 r/CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1
+
+*COMMAND 1* - `remark 1 r/CS2101/SEC/` +
+
+* *Result* +
+Invalid command format!
+remark: Remark the module information of the person identified by the index. Existing modulelist will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) r/MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2
+Example: remark 1 r/CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1
+
+*COMMAND 2* - `remark 1 r/CS2101//1` +
+
+* *Result* +
+Invalid command format!
+remark: Remark the module information of the person identified by the index. Existing modulelist will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) r/MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2
+Example: remark 1 r/CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1
+
+*COMMAND 3* - `remark 1 r//SEC/1` +
+
+* *Result* +
+Invalid command format!
+remark: Remark the module information of the person identified by the index. Existing modulelist will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) r/MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2
+Example: remark 1 r/CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1
+
+
+*COMMAND 4* - `remark 1 r/CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1` +
+
+* *Result* +
+Added remark to Person: Alex Yeoh Phone: 87438807 Email: alexyeoh@example.com Address: Blk 30 Geylang Street 29, #06-40 Date of birth: 13.10.1997 Remark: CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1 FilePath:  Facebook Username:  Tags: [friends]
+
+*COMMAND 5* - `remark 1 r/` +
+
+* *Result* +
+Added remark to Person: Alex Yeoh Phone: 87438807 Email: alexyeoh@example.com Address: Blk 30 Geylang Street 29, #06-40 Date of birth: 13.10.1997 Remark:  FilePath:  Facebook Username:  Tags: [friends]
+ +
+
+=== Logout Command
+*COMMAND 0* - `logout` +
+
+=== Edit Command
+
+*COMMAND 0* - `edit 1` +
+
+* *Result* +
+At least one field to edit must be provided. +
+
+*COMMAND 1* - `edit 1 n/ChangeIt` +
+
+* *Result* +
+Edited Person: changeit Phone: 98765432 Email: johnd@example.com Address: 311, Clementi Ave 2, #02-25
+Date of birth: 13.10.1997 Remark: CS2101/SEC/1 FilePath:  Facebook Username: john.doe Tags: [owesMoney][friends] +
+
+*COMMAND 3* - `edit 1 u/ronak.lakhotia` +
+
+* *Result* +
+At least one field to edit must be provided. +
+
+*COMMAND 4* - `edit 0` +
+
+* *Result* +
+Invalid command format!
+edit: Edits the details of the person identified by the index number used in the last person listing. Existing values
+will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATE_OF_BIRTH] [r/REMARK]
+[f/IMAGE[t/TAG]...
+Example: edit 1 p/91234567 e/johndoe@example.com +
+
+*COMMAND 5* - `edit 1 f/*please enter a valid file path*` +
+
+* *Result* +
+Success message is displayed. +
+
+*COMMAND 6* - `edit 1 n/another a/PGP p/91234567 e/another@example.com` +
+
+* *Result* +
+Edited Person: another Phone: 91234567 Email: another@example.com Address: PGP Date of birth: 13.10.1997
+Remark: CS2101/SEC/1 FilePath:  Facebook Username: john.doe Tags: [owesMoney][friends]
+
+
+
 
 === Delete Command
 
@@ -224,6 +329,9 @@ Invalid command format message displayed. +
 === Clear Command
 
 *COMMAND 0* - `cls` +
+
+* *Result* +
+Displays success message if ronak is there in person list else shows 0 persons listed. +
 
 === Find Command
 
@@ -333,4 +441,412 @@ Invalid command format displayed. +
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
+
+
+
+=== Customize tag color command
+
+*COMMAND 0* - `color` +
+
+* *Result* +
+Invalid command format!
+color: Edits the color of a tag or list of tags. Existing color will be overwritten by the input. +
+Parameters: color t/[TAG] c/[COLOR] +
+Example: color t/friend c/red
+
+*COMMAND 1* - `color t/friends c/ red`
+
+* *Result* +
+Change tag color of [[friends]] to red
+
+
+*COMMAND 2* - `color t/friends t/family c/teal`
+
+* *Result* +
+Change tag color of [[family], [friends]] to teal
+
+*COMMAND 3* - `color t/friends t/family c/notAColor`
+
+* *Result* +
+Valid colors are: [red, blue, green, teal, aqua, black, gray, lime, maroon, navy, orange, purple, silver, olive, white, yellow, transparent]
+
+*COMMAND 4* - `color t/notATag t/family c/teal`
+
+* *Result* +
+Cannot change color of not existing tags: [[notATag]]
+
+*COMMAND 5* - `undo`
+
+* *Result* +
+undo success
+
+*COMMAND 6* - `redo`
+
+* *Result* +
+redo success
+
+*Close the app and open again*
+
+* *Result* +
+The tag color of tags "friends" and "family" remain in color teal
+
+=== Customize font size command
+
+*COMMAND 0* - `fs` +
+
+* *Result* +
+Font size can only be either "xs", "s", "m", "l",  or "xl"
+
+*COMMAND 1* - `fs l` +
+
+* *Result* +
+Changed font size to l.
+
+*COMMAND 2* - `fs +` +
+
+* *Result* +
+Changed font size to xl.
+
+*COMMAND 3* - `fs +` +
+
+* *Result* +
+The current font size is the largest one.
+
+*COMMAND 4* - `fs s` +
+
+* *Result* +
+Changed font size to s.
+
+*COMMAND 5* - `fs -` +
+
+* *Result* +
+Changed font size to xs.
+
+*COMMAND 6* - `fs -` +
+
+* *Result* +
+The current font size is the smallest one.
+
+*COMMAND 6* - `fs notAFontSize` +
+
+* *Result* +
+Font size can only be either "xs", "s", "m", "l",  or "xl"
+
+*Press the "+" button on the left corner*
+
+* *Result* +
+Changed font size to s.
+
+*Press the "-" button on the left corner*
+
+* *Result* +
+Changed font size to xs.
+
+*COMMAND 7* - `undo`
+
+* *Result* +
+undo success
+
+*COMMAND 8* - `redo`
+
+* *Result* +
+redo success
+
+*Close the app and open again*
+
+* *Result* +
+
+The font size remains in xs.
+
+=== Change theme command
+
+*COMMAND 0* - `theme` +
+
+* *Result* +
+Invalid command format!
+theme: Change the theme of the application. Parameters: theme [THEME]
+Example: theme bright
+
+*COMMAND 1* - `theme dark` +
+
+* *Result* +
+Changed theme to dark.
+
+*COMMAND 2* - `undo`
+
+* *Result* +
+undo success
+
+*COMMAND 3* - `redo`
+
+* *Result* +
+redo success
+
+*Press the theme button "bright"*
+
+* *Result* +
+Changed theme to bright.
+
+*Press the theme button "dark"*
+
+* *Result* +
+Changed theme to dark.
+
+*Close the app and open again*
+
+* *Result* +
+
+The theme remains dark theme.
+
+=== Map command
+
+*COMMAND 0* - `map` +
+
+* *Result* +
+Invalid command format!
+map: Shows the address of the person identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer)
+Example: map 1
+
+*COMMAND 1* - `map 1` +
+
+* *Result* +
+Showing the address of Person: Alice Pauline
+
+*COMMAND 2* - `map 0` +
+
+* *Result* +
+Invalid command format!
+map: Shows the address of the person identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer)
+Example: map 1
+
+*COMMAND 3* - `map 100` +
+
+* *Result* +
+The person index provided is invalid
+
+*Click on the address field of a person in the person card panel*
+
+* *Result* +
+
+=== Feature: Check command formats’ validity while the user is typing +
+[NOTE]
+For all the following command, you need to type in the command without pressing enter key.
+And then you can check the result displayed.
+
+
+*COMMAND 1* - `map 1` +
+
+* *Result* +
+Command format is valid
+
+*COMMAND 2* - `abc` +
+
+* *Result* +
+Unknown command
+
+*COMMAND 3* - `theme` +
+
+* *Result* +
+Invalid command format!
+theme: Change the theme of the application. Parameters: theme [THEME]
+Example: theme bright
+
+*COMMAND 3* - `color t/friends c/` +
+
+* *Result* +
+Valid colors are: [red, blue, green, teal, aqua, black, gray, lime, maroon, navy, orange, purple, silver, olive, white, yellow, transparent]
+
+*COMMAND 4* - `add n/Damith p/123456 e/abc` +
+
+* *Result* +
+Person emails should be 2 alphanumeric/period strings separated by '@'
+
+*COMMAND 5* - `add n/Damith p/abc e/abc@gamil.com` +
+
+* *Result* +
+Phone numbers can only contain numbers, and should be at least 3 digits long
+
+*COMMAND 6* - `edit 1` +
+
+* *Result* +
+At least one field to edit must be provided.
+
+=== Find by Tag command
+
+*COMMAND 0* - `findtag` +
+
+* *Result* +
+Invalid command format!
+findtag: Finds all persons whose tag(s) contain any of the specified keywords (case-sensitive) and displays them as a list with index numbers.
+Parameters: KEYWORD [MORE_KEYWORDS]...
+Example: findtag friends colleagues
+
+*COMMAND 1* - `findtag friends` +
+
+* *Result* +
+2 persons listed!
+
+*COMMAND 2* - `findtag friend` +
+
+* *Result* +
+0 persons listed!
+
+*COMMAND 3* - `findtag 1` +
+
+* *Result* +
+0 persons listed!
+
+*COMMAND 4* - `findtag FRIENDS` +
+
+* *Result* +
+2 persons listed!
+
+=== Delete person tag command
+
+*COMMAND 0* - `deletetag` +
+
+* *Result* +
+Invalid command format!
+deletetag: Deletes the tag identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
+Example: deletetag 1 t/friends
+
+*COMMAND 1* - `deletetag 1 t/friends` +
+
+* *Result* +
+Deleted Tag: \[[friends]]
+
+*COMMAND 2* - `deletetag 1` +
+
+* *Result* +
+At least one field to delete must be provided.
+
+*COMMAND 3* - `deletetag t/friends` +
+
+* *Result* +
+Invalid command format!
+deletetag: Deletes the tag identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
+Example: deletetag 1 t/friends
+
+*COMMAND 3* - `deletetag 2 t/colleagues t/friends` +
+
+* *Result* +
+Deleted Tag: [[colleagues], [friends]]
+
+*COMMAND 4* - `deletetag 1 friends` +
+
+* *Result* +
+Invalid command format!
+deletetag: Deletes the tag identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
+Example: deletetag 1 t/friends
+
+=== Clear Popup command
+
+*COMMAND 0* - `clear` +
+
+* *Result* +
+A clear confirmation dialog would appear.
+
+*COMMAND 1* - `clear 1` +
+
+* *Result* +
+A clear confirmation dialog would appear.
+
+*COMMAND 2* - `clear` + click `OK` / press `Enter` / press `Space`
+
+* *Result* +
+Weaver has been cleared!
+
+*COMMAND 3* - `clear` + click `X` / `Cancel` / press `->` + `Space` / press `Tab` + `Space`
+
+* *Result* +
+Weaver has not been cleared!
+
+=== Clear Popup command
+
+*COMMAND 0* - `clear` +
+
+* *Result* +
+A clear confirmation dialog would appear.
+
+*COMMAND 1* - `clear 1` +
+
+* *Result* +
+A clear confirmation dialog would appear.
+
+*COMMAND 2* - `clear` + click `OK` / press `Enter` / press `Space`
+
+* *Result* +
+Weaver has been cleared!
+
+*COMMAND 3* - `clear` + click `X` / `Cancel` / press `->` + `Space` / press `Tab` + `Space`
+
+* *Result* +
+Weaver has not been cleared!
+
+=== Backup command
+
+*COMMAND 0* - `backup` +
+
+* *Result* +
+A backup of Weaver has been created!
+
+
+=== Feature: Auto-completion for commands
+[NOTE]
+For all the following command, you need to type in the command without pressing enter key.
+And then you can check the suggested words displayed. To cancel the suggested words, press the `ESC` key.
+If you press `Enter`, you will see the auto-completed word on the command line.
+
+*COMMAND 0* - `del` +
+
+* *Suggested words* +
+delete +
+deletetag
+
+*COMMAND 1* - `ete` +
+
+* *Suggested words* +
+delete +
+deletetag
+
+*COMMAND 2* - `delete` +
+
+* *Suggested words* +
+deletetag
+
+*COMMAND 3* - `delete` + press `ESC`
+
+* *Result* +
+Command Line: delete
+
+*COMMAND 4* - `delete` + press `Enter`
+
+* *Suggested words* +
+deletetag
+
+* *Result* +
+Command Line: deletetag
+
+*COMMAND 5* - `del` + press `Enter`
+
+* *Suggested words* +
+delete +
+deletetag
+
+* *Result* +
+Command Line: delete
+
+*COMMAND 6* - `del` + press `DOWN arrow` + press `Enter`
+
+* *Suggested words* +
+delete +
+deletetag
+
+* *Result* +
+Command Line: deletetag
 
