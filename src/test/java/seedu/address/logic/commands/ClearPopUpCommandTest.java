@@ -14,13 +14,13 @@ public class ClearPopUpCommandTest {
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
-        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_CLEAR_SUCCESS, model);
     }
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_CLEAR_SUCCESS, model);
     }
 
     /**

@@ -127,13 +127,6 @@ public class RemarkCommandTest {
         final EmailCommand command = new EmailCommand("friends", "party");
         assertFalse(new EmailCommand("colleagues", "birthday").equals(command));
     }
-    @Test
-    public void parseCommand_findTagCommand() throws Exception {
-
-        List<String> keywords = Arrays.asList("friends");
-        final FindTagCommand command = new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
-        assertEquals(command, new FindTagCommand(new TagContainsKeywordsPredicate(keywords)));
-    }
 ```
 ###### /java/seedu/address/logic/parser/RemarkCommandParserTest.java
 ``` java

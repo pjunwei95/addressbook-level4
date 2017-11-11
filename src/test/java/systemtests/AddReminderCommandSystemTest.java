@@ -130,7 +130,7 @@ public class AddReminderCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(ReadOnlyReminder toAdd) {
         assertCommandSuccess(ReminderUtil.getAddCommand(toAdd), toAdd);
     }
-    //@@author RonakLakhotia
+
     /**
      * Performs the same verification as {@code assertCommandSuccess(ReadOnlyPerson)}. Executes {@code command}
      * instead.

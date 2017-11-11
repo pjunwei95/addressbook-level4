@@ -189,7 +189,7 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + INVALID_DATE_OF_BIRTH_DESC_BOUNDS + REMARK_DESC_BOB + IMAGE_BOB + TAG_DESC_HUSBAND
                 + VALID_TAG_FRIEND, DateOfBirth.MESSAGE_BIRTHDAY_CONSTRAINTS);
 
-        //@@author
+        //@@author RonakLakhotia
         // invalid Image path
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + DOB_DESC_BOB + REMARK_DESC_BOB + INVALID_IMAGE_PATH_DESC + TAG_DESC_HUSBAND

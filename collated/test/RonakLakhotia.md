@@ -658,13 +658,13 @@ public class ClearPopUpCommandTest {
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
-        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_CLEAR_SUCCESS, model);
     }
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_CLEAR_SUCCESS, model);
     }
 
     /**
@@ -1145,6 +1145,14 @@ public class SearchCommandTest {
                 + VALID_TAG_FRIEND, DateOfBirth.MESSAGE_BIRTHDAY_CONSTRAINTS);
 
 ```
+###### /java/seedu/address/logic/parser/AddCommandParserTest.java
+``` java
+        // invalid Image path
+        assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + DOB_DESC_BOB + REMARK_DESC_BOB + INVALID_IMAGE_PATH_DESC + TAG_DESC_HUSBAND
+                + VALID_TAG_FRIEND, FileImage.MESSAGE_IMAGE_CONSTRAINTS);
+
+```
 ###### /java/seedu/address/logic/parser/AddReminderParserTest.java
 ``` java
 public class AddReminderParserTest {
@@ -1225,18 +1233,19 @@ public class AddReminderParserTest {
                 + PREFIX_NAME + "Alice" + " " + PREFIX_DOB + "13.10.1997");
         assertEquals(commandCheck, command);
     }
+
     @Test
-    public void parseCommand_facebook() throws Exception {
-        FaceBookCommand command = (FaceBookCommand) parser.parseCommand(
-                FaceBookCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new FaceBookCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_deleteTag() throws Exception {
+        assertTrue(parser.parseCommand(DeleteTagCommand.COMMAND_WORD
+                + " " + "1" + " " + "t/friends"
+        ) instanceof DeleteTagCommand);
     }
+
     @Test
-    public void parseCommand_photo() throws Exception {
-        String path = "src/main/resources/images/clock.png";
-        PhotoCommand command = (PhotoCommand) parser.parseCommand(
-                PhotoCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + path);
-        assertEquals(new PhotoCommand(INDEX_FIRST_PERSON, path), command);
+    public void parseCommand_clearPopup() throws Exception {
+        assertTrue(parser.parseCommand(ClearPopupCommand.COMMAND_WORD) instanceof ClearPopupCommand);
+        assertTrue(parser.parseCommand(ClearPopupCommand.COMMAND_WORD
+                + " " + "1") instanceof ClearPopupCommand);
     }
 ```
 ###### /java/seedu/address/logic/parser/AddressBookParserTest.java
@@ -1524,13 +1533,6 @@ public class LogoutCommandParserTest {
 ```
 ###### /java/seedu/address/logic/parser/PhotoCommandParserTest.java
 ``` java
-/**
- * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the PhotoCommand code. For example, inputs "1" and "1 abc" take the
- * same path through the PhotoCommand, and therefore we test only one of them.
- * The path variation for those two cases occur inside the ParserUtil, and
- * therefore should be covered by the ParserUtilTest.
- */
 public class PhotoCommandParserTest {
 
     private PhotoCommandParser parser = new PhotoCommandParser();
@@ -1820,8 +1822,9 @@ public class UniqueReminderListTest {
 ```
 ###### /java/seedu/address/storage/XmlAddressBookStorageTest.java
 ``` java
+
     /**
-     * backs {@code addressBook} at the specified {@code filePath}.
+     * Backups {@code addressBook} at the specified {@code filePath}.
      */
     private void backUpAddressBook(ReadOnlyAddressBook addressBook, String filepath) {
         try {
@@ -2259,59 +2262,6 @@ public class AddReminderCommandSystemTest extends AddressBookSystemTest {
 
     }
 ```
-###### /java/systemtests/AddReminderCommandSystemTest.java
-``` java
-    /**
-     * Performs the same verification as {@code assertCommandSuccess(ReadOnlyPerson)}. Executes {@code command}
-     * instead.
-     * @see AddReminderCommandSystemTest#assertCommandSuccess(ReadOnlyReminder)
-     */
-    private void assertCommandSuccess(String command, ReadOnlyReminder toAdd) {
-        Model expectedModel = getModel();
-        try {
-            expectedModel.addReminder(toAdd);
-        } catch (DuplicateReminderException dpe) {
-            throw new IllegalArgumentException("toAdd already exists in the model.");
-        }
-        String expectedResultMessage = String.format(AddReminder.MESSAGE_SUCCESS, toAdd);
-
-        assertCommandSuccess(command, expectedModel, expectedResultMessage);
-    }
-
-
-    /**
-     * Performs the same verification as {@code assertCommandSuccess(String, ReadOnlyPerson)} except that the result
-     * display box displays {@code expectedResultMessage} and the model related components equal to
-     * {@code expectedModel}.
-     * @see AddReminderCommandSystemTest#assertCommandSuccess(String, ReadOnlyReminder)
-     */
-    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
-        executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
-        assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
-    }
-
-    /**
-     * Executes {@code command} and verifies that the command box displays {@code command}, the result display
-     * box displays {@code expectedResultMessage} and the model related components equal to the current model.
-     * These verifications are done by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     */
-    private void assertCommandFailure(String command, String expectedResultMessage) {
-        Model expectedModel = getModel();
-
-        executeCommand(command);
-        assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
-        assertCommandBoxShowsErrorStyle();
-        assertStatusBarUnchanged();
-    }
-
-}
-```
 ###### /java/systemtests/ChangeReminderCommandSystemTest.java
 ``` java
 public class ChangeReminderCommandSystemTest extends AddressBookSystemTest {
@@ -2560,84 +2510,6 @@ public class RemoveReminderCommandSystemTest extends AddressBookSystemTest {
         }
         return targetReminder;
     }
-```
-###### /java/systemtests/RemoveReminderCommandSystemTest.java
-``` java
-    /**
-     * Deletes the reminder at {@code toDelete} by creating a default {@code RemoveCommand} using {@code toDelete} and
-     * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
-     * @see RemoveReminderCommandSystemTest#assertCommandSuccess(String, Model, String)
-     */
-    private void assertCommandSuccess(Index toDelete) {
-        Model expectedModel = getModel();
-        ReadOnlyReminder deletedReminder = removeReminder(expectedModel, toDelete);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_REMINDER_SUCCESS, deletedReminder);
-
-        assertCommandSuccess(
-                RemoveReminderCommand.COMMAND_WORD + " "
-                        + toDelete.getOneBased(), expectedModel, expectedResultMessage);
-    }
-
-    /**
-     * Executes {@code command} and in addition,<br>
-     * 1. Asserts that the command box displays an empty string.<br>
-     * 2. Asserts that the result display box displays {@code expectedResultMessage}.<br>
-     * 3. Asserts that the model related components equal to {@code expectedModel}.<br>
-     * 4. Asserts that the browser url and selected card remains unchanged.<br>
-     * 5. Asserts that the status bar's sync status changes.<br>
-     * 6. Asserts that the command box has the default style class.<br>
-     * Verifications 1 to 3 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     */
-    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
-        assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
-    }
-
-    /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser
-     url
-     * and selected card are expected to update accordingly depending on the card at
-     {@code expectedSelectedCardIndex}.
-     * @see RemoveReminderCommandSystemTest#assertCommandSuccess(String, Model, String)
-     * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
-     */
-    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
-                                      Index expectedSelectedCardIndex) {
-        executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-
-        if (expectedSelectedCardIndex != null) {
-            assertSelectedCardChanged(expectedSelectedCardIndex);
-        } else {
-            assertSelectedCardUnchanged();
-        }
-
-        assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
-    }
-
-    /**
-     * Executes {@code command} and in addition,<br>
-     * 1. Asserts that the command box displays {@code command}.<br>
-     * 2. Asserts that result display box displays {@code expectedResultMessage}.<br>
-     * 3. Asserts that the model related components equal to the current model.<br>
-     * 4. Asserts that the browser url, selected card and status bar remain unchanged.<br>
-     * 5. Asserts that the command box has the error style.<br>
-     * Verifications 1 to 3 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     */
-    private void assertCommandFailure(String command, String expectedResultMessage) {
-        Model expectedModel = getModel();
-
-        executeCommand(command);
-        assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
-        assertCommandBoxShowsErrorStyle();
-        assertStatusBarUnchanged();
-    }
-}
 ```
 ###### /java/systemtests/SearchCommandSystemTest.java
 ``` java

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.PhotoCommand;
 
-//@@author RonakLakhotia
+
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
  * outside of the PhotoCommand code. For example, inputs "1" and "1 abc" take the
@@ -17,6 +17,7 @@ import seedu.address.logic.commands.PhotoCommand;
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
+//@@author RonakLakhotia
 public class PhotoCommandParserTest {
 
     private PhotoCommandParser parser = new PhotoCommandParser();
