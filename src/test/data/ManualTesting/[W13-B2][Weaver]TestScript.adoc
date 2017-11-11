@@ -765,6 +765,7 @@ Weaver has been cleared!
 
 * *Result* +
 Weaver has not been cleared!
+
 === Clear Popup command
 
 *COMMAND 0* - `clear` +
@@ -787,8 +788,65 @@ Weaver has been cleared!
 * *Result* +
 Weaver has not been cleared!
 
+=== Backup command
+
+*COMMAND 0* - `backup` +
+
+* *Result* +
+A backup of Weaver has been created!
 
 
+=== Feature: Auto-completion for commands
+[NOTE]
+For all the following command, you need to type in the command without pressing enter key.
+And then you can check the suggested words displayed. To cancel the suggested words, press the `ESC` key.
+If you press `Enter`, you will see the auto-completed word on the command line.
 
+*COMMAND 0* - `del` +
 
+* *Suggested words* +
+delete +
+deletetag
+
+*COMMAND 1* - `ete` +
+
+* *Suggested words* +
+delete +
+deletetag
+
+*COMMAND 2* - `delete` +
+
+* *Suggested words* +
+deletetag
+
+*COMMAND 3* - `delete` + press `ESC`
+
+* *Result* +
+Command Line: delete
+
+*COMMAND 4* - `delete` + press `Enter`
+
+* *Suggested words* +
+deletetag
+
+* *Result* +
+Command Line: deletetag
+
+*COMMAND 5* - `del` + press `Enter`
+
+* *Suggested words* +
+delete +
+deletetag
+
+* *Result* +
+Command Line: delete
+
+*COMMAND 6* - `del` + press `DOWN arrow` + press `Enter`
+
+* *Suggested words* +
+delete +
+deletetag
+
+* *Result* +
+Command Line: deletetag
 
