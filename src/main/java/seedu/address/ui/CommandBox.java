@@ -34,7 +34,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String[] suggestedWords = {"add", "delete", "edit", "help", "find", "list",
                                                     "select", "search", "clear", "undo", "redo", "history",
                                                     "deletetag", "findtag", "photo", "facebook", "color",
-                                                    "exit", "fs", "remark", "map"};
+                                                    "exit", "fs", "remark", "map", "theme", "backup"};
     //@@author pjunwei95
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
