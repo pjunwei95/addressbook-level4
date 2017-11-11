@@ -678,29 +678,69 @@ At least one field to edit must be provided.
 Invalid command format!
 findtag: Finds all persons whose tag(s) contain any of the specified keywords (case-sensitive) and displays them as a list with index numbers.
 Parameters: KEYWORD [MORE_KEYWORDS]...
-Example: findtag alice bob charlie
+Example: findtag friends colleagues
 
-*COMMAND 1* - `map 1` +
+*COMMAND 1* - `findtag friends` +
 
 * *Result* +
-Showing the address of Person: Alice Pauline
+2 persons listed!
 
-*COMMAND 2* - `map 0` +
+*COMMAND 2* - `findtag friend` +
+
+* *Result* +
+0 persons listed!
+
+*COMMAND 3* - `findtag 1` +
+
+* *Result* +
+0 persons listed!
+
+*COMMAND 4* - `findtag FRIENDS` +
+
+* *Result* +
+2 persons listed!
+
+=== Delete person tag command
+
+*COMMAND 0* - `deletetag` +
 
 * *Result* +
 Invalid command format!
-map: Shows the address of the person identified by the index number used in the last person listing.
-Parameters: INDEX (must be a positive integer)
-Example: map 1
+deletetag: Deletes the tag identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
+Example: deletetag 1 t/friends
 
-*COMMAND 3* - `map 100` +
-
-* *Result* +
-The person index provided is invalid
-
-*Click on the address field of a person in the person card panel*
+*COMMAND 1* - `deletetag 1 t/friends` +
 
 * *Result* +
+Deleted Tag: \[[friends]]
+
+*COMMAND 2* - `deletetag 1` +
+
+* *Result* +
+At least one field to delete must be provided.
+
+*COMMAND 3* - `deletetag t/friends` +
+
+* *Result* +
+Invalid command format!
+deletetag: Deletes the tag identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
+Example: deletetag 1 t/friends
+
+*COMMAND 3* - `deletetag 2 t/colleagues t/friends` +
+
+* *Result* +
+Deleted Tag: [[colleagues], [friends]]
+
+*COMMAND 4* - `deletetag 1 friends` +
+
+* *Result* +
+Invalid command format!
+deletetag: Deletes the tag identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
+Example: deletetag 1 t/friends
+
 
 
 
