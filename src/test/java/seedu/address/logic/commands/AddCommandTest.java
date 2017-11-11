@@ -156,16 +156,12 @@ public class AddCommandTest {
                 throws DuplicatePersonException {
             fail("This method should not be called.");
         }
+        //@@author RonakLakhotia
         @Override
         public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder) {
             fail("This method should not be called");
         }
 
-        @Override
-        public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
-            fail("This method should not be called.");
-            return null;
-        }
         @Override
         public ObservableList<ReadOnlyReminder> getFilteredReminderList() {
             fail("This method should not be called.");
@@ -175,10 +171,16 @@ public class AddCommandTest {
         public void updateFilteredReminderList(Predicate<ReadOnlyReminder> predicate) {
             fail("This method should not be called.");
         }
-
+        //@@author
         @Override
         public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
             fail("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
+            fail("This method should not be called.");
+            return null;
         }
 
         @Override

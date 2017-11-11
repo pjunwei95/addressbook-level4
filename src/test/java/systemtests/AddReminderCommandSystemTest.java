@@ -1,5 +1,5 @@
 package systemtests;
-
+//@@author RonakLakhotia
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import static seedu.address.logic.commands.CommandTestUtil.DETAILS_DESC_ASSIGNMENT;
@@ -38,7 +38,7 @@ public class AddReminderCommandSystemTest extends AddressBookSystemTest {
     @Test
     public void add() throws Exception {
         Model model = getModel();
-        /* Case: add a person without tags to a non-empty address book, command with leading spaces and trailing spaces
+        /* Case: add a reminder command with leading spaces and trailing spaces
          * -> added
          */
         ReadOnlyReminder toAdd = TUTORIAL;
@@ -117,7 +117,7 @@ public class AddReminderCommandSystemTest extends AddressBookSystemTest {
 
 
     }
-
+    //@@author
     /**
      * Executes the {@code AddCommand} that adds {@code toAdd} to the model and verifies that the command box displays
      * an empty string, the result display box displays the success message of executing {@code AddReminderCommand}
@@ -130,7 +130,7 @@ public class AddReminderCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(ReadOnlyReminder toAdd) {
         assertCommandSuccess(ReminderUtil.getAddCommand(toAdd), toAdd);
     }
-
+    //@@author RonakLakhotia
     /**
      * Performs the same verification as {@code assertCommandSuccess(ReadOnlyPerson)}. Executes {@code command}
      * instead.
@@ -147,6 +147,7 @@ public class AddReminderCommandSystemTest extends AddressBookSystemTest {
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
+
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, ReadOnlyPerson)} except that the result

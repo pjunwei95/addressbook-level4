@@ -1,78 +1,4 @@
 # pjunwei95
-###### /java/seedu/address/logic/commands/CancelClearCommandTest.java
-``` java
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import org.junit.Test;
-
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.UndoRedoStack;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-
-public class CancelClearCommandTest {
-
-    @Test
-    public void execute_emptyAddressBook_success() {
-        Model model = new ModelManager();
-        assertCommandSuccess(prepareCommand(model), model, CancelClearCommand.MESSAGE_FAILURE, model);
-    }
-
-    @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        assertCommandSuccess(prepareCommand(model), model, CancelClearCommand.MESSAGE_FAILURE, model);
-    }
-
-    /**
-     * Generates a new {@code CancelClearCommand} which upon execution, retains the contents in {@code model}.
-     */
-    private CancelClearCommand prepareCommand(Model model) {
-        CancelClearCommand command = new CancelClearCommand();
-        command.setData(model, new CommandHistory(), new UndoRedoStack());
-        return command;
-    }
-}
-```
-###### /java/seedu/address/logic/commands/ClearPopupCommandTest.java
-``` java
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import org.junit.Test;
-
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.UndoRedoStack;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-
-public class ClearPopupCommandTest {
-
-    @Test
-    public void execute_emptyAddressBook_success() {
-        Model model = new ModelManager();
-        assertCommandSuccess(prepareCommand(model), model, ClearPopupCommand.MESSAGE_SUCCESS, model);
-    }
-
-    @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        assertCommandSuccess(prepareCommand(model), model, ClearPopupCommand.MESSAGE_SUCCESS, model);
-    }
-
-    /**
-     * Generates a new {@code ClearCommand} which upon execution, clears the contents in {@code model}.
-     */
-    private ClearPopupCommand prepareCommand(Model model) {
-        ClearPopupCommand command = new ClearPopupCommand();
-        command.setData(model, new CommandHistory(), new UndoRedoStack());
-        return command;
-    }
-}
-```
 ###### /java/seedu/address/logic/commands/CommandTestUtil.java
 ``` java
         TAG_DESC_AMY = new DeleteTagDescriptorBuilder()
@@ -174,29 +100,6 @@ public class ClearPopupCommandTest {
 
         assert model.getFilteredPersonList().size() == 1;
     }
-    /**
-     * Updates {@code model}'s filtered list to show only the first reminder in the {@code model}'s address book.
-     */
-    public static void showFirstReminderOnly(Model model) {
-        ReadOnlyReminder reminder = model.getAddressBook().getReminderList().get(0);
-        final String[] splitDetails = reminder.getDetails().details.split("\\s+");
-        model.updateFilteredReminderList(new DetailsContainsKeywordsPredicate(Arrays.asList(splitDetails[0])));
-
-        assert model.getFilteredReminderList().size() == 1;
-    }
-
-    /**
-     * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
-     */
-    public static void deleteFirstPerson(Model model) {
-        ReadOnlyPerson firstPerson = model.getFilteredPersonList().get(0);
-        try {
-            model.deletePerson(firstPerson);
-        } catch (PersonNotFoundException pnfe) {
-            throw new AssertionError("Person in filtered list must exist in model.", pnfe);
-        }
-    }
-}
 ```
 ###### /java/seedu/address/logic/commands/DeleteTagCommandTest.java
 ``` java

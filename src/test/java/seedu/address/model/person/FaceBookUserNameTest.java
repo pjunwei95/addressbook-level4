@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-
+//@@author RonakLakhotia
 public class FaceBookUserNameTest {
 
     @Test

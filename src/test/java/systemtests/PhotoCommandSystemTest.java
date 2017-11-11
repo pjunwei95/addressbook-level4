@@ -73,7 +73,7 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
 
     }
     @Test
-    public void checkForInvalidPath() {
+    public void check_invalidPath() {
 
         /* Case When incorrect path is entered */
         String command =  PhotoCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
@@ -100,6 +100,7 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
         }
         return targetPerson;
     }
+    //@@author
     /**
      * Executes {@code command} and in addition,<br>
      * 1. Asserts that the command box displays {@code command}.<br>

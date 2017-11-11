@@ -6,9 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
 
 import seedu.address.logic.commands.AddReminder;
 import seedu.address.model.reminder.ReadOnlyReminder;
-
+//@@author RonakLakhotia
 /**
- * A utility class for Person.
+ * A utility class for Reminder
  */
 public class ReminderUtil {
 

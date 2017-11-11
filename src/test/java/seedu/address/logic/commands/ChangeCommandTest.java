@@ -30,9 +30,9 @@ import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.testutil.ChangeReminderDescriptorBuilder;
 import seedu.address.testutil.ReminderBuilder;
-
+//@@author RonakLakhotia
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ChangeReminderCommand.
  */
 public class ChangeCommandTest {
 
@@ -142,7 +142,7 @@ public class ChangeCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
+     * Change filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
      */
     @Test
@@ -184,7 +184,7 @@ public class ChangeCommandTest {
     }
 
     /**
-     * Returns an {@code EditCommand} with parameters {@code index} and {@code descriptor}
+     * Returns an {@code ChangeCommand} with parameters {@code index} and {@code descriptor}
      */
     private ChangeReminderCommand prepareCommand(Index index, ChangeReminderDescriptor descriptor) {
         ChangeReminderCommand changeCommand = new ChangeReminderCommand(index, descriptor);

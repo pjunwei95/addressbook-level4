@@ -91,6 +91,7 @@ public class AddressBookParserTest {
         final FindTagCommand command = new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
         assertEquals(command, new FindTagCommand(new TagContainsKeywordsPredicate(keywords)));
     }
+    //@@author RonakLakhotia
     @Test
     public void parseCommand_search() throws Exception {
         SearchCommand command = new SearchCommand(new
@@ -113,12 +114,14 @@ public class AddressBookParserTest {
                 PhotoCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + path);
         assertEquals(new PhotoCommand(INDEX_FIRST_PERSON, path), command);
     }
+    //@@author
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
+    //@@author RonakLakhotia
     @Test
     public void parseCommand_addReminder() throws Exception {
         Reminder reminder = new ReminderBuilder().build();
@@ -135,7 +138,7 @@ public class AddressBookParserTest {
                 + "1 " + "g/CS2103T Assignment" + " p/high" + " d/12.11.2017");
         assertEquals(new ChangeReminderCommand(INDEX_FIRST_REMINDER, descriptor), command);
     }
-
+    //@@author
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
@@ -158,13 +161,14 @@ public class AddressBookParserTest {
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
+    //@@author RonakLakhotia
     @Test
     public void parseCommand_remove() throws Exception {
         RemoveReminderCommand command = (RemoveReminderCommand) parser.parseCommand(
                 RemoveReminderCommand.COMMAND_WORD + " " + INDEX_FIRST_REMINDER.getOneBased());
         assertEquals(new RemoveReminderCommand(INDEX_FIRST_REMINDER), command);
     }
-
+    //@@author
 
     @Test
     public void parseCommand_exit() throws Exception {

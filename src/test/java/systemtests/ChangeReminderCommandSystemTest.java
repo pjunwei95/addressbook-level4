@@ -28,7 +28,7 @@ import seedu.address.model.reminder.ReminderDetails;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 import seedu.address.testutil.ReminderBuilder;
-
+//@@author RonakLakhotia
 public class ChangeReminderCommandSystemTest extends AddressBookSystemTest {
 
     @Test
@@ -50,12 +50,12 @@ public class ChangeReminderCommandSystemTest extends AddressBookSystemTest {
                 .withDueDate(VALID_DUE_DATE_ASSIGNMENT).build();
         assertCommandSuccess(command, index, editedReminder);
 
-        /* Case: undo editing the last person in the list -> last person restored */
+        /* Case: undo editing the last reminder in the list -> last reminder restored */
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: redo editing the last person in the list -> last person edited again */
+        /* Case: redo editing the last reminder in the list -> last reminder edited again */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         model.updateReminder(
@@ -113,6 +113,7 @@ public class ChangeReminderCommandSystemTest extends AddressBookSystemTest {
 
 
     }
+    //@@author
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Index, ReadOnlyReminder, Index)} except

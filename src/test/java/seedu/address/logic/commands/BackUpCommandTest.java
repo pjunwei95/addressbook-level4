@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
-
+//@@author RonakLakhotia
 public class BackUpCommandTest {
 
     @Rule
@@ -35,7 +35,7 @@ public class BackUpCommandTest {
 
     }
     @Test
-    public void checkIfBackUpEventCollected() throws CommandException {
+    public void check_backUpEventCollected() throws CommandException {
         BackUpCommand backupCommand = prepareCommand();
         backupCommand.executeUndoableCommand();
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof BackUpEvent);

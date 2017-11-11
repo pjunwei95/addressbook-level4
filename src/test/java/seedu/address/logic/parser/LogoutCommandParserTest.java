@@ -7,7 +7,7 @@ import org.junit.Test;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.LogoutCommand;
 
-
+//@@author RonakLakhotia
 public class LogoutCommandParserTest {
 
     private LogoutCommandParser parser = new LogoutCommandParser();

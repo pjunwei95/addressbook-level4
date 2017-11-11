@@ -8,7 +8,7 @@ import org.junit.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-
+//@@author RonakLakhotia
 public class ClearPopUpCommandTest {
 
     @Test

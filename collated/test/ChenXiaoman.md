@@ -604,6 +604,7 @@ public class FontSizeTest {
         assertFalse(FontSize.isValidFontSize(INVALID_FONT_SIZE));
         assertFalse(FontSize.isValidFontSize(""));
     }
+
     @Test
     public void equals() throws IllegalValueException {
 

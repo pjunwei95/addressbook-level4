@@ -82,6 +82,7 @@ public class StorageManagerTest {
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
+    //@@author RonakLakhotia
     @Test
     public void handleAddressBookBackUpEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
@@ -90,7 +91,7 @@ public class StorageManagerTest {
         storage.handleBackUpEvent(new BackUpEvent(new AddressBook()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
-
+    //@@author
     /**
      * A Stub class to throw an exception when the save method is called
      */
