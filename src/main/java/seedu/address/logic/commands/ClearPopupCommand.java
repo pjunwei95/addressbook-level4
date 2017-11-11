@@ -6,13 +6,14 @@ import seedu.address.model.AddressBook;
 import seedu.address.ui.ClearConfirmation;
 
 /**
- * Clears the address book.
+ * Pop-ups a clear confirmation window before clearing.
+ * Confirming clears Weaver, otherwise cancels the clearing.
  */
 public class ClearPopupCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Weaver has been cleared!";
-    public static final String MESSAGE_FAILURE = "Weaver has not been cleared!";
+    public static final String MESSAGE_CLEAR_SUCCESS = "Weaver has been cleared!";
+    public static final String MESSAGE_NOT_CLEAR_SUCCESS = "Weaver has not been cleared!";
 
 
     @Override
@@ -21,9 +22,9 @@ public class ClearPopupCommand extends UndoableCommand {
         if (clearConfirmation.isClearCommand()) {
             requireNonNull(model);
             model.resetData(new AddressBook());
-            return new CommandResult(MESSAGE_SUCCESS);
+            return new CommandResult(MESSAGE_CLEAR_SUCCESS);
         } else {
-            return new CommandResult(MESSAGE_FAILURE);
+            return new CommandResult(MESSAGE_NOT_CLEAR_SUCCESS);
         }
     }
 }

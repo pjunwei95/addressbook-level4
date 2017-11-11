@@ -124,8 +124,9 @@ public class XmlAddressBookStorageTest {
         saveAddressBook(new AddressBook(), null);
     }
 
+    //@@author pjunwei95
     /**
-     * backs {@code addressBook} at the specified {@code filePath}.
+     * Backups {@code addressBook} at the specified {@code filePath}.
      */
     private void backUpAddressBook(ReadOnlyAddressBook addressBook, String filepath) {
         try {
