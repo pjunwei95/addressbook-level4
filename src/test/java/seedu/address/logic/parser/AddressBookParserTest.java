@@ -160,7 +160,7 @@ public class AddressBookParserTest {
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
-    
+
     @Test
     public void parseCommand_remove() throws Exception {
         RemoveReminderCommand command = (RemoveReminderCommand) parser.parseCommand(
