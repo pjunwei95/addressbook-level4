@@ -5,9 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.io.File;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-
+//@@author RonakLakhotia
 /**
- * Represents a Person's Date Of birth
+ * Represents a Person's File Path of the image he/she is assigned
  * Guarantees: immutable; is valid as declared in {@link #isValidImage(String)}
  */
 public class FileImage {
@@ -42,7 +42,6 @@ public class FileImage {
         return file.exists();
 
     }
-
 
     @Override
     public String toString() {

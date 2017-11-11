@@ -48,7 +48,8 @@ public class LogoutEvent extends BaseEvent {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DOB + "DATE_OF_BIRTH] "
             + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_IMAGE + "IMAGE"
+            + "[" + PREFIX_IMAGE + "IMAGE] "
+            + "[" + PREFIX_USERNAME + "USERNAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -90,6 +91,7 @@ public class LogoutEvent extends BaseEvent {
                     && getDateOfBirth().equals(e.getDateOfBirth())
                     && getRemark().equals(e.getRemark())
                     && getImage().equals(e.getImage())
+                    && getUsername().equals(e.getUsername())
                     && getTags().equals(e.getTags());
 ```
 ###### /java/seedu/address/logic/commands/LogoutCommand.java
@@ -1112,7 +1114,6 @@ public class RegisterPage extends UiPart<Region> {
             loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, this);
             loginPage.show();
         } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }
@@ -1131,7 +1132,6 @@ public class RegisterPage extends UiPart<Region> {
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
         } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }

@@ -1,15 +1,19 @@
 package seedu.address.logic.commands;
-//@@author RonakLakhotia
-import java.util.List;
 
+import java.util.List;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 
+//@@author RonakLakhotia
 /**
- * Deletes a reminder identified using it's last displayed index from the address book.
+ * Deletes a reminder identified using it's last displayed index from Weaver.
  */
 public class RemoveReminderCommand extends UndoableCommand {
 
@@ -22,7 +26,9 @@ public class RemoveReminderCommand extends UndoableCommand {
 
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder: %1$s";
 
+    private static final Logger logger = LogsCenter.getLogger(RemoveReminderCommand.class);
     private final Index targetIndex;
+
 
     public RemoveReminderCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -43,6 +49,7 @@ public class RemoveReminderCommand extends UndoableCommand {
         try {
             model.deleteReminder(reminderToDelete);
         } catch (ReminderNotFoundException pnfe) {
+            logger.severe(StringUtil.getDetails(pnfe));
             assert false : "The target reminder cannot be missing";
         }
 

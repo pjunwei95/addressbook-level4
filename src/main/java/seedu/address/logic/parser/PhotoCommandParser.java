@@ -1,22 +1,25 @@
 package seedu.address.logic.parser;
-//@@author RonakLakhotia
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_IMAGE;
 
 import java.io.File;
 
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.PhotoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
+//@@author RonakLakhotia
 /**
  * Parses input arguments and creates a new PhotoCommand object
  */
 public class PhotoCommandParser implements Parser<PhotoCommand> {
 
+    private final Logger logger = LogsCenter.getLogger(PhotoCommandParser.class);
     /**
      * Parses the given {@code String} of arguments in the context of the PhotoCommand
      * and returns an PhotoCommand object for execution.
@@ -24,6 +27,7 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
      */
     public PhotoCommand parse(String args) throws ParseException {
 
+        logger.info("----------------[USER COMMAND][" + args + "]");
         String trimmedArgs = args.trim();
         String regex = "[\\s]+";
         String[] keywords = trimmedArgs.split(regex, 2);
@@ -34,12 +38,12 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE)
             );
         }
-
-        boolean isFileExists = checkIfFileExists(keywords[1]);
+        String inputPathForImage = keywords[1];
+        boolean isFileExists = checkIfFileExists(inputPathForImage);
         if (isFileExists) {
             try {
                 Index index = ParserUtil.parseIndex(keywords[0]);
-                return new PhotoCommand(index, (keywords[1]));
+                return new PhotoCommand(index, inputPathForImage);
             } catch (IllegalValueException ive) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
@@ -52,16 +56,16 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
 
     }
     /**
-     * Checks if the number of arguments entered by the user are valid
+     * Returns true if the number of arguments entered is invalid.
      */
     public static boolean checkIfInvalidNumberOfArgs(String [] keywords) {
-        if (keywords.length < 2) {
+        if (keywords.length != 2) {
             return true;
         }
         return false;
     }
     /**
-     * Checks if the image exists in the given filepath
+     * Returns true if the image is present in the path entered, else returns false.
      */
     public static boolean checkIfFileExists(String inputFilePath) {
 

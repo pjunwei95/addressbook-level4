@@ -1,5 +1,5 @@
 package seedu.address.logic.parser;
-//@@author RonakLakhotia
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
@@ -11,10 +11,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ChangeReminderCommand;
 import seedu.address.logic.commands.ChangeReminderCommand.ChangeReminderDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-
+//@@author RonakLakhotia
 
 /**
- * Parses input arguments and creates a new ChangeReminderCommand object
+ * Parses input arguments and creates a new ChangeReminderCommand object.
  */
 public class ChangeReminderCommandParser implements Parser<ChangeReminderCommand> {
 
@@ -46,6 +46,7 @@ public class ChangeReminderCommandParser implements Parser<ChangeReminderCommand
                     .ifPresent(changeReminderDescriptor::setPriority);
             ParserUtil.parseDueDate(argMultimap.getValue(PREFIX_REMINDER_DUE_DATE))
                     .ifPresent(changeReminderDescriptor::setDueDate);
+
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }

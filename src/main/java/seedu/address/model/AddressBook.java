@@ -33,9 +33,9 @@ import seedu.address.model.tag.UniqueTagList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    //@@author RonakLakhotia
+
     private final UniqueReminderList reminders;
-    //@@author generated
+
     private final UniqueTagList tags;
 
     /*
@@ -46,9 +46,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        //@@author RonakLakhotia
+
         reminders = new UniqueReminderList();
-        //@@author generated
         persons = new UniquePersonList();
         tags = new UniqueTagList();
     }
@@ -81,6 +80,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
+    //@@author RonakLakhotia
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         try {
@@ -95,8 +95,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setTags(new HashSet<>(newData.getTagList()));
         syncMasterTagListWith(persons);
     }
-
-    //// person-level operations
+    //@@author
 
     /**
      * Adds a person to the address book.
@@ -116,10 +115,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     //@@author RonakLakhotia
     /**
      * Adds a reminder to the address book.
-     * @throws DuplicateReminderException if an equivalent person already exists.
+     * @throws DuplicateReminderException if an equivalent reminder already exists.
      */
-    public void addReminder(ReadOnlyReminder r) throws DuplicateReminderException {
-        Reminder newReminder = new Reminder(r);
+    public void addReminder(ReadOnlyReminder reminder) throws DuplicateReminderException {
+        Reminder newReminder = new Reminder(reminder);
         reminders.add(newReminder);
     }
     //@@author generated

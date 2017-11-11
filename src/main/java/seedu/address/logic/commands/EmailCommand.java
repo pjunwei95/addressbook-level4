@@ -6,18 +6,24 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.tag.Tag;
 
+//@@author RonakLakhotia
 /**
  * Sends an Email to all contacts with the specified tag.
  */
 public class EmailCommand extends Command {
 
+
+    public static final String characterToAppendAfterEachWordInSubjectLine = "+";
     public static final String COMMAND_WORD = "email";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -30,11 +36,14 @@ public class EmailCommand extends Command {
     public static final String MESSAGE_EMAIL_SUCCESS = "Email has been sent!";
     public static final String MESSAGE_NOT_EXISTING_TAGS = "The tag provided is invalid. Please check again.";
 
+    private static final Logger logger = LogsCenter.getLogger(EmailCommand.class);
     private final String tag;
     private final String subject;
     private String modifiedSubject;
 
+
     /**
+     * Emails a group of person with the same tag description and a given subject body.
      * @param tag     of the persons to whom the email has to be sent
      * @param subject the subject line of th email
      */
@@ -54,14 +63,17 @@ public class EmailCommand extends Command {
             boolean isExistingTagName = checkIfExistingTagName(tag);
 
             if (!isExistingTagName) {
+                logger.warning("Incorrect tags entered");
                 throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS));
             }
             else {
+                logger.info("Processing subject line and executing");
                 modifiedSubject = getSubjectForBrowser(subject);
                 model.sendMailToContacts(tag, modifiedSubject, model.getFilteredPersonList());
                 return new CommandResult(MESSAGE_EMAIL_SUCCESS);
             }
         } catch (IOException io) {
+            logger.severe(StringUtil.getDetails(io));
             throw new AssertionError("Invalid Input");
         } catch (URISyntaxException ur) {
             throw new AssertionError("urisyntax erro");
@@ -72,15 +84,15 @@ public class EmailCommand extends Command {
 
     }
     /**
-     * Get subject with '+' appended
+     * Gets subject with the '+' character appended after each word to match the URL requirements.
      */
     public String getSubjectForBrowser(String subject) {
 
         String modifiedSubject = "";
-        int loopVariable;
-        for (loopVariable = 0; loopVariable < subject.length(); loopVariable++) {
+
+        for (int loopVariable = 0; loopVariable < subject.length(); loopVariable++) {
             if (subject.charAt(loopVariable) == ' ') {
-                modifiedSubject = modifiedSubject + '+';
+                modifiedSubject = modifiedSubject + characterToAppendAfterEachWordInSubjectLine;
             } else {
                 modifiedSubject = modifiedSubject + subject.charAt(loopVariable);
             }
@@ -89,8 +101,7 @@ public class EmailCommand extends Command {
     }
 
     /**
-     * Check whether a given tag exists in address book.
-     *
+     * Checks whether a given tag exists in address book.
      * @param tagName tag that is to be checked
      */
     public boolean checkIfExistingTagName(String tagName) {

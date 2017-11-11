@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-//@@author RonakLakhotia
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
@@ -21,8 +21,9 @@ import seedu.address.model.reminder.ReminderDetails;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 
+//@@author RonakLakhotia
 /**
- * Edits the details of an existing reminder in Weaver
+ * Changes the details of an existing reminder in Weaver.
  */
 public class ChangeReminderCommand extends UndoableCommand {
 
@@ -46,6 +47,7 @@ public class ChangeReminderCommand extends UndoableCommand {
     private final ChangeReminderDescriptor changeReminderDescriptor;
 
     /**
+     * Changes the reminder at the given index with the given descriptor.
      * @param index of the reminder in the filtered reminder list to change
      * @param changeReminderDescriptor details to change the reminder with
      */
@@ -107,9 +109,9 @@ public class ChangeReminderCommand extends UndoableCommand {
         }
 
         // state check
-        ChangeReminderCommand c = (ChangeReminderCommand) other;
-        return index.equals(c.index)
-                && changeReminderDescriptor.equals(c.changeReminderDescriptor);
+        ChangeReminderCommand command = (ChangeReminderCommand) other;
+        return index.equals(command.index)
+                && changeReminderDescriptor.equals(command.changeReminderDescriptor);
     }
 
     /**
@@ -139,6 +141,7 @@ public class ChangeReminderCommand extends UndoableCommand {
         public void setDetails(ReminderDetails details) {
             this.details = details;
         }
+
         public Optional<ReminderDetails> getDetails() {
             return Optional.ofNullable(details);
         }
@@ -150,8 +153,6 @@ public class ChangeReminderCommand extends UndoableCommand {
         public Optional<DueDate> getDueDate() {
             return Optional.ofNullable(dueDate);
         }
-
-
 
         public void setPriority(Priority priority) {
             this.priority = priority;

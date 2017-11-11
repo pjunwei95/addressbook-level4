@@ -1,5 +1,5 @@
 package seedu.address.model.reminder;
-//@@author RonakLakhotia
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -7,9 +7,9 @@ import java.util.Objects;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-
+//@@author RonakLakhotia
 /**
- * Represents a Person in the address book.
+ * Represents a Reminder in the Weaver.
  * Guarantees: details are present and not null, field values are validated.
  */
 

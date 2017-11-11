@@ -1,5 +1,5 @@
 package seedu.address.ui;
-//@@author RonakLakhotia
+
 import static seedu.address.model.font.FontSize.getAssociateFxFontSizeString;
 
 import java.util.Random;
@@ -15,7 +15,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.events.ui.ChangeFontSizeEvent;
 import seedu.address.model.font.FontSize;
 import seedu.address.model.reminder.ReadOnlyReminder;
-
+//@@author RonakLakhotia
 //import javax.swing.text.html.ImageView;
 
 
@@ -32,10 +32,7 @@ public class ReminderCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-
 
     public final ReadOnlyReminder reminder;
 
@@ -93,6 +90,7 @@ public class ReminderCard extends UiPart<Region> {
         return id.getText().equals(card.id.getText())
                 && reminder.equals(card.reminder);
     }
+    //@@author
 
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {

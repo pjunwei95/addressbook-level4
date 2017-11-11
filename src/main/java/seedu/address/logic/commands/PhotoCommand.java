@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
-//@@author RonakLakhotia
+
 import java.io.IOException;
 
 import java.util.List;
@@ -12,9 +12,10 @@ import seedu.address.model.person.FileImage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-
+//@@author RonakLakhotia
 /**
- * Adds a photo of the person to the addressBook
+ * Adds a photo of the person referenced to by the index in Weaver.
+ * Deletes an existing photo of a person.
  */
 
 public class PhotoCommand extends UndoableCommand {
@@ -83,9 +84,10 @@ public class PhotoCommand extends UndoableCommand {
         }
     }
     /**
-     * Checks if the person has any photo to be deleted
+     * Returns tru if the person has any photo to be deleted else returns false.
      */
     public static boolean checkIfThereIsAnyPhotoToDelete(ReadOnlyPerson personToAddPhoto, String filePath) {
+
         if (personToAddPhoto.getImage().getFilePath().equals("") && filePath.equalsIgnoreCase("delete")) {
             return false;
         }

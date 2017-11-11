@@ -12,81 +12,9 @@
 ```
 ###### /java/seedu/address/model/AddressBook.java
 ``` java
-    private final UniqueTagList tags;
-
-    /*
-     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
-    {
-```
-###### /java/seedu/address/model/AddressBook.java
-``` java
-        persons = new UniquePersonList();
-        tags = new UniqueTagList();
-    }
-
-    public AddressBook() {}
-
-    /**
-     * Creates an AddressBook using the Persons, Reminders and Tags in the {@code toBeCopied}
-     */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
-        this();
-        resetData(toBeCopied);
-    }
-
-    //// list overwrite operations
-
-    public void setPersons(List<? extends ReadOnlyPerson> persons) throws DuplicatePersonException {
-        this.persons.setPersons(persons);
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags.setTags(tags);
-    }
-
-```
-###### /java/seedu/address/model/AddressBook.java
-``` java
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
-        requireNonNull(newData);
-        try {
-            setReminders(newData.getReminderList());
-            setPersons(newData.getPersonList());
-        } catch (DuplicatePersonException e) {
-            assert false : "AddressBooks should not have duplicate persons";
-        } catch (DuplicateReminderException ee) {
-            assert false : "AddressBooks should not have duplicate reminders";
-        }
-
-        setTags(new HashSet<>(newData.getTagList()));
-        syncMasterTagListWith(persons);
-    }
-
-    //// person-level operations
-
-    /**
-     * Adds a person to the address book.
-     * Also checks the new person's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the person to point to those in {@link #tags}.
-     *
-     * @throws DuplicatePersonException if an equivalent person already exists.
-     */
-    public void addPerson(ReadOnlyPerson p) throws DuplicatePersonException {
-        Person newPerson = new Person(p);
-        syncMasterTagListWith(newPerson);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
-        persons.add(newPerson);
-    }
 ```
 ###### /java/seedu/address/model/AddressBook.java
 ``` java

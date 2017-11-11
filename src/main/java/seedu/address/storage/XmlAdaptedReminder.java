@@ -1,5 +1,5 @@
 package seedu.address.storage;
-//@@author RonakLakhotia
+
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -8,7 +8,7 @@ import seedu.address.model.reminder.Priority;
 import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.ReminderDetails;
-
+//@@author RonakLakhotia
 /**
  * JAXB-friendly version of the Reminder.
  */
