@@ -7,6 +7,8 @@ import static org.junit.Assert.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import seedu.address.logic.commands.ClearPopupCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -110,6 +112,21 @@ public class AddressBookParserTest {
                 + PREFIX_NAME + "Alice" + " " + PREFIX_DOB + "13.10.1997");
         assertEquals(commandCheck, command);
     }
+
+    @Test
+    public void parseCommand_deleteTag() throws Exception {
+        assertTrue(parser.parseCommand(DeleteTagCommand.COMMAND_WORD
+                + " " + "1" + " " + "t/friends"
+        ) instanceof DeleteTagCommand);
+    }
+
+    @Test
+    public void parseCommand_clearPopup() throws Exception {
+        assertTrue(parser.parseCommand(ClearPopupCommand.COMMAND_WORD) instanceof ClearPopupCommand);
+        assertTrue(parser.parseCommand(ClearPopupCommand.COMMAND_WORD
+                + " " + "1") instanceof ClearPopupCommand);
+    }
+    //@@author
     @Test
     public void parseCommand_facebook() throws Exception {
         FaceBookCommand command = (FaceBookCommand) parser.parseCommand(
