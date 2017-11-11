@@ -21,6 +21,7 @@ public class ClearPopupCommand extends UndoableCommand {
         if (clearConfirmation.isClearCommand()) {
             requireNonNull(model);
             model.resetData(new AddressBook());
+            model.clearBrowserPanel();
             return new CommandResult(MESSAGE_SUCCESS);
         } else {
             return new CommandResult(MESSAGE_FAILURE);
