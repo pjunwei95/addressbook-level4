@@ -1,5 +1,5 @@
 package seedu.address.logic.parser;
-
+//@@author yangminxingnus
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -41,3 +41,4 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
     }
 
 }
+//@@author

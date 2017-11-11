@@ -7,7 +7,9 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,7 +17,9 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.events.ui.ClearBrowserPanelEvent;
 import seedu.address.commons.events.ui.FaceBookEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.ui.testutil.EventsCollectorRule;
@@ -53,6 +57,15 @@ public class ModelManagerTest {
         ModelManager model = new ModelManager();
         model.clearBrowserPanel();
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ClearBrowserPanelEvent);
+    }
+    @Test
+    public void sendEmailToContacts() throws IOException, URISyntaxException, IllegalValueException {
+
+        ModelManager model = new ModelManager();
+        String expectedAppendedMail = "johnd@example.com+johnd@example.com+johnd@example.com+";
+        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+        String appendedMail = model.getAppendedEmailIdOfContacts("friends", lastShownList);
+        assertFalse(appendedMail.equals(expectedAppendedMail));
     }
 
     @Test

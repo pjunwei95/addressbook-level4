@@ -4,7 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+
 import seedu.address.logic.commands.exceptions.CommandException;
+
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,15 +50,23 @@ public class EmailCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        boolean isExistingTagName = checkIfExistingTagName(tag);
+        try {
+            boolean isExistingTagName = checkIfExistingTagName(tag);
 
-        if (!isExistingTagName) {
-            throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS));
-        }
-        else {
-            modifiedSubject = getSubjectForBrowser(subject);
-            model.sendMailToContacts(tag, modifiedSubject, model.getFilteredPersonList());
-            return new CommandResult(MESSAGE_EMAIL_SUCCESS);
+            if (!isExistingTagName) {
+                throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS));
+            }
+            else {
+                modifiedSubject = getSubjectForBrowser(subject);
+                model.sendMailToContacts(tag, modifiedSubject, model.getFilteredPersonList());
+                return new CommandResult(MESSAGE_EMAIL_SUCCESS);
+            }
+        } catch (IOException io) {
+            throw new AssertionError("Invalid Input");
+        } catch (URISyntaxException ur) {
+            throw new AssertionError("urisyntax erro");
+        } catch (IllegalValueException ie) {
+            throw new AssertionError("Illegal values");
         }
 
 

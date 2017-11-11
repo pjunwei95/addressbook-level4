@@ -1,5 +1,5 @@
 package seedu.address.model.person;
-
+//@@author yangminxingnus
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -75,8 +75,7 @@ public class Remark {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Remark // instanceof handles nulls
+        return other == this || (other instanceof Remark // instanceof handles nulls
                 && this.moduleLists.equals(((Remark) other).moduleLists)); // state check
     }
 
@@ -85,3 +84,4 @@ public class Remark {
         return moduleLists.hashCode();
     }
 }
+//@@author

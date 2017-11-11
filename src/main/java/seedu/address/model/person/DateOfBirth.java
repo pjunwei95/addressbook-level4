@@ -165,10 +165,5 @@ public class DateOfBirth {
                 || (other instanceof DateOfBirth
                 && this.date.equals(((DateOfBirth) other).date));
     }
-    @Override
-    public int hashCode() {
-        return date.hashCode();
-    }
-
 
 }

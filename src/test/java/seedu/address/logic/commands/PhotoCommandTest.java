@@ -38,6 +38,13 @@ public class PhotoCommandTest {
 
         assertCommandFailure(photoCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+    @Test
+    public void deleteFaliure() {
+        Index index = Index.fromOneBased(model.getFilteredPersonList().size());
+        String filePath = "delete";
+        PhotoCommand photoCommand = prepareCommand(index, filePath);
+        assertCommandFailure(photoCommand, model, Messages.MESSAGE_NO_IMAGE_TO_DELETE);
+    }
 
     /**
      * Returns a {@code PhotoCommand} with the parameter {@code index and Filepath}.

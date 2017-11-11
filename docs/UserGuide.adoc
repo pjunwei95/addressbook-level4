@@ -198,6 +198,7 @@ Selects the 2nd person in the address book.
 `select 1` +
 Selects the 1st person in the results of the `find` command.
 
+// tag::remark[]
 === Remarking a person : `remark`
 
 Remarks the person identified by the index number. +
@@ -214,6 +215,16 @@ Examples:
 * `list` +
 `remark 2 /r CS2104/LEC/1` +
 Remarks the 2nd person's module information as CS2104/LEC/1.
+// end::remark[]
+
+// tag::nusmods[]
+=== NUSMODS Integration SINCE V1.2
+
+Helps you view your contacts' module information corresponding to this person's remark on nusmods by clicking on the person. +
+
+image::nusmods.png[width="790"]
+
+// end::nusmods[]
 
 
 === Listing entered commands : `history`
@@ -279,16 +290,26 @@ The `redo` command fails as there are no `undo` commands executed previously.
 *SINCE V1.2*
 
 === Login / Logout SINCE V1.2
+image::Login.png[width="790"]
 
-Users now can login using valid accounts. And their files are seperated.
+Users now can login using valid accounts. And their files are seperated. +
+To start with, there are to default pair os username and password. They are
+{admin, admin} and {user, user}. +
+To logout, just click logout in the "file - > logout" button. Or, use the "logout" command. +
 
-To logout, just click logout in the "file - > logout" button.
+image::Logout.png[width="790"]
 
+// tag::register[]
 === Register SINCE V1.3
 
-Users now can register new valid accounts.
+Users now can register new valid accounts. Just click the "Register" button on the bottom
+of the login page. Registering has two requirements: +
+1. The username registering should be different
+with all previous ones. +
+2. You have to key in identical password twice.
 
-The new account's username must be different from all previous ones.
+image::Register.png[width="790"]
+// end::register[]
 
 // tag::customizetagcolor[]
 === Customize tags' color : `color` SINCE V1.2
@@ -397,6 +418,7 @@ If the person does not have a facebook account or the username is not entered in
 image::facebook.png[width="790"]
 
 // end::facebook[]
+
 // tag::map[]
 === Show address of a person : `map` (SINCE V1.3)
 

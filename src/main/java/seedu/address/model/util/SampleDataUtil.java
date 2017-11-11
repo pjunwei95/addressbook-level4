@@ -29,6 +29,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         try {
+            //@@author yangminxingnus
             return new Person[] {
                 new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new DateOfBirth("13.10.1997"),
@@ -61,6 +62,7 @@ public class SampleDataUtil {
                     new FacebookUsername(""),
                     getTagSet("colleagues"))
             };
+            //@@author
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }

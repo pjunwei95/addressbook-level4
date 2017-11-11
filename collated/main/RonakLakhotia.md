@@ -1829,11 +1829,6 @@ public class XmlAdaptedReminder {
         return FXCollections.unmodifiableObservableList(reminders);
     }
 ```
-###### /java/seedu/address/ui/MainWindow.java
-``` java
-    @FXML
-    private StackPane reminderListPlaceholder;
-```
 ###### /java/seedu/address/ui/ReminderCard.java
 ``` java
 import static seedu.address.model.font.FontSize.getAssociateFxFontSizeString;
