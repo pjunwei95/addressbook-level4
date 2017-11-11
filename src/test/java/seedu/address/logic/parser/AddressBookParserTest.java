@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import seedu.address.logic.commands.BackUpCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -87,12 +88,19 @@ public class AddressBookParserTest {
     }
     //@@author pjunwei95
     @Test
-    public void parseCommand_findTagCommand() throws Exception {
+    public void parseCommand_findTag() throws Exception {
 
         List<String> keywords = Arrays.asList("friends");
         final FindTagCommand command = new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
         assertEquals(command, new FindTagCommand(new TagContainsKeywordsPredicate(keywords)));
     }
+
+    @Test
+    public void parseCommand_backup() throws Exception {
+        assertTrue(parser.parseCommand(BackUpCommand.COMMAND_WORD) instanceof BackUpCommand);
+        assertTrue(parser.parseCommand(BackUpCommand.COMMAND_WORD + " 3") instanceof BackUpCommand);
+    }
+
     @Test
     public void parseCommand_search() throws Exception {
         SearchCommand command = new SearchCommand(new
