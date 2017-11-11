@@ -511,7 +511,10 @@ Returns `John Doe` and `Hans Gruber`
 Returns any person having tags `Friends` or `Colleagues`
 
 image::findtaginvalid.png[width="912"]
-image::findtagvalid.png[width="213"]
+
+* `findtag friends`
+
+image::findtagvalid.png[width="1360"]
 
 // end::findtag[]
 
@@ -537,10 +540,13 @@ Deletes the tag `friends` and `colleagues` from the person index `2`.
 
 [TIP]
 You can remove all the person's tags by typing `edit INDEX t/` without specifying any tags after it.
-Refer to the link:#edit[Edit] section above for more details.
+Refer to the Edit section above for more details.
 
 image::deletetaginvalid.png[width="341"]
-image::deletetagvalid.png[width="262"]
+
+* `deletetag 1 t/friends`
+
+image::deletetagvalid.png[width="1360"]
 
 // end::deletetag[]
 
@@ -588,11 +594,9 @@ Backup your address book information in Weaver. +
 
 Format: `backup` +
 
-****
 * Back up your address book information in Weaver according to your own accounts.
-* The file will be saved in the data folder of the following format:
-* [Account Username]addressbook-backup.xml
-****
+* The file will be saved in the /data folder as the following format: +
+ `[Account Username]-backup.xml`
 
 image::backup.png[width="237"]
 
