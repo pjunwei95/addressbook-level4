@@ -463,21 +463,12 @@
 
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
-    }
-
-    public ReminderListPanel getReminderListPanel() {
-        return this.reminderListPanel;
-    }
-
     void releaseResources() {
         browserPanel.freeResources();
     }
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
 
