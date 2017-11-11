@@ -35,11 +35,12 @@ public class FontSize {
     /**
      * Validates given font size.
      *
+     * @param fontSize
      * @throws IllegalValueException if given font size is invalid.
      */
     public FontSize(String fontSize) throws IllegalValueException {
         requireNonNull(fontSize);
-        if (isValidFontSizeChangeSymbol(fontSize)) {
+        if (isValidChangeFontSizeSymbol(fontSize)) {
 
             // Get the new font size from "+" or "-" symbol base on current font size
             fontSize = getFontSizeFromChangeSymbol(fontSize);
@@ -58,7 +59,11 @@ public class FontSize {
     }
 
     /**
-     * Get the new font size from "+" or "-" symbol and change the current font size
+     * Get a increased/decreased font size from "+" or "-"  symbol
+     *
+     * @param symbol
+     * @return increased/decreased font size based on current font size
+     * @throws IllegalValueException
      */
     private String getFontSizeFromChangeSymbol(String symbol) throws IllegalValueException {
         int fontSizeListLength = FONT_SIZE_LIST.length;
@@ -100,8 +105,11 @@ public class FontSize {
 
     /**
      * Check whether the change symbol is valid
+     *
+     * @param symbol
+     * @return validity of a symbol
      */
-    private boolean isValidFontSizeChangeSymbol(String symbol) {
+    private boolean isValidChangeFontSizeSymbol(String symbol) {
         for (String s : FONT_SIZE_CHANGE_SYMBOL) {
             if (symbol.equals(s)) {
                 return true;
@@ -111,7 +119,10 @@ public class FontSize {
     }
 
     /**
-     * Returns true if a given string is a valid font size.
+     * Check if a given string is a valid font size
+     *
+     * @param test
+     * @return validity of a the String
      */
     public static boolean isValidFontSize(String test) {
         for (String s : FONT_SIZE_LIST) {
@@ -123,6 +134,8 @@ public class FontSize {
     }
 
     /**
+     * Get the current font size
+     *
      * @return the current font size
      */
     public static String getCurrentFontSizeLabel() {
@@ -130,7 +143,8 @@ public class FontSize {
     }
 
     /**
-     * Set the current font size to a new font size
+     * Set the current font size to a given new font size
+     *
      * @param newFontSizeLabel
      */
     public static void setCurrentFontSizeLabel(String newFontSizeLabel) {
@@ -154,7 +168,8 @@ public class FontSize {
 
 
     /**
-     * Get the associate fx format string for a give font size
+     * Get the associate JavaFX format String for a give font size
+     *
      * @param inputFontSize
      */
     public static String getAssociateFxFontSizeString(String inputFontSize) {
@@ -162,28 +177,30 @@ public class FontSize {
         String fxFontSizeString = "-fx-font-size: ";
         switch (inputFontSize) {
         case FONT_SIZE_XS_LABEL:
-            fxFontSizeString += "small;";
+            fxFontSizeString += "small";
             break;
 
         case FONT_SIZE_S_LABEL:
-            fxFontSizeString += "medium;";
+            fxFontSizeString += "medium";
             break;
 
         case FONT_SIZE_M_LABEL:
-            fxFontSizeString += "large;";
+            fxFontSizeString += "large";
             break;
 
         case FONT_SIZE_L_LABEL:
-            fxFontSizeString += "x-large;";
+            fxFontSizeString += "x-large";
             break;
 
         case FONT_SIZE_XL_LABEL:
-            fxFontSizeString += "xx-large;";
+            fxFontSizeString += "xx-large";
             break;
 
         default:
-            fxFontSizeString += "large;";
+            fxFontSizeString += "large";
         }
+
+        fxFontSizeString += ";";
         return fxFontSizeString;
     }
 

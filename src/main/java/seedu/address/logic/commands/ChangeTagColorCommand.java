@@ -53,7 +53,9 @@ public class ChangeTagColorCommand extends UndoableCommand {
     }
 
     /**
-     * Check whether a given tag exists in current database
+     * Check whether a given tag exists in current database.
+     * @param t
+     * @return whether a given tag exists
      */
     private boolean isExistingTagName(Tag t) {
         for (Tag tag : model.getAddressBook().getTagList()) {
@@ -66,17 +68,17 @@ public class ChangeTagColorCommand extends UndoableCommand {
 
     @Override
     protected CommandResult executeUndoableCommand() throws CommandException {
-        // Store all non existing tags
+        // Store all non existing tags.
         Set<Tag> nonExistingTagList = new HashSet<>();
 
-        // Check whether tags in the tagList are not existing tags
+        // Check whether tags in the tagList are not existing tags.
         for (Tag tag: tagList) {
             if (!isExistingTagName(tag)) {
                 nonExistingTagList.add(tag);
             }
         }
 
-        // There are tags that are not existing tags
+        // There are tags that are not existing tags.
         if (nonExistingTagList.size() != 0) {
             throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS, nonExistingTagList));
         }

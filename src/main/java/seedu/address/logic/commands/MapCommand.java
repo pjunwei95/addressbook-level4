@@ -38,10 +38,10 @@ public class MapCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        // Get the peron with the index
+        // Get the peron with the index.
         ReadOnlyPerson person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
 
-        // Post an event to show the address
+        // Post an event to show the address.
         EventsCenter.getInstance().post(new ShowPersonAddressEvent(person.getAddress().value));
 
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, person.getName().fullName));

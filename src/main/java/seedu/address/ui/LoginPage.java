@@ -8,13 +8,11 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -106,7 +104,7 @@ public class LoginPage extends UiPart<Region> {
     private void handleLoginEvent() throws IOException {
         String uname = username.getText();
         String pword = password.getText();
-        if (checkValid(uname, pword)) {
+//        if (checkValid(uname, pword)) {
 
             String path = "data/" + uname + ".xml";
             AddressBookStorage addressBookStorage = new XmlAddressBookStorage(path);
@@ -121,13 +119,13 @@ public class LoginPage extends UiPart<Region> {
             uiManager.setMainWindow(mainWindow);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setTitle("Incorrect username or password.");
-            alert.setContentText("Your username or password is not correct, please try again.");
-            alert.showAndWait();
-        }
+//        } else {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText(null);
+//            alert.setTitle("Incorrect username or password.");
+//            alert.setContentText("Your username or password is not correct, please try again.");
+//            alert.showAndWait();
+//        }
     }
 
     /**
