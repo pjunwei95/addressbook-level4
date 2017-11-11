@@ -216,7 +216,7 @@ Remarks the 2nd person's module information as CS2104/LEC/1.
 // end::remark[]
 
 // tag::nusmods[]
-=== NUSMODS Integration SINCE V1.2
+=== NUSMODS Integration since v1.2
 
 Helps you view your contacts' module information corresponding to this person's remark on nusmods by clicking on the person. +
 
@@ -310,7 +310,7 @@ image::Register.png[width="790"]
 // end::register[]
 
 // tag::customizetagcolor[]
-=== Customize tags' color : `color` SINCE V1.2
+=== Customize tags' color : `color` since v1.2
 
 Change the color of one or more than one tags. +
 Format: `color [c/COLOR] [t/TAG]...`
@@ -339,7 +339,7 @@ image::tagcolor.png[width="790"]
 // end::customizetagcolor[]
 
 // tag::addphoto[]
-=== Add Photo to contacts : `photo` SINCE V1.2 +
+=== Add Photo to contacts : `photo` since v1.2 +
 
 image::MockUp.png[width="790"]
 
@@ -370,7 +370,7 @@ this will delete the photo attached with the person at index 1.
 
 
 // tag::customizefontsize[]
-=== Change font size : `fs` SINCE V1.3
+=== Change font size : `fs` since v1.3
 
 Change the font size of the entire application +
 Format: `fs [FONT SIZE]` or `fs [+/-]`
@@ -397,7 +397,7 @@ image::fs.png[width="790"]
 // end::customizefontsize[]
 
 // tag::facebook[]
-=== FaceBook Integration SINCE V1.3
+=== FaceBook Integration since v1.3
 
 Helps you view the profile page of a person in your contact list. +
 
@@ -418,7 +418,7 @@ image::facebook.png[width="790"]
 // end::facebook[]
 
 // tag::map[]
-=== Show address of a person : `map` (SINCE V1.3)
+=== Show address of a person : `map` since v1.3
 
 Shows the address of a person in Google Map in the browser panel. +
 
@@ -440,7 +440,7 @@ image::map.png[width="790"]
 // end::map[]
 
 // tag::theme[]
-=== Change the theme : `theme` (SINCE V1.4)
+=== Change the theme : `theme` since v1.4
 
 Changes the theme of entire application. +
 
@@ -462,7 +462,7 @@ image::theme.png[width="840"]
 
 // end::theme[]
 
-=== Reminders Panel (SINCE V1.4) +
+=== Reminders Panel since v1.4 +
 
 Have you ever felt the need to be constantly reminded of your daily assignments.Fret not!Weaver helps you keep up to
 date with your daily school assignments.Just add your reminders using a single command and weaver will display your
@@ -487,7 +487,7 @@ The above command will change the due date of the reminder to the new date. +
 
 // tag::findtag[]
 
-=== Locating persons by tag: `findtag`
+=== Locating persons by tag: `findtag` since v1.2
 
 Finds persons whose tags contain any of the given keywords. +
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
@@ -513,7 +513,7 @@ Returns any person having tags `Friends` or `Colleagues`
 // end::findtag[]
 
 // tag::deletetag[]
-=== Deleting a person's tag : `deletetag`
+=== Deleting a person's tag : `deletetag` since v1.3
 
 Deletes the tag(s) of an existing person in the address book. +
 Format: `deletetag INDEX [t/TAG]...`
@@ -539,7 +539,7 @@ Refer to the link:#edit[Edit] section above for more details.
 // end::deletetag[]
 
 // tag::autocompletion[]
-=== Auto-completion
+=== Auto-completion since v1.4
 
 The command box has a auto-complete feature to provide suggestions to your commands. +
 
@@ -547,10 +547,10 @@ image::autocompletion.png[width="790"]
 
 Type any letters to get some suggestions on what command to use.
 [TIP]
-To avoid accidentally auto-completion, you can press `ESC` to cancel and continue your input.
+To avoid accidental auto-completion, you can press `ESC` to cancel and continue your input.
 
 // tag::parse[]
-=== Check whether the command's format is valid while the user is typing (SINCE V1.5)
+=== Check whether the command's format is valid while the user is typing since v1.5
 
 The result display panel will show whether the command is valid while you are typing without pressing an enter key.
 Also, the message displayed will tell you exactly which part goes wrong.
@@ -577,7 +577,7 @@ image::invalidbutok.png[width="430"]
 // end::autocompletion[]
 
 // tag::backup[]
-=== Backing up your Weaver : `backup`
+=== Backing up your Weaver : `backup` since v1.5
 
 Backup your address book information in Weaver. +
 
@@ -593,6 +593,8 @@ Format: `backup` +
 
 // tag::clear[]
 === Clearing all entries : `clear`
+[NOTE]
+To interact solely with the keyboard, make your selection and press `SPACE` instead of `ENTER`!
 
 Clears all entries from the address book. +
 
@@ -608,7 +610,8 @@ Otherwise, you can cancel by highlighting the `Cancel` button with the keyboard 
 Alternatively, you can also click the `X` button or the `Cancel` button. +
 
 [TIP]
-To interact solely with the keyboard, make your selection and press `SPACE` instead of `ENTER`!
+Experienced users may be able to bypass the clear confirmation window by its alias: +
+`cls`
 
 // end::clear[]
 
@@ -617,9 +620,8 @@ To interact solely with the keyboard, make your selection and press `SPACE` inst
 Exits the program. +
 Format: `exit`
 
-=== Coming in V2.0
+=== Coming in v2.0
 
-image::EmailThem.png[width="600"]
 
 * Add a notification system to notify users about upcoming birthdays +
 * Send Email Intents to contacts +
