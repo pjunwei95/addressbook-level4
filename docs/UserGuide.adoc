@@ -510,6 +510,9 @@ Returns `John Doe` and `Hans Gruber`
 * `findtag friends colleagues` +
 Returns any person having tags `Friends` or `Colleagues`
 
+image::findtaginvalid.png[width="912"]
+image::findtagvalid.png[width="213"]
+
 // end::findtag[]
 
 // tag::deletetag[]
@@ -536,6 +539,9 @@ Deletes the tag `friends` and `colleagues` from the person index `2`.
 You can remove all the person's tags by typing `edit INDEX t/` without specifying any tags after it.
 Refer to the link:#edit[Edit] section above for more details.
 
+image::deletetaginvalid.png[width="341"]
+image::deletetagvalid.png[width="262"]
+
 // end::deletetag[]
 
 // tag::autocompletion[]
@@ -543,11 +549,13 @@ Refer to the link:#edit[Edit] section above for more details.
 
 The command box has a auto-complete feature to provide suggestions to your commands. +
 
-image::autocompletion.png[width="790"]
+image::autocomplete.png[width="313"]
 
 Type any letters to get some suggestions on what command to use.
 [TIP]
 To avoid accidental auto-completion, you can press `ESC` to cancel and continue your input.
+
+// end::autocompletion[]
 
 // tag::parse[]
 === Check whether the command's format is valid while the user is typing since v1.5
@@ -573,9 +581,6 @@ image::invalid.png[width="630"]
 image::invalidbutok.png[width="430"]
 // end::parse[]
 
-
-// end::autocompletion[]
-
 // tag::backup[]
 === Backing up your Weaver : `backup` since v1.5
 
@@ -588,6 +593,8 @@ Format: `backup` +
 * The file will be saved in the data folder of the following format:
 * [Account Username]addressbook-backup.xml
 ****
+
+image::backup.png[width="237"]
 
 // end::backup[]
 
@@ -602,7 +609,7 @@ Format: `clear` +
 
 A clear confirmation will pop-up to reaffirm your clear command in the event of accidental clearing. +
 
-image::clearconfirmation.png[width="790"]
+image::clearconfirmation.png[width="1362"]
 
 By default, you will be able to confirm clearing by pressing `ENTER` on the keyboard, or clicking `OK`.
 
