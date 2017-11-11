@@ -1,3 +1,4 @@
+//@@author ChenXiaoman
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -8,7 +9,6 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.ChangeThemeCommand;
 
-//@@author ChenXiaoman
 public class ChangeThemeCommandParserTest {
 
     private ChangeThemeCommandParser parser = new ChangeThemeCommandParser();
