@@ -118,26 +118,6 @@ public class BackUpCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/CancelClearCommand.java
-``` java
-import static java.util.Objects.requireNonNull;
-
-/**
- * Clears the address book.
- */
-public class CancelClearCommand extends Command {
-
-    public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_FAILURE = "Address book has not been cleared!";
-
-
-    @Override
-    public CommandResult execute() {
-        requireNonNull(model);
-        return new CommandResult(MESSAGE_FAILURE);
-    }
-}
-```
 ###### /java/seedu/address/logic/commands/ClearCommand.java
 ``` java
 import static java.util.Objects.requireNonNull;
@@ -150,7 +130,7 @@ import seedu.address.model.AddressBook;
 public class ClearCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "cls";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Weaver has been cleared!";
 
 
     @Override
@@ -167,6 +147,7 @@ public class ClearCommand extends UndoableCommand {
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.AddressBook;
+import seedu.address.ui.ClearConfirmation;
 
 /**
  * Clears the address book.
@@ -174,15 +155,21 @@ import seedu.address.model.AddressBook;
 public class ClearPopupCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Weaver has been cleared!";
+    public static final String MESSAGE_FAILURE = "Weaver has not been cleared!";
 
 
     @Override
     public CommandResult executeUndoableCommand() {
-        requireNonNull(model);
-        model.clearBrowserPanel();
-        model.resetData(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        ClearConfirmation clearConfirmation = new ClearConfirmation();
+        if (clearConfirmation.isClearCommand()) {
+            requireNonNull(model);
+            model.resetData(new AddressBook());
+            model.clearBrowserPanel();
+            return new CommandResult(MESSAGE_SUCCESS);
+        } else {
+            return new CommandResult(MESSAGE_FAILURE);
+        }
     }
 }
 ```
@@ -392,7 +379,7 @@ public class FindTagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tag(s) contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " friends colleagues";
 
     private final TagContainsKeywordsPredicate predicate;
 
@@ -423,12 +410,7 @@ public class FindTagCommand extends Command {
             return new DeleteTagCommandParser().parse(arguments);
 
         case ClearPopupCommand.COMMAND_WORD: {
-            ClearConfirmation clearConfirmation = new ClearConfirmation();
-            if (clearConfirmation.isClearCommand()) {
-                return new ClearPopupCommand();
-            } else {
-                return new CancelClearCommand();
-            }
+            return new ClearPopupCommand();
         }
 
         case BackUpCommand.COMMAND_WORD:

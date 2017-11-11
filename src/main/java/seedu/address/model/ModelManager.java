@@ -89,6 +89,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
     }
+    //@@author RonakLakhotia
+    /** Raises an event to indicate the model has changed */
     @Override
     public synchronized void clearBrowserPanel() {
         raise(new ClearBrowserPanelEvent());
@@ -101,6 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
         String appendEmailAddress = getAppendedEmailIdOfContacts(tag, lastShownList);
         openUpDesktopBrowser(appendEmailAddress, subject);
     }
+
     public String getAppendedEmailIdOfContacts(String tag, List<ReadOnlyPerson> lastShownList) throws
             IllegalValueException {
 
@@ -118,6 +121,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return appendEmailAddress;
     }
+
     /** Opens the default browser in your desktop */
     private void openUpDesktopBrowser(String appendEmailAddress, String subject) throws IOException,
             URISyntaxException {
@@ -133,12 +137,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
+    /** Raises an facebook event to indicate the model has changed */
     @Override
     public synchronized void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
 
         raise(new FaceBookEvent(person));
     }
-
+    //@@author
     @Override
     public synchronized void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
 
@@ -147,6 +152,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
     }
+    //@@author RonakLakhotia
     @Override
     public synchronized void addReminder(ReadOnlyReminder target) throws DuplicateReminderException {
 
@@ -173,6 +179,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
 
     }
+    //@@author
 
     //@@author yangminxingnus
     @Override
@@ -202,6 +209,7 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
     }
+    //@@author RonakLakhotia
     @Override
     public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder)
             throws DuplicateReminderException, ReminderNotFoundException {
@@ -210,6 +218,7 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.updateReminder(target, changedReminder);
         indicateAddressBookChanged();
     }
+    //@@author
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -220,6 +229,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
     }
+    //@@author RonakLakhotia
     /**
      * Returns an unmodifiable view of the list of {@code ReadOnlyReminder} backed by the internal list of
      * {@code weaver}
@@ -228,17 +238,19 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<ReadOnlyReminder> getFilteredReminderList() {
         return FXCollections.unmodifiableObservableList(filteredReminders);
     }
+    //@@author
     @Override
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
-
+    //@@author RonakLakhotia
     @Override
     public void updateFilteredReminderList(Predicate<ReadOnlyReminder> predicate) {
         requireNonNull(predicate);
         filteredReminders.setPredicate(predicate);
     }
+    //@@author
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

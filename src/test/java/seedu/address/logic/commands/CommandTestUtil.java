@@ -253,6 +253,7 @@ public class CommandTestUtil {
 
         assert model.getFilteredPersonList().size() == 1;
     }
+    //@@author RonakLakhotia
     /**
      * Updates {@code model}'s filtered list to show only the first reminder in the {@code model}'s address book.
      */
@@ -263,7 +264,7 @@ public class CommandTestUtil {
 
         assert model.getFilteredReminderList().size() == 1;
     }
-
+    //@@author
     /**
      * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
      */

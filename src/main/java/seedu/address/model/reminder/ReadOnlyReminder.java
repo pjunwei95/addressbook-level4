@@ -27,7 +27,7 @@ public interface ReadOnlyReminder {
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats and returns the reminder as text, showing all reminder details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();

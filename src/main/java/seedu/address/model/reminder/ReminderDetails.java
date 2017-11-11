@@ -1,9 +1,9 @@
 package seedu.address.model.reminder;
-//@@author RonakLakhotia
+
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-
+//@@author RonakLakhotia
 /**
  * Represents a Reminder's details
  * Guarantees: immutable; is valid as declared in {@link #isValidDetail(String)}

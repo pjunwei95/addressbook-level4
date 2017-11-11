@@ -3,18 +3,35 @@ package seedu.address.ui;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 
+import org.junit.Rule;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.ShowPersonAddressEvent;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.UndoRedoStack;
+import seedu.address.logic.commands.MapCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.testutil.EventsCollectorRule;
+
 
 public class PersonCardTest extends GuiUnitTest {
 
+    @Rule
+    public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     public void display() {
         // no tags
@@ -103,5 +120,20 @@ public class PersonCardTest extends GuiUnitTest {
 
         // verify person details are displayed correctly
         assertCardDisplaysPerson(expectedPerson, personCardHandle);
+    }
+    @Test
+    public void checkIfEventCollected() throws CommandException {
+        MapCommand mapCommand = prepareCommand(INDEX_FIRST_PERSON);
+        mapCommand.execute();
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ShowPersonAddressEvent);
+
+    }
+    /**
+     * Returns an {@code LocationCommand} with parameters {@code index}}
+     */
+    private MapCommand prepareCommand(Index index) {
+        MapCommand mapCommand = new MapCommand(index);
+        mapCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        return mapCommand;
     }
 }

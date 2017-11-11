@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 //@@author RonakLakhotia
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -9,12 +11,11 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- *  Shows a person's address on Google Maps in browser
+ *  Shows a person's Facebook profile page in the browser panel.
  */
 public class FaceBookCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "facebook";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + " Shows the profile of the user whose"
             + " index is entered\n"
             + "Example: " + COMMAND_WORD + " 1 ";
@@ -22,10 +23,11 @@ public class FaceBookCommand extends UndoableCommand {
     public static final String MESSAGE_FACEBOOK_SHOWN_SUCCESS = "Profile of Person: %1$s";
     public static final String MESSAGE_NO_USERNAME = "This Person has no Facebook username!\n";
 
+    private static final Logger logger = LogsCenter.getLogger(FaceBookCommand.class);
     public final Index index;
 
-    public FaceBookCommand (Index index) {
 
+    public FaceBookCommand (Index index) {
         this.index = index;
     }
 
@@ -45,8 +47,10 @@ public class FaceBookCommand extends UndoableCommand {
         }
 
         try {
+            assert index.getZeroBased() >= 0;
             model.faceBook(personToShow);
         } catch (PersonNotFoundException pnfe) {
+            logger.warning("Person is missing");
             assert false : "The target person cannot be missing";
         }
 

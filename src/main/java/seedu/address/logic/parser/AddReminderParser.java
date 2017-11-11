@@ -1,5 +1,5 @@
 package seedu.address.logic.parser;
-//@@author RonakLakhotia
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
@@ -15,9 +15,9 @@ import seedu.address.model.reminder.Priority;
 import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.ReminderDetails;
-
+//@@author RonakLakhotia
 /**
- * Parses input arguments and creates a new AddReminderCommand object
+ * Parses the input arguments and creates a new AddReminderCommand object.
  */
 public class AddReminderParser implements Parser<AddReminder> {
 
@@ -27,6 +27,7 @@ public class AddReminderParser implements Parser<AddReminder> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddReminder parse(String args) throws ParseException {
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_REMINDER_DETAILS, PREFIX_REMINDER_DUE_DATE,
                         PREFIX_REMINDER_PRIORITY);
@@ -40,7 +41,6 @@ public class AddReminderParser implements Parser<AddReminder> {
             ReminderDetails details = ParserUtil.parseDetails(argMultimap.getValue(PREFIX_REMINDER_DETAILS)).get();
             Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_REMINDER_PRIORITY)).get();
             DueDate dueDate = ParserUtil.parseDueDate(argMultimap.getValue(PREFIX_REMINDER_DUE_DATE)).get();
-
             ReadOnlyReminder reminder = new Reminder(details, priority , dueDate);
 
             return new AddReminder(reminder);

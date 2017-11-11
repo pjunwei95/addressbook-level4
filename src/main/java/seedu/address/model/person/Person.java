@@ -68,14 +68,6 @@ public class Person implements ReadOnlyPerson {
         return name.get();
     }
 
-    public void setUsername(FacebookUsername username) {
-        this.username.set(requireNonNull(username));
-    }
-    @Override
-    public ObjectProperty<FacebookUsername> usernameProperty() {
-        return username;
-    }
-
     @Override
     public FacebookUsername getUsername() {
         return username.get();
@@ -123,6 +115,30 @@ public class Person implements ReadOnlyPerson {
         return address.get();
     }
 
+
+    public void setRemark(Remark remark) {
+        this.remark.set(requireNonNull(remark));
+    }
+
+    @Override
+    public ObjectProperty<Remark> remarkProperty() {
+        return remark;
+    }
+
+    @Override
+    public Remark getRemark() {
+        return remark.get();
+    }
+    //@@author RonakLakhotia
+    @Override
+    public FileImage getImage() {
+        return image.get();
+    }
+
+    public ObjectProperty<FileImage> imageProperty() {
+        return image;
+    }
+
     public void setDateOfBirth(DateOfBirth date) {
         this.date.set(requireNonNull(date));
     }
@@ -140,23 +156,14 @@ public class Person implements ReadOnlyPerson {
         return date.get();
     }
 
-    public void setRemark(Remark remark) {
-        this.remark.set(requireNonNull(remark));
-    }
-
-    @Override
-    public ObjectProperty<Remark> remarkProperty() {
-        return remark;
-    }
-
-    @Override
-    public Remark getRemark() {
-        return remark.get();
+    public void setUsername(FacebookUsername username) {
+        this.username.set(requireNonNull(username));
     }
     @Override
-    public FileImage getImage() {
-        return image.get();
+    public ObjectProperty<FacebookUsername> usernameProperty() {
+        return username;
     }
+    //@@author
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -171,9 +178,7 @@ public class Person implements ReadOnlyPerson {
         return tags;
     }
 
-    public ObjectProperty<FileImage> imageProperty() {
-        return image;
-    }
+
     /**
      * Replaces this person's tags with the tags in the argument tag set.
      */

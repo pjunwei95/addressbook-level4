@@ -1,4 +1,44 @@
 # RonakLakhotia
+###### /java/seedu/address/commons/events/ui/ClearBrowserPanelEvent.java
+``` java
+import seedu.address.commons.events.BaseEvent;
+
+/**
+ * Raises a ClearBrowserPanelEvent to clear the browser panel when the clear command is executed
+ */
+public class ClearBrowserPanelEvent extends BaseEvent {
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
+
+}
+```
+###### /java/seedu/address/commons/events/ui/FaceBookEvent.java
+``` java
+/**
+ * Raises a FaceBookEvent when the user executes the facebook command to view the profile page.
+ */
+public class FaceBookEvent extends BaseEvent {
+
+    private final ReadOnlyPerson person;
+
+    public FaceBookEvent(ReadOnlyPerson person) {
+        this.person = person;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
+
+    public ReadOnlyPerson getPerson() {
+        return person;
+    }
+
+}
+```
 ###### /java/seedu/address/commons/events/ui/ReminderPanelSelectionChangedEvent.java
 ``` java
 import seedu.address.commons.events.BaseEvent;
@@ -33,10 +73,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+
+import java.util.logging.Logger;
 
 /**
  * Adds a reminder to the address book.
@@ -59,6 +103,7 @@ public class AddReminder extends UndoableCommand {
     public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists!";
 
     private final Reminder toAdd;
+    private static final Logger logger = LogsCenter.getLogger(AddReminder.class);
 
     /**
      * Creates an AddReminder Command to add the specified {@code ReadOnlyReminder}
@@ -74,6 +119,7 @@ public class AddReminder extends UndoableCommand {
             model.addReminder(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (DuplicateReminderException e) {
+            logger.severe(StringUtil.getDetails(e));
             throw new CommandException(MESSAGE_DUPLICATE_REMINDER);
         }
 
@@ -89,29 +135,8 @@ public class AddReminder extends UndoableCommand {
 ```
 ###### /java/seedu/address/logic/commands/ChangeReminderCommand.java
 ``` java
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_REMINDERS;
-
-import java.util.List;
-import java.util.Optional;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.reminder.DueDate;
-import seedu.address.model.reminder.Priority;
-import seedu.address.model.reminder.ReadOnlyReminder;
-import seedu.address.model.reminder.Reminder;
-import seedu.address.model.reminder.ReminderDetails;
-import seedu.address.model.reminder.exceptions.DuplicateReminderException;
-import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
-
 /**
- * Edits the details of an existing reminder in Weaver
+ * Changes the details of an existing reminder in Weaver.
  */
 public class ChangeReminderCommand extends UndoableCommand {
 
@@ -135,6 +160,7 @@ public class ChangeReminderCommand extends UndoableCommand {
     private final ChangeReminderDescriptor changeReminderDescriptor;
 
     /**
+     * Changes the reminder at the given index with the given descriptor.
      * @param index of the reminder in the filtered reminder list to change
      * @param changeReminderDescriptor details to change the reminder with
      */
@@ -196,9 +222,9 @@ public class ChangeReminderCommand extends UndoableCommand {
         }
 
         // state check
-        ChangeReminderCommand c = (ChangeReminderCommand) other;
-        return index.equals(c.index)
-                && changeReminderDescriptor.equals(c.changeReminderDescriptor);
+        ChangeReminderCommand command = (ChangeReminderCommand) other;
+        return index.equals(command.index)
+                && changeReminderDescriptor.equals(command.changeReminderDescriptor);
     }
 
     /**
@@ -228,6 +254,7 @@ public class ChangeReminderCommand extends UndoableCommand {
         public void setDetails(ReminderDetails details) {
             this.details = details;
         }
+
         public Optional<ReminderDetails> getDetails() {
             return Optional.ofNullable(details);
         }
@@ -239,8 +266,6 @@ public class ChangeReminderCommand extends UndoableCommand {
         public Optional<DueDate> getDueDate() {
             return Optional.ofNullable(dueDate);
         }
-
-
 
         public void setPriority(Priority priority) {
             this.priority = priority;
@@ -272,10 +297,113 @@ public class ChangeReminderCommand extends UndoableCommand {
     }
 }
 ```
+###### /java/seedu/address/logic/commands/EmailCommand.java
+``` java
+/**
+ * Sends an Email to all contacts with the specified tag.
+ */
+public class EmailCommand extends Command {
+
+
+    public static final String characterToAppendAfterEachWordInSubjectLine = "+";
+    public static final String COMMAND_WORD = "email";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Opens the default browser on the desktop with the Gmail "
+            + "compose box open and specific details pre-filled.\n"
+            + "Parameters: " + PREFIX_TAG + "OnTAG (must match tag) \n"
+            + PREFIX_SUBJECT + "Subject of the email."
+            + "Example: " + COMMAND_WORD + " t/friends s/birthday.";
+
+    public static final String MESSAGE_EMAIL_SUCCESS = "Email has been sent!";
+    public static final String MESSAGE_NOT_EXISTING_TAGS = "The tag provided is invalid. Please check again.";
+
+    private final String tag;
+    private final String subject;
+    private String modifiedSubject;
+
+    private static final Logger logger = LogsCenter.getLogger(EmailCommand.class);
+
+    /**
+     * Emails a group of person with the same tag description and a given subject body.
+     * @param tag     of the persons to whom the email has to be sent
+     * @param subject the subject line of th email
+     */
+
+    public EmailCommand(String tag, String subject) {
+        requireNonNull(tag);
+        requireNonNull(subject);
+
+        this.tag = tag;
+        this.subject = subject;
+    }
+
+    @Override
+    public CommandResult execute() throws CommandException {
+
+        try {
+            boolean isExistingTagName = checkIfExistingTagName(tag);
+
+            if (!isExistingTagName) {
+                logger.warning("Incorrect tags entered");
+                throw new CommandException(String.format(MESSAGE_NOT_EXISTING_TAGS));
+            }
+            else {
+                logger.info("Processing subject line and executing");
+                modifiedSubject = getSubjectForBrowser(subject);
+                model.sendMailToContacts(tag, modifiedSubject, model.getFilteredPersonList());
+                return new CommandResult(MESSAGE_EMAIL_SUCCESS);
+            }
+        } catch (IOException io) {
+            logger.severe(StringUtil.getDetails(io));
+            throw new AssertionError("Invalid Input");
+        } catch (URISyntaxException ur) {
+            throw new AssertionError("urisyntax erro");
+        } catch (IllegalValueException ie) {
+            throw new AssertionError("Illegal values");
+        }
+
+
+    }
+    /**
+     * Gets subject with the '+' character appended after each word to match the URL requirements.
+     */
+    public String getSubjectForBrowser(String subject) {
+
+        String modifiedSubject = "";
+
+        for (int loopVariable = 0; loopVariable < subject.length(); loopVariable++) {
+            if (subject.charAt(loopVariable) == ' ') {
+                modifiedSubject = modifiedSubject + characterToAppendAfterEachWordInSubjectLine;
+            } else {
+                modifiedSubject = modifiedSubject + subject.charAt(loopVariable);
+            }
+        }
+        return modifiedSubject;
+    }
+
+    /**
+     * Checks whether a given tag exists in address book.
+     * @param tagName tag that is to be checked
+     */
+    public boolean checkIfExistingTagName(String tagName) {
+
+        for (Tag tag : model.getAddressBook().getTagList()) {
+            if (tag.tagName.equalsIgnoreCase(tagName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+}
+```
 ###### /java/seedu/address/logic/commands/FaceBookCommand.java
 ``` java
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -283,12 +411,11 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- *  Shows a person's address on Google Maps in browser
+ *  Shows a person's Facebook profile page in the browser panel.
  */
 public class FaceBookCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "facebook";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + " Shows the profile of the user whose"
             + " index is entered\n"
             + "Example: " + COMMAND_WORD + " 1 ";
@@ -297,9 +424,9 @@ public class FaceBookCommand extends UndoableCommand {
     public static final String MESSAGE_NO_USERNAME = "This Person has no Facebook username!\n";
 
     public final Index index;
+    private static final Logger logger = LogsCenter.getLogger(FaceBookCommand.class);
 
     public FaceBookCommand (Index index) {
-
         this.index = index;
     }
 
@@ -319,8 +446,10 @@ public class FaceBookCommand extends UndoableCommand {
         }
 
         try {
+            assert index.getZeroBased() >= 0;
             model.faceBook(personToShow);
         } catch (PersonNotFoundException pnfe) {
+            logger.warning("Person is missing");
             assert false : "The target person cannot be missing";
         }
 
@@ -337,21 +466,9 @@ public class FaceBookCommand extends UndoableCommand {
 ```
 ###### /java/seedu/address/logic/commands/PhotoCommand.java
 ``` java
-import java.io.IOException;
-
-import java.util.List;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.FileImage;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
-
 /**
- * Adds a photo of the person to the addressBook
+ * Adds a photo of the person referenced to by the index in Weaver.
+ * Deletes an existing photo of a person.
  */
 
 public class PhotoCommand extends UndoableCommand {
@@ -420,9 +537,10 @@ public class PhotoCommand extends UndoableCommand {
         }
     }
     /**
-     * Checks if the person has any photo to be deleted
+     * Returns tru if the person has any photo to be deleted else returns false.
      */
     public static boolean checkIfThereIsAnyPhotoToDelete(ReadOnlyPerson personToAddPhoto, String filePath) {
+
         if (personToAddPhoto.getImage().getFilePath().equals("") && filePath.equalsIgnoreCase("delete")) {
             return false;
         }
@@ -441,16 +559,8 @@ public class PhotoCommand extends UndoableCommand {
 ```
 ###### /java/seedu/address/logic/commands/RemoveReminderCommand.java
 ``` java
-import java.util.List;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.reminder.ReadOnlyReminder;
-import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
-
 /**
- * Deletes a reminder identified using it's last displayed index from the address book.
+ * Deletes a reminder identified using it's last displayed index from Weaver.
  */
 public class RemoveReminderCommand extends UndoableCommand {
 
@@ -464,6 +574,7 @@ public class RemoveReminderCommand extends UndoableCommand {
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder: %1$s";
 
     private final Index targetIndex;
+    private static final Logger logger = LogsCenter.getLogger(RemoveReminderCommand.class);
 
     public RemoveReminderCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -484,6 +595,7 @@ public class RemoveReminderCommand extends UndoableCommand {
         try {
             model.deleteReminder(reminderToDelete);
         } catch (ReminderNotFoundException pnfe) {
+            logger.severe(StringUtil.getDetails(pnfe));
             assert false : "The target reminder cannot be missing";
         }
 
@@ -500,10 +612,9 @@ public class RemoveReminderCommand extends UndoableCommand {
 ```
 ###### /java/seedu/address/logic/commands/SearchCommand.java
 ``` java
-import seedu.address.model.person.SearchContainsKeywordsPredicate;
-
 /**
- * Searches and lists all persons in address book whose name and DateOfBirth matches the argument keywords.
+ * Searches and lists all persons in address book whose name and DateOfBirth matches the argument keywords, that
+ * is persons with same name and DateOfBirth. This is to make the find command more powerful.
  * Keyword matching is case insensitive.
  */
 
@@ -517,12 +628,14 @@ public class SearchCommand extends Command {
             + "Example: " + COMMAND_WORD + " search n/ronak b/13.10.1997";
 
     private final SearchContainsKeywordsPredicate predicate;
+    private static final Logger logger = LogsCenter.getLogger(SearchCommand.class);
 
     public SearchCommand(SearchContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
     @Override
     public CommandResult execute() {
+        logger.info("Executing seacrh command!");
         model.updateFilteredPersonList(predicate);
         return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
     }
@@ -546,24 +659,8 @@ public class SearchCommand extends Command {
 ```
 ###### /java/seedu/address/logic/parser/AddReminderParser.java
 ``` java
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
-
-import java.util.stream.Stream;
-
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.AddReminder;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.reminder.DueDate;
-import seedu.address.model.reminder.Priority;
-import seedu.address.model.reminder.ReadOnlyReminder;
-import seedu.address.model.reminder.Reminder;
-import seedu.address.model.reminder.ReminderDetails;
-
 /**
- * Parses input arguments and creates a new AddReminderCommand object
+ * Parses the input arguments and creates a new AddReminderCommand object.
  */
 public class AddReminderParser implements Parser<AddReminder> {
 
@@ -573,6 +670,7 @@ public class AddReminderParser implements Parser<AddReminder> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddReminder parse(String args) throws ParseException {
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_REMINDER_DETAILS, PREFIX_REMINDER_DUE_DATE,
                         PREFIX_REMINDER_PRIORITY);
@@ -586,7 +684,6 @@ public class AddReminderParser implements Parser<AddReminder> {
             ReminderDetails details = ParserUtil.parseDetails(argMultimap.getValue(PREFIX_REMINDER_DETAILS)).get();
             Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_REMINDER_PRIORITY)).get();
             DueDate dueDate = ParserUtil.parseDueDate(argMultimap.getValue(PREFIX_REMINDER_DUE_DATE)).get();
-
             ReadOnlyReminder reminder = new Reminder(details, priority , dueDate);
 
             return new AddReminder(reminder);
@@ -607,21 +704,9 @@ public class AddReminderParser implements Parser<AddReminder> {
 ```
 ###### /java/seedu/address/logic/parser/ChangeReminderCommandParser.java
 ``` java
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
-
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.ChangeReminderCommand;
-import seedu.address.logic.commands.ChangeReminderCommand.ChangeReminderDescriptor;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 
 /**
- * Parses input arguments and creates a new ChangeReminderCommand object
+ * Parses input arguments and creates a new ChangeReminderCommand object.
  */
 public class ChangeReminderCommandParser implements Parser<ChangeReminderCommand> {
 
@@ -653,6 +738,7 @@ public class ChangeReminderCommandParser implements Parser<ChangeReminderCommand
                     .ifPresent(changeReminderDescriptor::setPriority);
             ParserUtil.parseDueDate(argMultimap.getValue(PREFIX_REMINDER_DUE_DATE))
                     .ifPresent(changeReminderDescriptor::setDueDate);
+
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }
@@ -746,23 +832,15 @@ public class EmailCommandParser implements Parser<EmailCommand> {
 ```
 ###### /java/seedu/address/logic/parser/FaceBookCommandParser.java
 ``` java
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.FaceBookCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 /**
- * Parses input arguments and creates a new MapCommand object
+ * Parses input arguments and creates a new FacebookCommand object
  */
 public class FaceBookCommandParser implements Parser<FaceBookCommand> {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index entered is invalid";
-
+    private static final Logger logger = LogsCenter.getLogger(FaceBookCommand.class);
     /**
-     * Parses the given {@code String} of arguments in the context of the MapCommand
-     * and returns an MapCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FacebookCommand
+     * and returns an FacebookCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FaceBookCommand parse(String args) throws ParseException {
@@ -775,12 +853,13 @@ public class FaceBookCommandParser implements Parser<FaceBookCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE));
             }
 
-
+            assert Keywords.length == 1;
             Index index = ParserUtil.parseIndex(Keywords[0]);
 
             return new FaceBookCommand(index);
 
         } catch (IllegalValueException ive) {
+            logger.info("You have entered and invalid index");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FaceBookCommand.MESSAGE_USAGE));
         }
@@ -789,18 +868,6 @@ public class FaceBookCommandParser implements Parser<FaceBookCommand> {
 ```
 ###### /java/seedu/address/logic/parser/PhotoCommandParser.java
 ``` java
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_IMAGE;
-
-import java.io.File;
-
-import java.util.stream.Stream;
-
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.PhotoCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 /**
  * Parses input arguments and creates a new PhotoCommand object
  */
@@ -811,8 +878,10 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
      * and returns an PhotoCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    private final Logger logger = LogsCenter.getLogger(PhotoCommandParser.class);
     public PhotoCommand parse(String args) throws ParseException {
 
+        logger.info("----------------[USER COMMAND][" + args + "]");
         String trimmedArgs = args.trim();
         String regex = "[\\s]+";
         String[] keywords = trimmedArgs.split(regex, 2);
@@ -823,12 +892,12 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE)
             );
         }
-
-        boolean isFileExists = checkIfFileExists(keywords[1]);
+        String inputPathForImage = keywords[1];
+        boolean isFileExists = checkIfFileExists(inputPathForImage);
         if (isFileExists) {
             try {
                 Index index = ParserUtil.parseIndex(keywords[0]);
-                return new PhotoCommand(index, (keywords[1]));
+                return new PhotoCommand(index, inputPathForImage);
             } catch (IllegalValueException ive) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhotoCommand.MESSAGE_USAGE));
@@ -841,16 +910,16 @@ public class PhotoCommandParser implements Parser<PhotoCommand> {
 
     }
     /**
-     * Checks if the number of arguments entered by the user are valid
+     * Returns true if the number of arguments entered is invalid.
      */
     public static boolean checkIfInvalidNumberOfArgs(String [] keywords) {
-        if (keywords.length < 2) {
+        if (keywords.length != 2) {
             return true;
         }
         return false;
     }
     /**
-     * Checks if the image exists in the given filepath
+     * Returns true if the image is present in the path entered, else returns false.
      */
     public static boolean checkIfFileExists(String inputFilePath) {
 
@@ -975,26 +1044,35 @@ public class SearchCommandParser implements Parser<SearchCommand> {
 ```
 ###### /java/seedu/address/model/AddressBook.java
 ``` java
-    private final UniqueReminderList reminders;
-```
-###### /java/seedu/address/model/AddressBook.java
-``` java
-        reminders = new UniqueReminderList();
-```
-###### /java/seedu/address/model/AddressBook.java
-``` java
     public void setReminders(List<? extends ReadOnlyReminder> reminders) throws DuplicateReminderException {
         this.reminders.setReminders(reminders);
     }
 ```
 ###### /java/seedu/address/model/AddressBook.java
 ``` java
+    public void resetData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+        try {
+            setReminders(newData.getReminderList());
+            setPersons(newData.getPersonList());
+        } catch (DuplicatePersonException e) {
+            assert false : "AddressBooks should not have duplicate persons";
+        } catch (DuplicateReminderException ee) {
+            assert false : "AddressBooks should not have duplicate reminders";
+        }
+
+        setTags(new HashSet<>(newData.getTagList()));
+        syncMasterTagListWith(persons);
+    }
+```
+###### /java/seedu/address/model/AddressBook.java
+``` java
     /**
      * Adds a reminder to the address book.
-     * @throws DuplicateReminderException if an equivalent person already exists.
+     * @throws DuplicateReminderException if an equivalent reminder already exists.
      */
-    public void addReminder(ReadOnlyReminder r) throws DuplicateReminderException {
-        Reminder newReminder = new Reminder(r);
+    public void addReminder(ReadOnlyReminder reminder) throws DuplicateReminderException {
+        Reminder newReminder = new Reminder(reminder);
         reminders.add(newReminder);
     }
 ```
@@ -1040,152 +1118,161 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         return reminders.asObservableList();
     }
 ```
-###### /java/seedu/address/model/person/FacebookUsername.java
+###### /java/seedu/address/model/ModelManager.java
 ``` java
-import static java.util.Objects.requireNonNull;
-
-import seedu.address.commons.exceptions.IllegalValueException;
-
-/**
- * Represents a Person's username on Facebook
- */
-public class FacebookUsername {
-
-    public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Person usernames should be the username of the person on Facebook";
-
-    /*
-     * The first character of the username must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-
-
-    public final String username;
-
-    /**
-     * Validates given username
-     *
-     * @throws IllegalValueException if given name string is invalid.
-     */
-    public FacebookUsername(String username) throws IllegalValueException {
-        requireNonNull(username);
-        String trimmedName = username.trim();
-        this.username = trimmedName;
-    }
-
-
+    /** Raises an event to indicate the model has changed */
     @Override
-    public String toString() {
-        return username;
+    public synchronized void clearBrowserPanel() {
+        raise(new ClearBrowserPanelEvent());
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && this.username.equals(((FacebookUsername) other).username)); // state check
+    public synchronized void sendMailToContacts(String tag, String subject, List<ReadOnlyPerson> lastShownList) throws
+            IOException, URISyntaxException, IllegalValueException {
+
+        String appendEmailAddress = getAppendedEmailIdOfContacts(tag, lastShownList);
+        openUpDesktopBrowser(appendEmailAddress, subject);
     }
 
-}
-```
-###### /java/seedu/address/model/person/ReadOnlyPerson.java
-``` java
-    ObjectProperty<DateOfBirth> dateOfBirthProperty();
-    DateOfBirth getDateOfBirth();
-```
-###### /java/seedu/address/model/person/ReadOnlyPerson.java
-``` java
-    ObjectProperty<FileImage> imageProperty();
-    FileImage getImage();
-    ObjectProperty<FacebookUsername> usernameProperty();
-    FacebookUsername getUsername();
-```
-###### /java/seedu/address/model/person/SearchContainsKeywordsPredicate.java
-``` java
-import java.util.List;
-import java.util.function.Predicate;
+    public String getAppendedEmailIdOfContacts(String tag, List<ReadOnlyPerson> lastShownList) throws
+            IllegalValueException {
 
-import seedu.address.commons.util.StringUtil;
+        ReadOnlyPerson getPerson;
+        int loopVariable = 0;
+        String appendEmailAddress = "";
 
-/**
- * Tests that a {@code ReadOnlyPerson}'s {@code Name} matches any of the keywords given.
- */
+        while (loopVariable < lastShownList.size()) {
+            getPerson = lastShownList.get(loopVariable);
 
-public class SearchContainsKeywordsPredicate implements Predicate<ReadOnlyPerson> {
-
-    private final List<String> keywords;
-
-    public SearchContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+            if (getPerson.getTags().contains(new Tag(tag))) {
+                appendEmailAddress = appendEmailAddress + getPerson.getEmail().toString() + "+";
+            }
+            loopVariable++;
+        }
+        return appendEmailAddress;
     }
 
-    @Override
-    public boolean test (ReadOnlyPerson person) {
+    /** Opens the default browser in your desktop */
+    private void openUpDesktopBrowser(String appendEmailAddress, String subject) throws IOException,
+            URISyntaxException {
 
-        if (keywords.size() <= 1) {
-            return false;
+        appendEmailAddress = appendEmailAddress.substring(0, appendEmailAddress.length() - 1);
+
+        String Gmail_Url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + appendEmailAddress + "&su=" + subject;
+
+        if (Desktop.isDesktopSupported()) {
+
+            Desktop.getDesktop().browse(new URI(Gmail_Url));
         }
 
+    }
 
-        return StringUtil.containsWordIgnoreCase(person.getName().fullName, keywords.get(0))
-               && StringUtil.containsWordIgnoreCase(person.getDateOfBirth().date, keywords.get(1));
+    /** Raises an facebook event to indicate the model has changed */
+    @Override
+    public synchronized void faceBook(ReadOnlyPerson person) throws PersonNotFoundException {
+
+        raise(new FaceBookEvent(person));
+    }
+```
+###### /java/seedu/address/model/ModelManager.java
+``` java
+    @Override
+    public synchronized void addReminder(ReadOnlyReminder target) throws DuplicateReminderException {
+
+        addressBook.addReminder(target);
+        updateFilteredReminderList(PREDICATE_SHOW_ALL_REMINDERS);
+        indicateAddressBookChanged();
+
+    }
+    @Override
+    public synchronized void deleteReminder(ReadOnlyReminder target) throws ReminderNotFoundException {
+
+        addressBook.removeReminder(target);
+        indicateAddressBookChanged();
+
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof SearchContainsKeywordsPredicate // instanceof handles nulls
-                && this.keywords.equals(((SearchContainsKeywordsPredicate) other).keywords)); // state check
+    public synchronized void addPhotoPerson(ReadOnlyPerson person, String filePath, Index targetIndex)
+            throws PersonNotFoundException, IOException, IllegalValueException {
+
+
+        person.imageProperty().setValue(new FileImage(filePath));
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
+
     }
-}
 ```
-###### /java/seedu/address/model/ReadOnlyAddressBook.java
+###### /java/seedu/address/model/ModelManager.java
+``` java
+    @Override
+    public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder)
+            throws DuplicateReminderException, ReminderNotFoundException {
+        requireAllNonNull(target, changedReminder);
+
+        addressBook.updateReminder(target, changedReminder);
+        indicateAddressBookChanged();
+    }
+```
+###### /java/seedu/address/model/ModelManager.java
 ``` java
     /**
-     * Returns an unmodifiable view of the reminders list.
-     * This list will not contain any duplicate reminders.
+     * Returns an unmodifiable view of the list of {@code ReadOnlyReminder} backed by the internal list of
+     * {@code weaver}
      */
-
-    ObservableList<ReadOnlyReminder> getReminderList();
+    @Override
+    public ObservableList<ReadOnlyReminder> getFilteredReminderList() {
+        return FXCollections.unmodifiableObservableList(filteredReminders);
+    }
 ```
-###### /java/seedu/address/model/reminder/DueDate.java
+###### /java/seedu/address/model/ModelManager.java
 ``` java
-import seedu.address.commons.exceptions.IllegalValueException;
-
+    @Override
+    public void updateFilteredReminderList(Predicate<ReadOnlyReminder> predicate) {
+        requireNonNull(predicate);
+        filteredReminders.setPredicate(predicate);
+    }
+```
+###### /java/seedu/address/model/person/DateOfBirth.java
+``` java
 /**
- * Represents a Reminders DueDate in the address book.
+ * Represents a Person's DateOfBirth in the address book.
  */
 
-public class DueDate {
+public class DateOfBirth {
 
     /**
-     * Represents a Reminders DueDate
-     * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+     * Represents a Person's Date Of birth
+     * Guarantees: immutable; is valid as declared in {@link #isValidBirthday(String)}
      */
 
-    public static final int DAYS_IN_FEBRUARY = 28;
-    public static final String DUE_DATE_VALIDATION_REGEX = "(0[1-9]|[1-9]|1[0-9]|2[0-9]|3[01])[///./-]"
+    public static final String BIRTHDAY_VALIDATION_REGEX = "(0[1-9]|[1-9]|1[0-9]|2[0-9]|3[01])[///./-]"
             + "(0[1-9]|1[0-2]|[1-9])[///./-](19|20)[0-9][0-9]";
 
+
+    public static final int DAYS_IN_FEBRUARY = 28;
     public static final int FEBRUARY = 2;
     public static final int FIRST_INDEX = 0;
-
+    public static final int INVALID_NUMBER_OF_DAYS = -1;
     public static final int LAST_INDEX = 1;
-    public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Due Date must be a Valid Date and in the following format: \n"
-                    + "'.' and '-' can be used as separators. \n";
 
     public static final int [] MONTHS_WITH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+    public static final String MESSAGE_BIRTHDAY_CONSTRAINTS =
+            "Date of Birth must be a Valid Date that is days should be less than 32 , months should be less"
+                    + " than 12\n.For the month of February make sure days are less than 29 unless it is a leap year.\n"
+                    + "The following format should be followed: \n"
+            + "'.' and '-' can be used as separators. \n";
+
     public final String date;
+    private static final Logger logger = LogsCenter.getLogger(DateOfBirth.class);
 
 
-
-    public DueDate(String date) throws IllegalValueException {
+    public DateOfBirth(String date) throws IllegalValueException {
 
         String trimmedDate;
-        if (!isValidDate(date)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+        if (!isValidBirthday(date)) {
+            throw new IllegalValueException(MESSAGE_BIRTHDAY_CONSTRAINTS);
         }
         if (!date.equals("")) {
             trimmedDate = date.trim();
@@ -1195,26 +1282,30 @@ public class DueDate {
         }
 
     }
-    /**
-     * Returns true if a given string is a valid person birthday.
-     */
-    public static boolean isValidDate(String dueDate) {
-
-        String trimmedDate = dueDate.trim();
-        if (trimmedDate.isEmpty()) {
-            return false;
-        }
-        if (!trimmedDate.matches(DUE_DATE_VALIDATION_REGEX)) {
-            return false;
-        }
-        boolean isValidDate = checkIfValidDate(dueDate);
-
-        return isValidDate;
-
+    @Override
+    public String toString() {
+        return date;
     }
 
     /**
-     * Checks if number of days in a given month are valid
+     * Returns true if a given string is a valid person birthday.
+     */
+    public static boolean isValidBirthday(String birthday) {
+
+        String trimmedBirthday = birthday.trim();
+
+        if (trimmedBirthday.isEmpty()) {
+            return true;
+        }
+        if (!trimmedBirthday.matches(BIRTHDAY_VALIDATION_REGEX)) {
+            return false;
+        }
+        boolean isValidDate = checkIfValidDate(birthday);
+
+        return isValidDate;
+    }
+    /**
+     * Returns true if the date has invalid conditions else returns false
      */
     public static boolean checkIfValidDate(String date) {
 
@@ -1246,23 +1337,21 @@ public class DueDate {
                 return false;
             }
         }
+        logger.info("The date has valid number of days in February!");
         return true;
     }
     /**
-     * Checks if number of days in a given month are valid
+     * Returns true if the number of days in a month are valid else returns false.
      */
     public static boolean checkIfValidNumberOfDaysInMonth(int month, int day) {
 
         if (MONTHS_WITH_DAYS[month - 1] < day && month != FEBRUARY) {
             return false;
         }
-
         return true;
-
     }
-
     /**
-     * Checks if it is a leap year
+     * Returns true if it is a leap year else returns false.
      */
     public static boolean checkIfLeapYear(int yearNumber) {
 
@@ -1275,6 +1364,7 @@ public class DueDate {
     public static int getYearNumber(int lastIndexOfSeparator, String date) {
 
         String year = date.substring(lastIndexOfSeparator + 1);
+        assert Integer.parseInt(year) > 0;
         return Integer.parseInt(year);
     }
     public static int getMonthNumber(int firstIndexOfSeparator, int lastIndexOfSeparator, String date) {
@@ -1287,10 +1377,13 @@ public class DueDate {
         String dayNumber = date.substring(0, firstIndexOfSeparator);
         return Integer.parseInt(dayNumber);
     }
+    /**
+     * Returns the index position of the separator '-' or '.' .
+     */
 
     public static int getIndexOfSeparator(String date, int position) {
 
-        int storesIndex = -1;
+        int storesIndex = INVALID_NUMBER_OF_DAYS;
         for (int loopVariable = 0; loopVariable < date.length(); loopVariable++) {
 
             if (date.charAt(loopVariable) == '.' || date.charAt(loopVariable) == '-') {
@@ -1301,6 +1394,445 @@ public class DueDate {
                 }
             }
         }
+        return storesIndex;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof DateOfBirth
+                && this.date.equals(((DateOfBirth) other).date));
+    }
+
+}
+```
+###### /java/seedu/address/model/person/EmailSubject.java
+``` java
+/**
+ * Represents an Email's Subject line.
+ * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
+ */
+public class EmailSubject {
+
+    public static final String MESSAGE_NAME_CONSTRAINTS =
+            "Subject lines should only contain alphanumeric characters and spaces, and it should not be blank.";
+
+    /*
+     * The first character of the subject must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
+    public final String subject;
+
+    /**
+     * Validates given subject
+     *
+     * @throws IllegalValueException if given subject string is invalid.
+     */
+    public EmailSubject(String subject) throws IllegalValueException {
+
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!isValidSubject(trimmedSubject)) {
+            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+        }
+        this.subject = subject;
+    }
+
+    /**
+     * Returns true if a given string is a valid email subject.
+     */
+    public static boolean isValidSubject(String test) {
+        return test.matches(NAME_VALIDATION_REGEX);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EmailSubject // instanceof handles nulls
+                && this.subject.equals(((EmailSubject) other).subject)); // state check
+    }
+
+    @Override
+    public String toString() {
+        return subject;
+    }
+}
+```
+###### /java/seedu/address/model/person/FacebookUsername.java
+``` java
+/**
+ * Represents a Person's username on Facebook.
+ */
+public class FacebookUsername {
+
+    /*
+     * The first character of the username must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public final String username;
+
+    public FacebookUsername(String username) throws IllegalValueException {
+        requireNonNull(username);
+        String trimmedName = username.trim();
+        this.username = trimmedName;
+    }
+    @Override
+    public String toString() {
+        return username;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Name // instanceof handles nulls
+                && this.username.equals(((FacebookUsername) other).username)); // state check
+    }
+
+}
+```
+###### /java/seedu/address/model/person/FileImage.java
+``` java
+/**
+ * Represents a Person's File Path of the image he/she is assigned
+ * Guarantees: immutable; is valid as declared in {@link #isValidImage(String)}
+ */
+public class FileImage {
+
+    public static final String MESSAGE_IMAGE_CONSTRAINTS =
+            "File Path must be correctly entered, that is the image must exist in the path specified\n"
+            + "For example: src/resources/images/clock.png";
+
+    public final String filePath;
+
+    public FileImage(String filePath) throws IllegalValueException {
+        requireNonNull(filePath);
+        if (!isValidImage(filePath)) {
+            throw new IllegalValueException(MESSAGE_IMAGE_CONSTRAINTS);
+        }
+        String trimmedName = filePath.trim();
+
+        this.filePath = trimmedName;
+    }
+
+    /**
+     * Returns true if a given string is a valid Image path.
+     */
+    public static boolean isValidImage(String filePath) {
+
+        String trimmedPath = filePath.trim();
+
+        if (trimmedPath.isEmpty()) {
+            return true;
+        }
+        File file = new File(trimmedPath);
+        return file.exists();
+
+    }
+
+    @Override
+    public String toString() {
+        return filePath;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FileImage // instanceof handles nulls
+                && this.filePath.equals(((FileImage) other).filePath)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return filePath.hashCode();
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+
+}
+```
+###### /java/seedu/address/model/person/Person.java
+``` java
+    @Override
+    public FileImage getImage() {
+        return image.get();
+    }
+
+    public ObjectProperty<FileImage> imageProperty() {
+        return image;
+    }
+
+    public void setDateOfBirth(DateOfBirth date) {
+        this.date.set(requireNonNull(date));
+    }
+
+    public void setImage(FileImage image) {
+        this.image.set(requireNonNull(image));
+    }
+    @Override
+    public ObjectProperty<DateOfBirth> dateOfBirthProperty() {
+        return date;
+    }
+
+    @Override
+    public  DateOfBirth getDateOfBirth() {
+        return date.get();
+    }
+
+    public void setUsername(FacebookUsername username) {
+        this.username.set(requireNonNull(username));
+    }
+    @Override
+    public ObjectProperty<FacebookUsername> usernameProperty() {
+        return username;
+    }
+```
+###### /java/seedu/address/model/person/SearchContainsKeywordsPredicate.java
+``` java
+/**
+ * Tests that a {@code ReadOnlyPerson}'s {@code Name} and {@code DateOFbirth} matches the keywords given.
+ */
+
+public class SearchContainsKeywordsPredicate implements Predicate<ReadOnlyPerson> {
+
+    private final List<String> keywords;
+
+    public SearchContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    private static final Logger logger = LogsCenter.getLogger(SearchContainsKeywordsPredicate.class);
+    @Override
+    public boolean test (ReadOnlyPerson person) {
+
+        if (keywords.size() <= 1) {
+            logger.warning("The number of arguements entered do not match the command format");
+            return false;
+        }
+
+        return StringUtil.containsWordIgnoreCase(person.getName().fullName, keywords.get(0))
+               && StringUtil.containsWordIgnoreCase(person.getDateOfBirth().date, keywords.get(1));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SearchContainsKeywordsPredicate // instanceof handles nulls
+                && this.keywords.equals(((SearchContainsKeywordsPredicate) other).keywords)); // state check
+    }
+}
+```
+###### /java/seedu/address/model/ReadOnlyAddressBook.java
+``` java
+    /**
+     * Returns an unmodifiable view of the reminders list.
+     * This list will not contain any duplicate reminders.
+     */
+
+    ObservableList<ReadOnlyReminder> getReminderList();
+```
+###### /java/seedu/address/model/reminder/DetailsContainsKeywordsPredicate.java
+``` java
+/**
+ * Tests that a {@code ReadOnlyReminder}'s {@code Name} matches any of the keywords given.
+ */
+public class DetailsContainsKeywordsPredicate implements Predicate<ReadOnlyReminder> {
+    private final List<String> keywords;
+
+    public DetailsContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    @Override
+    public boolean test(ReadOnlyReminder reminder) {
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(reminder.getDetails().details, keyword));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DetailsContainsKeywordsPredicate // instanceof handles nulls
+                && this.keywords.equals(((DetailsContainsKeywordsPredicate) other).keywords)); // state check
+    }
+
+}
+```
+###### /java/seedu/address/model/reminder/DueDate.java
+``` java
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
+
+import java.util.logging.Logger;
+
+/**
+ * Represents a Reminders DueDate in Weaver.
+ */
+
+public class DueDate {
+
+    /**
+     * Represents a Reminders DueDate
+     * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+     */
+
+    public static final int DAYS_IN_FEBRUARY = 28;
+    public static final String DUE_DATE_VALIDATION_REGEX = "(0[1-9]|[1-9]|1[0-9]|2[0-9]|3[01])[///./-]"
+            + "(0[1-9]|1[0-2]|[1-9])[///./-](19|20)[0-9][0-9]";
+
+    public static final int FEBRUARY = 2;
+    public static final int FIRST_INDEX = 0;
+    public static final int INVALID_INDEX_OF_SEPARATOR = -1;
+    public static final int LAST_INDEX = 1;
+    public static final String MESSAGE_DATE_CONSTRAINTS =
+            "Due Date must be a Valid Date and in the following format: \n"
+                    + "'.' and '-' can be used as separators. \n";
+
+    public static final int [] MONTHS_WITH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    public final String date;
+    private static final Logger logger = LogsCenter.getLogger(DueDate.class);
+
+
+
+    public DueDate(String date) throws IllegalValueException {
+
+        String trimmedDate;
+        String nullValueOfDate = "";
+        if (!isValidDate(date)) {
+            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+        }
+        if (!date.equals(nullValueOfDate)) {
+            trimmedDate = date.trim();
+            this.date = trimmedDate;
+        } else {
+            this.date = nullValueOfDate;
+        }
+
+    }
+    /**
+     * Returns true if a given string is a valid person birthday.
+     */
+    public static boolean isValidDate(String dueDate) {
+
+        String trimmedDate = dueDate.trim();
+        if (trimmedDate.isEmpty()) {
+            return false;
+        }
+        if (!trimmedDate.matches(DUE_DATE_VALIDATION_REGEX)) {
+            logger.info("Invalid format of date.");
+            return false;
+        }
+        boolean isValidDate = checkIfValidDate(dueDate);
+
+        return isValidDate;
+
+    }
+
+    /**
+     * Checks if number of days in a given month are valid
+     * Returns true if the given date is valid, that is has valid number of days in a month.
+     */
+    public static boolean checkIfValidDate(String date) {
+
+
+        int lastIndexOfSeparator = getIndexOfSeparator(date, LAST_INDEX);
+        int firstIndexOfSeparator = getIndexOfSeparator(date, FIRST_INDEX);
+        int yearNumber = getYearNumber(lastIndexOfSeparator, date);
+        int monthNumber = getMonthNumber(firstIndexOfSeparator, lastIndexOfSeparator, date);
+        boolean isLeapYear = checkIfLeapYear(yearNumber);
+        int dayNumber = getDayNumber(firstIndexOfSeparator, date);
+        boolean isValidDateOfFebruary = checkIfValidDateOfFebruary(
+                date, monthNumber, yearNumber, dayNumber, isLeapYear);
+        boolean isValidNumberOfDaysInMonth = checkIfValidNumberOfDaysInMonth(monthNumber, dayNumber);
+
+        if (isValidDateOfFebruary && isValidNumberOfDaysInMonth) {
+            return true;
+        }
+        return false;
+
+    }
+    /**
+     * Returns true if number of days in February are valid else return false.
+     */
+    public static boolean checkIfValidDateOfFebruary(String date, int month, int year, int day, boolean isLeapYear) {
+
+        if (month == FEBRUARY) {
+
+            if (isLeapYear && day > (DAYS_IN_FEBRUARY + 1) || (!isLeapYear && day > DAYS_IN_FEBRUARY)) {
+                logger.warning("Invalid number of days in February");
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * Returns true number of number of days in a month are valid else returns false.
+     */
+    public static boolean checkIfValidNumberOfDaysInMonth(int month, int day) {
+
+        if (MONTHS_WITH_DAYS[month - 1] < day && month != FEBRUARY) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if year is a leap year.
+     */
+    public static boolean checkIfLeapYear(int yearNumber) {
+
+        if (yearNumber % 400 == 0 || (yearNumber % 4 == 0 && yearNumber % 100 != 0)) {
+            return true;
+        }
+        return false;
+    }
+    /**
+     * Returns the year number in the date.
+     */
+    public static int getYearNumber(int lastIndexOfSeparator, String date) {
+
+        String year = date.substring(lastIndexOfSeparator + 1);
+        return Integer.parseInt(year);
+    }
+    /**
+     * Returns the month number in the date.
+     */
+    public static int getMonthNumber(int firstIndexOfSeparator, int lastIndexOfSeparator, String date) {
+
+        String month = date.substring(firstIndexOfSeparator + 1, lastIndexOfSeparator);
+        return Integer.parseInt(month);
+    }
+    /**
+     * Returns the day number in the date.
+     */
+    public static int getDayNumber(int firstIndexOfSeparator, String date) {
+
+        String dayNumber = date.substring(0, firstIndexOfSeparator);
+        return Integer.parseInt(dayNumber);
+    }
+    /**
+     * Returns the index of the separator '-' or '.' depending on the position.
+     */
+
+    public static int getIndexOfSeparator(String date, int position) {
+
+        int storesIndex = INVALID_INDEX_OF_SEPARATOR;
+        for (int loopVariable = 0; loopVariable < date.length(); loopVariable++) {
+
+            if (date.charAt(loopVariable) == '.' || date.charAt(loopVariable) == '-') {
+                storesIndex = loopVariable;
+
+                if (position == FIRST_INDEX) {
+                    break;
+                }
+            }
+        }
+        assert storesIndex > INVALID_INDEX_OF_SEPARATOR;
         return storesIndex;
     }
 
@@ -1345,12 +1877,8 @@ public class ReminderNotFoundException extends Exception {}
 ```
 ###### /java/seedu/address/model/reminder/Priority.java
 ``` java
-import static java.util.Objects.requireNonNull;
-
-import seedu.address.commons.exceptions.IllegalValueException;
-
 /**
- * Represents a Reminders priority level
+ * Represents a Reminders priority level, which can be either high, medium or low.
  */
 
 public class Priority {
@@ -1386,7 +1914,7 @@ public class Priority {
     }
 
     /**
-     * Get the priority Level of Reminder
+     * Returns the priority Level of Reminder.
      */
     public String getPriority() {
         return priority;
@@ -1439,7 +1967,7 @@ public interface ReadOnlyReminder {
     }
 
     /**
-     * Formats the person as text, showing all contact details.
+     * Formats and returns the reminder as text, showing all reminder details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
@@ -1456,16 +1984,8 @@ public interface ReadOnlyReminder {
 ```
 ###### /java/seedu/address/model/reminder/Reminder.java
 ``` java
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.util.Objects;
-
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-
 /**
- * Represents a Person in the address book.
+ * Represents a Reminder in the Weaver.
  * Guarantees: details are present and not null, field values are validated.
  */
 
@@ -1557,10 +2077,6 @@ public class Reminder implements ReadOnlyReminder {
 ```
 ###### /java/seedu/address/model/reminder/ReminderDetails.java
 ``` java
-import static java.util.Objects.requireNonNull;
-
-import seedu.address.commons.exceptions.IllegalValueException;
-
 /**
  * Represents a Reminder's details
  * Guarantees: immutable; is valid as declared in {@link #isValidDetail(String)}
@@ -1621,19 +2137,6 @@ public class ReminderDetails {
 ```
 ###### /java/seedu/address/model/reminder/UniqueReminderList.java
 ``` java
-import static java.util.Objects.requireNonNull;
-
-import java.util.Iterator;
-import java.util.List;
-
-import org.fxmisc.easybind.EasyBind;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.reminder.exceptions.DuplicateReminderException;
-import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
-
 /**
  * A list of reminders that enforces uniqueness between its elements and does not allow nulls.
  *
@@ -1683,7 +2186,6 @@ public class UniqueReminderList implements Iterable<Reminder> {
         if (index == -1) {
             throw new ReminderNotFoundException();
         }
-
         if (!target.equals(changedPerson) && internalList.contains(changedPerson)) {
             throw new DuplicateReminderException();
         }
@@ -1745,15 +2247,6 @@ public class UniqueReminderList implements Iterable<Reminder> {
 ```
 ###### /java/seedu/address/storage/XmlAdaptedReminder.java
 ``` java
-import javax.xml.bind.annotation.XmlElement;
-
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.reminder.DueDate;
-import seedu.address.model.reminder.Priority;
-import seedu.address.model.reminder.ReadOnlyReminder;
-import seedu.address.model.reminder.Reminder;
-import seedu.address.model.reminder.ReminderDetails;
-
 /**
  * JAXB-friendly version of the Reminder.
  */
@@ -1829,24 +2322,97 @@ public class XmlAdaptedReminder {
         return FXCollections.unmodifiableObservableList(reminders);
     }
 ```
+###### /java/seedu/address/ui/BrowserPanel.java
+``` java
+    /**
+     * Loads a default HTML file with a background that matches the general theme when the clear command is executed.
+     */
+    private void loadDefaultPage() {
+        try {
+
+            URL defaultPage = new URL(DEFAULT_PAGE);
+            loadPage(defaultPage.toExternalForm());
+
+        } catch (MalformedURLException e) {
+            logger.info("Invalid URL");
+        }
+
+    }
+
+    private void loadDeafultPageBrowser() {
+
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFUALT_PAGE_OF_BROWSER);
+        loadPage(defaultPage.toExternalForm());
+    }
+```
+###### /java/seedu/address/ui/BrowserPanel.java
+``` java
+    @Subscribe
+    private void handleClearCommandExecutionEvent (ClearBrowserPanelEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadDeafultPageBrowser();
+    }
+```
+###### /java/seedu/address/ui/BrowserPanel.java
+``` java
+    /**
+     * Shows Facebook profile picture of user
+     */
+    public void loadPersonFaceBookPage(ReadOnlyPerson person) throws ParseException {
+
+        String url = FACEBOOK_PROFILE_PAGE + person.getUsername().toString();
+        loadPage(url);
+
+    }
+
+    @Subscribe
+    public void handleFaceBookEvent(FaceBookEvent event) throws ParseException {
+
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        loadPersonFaceBookPage(event.getPerson());
+    }
+}
+```
+###### /java/seedu/address/ui/PersonCard.java
+``` java
+    /**
+     * Binds a photo to a persons PersonCard.
+     */
+    public void assignImageToPerson(String filePath) throws ParseException {
+
+        String url;
+        String Message_Image_Removed = "The image may have been removed from"
+                + " the previous location!";
+
+        if (filePath.equals("")) {
+            url = "/images/user.png";
+            Image Display = new Image(url);
+            image.setImage(Display);
+
+        } else {
+            url = filePath + "";
+            File file = new File(url);
+            boolean isFileExists = file.exists();
+
+            if (!isFileExists) {
+                url = "/images/address_book_32.png";
+                Image Display = new Image(url);
+                image.setImage(Display);
+                throw new ParseException(
+                            String.format(Message_Image_Removed, PhotoCommand.MESSAGE_USAGE)
+                    );
+            }
+            else {
+                Image display = new Image(file.toURI().toString());
+                image.setImage(display);
+            }
+
+        }
+    }
+```
 ###### /java/seedu/address/ui/ReminderCard.java
 ``` java
-import static seedu.address.model.font.FontSize.getAssociateFxFontSizeString;
-
-import java.util.Random;
-
-import com.google.common.eventbus.Subscribe;
-
-import javafx.beans.binding.Bindings;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-
-import seedu.address.commons.events.ui.ChangeFontSizeEvent;
-import seedu.address.model.font.FontSize;
-import seedu.address.model.reminder.ReadOnlyReminder;
-
 //import javax.swing.text.html.ImageView;
 
 
@@ -1863,10 +2429,7 @@ public class ReminderCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-
 
     public final ReadOnlyReminder reminder;
 
@@ -1924,50 +2487,9 @@ public class ReminderCard extends UiPart<Region> {
         return id.getText().equals(card.id.getText())
                 && reminder.equals(card.reminder);
     }
-
-    @Subscribe
-    private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
-        setFontSize(event.getFontSize());
-        //setFontSizeForAllImages(event.getFontSize());
-    }
-
-    private void setFontSize(String newFontSize) {
-        assert (FontSize.isValidFontSize(newFontSize));
-
-        String fxFormatFontSize = getAssociateFxFontSizeString(newFontSize);
-        setFontSizeForAllAttributesExceptTag(fxFormatFontSize);
-    }
-
-
-    private void setFontSizeForAllAttributesExceptTag(String fontSize) {
-        about.setStyle(fontSize);
-        id.setStyle(fontSize);
-        priority.setStyle(fontSize);
-        date.setStyle(fontSize);
-    }
-
-
-}
 ```
 ###### /java/seedu/address/ui/ReminderListPanel.java
 ``` java
-import java.util.logging.Logger;
-
-import org.fxmisc.easybind.EasyBind;
-
-import com.google.common.eventbus.Subscribe;
-
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.ReminderPanelSelectionChangedEvent;
-import seedu.address.model.reminder.ReadOnlyReminder;
-
 /**
  * Panel containing the list of reminders.
  */
@@ -2051,4 +2573,73 @@ public class ReminderListPanel extends UiPart<Region> {
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
                 </ImageView>
+```
+###### /resources/view/ReminderListCard.fxml
+``` fxml
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+            <padding>
+                <Insets bottom="5" left="15" right="5" top="5" />
+            </padding>
+            <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="130.0" spacing="5">
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <Label fx:id="id" alignment="BOTTOM_LEFT" styleClass="cell_big_label">
+                                    <minWidth>
+                                        <!-- Ensures that the label text is never truncated -->
+                                        <Region fx:constant="USE_PREF_SIZE" />
+                                    </minWidth>
+                                </Label>
+                                <Label fx:id="about" alignment="BOTTOM_LEFT" text="\$about" styleClass="cell_big_label"/>
+                            </children>
+                            <padding>
+                                <Insets bottom="0.0" left="3.0" right="5.0" top="5.0" />
+                            </padding>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="5.0" />
+                    </padding>
+                </VBox>
+
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="5">
+
+                <Label fx:id="priority" styleClass="cell_small_label" text="\$priority">
+                    <padding>
+                        <Insets top="1.0" left="10.0" />
+                    </padding>
+                </Label>
+                <padding>
+                    <Insets top="1.0" />
+                </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Label fx:id="date" styleClass="cell_small_label" text="\$date">
+                    <padding>
+                        <Insets top="5.0" left="4.0"/>
+                    </padding>
+                </Label>
+                <padding>
+                    <Insets top="5.0" left="4.5"/>
+                </padding>
+            </HBox>
+        </VBox>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+</HBox>
+```
+###### /resources/view/ReminderListPanel.fxml
+``` fxml
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <ListView fx:id="reminderListView" VBox.vgrow="ALWAYS" />
+</VBox>
 ```

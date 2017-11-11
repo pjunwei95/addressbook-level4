@@ -36,12 +36,14 @@ public class ModelManagerTest {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
     }
+    //@@author RonakLakhotia
     @Test
     public void getFilteredReminderList_modifyList_throwsUnsupportedOperationException() {
         ModelManager modelManager = new ModelManager();
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
     }
+
     @Test
     public void facebook_eventRaised() throws IOException {
         ModelManager model = new ModelManager();
@@ -52,6 +54,7 @@ public class ModelManagerTest {
         }
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof FaceBookEvent);
     }
+
     @Test
     public void clearBrowserPanel_eventRaised() throws IOException {
         ModelManager model = new ModelManager();
@@ -67,7 +70,7 @@ public class ModelManagerTest {
         String appendedMail = model.getAppendedEmailIdOfContacts("friends", lastShownList);
         assertFalse(appendedMail.equals(expectedAppendedMail));
     }
-
+    //@@author
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();

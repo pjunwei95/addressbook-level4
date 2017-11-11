@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -50,7 +51,8 @@ public class EditCommand extends UndoableCommand {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DOB + "DATE_OF_BIRTH] "
             + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_IMAGE + "IMAGE"
+            + "[" + PREFIX_IMAGE + "IMAGE] "
+            + "[" + PREFIX_USERNAME + "USERNAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -177,7 +179,7 @@ public class EditCommand extends UndoableCommand {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(this.name, this.phone, this.email, this.address, this.dateOfBirth,
-                    this.remark, this.image, this.tags);
+                    this.remark, this.image, this.username, this.tags);
         }
 
         public void setName(Name name) {
@@ -271,6 +273,7 @@ public class EditCommand extends UndoableCommand {
                     && getDateOfBirth().equals(e.getDateOfBirth())
                     && getRemark().equals(e.getRemark())
                     && getImage().equals(e.getImage())
+                    && getUsername().equals(e.getUsername())
                     && getTags().equals(e.getTags());
             //@@author
         }

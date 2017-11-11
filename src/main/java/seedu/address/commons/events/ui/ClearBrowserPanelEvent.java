@@ -1,9 +1,9 @@
 package seedu.address.commons.events.ui;
-
+//@@author RonakLakhotia
 import seedu.address.commons.events.BaseEvent;
 
 /**
- * To raise a ClearBrowserPanel Event
+ * Raises a ClearBrowserPanelEvent to clear the browser panel when the clear command is executed
  */
 public class ClearBrowserPanelEvent extends BaseEvent {
 

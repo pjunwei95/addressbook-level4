@@ -80,8 +80,9 @@ public class BrowserPanel extends UiPart<Region> {
 
     }
 
+    //@@author RonakLakhotia
     /**
-     * Loads a default HTML file with a background that matches the general theme.
+     * Loads a default HTML file with a background that matches the general theme when the clear command is executed.
      */
     private void loadDefaultPage() {
         try {
@@ -94,11 +95,13 @@ public class BrowserPanel extends UiPart<Region> {
         }
 
     }
+
     private void loadDeafultPageBrowser() {
 
         URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFUALT_PAGE_OF_BROWSER);
         loadPage(defaultPage.toExternalForm());
     }
+    //@@author
 
     /**
      * Frees resources allocated to the browser.
@@ -112,17 +115,19 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonPage(event.getNewSelection().person);
     }
+    //@@author RonakLakhotia
     @Subscribe
     private void handleClearCommandExecutionEvent (ClearBrowserPanelEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadDeafultPageBrowser();
     }
-
+    //@@author
     @Subscribe
     private void handleShowPersonAddressEvent(ShowPersonAddressEvent event) {
         loadPage(GOOGLE_MAP_SEARCH_URL_PREFIX + event.getAddress());
     }
 
+    //@@author RonakLakhotia
     /**
      * Shows Facebook profile picture of user
      */

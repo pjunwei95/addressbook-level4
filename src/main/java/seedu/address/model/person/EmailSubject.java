@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-
+//@@author RonakLakhotia
 /**
  * Represents an Email's Subject line.
  * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}

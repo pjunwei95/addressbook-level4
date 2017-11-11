@@ -124,7 +124,8 @@ public class XmlAddressBookStorageTest {
         saveAddressBook(new AddressBook(), null);
     }
 
-    //@@author pjunwei95
+    //@@author RonakLakhotia
+
     /**
      * Backups {@code addressBook} at the specified {@code filePath}.
      */

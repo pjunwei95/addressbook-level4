@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.ui.ReminderCard;
 
+//@@author RonakLakhotia
 /**
  * Provides a handle for {@code ReminderListPanel} containing the list of {@code ReminderCard}.
  */

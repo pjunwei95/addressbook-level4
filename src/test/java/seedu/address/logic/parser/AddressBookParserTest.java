@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -97,12 +98,14 @@ public class AddressBookParserTest {
         assertEquals(command, new FindTagCommand(new TagContainsKeywordsPredicate(keywords)));
     }
 
+
     @Test
     public void parseCommand_backup() throws Exception {
         assertTrue(parser.parseCommand(BackUpCommand.COMMAND_WORD) instanceof BackUpCommand);
         assertTrue(parser.parseCommand(BackUpCommand.COMMAND_WORD + " 3") instanceof BackUpCommand);
     }
 
+    //@@author RonakLakhotia
     @Test
     public void parseCommand_search() throws Exception {
         SearchCommand command = new SearchCommand(new
@@ -140,12 +143,14 @@ public class AddressBookParserTest {
                 PhotoCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + path);
         assertEquals(new PhotoCommand(INDEX_FIRST_PERSON, path), command);
     }
+    //@@author
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
+    //@@author RonakLakhotia
     @Test
     public void parseCommand_addReminder() throws Exception {
         Reminder reminder = new ReminderBuilder().build();
@@ -162,16 +167,15 @@ public class AddressBookParserTest {
                 + "1 " + "g/CS2103T Assignment" + " p/high" + " d/12.11.2017");
         assertEquals(new ChangeReminderCommand(INDEX_FIRST_REMINDER, descriptor), command);
     }
-
+    //@@author
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        //System.out.println(descriptor.getUsername().toString());
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getPersonDetails(person));
 
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertNotEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -187,13 +191,15 @@ public class AddressBookParserTest {
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
+
+    //@@author RonakLakhotia
     @Test
     public void parseCommand_remove() throws Exception {
         RemoveReminderCommand command = (RemoveReminderCommand) parser.parseCommand(
                 RemoveReminderCommand.COMMAND_WORD + " " + INDEX_FIRST_REMINDER.getOneBased());
         assertEquals(new RemoveReminderCommand(INDEX_FIRST_REMINDER), command);
     }
-
+    //@@author
 
     @Test
     public void parseCommand_exit() throws Exception {

@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.reminder.UniqueReminderList;
-
+//@@author RonakLakhotia
 public class UniqueReminderListTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

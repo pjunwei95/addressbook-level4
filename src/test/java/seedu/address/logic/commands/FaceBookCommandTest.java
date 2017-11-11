@@ -27,11 +27,11 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.FacebookUsername;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.ui.testutil.EventsCollectorRule;
-
+//@@author RonakLakhotia
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code MapCommand}.
  */
-//@@author RonakLakhotia
+
 public class FaceBookCommandTest {
 
     @Rule
@@ -118,7 +118,7 @@ public class FaceBookCommandTest {
     }
 
     @Test
-    public void checkIfFacebookEventCollected() throws CommandException {
+    public void check_facebookEventCollected() throws CommandException {
         FaceBookCommand faceBookCommand = prepareCommand(INDEX_FIRST_PERSON);
         faceBookCommand.execute();
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof FaceBookEvent);

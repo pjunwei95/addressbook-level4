@@ -13,7 +13,7 @@ import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.testutil.ReminderBuilder;
 
-
+//@@author RonakLakhotia
 public class ReminderCardTest extends GuiUnitTest {
 
     @Test
@@ -34,11 +34,11 @@ public class ReminderCardTest extends GuiUnitTest {
         // different types -> returns false
         assertFalse(reminderCard.equals(0));
 
-        // different person, same index -> returns false
+        // different reminder, same index -> returns false
         Reminder differentReminder = new ReminderBuilder().withDetails("different").build();
         assertFalse(reminderCard.equals(new ReminderCard(differentReminder, 0)));
 
-        // same person, different index -> returns false
+        // same reminder, different index -> returns false
         assertFalse(reminderCard.equals(new ReminderCard(reminder, 1)));
     }
 
