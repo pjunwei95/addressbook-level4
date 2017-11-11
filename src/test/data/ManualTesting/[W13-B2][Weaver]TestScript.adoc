@@ -670,6 +670,37 @@ Phone numbers can only contain numbers, and should be at least 3 digits long
 * *Result* +
 At least one field to edit must be provided.
 
+=== Find by Tag command
+
+*COMMAND 0* - `findtag` +
+
+* *Result* +
+Invalid command format!
+findtag: Finds all persons whose tag(s) contain any of the specified keywords (case-sensitive) and displays them as a list with index numbers.
+Parameters: KEYWORD [MORE_KEYWORDS]...
+Example: findtag alice bob charlie
+
+*COMMAND 1* - `map 1` +
+
+* *Result* +
+Showing the address of Person: Alice Pauline
+
+*COMMAND 2* - `map 0` +
+
+* *Result* +
+Invalid command format!
+map: Shows the address of the person identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer)
+Example: map 1
+
+*COMMAND 3* - `map 100` +
+
+* *Result* +
+The person index provided is invalid
+
+*Click on the address field of a person in the person card panel*
+
+* *Result* +
 
 
 
