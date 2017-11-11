@@ -21,6 +21,7 @@ import seedu.address.logic.commands.DeleteTagCommand.DeleteTagDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.testutil.DeleteTagDescriptorBuilder;
 
@@ -30,6 +31,15 @@ import seedu.address.testutil.DeleteTagDescriptorBuilder;
 public class DeleteTagCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_duplicatePersonUnfilteredList_failure() {
+        Person firstPerson = new Person(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder(firstPerson).build();
+        DeleteTagCommand deleteTagCommand = prepareCommand(INDEX_SECOND_PERSON, descriptor);
+
+        assertCommandFailure(deleteTagCommand, model, DeleteTagCommand.MESSAGE_NOT_EXISTING_TAGS);
+    }
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
@@ -51,20 +61,9 @@ public class DeleteTagCommandTest {
 
         assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-    @Test
-    public void checkTagDeletedPerson() {
-
-        ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND)
-                .build();
-        DeleteTagCommand command = new DeleteTagCommand(INDEX_SECOND_PERSON, descriptor);
-        ReadOnlyPerson changed = command.createTagDeletedPerson(personInList, descriptor);
-        assertTrue(changed.getTags().isEmpty() == false);
-    }
-
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
+     * Delete the tags of  filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
      */
     @Test
@@ -79,6 +78,20 @@ public class DeleteTagCommandTest {
 
         assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
+
+    @Test
+    public void checkTagDeletedPerson() {
+
+        ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND)
+                .build();
+        DeleteTagCommand command = new DeleteTagCommand(INDEX_SECOND_PERSON, descriptor);
+        ReadOnlyPerson changed = command.createTagDeletedPerson(personInList, descriptor);
+        assertTrue(!changed.getTags().isEmpty());
+    }
+
+
 
     @Test
     public void equals() {
