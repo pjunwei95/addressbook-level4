@@ -6,7 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 /**
- * Display a popup for confirmation for clearing the address book
+ * Displays a popup for confirmation for clearing the address book
  */
 public class ClearConfirmation {
 
