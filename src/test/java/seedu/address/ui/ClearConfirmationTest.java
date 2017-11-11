@@ -1,10 +1,10 @@
 package seedu.address.ui;
 //@@author pjunwei95
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
-
-import static org.junit.Assert.assertEquals;
 
 public class ClearConfirmationTest extends GuiUnitTest {
 
