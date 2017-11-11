@@ -18,7 +18,7 @@ Weaver symbolises the weaving of out contacts in order to stay connected. +
 
 === Ronak Lakhotia
 image::ronaklakhotia.png[width="150", align="left"]
-{empty}[https://github.com/RonakLakhotia[github]]
+{empty}[https://github.com/RonakLakhotia[github]][<<RonakLakhotia#, portfolio>>]
 
 Role: Co-ordination and Testing +
 
@@ -30,7 +30,7 @@ Also suggests modifications to be made in the features. Also in charge of Logic 
 
 === Chen Xiaoman
 image::chenxiaoman.png[width="150", align="left"]
-{empty}[https://github.com/ChenXiaoman[github]]
+{empty}[https://github.com/ChenXiaoman[github]][<<ChenXiaoman#, portfolio>>]
 
 Role: Scheduling and Tracking +
 Responsibilities: Ensure that all deadlines and Deliverables are met on time.
@@ -41,7 +41,7 @@ Make sure that all work is done in the correct format.In addition, in charge of 
 
 === Yang Minxing
 image::yangminxing.png[width="150", align="left"]
-{empty}[https://github.com/yangminxingnus[github]]
+{empty}[https://github.com/yangminxingnus[github]][<<yangminxing#, portfolio>>]
 
 Role: In charge of Storage and UI +
 Responsibilities: Ensure that the interface of the Application is of good quality.
@@ -49,9 +49,9 @@ Ensures competency with JAVAFX. As for main components, is in charge of storage 
 
 '''
 
-=== Pei Jun Wei
+=== Pei Junwei
 image::pjunwei.png[width="150", align="left"]
-{empty}[https://github.com/pjunwei95[github]]
+{empty}[https://github.com/pjunwei95[github]][<<peijunwei#, portfolio>>]
 
 Role: Code Quality, Integration and Documentation +
 Responsibilities: Ensure the code quality of the SUT is maintained at all times.
