@@ -10,7 +10,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2103AUG2017-W13-B2/main/releases
 
 By: `W13-B2`      Since: `Aug 2017`      Licence: `MIT`
 
@@ -18,13 +18,14 @@ By: `W13-B2`      Since: `Aug 2017`      Licence: `MIT`
 == Product Overview
 
 Weaver is a desktop application that has a GUI (Graphical User Interface) but most of the interactions happen using
-a Command Line Interface.Weaver is your personalised addressbook that will make your day to day life easier by letting
-you access the details over your friends and family members as and when you want them.
+a Command Line Interface. The application is meant for NUS students in particular. Weaver is your personalised addressbook that will make your day to day life easier by letting
+you access the details over your friends and family members as and when you want them. It also has other interesting features like
+adding reminders and scheduling your day to day timetable. Excited to explore this app?
 
 == About
 
 This User Guide gives you some basic guidlines that you need to follow to use Weaver.It gives you a brief introduction
-of what the product intends to do and how it will benefit you as a user.Since Weaver uses a Command line Interface
+of what the product intends to do and how it will benefit you as a user. Since Weaver uses a Command line Interface
 you will find below the list of commands and how to execute them in order to use the application.
 So lets get Started! +
 
@@ -51,7 +52,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/13.10.1997 f/nus.jpg` : adds a contact named `John Doe` to the Address Book.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/13.10.1997 ` : adds a contact named `John Doe` to the Address Book.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 * *`photo`* : Add a photo to a person
@@ -77,7 +78,7 @@ Format: `help`
 
 Adds a person to the address book +
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH f/FILE_PATH r/MODULES_TAKEN_IN_SCHOOL u/[FACEBOOK USERNAME] [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/[ADDRESS] b/DATE_OF_BIRTH f/[FILE_PATH OF IMAGE] r/[MODULES_TAKEN_IN_SCHOOL] u/[FACEBOOK USERNAME] [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0).
@@ -86,7 +87,7 @@ Minimum requirement of the fields are NAME, PHONE, EMAIL.
 Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/13.10.1997 f//Users/ronaklakhotia/Desktop/Ronak.jpeg r/CS2103T/SEC/1 u/joh.doe`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/13.10.1997 f/nus.jpg t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/13.10.1997 t/criminal`
 * `add n/John Doe p/98765432 e/johnd@example.com`
 
 === Listing all persons : `list`
@@ -135,27 +136,6 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Searching a person : `search`
-
-Lists persons with the given name and Date Of Birth. +
-This makes the find command more powerful. +
-The name and Date Of Birth must be valid. +
-Format: `search NAME DATE_OF_BIRTH`
-
-
-
-****
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of keywords matter. e.g. in `search Hans 13.10.1997` Hans and 13.10.1997 cannot be interchanged
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching both name and Date Of Birth will be returned.
-****
-
-Examples:
-
-* `search n/John b/13.10.1997` +
-Returns persons with name `John` and Date of Birth `13.10.1997`.
-
 === Deleting a person : `delete`
 
 Deletes the specified person from the address book. +
@@ -195,35 +175,6 @@ Selects the 2nd person in the address book.
 * `find Betsy` +
 `select 1` +
 Selects the 1st person in the results of the `find` command.
-
-// tag::remark[]
-=== Remarking a person : `remark`
-
-Remarks the person identified by the index number. +
-Format: `remark INDEX /r REMARK`
-
-****
-* Remarks a person's module information identified by the index number.
-* The content of remark should be in the format MODNAME/MODTYPE/GROUPNUM(Integer).
-* All info shuold coexist in nusmods. This app dont check the validity of the module information.
-****
-
-Examples:
-
-* `list` +
-`remark 2 /r CS2104/LEC/1` +
-Remarks the 2nd person's module information as CS2104/LEC/1.
-// end::remark[]
-
-// tag::nusmods[]
-=== NUSMODS Integration since v1.2
-
-Helps you view your contacts' module information corresponding to this person's remark on nusmods by clicking on the person. +
-
-image::nusmods.png[width="790"]
-
-// end::nusmods[]
-
 
 === Listing entered commands : `history`
 
@@ -285,32 +236,76 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-*SINCE V1.2*
 
-=== Login / Logout since v1.2
+=== Searching a person : `search` Since v1.1
+
+Lists persons with the given name and Date Of Birth. +
+This makes the find command more powerful. +
+The name and Date Of Birth must be valid. +
+Format: `search n/NAME b/DATE_OF_BIRTH`
+
+
+
+****
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching both name and Date Of Birth will be returned.
+****
+
+Examples:
+
+** Initially there are three persons in Weaver with name 'John'. +
+** Two of them have Date Of Birth 13.10.1997 and third one has date of birth 12.10.1997. +
+
+* `search n/John b/13.10.1997` +
+Returns persons with name `John` and Date of Birth `13.10.1997`.
+** Result - 2 persons listed!
+
+image::Search.png[width="790"]
+
+// tag::remark[]
+=== Remarking a person : `remark` Since v1.1
+
+Remarks the person identified by the index number. +
+Format: `remark INDEX r/REMARK`
+
+****
+* Remarks a person's module information identified by the index number.
+* The content of remark should be in the format MODNAME/MODTYPE/GROUPNUM(Integer).
+* All info should coexist in nusmods. This app dont check the validity of the module information.
+****
+
+Examples:
+
+* `list` +
+`remark 2 r/CS2104/LEC/1` +
+Remarks the 2nd person's module information as CS2104/LEC/1.
+
+`remark 1 r/MA1101R/LEC/1,CS2105/LEC/1` +
+Remarks the 2nd person's module information as MA1101R and CS2105
+// end::remark[]
+
+// tag::nusmods[]
+=== NUSMODS Integration Since v1.2
+
+Helps you view your contacts' module information corresponding to this person's remark on nusmods by clicking on the person. +
+
+image::nusmods.png[width="790"]
+
+// end::nusmods[]
+
+=== Login / Logout Since v1.2
 image::Login.png[width="790"]
 
 Users now can login using valid accounts. And their files are seperated. +
-To start with, there are to default pair os username and password. They are
+To start with, there are two default pairs of username and password. They are
 {admin, admin} and {user, user}. +
 To logout, just click logout in the "file - > logout" button. Or, use the "logout" command. +
 
 image::Logout.png[width="790"]
 
-// tag::register[]
-=== Register since v1.3
-
-Users now can register new valid accounts. Just click the "Register" button on the bottom
-of the login page. Registering has two requirements: +
-1. The username registering should be different
-with all previous ones. +
-2. You have to key in identical password twice.
-
-image::Register.png[width="790"]
-// end::register[]
-
 // tag::customizetagcolor[]
-=== Customize tags' color : `color` since v1.2
+=== Customize tags' color : `color` Since v1.2
 
 Change the color of one or more than one tags. +
 Format: `color [c/COLOR] [t/TAG]...`
@@ -339,9 +334,8 @@ image::tagcolor.png[width="790"]
 // end::customizetagcolor[]
 
 // tag::addphoto[]
-=== Add Photo to contacts : `photo` since v1.2 +
+=== Add Photo to contacts : `photo` Since v1.2 +
 
-image::MockUp.png[width="790"]
 
 ** Adds a Display picture to the contact.The image file must be present in your PC. +
 
@@ -354,8 +348,19 @@ delete operation is not valid. +
 
 ** Once the Image is set and the file is then removed from the specified directory, Weaver will no longer display the picture. +
 
+** The command also follows the undo/redo mechanism. +
+
 e.g. `Photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg` adds the image `Ronak.jpg` to the contact with
 index 1 in the address book.
+
+** Result - Picture is added to the person at index 1. +
+
+image::MockUp.png[width="790"]
+
+e.g. `Photo 1 delete`. +
+** Result - Picture is deleted from the person at index at 1. +
+
+image::delete.png[width="790"]
 
 *Different Scenarios* :
 ****
@@ -367,123 +372,6 @@ Command - `Photo 1 Delete` +
 this will delete the photo attached with the person at index 1.
 ****
 // end::addphoto[]
-
-
-// tag::customizefontsize[]
-=== Change font size : `fs` since v1.3
-
-Change the font size of the entire application +
-Format: `fs [FONT SIZE]` or `fs [+/-]`
-****
-* The available font sizes are: xs(extra small), s(small), m(medium), l(large), xl(extra large).
-* The default font size is m.
-* The font size changed will be auto stored.
-* You can increase (or decrease) the font size by pressing the "+" (or "-") button in the right top corner.
-* The font size that you have choosen will be stored in user preference
-****
-
-Examples:
-
-* `fs xl`
-
-* `fs s`
-
-* `fs +`
-
-* `fs -` +
-
-image::fs.png[width="790"]
-
-// end::customizefontsize[]
-
-// tag::facebook[]
-=== FaceBook Integration since v1.3
-
-Helps you view the profile page of a person in your contact list. +
-
-** The index of the person must be valid. +
-
-** The person must have the username he/she uses on Facebook. +
-
-** You will have to log in to your own account before you view the profile page of the person. +
-
-Command Format - `Facebook [INDEX] +
-
-e.g. - `facebook 1` +
-
-If the person does not have a facebook account or the username is not entered in Weaver,you will be notified by Weaver.
-
-image::facebook.png[width="790"]
-
-// end::facebook[]
-
-// tag::map[]
-=== Show address of a person : `map` since v1.3
-
-Shows the address of a person in Google Map in the browser panel. +
-
-Format: `map INDEX`
-****
-* Selects the person and loads the Google Map showing address of the person at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* `1, 2, 3, ...`
-* You can also view the address by clicking the address panel of a person.
-****
-
-Examples:
-
-* `map 1`
-
-* `map 2`
-
-image::map.png[width="790"]
-// end::map[]
-
-// tag::theme[]
-=== Change the theme : `theme` since v1.4
-
-Changes the theme of entire application. +
-
-Format: `theme [THEME]`
-****
-* Supported themes are: dark, bright
-* The default theme is bright
-* You can also change the theme via "theme" button
-* The theme that you have choosen will be stored in user preference
-****
-
-Examples:
-
-* `theme dark`
-
-* `theme bright`
-
-image::theme.png[width="840"]
-
-// end::theme[]
-
-=== Reminders Panel since v1.4 +
-
-Have you ever felt the need to be constantly reminded of your daily assignments.Fret not!Weaver helps you keep up to
-date with your daily school assignments.Just add your reminders using a single command and weaver will display your
-reminders with a image depicting the priority level of that assignment.That way, you can keep scrolling through your
-reminders panel when you open the application and be aware of the upcoming tasks.
-
-
-==== There are three basic commands. +
-
-** Add a reminder to your list. +
-Command Format - `Reminder g/DETAILS p/PRIORITY OF TASK d/DUEDATE +
-e.g. `Reminder g/CS2103T Assignment p/High d/12.11.2017` +
-
-** Remove a reminder from your list. +
-Command Format - `Remove [INDEX OF REMINDER]` +
-e.g. `Remove 1` +
-
-** Change an existing reminder. +
-Command Format - `Change d/13.11.1997` +
-The above command will change the due date of the reminder to the new date. +
-
 
 // tag::findtag[]
 
@@ -518,6 +406,115 @@ image::findtagvalid.png[width="1360"]
 
 // end::findtag[]
 
+// tag::register[]
+=== Register Since v1.3
+
+Users now can register new valid accounts. Just click the "Register" button on the bottom
+of the login page. Registering has two requirements: +
+1. The username registering should be different
+with all previous ones. +
+2. You have to key in identical password twice.
+
+image::Register.png[width="790"]
+// end::register[]
+
+
+// tag::customizefontsize[]
+=== Change font size : `fs` since v1.3
+
+Change the font size of the entire application +
+Format: `fs [FONT SIZE]` or `fs [+/-]`
+****
+* The available font sizes are: xs(extra small), s(small), m(medium), l(large), xl(extra large).
+* The default font size is m.
+* The font size changed will be auto stored.
+* You can increase (or decrease) the font size by pressing the "+" (or "-") button in the right top corner.
+* The font size that you have choosen will be stored in user preference
+****
+
+Examples:
+
+* `fs xl`
+
+* `fs s`
+
+* `fs +`
+
+* `fs -` +
+
+image::fs.png[width="790"]
+
+// end::customizefontsize[]
+
+// tag::facebook[]
+=== FaceBook Integration since v1.3
+
+Helps you view the profile page of a person in your contact list. +
+
+Below are listed some conditions for the command. +
+
+** The index of the person must be valid, that is it must be a positive integer and within bounds. +
+
+** The person must have the username he/she uses on Facebook. +
+
+** You will have to log in to your own account before you view the profile page of the person. +
+
+Command Format - `Facebook [INDEX]` +
+
+e.g. - `facebook 1` +
+
+If the person does not have a facebook account or the username is not entered in Weaver,you will be notified.
+
+image::facebook.png[width="790"]
+
+// end::facebook[]
+
+// tag::map[]
+=== Show address of a person : `map` since v1.3
+
+Shows the address of a person in Google Map in the browser panel. +
+
+Format: `map INDEX`
+****
+* Selects the person and loads the Google Map showing address of the person at the specified `INDEX`.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* You can also view the address by clicking the address panel of a person.
+****
+
+Examples:
+
+* `map 1`
+
+* `map 2`
+
+image::map.png[width="790"]
+// end::map[]
+
+// tag::clear[]
+=== Clearing all entries : `clear` since v1.3
+[NOTE]
+To interact solely with the keyboard, make your selection and press `SPACE` instead of `ENTER`!
+
+Clears all entries from the address book. +
+
+Format: `clear` +
+
+A clear confirmation will pop-up to reaffirm your clear command in the event of accidental clearing. +
+
+image::clearconfirmation.png[width="1362"]
+
+By default, you will be able to confirm clearing by pressing `ENTER` on the keyboard, or clicking `OK`.
+
+Otherwise, you can cancel by highlighting the `Cancel` button with the keyboard followed by the `SPACE` button.
+Alternatively, you can also click the `X` button or the `Cancel` button. +
+
+[TIP]
+Experienced users may be able to bypass the clear confirmation window by its alias: +
+`cls`
+
+// end::clear[]
+
 // tag::deletetag[]
 === Deleting a person's tag : `deletetag` since v1.3
 
@@ -549,6 +546,69 @@ image::deletetaginvalid.png[width="341"]
 image::deletetagvalid.png[width="1360"]
 
 // end::deletetag[]
+
+// tag::theme[]
+=== Change the theme : `theme` since v1.4
+
+Changes the theme of entire application. +
+
+Format: `theme [THEME]`
+****
+* Supported themes are: dark, bright
+* The default theme is bright
+* You can also change the theme via "theme" button
+* The theme that you have choosen will be stored in user preference
+****
+
+Examples:
+
+* `theme dark`
+
+* `theme bright`
+
+image::theme.png[width="840"]
+
+// end::theme[]
+
+=== Reminders Panel since v1.4 +
+
+Have you ever felt the need to be constantly reminded of your daily assignments. Fret not!Weaver helps you keep up to
+date with your daily school assignments.Just add your reminders using a single command and weaver will display your
+reminders with an image depicting the priority level of that assignment and the due date.That way, you can keep scrolling through your
+reminders panel when you open the application and be aware of the upcoming tasks.
+
+
+==== There are three basic commands. +
+
+** Add a reminder to your list. +
+Command Format - `Reminder g/DETAILS p/PRIORITY OF TASK d/DUEDATE +
+e.g. `Reminder g/CS2103T Assignment p/High d/12.11.2017` +
+
+** `Result` +
+The reminder is added to your reminders panel. +
+
+image::add.png[width="840"]
+
+** Remove a reminder from your list. +
+Command Format - `Remove [INDEX OF REMINDER]` +
+e.g. `Remove 1` +
+
+** `Result` +
+The reminder is removed from your reminders panel. +
+
+image::remove.png[width="840"]
+
+
+** Change an existing reminder. +
+Command Format - `Change d/22.12.2017` +
+The above command will change the due date of the reminder to the new date. +
+
+** `Result` +
+The reminder duedate is changed . +
+
+image::change.png[width="840"]
+
+
 
 // tag::autocompletion[]
 === Auto-completion since v1.4
@@ -602,29 +662,33 @@ image::backup.png[width="237"]
 
 // end::backup[]
 
-// tag::clear[]
-=== Clearing all entries : `clear` since v1.3
-[NOTE]
-To interact solely with the keyboard, make your selection and press `SPACE` instead of `ENTER`!
+=== Sending Emails to your contacts : `backup` since v1.5
 
-Clears all entries from the address book. +
+Weaver now allows you to send emails to all your contacts with a common tag! +
+If you want to send an important mail to people who are tagged as temmates, you are just a command away!. +
+This command will open the default browser in your desktop and direct you to your gmail account with the
+`send to recipients` and Subject line filled in. +
 
-Format: `clear` +
-
-A clear confirmation will pop-up to reaffirm your clear command in the event of accidental clearing. +
-
-image::clearconfirmation.png[width="1362"]
-
-By default, you will be able to confirm clearing by pressing `ENTER` on the keyboard, or clicking `OK`.
-
-Otherwise, you can cancel by highlighting the `Cancel` button with the keyboard followed by the `SPACE` button.
-Alternatively, you can also click the `X` button or the `Cancel` button. +
+Format: `email t/[TAG] s/[SUBJECT]`. +
 
 [TIP]
-Experienced users may be able to bypass the clear confirmation window by its alias: +
-`cls`
+You must have Gmail Account to send mails. +
 
-// end::clear[]
+** You cannot include more than one tag. Also you must specify 1 tag +
+** The tag specified must be attached to atleast one person in Weaver. +
+** You must specify a valid subject line for the mail. +
+
+e.g. `email t/friends s/birthday party`
+** Result ** +
+Email is sent!
+
+image::email.png[width="237"]
+
+e.g. `email t/friends t/colleagues s/subject`
+** Result ** +
+Multiple tags cannot be entered +
+
+image::emailMultiple.png[width="237"]
 
 === Exiting the program : `exit`
 
@@ -642,7 +706,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Weaver data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 == FAQ
@@ -652,7 +716,7 @@ There is no need to save manually.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH [t/TAG]...` +
+* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/DATE_OF_BIRTH] [f/Filepath] [u/Username] [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/13.10.1997 f/ t/friend t/colleague`
 * *Clear* : `clear` +
 e.g. Press `ENTER`,`SPACE` or click
@@ -681,6 +745,10 @@ e.g.`map 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Search n/NAME B/DATE OF BIRTH* : search n/NAME b/DATE OF BIRTH +
+e.g. `search n/Ronak b/13.10.1997` +
+* *Email t/TAG s/SUBJECT* +
+e.g. `email t/friends s/party` +
 * *Facebook* : `facebook` +
 e.g. `facebook 1`
 * *Photo Index FilePath* : photo [Index] [FilePath] +
