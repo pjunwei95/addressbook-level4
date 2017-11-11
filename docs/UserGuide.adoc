@@ -287,7 +287,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 *SINCE V1.2*
 
-=== Login / Logout SINCE V1.2
+=== Login / Logout since v1.2
 image::Login.png[width="790"]
 
 Users now can login using valid accounts. And their files are seperated. +
@@ -298,7 +298,7 @@ To logout, just click logout in the "file - > logout" button. Or, use the "logou
 image::Logout.png[width="790"]
 
 // tag::register[]
-=== Register SINCE V1.3
+=== Register since v1.3
 
 Users now can register new valid accounts. Just click the "Register" button on the bottom
 of the login page. Registering has two requirements: +
@@ -603,7 +603,7 @@ image::backup.png[width="237"]
 // end::backup[]
 
 // tag::clear[]
-=== Clearing all entries : `clear`
+=== Clearing all entries : `clear` since v1.3
 [NOTE]
 To interact solely with the keyboard, make your selection and press `SPACE` instead of `ENTER`!
 
