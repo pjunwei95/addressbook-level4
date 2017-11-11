@@ -36,7 +36,7 @@ So lets get Started! +
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `Weaver.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -44,7 +44,7 @@ This app will not work with earlier versions of Java 8.
 
 . After login, you will see the GUI below.
 
-image::Ui.png[width="790"]
+image::UIExplain.png[width="790"]
 
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -134,8 +134,6 @@ Examples:
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
-
-image::Search.png[width="600"]
 
 === Searching a person : `search`
 
