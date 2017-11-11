@@ -2,12 +2,19 @@
 
 == Load Sample data
 
-** To load the sample data, open the app so that the preferences.json file is created.+
-** Then close the app. +
-** Copy the SampleData.xml file to the data folder. +
-** Open the preferences.json file. +
-** Change file path in file to data/SampleData.xml. +
-** Start the app again. +
+** To load the sample data, follow the instructions given below:- +
+** 1) Download the SampleData.xml file. +
+** 2) Run the Weaver.jar file to open the app. +
+** 3) ** LOGIN ** with the Usernam - `admin` and Password - `admin` . +
+** 4) After logging in make a change to the Weaver data by executing the command - `edit 1 n/change` . +
+** 5) Close the app. You will notice that the `data` folder is created. +
+** 6) Open the data folder. Drag/Copy the SampleData.xml file into the data folder. +
+** 7) Close the folder. Run the App again. +
+** 8) Click on ** REGISTER ** to register a new account. +
+** 9) Enter username as **SampleData**. `S` and `D` must in uppercase. `SampleData` is case-sensetive. Enter any password. +
+** 10) You will reach the **LOGIN** page. +
+** 11) Login with the username **SampleData** and the password you used to register. +
+** 12) The app opens with the data. +
 
 == Test login feature
 ** Start the app, and now the only valid username and password pairs are {admin, admin} and {user, user}. +
