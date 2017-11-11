@@ -6,10 +6,10 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
@@ -32,8 +32,11 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String GOOGLE_MAP_SEARCH_URL_PREFIX = "https://www.google.com.sg/maps/search/";
 
     private static final String FXML = "BrowserPanel.fxml";
+    private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 5.1; rv:7.0.1) Gecko/20100101 Firefox/7.0.1";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
+
+    private WebEngine engine;
 
     @FXML
     private WebView browser;
@@ -44,9 +47,19 @@ public class BrowserPanel extends UiPart<Region> {
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
+        setUpWebEngine();
+
         loadDefaultPage();
 
         registerAsAnEventHandler(this);
+    }
+
+    /**
+     * Set up web engine
+     */
+    private void setUpWebEngine() {
+        engine = browser.getEngine();
+        engine.setUserAgent(USER_AGENT);
     }
 
     /**
@@ -63,7 +76,7 @@ public class BrowserPanel extends UiPart<Region> {
      */
     public void loadPage(String url) {
 
-        Platform.runLater(() -> browser.getEngine().load(url));
+        engine.load(url);
 
     }
 

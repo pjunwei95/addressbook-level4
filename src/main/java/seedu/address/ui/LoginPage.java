@@ -1,5 +1,6 @@
 package seedu.address.ui;
 //@@author yangminxingnus
+
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -14,7 +15,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;

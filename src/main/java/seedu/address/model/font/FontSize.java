@@ -28,6 +28,31 @@ public class FontSize {
     public static final String FONT_SIZE_L_LABEL = "l";
     public static final String FONT_SIZE_XL_LABEL = "xl";
 
+    private static final String JAVAFX_FONT_SIZE_PREFIX = "-fx-font-size: ";
+    private static final String JAVAFX_FONT_SIZE_XS = "small";
+    private static final String JAVAFX_FONT_SIZE_S = "medium";
+    private static final String JAVAFX_FONT_SIZE_M = "large";
+    private static final String JAVAFX_FONT_SIZE_L = "x-large";
+    private static final String JAVAFX_FONT_SIZE_XL = "xx-large";
+
+    private static final String NAME_LABEL_SIZE_XS = "15";
+    private static final String NAME_LABEL_SIZE_S = "20";
+    private static final String NAME_LABEL_SIZE_M = "25";
+    private static final String NAME_LABEL_SIZE_L = "30";
+    private static final String NAME_LABEL_SIZE_XL = "35";
+
+    private static final int IMAGE_SIZE_XS = 15;
+    private static final int IMAGE_SIZE_S = 20;
+    private static final int IMAGE_SIZE_M = 25;
+    private static final int IMAGE_SIZE_L = 30;
+    private static final int IMAGE_SIZE_XL = 35;
+
+    private static final int PHOTO_SIZE_XS = 45;
+    private static final int PHOTO_SIZE_S = 50;
+    private static final int PHOTO_SIZE_M = 55;
+    private static final int PHOTO_SIZE_L = 60;
+    private static final int PHOTO_SIZE_XL = 65;
+
     private static String currentFontSizeLabel = FONT_SIZE_M_LABEL;
 
     private final String value;
@@ -35,11 +60,12 @@ public class FontSize {
     /**
      * Validates given font size.
      *
+     * @param fontSize
      * @throws IllegalValueException if given font size is invalid.
      */
     public FontSize(String fontSize) throws IllegalValueException {
         requireNonNull(fontSize);
-        if (isValidFontSizeChangeSymbol(fontSize)) {
+        if (isValidChangeFontSizeSymbol(fontSize)) {
 
             // Get the new font size from "+" or "-" symbol base on current font size
             fontSize = getFontSizeFromChangeSymbol(fontSize);
@@ -58,7 +84,11 @@ public class FontSize {
     }
 
     /**
-     * Get the new font size from "+" or "-" symbol and change the current font size
+     * Get a increased/decreased font size from "+" or "-"  symbol
+     *
+     * @param symbol
+     * @return increased/decreased font size based on current font size
+     * @throws IllegalValueException
      */
     private String getFontSizeFromChangeSymbol(String symbol) throws IllegalValueException {
         int fontSizeListLength = FONT_SIZE_LIST.length;
@@ -100,8 +130,11 @@ public class FontSize {
 
     /**
      * Check whether the change symbol is valid
+     *
+     * @param symbol
+     * @return validity of a symbol
      */
-    private boolean isValidFontSizeChangeSymbol(String symbol) {
+    private boolean isValidChangeFontSizeSymbol(String symbol) {
         for (String s : FONT_SIZE_CHANGE_SYMBOL) {
             if (symbol.equals(s)) {
                 return true;
@@ -111,7 +144,10 @@ public class FontSize {
     }
 
     /**
-     * Returns true if a given string is a valid font size.
+     * Check if a given string is a valid font size
+     *
+     * @param test
+     * @return validity of a the String
      */
     public static boolean isValidFontSize(String test) {
         for (String s : FONT_SIZE_LIST) {
@@ -123,6 +159,8 @@ public class FontSize {
     }
 
     /**
+     * Get the current font size
+     *
      * @return the current font size
      */
     public static String getCurrentFontSizeLabel() {
@@ -130,7 +168,8 @@ public class FontSize {
     }
 
     /**
-     * Set the current font size to a new font size
+     * Set the current font size to a given new font size
+     *
      * @param newFontSizeLabel
      */
     public static void setCurrentFontSizeLabel(String newFontSizeLabel) {
@@ -154,139 +193,148 @@ public class FontSize {
 
 
     /**
-     * Get the associate fx format string for a give font size
+     * Get the associate JavaFX format String for a give font size
+     *
      * @param inputFontSize
      */
     public static String getAssociateFxFontSizeString(String inputFontSize) {
         assert (FontSize.isValidFontSize(inputFontSize));
-        String fxFontSizeString = "-fx-font-size: ";
+        String fxFontSizeString = JAVAFX_FONT_SIZE_PREFIX;
         switch (inputFontSize) {
         case FONT_SIZE_XS_LABEL:
-            fxFontSizeString += "small;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_XS;
             break;
 
         case FONT_SIZE_S_LABEL:
-            fxFontSizeString += "medium;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_S;
             break;
 
         case FONT_SIZE_M_LABEL:
-            fxFontSizeString += "large;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_M;
             break;
 
         case FONT_SIZE_L_LABEL:
-            fxFontSizeString += "x-large;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_L;
             break;
 
         case FONT_SIZE_XL_LABEL:
-            fxFontSizeString += "xx-large;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_XL;
             break;
 
         default:
-            fxFontSizeString += "large;";
+            fxFontSizeString += JAVAFX_FONT_SIZE_M;
         }
+
+        fxFontSizeString += ";";
         return fxFontSizeString;
     }
 
     /**
-     * Get the associate fx format string for a give font size of name
+     * Get the associate JavaFX format String for a give font size of name
+     *
      * @param inputFontSize
+     * @return JavaFX format String
      */
     public static String getAssociateFxFontSizeStringForName(String inputFontSize) {
         assert (FontSize.isValidFontSize(inputFontSize));
-        String fxFontSizeString = "-fx-font-size: ";
+        String fxFontSizeString = JAVAFX_FONT_SIZE_PREFIX;
         switch (inputFontSize) {
         case FONT_SIZE_XS_LABEL:
-            fxFontSizeString += "15;";
+            fxFontSizeString += NAME_LABEL_SIZE_XS;
             break;
 
         case FONT_SIZE_S_LABEL:
-            fxFontSizeString += "20;";
+            fxFontSizeString += NAME_LABEL_SIZE_S;
             break;
 
         case FONT_SIZE_M_LABEL:
-            fxFontSizeString += "25;";
+            fxFontSizeString += NAME_LABEL_SIZE_M;
             break;
 
         case FONT_SIZE_L_LABEL:
-            fxFontSizeString += "30;";
+            fxFontSizeString += NAME_LABEL_SIZE_L;
             break;
 
         case FONT_SIZE_XL_LABEL:
-            fxFontSizeString += "35;";
+            fxFontSizeString += NAME_LABEL_SIZE_XL;
             break;
 
         default:
-            fxFontSizeString += "25;";
+            fxFontSizeString += NAME_LABEL_SIZE_M;
         }
+
+        fxFontSizeString += ";";
         return fxFontSizeString;
     }
 
     /**
      * Get associate image size from a given font size
+     *
      * @param inputFontSize
-     * @return
+     * @return image size
      */
     public static int getAssociateImageSizeFromFontSize(String inputFontSize) {
         assert (FontSize.isValidFontSize(inputFontSize));
         int imageSize;
         switch (inputFontSize) {
         case FONT_SIZE_XS_LABEL:
-            imageSize = 15;
+            imageSize = IMAGE_SIZE_XS;
             break;
 
         case FONT_SIZE_S_LABEL:
-            imageSize = 20;
+            imageSize = IMAGE_SIZE_S;
             break;
 
         case FONT_SIZE_M_LABEL:
-            imageSize = 25;
+            imageSize = IMAGE_SIZE_M;
             break;
 
         case FONT_SIZE_L_LABEL:
-            imageSize = 30;
+            imageSize = IMAGE_SIZE_L;
             break;
 
         case FONT_SIZE_XL_LABEL:
-            imageSize = 35;
+            imageSize = IMAGE_SIZE_XL;
             break;
 
         default:
-            imageSize = 25;
+            imageSize = IMAGE_SIZE_M;
         }
         return imageSize;
     }
 
     /**
      * Get associate photo size from a given font size
+     *
      * @param inputFontSize
-     * @return
+     * @return photo size
      */
     public static int getAssociatePhotoSizeFromFontSize(String inputFontSize) {
         assert (FontSize.isValidFontSize(inputFontSize));
         int photoSize;
         switch (inputFontSize) {
         case FONT_SIZE_XS_LABEL:
-            photoSize = 45;
+            photoSize = PHOTO_SIZE_XS;
             break;
 
         case FONT_SIZE_S_LABEL:
-            photoSize = 50;
+            photoSize = PHOTO_SIZE_S;
             break;
 
         case FONT_SIZE_M_LABEL:
-            photoSize = 55;
+            photoSize = PHOTO_SIZE_M;
             break;
 
         case FONT_SIZE_L_LABEL:
-            photoSize = 60;
+            photoSize = PHOTO_SIZE_L;
             break;
 
         case FONT_SIZE_XL_LABEL:
-            photoSize = 65;
+            photoSize = PHOTO_SIZE_XL;
             break;
 
         default:
-            photoSize = 55;
+            photoSize = PHOTO_SIZE_M;
         }
         return photoSize;
     }

@@ -1,10 +1,11 @@
+//@@author ChenXiaoman
 package seedu.address.model.tag;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-//@@author ChenXiaoman
+
 public class TagColorTest {
 
     @Test

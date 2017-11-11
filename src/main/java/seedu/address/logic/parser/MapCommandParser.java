@@ -1,6 +1,7 @@
 //@@author ChenXiaoman
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
@@ -19,6 +20,7 @@ public class MapCommandParser implements Parser<MapCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public MapCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         try {
             Index index = ParserUtil.parseIndex(args);
             return new MapCommand(index);

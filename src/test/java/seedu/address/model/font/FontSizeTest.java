@@ -1,3 +1,4 @@
+//@@author ChenXiaoman
 package seedu.address.model.font;
 
 import static org.junit.Assert.assertFalse;
@@ -9,13 +10,14 @@ import org.junit.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 public class FontSizeTest {
-    //@@author ChenXiaoman
+
     @Test
     public void isValidFontSize() throws Exception {
         assertTrue(FontSize.isValidFontSize(FontSize.FONT_SIZE_L_LABEL));
         assertFalse(FontSize.isValidFontSize(INVALID_FONT_SIZE));
         assertFalse(FontSize.isValidFontSize(""));
     }
+
     @Test
     public void equals() throws IllegalValueException {
 
