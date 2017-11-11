@@ -4,7 +4,7 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyAddressBook;
 //@@author pjunwei95
 /**
- * An event requesting to backup the address book.
+ * Indicates a request to backup Weaver
  */
 public class BackUpEvent extends BaseEvent {
 
