@@ -37,19 +37,19 @@ public class DeleteTagCommandTest {
 
         // edit person in filtered list into a duplicate in address book
         ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        DeleteTagCommand editCommand = prepareCommand(INDEX_FIRST_PERSON,
+        DeleteTagCommand deleteTagCommand = prepareCommand(INDEX_FIRST_PERSON,
                 new DeleteTagDescriptorBuilder(personInList).build());
 
-        assertCommandFailure(editCommand, model, DeleteTagCommand.MESSAGE_NOT_EXISTING_TAGS);
+        assertCommandFailure(deleteTagCommand, model, DeleteTagCommand.MESSAGE_NOT_EXISTING_TAGS);
     }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build();
-        DeleteTagCommand editCommand = prepareCommand(outOfBoundIndex, descriptor);
+        DeleteTagCommand deleteTagCommand = prepareCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
     @Test
     public void checkTagDeletedPerson() {
@@ -74,10 +74,10 @@ public class DeleteTagCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeleteTagCommand editCommand = prepareCommand(outOfBoundIndex,
+        DeleteTagCommand deleteTagCommand = prepareCommand(outOfBoundIndex,
                 new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -104,8 +104,8 @@ public class DeleteTagCommandTest {
      * Returns an {@code DeleteTagCommand} with parameters {@code index} and {@code descriptor}
      */
     private DeleteTagCommand prepareCommand(Index index, DeleteTagDescriptor descriptor) {
-        DeleteTagCommand editCommand = new DeleteTagCommand(index, descriptor);
-        editCommand.setData(model, new CommandHistory(), new UndoRedoStack());
-        return editCommand;
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(index, descriptor);
+        deleteTagCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        return deleteTagCommand;
     }
 }
