@@ -73,6 +73,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
 
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -80,7 +82,7 @@ import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 
-import java.util.logging.Logger;
+
 
 /**
  * Adds a reminder to the address book.
@@ -102,8 +104,9 @@ public class AddReminder extends UndoableCommand {
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
     public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists!";
 
-    private final Reminder toAdd;
     private static final Logger logger = LogsCenter.getLogger(AddReminder.class);
+    private final Reminder toAdd;
+
 
     /**
      * Creates an AddReminder Command to add the specified {@code ReadOnlyReminder}
@@ -311,18 +314,18 @@ public class EmailCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Opens the default browser on the desktop with the Gmail "
             + "compose box open and specific details pre-filled.\n"
-            + "Parameters: " + PREFIX_TAG + "OnTAG (must match tag) \n"
+            + "Parameters: " + PREFIX_TAG + "One Tag (must match tag) \n"
             + PREFIX_SUBJECT + "Subject of the email."
             + "Example: " + COMMAND_WORD + " t/friends s/birthday.";
 
     public static final String MESSAGE_EMAIL_SUCCESS = "Email has been sent!";
     public static final String MESSAGE_NOT_EXISTING_TAGS = "The tag provided is invalid. Please check again.";
 
+    private static final Logger logger = LogsCenter.getLogger(EmailCommand.class);
     private final String tag;
     private final String subject;
     private String modifiedSubject;
 
-    private static final Logger logger = LogsCenter.getLogger(EmailCommand.class);
 
     /**
      * Emails a group of person with the same tag description and a given subject body.
@@ -423,8 +426,9 @@ public class FaceBookCommand extends UndoableCommand {
     public static final String MESSAGE_FACEBOOK_SHOWN_SUCCESS = "Profile of Person: %1$s";
     public static final String MESSAGE_NO_USERNAME = "This Person has no Facebook username!\n";
 
-    public final Index index;
     private static final Logger logger = LogsCenter.getLogger(FaceBookCommand.class);
+    public final Index index;
+
 
     public FaceBookCommand (Index index) {
         this.index = index;
@@ -573,8 +577,9 @@ public class RemoveReminderCommand extends UndoableCommand {
 
     public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted Reminder: %1$s";
 
-    private final Index targetIndex;
     private static final Logger logger = LogsCenter.getLogger(RemoveReminderCommand.class);
+    private final Index targetIndex;
+
 
     public RemoveReminderCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -627,8 +632,9 @@ public class SearchCommand extends Command {
             + "Parameters: Name and Date Of Birth\n"
             + "Example: " + COMMAND_WORD + " search n/ronak b/13.10.1997";
 
-    private final SearchContainsKeywordsPredicate predicate;
     private static final Logger logger = LogsCenter.getLogger(SearchCommand.class);
+    private final SearchContainsKeywordsPredicate predicate;
+
 
     public SearchCommand(SearchContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
@@ -873,12 +879,12 @@ public class FaceBookCommandParser implements Parser<FaceBookCommand> {
  */
 public class PhotoCommandParser implements Parser<PhotoCommand> {
 
+    private final Logger logger = LogsCenter.getLogger(PhotoCommandParser.class);
     /**
      * Parses the given {@code String} of arguments in the context of the PhotoCommand
      * and returns an PhotoCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    private final Logger logger = LogsCenter.getLogger(PhotoCommandParser.class);
     public PhotoCommand parse(String args) throws ParseException {
 
         logger.info("----------------[USER COMMAND][" + args + "]");
@@ -1264,8 +1270,8 @@ public class DateOfBirth {
                     + "The following format should be followed: \n"
             + "'.' and '-' can be used as separators. \n";
 
+    private static final Logger logger = LogsCenter.getLogger(SearchContainsKeywordsPredicate.class);
     public final String date;
-    private static final Logger logger = LogsCenter.getLogger(DateOfBirth.class);
 
 
     public DateOfBirth(String date) throws IllegalValueException {
@@ -1599,13 +1605,14 @@ public class FileImage {
 
 public class SearchContainsKeywordsPredicate implements Predicate<ReadOnlyPerson> {
 
+    private static final Logger logger = LogsCenter.getLogger(SearchContainsKeywordsPredicate.class);
     private final List<String> keywords;
 
     public SearchContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
-    private static final Logger logger = LogsCenter.getLogger(SearchContainsKeywordsPredicate.class);
+
     @Override
     public boolean test (ReadOnlyPerson person) {
 
@@ -1664,10 +1671,11 @@ public class DetailsContainsKeywordsPredicate implements Predicate<ReadOnlyRemin
 ```
 ###### /java/seedu/address/model/reminder/DueDate.java
 ``` java
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 
-import java.util.logging.Logger;
 
 /**
  * Represents a Reminders DueDate in Weaver.
@@ -1693,9 +1701,10 @@ public class DueDate {
                     + "'.' and '-' can be used as separators. \n";
 
     public static final int [] MONTHS_WITH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private static final Logger logger = LogsCenter.getLogger(DueDate.class);
 
     public final String date;
-    private static final Logger logger = LogsCenter.getLogger(DueDate.class);
+
 
 
 

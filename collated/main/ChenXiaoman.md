@@ -770,6 +770,10 @@ public class MapCommandParser implements Parser<MapCommand> {
 
     /**
      * Update tag and color pair in every person
+     *
+     * @param modifyingTagList
+     * @param tagColor
+     * @throws IllegalValueException
      */
     private void updateTagColorInEveryPerson(Set<Tag> modifyingTagList, TagColor tagColor)
             throws IllegalValueException {
@@ -1677,122 +1681,4 @@ public class PersonCard extends UiPart<Region> {
         totalPersons.setStyle(fxFomatString);
     }
 }
-```
-###### /resources/view/MainWindow.fxml
-``` fxml
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-
-    <stylesheets>
-        <URL value="@Extensions.css"/>
-    </stylesheets>
-
-    <SplitPane dividerPositions="0.5, 0.5" prefHeight="0.0" prefWidth="690.0">
-        <items>
-            <MenuBar fx:id="menuBar" prefHeight="29.0">
-                <Menu mnemonicParsing="false" text="File">
-                    <MenuItem id="logout" mnemonicParsing="false" onAction="#handleLogoutEvent" text="Logout"/>
-                    <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Theme">
-                    <MenuItem fx:id="brightTheme" mnemonicParsing="false" onAction="#handleChangeBrightTheme"
-                              text="Bright"/>
-                    <MenuItem fx:id="darkTheme" mnemonicParsing="false" onAction="#handleChangeDarkTheme" text="Dark"/>
-                </Menu>
-            </MenuBar>
-
-            <Button alignment="TOP_RIGHT" onAction="#handleIncreaseFontSize" text="+" wrapText="true"/>
-
-            <Button alignment="TOP_RIGHT" onAction="#handleDecreaseFontSize" text="-"
-                    wrapText="true"/>
-        </items>
-    </SplitPane>
-    <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
-        <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-        </padding>
-    </StackPane>
-
-    <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
-        <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-        </padding>
-    </StackPane>
-
-    <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-        <VBox fx:id="personList" maxWidth="350.0" minWidth="159.0" prefWidth="350.0" SplitPane.resizableWithParent="false">
-            <padding>
-                <Insets bottom="10" left="10" right="10" top="10" />
-            </padding>
-            <StackPane fx:id="personListPanelPlaceholder" maxWidth="400.0" prefWidth="375.0" VBox.vgrow="ALWAYS" />
-        </VBox>
-
-        <StackPane fx:id="browserPlaceholder" prefWidth="700.0" SplitPane.resizableWithParent="false">
-            <padding>
-                <Insets bottom="10" left="10" right="10" top="10" />
-            </padding>
-
-        </StackPane>
-        <VBox fx:id="reminders" maxWidth="340.0" prefWidth="320.0">
-            <children>
-                <StackPane fx:id="reminderListPlaceholder" layoutX="20.0" layoutY="20.0" prefHeight="590.0" />
-            </children>
-        </VBox>
-    </SplitPane>
-
-
-    <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
-
-</VBox>
-```
-###### /resources/view/PersonListCard.fxml
-``` fxml
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane HBox.hgrow="ALWAYS">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-        </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-            <padding>
-                <Insets bottom="5" left="15" right="5" top="5" />
-            </padding>
-            <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="130.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                    <children>
-                        <HBox alignment="CENTER_LEFT">
-                            <children>
-                                <Label fx:id="id" alignment="BOTTOM_LEFT" styleClass="cell_big_label">
-                                    <minWidth>
-                                        <!-- Ensures that the label text is never truncated -->
-                                        <Region fx:constant="USE_PREF_SIZE" />
-                                    </minWidth>
-                                </Label>
-                                <Label fx:id="name" alignment="BOTTOM_LEFT" styleClass="cell_big_label" text="\$first" />
-                            </children>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                        </HBox>
-                        <FlowPane fx:id="tags">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </VBox.margin>
-                        </FlowPane>
-                    </children>
-               <padding>
-                  <Insets top="5.0" />
-               </padding>
-                </VBox>
 ```

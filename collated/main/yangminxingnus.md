@@ -194,11 +194,18 @@ public class RemarkCommand extends UndoableCommand {
 ###### /java/seedu/address/logic/parser/RemarkCommandParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+
+import java.util.stream.Stream;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+
 import seedu.address.logic.commands.RemarkCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
+
 import seedu.address.model.person.Remark;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -212,25 +219,35 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
      */
     public RemarkCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_REMARK);
+
         if (trimmedArgs.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
+        }
+        if (!arePrefixesPresent(argMultimap, PREFIX_REMARK)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
         }
 
         String[] argus = trimmedArgs.split("r/");
 
         try {
+            Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)).get();
             Integer index = Integer.parseInt(argus[0].trim());
-            Remark remark;
-            if (argus.length > 1) {
-                remark = new Remark(argus[1].trim());
-            } else {
-                remark = new Remark("");
-            }
+
             return new RemarkCommand(index, remark);
         } catch (IllegalValueException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
         }
+    }
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
@@ -1175,95 +1192,4 @@ public class RegisterPage extends UiPart<Region> {
     public void setRegisterPage(RegisterPage registerPage) {
         this.registerPage = registerPage;
     }
-```
-###### /resources/view/LoginPage.fxml
-``` fxml
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox minHeight="400.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-
-      <StackPane VBox.vgrow="ALWAYS" styleClass="pane-with-border">
-
-         <children>
-            <TextField fx:id="username" alignment="CENTER" onKeyPressed="#handleKeyPress" promptText="username" StackPane.alignment="CENTER">
-               <StackPane.margin>
-                  <Insets bottom="100.0" left="300.0" right="300.0" />
-               </StackPane.margin>
-            </TextField>
-            <PasswordField fx:id="password" alignment="CENTER" onKeyPressed="#handleKeyPress" prefHeight="33.0" prefWidth="300.0" promptText="password" StackPane.alignment="BOTTOM_CENTER">
-               <StackPane.margin>
-                  <Insets bottom="80.0" left="300.0" right="300.0" />
-               </StackPane.margin>
-            </PasswordField>
-         </children>
-      </StackPane>
-      <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-         <children>
-            <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#handleRegisterEvent" prefHeight="70.0" prefWidth="159.0" text="Register" textAlignment="CENTER">
-            <StackPane.margin>
-               <Insets left="200.0" />
-            </StackPane.margin></Button>
-         <Button fx:id="loginButton1" alignment="CENTER" layoutX="382.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#handleLoginEvent" prefHeight="70.0" prefWidth="159.0" text="Login" textAlignment="CENTER">
-            <StackPane.margin>
-               <Insets right="200.0" />
-            </StackPane.margin>
-         </Button>
-         </children>
-      </StackPane>
-</VBox>
-```
-###### /resources/view/RegisterPage.fxml
-``` fxml
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox minHeight="400.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-      <children>
-         <TextField fx:id="username" alignment="CENTER" onKeyPressed="#handleKeyPress" promptText="username" StackPane.alignment="CENTER">
-            <StackPane.margin>
-               <Insets bottom="140.0" left="300.0" right="300.0" />
-            </StackPane.margin>
-         </TextField>
-         <PasswordField fx:id="password" alignment="CENTER" onKeyPressed="#handleKeyPress" prefHeight="33.0" prefWidth="300.0" promptText="password" StackPane.alignment="CENTER">
-            <StackPane.margin>
-               <Insets bottom="20.0" left="300.0" right="300.0" />
-            </StackPane.margin>
-         </PasswordField>
-         <PasswordField fx:id="password1" alignment="CENTER" layoutX="311.0" layoutY="127.0" onKeyPressed="#handleKeyPress" prefHeight="33.0" prefWidth="300.0" promptText="reenter password" StackPane.alignment="CENTER">
-            <StackPane.margin>
-               <Insets bottom="-100.0" left="300.0" right="300.0" />
-            </StackPane.margin>
-         </PasswordField>
-      </children>
-   </StackPane>
-   <StackPane styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-      <children>
-         <Button fx:id="registerButton" alignment="CENTER" layoutX="344.0" layoutY="60.0" mnemonicParsing="false" onMouseClicked="#handleRegisterEvent" prefHeight="70.0" prefWidth="143.0" text="Register" textAlignment="CENTER" StackPane.alignment="CENTER">
-            <StackPane.margin>
-               <Insets left="-200.0" />
-            </StackPane.margin>
-         </Button>
-         <Button fx:id="backButton" alignment="CENTER" layoutX="390.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#handleBackEvent" prefHeight="70.0" prefWidth="143.0" text="Back" textAlignment="CENTER" StackPane.alignment="CENTER">
-            <StackPane.margin>
-               <Insets right="-200.0" />
-            </StackPane.margin>
-         </Button>
-      </children>
-   </StackPane>
-   <stylesheets>
-      <URL value="@Extensions.css" />
-   </stylesheets>
-</VBox>
 ```

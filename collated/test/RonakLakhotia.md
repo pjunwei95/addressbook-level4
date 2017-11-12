@@ -651,37 +651,6 @@ public class ChangeReminderDescriptorTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ClearPopUpCommandTest.java
-``` java
-public class ClearPopUpCommandTest {
-
-    @Test
-    public void execute_emptyAddressBook_success() {
-        Model model = new ModelManager();
-        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_CLEAR_SUCCESS, model);
-    }
-
-    @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_CLEAR_SUCCESS, model);
-    }
-
-    /**
-     * Executes the given {@code command}, confirms that <br>
-     * - the result message matches {@code expectedMessage} <br>
-     * - the {@code actualModel} matches {@code expectedModel}
-     */
-
-    public static void assertCommandSuccessClear( Model actualModel, String expectedMessage,
-                                            Model expectedModel) {
-
-        assertEquals(expectedMessage, "Weaver has been cleared!");;
-        assertEquals(expectedModel, actualModel);
-
-    }
-}
-```
 ###### /java/seedu/address/logic/commands/CommandTestUtil.java
 ``` java
     /**

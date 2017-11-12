@@ -1,4 +1,43 @@
 # pjunwei95
+###### /java/seedu/address/logic/commands/ClearPopupCommandTest.java
+``` java
+import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import org.junit.Test;
+
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.UndoRedoStack;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+
+public class ClearPopupCommandTest {
+
+    @Test
+    public void execute_emptyAddressBook() {
+        Model model = new ModelManager();
+        ClearPopupCommand clearPopupCommand = new ClearPopupCommand();
+        assertEquals(prepareCommand(model, clearPopupCommand), clearPopupCommand);
+    }
+
+    @Test
+    public void execute_nonEmptyAddressBook() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ClearPopupCommand clearPopupCommand = new ClearPopupCommand();
+        assertEquals(prepareCommand(model, clearPopupCommand), clearPopupCommand);
+    }
+
+    /**
+     * Generates a new {@code ClearPopupCommand} which upon execution, clears the contents in {@code model}.
+     */
+    private ClearPopupCommand prepareCommand(Model model, ClearPopupCommand clearPopupCommand) {
+        ClearPopupCommand command = new ClearPopupCommand();
+        command.setData(model, new CommandHistory(), new UndoRedoStack());
+        return clearPopupCommand;
+    }
+}
+```
 ###### /java/seedu/address/logic/commands/CommandTestUtil.java
 ``` java
         TAG_DESC_AMY = new DeleteTagDescriptorBuilder()
@@ -124,6 +163,7 @@ import seedu.address.logic.commands.DeleteTagCommand.DeleteTagDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.testutil.DeleteTagDescriptorBuilder;
 
@@ -135,39 +175,37 @@ public class DeleteTagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
+    public void execute_duplicatePersonUnfilteredList_failure() {
+        Person firstPerson = new Person(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder(firstPerson).build();
+        DeleteTagCommand deleteTagCommand = prepareCommand(INDEX_SECOND_PERSON, descriptor);
+
+        assertCommandFailure(deleteTagCommand, model, DeleteTagCommand.MESSAGE_NOT_EXISTING_TAGS);
+    }
+
+    @Test
     public void execute_duplicatePersonFilteredList_failure() {
         showFirstPersonOnly(model);
 
         // edit person in filtered list into a duplicate in address book
         ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        DeleteTagCommand editCommand = prepareCommand(INDEX_FIRST_PERSON,
+        DeleteTagCommand deleteTagCommand = prepareCommand(INDEX_FIRST_PERSON,
                 new DeleteTagDescriptorBuilder(personInList).build());
 
-        assertCommandFailure(editCommand, model, DeleteTagCommand.MESSAGE_NOT_EXISTING_TAGS);
+        assertCommandFailure(deleteTagCommand, model, DeleteTagCommand.MESSAGE_NOT_EXISTING_TAGS);
     }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build();
-        DeleteTagCommand editCommand = prepareCommand(outOfBoundIndex, descriptor);
+        DeleteTagCommand deleteTagCommand = prepareCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-    @Test
-    public void checkTagDeletedPerson() {
-
-        ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND)
-                .build();
-        DeleteTagCommand command = new DeleteTagCommand(INDEX_SECOND_PERSON, descriptor);
-        ReadOnlyPerson changed = command.createTagDeletedPerson(personInList, descriptor);
-        assertTrue(changed.getTags().isEmpty() == false);
-    }
-
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
+     * Delete the tags of  filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
      */
     @Test
@@ -177,11 +215,25 @@ public class DeleteTagCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeleteTagCommand editCommand = prepareCommand(outOfBoundIndex,
+        DeleteTagCommand deleteTagCommand = prepareCommand(outOfBoundIndex,
                 new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
+
+    @Test
+    public void checkTagDeletedPerson() {
+
+        ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND)
+                .build();
+        DeleteTagCommand command = new DeleteTagCommand(INDEX_SECOND_PERSON, descriptor);
+        ReadOnlyPerson changed = command.createTagDeletedPerson(personInList, descriptor);
+        assertTrue(!changed.getTags().isEmpty());
+    }
+
+
 
     @Test
     public void equals() {
@@ -207,9 +259,9 @@ public class DeleteTagCommandTest {
      * Returns an {@code DeleteTagCommand} with parameters {@code index} and {@code descriptor}
      */
     private DeleteTagCommand prepareCommand(Index index, DeleteTagDescriptor descriptor) {
-        DeleteTagCommand editCommand = new DeleteTagCommand(index, descriptor);
-        editCommand.setData(model, new CommandHistory(), new UndoRedoStack());
-        return editCommand;
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(index, descriptor);
+        deleteTagCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        return deleteTagCommand;
     }
 }
 ```
@@ -602,6 +654,32 @@ public class DeleteTagDescriptorBuilder {
 
     public DeleteTagDescriptor build() {
         return descriptor;
+    }
+}
+```
+###### /java/seedu/address/ui/ClearConfirmationTest.java
+``` java
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.testfx.api.FxToolkit;
+
+public class ClearConfirmationTest extends GuiUnitTest {
+
+    private ClearConfirmation clearConfirmation;
+
+    @Before
+    public void setUp() throws Exception {
+        guiRobot.interact(() -> clearConfirmation = new ClearConfirmation());
+
+        FxToolkit.showStage();
+    }
+
+    @Test
+    public void display() {
+        ClearConfirmation expectedClearConfirmation = clearConfirmation;
+        assertEquals(expectedClearConfirmation, clearConfirmation);
     }
 }
 ```
