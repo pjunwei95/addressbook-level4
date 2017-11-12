@@ -693,7 +693,7 @@ Example: findtag friends colleagues
 *COMMAND 1* - `findtag friends` +
 
 * *Result* +
-2 persons listed!
+5 persons listed!
 
 *COMMAND 2* - `findtag friend` +
 
@@ -708,7 +708,7 @@ Example: findtag friends colleagues
 *COMMAND 4* - `findtag FRIENDS` +
 
 * *Result* +
-2 persons listed!
+5 persons listed!
 
 === Delete person tag command
 
@@ -753,12 +753,12 @@ Example: deletetag 1 t/friends
 
 === Clear Popup command
 
-*COMMAND 0* - `clear` +
+*COMMAND 0* - `clear` + press `ESC`
 
 * *Result* +
 A clear confirmation dialog would appear.
 
-*COMMAND 1* - `clear 1` +
+*COMMAND 1* - `clear 1` + press `ESC`
 
 * *Result* +
 A clear confirmation dialog would appear.
@@ -768,7 +768,8 @@ A clear confirmation dialog would appear.
 * *Result* +
 Weaver has been cleared!
 
-*COMMAND 3* - `clear` + click `X` / `Cancel` / press `->` + `Space` / press `Tab` + `Space`
+*COMMAND 3* - `clear` +  press `ESC` / press `->` + `Space` /
+press `Tab` + `Space` / click `X` / click `Cancel` /
 
 * *Result* +
 Weaver has not been cleared!
@@ -797,13 +798,17 @@ Weaver has not been cleared!
 
 === Backup command
 
+[NOTE]
+In your root directory, under `data/` you should have a SampleData.xml file, and
+entering the backup command, will create a SampleData-backup.xml file.
+
 *COMMAND 0* - `backup` +
 
 * *Result* +
 A backup of Weaver has been created!
 
 
-=== Feature: Auto-completion for commands
+=== Autocompletion feature
 [NOTE]
 For all the following command, you need to type in the command without pressing enter key.
 And then you can check the suggested words displayed. To cancel the suggested words, press the `ESC` key.
@@ -826,7 +831,11 @@ deletetag
 * *Suggested words* +
 deletetag
 
-*COMMAND 3* - `delete` + press `ESC`
+*COMMAND 3* - `del` + press `Enter`
+
+* *Suggested words* +
+delete +
+deletetag
 
 * *Result* +
 Command Line: delete
@@ -839,11 +848,7 @@ deletetag
 * *Result* +
 Command Line: deletetag
 
-*COMMAND 5* - `del` + press `Enter`
-
-* *Suggested words* +
-delete +
-deletetag
+*COMMAND 5* - `delete` + press `ESC`
 
 * *Result* +
 Command Line: delete
