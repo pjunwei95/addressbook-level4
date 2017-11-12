@@ -591,7 +591,7 @@ image::ChangeTagColorSequenceDiagram.png[width="800"]
 **Cons:** It is complicated to implement. +
 **Alternative 2:** Create a static hash map of all tag names(String) and their associate tag color(String) inside `Tag` class. +
 **Pros:** It is easy to implement. +
-**Cons:** Storing tag and tag color pairs inside `Tag` class violates the single responsibility principle of classes.
+**Cons:** All the methods associated with tag color will be stored inside `Tag` class, violates the single responsibility principle of classes.
 
 ---
 
