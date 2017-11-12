@@ -8,7 +8,7 @@ We are a team consisting of four members based in the http://www.comp.nus.edu.sg
 We are currently Computer Science students pursuing an undergraduate degree here at NUS.
 Our TeamID is `W13-B2`.
 
-The `Weaver` application was developed by our team for our Software Engineering project.
+The `Weaver` application was developed by our team for our Software Engineering project mainly meant for NUS students.
 It is adapted from the AddressBook - Level 4 that was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
 We have renamed the application as such so that it evokes a positive appeal among others. +
 Weaver symbolises the weaving of out contacts in order to stay connected. +
@@ -18,7 +18,7 @@ Weaver symbolises the weaving of out contacts in order to stay connected. +
 
 === Ronak Lakhotia
 image::ronaklakhotia.png[width="150", align="left"]
-{empty}[https://github.com/RonakLakhotia[github]][http://localhost:63342/addressbook-level4/build/docs/html5/team/RonakLakhotia.html?_ijt=86rdvl087ep6gbn048dr27p4g8[portfolio]]
+{empty}[https://github.com/RonakLakhotia[github]][http://localhost:63342/addressbook-level4/build/docs/html5/team/RonakLakhotia.html?_ijt=jslv02ukcc8u0ala29s7a758qo[portfolio Weblink]]
 
 Role: Co-ordination and Testing +
 

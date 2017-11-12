@@ -3,7 +3,13 @@
 == Load Sample data
 
 ** To load the sample data, follow the instructions given below:- +
-** 1) Download the SampleData.xml file. +
+** 1) Download the [W13-B2][Weaver]SampleData.xml file. +
+
+
+[TIP]
+RENAME THE FILE NAME to `SampleData.xml` Make sure it is exactly the same. It is case-sensitive. +
+
+
 ** 2) Run the Weaver.jar file to open the app. +
 ** 3) ** LOGIN ** with the Username - `admin` and Password - `admin` . +
 ** 4) After logging in make a change to the Weaver data by executing the command - `edit 1 n/change` . +
