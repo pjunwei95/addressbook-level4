@@ -1,21 +1,148 @@
 # pjunwei95
-###### /java/seedu/address/logic/commands/BackUpCommandTest.java
+###### /java/seedu/address/ui/ClearConfirmationTest.java
 ``` java
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Rule;
+import org.junit.Before;
+import org.junit.Test;
+import org.testfx.api.FxToolkit;
+
+public class ClearConfirmationTest extends GuiUnitTest {
+
+    private ClearConfirmation clearConfirmation;
+
+    @Before
+    public void setUp() throws Exception {
+        guiRobot.interact(() -> clearConfirmation = new ClearConfirmation());
+
+        FxToolkit.showStage();
+    }
+
+    @Test
+    public void display() {
+        ClearConfirmation expectedClearConfirmation = clearConfirmation;
+        assertEquals(expectedClearConfirmation, clearConfirmation);
+    }
+}
+```
+###### /java/seedu/address/logic/parser/DeleteTagCommandParserTest.java
+``` java
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+
 import org.junit.Test;
 
-import seedu.address.commons.events.model.BackUpEvent;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.UndoRedoStack;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.ui.testutil.EventsCollectorRule;
+import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.model.tag.Tag;
+
+public class DeleteTagCommandParserTest {
+
+    private static final String TAG_EMPTY = " " + PREFIX_TAG;
+
+    private static final String MESSAGE_INVALID_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE);
+
+    private DeleteTagCommandParser parser = new DeleteTagCommandParser();
+
+    @Test
+    public void parse_missingParts_failure() {
+        // no index specified
+        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+
+        // no field specified
+        assertParseFailure(parser, "1", DeleteTagCommand.MESSAGE_NOT_DELETED);
+
+        // no index and no field specified
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidPreamble_failure() {
+        // negative index
+        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // zero index
+        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // invalid arguments being parsed as preamble
+        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+
+        // invalid prefix being parsed as preamble
+        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidValue_failure() {
+        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
+
+        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
+        // parsing it together with a valid tag results in error
+        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_TAG_CONSTRAINTS);
+    }
+
+}
+```
+###### /java/seedu/address/logic/parser/AddressBookParserTest.java
+``` java
+    @Test
+    public void parseCommand_findTag() throws Exception {
+
+        List<String> keywords = Arrays.asList("friends");
+        final FindTagCommand command = new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
+        assertEquals(command, new FindTagCommand(new TagContainsKeywordsPredicate(keywords)));
+    }
+
+
+    @Test
+    public void parseCommand_backup() throws Exception {
+        assertTrue(parser.parseCommand(BackUpCommand.COMMAND_WORD) instanceof BackUpCommand);
+        assertTrue(parser.parseCommand(BackUpCommand.COMMAND_WORD + " 3") instanceof BackUpCommand);
+    }
+
+```
+###### /java/seedu/address/logic/parser/FindTagCommandParserTest.java
+``` java
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Arrays;
+
+import org.junit.Test;
+
+import seedu.address.logic.commands.FindTagCommand;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
+
+public class FindTagCommandParserTest {
+
+    private FindTagCommandParser parser = new FindTagCommandParser();
+
+    @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        FindTagCommand expectedFindTagCommand =
+                new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "husband")));
+        assertParseSuccess(parser, "friends husband", expectedFindTagCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " \n friends \n \t husband  \t", expectedFindTagCommand);
+    }
+
+}
 ```
 ###### /java/seedu/address/logic/commands/CommandTestUtil.java
 ``` java
@@ -118,118 +245,6 @@ import seedu.address.ui.testutil.EventsCollectorRule;
 
         assert model.getFilteredPersonList().size() == 1;
     }
-```
-###### /java/seedu/address/logic/commands/DeleteTagCommandTest.java
-``` java
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.showFirstPersonOnly;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import org.junit.Test;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.UndoRedoStack;
-import seedu.address.logic.commands.DeleteTagCommand.DeleteTagDescriptor;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.testutil.DeleteTagDescriptorBuilder;
-
-/**
- * Contains integration tests (interaction with the Model) and unit tests for DeleteTagCommand.
- */
-public class DeleteTagCommandTest {
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        showFirstPersonOnly(model);
-
-        // edit person in filtered list into a duplicate in address book
-        ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        DeleteTagCommand editCommand = prepareCommand(INDEX_FIRST_PERSON,
-                new DeleteTagDescriptorBuilder(personInList).build());
-
-        assertCommandFailure(editCommand, model, DeleteTagCommand.MESSAGE_NOT_EXISTING_TAGS);
-    }
-
-    @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build();
-        DeleteTagCommand editCommand = prepareCommand(outOfBoundIndex, descriptor);
-
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-    @Test
-    public void checkTagDeletedPerson() {
-
-        ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND)
-                .build();
-        DeleteTagCommand command = new DeleteTagCommand(INDEX_SECOND_PERSON, descriptor);
-        ReadOnlyPerson changed = command.createTagDeletedPerson(personInList, descriptor);
-        assertTrue(changed.getTags().isEmpty() == false);
-    }
-
-
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
-    @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showFirstPersonOnly(model);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-
-        DeleteTagCommand editCommand = prepareCommand(outOfBoundIndex,
-                new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build());
-
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void equals() {
-        final DeleteTagCommand standardCommand = new DeleteTagCommand(INDEX_FIRST_PERSON, TAG_DESC_AMY);
-
-        // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
-
-        // null -> returns false
-        assertFalse(standardCommand.equals(null));
-
-        // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
-
-        // different index -> returns false
-        assertFalse(standardCommand.equals(new DeleteTagCommand(INDEX_SECOND_PERSON, TAG_DESC_AMY)));
-
-        // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new DeleteTagCommand(INDEX_FIRST_PERSON, TAG_DESC_BOB)));
-    }
-
-    /**
-     * Returns an {@code DeleteTagCommand} with parameters {@code index} and {@code descriptor}
-     */
-    private DeleteTagCommand prepareCommand(Index index, DeleteTagDescriptor descriptor) {
-        DeleteTagCommand editCommand = new DeleteTagCommand(index, descriptor);
-        editCommand.setData(model, new CommandHistory(), new UndoRedoStack());
-        return editCommand;
-    }
-}
 ```
 ###### /java/seedu/address/logic/commands/DeleteTagDescriptorTest.java
 ``` java
@@ -369,123 +384,129 @@ public class FindTagCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
+###### /java/seedu/address/logic/commands/DeleteTagCommandTest.java
 ``` java
-    @Test
-    public void parseCommand_findTag() throws Exception {
-
-        List<String> keywords = Arrays.asList("friends");
-        final FindTagCommand command = new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
-        assertEquals(command, new FindTagCommand(new TagContainsKeywordsPredicate(keywords)));
-    }
-
-
-    @Test
-    public void parseCommand_backup() throws Exception {
-        assertTrue(parser.parseCommand(BackUpCommand.COMMAND_WORD) instanceof BackUpCommand);
-        assertTrue(parser.parseCommand(BackUpCommand.COMMAND_WORD + " 3") instanceof BackUpCommand);
-    }
-
-```
-###### /java/seedu/address/logic/parser/DeleteTagCommandParserTest.java
-``` java
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.showFirstPersonOnly;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.model.tag.Tag;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.UndoRedoStack;
+import seedu.address.logic.commands.DeleteTagCommand.DeleteTagDescriptor;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.testutil.DeleteTagDescriptorBuilder;
 
-public class DeleteTagCommandParserTest {
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for DeleteTagCommand.
+ */
+public class DeleteTagCommandTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
-
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE);
-
-    private DeleteTagCommandParser parser = new DeleteTagCommandParser();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void parse_missingParts_failure() {
-        // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+    public void execute_duplicatePersonUnfilteredList_failure() {
+        Person firstPerson = new Person(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
+        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder(firstPerson).build();
+        DeleteTagCommand deleteTagCommand = prepareCommand(INDEX_SECOND_PERSON, descriptor);
 
-        // no field specified
-        assertParseFailure(parser, "1", DeleteTagCommand.MESSAGE_NOT_DELETED);
-
-        // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertCommandFailure(deleteTagCommand, model, DeleteTagCommand.MESSAGE_NOT_EXISTING_TAGS);
     }
 
     @Test
-    public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+    public void execute_duplicatePersonFilteredList_failure() {
+        showFirstPersonOnly(model);
 
-        // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        // edit person in filtered list into a duplicate in address book
+        ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        DeleteTagCommand deleteTagCommand = prepareCommand(INDEX_FIRST_PERSON,
+                new DeleteTagDescriptorBuilder(personInList).build());
 
-        // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
-
-        // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertCommandFailure(deleteTagCommand, model, DeleteTagCommand.MESSAGE_NOT_EXISTING_TAGS);
     }
 
     @Test
-    public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build();
+        DeleteTagCommand deleteTagCommand = prepareCommand(outOfBoundIndex, descriptor);
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-}
-```
-###### /java/seedu/address/logic/parser/FindTagCommandParserTest.java
-``` java
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+    /**
+     * Delete the tags of  filtered list where index is larger than size of filtered list,
+     * but smaller than size of address book
+     */
+    @Test
+    public void execute_invalidPersonIndexFilteredList_failure() {
+        showFirstPersonOnly(model);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-import java.util.Arrays;
+        DeleteTagCommand deleteTagCommand = prepareCommand(outOfBoundIndex,
+                new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND).build());
 
-import org.junit.Test;
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
 
-import seedu.address.logic.commands.FindTagCommand;
-import seedu.address.model.tag.TagContainsKeywordsPredicate;
-
-public class FindTagCommandParserTest {
-
-    private FindTagCommandParser parser = new FindTagCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
+    public void checkTagDeletedPerson() {
+
+        ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        DeleteTagDescriptor descriptor = new DeleteTagDescriptorBuilder().withTags(VALID_TAG_HUSBAND)
+                .build();
+        DeleteTagCommand command = new DeleteTagCommand(INDEX_SECOND_PERSON, descriptor);
+        ReadOnlyPerson changed = command.createTagDeletedPerson(personInList, descriptor);
+        assertTrue(!changed.getTags().isEmpty());
     }
+
+
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindTagCommand expectedFindTagCommand =
-                new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "husband")));
-        assertParseSuccess(parser, "friends husband", expectedFindTagCommand);
+    public void equals() {
+        final DeleteTagCommand standardCommand = new DeleteTagCommand(INDEX_FIRST_PERSON, TAG_DESC_AMY);
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n friends \n \t husband  \t", expectedFindTagCommand);
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different index -> returns false
+        assertFalse(standardCommand.equals(new DeleteTagCommand(INDEX_SECOND_PERSON, TAG_DESC_AMY)));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new DeleteTagCommand(INDEX_FIRST_PERSON, TAG_DESC_BOB)));
     }
 
+    /**
+     * Returns an {@code DeleteTagCommand} with parameters {@code index} and {@code descriptor}
+     */
+    private DeleteTagCommand prepareCommand(Index index, DeleteTagDescriptor descriptor) {
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(index, descriptor);
+        deleteTagCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        return deleteTagCommand;
+    }
 }
 ```
 ###### /java/seedu/address/storage/StorageManagerTest.java
