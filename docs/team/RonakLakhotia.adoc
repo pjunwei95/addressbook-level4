@@ -183,6 +183,8 @@ wants to look only for a particular person (Pull requests https://github.com/CS2
 
 * Implementing the Reminders panel was very useful as it gave me a good understanding of how the various components of the codebase interact with each other. +
 
+* Wrote extensive use cases and documentation in the form of user guide and developer guide. +
+
 ==== Active Participation in Forum. +
 
 * I have participated actively in forum discussions and have helped my peers. Below are two such instances. +
@@ -207,12 +209,19 @@ for the issue being resolved. (https://github.com/nus-cs2103-AY1718S1/forum/issu
 3) I helped other teams find bugs in their product during the practical exam simulation we had in Week 11.
 (https://github.com/CS2103AUG2017-T09-B4/main/issues/101#issuecomment-341641998[Bug]) is the link to the issue. +
 
+4) In the team project, I took a leader's role and created issues, therby assigning deadlines. +
 
 === PROJECT: NUSEvents +
 
 ** I was actively involved in a side project of my own over the recent summer break. +
+
+==== ABOUT THE PROJECT
+
+Students coming into university want to experience an enriching and diverse campus life. One of the most integral parts of a campus life is the host of events taking place around the campus. We want to bring forth an application by means of which members of the NUS family will be able to view the various events going around the campus on a day to day basis. Now there will be no need to worry about searching websites, scrolling through emails and pages on Facebook to know what events are being organized by various faculties and clubs. This will be convenient for all students and members of the various faculties as it will enable them to indicate their interest in the events that they want to attend.
+
 ** The project was about developing an Android Application that will help students keep track of
 the various events going around campus. +
+
 
 ** The project was done with another friend of mine and we were careful in following the Software Engineering norms.
 (https://github.com/RonakLakhotia/NusEvents[Here]) is a link to the project repository. +
