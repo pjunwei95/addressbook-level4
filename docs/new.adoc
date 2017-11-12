@@ -3,7 +3,13 @@
 == Load Sample data
 
 ** To load the sample data, follow the instructions given below:- +
-** 1) Download the SampleData.xml file. +
+** 1) Download the [W13-B2][Weaver]SampleData.xml file. +
+
+
+[TIP]
+RENAME THE FILE NAME to `SampleData.xml` Make sure it is exactly the same. It is case-sensitive. +
+
+
 ** 2) Run the Weaver.jar file to open the app. +
 ** 3) ** LOGIN ** with the Username - `admin` and Password - `admin` . +
 ** 4) After logging in make a change to the Weaver data by executing the command - `edit 1 n/change` . +
@@ -699,11 +705,7 @@ Example: findtag friends colleagues
 *COMMAND 1* - `findtag friends` +
 
 * *Result* +
-<<<<<<< HEAD
 6 persons listed!
-=======
-5 persons listed!
->>>>>>> d4b1c980ae5676848d9b1399301bb6d096b7d8a2
 
 *COMMAND 2* - `findtag friend` +
 
@@ -718,11 +720,7 @@ Example: findtag friends colleagues
 *COMMAND 4* - `findtag FRIENDS` +
 
 * *Result* +
-<<<<<<< HEAD
 6 persons listed!
-=======
-5 persons listed!
->>>>>>> d4b1c980ae5676848d9b1399301bb6d096b7d8a2
 
 === Delete person tag command
 
@@ -765,62 +763,11 @@ deletetag: Deletes the tag identified by the index number used in the last perso
 Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
 Example: deletetag 1 t/friends
 
-<<<<<<< HEAD
-=======
-=== Clear Popup command
-
-*COMMAND 0* - `clear` + press `ESC`
-
-* *Result* +
-A clear confirmation dialog would appear.
-
-*COMMAND 1* - `clear 1` + press `ESC`
-
-* *Result* +
-A clear confirmation dialog would appear.
-
-*COMMAND 2* - `clear` + click `OK` / press `Enter` / press `Space`
-
-* *Result* +
-Weaver has been cleared!
-
-*COMMAND 3* - `clear` +  press `ESC` / press `->` + `Space` /
-press `Tab` + `Space` / click `X` / click `Cancel` /
-
-* *Result* +
-Weaver has not been cleared!
-
-=== Clear Popup command
-
-*COMMAND 0* - `clear` +
-
-* *Result* +
-A clear confirmation dialog would appear.
-
-*COMMAND 1* - `clear 1` +
-
-* *Result* +
-A clear confirmation dialog would appear.
-
-*COMMAND 2* - `clear` + click `OK` / press `Enter` / press `Space`
-
-* *Result* +
-Weaver has been cleared!
-
-*COMMAND 3* - `clear` + click `X` / `Cancel` / press `->` + `Space` / press `Tab` + `Space`
-
-* *Result* +
-Weaver has not been cleared!
->>>>>>> d4b1c980ae5676848d9b1399301bb6d096b7d8a2
 
 === Backup command
 
 [NOTE]
-<<<<<<< HEAD
 In your root directory, under data/ you should have a SampleData.xml file, and
-=======
-In your root directory, under `data/` you should have a SampleData.xml file, and
->>>>>>> d4b1c980ae5676848d9b1399301bb6d096b7d8a2
 entering the backup command, will create a SampleData-backup.xml file.
 
 *COMMAND 0* - `backup` +

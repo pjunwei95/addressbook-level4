@@ -1682,6 +1682,8 @@ public class PersonCard extends UiPart<Region> {
     }
 }
 ```
+
+
 ###### \resources\view\MainWindow.fxml
 ``` fxml
 <?import java.net.URL?>
@@ -1889,3 +1891,4 @@ public class PersonCard extends UiPart<Region> {
     </GridPane>
 </HBox>
 ```
+
