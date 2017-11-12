@@ -821,14 +821,14 @@ will be thrown. +
 
 
 *PRE-REQUISITE* +
-There is a pre-requisite for the command to work.The image that is going to be added to the contact must already be
-present on the user's local PC.If it is not so, Weaver is going to throw an exception and prompt the user to add a valid File path.
+There is a pre-requisite for the command to work. The image that is going to be added to the contact must already be
+present on the user's local PC. If it is not so, Weaver is going to throw an exception and prompt the user to add a valid File path.
 
 
 *Working Flow* +
 
 ** The `PhotoCommandParser` Class parses the arguments entered in the photo command.The class then throws an Exception with the
-appropriate message depending on whether the File name is not present in the path specified by the user or if the number of arguments entered
+appropriate message depending on whether the File name is present in the path specified by the user or if the number of arguments entered
 is not equal to two. +
 
 ** The `PhotoCommand` class takes care of Invalid conditions like incorrect index. +
@@ -871,7 +871,7 @@ The Sequence diagram (Figure 3.2) above shows the working flow of the Photo comm
 
 Refer to Figure 3.3 below for the Inheritance diagram of the command. +
 
-image::PhotoCommand.png[width="800"]
+image::PhotoCommand.png[width="590" length="150" ]
 Figure 3.3
 
 The binder for attaching the image to the Person Card each time, is implemented in the following way. +
@@ -899,7 +899,7 @@ The wireframe for binding the image is shown above in Figure 3.4. +
 ==== Design considerations
 
 **Aspect:** How should the user choose the Image. +
-**Alternative1 (current choice): ** Enter the File path present on
+**Alternative1: (current choice): ** Enter the File path present on
 the desktop. +
 **Pros:** Makes use of Commad Line Interface. +
 **Cons:** User has to make sure the file exists on his/her Desktop. +
@@ -1038,19 +1038,10 @@ the browser panel restricts some functionalities. +
 === Adding a reminders list to Weaver.
 
 ** The reminders panel displays the list of reminders that the user has entered. +
-** The Reminder object contains three main attributes which are as follows +
 ** A reminder class has three main attributes, Details of reminder, due date and the priority level of the reminder. +
 ** Reminder objects are kept in the UniqueReminderList which ensures there are no duplicate reminders. +
 ** The Model manager carries out the operations related to reminders. +
 ** Exceptions are thrown if invalid commands entered. +
-
-* Details of the reminder. +
-
-* The priority level of the reminder which can be high, low or medium. +
-
-* The DueDate of the assignment.
-
-** An image is also assigned to the reminder indicating the priority level of the reminder. +
 
 ** There are three main commands associated with this feature. +
 
@@ -1072,7 +1063,7 @@ image::ReminderArchi.png[width="800"]
 ** The reminders panel is implemented in a similar manner like the person list panel. +
 ** Data is written/stored in the same addressbook.xml file. +
 
-image::LogicComponentClassDiagram copyReminder.png[width="800"]]
+image::LogicReminder.png[width="800"]]
 (Figure 5.2)
 
 Figure 5.2 above shows the Logic Component Diagram of the Reminders Panel implementation. +
