@@ -18,7 +18,7 @@ Weaver symbolises the weaving of out contacts in order to stay connected. +
 
 === Ronak Lakhotia
 image::ronaklakhotia.png[width="150", align="left"]
-{empty}[https://github.com/RonakLakhotia[github]][http://localhost:63342/addressbook-level4/build/docs/html5/team/RonakLakhotia.html?_ijt=jslv02ukcc8u0ala29s7a758qo[portfolio Weblink]]
+{empty}[https://github.com/RonakLakhotia[github]][https://github.com/CS2103AUG2017-W13-B2/main/blob/master/docs/team/RonakLakhotia.adoc[portfolio]]
 
 Role: Co-ordination and Testing +
 
