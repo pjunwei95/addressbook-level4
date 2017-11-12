@@ -94,14 +94,14 @@ include::../DeveloperGuide.adoc[tag=email]
 
 ---
 
-=== Enhancement Added: Add command `search`
+=== Enhancement Added: Reminders Panel
 
 ==== External behavior
 
 ---
 #Start of Extract [from: User Guide]#
 
-include::../UserGuide.adoc[tag=search]
+include::../UserGuide.adoc[tag=reminder]
 
 #End of Extract#
 
@@ -112,7 +112,7 @@ include::../UserGuide.adoc[tag=search]
 ---
 #Start of Extract [from: Developer Guide]#
 
-include::../DeveloperGuide.adoc[tag=email]
+include::../DeveloperGuide.adoc[tag=reminder]
 
 #End of Extract#
 

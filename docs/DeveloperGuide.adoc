@@ -360,6 +360,28 @@ image::UndoRedoActivityDiagram.png[width="200"]
 **Cons:** Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things. +
 // end::undoredo[]
 
+=== Search Command
+
+** The search command simply makes the find command more powerful as it looks for people with same name and date of birth. +
+** Implementation is similar to the find command. +
+** The command takes in two arguments, namely the name of the person and the date of birth. +
+** Exceptions are thrown if invalid commands are entered. +
+
+Below is a code snippet which shows how the search command parses the arguements. +
+
+---
+    @Override
+    public boolean test (ReadOnlyPerson person) {
+
+        if (keywords.size() <= 1) {
+            logger.warning("The number of arguements entered do not match the command format");
+            return false;
+        }
+
+        return StringUtil.containsWordIgnoreCase(person.getName().fullName, keywords.get(0))
+               && StringUtil.containsWordIgnoreCase(person.getDateOfBirth().date, keywords.get(1));
+    }
+---
 // tag::remark[]
 === Remark mechanism
 
@@ -1011,10 +1033,16 @@ the browser panel restricts some functionalities. +
 **Cons:** Limits the functionalities that can be used on Gmail since the browser panel is not updated. +
 
 // end::email[]
+
+// tag::reminder[]
 === Adding a reminders list to Weaver.
 
 ** The reminders panel displays the list of reminders that the user has entered. +
 ** The Reminder object contains three main attributes which are as follows +
+** A reminder class has three main attributes, Details of reminder, due date and the priority level of the reminder. +
+** Reminder objects are kept in the UniqueReminderList which ensures there are no duplicate reminders. +
+** The Model manager carries out the operations related to reminders. +
+** Exceptions are thrown if invalid commands entered. +
 
 * Details of the reminder. +
 
@@ -1036,6 +1064,37 @@ e.g. - `remove 1`. +
 e.g. - `change 1 d/12.12.2017`. +
 
 ** The commands to add and remove reminders will inherit from Undoable Command. +
+
+The diagram (Figure 5.1) below gives the high level architecture diagram of the implementation. +
+
+image::ReminderArchi.png[width="800"]
+
+** The reminders panel is implemented in a similar manner like the person list panel. +
+** Data is written/stored in the same addressbook.xml file. +
+
+image::LogicComponentClassDiagram copyReminder.png[width="800"]]
+(Figure 5.2)
+
+Figure 5.2 above shows the Logic Component Diagram of the Reminders Panel implementation. +
+[TIP]
+ Note how the LogicManager class implements the interface Logic and is associated with the undo redo stack. +
+
+==== Reasons for this kind of implementation
+
+** The implementation is easy to follow and comprehend. +
+** Storing in the same file makes the organization better. +
+
+==== Design Considerations
+
+**Aspect:** How to store each reminder +
+**Alternative1 : (currently used) ** Reminders stored in the addressbook.xml file +
+**Pros:** Implementation easy to follow for future developers. +
+**Cons:** Can violate higher levels of software engineering principles. +
+**Alternative2:** Store reminder objects separately in a different xml file +
+**Pros:** More in sync with SE principles. +
+**Cons:** Harder to implement and follow. +
+
+// end::reminder[]
 
 // tag::nusmods[]
 === Nusmods Integration

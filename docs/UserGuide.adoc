@@ -577,6 +577,7 @@ image::theme.png[width="840"]
 
 // end::theme[]
 
+// tag::reminder[]
 === Reminders Panel since v1.4 +
 
 Have you ever felt the need to be constantly reminded of your daily assignments. Fret not!Weaver helps you keep up to
@@ -615,7 +616,7 @@ The reminder duedate is changed . +
 
 image::change.png[width="840"]
 
-
+// end::reminder[]
 
 // tag::autocompletion[]
 === Auto-completion since v1.4
