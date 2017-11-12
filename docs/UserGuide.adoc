@@ -668,6 +668,7 @@ image::backup.png[width="237"]
 
 // end::backup[]
 
+// tag::email[]
 === Sending Emails to your contacts : `backup` since v1.5
 
 Weaver now allows you to send emails to all your contacts with a common tag! +
@@ -696,6 +697,7 @@ Multiple tags cannot be entered +
 
 image::emailMultiple.png[width="237"]
 
+// end::email[]
 === Exiting the program : `exit`
 
 Exits the program. +

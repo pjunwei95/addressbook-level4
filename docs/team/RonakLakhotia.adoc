@@ -41,7 +41,7 @@ include::../DeveloperGuide.adoc[tag=facebook]
 
 ---
 
-=== Enhancement Proposed: Add command `photo`
+=== Enhancement Added: Add command `photo`
 
 ==== External behavior
 
@@ -55,8 +55,9 @@ include::../UserGuide.adoc[tag=addphoto]
 ---
 ==== Justification
 
-Allows user to choose any image in their pc and use CLI to specify the path of the image. +
-This way the user can display the pictures on their contact lists. +
+Allows user to choose any image in their local device and use Command Line Interface to specify the path of the image. +
+This way the user can display the pictures on their contact lists. Users can also identify people more easily if two or+
+more people have the same name. It also hads a visual appeal to the Application.+
 
 ==== Implementation
 
@@ -64,6 +65,19 @@ This way the user can display the pictures on their contact lists. +
 #Start of Extract [from: Developer Guide]#
 
 include::../DeveloperGuide.adoc[tag=addphoto]
+
+#End of Extract#
+
+---
+
+=== Enhancement Added: Add command `email`
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=email]
 
 #End of Extract#
 
