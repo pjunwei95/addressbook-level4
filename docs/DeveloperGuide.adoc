@@ -789,25 +789,19 @@ If the `undoStack` is empty, then there are no other commands left to be undone,
 // tag::addphoto[]
 === Adding a photo to a contact in your personalised Weaver.
 
-The add Photo command adds a display picture to a particular contact.The command takes in two parameters, TargetIndex
-that is the index of the person I want to add a photo and the image filepath. +
-The command can also be used to delete an existing picture of a person.If the person has no display picture and the user attempts to delete a picture, an exception
-will be thrown.
+** The add Photo command adds a display picture to a particular contact.
+** The command takes in two parameters, TargetIndex that is the index of the person to add a photo and the image filepath. +
+** The command can also be used to delete an existing picture of a person.If the person has no display picture and the user attempts to delete a picture, an exception
+will be thrown. +
+** The photo Command is inherited from the `UndoableCommand` class. The command supports the Undo/Redo mechanism in Weaver. +
+** The photo command is done with the help of ImageView property in JAVAFX, hence it is an attempt to enhance the UI. +
 
 
-Format - photo [INDEX] [IMAGE_FILEPATH] +
-e.g. `photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg` to add an image
-e.g. `photo 1 delete` to delete an existing image.
-
-image::MockUp.png[width="800"]
-
-The photo command is done with the help of ImageView property in JAVAFX, hence it is an attempt to enhance the UI. +
 
 *PRE-REQUISITE* +
 There is a pre-requisite for the command to work.The image that is going to be added to the contact must already be
-present on the user's local PC.If it is not so, Weaver is going to prompt the user to add a valid File path.
+present on the user's local PC.If it is not so, Weaver is going to throw an exception and prompt the user to add a valid File path.
 
-The photo Command is inherited from the `UndoableCommand` class.
 
 *Working Flow* +
 
@@ -820,7 +814,12 @@ is not equal to two. +
 ** It then creates a new instance of the `FileImage` class. `FileImage` is an attribute that every person must have.
 A new `Person` is created with the updated `FileImage` and the existing model is updated.
 
-image::PhotoCommand.png[width="800"]
+*Sequence Diagram*
+
+image::PhotoSequenceDiagram.png[width="800"]
+Figure 3.2
+
+The Sequence diagram (Figure 3.2) above shows the working flow of the Photo command feature. +
 
 ** The `ModelManager` class implements the `addPhotoToPerson` method that adds a valid file image as an attribute to the person.
 
@@ -848,11 +847,22 @@ image::PhotoCommand.png[width="800"]
 
 ** Once the Image is set and the file is then removed from the specified directory, Weaver will no longer display the picture. +
 
+Refer to Figure 3.3 below for the Inheritance diagram of the command. +
 
+image::PhotoCommand.png[width="800"]. +
 
-*Sequence Diagram*
+The binder for attaching the image to the Person Card each time, is implemented in the following way. +
 
-image::PhotoSequenceDiagram.png[width="800"]
+----
+Image display = new Image(file.toURI().toString());
+
+image.setImage(display);
+----
+
+image::Wireframe.png[width="800"]. +
+
+The wireframe for binding the image is shown below. +
+
 
 ==== Reasons for this type of implementation
 
