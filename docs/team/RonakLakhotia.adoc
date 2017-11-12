@@ -211,6 +211,8 @@ for the issue being resolved. (https://github.com/nus-cs2103-AY1718S1/forum/issu
 
 4) In the team project, I took a leader's role and created issues, therby assigning deadlines. +
 
+5) Also set up important tools for the project like Travis and Coveralls. +
+
 === PROJECT: NUSEvents +
 
 ** I was actively involved in a side project of my own over the recent summer break. +
