@@ -1,5 +1,5 @@
 # ChenXiaoman
-###### /java/seedu/address/logic/commands/ChangeFontSizeCommandTest.java
+###### \java\seedu\address\logic\commands\ChangeFontSizeCommandTest.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -90,7 +90,7 @@ public class ChangeFontSizeCommandTest {
 
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeTagColorCommandTest.java
+###### \java\seedu\address\logic\commands\ChangeTagColorCommandTest.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -194,7 +194,7 @@ public class ChangeTagColorCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeThemeCommandTest.java
+###### \java\seedu\address\logic\commands\ChangeThemeCommandTest.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -294,7 +294,7 @@ public class ChangeThemeCommandTest {
 
 }
 ```
-###### /java/seedu/address/logic/commands/MapCommandTest.java
+###### \java\seedu\address\logic\commands\MapCommandTest.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -414,7 +414,7 @@ public class MapCommandTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/ChangeFontSizeCommandParserTest.java
+###### \java\seedu\address\logic\parser\ChangeFontSizeCommandParserTest.java
 ``` java
 package seedu.address.logic.parser;
 
@@ -464,7 +464,7 @@ public class ChangeFontSizeCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/ChangeTagColorCommandParserTest.java
+###### \java\seedu\address\logic\parser\ChangeTagColorCommandParserTest.java
 ``` java
 package seedu.address.logic.parser;
 
@@ -515,7 +515,7 @@ public class ChangeTagColorCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/ChangeThemeCommandParserTest.java
+###### \java\seedu\address\logic\parser\ChangeThemeCommandParserTest.java
 ``` java
 package seedu.address.logic.parser;
 
@@ -550,7 +550,7 @@ public class ChangeThemeCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/MapCommandParserTest.java
+###### \java\seedu\address\logic\parser\MapCommandParserTest.java
 ``` java
 package seedu.address.logic.parser;
 
@@ -584,7 +584,7 @@ public class MapCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/model/font/FontSizeTest.java
+###### \java\seedu\address\model\font\FontSizeTest.java
 ``` java
 package seedu.address.model.font;
 
@@ -619,7 +619,7 @@ public class FontSizeTest {
 
 }
 ```
-###### /java/seedu/address/model/tag/TagColorTest.java
+###### \java\seedu\address\model\tag\TagColorTest.java
 ``` java
 package seedu.address.model.tag;
 
@@ -644,7 +644,7 @@ public class TagColorTest {
 
 }
 ```
-###### /java/seedu/address/model/theme/ThemeTest.java
+###### \java\seedu\address\model\theme\ThemeTest.java
 ``` java
 package seedu.address.model.theme;
 
@@ -669,7 +669,7 @@ public class ThemeTest {
 
 }
 ```
-###### /java/systemtests/ChangeFontSizeCommandSystemTest.java
+###### \java\systemtests\ChangeFontSizeCommandSystemTest.java
 ``` java
 package systemtests;
 
@@ -812,7 +812,7 @@ public class ChangeFontSizeCommandSystemTest extends AddressBookSystemTest {
 
 }
 ```
-###### /java/systemtests/ChangeTagColorCommandSystemTest.java
+###### \java\systemtests\ChangeTagColorCommandSystemTest.java
 ``` java
 package systemtests;
 
@@ -948,7 +948,7 @@ public class ChangeTagColorCommandSystemTest extends AddressBookSystemTest {
     }
 }
 ```
-###### /java/systemtests/ChangeThemeCommandSystemTest.java
+###### \java\systemtests\ChangeThemeCommandSystemTest.java
 ``` java
 package systemtests;
 
@@ -1070,7 +1070,7 @@ public class ChangeThemeCommandSystemTest extends AddressBookSystemTest {
 
 }
 ```
-###### /java/systemtests/MapCommandSystemTest.java
+###### \java\systemtests\MapCommandSystemTest.java
 ``` java
 package systemtests;
 

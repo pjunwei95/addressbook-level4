@@ -1,23 +1,23 @@
 # yangminxingnus
-###### /java/seedu/address/logic/commands/AddCommandTest.java
+###### \java\seedu\address\logic\commands\AddCommandTest.java
 ``` java
         @Override
         public void addRemarkPerson(ReadOnlyPerson person, String FilePath, Index targetIndex) {
             fail("This method should not be called.");
         }
 ```
-###### /java/seedu/address/logic/commands/AddReminderTest.java
+###### \java\seedu\address\logic\commands\AddReminderTest.java
 ``` java
         @Override
         public void addRemarkPerson(ReadOnlyPerson person, String remark, Index targetIndex) {
             fail("This method should not be called.");
         }
 ```
-###### /java/seedu/address/logic/commands/AddReminderTest.java
+###### \java\seedu\address\logic\commands\AddReminderTest.java
 ``` java
 
 ```
-###### /java/seedu/address/logic/commands/RemarkCommandTest.java
+###### \java\seedu\address\logic\commands\RemarkCommandTest.java
 ``` java
 import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -108,7 +108,7 @@ public class RemarkCommandTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
+###### \java\seedu\address\logic\parser\AddressBookParserTest.java
 ``` java
     @Test
     public void parseCommand_remark() throws Exception {
@@ -128,7 +128,7 @@ public class RemarkCommandTest {
         assertFalse(new EmailCommand("colleagues", "birthday").equals(command));
     }
 ```
-###### /java/seedu/address/logic/parser/RemarkCommandParserTest.java
+###### \java\seedu\address\logic\parser\RemarkCommandParserTest.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_AMY;
@@ -178,7 +178,7 @@ public class RemarkCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/storage/AccountStorageTest.java
+###### \java\seedu\address\storage\AccountStorageTest.java
 ``` java
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -270,7 +270,7 @@ public class AccountStorageTest {
     }
 }
 ```
-###### /java/seedu/address/storage/JsonAccountsStorageTest.java
+###### \java\seedu\address\storage\JsonAccountsStorageTest.java
 ``` java
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -384,33 +384,33 @@ public class JsonAccountsStorageTest {
     }
 }
 ```
-###### /java/seedu/address/TestApp.java
+###### \java\seedu\address\TestApp.java
 ``` java
     @Override
     public void start(Stage primaryStage) {
         ui.start(primaryStage, 1);
     }
 ```
-###### /java/systemtests/AddCommandSystemTest.java
+###### \java\systemtests\AddCommandSystemTest.java
 ``` java
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
                 + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + DOB_DESC_AMY + " " + REMARK_DESC_AMY + " "
                 + USERNAME_AMY
                 + TAG_DESC_FRIEND + " ";
 ```
-###### /java/systemtests/AddCommandSystemTest.java
+###### \java\systemtests\AddCommandSystemTest.java
 ``` java
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + DOB_DESC_AMY + REMARK_DESC_AMY
                 + TAG_DESC_FRIEND;
 ```
-###### /java/systemtests/AddCommandSystemTest.java
+###### \java\systemtests\AddCommandSystemTest.java
 ``` java
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DOB_DESC_AMY + REMARK_DESC_AMY
                 + " " + PREFIX_TAG.getPrefix() + "friends";
 ```
-###### /java/systemtests/AddCommandSystemTest.java
+###### \java\systemtests\AddCommandSystemTest.java
 ``` java
         toAdd = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withDateOfBirth(VALID_DOB_AMY)
@@ -420,7 +420,7 @@ public class JsonAccountsStorageTest {
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DOB_DESC_AMY + USERNAME_AMY + REMARK_DESC_AMY
                 + TAG_DESC_FRIEND;
 ```
-###### /java/systemtests/AddCommandSystemTest.java
+###### \java\systemtests\AddCommandSystemTest.java
 ``` java
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withDateOfBirth(VALID_DOB_AMY)
@@ -430,7 +430,7 @@ public class JsonAccountsStorageTest {
                 + ADDRESS_DESC_AMY + DOB_DESC_AMY + USERNAME_AMY + REMARK_DESC_AMY
                 + TAG_DESC_FRIEND;
 ```
-###### /java/systemtests/AddCommandSystemTest.java
+###### \java\systemtests\AddCommandSystemTest.java
 ``` java
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_AMY).withDateOfBirth(VALID_DOB_AMY)
@@ -441,7 +441,7 @@ public class JsonAccountsStorageTest {
                 + ADDRESS_DESC_AMY + DOB_DESC_AMY + USERNAME_AMY + REMARK_DESC_AMY
                 + TAG_DESC_FRIEND;
 ```
-###### /java/systemtests/AddCommandSystemTest.java
+###### \java\systemtests\AddCommandSystemTest.java
 ``` java
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_BOB).withDateOfBirth(VALID_DOB_AMY).withUsername(VALID_USERNAME_AMY)
@@ -450,13 +450,13 @@ public class JsonAccountsStorageTest {
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_BOB + DOB_DESC_AMY + USERNAME_AMY + REMARK_DESC_AMY
                 + TAG_DESC_FRIEND;
 ```
-###### /java/systemtests/AddCommandSystemTest.java
+###### \java\systemtests\AddCommandSystemTest.java
 ``` java
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB
                 + NAME_DESC_BOB + DOB_DESC_BOB + REMARK_DESC_BOB + USERNAME_BOB
                 + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
 ```
-###### /java/systemtests/AddCommandSystemTest.java
+###### \java\systemtests\AddCommandSystemTest.java
 ``` java
         command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + DOB_DESC_AMY + REMARK_DESC_AMY;
@@ -477,7 +477,7 @@ public class JsonAccountsStorageTest {
                 + ADDRESS_DESC_AMY + DOB_DESC_AMY + REMARK_DESC_AMY
                 + INVALID_TAG_DESC;
 ```
-###### /java/systemtests/RemarkCommandSystemTest.java
+###### \java\systemtests\RemarkCommandSystemTest.java
 ``` java
 import static seedu.address.logic.commands.RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;

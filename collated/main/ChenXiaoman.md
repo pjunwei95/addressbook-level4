@@ -1,5 +1,5 @@
 # ChenXiaoman
-###### /java/seedu/address/commons/core/GuiSettings.java
+###### \java\seedu\address\commons\core\GuiSettings.java
 ``` java
 package seedu.address.commons.core;
 
@@ -107,7 +107,7 @@ public class GuiSettings implements Serializable {
     }
 }
 ```
-###### /java/seedu/address/commons/events/ui/ChangeFontSizeEvent.java
+###### \java\seedu\address\commons\events\ui\ChangeFontSizeEvent.java
 ``` java
 package seedu.address.commons.events.ui;
 
@@ -137,7 +137,7 @@ public class ChangeFontSizeEvent extends BaseEvent {
 
 }
 ```
-###### /java/seedu/address/commons/events/ui/ChangeTagColorEvent.java
+###### \java\seedu\address\commons\events\ui\ChangeTagColorEvent.java
 ``` java
 package seedu.address.commons.events.ui;
 
@@ -154,7 +154,7 @@ public class ChangeTagColorEvent extends BaseEvent {
     }
 }
 ```
-###### /java/seedu/address/commons/events/ui/ChangeThemeEvent.java
+###### \java\seedu\address\commons\events\ui\ChangeThemeEvent.java
 ``` java
 package seedu.address.commons.events.ui;
 
@@ -180,7 +180,7 @@ public class ChangeThemeEvent extends BaseEvent {
     }
 }
 ```
-###### /java/seedu/address/commons/events/ui/ShowPersonAddressEvent.java
+###### \java\seedu\address\commons\events\ui\ShowPersonAddressEvent.java
 ``` java
 package seedu.address.commons.events.ui;
 
@@ -209,7 +209,7 @@ public class ShowPersonAddressEvent extends BaseEvent {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeFontSizeCommand.java
+###### \java\seedu\address\logic\commands\ChangeFontSizeCommand.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -265,7 +265,7 @@ public class ChangeFontSizeCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeTagColorCommand.java
+###### \java\seedu\address\logic\commands\ChangeTagColorCommand.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -381,7 +381,7 @@ public class ChangeTagColorCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeThemeCommand.java
+###### \java\seedu\address\logic\commands\ChangeThemeCommand.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -453,7 +453,7 @@ public class ChangeThemeCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/MapCommand.java
+###### \java\seedu\address\logic\commands\MapCommand.java
 ``` java
 package seedu.address.logic.commands;
 
@@ -511,7 +511,7 @@ public class MapCommand extends Command {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/UndoableCommand.java
+###### \java\seedu\address\logic\commands\UndoableCommand.java
 ``` java
 
         //Revert font size
@@ -526,7 +526,7 @@ public class MapCommand extends Command {
             EventsCenter.getInstance().post(new ChangeThemeEvent(previousTheme));
         }
 ```
-###### /java/seedu/address/logic/parser/AddressBookParser.java
+###### \java\seedu\address\logic\parser\AddressBookParser.java
 ``` java
         case ChangeTagColorCommand.COMMAND_WORD:
             return new ChangeTagColorCommandParser().parse(arguments);
@@ -541,7 +541,7 @@ public class MapCommand extends Command {
             return new MapCommandParser().parse(arguments);
 
 ```
-###### /java/seedu/address/logic/parser/ChangeFontSizeCommandParser.java
+###### \java\seedu\address\logic\parser\ChangeFontSizeCommandParser.java
 ``` java
 package seedu.address.logic.parser;
 
@@ -595,7 +595,7 @@ public class ChangeFontSizeCommandParser implements Parser<ChangeFontSizeCommand
 
 }
 ```
-###### /java/seedu/address/logic/parser/ChangeTagColorCommandParser.java
+###### \java\seedu\address\logic\parser\ChangeTagColorCommandParser.java
 ``` java
 package seedu.address.logic.parser;
 
@@ -652,7 +652,7 @@ public class ChangeTagColorCommandParser implements Parser<ChangeTagColorCommand
     }
 }
 ```
-###### /java/seedu/address/logic/parser/ChangeThemeCommandParser.java
+###### \java\seedu\address\logic\parser\ChangeThemeCommandParser.java
 ``` java
 package seedu.address.logic.parser;
 
@@ -683,7 +683,7 @@ public class ChangeThemeCommandParser implements Parser<ChangeThemeCommand> {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/MapCommandParser.java
+###### \java\seedu\address\logic\parser\MapCommandParser.java
 ``` java
 package seedu.address.logic.parser;
 
@@ -717,7 +717,7 @@ public class MapCommandParser implements Parser<MapCommand> {
     }
 }
 ```
-###### /java/seedu/address/model/AddressBook.java
+###### \java\seedu\address\model\AddressBook.java
 ``` java
     /**
      * Update the tag color pair in storage
@@ -783,7 +783,7 @@ public class MapCommandParser implements Parser<MapCommand> {
         }
     }
 ```
-###### /java/seedu/address/model/font/FontSize.java
+###### \java\seedu\address\model\font\FontSize.java
 ``` java
 package seedu.address.model.font;
 
@@ -1127,7 +1127,7 @@ public class FontSize {
 
 }
 ```
-###### /java/seedu/address/model/Model.java
+###### \java\seedu\address\model\Model.java
 ``` java
     /**
      * Update color of tags
@@ -1136,7 +1136,7 @@ public class FontSize {
      */
     void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException;
 ```
-###### /java/seedu/address/model/ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public synchronized void updateTagColorPair(Set<Tag> tagList, TagColor color) throws IllegalValueException {
@@ -1144,7 +1144,7 @@ public class FontSize {
         indicateAddressBookChanged();
     }
 ```
-###### /java/seedu/address/model/tag/Tag.java
+###### \java\seedu\address\model\tag\Tag.java
 ``` java
 package seedu.address.model.tag;
 
@@ -1222,7 +1222,7 @@ public class Tag {
 
 }
 ```
-###### /java/seedu/address/model/tag/TagColor.java
+###### \java\seedu\address\model\tag\TagColor.java
 ``` java
 package seedu.address.model.tag;
 
@@ -1294,7 +1294,7 @@ public class TagColor {
     }
 }
 ```
-###### /java/seedu/address/model/theme/Theme.java
+###### \java\seedu\address\model\theme\Theme.java
 ``` java
 /**
  * Represent a theme of an application
@@ -1372,7 +1372,7 @@ public class Theme {
     }
 }
 ```
-###### /java/seedu/address/ui/CommandBox.java
+###### \java\seedu\address\ui\CommandBox.java
 ``` java
 
     /**
@@ -1427,7 +1427,7 @@ public class Theme {
     }
 
 ```
-###### /java/seedu/address/ui/PersonCard.java
+###### \java\seedu\address\ui\PersonCard.java
 ``` java
 package seedu.address.ui;
 
@@ -1526,7 +1526,7 @@ public class PersonCard extends UiPart<Region> {
         return address;
     }
 ```
-###### /java/seedu/address/ui/PersonCard.java
+###### \java\seedu\address\ui\PersonCard.java
 ``` java
     /**
      * Binds the individual UI elements to observe their respective {@code Person} properties
@@ -1655,7 +1655,7 @@ public class PersonCard extends UiPart<Region> {
 
 }
 ```
-###### /java/seedu/address/ui/ResultDisplay.java
+###### \java\seedu\address\ui\ResultDisplay.java
 ``` java
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
@@ -1667,7 +1667,7 @@ public class PersonCard extends UiPart<Region> {
         resultDisplay.setStyle(fxFomatString);
     }
 ```
-###### /java/seedu/address/ui/StatusBarFooter.java
+###### \java\seedu\address\ui\StatusBarFooter.java
 ``` java
     @Subscribe
     private void handleChangeFontSizeEvent(ChangeFontSizeEvent event) {
@@ -1682,7 +1682,7 @@ public class PersonCard extends UiPart<Region> {
     }
 }
 ```
-###### /resources/view/MainWindow.fxml
+###### \resources\view\MainWindow.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -1761,7 +1761,7 @@ public class PersonCard extends UiPart<Region> {
 
 </VBox>
 ```
-###### /resources/view/PersonListCard.fxml
+###### \resources\view\PersonListCard.fxml
 ``` fxml
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
@@ -1800,7 +1800,7 @@ public class PersonCard extends UiPart<Region> {
                </padding>
                 </VBox>
 ```
-###### /resources/view/PersonListCard.fxml
+###### \resources\view\PersonListCard.fxml
 ``` fxml
                 <padding>
                     <Insets top="5.0" />

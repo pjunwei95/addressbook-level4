@@ -1,5 +1,5 @@
 # yangminxingnus
-###### /java/seedu/address/commons/events/ui/LogoutEvent.java
+###### \java\seedu\address\commons\events\ui\LogoutEvent.java
 ``` java
 /**
  * Indicates a request to logout
@@ -11,7 +11,7 @@ public class LogoutEvent extends BaseEvent {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/AddCommand.java
+###### \java\seedu\address\logic\commands\AddCommand.java
 ``` java
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
@@ -36,7 +36,7 @@ public class LogoutEvent extends BaseEvent {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 ```
-###### /java/seedu/address/logic/commands/EditCommand.java
+###### \java\seedu\address\logic\commands\EditCommand.java
 ``` java
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the last person listing. "
@@ -55,21 +55,21 @@ public class LogoutEvent extends BaseEvent {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 ```
-###### /java/seedu/address/logic/commands/EditCommand.java
+###### \java\seedu\address\logic\commands\EditCommand.java
 ``` java
         private Remark remark;
 ```
-###### /java/seedu/address/logic/commands/EditCommand.java
+###### \java\seedu\address\logic\commands\EditCommand.java
 ``` java
             this.remark = toCopy.remark;
 ```
-###### /java/seedu/address/logic/commands/EditCommand.java
+###### \java\seedu\address\logic\commands\EditCommand.java
 ``` java
         public Optional<DateOfBirth> getDateOfBirth() {
             return Optional.ofNullable(dateOfBirth);
         }
 ```
-###### /java/seedu/address/logic/commands/EditCommand.java
+###### \java\seedu\address\logic\commands\EditCommand.java
 ``` java
         public void setRemark(Remark remark) {
             this.remark = remark;
@@ -82,7 +82,7 @@ public class LogoutEvent extends BaseEvent {
             return Optional.ofNullable(remark);
         }
 ```
-###### /java/seedu/address/logic/commands/EditCommand.java
+###### \java\seedu\address\logic\commands\EditCommand.java
 ``` java
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
@@ -94,7 +94,7 @@ public class LogoutEvent extends BaseEvent {
                     && getUsername().equals(e.getUsername())
                     && getTags().equals(e.getTags());
 ```
-###### /java/seedu/address/logic/commands/LogoutCommand.java
+###### \java\seedu\address\logic\commands\LogoutCommand.java
 ``` java
 /**
  * Command of logout.
@@ -113,7 +113,7 @@ public class LogoutCommand extends Command {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/RemarkCommand.java
+###### \java\seedu\address\logic\commands\RemarkCommand.java
 ``` java
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -191,7 +191,7 @@ public class RemarkCommand extends UndoableCommand {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/RemarkCommandParser.java
+###### \java\seedu\address\logic\parser\RemarkCommandParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -252,13 +252,13 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
 
 }
 ```
-###### /java/seedu/address/MainApp.java
+###### \java\seedu\address\MainApp.java
 ``` java
         AccountsStorage accountsPrefs = new AccountsStorage(config.getAccountsPath());
 
         accPrefs = initAccPrefs(accountsPrefs);
 ```
-###### /java/seedu/address/MainApp.java
+###### \java\seedu\address\MainApp.java
 ``` java
     /**
      * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
@@ -293,7 +293,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         return initializedPrefs;
     }
 ```
-###### /java/seedu/address/model/ModelManager.java
+###### \java\seedu\address\model\ModelManager.java
 ``` java
     @Override
     public synchronized void addRemarkPerson(ReadOnlyPerson person, String remark, Index targetIndex) {
@@ -307,7 +307,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
     }
 
 ```
-###### /java/seedu/address/model/person/Remark.java
+###### \java\seedu\address\model\person\Remark.java
 ``` java
 import static java.util.Objects.requireNonNull;
 
@@ -394,7 +394,7 @@ public class Remark {
     }
 }
 ```
-###### /java/seedu/address/model/util/SampleDataUtil.java
+###### \java\seedu\address\model\util\SampleDataUtil.java
 ``` java
             return new Person[] {
                 new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -429,7 +429,7 @@ public class Remark {
                     getTagSet("colleagues"))
             };
 ```
-###### /java/seedu/address/storage/AccountsStorage.java
+###### \java\seedu\address\storage\AccountsStorage.java
 ``` java
 import java.io.IOException;
 import java.util.HashMap;
@@ -491,7 +491,7 @@ public class AccountsStorage {
     }
 }
 ```
-###### /java/seedu/address/storage/JsonAccountsStorage.java
+###### \java\seedu\address\storage\JsonAccountsStorage.java
 ``` java
 import java.io.IOException;
 import java.util.Optional;
@@ -550,7 +550,7 @@ public class JsonAccountsStorage implements UserPrefsStorage {
 
 }
 ```
-###### /java/seedu/address/ui/LoginPage.java
+###### \java\seedu\address\ui\LoginPage.java
 ``` java
 
 import java.io.IOException;
@@ -797,18 +797,18 @@ public class LoginPage extends UiPart<Region> {
     }
 }
 ```
-###### /java/seedu/address/ui/MainWindow.java
+###### \java\seedu\address\ui\MainWindow.java
 ``` java
     private AccountsStorage accPrefs;
     private UiManager uiManager;
 ```
-###### /java/seedu/address/ui/MainWindow.java
+###### \java\seedu\address\ui\MainWindow.java
 ``` java
         this.accPrefs = accPrefs;
         this.uiManager = uiManager;
         uiManager.setMainWindow(this);
 ```
-###### /java/seedu/address/ui/MainWindow.java
+###### \java\seedu\address\ui\MainWindow.java
 ``` java
     /**
     * logout
@@ -819,7 +819,7 @@ public class LoginPage extends UiPart<Region> {
         this.releaseResources();
     }
 ```
-###### /java/seedu/address/ui/MainWindow.java
+###### \java\seedu\address\ui\MainWindow.java
 ``` java
     /**
      * Method for handle logout event.
@@ -903,7 +903,7 @@ public class LoginPage extends UiPart<Region> {
     }
 }
 ```
-###### /java/seedu/address/ui/RegisterPage.java
+###### \java\seedu\address\ui\RegisterPage.java
 ``` java
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -1096,7 +1096,7 @@ public class RegisterPage extends UiPart<Region> {
     }
 }
 ```
-###### /java/seedu/address/ui/UiManager.java
+###### \java\seedu\address\ui\UiManager.java
 ``` java
     private Logic logic;
     private StorageManager storage;
@@ -1167,7 +1167,7 @@ public class RegisterPage extends UiPart<Region> {
         }
     }
 ```
-###### /java/seedu/address/ui/UiManager.java
+###### \java\seedu\address\ui\UiManager.java
 ``` java
     public MainWindow getMainWindow() {
         return mainWindow;
@@ -1193,7 +1193,7 @@ public class RegisterPage extends UiPart<Region> {
         this.registerPage = registerPage;
     }
 ```
-###### /resources/view/LoginPage.fxml
+###### \resources\view\LoginPage.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -1235,7 +1235,7 @@ public class RegisterPage extends UiPart<Region> {
       </StackPane>
 </VBox>
 ```
-###### /resources/view/RegisterPage.fxml
+###### \resources\view\RegisterPage.fxml
 ``` fxml
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
