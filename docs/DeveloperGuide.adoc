@@ -740,9 +740,9 @@ As you can see from the `Model` diagram, the `Person` retains the attributes tha
 
 Suppose that the user has just launched the application.
 
-The user executes a new `DeleteTagCommand`, `delete/t 5 t/friends`, to delete the tag `friends` of the 5th person in the address book. The tags and the index are parsed into `DeleteTagCommandParser` before the `delete/t` command executes.
+The user executes a new `DeleteTagCommand`, `deletetag 5 t/friends`, to delete the tag `friends` of the 5th person in the address book. The tags and the index are parsed into `DeleteTagCommandParser` before the `deletetag` command executes.
 
-As the user continues to use the program, he might decide to delete more than one tags. For example, the user may execute `delete/t 2 t/colleagues t/friends` to delete multiple tags.
+As the user continues to use the program, he might decide to delete more than one tags. For example, the user may execute `deletetag 2 t/colleagues t/friends` to delete multiple tags.
 
 [NOTE]
 If the tags are not fully matched, it will throw an `Exception`.
@@ -757,32 +757,34 @@ If the `undoStack` is empty, then there are no other commands left to be undone,
 ==== Design considerations
 
 **Aspect:** Implementation of `DeleteTagCommand` +
-**Alternative 1 (current choice):** Access the `Person` and overwrite a new `Person` to it. +
-**Pros:** We will not lose the same tags for other `Person` it is now part of the default behaviour. Classes that deal with `Tags` like `UniqueTagsList` do not have to be deleted. +
-**Cons:** Hard for new developers to understand the `UniqueTagsList`. +
-**Alternative 2:** Just delete the `Tag` in the `UniqueTagsList` +
-**Pros:** Does not involve `Person` model, easier for new developers to understand with less coupling. +
+**Alternative 1 (current choice):** To access the `Person` and overwrite a new `Person` to it. +
+**Pros:** It will not lose the same tags for other `Person` it is now part of the default behaviour. Classes that deal with `Tags` like `UniqueTagsList` do not have to be deleted. +
+**Cons:** It will be hard for new developers to understand the `UniqueTagsList`. +
+**Alternative 2:** To delete the `Tag` in the `UniqueTagsList` +
+**Pros:** It does not involve `Person` model, easier for new developers to understand with less coupling. +
 **Cons:** It will defeat the purpose of deleting a tag solely of the specific `Person`. Might take more effort to organise tags for users.
 
 ---
 
 **Aspect:** Implementation of `DeleteTagCommandParser` +
-**Alternative 1 (current choice):** Able to utilise `Index` and tag prefix `t/`. +
-**Pros:** Able to delete multiple tags, easy to implement. +
-**Cons:** User will have to type additional prefixes to delete. +
-**Alternative 2:** Not utilising prefix `t/`. +
-**Pros:** Easier and faster to delete with no prefix identifier. +
-**Cons:** Difficult to implement, as it is harder to tokenize the arguments to differentiate between index and tag.
+**Alternative 1 (current choice):** To be able to utilise `Index` and tag prefix `t/`. +
+**Pros:** It will be able to delete multiple tags. It is easy to implement. +
+**Cons:** It will pose difficulties for the user. User will have to type additional prefixes to delete. +
+**Alternative 2:** To not utilise prefix `t/`. +
+**Pros:** It will be easier and faster to delete with no prefix identifier. +
+**Cons:** It will be difficult to implement, as it is harder to tokenize the arguments to differentiate between index and tag.
 
 ---
 
-**Aspect:** Deleting only a `Person` Tags +
-**Alternative 1 (current choice):** If there are no tags for any `Person`, the `UniqueTagsList` will still contain that tag. +
-**Pros:** Easy to implement. +
-**Cons:** May have performance issues in terms of memory usage. +
-**Alternative 2:** Clean up the `UniqueTagsList` after deleting its last tag. +
-**Pros:** Will use less memory (e.g. for `UniqueTagsList`, will not contain tags that are not present in any `Person`). +
-**Cons:** We must ensure that the implementation for discovering the last tags of the list is correct. May be harder to implement for new developers.
+**Aspect:** Implementation of deleting only a person's tags +
+**Alternative 1 (current choice):**
+To continue to contain the tag in `UniqueTagsList` even if there are no tags for any `Person`. +
+**Pros:** It will be easy to implement. +
+**Cons:** It may have performance issues in terms of memory usage. +
+**Alternative 2:** To clean up the `UniqueTagsList` after deleting its last tag. +
+**Pros:** It will use less memory (e.g. for `UniqueTagsList`, will not contain tags that are not present in any `Person`). +
+**Cons:** It must be ensured that the implementation for discovering the last tags of the list
+ is correct. It may be harder to implement for new developers.
 
 // end::deletepersontag[]
 

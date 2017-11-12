@@ -1,7 +1,7 @@
 package seedu.address.model;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -38,7 +38,8 @@ public interface Model {
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
 
-    void sendMailToContacts(String tagName, String subject, List<ReadOnlyPerson> lastShownList);
+    void sendMailToContacts(String tagName, String subject, List<ReadOnlyPerson> lastShownList) throws
+            IOException, URISyntaxException, IllegalValueException;
 
     /** Deletes the given reminder. */
     void deleteReminder(ReadOnlyReminder target) throws ReminderNotFoundException;
@@ -51,8 +52,8 @@ public interface Model {
 
     /** Adds photo to person */
     void addPhotoPerson(ReadOnlyPerson person, String filePath, Index targetIndex)
-            throws PersonNotFoundException, FileNotFoundException,
-            IOException;
+            throws PersonNotFoundException,
+            IOException, IllegalValueException;
 
     /** Adds remark to person */
     void addRemarkPerson(ReadOnlyPerson person, String remark, Index targetIndex);

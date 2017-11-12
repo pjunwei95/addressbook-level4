@@ -16,6 +16,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
+//@@author RonakLakhotia
 
 public class RemoveReminderCommandSystemTest extends AddressBookSystemTest {
 
@@ -92,7 +93,7 @@ public class RemoveReminderCommandSystemTest extends AddressBookSystemTest {
         }
         return targetReminder;
     }
-
+    //@@author
     /**
      * Deletes the reminder at {@code toDelete} by creating a default {@code RemoveCommand} using {@code toDelete} and
      * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.

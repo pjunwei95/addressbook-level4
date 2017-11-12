@@ -16,7 +16,7 @@ import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-
+//@@author RonakLakhotia
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code PhotoCommand}.
  */
@@ -24,9 +24,7 @@ public class PhotoCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-
     /**
-     *
      * Out Of Bounds Exception Testing
      */
     @Test
@@ -38,12 +36,22 @@ public class PhotoCommandTest {
 
         assertCommandFailure(photoCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+    /**
+     * No image to delete Exception Testing
+     */
+    @Test
+    public void deleteFaliure() {
+        Index index = Index.fromOneBased(model.getFilteredPersonList().size());
+        String filePath = "delete";
+        PhotoCommand photoCommand = prepareCommand(index, filePath);
+        assertCommandFailure(photoCommand, model, Messages.MESSAGE_NO_IMAGE_TO_DELETE);
+    }
 
     /**
      * Returns a {@code PhotoCommand} with the parameter {@code index and Filepath}.
      */
     private PhotoCommand prepareCommand(Index index, String FilePath) {
-        //DeleteCommand deleteCommand = new DeleteCommand(index);
+
         PhotoCommand photoCommand = new PhotoCommand(index, FilePath);
         photoCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return photoCommand;
@@ -52,6 +60,7 @@ public class PhotoCommandTest {
     public void equals() {
         PhotoCommand photoCommand = new PhotoCommand(INDEX_FIRST_PERSON,
                 "/Users/ronaklakhotia/Desktop/Ronak.jpeg");
+
         PhotoCommand photoSecondCommand = new PhotoCommand(INDEX_SECOND_PERSON,
                 "/Users/ronaklakhotia/Desktop/Ronak.jpeg");
 

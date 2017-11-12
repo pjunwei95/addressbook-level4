@@ -67,7 +67,6 @@ public class UiManager extends ComponentManager implements Ui {
             loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, this);
             loginPage.show();
         } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }
@@ -86,7 +85,6 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
         } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }

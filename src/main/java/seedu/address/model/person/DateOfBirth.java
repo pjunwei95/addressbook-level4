@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 
+//@@author RonakLakhotia
 /**
  * Represents a Person's DateOfBirth in the address book.
  */
@@ -20,6 +24,7 @@ public class DateOfBirth {
     public static final int DAYS_IN_FEBRUARY = 28;
     public static final int FEBRUARY = 2;
     public static final int FIRST_INDEX = 0;
+    public static final int INVALID_NUMBER_OF_DAYS = -1;
     public static final int LAST_INDEX = 1;
 
     public static final int [] MONTHS_WITH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -30,6 +35,7 @@ public class DateOfBirth {
                     + "The following format should be followed: \n"
             + "'.' and '-' can be used as separators. \n";
 
+    private static final Logger logger = LogsCenter.getLogger(SearchContainsKeywordsPredicate.class);
     public final String date;
 
 
@@ -70,7 +76,7 @@ public class DateOfBirth {
         return isValidDate;
     }
     /**
-     * Checks for invalid conditions of a date
+     * Returns true if the date has invalid conditions else returns false
      */
     public static boolean checkIfValidDate(String date) {
 
@@ -102,22 +108,21 @@ public class DateOfBirth {
                 return false;
             }
         }
+        logger.info("The date has valid number of days in February!");
         return true;
     }
     /**
-     * Checks if number of days in a given month are valid
+     * Returns true if the number of days in a month are valid else returns false.
      */
     public static boolean checkIfValidNumberOfDaysInMonth(int month, int day) {
 
         if (MONTHS_WITH_DAYS[month - 1] < day && month != FEBRUARY) {
             return false;
         }
-
         return true;
-
     }
     /**
-     * Checks if it is a leap year
+     * Returns true if it is a leap year else returns false.
      */
     public static boolean checkIfLeapYear(int yearNumber) {
 
@@ -130,6 +135,7 @@ public class DateOfBirth {
     public static int getYearNumber(int lastIndexOfSeparator, String date) {
 
         String year = date.substring(lastIndexOfSeparator + 1);
+        assert Integer.parseInt(year) > 0;
         return Integer.parseInt(year);
     }
     public static int getMonthNumber(int firstIndexOfSeparator, int lastIndexOfSeparator, String date) {
@@ -142,10 +148,13 @@ public class DateOfBirth {
         String dayNumber = date.substring(0, firstIndexOfSeparator);
         return Integer.parseInt(dayNumber);
     }
+    /**
+     * Returns the index position of the separator '-' or '.' .
+     */
 
     public static int getIndexOfSeparator(String date, int position) {
 
-        int storesIndex = -1;
+        int storesIndex = INVALID_NUMBER_OF_DAYS;
         for (int loopVariable = 0; loopVariable < date.length(); loopVariable++) {
 
             if (date.charAt(loopVariable) == '.' || date.charAt(loopVariable) == '-') {
@@ -165,10 +174,5 @@ public class DateOfBirth {
                 || (other instanceof DateOfBirth
                 && this.date.equals(((DateOfBirth) other).date));
     }
-    @Override
-    public int hashCode() {
-        return date.hashCode();
-    }
-
 
 }

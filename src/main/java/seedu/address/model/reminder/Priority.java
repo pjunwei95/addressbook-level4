@@ -1,11 +1,12 @@
 package seedu.address.model.reminder;
-//@@author RonakLakhotia
+
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+//@@author RonakLakhotia
 /**
- * Represents a Reminders priority level
+ * Represents a Reminders priority level, which can be either high, medium or low.
  */
 
 public class Priority {
@@ -41,7 +42,7 @@ public class Priority {
     }
 
     /**
-     * Get the priority Level of Reminder
+     * Returns the priority Level of Reminder.
      */
     public String getPriority() {
         return priority;

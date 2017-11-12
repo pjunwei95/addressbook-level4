@@ -8,15 +8,15 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.Test;
 
 import seedu.address.logic.commands.FaceBookCommand;
-
+//@@author RonakLakhotia
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the MapCommand code. For example, inputs "1" and "1 abc" take the
- * same path through the MapCommand, and therefore we test only one of them.
+ * outside of the FacebookCommand code. For example, inputs "1" and "1 abc" take the
+ * same path through the FacebookCommand, and therefore we test only one of them.
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
-//@@author RonakLakhotia
+
 public class FaceBookCommandParserTest {
 
     private FaceBookCommandParser parser = new FaceBookCommandParser();

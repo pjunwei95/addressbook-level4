@@ -12,14 +12,13 @@ import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmailSubject;
 
-
+//@@author RonakLakhotia
 public class EmailCommandParserTest {
 
     private EmailCommandParser parser = new EmailCommandParser();
 
     @Test
     public void parse_allFieldsPresent_faliure() throws ParseException {
-
 
         //multiple tags -> rejected
         assertParseFailure(parser, EmailCommand.COMMAND_WORD + EMAIL_TAG + " t/owesMoney"

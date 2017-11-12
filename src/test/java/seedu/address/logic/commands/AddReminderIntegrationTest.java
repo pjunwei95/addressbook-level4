@@ -14,7 +14,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.testutil.ReminderBuilder;
-
+//@@author RonakLakhotia
 /**
  * Contains integration tests (interaction with the Model) for {@code AddReminder}.
  */

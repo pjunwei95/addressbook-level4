@@ -96,8 +96,10 @@ public class PersonCard extends UiPart<Region> {
         return address;
     }
     //@@author
+
+    //@@author RonakLakhotia
     /**
-     * Adds a photo to a persons contact
+     * Binds a photo to a persons PersonCard.
      */
     public void assignImageToPerson(String filePath) throws ParseException {
 
@@ -130,6 +132,8 @@ public class PersonCard extends UiPart<Region> {
 
         }
     }
+    //@@author
+
     //@@author ChenXiaoman
     /**
      * Binds the individual UI elements to observe their respective {@code Person} properties
@@ -228,14 +232,19 @@ public class PersonCard extends UiPart<Region> {
 
     private void setSizeForAllImagesAccordingToFontSize(String fontSize) {
         int newImageSize = FontSize.getAssociateImageSizeFromFontSize(fontSize);
+
         imagePhone.setFitHeight(newImageSize);
         imagePhone.setFitWidth(newImageSize);
+
         imageAddress.setFitHeight(newImageSize);
         imageAddress.setFitWidth(newImageSize);
+
         imageEmail.setFitHeight(newImageSize);
         imageEmail.setFitWidth(newImageSize);
+
         imageBirth.setFitHeight(newImageSize);
         imageBirth.setFitWidth(newImageSize);
+
         imageRemark.setFitHeight(newImageSize);
         imageRemark.setFitWidth(newImageSize);
     }

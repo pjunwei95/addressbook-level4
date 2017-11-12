@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.PhotoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -72,7 +73,7 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
 
     }
     @Test
-    public void checkForInvalidPath() {
+    public void check_invalidPath() {
 
         /* Case When incorrect path is entered */
         String command =  PhotoCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
@@ -94,9 +95,12 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
             throw new AssertionError("targetPerson is retrieved from model.");
         } catch (IOException ioe) {
             throw new AssertionError("Illegal values entered");
+        } catch (IllegalValueException ive) {
+            throw new AssertionError("Illegal value");
         }
         return targetPerson;
     }
+    //@@author
     /**
      * Executes {@code command} and in addition,<br>
      * 1. Asserts that the command box displays {@code command}.<br>

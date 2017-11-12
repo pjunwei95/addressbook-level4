@@ -1,5 +1,5 @@
 package seedu.address.ui;
-//@@author RonakLakhotia
+
 import java.util.logging.Logger;
 
 import org.fxmisc.easybind.EasyBind;
@@ -16,7 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ReminderPanelSelectionChangedEvent;
 import seedu.address.model.reminder.ReadOnlyReminder;
-
+//@@author RonakLakhotia
 /**
  * Panel containing the list of reminders.
  */

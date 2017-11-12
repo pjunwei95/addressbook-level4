@@ -19,9 +19,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.reminder.ReadOnlyReminder;
-
+//@@author RonakLakhotia
 /**
- * Contains integration tests (interaction with the Model) and unit tests for {@code RemoceReminderCommand}.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code RemoveReminderCommand}.
  */
 public class RemoveReminderCommandTest {
 
@@ -108,14 +108,6 @@ public class RemoveReminderCommandTest {
         return removeCommand;
     }
 
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assert model.getFilteredPersonList().isEmpty();
-    }
     /**
      * Updates {@code model}'s filtered list to show no one.
      */

@@ -1,5 +1,5 @@
 package seedu.address.model.reminder;
-//@@author RonakLakhotia
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
-
+//@@author RonakLakhotia
 /**
  * A list of reminders that enforces uniqueness between its elements and does not allow nulls.
  *
@@ -62,7 +62,6 @@ public class UniqueReminderList implements Iterable<Reminder> {
         if (index == -1) {
             throw new ReminderNotFoundException();
         }
-
         if (!target.equals(changedPerson) && internalList.contains(changedPerson)) {
             throw new DuplicateReminderException();
         }

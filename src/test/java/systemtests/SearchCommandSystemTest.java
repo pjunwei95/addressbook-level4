@@ -1,5 +1,5 @@
 package systemtests;
-
+//@@author RonakLakhotia
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_OF_BIRTH_DESC_BOUNDS;
@@ -19,15 +19,14 @@ import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 
-//@@author RonakLakhotia
+
 public class SearchCommandSystemTest extends AddressBookSystemTest {
 
     public static final String INVALID_DETAILS = "You might have entered invalid date or name with invalid characters!";
     @Test
 
     public void search() {
-        /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
-         * -> 2 persons found
+        /* Case: search multiple persons in address book, command with leading spaces and trailing spaces
          */
         String command = "   " + SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " "
                 + "b/13.10.1997" + "   ";
@@ -39,7 +38,7 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
 
         assertSelectedCardUnchanged();
 
-        /* Case: repeat previous find command where person list is displaying the persons we are Searching
+        /* Case: repeat previous search command where person list is displaying the persons we are Searching
          * -> 2 persons found
          */
         command = SearchCommand.COMMAND_WORD + " " + "n/" + KEYWORD_MATCHING_RONAK + " " + "b/13.10.1997";
@@ -88,6 +87,7 @@ public class SearchCommandSystemTest extends AddressBookSystemTest {
 
 
     }
+    //@@author
     /**
      * Executes {@code command} and verifies that the command box displays an empty string, the result display
      * box displays {@code Messages#MESSAGE_PERSONS_LISTED_OVERVIEW} with the number of people in the filtered list,

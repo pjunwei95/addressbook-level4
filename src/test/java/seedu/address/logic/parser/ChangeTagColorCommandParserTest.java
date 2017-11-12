@@ -1,3 +1,4 @@
+//@@author ChenXiaoman
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -15,7 +16,6 @@ import seedu.address.logic.commands.ChangeTagColorCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColor;
 
-//@@author ChenXiaoman
 public class ChangeTagColorCommandParserTest {
     private ChangeTagColorCommandParser parser = new ChangeTagColorCommandParser();
 

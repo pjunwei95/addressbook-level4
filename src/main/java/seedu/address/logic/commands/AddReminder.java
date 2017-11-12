@@ -5,10 +5,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DUE_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_PRIORITY;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.reminder.ReadOnlyReminder;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
+
+
 
 /**
  * Adds a reminder to the address book.
@@ -30,7 +36,9 @@ public class AddReminder extends UndoableCommand {
     public static final String MESSAGE_SUCCESS = "New reminder added: %1$s";
     public static final String MESSAGE_DUPLICATE_REMINDER = "This reminder already exists!";
 
+    private static final Logger logger = LogsCenter.getLogger(AddReminder.class);
     private final Reminder toAdd;
+
 
     /**
      * Creates an AddReminder Command to add the specified {@code ReadOnlyReminder}
@@ -46,6 +54,7 @@ public class AddReminder extends UndoableCommand {
             model.addReminder(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (DuplicateReminderException e) {
+            logger.severe(StringUtil.getDetails(e));
             throw new CommandException(MESSAGE_DUPLICATE_REMINDER);
         }
 
