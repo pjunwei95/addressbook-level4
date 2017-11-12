@@ -318,7 +318,6 @@ public class RegisterPage extends UiPart<Region> {
             loginPage = new LoginPage(primaryStage, config, storage, prefs, logic, accPrefs, this);
             loginPage.show();
         } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }
@@ -337,7 +336,6 @@ public class RegisterPage extends UiPart<Region> {
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
         } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }
@@ -384,6 +382,7 @@ public class RegisterPage extends UiPart<Region> {
 ```
 ###### /java/seedu/address/ui/LoginPage.java
 ``` java
+
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -398,7 +397,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -750,11 +748,18 @@ public class LogoutEvent extends BaseEvent {
 ###### /java/seedu/address/logic/parser/RemarkCommandParser.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+
+import java.util.stream.Stream;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+
 import seedu.address.logic.commands.RemarkCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
+
 import seedu.address.model.person.Remark;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -768,25 +773,35 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
      */
     public RemarkCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_REMARK);
+
         if (trimmedArgs.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
+        }
+        if (!arePrefixesPresent(argMultimap, PREFIX_REMARK)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
         }
 
         String[] argus = trimmedArgs.split("r/");
 
         try {
+            Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK)).get();
             Integer index = Integer.parseInt(argus[0].trim());
-            Remark remark;
-            if (argus.length > 1) {
-                remark = new Remark(argus[1].trim());
-            } else {
-                remark = new Remark("");
-            }
+
             return new RemarkCommand(index, remark);
         } catch (IllegalValueException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
         }
+    }
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
@@ -884,7 +899,7 @@ public class RemarkCommand extends UndoableCommand {
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("The target person cannot be missing");
         }
-        return new CommandResult(String.format(MESSAGE_ADD_REMARK_SUCCESS, personToEdit));
+        return new CommandResult(String.format(MESSAGE_ADD_REMARK_SUCCESS, editedPerson));
     }
 
     @Override
@@ -906,7 +921,8 @@ public class RemarkCommand extends UndoableCommand {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DOB + "DATE_OF_BIRTH] "
             + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_IMAGE + "IMAGE"
+            + "[" + PREFIX_IMAGE + "IMAGE] "
+            + "[" + PREFIX_USERNAME + "USERNAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -948,6 +964,7 @@ public class RemarkCommand extends UndoableCommand {
                     && getDateOfBirth().equals(e.getDateOfBirth())
                     && getRemark().equals(e.getRemark())
                     && getImage().equals(e.getImage())
+                    && getUsername().equals(e.getUsername())
                     && getTags().equals(e.getTags());
 ```
 ###### /java/seedu/address/logic/commands/LogoutCommand.java
@@ -1252,4 +1269,18 @@ public class Remark {
         return moduleLists.hashCode();
     }
 }
+```
+###### /java/seedu/address/model/ModelManager.java
+``` java
+    @Override
+    public synchronized void addRemarkPerson(ReadOnlyPerson person, String remark, Index targetIndex) {
+        try {
+            person.remarkProperty().setValue(new Remark(remark));
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            indicateAddressBookChanged();
+        } catch (IllegalValueException ive) {
+            throw new AssertionError("Invalid input");
+        }
+    }
+
 ```
