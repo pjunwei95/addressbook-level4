@@ -1,5 +1,5 @@
 # pjunwei95
-###### /java/seedu/address/logic/commands/ClearPopupCommandTest.java
+###### \java\seedu\address\logic\commands\ClearPopupCommandTest.java
 ``` java
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -38,14 +38,14 @@ public class ClearPopupCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/CommandTestUtil.java
+###### \java\seedu\address\logic\commands\CommandTestUtil.java
 ``` java
         TAG_DESC_AMY = new DeleteTagDescriptorBuilder()
                 .withTags(VALID_TAG_FRIEND).build();
         TAG_DESC_BOB = new DeleteTagDescriptorBuilder()
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 ```
-###### /java/seedu/address/logic/commands/CommandTestUtil.java
+###### \java\seedu\address\logic\commands\CommandTestUtil.java
 ``` java
 
         VALID_TAGLIST_1 = new HashSet<>();
@@ -140,7 +140,7 @@ public class ClearPopupCommandTest {
         assert model.getFilteredPersonList().size() == 1;
     }
 ```
-###### /java/seedu/address/logic/commands/DeleteTagCommandTest.java
+###### \java\seedu\address\logic\commands\DeleteTagCommandTest.java
 ``` java
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -265,7 +265,7 @@ public class DeleteTagCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/DeleteTagDescriptorTest.java
+###### \java\seedu\address\logic\commands\DeleteTagDescriptorTest.java
 ``` java
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -305,7 +305,7 @@ public class DeleteTagDescriptorTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/FindTagCommandTest.java
+###### \java\seedu\address\logic\commands\FindTagCommandTest.java
 ``` java
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -403,7 +403,7 @@ public class FindTagCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
+###### \java\seedu\address\logic\parser\AddressBookParserTest.java
 ``` java
     @Test
     public void parseCommand_findTag() throws Exception {
@@ -421,7 +421,7 @@ public class FindTagCommandTest {
     }
 
 ```
-###### /java/seedu/address/logic/parser/DeleteTagCommandParserTest.java
+###### \java\seedu\address\logic\parser\DeleteTagCommandParserTest.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -486,7 +486,7 @@ public class DeleteTagCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/FindTagCommandParserTest.java
+###### \java\seedu\address\logic\parser\FindTagCommandParserTest.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -522,7 +522,7 @@ public class FindTagCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/storage/StorageManagerTest.java
+###### \java\seedu\address\storage\StorageManagerTest.java
 ``` java
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
@@ -607,7 +607,7 @@ public class StorageManagerTest {
     }
 
 ```
-###### /java/seedu/address/testutil/DeleteTagDescriptorBuilder.java
+###### \java\seedu\address\testutil\DeleteTagDescriptorBuilder.java
 ``` java
 import java.util.Arrays;
 
@@ -657,7 +657,7 @@ public class DeleteTagDescriptorBuilder {
     }
 }
 ```
-###### /java/seedu/address/ui/ClearConfirmationTest.java
+###### \java\seedu\address\ui\ClearConfirmationTest.java
 ``` java
 import static org.junit.Assert.assertEquals;
 

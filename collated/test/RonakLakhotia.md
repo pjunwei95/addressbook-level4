@@ -1,5 +1,5 @@
 # RonakLakhotia
-###### /java/guitests/guihandles/ReminderCardHandle.java
+###### \java\guitests\guihandles\ReminderCardHandle.java
 ``` java
 /**
  * Provides a handle to a person card in the person list panel.
@@ -42,7 +42,7 @@ public class ReminderCardHandle extends NodeHandle<Node> {
     }
 }
 ```
-###### /java/guitests/guihandles/ReminderListPanelHandle.java
+###### \java\guitests\guihandles\ReminderListPanelHandle.java
 ``` java
 /**
  * Provides a handle for {@code ReminderListPanel} containing the list of {@code ReminderCard}.
@@ -170,7 +170,7 @@ public class ReminderListPanelHandle extends NodeHandle<ListView<ReminderCard>> 
     }
 }
 ```
-###### /java/seedu/address/logic/commands/AddCommandTest.java
+###### \java\seedu\address\logic\commands\AddCommandTest.java
 ``` java
         @Override
         public void updateReminder(ReadOnlyReminder target, ReadOnlyReminder changedReminder) {
@@ -187,7 +187,7 @@ public class ReminderListPanelHandle extends NodeHandle<ListView<ReminderCard>> 
             fail("This method should not be called.");
         }
 ```
-###### /java/seedu/address/logic/commands/AddReminderIntegrationTest.java
+###### \java\seedu\address\logic\commands\AddReminderIntegrationTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code AddReminder}.
@@ -228,7 +228,7 @@ public class AddReminderIntegrationTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/AddReminderTest.java
+###### \java\seedu\address\logic\commands\AddReminderTest.java
 ``` java
 public class AddReminderTest {
 
@@ -329,7 +329,7 @@ public class AddReminderTest {
 
         }
 ```
-###### /java/seedu/address/logic/commands/AddReminderTest.java
+###### \java\seedu\address\logic\commands\AddReminderTest.java
 ``` java
         @Override
         public void clearBrowserPanel() {
@@ -420,7 +420,7 @@ public class AddReminderTest {
 
 }
 ```
-###### /java/seedu/address/logic/commands/BackUpCommandTest.java
+###### \java\seedu\address\logic\commands\BackUpCommandTest.java
 ``` java
 public class BackUpCommandTest {
 
@@ -455,7 +455,7 @@ public class BackUpCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeCommandTest.java
+###### \java\seedu\address\logic\commands\ChangeCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ChangeReminderCommand.
@@ -619,7 +619,7 @@ public class ChangeCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/ChangeReminderDescriptorTest.java
+###### \java\seedu\address\logic\commands\ChangeReminderDescriptorTest.java
 ``` java
 public class ChangeReminderDescriptorTest {
 
@@ -651,7 +651,7 @@ public class ChangeReminderDescriptorTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/CommandTestUtil.java
+###### \java\seedu\address\logic\commands\CommandTestUtil.java
 ``` java
     /**
      * Updates {@code model}'s filtered list to show only the first reminder in the {@code model}'s address book.
@@ -664,7 +664,7 @@ public class ChangeReminderDescriptorTest {
         assert model.getFilteredReminderList().size() == 1;
     }
 ```
-###### /java/seedu/address/logic/commands/EmailCommandTest.java
+###### \java\seedu\address\logic\commands\EmailCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code EmailCommand}.
@@ -749,7 +749,7 @@ public class EmailCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/FaceBookCommandTest.java
+###### \java\seedu\address\logic\commands\FaceBookCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code MapCommand}.
@@ -858,7 +858,7 @@ public class FaceBookCommandTest {
     }
 }
 ```
-###### /java/seedu/address/logic/commands/PhotoCommandTest.java
+###### \java\seedu\address\logic\commands\PhotoCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code PhotoCommand}.
@@ -928,7 +928,7 @@ public class PhotoCommandTest {
 
 }
 ```
-###### /java/seedu/address/logic/commands/RemoveReminderCommandTest.java
+###### \java\seedu\address\logic\commands\RemoveReminderCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code RemoveReminderCommand}.
@@ -1029,7 +1029,7 @@ public class RemoveReminderCommandTest {
 
 }
 ```
-###### /java/seedu/address/logic/commands/SearchCommandTest.java
+###### \java\seedu\address\logic\commands\SearchCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code SearchCommand}.
@@ -1086,7 +1086,7 @@ public class SearchCommandTest {
         return command;
     }
 ```
-###### /java/seedu/address/logic/parser/AddCommandParserTest.java
+###### \java\seedu\address\logic\parser\AddCommandParserTest.java
 ``` java
         // multiple dates - last date accepted
         assertParseSuccess(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -1106,7 +1106,7 @@ public class SearchCommandTest {
                 new AddCommand(expectedPerson));
 
 ```
-###### /java/seedu/address/logic/parser/AddCommandParserTest.java
+###### \java\seedu\address\logic\parser\AddCommandParserTest.java
 ``` java
         // invalid Date
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -1114,7 +1114,7 @@ public class SearchCommandTest {
                 + VALID_TAG_FRIEND, DateOfBirth.MESSAGE_BIRTHDAY_CONSTRAINTS);
 
 ```
-###### /java/seedu/address/logic/parser/AddCommandParserTest.java
+###### \java\seedu\address\logic\parser\AddCommandParserTest.java
 ``` java
         // invalid Image path
         assertParseFailure(parser, AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -1122,7 +1122,7 @@ public class SearchCommandTest {
                 + VALID_TAG_FRIEND, FileImage.MESSAGE_IMAGE_CONSTRAINTS);
 
 ```
-###### /java/seedu/address/logic/parser/AddReminderParserTest.java
+###### \java\seedu\address\logic\parser\AddReminderParserTest.java
 ``` java
 public class AddReminderParserTest {
     private AddReminderParser parser = new AddReminderParser();
@@ -1191,7 +1191,7 @@ public class AddReminderParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
+###### \java\seedu\address\logic\parser\AddressBookParserTest.java
 ``` java
     @Test
     public void parseCommand_search() throws Exception {
@@ -1217,7 +1217,7 @@ public class AddReminderParserTest {
                 + " " + "1") instanceof ClearPopupCommand);
     }
 ```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
+###### \java\seedu\address\logic\parser\AddressBookParserTest.java
 ``` java
     @Test
     public void parseCommand_addReminder() throws Exception {
@@ -1236,7 +1236,7 @@ public class AddReminderParserTest {
         assertEquals(new ChangeReminderCommand(INDEX_FIRST_REMINDER, descriptor), command);
     }
 ```
-###### /java/seedu/address/logic/parser/AddressBookParserTest.java
+###### \java\seedu\address\logic\parser\AddressBookParserTest.java
 ``` java
     @Test
     public void parseCommand_remove() throws Exception {
@@ -1245,7 +1245,7 @@ public class AddReminderParserTest {
         assertEquals(new RemoveReminderCommand(INDEX_FIRST_REMINDER), command);
     }
 ```
-###### /java/seedu/address/logic/parser/ChangeReminderCommandParserTest.java
+###### \java\seedu\address\logic\parser\ChangeReminderCommandParserTest.java
 ``` java
 public class ChangeReminderCommandParserTest {
 
@@ -1402,7 +1402,7 @@ public class ChangeReminderCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/EmailCommandParserTest.java
+###### \java\seedu\address\logic\parser\EmailCommandParserTest.java
 ``` java
 public class EmailCommandParserTest {
 
@@ -1439,7 +1439,7 @@ public class EmailCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/FaceBookCommandParserTest.java
+###### \java\seedu\address\logic\parser\FaceBookCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -1480,7 +1480,7 @@ public class FaceBookCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/LogoutCommandParserTest.java
+###### \java\seedu\address\logic\parser\LogoutCommandParserTest.java
 ``` java
 public class LogoutCommandParserTest {
 
@@ -1500,7 +1500,7 @@ public class LogoutCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/PhotoCommandParserTest.java
+###### \java\seedu\address\logic\parser\PhotoCommandParserTest.java
 ``` java
 public class PhotoCommandParserTest {
 
@@ -1530,7 +1530,7 @@ public class PhotoCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/logic/parser/RemoveReminderCommandParserTest.java
+###### \java\seedu\address\logic\parser\RemoveReminderCommandParserTest.java
 ``` java
 public class RemoveReminderCommandParserTest {
 
@@ -1548,7 +1548,7 @@ public class RemoveReminderCommandParserTest {
     }
 }
 ```
-###### /java/seedu/address/logic/parser/SearchCommandParserTest.java
+###### \java\seedu\address\logic\parser\SearchCommandParserTest.java
 ``` java
 public class SearchCommandParserTest {
 
@@ -1638,7 +1638,7 @@ public class SearchCommandParserTest {
 
 }
 ```
-###### /java/seedu/address/model/ModelManagerTest.java
+###### \java\seedu\address\model\ModelManagerTest.java
 ``` java
     @Test
     public void getFilteredReminderList_modifyList_throwsUnsupportedOperationException() {
@@ -1674,7 +1674,7 @@ public class SearchCommandParserTest {
         assertFalse(appendedMail.equals(expectedAppendedMail));
     }
 ```
-###### /java/seedu/address/model/person/DateOfBirthTest.java
+###### \java\seedu\address\model\person\DateOfBirthTest.java
 ``` java
 public class DateOfBirthTest {
 
@@ -1691,7 +1691,7 @@ public class DateOfBirthTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/EmailSubjectTest.java
+###### \java\seedu\address\model\person\EmailSubjectTest.java
 ``` java
 public class EmailSubjectTest {
 
@@ -1711,7 +1711,7 @@ public class EmailSubjectTest {
     }
 }
 ```
-###### /java/seedu/address/model/person/FaceBookUserNameTest.java
+###### \java\seedu\address\model\person\FaceBookUserNameTest.java
 ``` java
 public class FaceBookUserNameTest {
 
@@ -1728,7 +1728,7 @@ public class FaceBookUserNameTest {
 }
 
 ```
-###### /java/seedu/address/model/person/RemarkTest.java
+###### \java\seedu\address\model\person\RemarkTest.java
 ``` java
 public class RemarkTest {
     @Test
@@ -1745,7 +1745,7 @@ public class RemarkTest {
     }
 }
 ```
-###### /java/seedu/address/model/reminder/DueDateTest.java
+###### \java\seedu\address\model\reminder\DueDateTest.java
 ``` java
 public class DueDateTest {
 
@@ -1764,7 +1764,7 @@ public class DueDateTest {
     }
 }
 ```
-###### /java/seedu/address/model/UniqueReminderListTest.java
+###### \java\seedu\address\model\UniqueReminderListTest.java
 ``` java
 public class UniqueReminderListTest {
     @Rule
@@ -1778,7 +1778,7 @@ public class UniqueReminderListTest {
     }
 }
 ```
-###### /java/seedu/address/storage/StorageManagerTest.java
+###### \java\seedu\address\storage\StorageManagerTest.java
 ``` java
     @Test
     public void handleAddressBookBackUpEvent_exceptionThrown_eventRaised() {
@@ -1789,7 +1789,7 @@ public class UniqueReminderListTest {
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 ```
-###### /java/seedu/address/storage/XmlAddressBookStorageTest.java
+###### \java\seedu\address\storage\XmlAddressBookStorageTest.java
 ``` java
 
     /**
@@ -1832,7 +1832,7 @@ public class UniqueReminderListTest {
 }
 
 ```
-###### /java/seedu/address/testutil/ChangeReminderDescriptorBuilder.java
+###### \java\seedu\address\testutil\ChangeReminderDescriptorBuilder.java
 ``` java
 /**
  * A utility class to help with building ChangeReminderDescriptor objects.
@@ -1902,7 +1902,7 @@ public class ChangeReminderDescriptorBuilder {
     }
 }
 ```
-###### /java/seedu/address/testutil/ReminderBuilder.java
+###### \java\seedu\address\testutil\ReminderBuilder.java
 ``` java
 /**
  * A utility class to help with building Reminder objects.
@@ -1976,7 +1976,7 @@ public class ReminderBuilder {
 
 }
 ```
-###### /java/seedu/address/testutil/ReminderUtil.java
+###### \java\seedu\address\testutil\ReminderUtil.java
 ``` java
 /**
  * A utility class for Reminder
@@ -2003,7 +2003,7 @@ public class ReminderUtil {
     }
 }
 ```
-###### /java/seedu/address/ui/ReminderCardTest.java
+###### \java\seedu\address\ui\ReminderCardTest.java
 ``` java
 public class ReminderCardTest extends GuiUnitTest {
 
@@ -2050,7 +2050,7 @@ public class ReminderCardTest extends GuiUnitTest {
     }
 }
 ```
-###### /java/seedu/address/ui/ReminderListPanelTest.java
+###### \java\seedu\address\ui\ReminderListPanelTest.java
 ``` java
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
@@ -2111,7 +2111,7 @@ public class ReminderListPanelTest extends GuiUnitTest {
     }
 }
 ```
-###### /java/systemtests/AddReminderCommandSystemTest.java
+###### \java\systemtests\AddReminderCommandSystemTest.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -2231,7 +2231,7 @@ public class AddReminderCommandSystemTest extends AddressBookSystemTest {
 
     }
 ```
-###### /java/systemtests/ChangeReminderCommandSystemTest.java
+###### \java\systemtests\ChangeReminderCommandSystemTest.java
 ``` java
 public class ChangeReminderCommandSystemTest extends AddressBookSystemTest {
 
@@ -2318,7 +2318,7 @@ public class ChangeReminderCommandSystemTest extends AddressBookSystemTest {
 
     }
 ```
-###### /java/systemtests/PhotoCommandSystemTest.java
+###### \java\systemtests\PhotoCommandSystemTest.java
 ``` java
 public class PhotoCommandSystemTest extends AddressBookSystemTest {
 
@@ -2401,7 +2401,7 @@ public class PhotoCommandSystemTest extends AddressBookSystemTest {
         return targetPerson;
     }
 ```
-###### /java/systemtests/RemoveReminderCommandSystemTest.java
+###### \java\systemtests\RemoveReminderCommandSystemTest.java
 ``` java
 
 public class RemoveReminderCommandSystemTest extends AddressBookSystemTest {
@@ -2480,7 +2480,7 @@ public class RemoveReminderCommandSystemTest extends AddressBookSystemTest {
         return targetReminder;
     }
 ```
-###### /java/systemtests/SearchCommandSystemTest.java
+###### \java\systemtests\SearchCommandSystemTest.java
 ``` java
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
