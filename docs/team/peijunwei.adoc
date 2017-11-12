@@ -175,7 +175,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*`|user |delete people with a specific tag |clean up my list
 
-|`* *`|user with frequent contacts |have a favourites list |find them easily
+|`* *`|user with frequent contacts | mark a contact as favourite |find them easily
 
 |`* *`|user |see a history bar |keep track of my previous searches
 
@@ -214,7 +214,7 @@ https://github.com/CS2103AUG2017-W13-B2/main/pull/141[#141])
 
 == Project: NUSeekers
 
-A paired software project in developing an inclusive community
+A software project in developing an inclusive community
 within the National University of Singapore. +
 It is written in with Meteor, using JavaScript, HTML5, CSS, JSON, and MongoDB.
 
