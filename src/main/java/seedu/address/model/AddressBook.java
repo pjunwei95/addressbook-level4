@@ -277,6 +277,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Update tag and color pair in every person
+     *
+     * @param modifyingTagList
+     * @param tagColor
+     * @throws IllegalValueException
      */
     private void updateTagColorInEveryPerson(Set<Tag> modifyingTagList, TagColor tagColor)
             throws IllegalValueException {
