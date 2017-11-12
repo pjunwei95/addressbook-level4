@@ -4,10 +4,11 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :stylesDir: ../stylesheets
 
 == Project: Weaver
-Weaver is a desktop address book application meant for NUS students.
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Weaver is a desktop address book application meant for NUS students. Weaver helps students maintain their day to day timetable and schedule their daily reminders.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC. Some of the tools used for this project are
+Github, Intellij, SceneBuilder and JAVAFX.
 
-*Code contributed*: [https://github.com/RonakLakhotia/addressbook-level4/blob/master/collated/main/RonakLakhotia.md[Functional code]] [https://github.com/RonakLakhotia/addressbook-level4/blob/master/collated/test/RonakLakhotia.md[Test code]] {give links to collated code files}
+*Code contributed*: [https://github.com/CS2103AUG2017-W13-B2/main/blob/master/collated/main/RonakLakhotia.md[Functional code]] [https://github.com/CS2103AUG2017-W13-B2/main/blob/master/collated/test/RonakLakhotia.md[Test code]] {give links to collated code files}
 
 === Enhancement Added: Facebook Integration
 

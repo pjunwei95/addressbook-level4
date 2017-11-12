@@ -449,7 +449,8 @@ image::fs.png[width="790"]
 // tag::facebook[]
 === FaceBook Integration since v1.3
 
-Helps you view the profile page of a person in your contact list. +
+This feature helps you view the profile page of a person in your contact list. This way we can know more about our friends +
+and colleagues. +
 
 Below are listed some conditions for the command. +
 
@@ -463,10 +464,17 @@ Command Format - `Facebook [INDEX]` +
 
 e.g. - `facebook 1` +
 
-If the person does not have a facebook account or the username is not entered in Weaver,you will be notified.
+** Result ** +
+The facebook homepgae shows up on the browser panel. +
 
 image::facebook.png[width="790"]
 
+** If the person does not have a facebook account or the username is not entered in Weaver,you will be notified.
+
+e.g. - `facebook 2`
+** Result ** - You will see a prompt telling you that the person has no username. +
+
+image::username.png[width="790"]
 // end::facebook[]
 
 // tag::map[]
