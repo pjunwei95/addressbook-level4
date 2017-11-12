@@ -463,9 +463,7 @@ Below are listed some conditions for the command. +
 Command Format - `Facebook [INDEX]` +
 
 e.g. - `facebook 1` +
-
-** Result ** +
-The facebook homepgae shows up on the browser panel. +
+** Result ** - The facebook homepgae shows up on the browser panel. +
 
 image::facebook.png[width="790"]
 

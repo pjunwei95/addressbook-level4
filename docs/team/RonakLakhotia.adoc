@@ -26,7 +26,9 @@ include::../UserGuide.adoc[tag=facebook]
 ==== Justification
 
 This implementation is very useful for users as they can connect with their friends and family through
-Weaver, therby saving them the trouble of opening a browser on their desktop. +
+Weaver, thereby saving them the trouble of opening a browser on their desktop. It also promotes a healthy social media life. +
+The command format is easy to follow. Opening the facebook page on the browser panel is more convenient than
+searching for the person manually on the default browser.
 
 ==== Implementation
 
