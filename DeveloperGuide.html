@@ -54,16 +54,19 @@
 <li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></li>
-<li><a href="#login-logout-mechanism">4.2. Login / Logout mechanism</a></li>
-<li><a href="#register-mechanism">4.3. Register mechanism</a></li>
-<li><a href="#customize-tag-color-mechanism">4.4. Customize tag color mechanism</a></li>
-<li><a href="#customize-font-size-mechanism">4.5. Customize font size mechanism</a></li>
-<li><a href="#deleting-a-person-s-tag-mechanism">4.6. Deleting a person&#8217;s tag mechanism</a></li>
-<li><a href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.7. Adding a photo to a contact in your personalised Weaver.</a></li>
-<li><a href="#facebook-integration">4.8. FaceBook Integration</a></li>
-<li><a href="#adding-a-reminders-list-to-weaver">4.9. Adding a reminders list to Weaver.</a></li>
-<li><a href="#logging">4.10. Logging</a></li>
-<li><a href="#configuration">4.11. Configuration</a></li>
+<li><a href="#remark-mechanism">4.2. Remark mechanism</a></li>
+<li><a href="#login-logout-mechanism">4.3. Login / Logout mechanism</a></li>
+<li><a href="#register-mechanism">4.4. Register mechanism</a></li>
+<li><a href="#customize-tag-color-mechanism">4.5. Customize tag color mechanism</a></li>
+<li><a href="#customize-font-size-mechanism">4.6. Customize font size mechanism</a></li>
+<li><a href="#deleting-a-person-s-tag-mechanism">4.7. Deleting a person&#8217;s tag mechanism</a></li>
+<li><a href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.8. Adding a photo to a contact in your personalised Weaver.</a></li>
+<li><a href="#facebook-integration">4.9. FaceBook Integration</a></li>
+<li><a href="#adding-a-reminders-list-to-weaver">4.10. Adding a reminders list to Weaver.</a></li>
+<li><a href="#nusmods-integration">4.11. Nusmods Integration</a></li>
+<li><a href="#encrypt-your-file-not-used-in-v1-5">4.12. Encrypt your file (not used in V1.5).</a></li>
+<li><a href="#logging">4.13. Logging</a></li>
+<li><a href="#configuration">4.14. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -806,7 +809,30 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="login-logout-mechanism"><a class="link" href="#login-logout-mechanism">4.2. Login / Logout mechanism</a></h3>
+<h3 id="remark-mechanism"><a class="link" href="#remark-mechanism">4.2. Remark mechanism</a></h3>
+<div class="paragraph">
+<p>The remark mechanism remarks contacts with their module information.
+The command takes two parameters, Index and ModuleInfo. TargetIndex specifies the person you want to remark to. And the module information specifies the person&#8217;s module information.
+If the index is invalid or the module information is not in the correct format, exceptions will be thrown.+
+Format - photo [INDEX] [MODULEINFO]
+e.g. remark 1 CS2103/LEC/1</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The correct format for module information is:<br>
+MODULETITLE/MODULETYPE/MODULENUM
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="login-logout-mechanism"><a class="link" href="#login-logout-mechanism">4.3. Login / Logout mechanism</a></h3>
 <div class="paragraph">
 <p>The <code>login / logout</code> mechanism is a page which requires user to key in his username and password before he can use the addressbook. And once he is logged in, there will be a automatically generated file named as <code>username + addressbook.xml</code> storing the information about his own addressbook.</p>
 </div>
@@ -891,7 +917,7 @@ If user key in wrong user name or password, he will stuck at login page until he
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.1. Design considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>login / logout</code> feature<br>
 <strong>Alternative 1 (current choice):</strong> <code>login</code> is compulsory. User must login before he can use the addressbook <br>
@@ -917,7 +943,7 @@ multiple users.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="register-mechanism"><a class="link" href="#register-mechanism">4.3. Register mechanism</a></h3>
+<h3 id="register-mechanism"><a class="link" href="#register-mechanism">4.4. Register mechanism</a></h3>
 <div class="paragraph">
 <p>The register feature enables users to put new valid accounts inside the accounts.json file. The file operations are similar to the one used in Login/Logout feature.</p>
 </div>
@@ -1002,7 +1028,7 @@ A user can go back using the back button.
 </div>
 </div>
 <div class="sect2">
-<h3 id="customize-tag-color-mechanism"><a class="link" href="#customize-tag-color-mechanism">4.4. Customize tag color mechanism</a></h3>
+<h3 id="customize-tag-color-mechanism"><a class="link" href="#customize-tag-color-mechanism">4.5. Customize tag color mechanism</a></h3>
 <div class="paragraph">
 <p>Tag color can be changed by giving a <code>ChangeTagColorCommand</code>.</p>
 </div>
@@ -1114,7 +1140,7 @@ The structure in .xml storage file is like the following:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.4.1. Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to associate each tag with a tag color?<br>
 <strong>Alternative 1 (current choice):</strong> Create a new class <code>TagColor</code> and add a new field to <code>Tag</code> class.<br>
@@ -1122,7 +1148,7 @@ The structure in .xml storage file is like the following:</p>
 <strong>Cons:</strong> It is complicated to implement.<br>
 <strong>Alternative 2:</strong> Create a static hash map of all tag names(String) and their associate tag color(String) inside <code>Tag</code> class.<br>
 <strong>Pros:</strong> It is easy to implement.<br>
-<strong>Cons:</strong> Storing tag and tag color pairs inside <code>Tag</code> class violates the single responsibility principle of classes.</p>
+<strong>Cons:</strong> All the methods associated with tag color will be stored inside <code>Tag</code> class, violates the single responsibility principle of classes.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -1137,7 +1163,7 @@ The structure in .xml storage file is like the following:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="customize-font-size-mechanism"><a class="link" href="#customize-font-size-mechanism">4.5. Customize font size mechanism</a></h3>
+<h3 id="customize-font-size-mechanism"><a class="link" href="#customize-font-size-mechanism">4.6. Customize font size mechanism</a></h3>
 <div class="paragraph">
 <p>The font size of the application can be changed via <code>ChangeFontSizeCommand</code> or by pressing the '+' or '-' button on the right top corner.</p>
 </div>
@@ -1218,7 +1244,7 @@ new font size.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.6.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to represent a font size?<br>
 <strong>Alternative 1 (current choice):</strong> Create a new class <code>FontSize</code>.<br>
@@ -1232,7 +1258,7 @@ new font size.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-s-tag-mechanism"><a class="link" href="#deleting-a-person-s-tag-mechanism">4.6. Deleting a person&#8217;s tag mechanism</a></h3>
+<h3 id="deleting-a-person-s-tag-mechanism"><a class="link" href="#deleting-a-person-s-tag-mechanism">4.7. Deleting a person&#8217;s tag mechanism</a></h3>
 <div class="paragraph">
 <p>The Deleting a person&#8217;s tag mechanism consists of <code>DeleteTagCommand</code> and <code>DeleteTagCommandParser</code> classes.
 The <code>DeleteTagCommandParser</code> resides inside <code>LogicManager</code>. <code>DeleteTagCommandParser</code> only deals with <code>Parser</code>. It is created from <code>AddressBookParser</code>. The following diagram shows the flow for parser:</p>
@@ -1327,10 +1353,10 @@ The tags are parsed under <code>parseTagsForDelete</code>, while the person inde
 <p>Suppose that the user has just launched the application.</p>
 </div>
 <div class="paragraph">
-<p>The user executes a new <code>DeleteTagCommand</code>, <code>delete/t 5 t/friends</code>, to delete the tag <code>friends</code> of the 5th person in the address book. The tags and the index are parsed into <code>DeleteTagCommandParser</code> before the <code>delete/t</code> command executes.</p>
+<p>The user executes a new <code>DeleteTagCommand</code>, <code>deletetag 5 t/friends</code>, to delete the tag <code>friends</code> of the 5th person in the address book. The tags and the index are parsed into <code>DeleteTagCommandParser</code> before the <code>deletetag</code> command executes.</p>
 </div>
 <div class="paragraph">
-<p>As the user continues to use the program, he might decide to delete more than one tags. For example, the user may execute <code>delete/t 2 t/colleagues t/friends</code> to delete multiple tags.</p>
+<p>As the user continues to use the program, he might decide to delete more than one tags. For example, the user may execute <code>deletetag 2 t/colleagues t/friends</code> to delete multiple tags.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1363,40 +1389,42 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.1. Design considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.7.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>DeleteTagCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> Access the <code>Person</code> and overwrite a new <code>Person</code> to it.<br>
-<strong>Pros:</strong> We will not lose the same tags for other <code>Person</code> it is now part of the default behaviour. Classes that deal with <code>Tags</code> like <code>UniqueTagsList</code> do not have to be deleted.<br>
-<strong>Cons:</strong> Hard for new developers to understand the <code>UniqueTagsList</code>.<br>
-<strong>Alternative 2:</strong> Just delete the <code>Tag</code> in the <code>UniqueTagsList</code><br>
-<strong>Pros:</strong> Does not involve <code>Person</code> model, easier for new developers to understand with less coupling.<br>
+<strong>Alternative 1 (current choice):</strong> To access the <code>Person</code> and overwrite a new <code>Person</code> to it.<br>
+<strong>Pros:</strong> It will not lose the same tags for other <code>Person</code> it is now part of the default behaviour. Classes that deal with <code>Tags</code> like <code>UniqueTagsList</code> do not have to be deleted.<br>
+<strong>Cons:</strong> It will be hard for new developers to understand the <code>UniqueTagsList</code>.<br>
+<strong>Alternative 2:</strong> To delete the <code>Tag</code> in the <code>UniqueTagsList</code><br>
+<strong>Pros:</strong> It does not involve <code>Person</code> model, easier for new developers to understand with less coupling.<br>
 <strong>Cons:</strong> It will defeat the purpose of deleting a tag solely of the specific <code>Person</code>. Might take more effort to organise tags for users.</p>
 </div>
 <hr>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>DeleteTagCommandParser</code><br>
-<strong>Alternative 1 (current choice):</strong> Able to utilise <code>Index</code> and tag prefix <code>t/</code>.<br>
-<strong>Pros:</strong> Able to delete multiple tags, easy to implement.<br>
-<strong>Cons:</strong> User will have to type additional prefixes to delete.<br>
-<strong>Alternative 2:</strong> Not utilising prefix <code>t/</code>.<br>
-<strong>Pros:</strong> Easier and faster to delete with no prefix identifier.<br>
-<strong>Cons:</strong> Difficult to implement, as it is harder to tokenize the arguments to differentiate between index and tag.</p>
+<strong>Alternative 1 (current choice):</strong> To be able to utilise <code>Index</code> and tag prefix <code>t/</code>.<br>
+<strong>Pros:</strong> It will be able to delete multiple tags. It is easy to implement.<br>
+<strong>Cons:</strong> It will pose difficulties for the user. User will have to type additional prefixes to delete.<br>
+<strong>Alternative 2:</strong> To not utilise prefix <code>t/</code>.<br>
+<strong>Pros:</strong> It will be easier and faster to delete with no prefix identifier.<br>
+<strong>Cons:</strong> It will be difficult to implement, as it is harder to tokenize the arguments to differentiate between index and tag.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Deleting only a <code>Person</code> Tags<br>
-<strong>Alternative 1 (current choice):</strong> If there are no tags for any <code>Person</code>, the <code>UniqueTagsList</code> will still contain that tag.<br>
-<strong>Pros:</strong> Easy to implement.<br>
-<strong>Cons:</strong> May have performance issues in terms of memory usage.<br>
-<strong>Alternative 2:</strong> Clean up the <code>UniqueTagsList</code> after deleting its last tag.<br>
-<strong>Pros:</strong> Will use less memory (e.g. for <code>UniqueTagsList</code>, will not contain tags that are not present in any <code>Person</code>).<br>
-<strong>Cons:</strong> We must ensure that the implementation for discovering the last tags of the list is correct. May be harder to implement for new developers.</p>
+<p><strong>Aspect:</strong> Implementation of deleting only a person&#8217;s tags<br>
+<strong>Alternative 1 (current choice):</strong>
+To continue to contain the tag in <code>UniqueTagsList</code> even if there are no tags for any <code>Person</code>.<br>
+<strong>Pros:</strong> It will be easy to implement.<br>
+<strong>Cons:</strong> It may have performance issues in terms of memory usage.<br>
+<strong>Alternative 2:</strong> To clean up the <code>UniqueTagsList</code> after deleting its last tag.<br>
+<strong>Pros:</strong> It will use less memory (e.g. for <code>UniqueTagsList</code>, will not contain tags that are not present in any <code>Person</code>).<br>
+<strong>Cons:</strong> It must be ensured that the implementation for discovering the last tags of the list
+ is correct. It may be harder to implement for new developers.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.7. Adding a photo to a contact in your personalised Weaver.</a></h3>
+<h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.8. Adding a photo to a contact in your personalised Weaver.</a></h3>
 <div class="paragraph">
 <p>The add Photo command adds a display picture to a particular contact.The command takes in two parameters, TargetIndex
 that is the index of the person I want to add a photo and the image filepath.<br>
@@ -1500,7 +1528,7 @@ A new <code>Person</code> is created with the updated <code>FileImage</code> and
 </div>
 </div>
 <div class="sect3">
-<h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">4.7.1. Reasons for this type of implementation</a></h4>
+<h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">4.8.1. Reasons for this type of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1516,7 +1544,7 @@ A new <code>Person</code> is created with the updated <code>FileImage</code> and
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.2. Design considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.8.2. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How should the user choose the Image.<br>
 <strong>Alternative1 (current choice): </strong> Enter the File path present on
@@ -1541,7 +1569,7 @@ any directory.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="facebook-integration"><a class="link" href="#facebook-integration">4.8. FaceBook Integration</a></h3>
+<h3 id="facebook-integration"><a class="link" href="#facebook-integration">4.9. FaceBook Integration</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1563,7 +1591,7 @@ page is shown up on the browser panel.</p>
 <p>e.g. - <code>facebook 1</code></p>
 </div>
 <div class="sect3">
-<h4 id="working-flow"><a class="link" href="#working-flow">4.8.1. Working flow</a></h4>
+<h4 id="working-flow"><a class="link" href="#working-flow">4.9.1. Working flow</a></h4>
 <div class="paragraph">
 <p>The <code>FaceBookCommand Parser</code> class parses the arguments and throws an exception if the index entered
 is invalid. A new event <code>handleFaceBookEvent</code>  is then raised.
@@ -1593,7 +1621,7 @@ loadPage(url);
 </div>
 </div>
 <div class="sect3">
-<h4 id="reasons-for-this-kind-of-implementation"><a class="link" href="#reasons-for-this-kind-of-implementation">4.8.2. Reasons for this kind of implementation</a></h4>
+<h4 id="reasons-for-this-kind-of-implementation"><a class="link" href="#reasons-for-this-kind-of-implementation">4.9.2. Reasons for this kind of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1606,7 +1634,7 @@ loadPage(url);
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.8.3. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.9.3. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How should the user view the profile page.<br>
 <strong>Alternative1 : </strong> View the profile page on a web browser<br>
@@ -1619,7 +1647,7 @@ loadPage(url);
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-reminders-list-to-weaver"><a class="link" href="#adding-a-reminders-list-to-weaver">4.9. Adding a reminders list to Weaver.</a></h3>
+<h3 id="adding-a-reminders-list-to-weaver"><a class="link" href="#adding-a-reminders-list-to-weaver">4.10. Adding a reminders list to Weaver.</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1670,7 +1698,212 @@ e.g. - <code>change 1 d/12.12.2017</code>.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.10. Logging</a></h3>
+<h3 id="nusmods-integration"><a class="link" href="#nusmods-integration">4.11. Nusmods Integration</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The nusmods command helps the user to view the nusmods website which displays module information stored in the
+person&#8217;s remark.</p>
+</li>
+<li>
+<p>If the module information are not stored in the correct format or there is no such module in nusmods, it will not be
+displayed.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="working-flow-2"><a class="link" href="#working-flow-2">4.11.1. Working flow</a></h4>
+<div class="paragraph">
+<p>When the person panel is clicked, an FXML function will handle this and start to parse the module information.
+After parsing this information into URL format which is supported by NUSMODS, an URL is made and passed to the
+Google engine. And the brower panel will go to the NUSMODS page which contains this person&#8217;s module information.
+<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/nusmods.png" alt="nusmods" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reasons-for-this-kind-of-implementation-2"><a class="link" href="#reasons-for-this-kind-of-implementation-2">4.11.2. Reasons for this kind of implementation</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>This helps the user to take a quick glance of the the Nusmods information.</p>
+</li>
+<li>
+<p>It is better than opening a brower on the desktop.<br></p>
+</li>
+<li>
+<p>It is convenient for users to shedule their time using this feature.<br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="encrypt-your-file-not-used-in-v1-5"><a class="link" href="#encrypt-your-file-not-used-in-v1-5">4.12. Encrypt your file (not used in V1.5).</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>With this feature embedded in the Weaver, all the files will be encrypted automatically<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>When user tries to login, the "account.json" file is decrypted and information is fetched for checking the
+authentication of the accounts. Once the check is finished, it&#8217;s encrypted.<br></p>
+</li>
+<li>
+<p>When the user login, his xml file will be decrypted and become editable. <br></p>
+</li>
+<li>
+<p>When the user logout, his xml file will be encrypted and become not readable.<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">import</span> <span class="include">java.io.File</span>;
+<span class="keyword">import</span> <span class="include">java.io.FileInputStream</span>;
+<span class="keyword">import</span> <span class="include">java.io.FileOutputStream</span>;
+<span class="keyword">import</span> <span class="include">java.io.IOException</span>;
+<span class="keyword">import</span> <span class="include">java.io.InputStream</span>;
+<span class="keyword">import</span> <span class="include">java.io.OutputStream</span>;
+
+<span class="keyword">import</span> <span class="include">javax.crypto.Cipher</span>;
+<span class="keyword">import</span> <span class="include">javax.crypto.CipherInputStream</span>;
+<span class="keyword">import</span> <span class="include">javax.crypto.CipherOutputStream</span>;
+<span class="keyword">import</span> <span class="include">javax.crypto.SecretKey</span>;
+<span class="keyword">import</span> <span class="include">javax.crypto.SecretKeyFactory</span>;
+<span class="keyword">import</span> <span class="include">javax.crypto.spec.DESKeySpec</span>;
+
+<span class="comment">/**
+ * method for encrypt / decrypt the files
+ */</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">CipherUnit</span> {
+    <span class="directive">private</span> <span class="directive">static</span> <span class="predefined-type">String</span> key = <span class="string"><span class="delimiter">&quot;</span><span class="content">squirrel123</span><span class="delimiter">&quot;</span></span>; <span class="comment">// needs to be at least 8 characters for DES</span>
+    <span class="directive">private</span> <span class="directive">static</span> <span class="predefined-type">String</span> dest;
+
+    <span class="comment">/**
+    * class for encrypting files
+    */</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> encrypt(<span class="predefined-type">String</span> path) {
+        <span class="keyword">try</span> {
+            dest = path;
+            <span class="predefined-type">FileInputStream</span> fis = <span class="keyword">new</span> <span class="predefined-type">FileInputStream</span>(path);
+            <span class="predefined-type">FileOutputStream</span> fos = <span class="keyword">new</span> <span class="predefined-type">FileOutputStream</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">data/temp.xml</span><span class="delimiter">&quot;</span></span>);
+            encryptOrDecrypt(key, <span class="predefined-type">Cipher</span>.ENCRYPT_MODE, fis, fos);
+            swapName(<span class="string"><span class="delimiter">&quot;</span><span class="content">data/temp.xml</span><span class="delimiter">&quot;</span></span>);
+        } <span class="keyword">catch</span> (<span class="predefined-type">Throwable</span> e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    <span class="comment">/**
+    * class for decrypting files
+    */</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> decrypt(<span class="predefined-type">String</span> path) {
+        <span class="keyword">try</span> {
+            dest = path;
+            <span class="predefined-type">FileInputStream</span> fis = <span class="keyword">new</span> <span class="predefined-type">FileInputStream</span>(path);
+            <span class="predefined-type">FileOutputStream</span> fos = <span class="keyword">new</span> <span class="predefined-type">FileOutputStream</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">data/temp.xml</span><span class="delimiter">&quot;</span></span>);
+            encryptOrDecrypt(key, <span class="predefined-type">Cipher</span>.DECRYPT_MODE, fis, fos);
+            swapName(<span class="string"><span class="delimiter">&quot;</span><span class="content">data/temp.xml</span><span class="delimiter">&quot;</span></span>);
+        } <span class="keyword">catch</span> (<span class="predefined-type">Throwable</span> e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    <span class="comment">/**
+    * translating method
+    */</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> encryptOrDecrypt(<span class="predefined-type">String</span> key, <span class="type">int</span> mode, <span class="predefined-type">InputStream</span> is, <span class="predefined-type">OutputStream</span> os) <span class="directive">throws</span> <span class="predefined-type">Throwable</span> {
+
+        <span class="predefined-type">DESKeySpec</span> dks = <span class="keyword">new</span> <span class="predefined-type">DESKeySpec</span>(key.getBytes());
+        <span class="predefined-type">SecretKeyFactory</span> skf = <span class="predefined-type">SecretKeyFactory</span>.getInstance(<span class="string"><span class="delimiter">&quot;</span><span class="content">DES</span><span class="delimiter">&quot;</span></span>);
+        <span class="predefined-type">SecretKey</span> desKey = skf.generateSecret(dks);
+        <span class="predefined-type">Cipher</span> cipher = <span class="predefined-type">Cipher</span>.getInstance(<span class="string"><span class="delimiter">&quot;</span><span class="content">DES</span><span class="delimiter">&quot;</span></span>); <span class="comment">// DES/ECB/PKCS5Padding for SunJCE</span>
+
+        <span class="keyword">if</span> (mode == <span class="predefined-type">Cipher</span>.ENCRYPT_MODE) {
+            cipher.init(<span class="predefined-type">Cipher</span>.ENCRYPT_MODE, desKey);
+            <span class="predefined-type">CipherInputStream</span> cis = <span class="keyword">new</span> <span class="predefined-type">CipherInputStream</span>(is, cipher);
+            doCopy(cis, os);
+        } <span class="keyword">else</span> <span class="keyword">if</span> (mode == <span class="predefined-type">Cipher</span>.DECRYPT_MODE) {
+            cipher.init(<span class="predefined-type">Cipher</span>.DECRYPT_MODE, desKey);
+            <span class="predefined-type">CipherOutputStream</span> cos = <span class="keyword">new</span> <span class="predefined-type">CipherOutputStream</span>(os, cipher);
+            doCopy(is, cos);
+        }
+    }
+
+    <span class="comment">/**
+    * do a copy
+    */</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> doCopy(<span class="predefined-type">InputStream</span> is, <span class="predefined-type">OutputStream</span> os) <span class="directive">throws</span> <span class="exception">IOException</span> {
+        <span class="type">byte</span><span class="type">[]</span> bytes = <span class="keyword">new</span> <span class="type">byte</span>[<span class="integer">64</span>];
+        <span class="type">int</span> numBytes;
+        <span class="keyword">while</span> ((numBytes = is.read(bytes)) != -<span class="integer">1</span>) {
+            os.write(bytes, <span class="integer">0</span>, numBytes);
+        }
+        os.flush();
+        os.close();
+        is.close();
+    }
+
+    <span class="comment">/**
+    * used to replace files encypted/decrypted with the dectypted/encrypted one.
+    */</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">boolean</span> swapName(<span class="predefined-type">String</span> source) {
+        <span class="predefined-type">File</span> tmp = <span class="keyword">new</span> <span class="predefined-type">File</span>(source);
+
+        <span class="predefined-type">File</span> swapFile1 = <span class="keyword">new</span> <span class="predefined-type">File</span>(dest);
+
+        <span class="keyword">return</span> tmp.renameTo(swapFile1);
+
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="mechanism-of-encrytion"><a class="link" href="#mechanism-of-encrytion">4.12.1. Mechanism of encrytion</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>We use RES mechanism provided by java to make encrypted files. <br></p>
+</li>
+<li>
+<p>When a file needs to be encrypted/decrypted, the system first create a temporary file named "temp.xml"
+to store the encryption/decryption information.</p>
+</li>
+<li>
+<p>After this temporary file successfully stores all the information. The system will try to rename it as the
+original name of the file before encryption/decryption. And then the previous original file will be replaced by the
+encrypted/decrypted. (This works on OSX but not on Windows and UNIX).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reason-for-giving-up-this-feature"><a class="link" href="#reason-for-giving-up-this-feature">4.12.2. Reason for giving up this feature</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>The most important reason is, different operating system has different ways to manage the files. Thus the current
+mechanism might not work as expected on different operating systems. When replacing files with their encrypted/decrypted copy,
+different operating system will behave differently. Some will replace the file while some will keep both.<br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">4.13. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1708,7 +1941,7 @@ e.g. - <code>change 1 d/12.12.2017</code>.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">4.11. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">4.14. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3381,7 +3614,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 07:42:47 +00:00
+Last updated 2017-11-12 17:04:16 +00:00
 </div>
 </div>
 </body>

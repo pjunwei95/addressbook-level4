@@ -36,14 +36,17 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 </div>
 </div>
 <div class="sect2">
-<h3 id="facebook-integration-since-v1-3"><a class="link" href="#facebook-integration-since-v1-3">FaceBook Integration SINCE V1.3</a></h3>
+<h3 id="facebook-integration-since-v1-3"><a class="link" href="#facebook-integration-since-v1-3">FaceBook Integration since v1.3</a></h3>
 <div class="paragraph">
 <p>Helps you view the profile page of a person in your contact list.<br></p>
+</div>
+<div class="paragraph">
+<p>Below are listed some conditions for the command.<br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The index of the person must be valid.<br></p>
+<p>The index of the person must be valid, that is it must be a positive integer and within bounds.<br></p>
 </li>
 <li>
 <p>The person must have the username he/she uses on Facebook.<br></p>
@@ -54,13 +57,13 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 </ul>
 </div>
 <div class="paragraph">
-<p>Command Format - `Facebook [INDEX]<br></p>
+<p>Command Format - <code>Facebook [INDEX]</code><br></p>
 </div>
 <div class="paragraph">
 <p>e.g. - <code>facebook 1</code><br></p>
 </div>
 <div class="paragraph">
-<p>If the person does not have a facebook account or the username is not entered in Weaver,you will be notified by Weaver.</p>
+<p>If the person does not have a facebook account or the username is not entered in Weaver,you will be notified.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -179,12 +182,7 @@ loadPage(url);
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-photo-to-contacts-code-photo-code-since-v1-2-br"><a class="link" href="#add-photo-to-contacts-code-photo-code-since-v1-2-br">Add Photo to contacts : <code>photo</code> SINCE V1.2<br></a></h3>
-<div class="imageblock">
-<div class="content">
-<img src="../images/MockUp.png" alt="MockUp" width="790">
-</div>
-</div>
+<h3 id="add-photo-to-contacts-code-photo-code-since-v1-2-br"><a class="link" href="#add-photo-to-contacts-code-photo-code-since-v1-2-br">Add Photo to contacts : <code>photo</code> Since v1.2<br></a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -203,11 +201,35 @@ delete operation is not valid.<br></p>
 <li>
 <p>Once the Image is set and the file is then removed from the specified directory, Weaver will no longer display the picture.<br></p>
 </li>
+<li>
+<p>The command also follows the undo/redo mechanism.<br></p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
 <p>e.g. <code>Photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg</code> adds the image <code>Ronak.jpg</code> to the contact with
 index 1 in the address book.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Result - Picture is added to the person at index 1.<br></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/MockUp.png" alt="MockUp" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p>e.g. <code>Photo 1 delete</code>.<br>
+** Result - Picture is deleted from the person at index at 1.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete.png" alt="delete" width="790">
+</div>
 </div>
 <div class="paragraph">
 <p><strong>Different Scenarios</strong> :</p>
@@ -411,7 +433,7 @@ any directory.<br>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 07:42:47 +00:00
+Last updated 2017-11-12 17:04:16 +00:00
 </div>
 </div>
 </body>

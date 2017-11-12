@@ -35,7 +35,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 </div>
 </div>
 <div class="sect2">
-<h3 id="customize-tags-color-code-color-code-since-v1-2"><a class="link" href="#customize-tags-color-code-color-code-since-v1-2">Customize tags' color : <code>color</code> SINCE V1.2</a></h3>
+<h3 id="customize-tags-color-code-color-code-since-v1-2"><a class="link" href="#customize-tags-color-code-color-code-since-v1-2">Customize tags' color : <code>color</code> Since v1.2</a></h3>
 <div class="paragraph">
 <p>Change the color of one or more than one tags.<br>
 Format: <code>color [c/COLOR] [t/TAG]&#8230;&#8203;</code></p>
@@ -45,7 +45,7 @@ Format: <code>color [c/COLOR] [t/TAG]&#8230;&#8203;</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>The default color of tags is "orange".</p>
+<p>The default color of tags is "orange"</p>
 </li>
 <li>
 <p>You can change the color of more than one tag at a time</p>
@@ -54,7 +54,10 @@ Format: <code>color [c/COLOR] [t/TAG]&#8230;&#8203;</code></p>
 <p>The colors supported are: "red", "blue", "green", "teal", "aqua", "black", "gray", "lime", "maroon", "navy","orange", "purple", "silver", "olive","white", "yellow" and "transparent"</p>
 </li>
 <li>
-<p>You cannot change the color of a non existing tag.</p>
+<p>You cannot change the color of a non existing tag</p>
+</li>
+<li>
+<p>The color for tags that you have set will be stored in user preference</p>
 </li>
 </ul>
 </div>
@@ -80,6 +83,11 @@ The <code>color</code> command fails as <code>invalid_color</code> is not suppor
 The <code>color</code> command fails as <code>not_existing_tag</code> does not exit in current database.</p>
 </li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/tagcolor.png" alt="tagcolor" width="790">
+</div>
 </div>
 <hr>
 <div class="sect3">
@@ -215,7 +223,7 @@ The structure in .xml storage file is like the following:</p>
 <strong>Cons:</strong> It is complicated to implement.<br>
 <strong>Alternative 2:</strong> Create a static hash map of all tag names(String) and their associate tag color(String) inside <code>Tag</code> class.<br>
 <strong>Pros:</strong> It is easy to implement.<br>
-<strong>Cons:</strong> Storing tag and tag color pairs inside <code>Tag</code> class violates the single responsibility principle of classes.</p>
+<strong>Cons:</strong> All the methods associated with tag color will be stored inside <code>Tag</code> class, violates the single responsibility principle of classes.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -238,7 +246,7 @@ The structure in .xml storage file is like the following:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="change-font-size-code-fs-code-since-v1-3"><a class="link" href="#change-font-size-code-fs-code-since-v1-3">Change font size : <code>fs</code> SINCE V1.3</a></h3>
+<h3 id="change-font-size-code-fs-code-since-v1-3"><a class="link" href="#change-font-size-code-fs-code-since-v1-3">Change font size : <code>fs</code> since v1.3</a></h3>
 <div class="paragraph">
 <p>Change the font size of the entire application<br>
 Format: <code>fs [FONT SIZE]</code> or <code>fs [+/-]</code></p>
@@ -258,6 +266,9 @@ Format: <code>fs [FONT SIZE]</code> or <code>fs [+/-]</code></p>
 </li>
 <li>
 <p>You can increase (or decrease) the font size by pressing the "+" (or "-") button in the right top corner.</p>
+</li>
+<li>
+<p>The font size that you have choosen will be stored in user preference</p>
 </li>
 </ul>
 </div>
@@ -281,6 +292,11 @@ Format: <code>fs [FONT SIZE]</code> or <code>fs [+/-]</code></p>
 <p><code>fs -</code><br></p>
 </li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/fs.png" alt="fs" width="790">
+</div>
 </div>
 <hr>
 <div class="sect3">
@@ -398,7 +414,7 @@ new font size.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="show-address-of-a-person-code-map-code-since-v1-3"><a class="link" href="#show-address-of-a-person-code-map-code-since-v1-3">Show address of a person : <code>map</code> (SINCE V1.3)</a></h3>
+<h3 id="show-address-of-a-person-code-map-code-since-v1-3"><a class="link" href="#show-address-of-a-person-code-map-code-since-v1-3">Show address of a person : <code>map</code> since v1.3</a></h3>
 <div class="paragraph">
 <p>Shows the address of a person in Google Map in the browser panel.<br></p>
 </div>
@@ -438,6 +454,11 @@ new font size.<br></p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/map.png" alt="map" width="790">
+</div>
+</div>
 <hr>
 <div class="sect3">
 <h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
@@ -455,7 +476,7 @@ new font size.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="change-the-theme-code-theme-code-since-v1-4"><a class="link" href="#change-the-theme-code-theme-code-since-v1-4">Change the theme : <code>theme</code> (SINCE V1.4)</a></h3>
+<h3 id="change-the-theme-code-theme-code-since-v1-4"><a class="link" href="#change-the-theme-code-theme-code-since-v1-4">Change the theme : <code>theme</code> since v1.4</a></h3>
 <div class="paragraph">
 <p>Changes the theme of entire application.<br></p>
 </div>
@@ -473,7 +494,10 @@ new font size.<br></p>
 <p>The default theme is bright</p>
 </li>
 <li>
-<p>You can also change the theme via theme button</p>
+<p>You can also change the theme via "theme" button</p>
+</li>
+<li>
+<p>The theme that you have choosen will be stored in user preference</p>
 </li>
 </ul>
 </div>
@@ -492,6 +516,11 @@ new font size.<br></p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/theme.png" alt="theme" width="840">
+</div>
+</div>
 <hr>
 <div class="sect3">
 <h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
@@ -509,10 +538,48 @@ When users are allowed to choose the theme for the app, the user experience will
 </div>
 </div>
 <div class="sect2">
-<h3 id="check-whether-the-command-is-valid-while-the-user-is-typing-since-v1-5"><a class="link" href="#check-whether-the-command-is-valid-while-the-user-is-typing-since-v1-5">Check whether the command is valid while the user is typing (SINCE V1.5)</a></h3>
+<h3 id="check-whether-the-command-s-format-is-valid-while-the-user-is-typing-since-v1-5"><a class="link" href="#check-whether-the-command-s-format-is-valid-while-the-user-is-typing-since-v1-5">Check whether the command&#8217;s format is valid while the user is typing since v1.5</a></h3>
 <div class="paragraph">
-<p>The result display panel will show whether the command is valid while the user is typing.
-Also, the message displayed will tell the user exactly which part goes wrong.</p>
+<p>The result display panel will show whether the command is valid while you are typing without pressing an enter key.
+Also, the message displayed will tell you exactly which part goes wrong.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The "Command format is valid" displayed in the result display panel doesn&#8217;t guarantee that
+the command typed is always valid.<br>
+This feature only checks the basic format of a command such as whether
+an input field is missing. Some underlying errors won&#8217;t be detected until the command is executed.<br>
+For example, when the user is giving a <code>ChangeTagColor</code> command,
+it can&#8217;t check whether a tag name given exists or not
+until this command is executed.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/valid.png" alt="valid" width="400">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/pink.png" alt="pink" width="950">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/invalid.png" alt="invalid" width="630">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/invalidbutok.png" alt="invalidbutok" width="430">
+</div>
 </div>
 <hr>
 <div class="sect3">
@@ -558,7 +625,7 @@ an error message and then fix the command typed earlier.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 07:42:47 +00:00
+Last updated 2017-11-12 17:04:16 +00:00
 </div>
 </div>
 </body>
