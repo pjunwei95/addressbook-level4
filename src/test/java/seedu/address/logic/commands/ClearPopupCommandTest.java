@@ -1,39 +1,38 @@
 package seedu.address.logic.commands;
-
+//@@author pjunwei95
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
 
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-//@@author RonakLakhotia
-public class ClearPopUpCommandTest {
+
+public class ClearPopupCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyAddressBook() {
         Model model = new ModelManager();
-        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_CLEAR_SUCCESS, model);
+        ClearPopupCommand clearPopupCommand = new ClearPopupCommand();
+        assertEquals(prepareCommand(model, clearPopupCommand), clearPopupCommand);
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyAddressBook() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        assertCommandSuccessClear(model, ClearPopupCommand.MESSAGE_CLEAR_SUCCESS, model);
+        ClearPopupCommand clearPopupCommand = new ClearPopupCommand();
+        assertEquals(prepareCommand(model, clearPopupCommand), clearPopupCommand);
     }
 
     /**
-     * Executes the given {@code command}, confirms that <br>
-     * - the result message matches {@code expectedMessage} <br>
-     * - the {@code actualModel} matches {@code expectedModel}
+     * Generates a new {@code ClearPopupCommand} which upon execution, clears the contents in {@code model}.
      */
-
-    public static void assertCommandSuccessClear( Model actualModel, String expectedMessage,
-                                            Model expectedModel) {
-
-        assertEquals(expectedMessage, "Weaver has been cleared!");;
-        assertEquals(expectedModel, actualModel);
-
+    private ClearPopupCommand prepareCommand(Model model, ClearPopupCommand clearPopupCommand) {
+        ClearPopupCommand command = new ClearPopupCommand();
+        command.setData(model, new CommandHistory(), new UndoRedoStack());
+        return clearPopupCommand;
     }
 }
