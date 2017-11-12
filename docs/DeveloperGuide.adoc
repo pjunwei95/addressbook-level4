@@ -849,7 +849,8 @@ The Sequence diagram (Figure 3.2) above shows the working flow of the Photo comm
 
 Refer to Figure 3.3 below for the Inheritance diagram of the command. +
 
-image::PhotoCommand.png[width="800"]. +
+image::PhotoCommand.png[width="800"]
+Figure 3.3
 
 The binder for attaching the image to the Person Card each time, is implemented in the following way. +
 
@@ -859,9 +860,10 @@ Image display = new Image(file.toURI().toString());
 image.setImage(display);
 ----
 
-image::Wireframe.png[width="800"]. +
+image::Wireframe.png[width="790"]
+Figure 3.4 Wireframe
 
-The wireframe for binding the image is shown below. +
+The wireframe for binding the image is shown above in Figure 3.4. +
 
 
 ==== Reasons for this type of implementation
