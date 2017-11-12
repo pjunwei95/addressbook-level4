@@ -948,10 +948,69 @@ It also shows how the event is raised and hence the page is loaded in the browse
 **Pros:** Helps user exercise other functionalities like using messenger. +
 **Cons:** Does not make use of Weaver in any useful way. +
 **Alternative2:** View the profile page on the browser panel. +
-**Pros:** Makes it quicker and adds a fucntion to the personalised Weaver. +
+**Pros:** Makes it quicker and adds a function to the personalised Weaver. +
 **Cons:** Limits the functionalities that can be used on facebook. +
 
 // end::facebook[]
+// tag::email[]
+=== Email Feature
+
+** Weaver includes the `email` command which helps users contact persons on their contact list using the default browser in their desktop. +
+
+** This feature will work for users with a Gmail Account. +
+
+[TIP]
+The recipients are those persons with a common tag. +
+
+** The command takes in two parameters, the tag name and the subject line that the user wants in the email body. +
+
+Refer to the sequence diagram 4.1 below to see how the command parses the arguements and completes execution. +
+
+image::EmailSequence.png[width="800"]
+Figure 4.1 +
+
+The command will throw an exception in the following cases :
+
+ ** The number of tags entered is not equal to 1. +
+ ** The tag name does not match any of the tags in Weaver. +
+ ** The subject line is not valid. +
+
+**  Below is the high level sequence diagram of the command. +
+
+image::EmailHigh.png[width="800"]
+
+The following code snippet shows the Gmail Browser URL used and how the desktop browser is opened. +
+
+ ---
+ appendEmailAddress = appendEmailAddress.substring(0, appendEmailAddress.length() - 1);
+
+ String Gmail_Url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + appendEmailAddress + "&su=" + subject;
+
+ if(Desktop.isDesktopSupported()) {
+ Desktop.getDesktop().browse(new URI(Gmail_Url));
+         }
+
+ ---
+
+==== Reasons for this kind of implementation
+
+** Gmail is the most widely used web browser and most people are likely to have a Gmail account.
+Hence Gmail was the most appropriate email service. +
+
+** Opening the Gmail compose page on the browser is more convenient than working on the browser panel of Weaver since
+the browser panel restricts some functionalities. +
+
+==== Design Considerations
+
+**Aspect:** How should the user send the mail. +
+**Alternative1 : (currently used) ** Open the default web browser +
+**Pros:** Makes sending emails a hassle free job and this also makes use of Weaver CLI in a good way. +
+**Cons:** Depends on the type of browser and its compatibility +
+**Alternative2:** Send the email using browser panel +
+**Pros:** Makes it quicker and adds a function to the personalised Weaver. +
+**Cons:** Limits the functionalities that can be used on Gmail since the browser panel is not updated. +
+
+// end::email[]
 === Adding a reminders list to Weaver.
 
 ** The reminders panel displays the list of reminders that the user has entered. +

@@ -669,7 +669,7 @@ image::backup.png[width="237"]
 // end::backup[]
 
 // tag::email[]
-=== Sending Emails to your contacts : `backup` since v1.5
+=== Sending Emails to your contacts : `email` since v1.5
 
 Weaver now allows you to send emails to all your contacts with a common tag! +
 If you want to send an important mail to people who are tagged as temmates, you are just a command away!. +
@@ -679,7 +679,7 @@ This command will open the default browser in your desktop and direct you to you
 Format: `email t/[TAG] s/[SUBJECT]`. +
 
 [TIP]
-You must have Gmail Account to send mails. +
+You must have a Gmail Account to send mails. +
 
 ** You cannot include more than one tag. Also you must specify 1 tag +
 ** The tag specified must be attached to atleast one person in Weaver. +

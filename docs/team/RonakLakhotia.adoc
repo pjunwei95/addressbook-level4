@@ -83,6 +83,17 @@ include::../UserGuide.adoc[tag=email]
 
 ---
 
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=email]
+
+#End of Extract#
+
+---
+
 === Other contributions
 
 * Set up a reminders panel (Pull requests https://github.com[#33], https://github.com[#34])
