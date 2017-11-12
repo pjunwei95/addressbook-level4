@@ -94,6 +94,30 @@ include::../DeveloperGuide.adoc[tag=email]
 
 ---
 
+=== Enhancement Added: Add command `search`
+
+==== External behavior
+
+---
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=search]
+
+#End of Extract#
+
+---
+
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=email]
+
+#End of Extract#
+
+---
+
 === Other contributions
 
 * Set up a reminders panel (Pull requests https://github.com[#33], https://github.com[#34])

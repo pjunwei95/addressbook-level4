@@ -236,7 +236,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-
+// tag::search[]
 === Searching a person : `search` Since v1.1
 
 Lists persons with the given name and Date Of Birth. +
@@ -262,6 +262,7 @@ Returns persons with name `John` and Date of Birth `13.10.1997`.
 ** Result - 2 persons listed!
 
 image::Search.png[width="790"]
+// end::search[]
 
 // tag::remark[]
 === Remarking a person : `remark` Since v1.1
