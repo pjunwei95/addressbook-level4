@@ -24,7 +24,7 @@ IMPORTANT STEP - RENAME THE FILE TO `SampleData.xml`. Please note the use of Upp
  	If at any point the app stops responding, close the app and restart again with username ‘SampleData.xml’ and the password you used to register. Click on the ** LOGIN ** button each time you need to enter the app with the credentials. +
 
 
-** IMPORTANT NOTE - The outputs provided in this sheet are according to the inputs we have put. Please not if you put different inputs, the output will be different. +
+** IMPORTANT NOTE - The outputs provided in this sheet are according to the inputs we have put. Please note if you put different inputs, the output will be different. +
 
 
 == Test login feature
