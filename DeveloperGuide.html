@@ -55,19 +55,20 @@
 <ul class="sectlevel2">
 <li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></li>
 <li><a href="#search-command">4.2. Search Command</a></li>
-<li><a href="#login-logout-mechanism">4.3. Login / Logout mechanism</a></li>
-<li><a href="#register-mechanism">4.4. Register mechanism</a></li>
-<li><a href="#customize-tag-color-mechanism">4.5. Customize tag color mechanism</a></li>
-<li><a href="#customize-font-size-mechanism">4.6. Customize font size mechanism</a></li>
-<li><a href="#deleting-a-person-s-tag-mechanism">4.7. Deleting a person&#8217;s tag mechanism</a></li>
-<li><a href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.8. Adding a photo to a contact in your personalised Weaver.</a></li>
-<li><a href="#facebook-integration">4.9. FaceBook Integration</a></li>
-<li><a href="#email-feature">4.10. Email Feature</a></li>
-<li><a href="#adding-a-reminders-list-to-weaver">4.11. Adding a reminders list to Weaver.</a></li>
-<li><a href="#nusmods-integration">4.12. Nusmods Integration</a></li>
-<li><a href="#encrypt-your-file-not-used-in-v1-5">4.13. Encrypt your file (not used in V1.5).</a></li>
-<li><a href="#logging">4.14. Logging</a></li>
-<li><a href="#configuration">4.15. Configuration</a></li>
+<li><a href="#remark-mechanism">4.3. Remark mechanism</a></li>
+<li><a href="#login-logout-mechanism">4.4. Login / Logout mechanism</a></li>
+<li><a href="#register-mechanism">4.5. Register mechanism</a></li>
+<li><a href="#customize-tag-color-mechanism">4.6. Customize tag color mechanism</a></li>
+<li><a href="#customize-font-size-mechanism">4.7. Customize font size mechanism</a></li>
+<li><a href="#deleting-a-person-s-tag-mechanism">4.8. Deleting a person&#8217;s tag mechanism</a></li>
+<li><a href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.9. Adding a photo to a contact in your personalised Weaver.</a></li>
+<li><a href="#facebook-integration">4.10. FaceBook Integration</a></li>
+<li><a href="#email-feature">4.11. Email Feature</a></li>
+<li><a href="#adding-a-reminders-list-to-weaver">4.12. Adding a reminders list to Weaver.</a></li>
+<li><a href="#nusmods-integration">4.13. Nusmods Integration</a></li>
+<li><a href="#encrypt-your-file-not-used-in-v1-5">4.14. Encrypt your file (not used in V1.5).</a></li>
+<li><a href="#logging">4.15. Logging</a></li>
+<li><a href="#configuration">4.16. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -851,14 +852,16 @@ public boolean test (ReadOnlyPerson person) {</pre>
                &amp;&amp; StringUtil.containsWordIgnoreCase(person.getDateOfBirth().date, keywords.get(1));
     }
 ---
-// tag::remark[]
-=== Remark mechanism</pre>
+// tag::remark[]</pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="remark-mechanism"><a class="link" href="#remark-mechanism">4.3. Remark mechanism</a></h3>
 <div class="paragraph">
 <p>The remark mechanism remarks contacts with their module information.
 The command takes two parameters, Index and ModuleInfo. TargetIndex specifies the person you want to remark to. And the module information specifies the person&#8217;s module information.
-If the index is invalid or the module information is not in the correct format, exceptions will be thrown.+
+If the index is invalid or the module information is not in the correct format, exceptions will be thrown.<br>
 Format - photo [INDEX] [MODULEINFO]
 e.g. remark 1 CS2103/LEC/1</p>
 </div>
@@ -877,7 +880,7 @@ MODULETITLE/MODULETYPE/MODULENUM
 </div>
 </div>
 <div class="sect2">
-<h3 id="login-logout-mechanism"><a class="link" href="#login-logout-mechanism">4.3. Login / Logout mechanism</a></h3>
+<h3 id="login-logout-mechanism"><a class="link" href="#login-logout-mechanism">4.4. Login / Logout mechanism</a></h3>
 <div class="paragraph">
 <p>The <code>login / logout</code> mechanism is a page which requires user to key in his username and password before he can use the addressbook. And once he is logged in, there will be a automatically generated file named as <code>username + addressbook.xml</code> storing the information about his own addressbook.</p>
 </div>
@@ -962,7 +965,7 @@ If user key in wrong user name or password, he will stuck at login page until he
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.1. Design considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.4.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>login / logout</code> feature<br>
 <strong>Alternative 1 (current choice):</strong> <code>login</code> is compulsory. User must login before he can use the addressbook <br>
@@ -988,7 +991,7 @@ multiple users.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="register-mechanism"><a class="link" href="#register-mechanism">4.4. Register mechanism</a></h3>
+<h3 id="register-mechanism"><a class="link" href="#register-mechanism">4.5. Register mechanism</a></h3>
 <div class="paragraph">
 <p>The register feature enables users to put new valid accounts inside the accounts.json file. The file operations are similar to the one used in Login/Logout feature.</p>
 </div>
@@ -1032,7 +1035,7 @@ It puts account information in the accounts.json file. Users must key in the sam
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If user key in wrong password, he will stuck at login page until he manages to get in.
+If user key in wrong password, he will be stuck at login page until he manages to get in.
 </td>
 </tr>
 </table>
@@ -1073,7 +1076,7 @@ A user can go back using the back button.
 </div>
 </div>
 <div class="sect2">
-<h3 id="customize-tag-color-mechanism"><a class="link" href="#customize-tag-color-mechanism">4.5. Customize tag color mechanism</a></h3>
+<h3 id="customize-tag-color-mechanism"><a class="link" href="#customize-tag-color-mechanism">4.6. Customize tag color mechanism</a></h3>
 <div class="paragraph">
 <p>Tag color can be changed by giving a <code>ChangeTagColorCommand</code>.</p>
 </div>
@@ -1185,7 +1188,7 @@ The structure in .xml storage file is like the following:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.5.1. Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.6.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to associate each tag with a tag color?<br>
 <strong>Alternative 1 (current choice):</strong> Create a new class <code>TagColor</code> and add a new field to <code>Tag</code> class.<br>
@@ -1208,7 +1211,7 @@ The structure in .xml storage file is like the following:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="customize-font-size-mechanism"><a class="link" href="#customize-font-size-mechanism">4.6. Customize font size mechanism</a></h3>
+<h3 id="customize-font-size-mechanism"><a class="link" href="#customize-font-size-mechanism">4.7. Customize font size mechanism</a></h3>
 <div class="paragraph">
 <p>The font size of the application can be changed via <code>ChangeFontSizeCommand</code> or by pressing the '+' or '-' button on the right top corner.</p>
 </div>
@@ -1289,7 +1292,7 @@ new font size.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.6.1. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.7.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to represent a font size?<br>
 <strong>Alternative 1 (current choice):</strong> Create a new class <code>FontSize</code>.<br>
@@ -1303,7 +1306,7 @@ new font size.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-s-tag-mechanism"><a class="link" href="#deleting-a-person-s-tag-mechanism">4.7. Deleting a person&#8217;s tag mechanism</a></h3>
+<h3 id="deleting-a-person-s-tag-mechanism"><a class="link" href="#deleting-a-person-s-tag-mechanism">4.8. Deleting a person&#8217;s tag mechanism</a></h3>
 <div class="paragraph">
 <p>The Deleting a person&#8217;s tag mechanism consists of <code>DeleteTagCommand</code> and <code>DeleteTagCommandParser</code> classes.
 The <code>DeleteTagCommandParser</code> resides inside <code>LogicManager</code>. <code>DeleteTagCommandParser</code> only deals with <code>Parser</code>. It is created from <code>AddressBookParser</code>. The following diagram shows the flow for parser:</p>
@@ -1434,7 +1437,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 </table>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.7.1. Design considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.8.1. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>DeleteTagCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> To access the <code>Person</code> and overwrite a new <code>Person</code> to it.<br>
@@ -1469,7 +1472,7 @@ To continue to contain the tag in <code>UniqueTagsList</code> even if there are 
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.8. Adding a photo to a contact in your personalised Weaver.</a></h3>
+<h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.9. Adding a photo to a contact in your personalised Weaver.</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1604,7 +1607,7 @@ image.setImage(display);</pre>
 <p>The wireframe for binding the image is shown above in Figure 3.4.<br></p>
 </div>
 <div class="sect3">
-<h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">4.8.1. Reasons for this type of implementation</a></h4>
+<h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">4.9.1. Reasons for this type of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1620,7 +1623,7 @@ image.setImage(display);</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.8.2. Design considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.9.2. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How should the user choose the Image.<br>
 <strong>Alternative1: (current choice): </strong> Enter the File path present on
@@ -1645,7 +1648,7 @@ any directory.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="facebook-integration"><a class="link" href="#facebook-integration">4.9. FaceBook Integration</a></h3>
+<h3 id="facebook-integration"><a class="link" href="#facebook-integration">4.10. FaceBook Integration</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1660,7 +1663,7 @@ any directory.<br>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="working-flow"><a class="link" href="#working-flow">4.9.1. Working flow</a></h4>
+<h4 id="working-flow"><a class="link" href="#working-flow">4.10.1. Working flow</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1711,7 +1714,7 @@ It also shows how the event is raised and hence the page is loaded in the browse
 </div>
 </div>
 <div class="sect3">
-<h4 id="reasons-for-this-kind-of-implementation"><a class="link" href="#reasons-for-this-kind-of-implementation">4.9.2. Reasons for this kind of implementation</a></h4>
+<h4 id="reasons-for-this-kind-of-implementation"><a class="link" href="#reasons-for-this-kind-of-implementation">4.10.2. Reasons for this kind of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1727,7 +1730,7 @@ It also shows how the event is raised and hence the page is loaded in the browse
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.9.3. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.10.3. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How should the user view the profile page.<br>
 <strong>Alternative1 : </strong> View the profile page on a web browser<br>
@@ -1740,7 +1743,7 @@ It also shows how the event is raised and hence the page is loaded in the browse
 </div>
 </div>
 <div class="sect2">
-<h3 id="email-feature"><a class="link" href="#email-feature">4.10. Email Feature</a></h3>
+<h3 id="email-feature"><a class="link" href="#email-feature">4.11. Email Feature</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1828,7 +1831,7 @@ Desktop.getDesktop().browse(new URI(Gmail_Url));
 </div>
 <hr>
 <div class="sect3">
-<h4 id="reasons-for-this-kind-of-implementation-2"><a class="link" href="#reasons-for-this-kind-of-implementation-2">4.10.1. Reasons for this kind of implementation</a></h4>
+<h4 id="reasons-for-this-kind-of-implementation-2"><a class="link" href="#reasons-for-this-kind-of-implementation-2">4.11.1. Reasons for this kind of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1843,7 +1846,7 @@ the browser panel restricts some functionalities.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.10.2. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.11.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How should the user send the mail.<br>
 <strong>Alternative1 : (currently used) </strong> Open the default web browser<br>
@@ -1856,7 +1859,7 @@ the browser panel restricts some functionalities.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-reminders-list-to-weaver"><a class="link" href="#adding-a-reminders-list-to-weaver">4.11. Adding a reminders list to Weaver.</a></h3>
+<h3 id="adding-a-reminders-list-to-weaver"><a class="link" href="#adding-a-reminders-list-to-weaver">4.12. Adding a reminders list to Weaver.</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1916,9 +1919,13 @@ e.g. - <code>change 1 d/12.12.2017</code>.<br></p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogicReminder.png" alt="LogicReminder" width="800">
+</div>
+</div>
 <div class="paragraph">
-<p>image::LogicReminder.png[width="800"]]
-(Figure 5.2)</p>
+<p>(Figure 5.2)</p>
 </div>
 <div class="paragraph">
 <p>Figure 5.2 above shows the Logic Component Diagram of the Reminders Panel implementation.<br></p>
@@ -1936,7 +1943,7 @@ e.g. - <code>change 1 d/12.12.2017</code>.<br></p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="reasons-for-this-kind-of-implementation-3"><a class="link" href="#reasons-for-this-kind-of-implementation-3">4.11.1. Reasons for this kind of implementation</a></h4>
+<h4 id="reasons-for-this-kind-of-implementation-3"><a class="link" href="#reasons-for-this-kind-of-implementation-3">4.12.1. Reasons for this kind of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1949,7 +1956,7 @@ e.g. - <code>change 1 d/12.12.2017</code>.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.11.2. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.12.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to store each reminder<br>
 <strong>Alternative1 : (currently used) </strong> Reminders stored in the addressbook.xml file<br>
@@ -1962,7 +1969,7 @@ e.g. - <code>change 1 d/12.12.2017</code>.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="nusmods-integration"><a class="link" href="#nusmods-integration">4.12. Nusmods Integration</a></h3>
+<h3 id="nusmods-integration"><a class="link" href="#nusmods-integration">4.13. Nusmods Integration</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1976,7 +1983,7 @@ displayed.</p>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="working-flow-2"><a class="link" href="#working-flow-2">4.12.1. Working flow</a></h4>
+<h4 id="working-flow-2"><a class="link" href="#working-flow-2">4.13.1. Working flow</a></h4>
 <div class="paragraph">
 <p>When the person panel is clicked, an FXML function will handle this and start to parse the module information.
 After parsing this information into URL format which is supported by NUSMODS, an URL is made and passed to the
@@ -1990,7 +1997,7 @@ Google engine. And the brower panel will go to the NUSMODS page which contains t
 </div>
 </div>
 <div class="sect3">
-<h4 id="reasons-for-this-kind-of-implementation-4"><a class="link" href="#reasons-for-this-kind-of-implementation-4">4.12.2. Reasons for this kind of implementation</a></h4>
+<h4 id="reasons-for-this-kind-of-implementation-4"><a class="link" href="#reasons-for-this-kind-of-implementation-4">4.13.2. Reasons for this kind of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2007,7 +2014,7 @@ Google engine. And the brower panel will go to the NUSMODS page which contains t
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypt-your-file-not-used-in-v1-5"><a class="link" href="#encrypt-your-file-not-used-in-v1-5">4.13. Encrypt your file (not used in V1.5).</a></h3>
+<h3 id="encrypt-your-file-not-used-in-v1-5"><a class="link" href="#encrypt-your-file-not-used-in-v1-5">4.14. Encrypt your file (not used in V1.5).</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2135,7 +2142,7 @@ authentication of the accounts. Once the check is finished, it&#8217;s encrypted
 </div>
 </div>
 <div class="sect3">
-<h4 id="mechanism-of-encrytion"><a class="link" href="#mechanism-of-encrytion">4.13.1. Mechanism of encrytion</a></h4>
+<h4 id="mechanism-of-encrytion"><a class="link" href="#mechanism-of-encrytion">4.14.1. Mechanism of encrytion</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2154,7 +2161,7 @@ encrypted/decrypted. (This works on OSX but not on Windows and UNIX).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="reason-for-giving-up-this-feature"><a class="link" href="#reason-for-giving-up-this-feature">4.13.2. Reason for giving up this feature</a></h4>
+<h4 id="reason-for-giving-up-this-feature"><a class="link" href="#reason-for-giving-up-this-feature">4.14.2. Reason for giving up this feature</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2167,7 +2174,7 @@ different operating system will behave differently. Some will replace the file w
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.14. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.15. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -2205,7 +2212,7 @@ different operating system will behave differently. Some will replace the file w
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">4.15. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">4.16. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3878,7 +3885,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 08:49:19 +00:00
+Last updated 2017-11-13 12:00:21 +00:00
 </div>
 </div>
 </body>
