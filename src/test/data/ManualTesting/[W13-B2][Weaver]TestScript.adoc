@@ -34,8 +34,8 @@ IMPORTANT STEP - RENAME THE FILE TO `SampleData.xml`. Please note the use of Upp
 == Test register feature
 ** Go to the register page using the button “register” on the right bottom of login page.
 ** Choose any username and password to register. If you use duplicate username, you will get a pop up window and need to choose other valid username.
-** Choose a valid username, but key in different password purposely to see the effect.
-** Register using any new username and whatever password to see the effect of correct registering. 
+** Choose a valid username, but key in different password purposely to see the effect. +
+** Register using any new username and whatever password to see the effect of correct registering. +
 ** Login with valid username and password pair and see the mainWindow(the effect of correctly login) +
 
 ** Please note - After you have tested the LOGIN and REGISTER feature follow the steps below :-
