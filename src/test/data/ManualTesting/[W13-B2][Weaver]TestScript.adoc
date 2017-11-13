@@ -766,7 +766,8 @@ entering the backup command, will create a SampleData-backup.xml file.
 *COMMAND 0* - `backup` +
 
 * *Result* +
-A backup of Weaver has been created!
+A backup of Weaver has been created! +
+If you close the app and open the data folder, you will notice, a `SampleData-backup.xml` is created. +
 
 
 === Autocompletion feature
