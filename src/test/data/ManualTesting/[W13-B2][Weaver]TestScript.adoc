@@ -3,15 +3,19 @@
 == Load Sample data
 
 ** To load the sample data, follow the instructions given below:- +
-** 1) Download the SampleData.xml file. +
-** 2) Run the Weaver.jar file to open the app. +
+** 1) Download the [W13-B2][Weaver]SampleData.xml file. +
+
+[TIP]
+IMPORTANT STEP - RENAME THE FILE TO `SampleData.xml`. Please note the use of Upeercase characters 'S' and 'D'. +
+
+** 2) Run the [W13-B2][Weaver].jar file to open the app. +
 ** 3) ** LOGIN ** with the Username - `admin` and Password - `admin` . +
 ** 4) After logging in make a change to the Weaver data by executing the command - `edit 1 n/change` . +
 ** 5) Close the app. You will notice that the `data` folder is created. +
 ** 6) Open the data folder. Drag/Copy the SampleData.xml file into the data folder. +
-** 7) Close the folder. Run the App again. +
+** 7) Close the folder. Run the App again.  You will see the Login page again. +
 ** 8) Click on ** REGISTER ** to register a new account. +
-** 9) Enter username as **SampleData**. `S` and `D` must in uppercase. `SampleData` is case-sensitive. Enter any password. Take a note of the password. +
+** 9) Enter username as **SampleData**. `S` and `D` must in uppercase. `SampleData` is case-sensitive. Enter any password. Please Take a note of the password since you will be need ing it. +
 ** 10) You will reach the **LOGIN** page. +
 ** 11) Login with the username **SampleData** and the password you used to register. +
 ** 12) The app opens with the data. +
@@ -31,8 +35,12 @@
 ** Go to the register page using the button “register” on the right bottom of login page.
 ** Choose any username and password to register. If you use duplicate username, you will get a pop up window and need to choose other valid username.
 ** Choose a valid username, but key in different password purposely to see the effect.
-** Register using username “SampleData” and whatever password to see the effect of correct registering. Meanwhile, to load the “SampleData.xml”, you need to use the username “SampleData” to get start with.
+** Register using any new username and whatever password to see the effect of correct registering. 
 ** Login with valid username and password pair and see the mainWindow(the effect of correctly login) +
+
+** Please note - After you have tested the LOGIN and REGISTER feature follow the steps below :-
+1) Close the app. +
+2) Login in again with the USERNAME - `SampleData` and PASSWORD - You used to register the account with username `SampleData` . +
 
 === Command 0
 
