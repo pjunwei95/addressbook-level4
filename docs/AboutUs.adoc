@@ -41,7 +41,7 @@ Make sure that all work is done in the correct format.In addition, in charge of 
 
 === Yang Minxing
 image::yangminxing.png[width="150", align="left"]
-{empty}[https://github.com/yangminxingnus[github]][<<yangminxing#, portfolio>>]
+{empty}[https://github.com/yangminxingnus[github]][https://cs2103aug2017-w13-b2.github.io/main/team/yangminxing.html[portfolio]]
 
 Role: In charge of Storage and UI +
 Responsibilities: Ensure that the interface of the Application is of good quality.
