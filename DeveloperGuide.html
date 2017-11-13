@@ -54,7 +54,7 @@
 <li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></li>
-<li><a href="#remark-mechanism">4.2. Remark mechanism</a></li>
+<li><a href="#search-command">4.2. Search Command</a></li>
 <li><a href="#login-logout-mechanism">4.3. Login / Logout mechanism</a></li>
 <li><a href="#register-mechanism">4.4. Register mechanism</a></li>
 <li><a href="#customize-tag-color-mechanism">4.5. Customize tag color mechanism</a></li>
@@ -62,11 +62,12 @@
 <li><a href="#deleting-a-person-s-tag-mechanism">4.7. Deleting a person&#8217;s tag mechanism</a></li>
 <li><a href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.8. Adding a photo to a contact in your personalised Weaver.</a></li>
 <li><a href="#facebook-integration">4.9. FaceBook Integration</a></li>
-<li><a href="#adding-a-reminders-list-to-weaver">4.10. Adding a reminders list to Weaver.</a></li>
-<li><a href="#nusmods-integration">4.11. Nusmods Integration</a></li>
-<li><a href="#encrypt-your-file-not-used-in-v1-5">4.12. Encrypt your file (not used in V1.5).</a></li>
-<li><a href="#logging">4.13. Logging</a></li>
-<li><a href="#configuration">4.14. Configuration</a></li>
+<li><a href="#email-feature">4.10. Email Feature</a></li>
+<li><a href="#adding-a-reminders-list-to-weaver">4.11. Adding a reminders list to Weaver.</a></li>
+<li><a href="#nusmods-integration">4.12. Nusmods Integration</a></li>
+<li><a href="#encrypt-your-file-not-used-in-v1-5">4.13. Encrypt your file (not used in V1.5).</a></li>
+<li><a href="#logging">4.14. Logging</a></li>
+<li><a href="#configuration">4.15. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -809,7 +810,51 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="remark-mechanism"><a class="link" href="#remark-mechanism">4.2. Remark mechanism</a></h3>
+<h3 id="search-command"><a class="link" href="#search-command">4.2. Search Command</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The search command simply makes the find command more powerful as it looks for people with same name and date of birth.<br></p>
+</li>
+<li>
+<p>Implementation is similar to the find command.<br></p>
+</li>
+<li>
+<p>The command takes in two arguments, namely the name of the person and the date of birth.<br></p>
+</li>
+<li>
+<p>Exceptions are thrown if invalid commands are entered.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is a code snippet which shows how the search command parses the arguements.<br></p>
+</div>
+<hr>
+<div class="literalblock">
+<div class="content">
+<pre>@Override
+public boolean test (ReadOnlyPerson person) {</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>if (keywords.size() &lt;= 1) {
+    logger.warning("The number of arguements entered do not match the command format");
+    return false;
+}</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>        return StringUtil.containsWordIgnoreCase(person.getName().fullName, keywords.get(0))
+               &amp;&amp; StringUtil.containsWordIgnoreCase(person.getDateOfBirth().date, keywords.get(1));
+    }
+---
+// tag::remark[]
+=== Remark mechanism</pre>
+</div>
+</div>
 <div class="paragraph">
 <p>The remark mechanism remarks contacts with their module information.
 The command takes two parameters, Index and ModuleInfo. TargetIndex specifies the person you want to remark to. And the module information specifies the person&#8217;s module information.
@@ -1425,32 +1470,30 @@ To continue to contain the tag in <code>UniqueTagsList</code> even if there are 
 </div>
 <div class="sect2">
 <h3 id="adding-a-photo-to-a-contact-in-your-personalised-weaver"><a class="link" href="#adding-a-photo-to-a-contact-in-your-personalised-weaver">4.8. Adding a photo to a contact in your personalised Weaver.</a></h3>
-<div class="paragraph">
-<p>The add Photo command adds a display picture to a particular contact.The command takes in two parameters, TargetIndex
-that is the index of the person I want to add a photo and the image filepath.<br>
-The command can also be used to delete an existing picture of a person.If the person has no display picture and the user attempts to delete a picture, an exception
-will be thrown.</p>
-</div>
-<div class="paragraph">
-<p>Format - photo [INDEX] [IMAGE_FILEPATH]<br>
-e.g. <code>photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg</code> to add an image
-e.g. <code>photo 1 delete</code> to delete an existing image.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/MockUp.png" alt="MockUp" width="800">
-</div>
-</div>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
+<p>The add Photo command adds a display picture to a particular contact.</p>
+</li>
+<li>
+<p>The command takes in two parameters, TargetIndex that is the index of the person to add a photo and the image filepath.<br></p>
+</li>
+<li>
+<p>The command can also be used to delete an existing picture of a person.If the person has no display picture and the user attempts to delete a picture, an exception
+will be thrown.<br></p>
+</li>
+<li>
+<p>The photo Command is inherited from the <code>UndoableCommand</code> class. The command supports the Undo/Redo mechanism in Weaver.<br></p>
+</li>
+<li>
 <p>The photo command is done with the help of ImageView property in JAVAFX, hence it is an attempt to enhance the UI.<br></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><strong>PRE-REQUISITE</strong><br>
-There is a pre-requisite for the command to work.The image that is going to be added to the contact must already be
-present on the user&#8217;s local PC.If it is not so, Weaver is going to prompt the user to add a valid File path.</p>
-</div>
-<div class="paragraph">
-<p>The photo Command is inherited from the <code>UndoableCommand</code> class.</p>
+There is a pre-requisite for the command to work. The image that is going to be added to the contact must already be
+present on the user&#8217;s local PC. If it is not so, Weaver is going to throw an exception and prompt the user to add a valid File path.</p>
 </div>
 <div class="paragraph">
 <p><strong>Working Flow</strong><br></p>
@@ -1459,7 +1502,7 @@ present on the user&#8217;s local PC.If it is not so, Weaver is going to prompt 
 <ul>
 <li>
 <p>The <code>PhotoCommandParser</code> Class parses the arguments entered in the photo command.The class then throws an Exception with the
-appropriate message depending on whether the File name is not present in the path specified by the user or if the number of arguments entered
+appropriate message depending on whether the File name is present in the path specified by the user or if the number of arguments entered
 is not equal to two.<br></p>
 </li>
 <li>
@@ -1471,10 +1514,19 @@ A new <code>Person</code> is created with the updated <code>FileImage</code> and
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Sequence Diagram</strong></p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/PhotoCommand.png" alt="PhotoCommand" width="800">
+<img src="images/PhotoSequenceDiagram.png" alt="PhotoSequenceDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p>Figure 3.2</p>
+</div>
+<div class="paragraph">
+<p>The Sequence diagram (Figure 3.2) above shows the working flow of the Photo command feature.<br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1520,12 +1572,36 @@ A new <code>Person</code> is created with the updated <code>FileImage</code> and
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Sequence Diagram</strong></p>
+<p>Refer to Figure 3.3 below for the Inheritance diagram of the command.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/PhotoSequenceDiagram.png" alt="PhotoSequenceDiagram" width="800">
+<img src="images/PhotoCommand.png" alt="PhotoCommand" width="590">
 </div>
+</div>
+<div class="paragraph">
+<p>Figure 3.3</p>
+</div>
+<div class="paragraph">
+<p>The binder for attaching the image to the Person Card each time, is implemented in the following way.<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Image display = new Image(file.toURI().toString());
+
+image.setImage(display);</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Wireframe.png" alt="Wireframe" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 3.4 Wireframe</p>
+</div>
+<div class="paragraph">
+<p>The wireframe for binding the image is shown above in Figure 3.4.<br></p>
 </div>
 <div class="sect3">
 <h4 id="reasons-for-this-type-of-implementation"><a class="link" href="#reasons-for-this-type-of-implementation">4.8.1. Reasons for this type of implementation</a></h4>
@@ -1547,7 +1623,7 @@ A new <code>Person</code> is created with the updated <code>FileImage</code> and
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.8.2. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How should the user choose the Image.<br>
-<strong>Alternative1 (current choice): </strong> Enter the File path present on
+<strong>Alternative1: (current choice): </strong> Enter the File path present on
 the desktop.<br>
 <strong>Pros:</strong> Makes use of Commad Line Interface.<br>
 <strong>Cons:</strong> User has to make sure the file exists on his/her Desktop.<br>
@@ -1576,26 +1652,31 @@ any directory.<br>
 <p>The facebook command helps the user to view the profile page of a person on the contact list.<br></p>
 </li>
 <li>
-<p>It requires the user to login to his/her account before they can view the profile page.The profile<br>
-page is shown up on the browser panel.</p>
+<p>If the user has no username the facebook page will not be loaded in the browser panel and an exception will be thrown.<br></p>
 </li>
 <li>
-<p>If the user has no username the facebook page will not be loaded in the browser panel.<br></p>
+<p>The command takes in one argument which is the index of the person.<br></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="working-flow"><a class="link" href="#working-flow">4.9.1. Working flow</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>FaceBookCommand Parser</code> class parses the argument and throws an exception if the index entered
+is invalid.<br></p>
 </li>
 <li>
-<p>FORMAT - <code>facebook [INDEX]</code></p>
+<p>A new event <code>handleFaceBookEvent</code>  is then raised.<br></p>
+</li>
+<li>
+<p>The Brower Panel class then loads the page with the url of the profile page to be viewed on Facebook.<br></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>e.g. - <code>facebook 1</code></p>
-</div>
-<div class="sect3">
-<h4 id="working-flow"><a class="link" href="#working-flow">4.9.1. Working flow</a></h4>
-<div class="paragraph">
-<p>The <code>FaceBookCommand Parser</code> class parses the arguments and throws an exception if the index entered
-is invalid. A new event <code>handleFaceBookEvent</code>  is then raised.
-The Brower Panel class then loads the page with the url of the profile page to be viewed on Facebook.<br></p>
+<p>Below are few code snippets to guide you through the working of the feature.<br></p>
 </div>
 <hr>
 <div class="literalblock">
@@ -1613,11 +1694,20 @@ loadPage(url);
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/FaceBookSequence.png" alt="FaceBookSequence" width="800">
+<img src="images/FacebookSequence.png" alt="FacebookSequence" width="790">
 </div>
 </div>
 <div class="paragraph">
-<p>Above is the sequence diagram.<br></p>
+<p>Figure 3.1</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Refer to figure 3.1 above which shows the sequence diagram of the Facebook command.<br>
+It clearly demonstrates how the command interacts with the Logic, Model and UI components.<br>
+It also shows how the event is raised and hence the page is loaded in the browser panel.<br></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -1630,6 +1720,9 @@ loadPage(url);
 <li>
 <p>It is better than opening a brower on the desktop.<br></p>
 </li>
+<li>
+<p>It does not require the user to search for the person on the facebook homepage which can be a tedious task.<br></p>
+</li>
 </ul>
 </div>
 </div>
@@ -1638,39 +1731,148 @@ loadPage(url);
 <div class="paragraph">
 <p><strong>Aspect:</strong> How should the user view the profile page.<br>
 <strong>Alternative1 : </strong> View the profile page on a web browser<br>
-<strong>Pros:</strong> Helps user exercise other functionalities like messaging.<br>
+<strong>Pros:</strong> Helps user exercise other functionalities like using messenger.<br>
 <strong>Cons:</strong> Does not make use of Weaver in any useful way.<br>
 <strong>Alternative2:</strong> View the profile page on the browser panel.<br>
-<strong>Pros:</strong> Makes it quicker and adds a fucntion to the personalised Weaver.<br>
+<strong>Pros:</strong> Makes it quicker and adds a function to the personalised Weaver.<br>
 <strong>Cons:</strong> Limits the functionalities that can be used on facebook.<br></p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-reminders-list-to-weaver"><a class="link" href="#adding-a-reminders-list-to-weaver">4.10. Adding a reminders list to Weaver.</a></h3>
+<h3 id="email-feature"><a class="link" href="#email-feature">4.10. Email Feature</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Weaver includes the <code>email</code> command which helps users contact persons on their contact list using the default browser in their desktop.<br></p>
+</li>
+<li>
+<p>This feature will work for users with a Gmail Account.<br></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The recipients are those persons with a common tag.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The command takes in two parameters, the tag name and the subject line that the user wants in the email body.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Refer to the sequence diagram 4.1 below to see how the command parses the arguements and completes execution.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EmailSequence.png" alt="EmailSequence" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Figure 4.1<br></p>
+</div>
+<div class="paragraph">
+<p>The command will throw an exception in the following cases :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The number of tags entered is not equal to 1.<br></p>
+</li>
+<li>
+<p>The tag name does not match any of the tags in Weaver.<br></p>
+</li>
+<li>
+<p>The subject line is not valid.<br></p>
+</li>
+<li>
+<p>Below is the high level sequence diagram of the command.<br></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EmailHigh.png" alt="EmailHigh" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The following code snippet shows the Gmail Browser URL used and how the desktop browser is opened.<br></p>
+</div>
+<hr>
+<div class="literalblock">
+<div class="content">
+<pre>appendEmailAddress = appendEmailAddress.substring(0, appendEmailAddress.length() - 1);</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>String Gmail_Url = "https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=" + appendEmailAddress + "&amp;su=" + subject;</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>if(Desktop.isDesktopSupported()) {
+Desktop.getDesktop().browse(new URI(Gmail_Url));
+        }</pre>
+</div>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="reasons-for-this-kind-of-implementation-2"><a class="link" href="#reasons-for-this-kind-of-implementation-2">4.10.1. Reasons for this kind of implementation</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Gmail is the most widely used web browser and most people are likely to have a Gmail account.
+Hence Gmail was the most appropriate email service.<br></p>
+</li>
+<li>
+<p>Opening the Gmail compose page on the browser is more convenient than working on the browser panel of Weaver since
+the browser panel restricts some functionalities.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.10.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How should the user send the mail.<br>
+<strong>Alternative1 : (currently used) </strong> Open the default web browser<br>
+<strong>Pros:</strong> Makes sending emails a hassle free job and this also makes use of Weaver CLI in a good way.<br>
+<strong>Cons:</strong> Depends on the type of browser and its compatibility<br>
+<strong>Alternative2:</strong> Send the email using browser panel<br>
+<strong>Pros:</strong> Makes it quicker and adds a function to the personalised Weaver.<br>
+<strong>Cons:</strong> Limits the functionalities that can be used on Gmail since the browser panel is not updated.<br></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-reminders-list-to-weaver"><a class="link" href="#adding-a-reminders-list-to-weaver">4.11. Adding a reminders list to Weaver.</a></h3>
 <div class="ulist">
 <ul>
 <li>
 <p>The reminders panel displays the list of reminders that the user has entered.<br></p>
 </li>
 <li>
-<p>The Reminder object contains three main attributes which are as follows<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Details of the reminder.<br></p>
+<p>A reminder class has three main attributes, Details of reminder, due date and the priority level of the reminder.<br></p>
 </li>
 <li>
-<p>The priority level of the reminder which can be high, low or medium.<br></p>
+<p>Reminder objects are kept in the UniqueReminderList which ensures there are no duplicate reminders.<br></p>
 </li>
 <li>
-<p>The DueDate of the assignment.</p>
-</li>
-</ul>
-</div>
+<p>The Model manager carries out the operations related to reminders.<br></p>
 </li>
 <li>
-<p>An image is also assigned to the reminder indicating the priority level of the reminder.<br></p>
+<p>Exceptions are thrown if invalid commands entered.<br></p>
 </li>
 <li>
 <p>There are three main commands associated with this feature.<br></p>
@@ -1696,9 +1898,71 @@ e.g. - <code>change 1 d/12.12.2017</code>.<br></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>The diagram (Figure 5.1) below gives the high level architecture diagram of the implementation.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReminderArchi.png" alt="ReminderArchi" width="800">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The reminders panel is implemented in a similar manner like the person list panel.<br></p>
+</li>
+<li>
+<p>Data is written/stored in the same addressbook.xml file.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>image::LogicReminder.png[width="800"]]
+(Figure 5.2)</p>
+</div>
+<div class="paragraph">
+<p>Figure 5.2 above shows the Logic Component Diagram of the Reminders Panel implementation.<br></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+ Note how the LogicManager class implements the interface Logic and is associated with the undo redo stack.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="reasons-for-this-kind-of-implementation-3"><a class="link" href="#reasons-for-this-kind-of-implementation-3">4.11.1. Reasons for this kind of implementation</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>The implementation is easy to follow and comprehend.<br></p>
+</li>
+<li>
+<p>Storing in the same file makes the organization better.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.11.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to store each reminder<br>
+<strong>Alternative1 : (currently used) </strong> Reminders stored in the addressbook.xml file<br>
+<strong>Pros:</strong> Implementation easy to follow for future developers.<br>
+<strong>Cons:</strong> Can violate higher levels of software engineering principles.<br>
+<strong>Alternative2:</strong> Store reminder objects separately in a different xml file<br>
+<strong>Pros:</strong> More in sync with SE principles.<br>
+<strong>Cons:</strong> Harder to implement and follow.<br></p>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="nusmods-integration"><a class="link" href="#nusmods-integration">4.11. Nusmods Integration</a></h3>
+<h3 id="nusmods-integration"><a class="link" href="#nusmods-integration">4.12. Nusmods Integration</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1712,7 +1976,7 @@ displayed.</p>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="working-flow-2"><a class="link" href="#working-flow-2">4.11.1. Working flow</a></h4>
+<h4 id="working-flow-2"><a class="link" href="#working-flow-2">4.12.1. Working flow</a></h4>
 <div class="paragraph">
 <p>When the person panel is clicked, an FXML function will handle this and start to parse the module information.
 After parsing this information into URL format which is supported by NUSMODS, an URL is made and passed to the
@@ -1726,7 +1990,7 @@ Google engine. And the brower panel will go to the NUSMODS page which contains t
 </div>
 </div>
 <div class="sect3">
-<h4 id="reasons-for-this-kind-of-implementation-2"><a class="link" href="#reasons-for-this-kind-of-implementation-2">4.11.2. Reasons for this kind of implementation</a></h4>
+<h4 id="reasons-for-this-kind-of-implementation-4"><a class="link" href="#reasons-for-this-kind-of-implementation-4">4.12.2. Reasons for this kind of implementation</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1743,7 +2007,7 @@ Google engine. And the brower panel will go to the NUSMODS page which contains t
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypt-your-file-not-used-in-v1-5"><a class="link" href="#encrypt-your-file-not-used-in-v1-5">4.12. Encrypt your file (not used in V1.5).</a></h3>
+<h3 id="encrypt-your-file-not-used-in-v1-5"><a class="link" href="#encrypt-your-file-not-used-in-v1-5">4.13. Encrypt your file (not used in V1.5).</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1871,7 +2135,7 @@ authentication of the accounts. Once the check is finished, it&#8217;s encrypted
 </div>
 </div>
 <div class="sect3">
-<h4 id="mechanism-of-encrytion"><a class="link" href="#mechanism-of-encrytion">4.12.1. Mechanism of encrytion</a></h4>
+<h4 id="mechanism-of-encrytion"><a class="link" href="#mechanism-of-encrytion">4.13.1. Mechanism of encrytion</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1890,7 +2154,7 @@ encrypted/decrypted. (This works on OSX but not on Windows and UNIX).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="reason-for-giving-up-this-feature"><a class="link" href="#reason-for-giving-up-this-feature">4.12.2. Reason for giving up this feature</a></h4>
+<h4 id="reason-for-giving-up-this-feature"><a class="link" href="#reason-for-giving-up-this-feature">4.13.2. Reason for giving up this feature</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1903,7 +2167,7 @@ different operating system will behave differently. Some will replace the file w
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.13. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.14. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1941,7 +2205,7 @@ different operating system will behave differently. Some will replace the file w
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">4.14. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">4.15. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3614,7 +3878,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 17:04:16 +00:00
+Last updated 2017-11-13 08:49:19 +00:00
 </div>
 </div>
 </body>

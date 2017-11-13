@@ -57,7 +57,7 @@
 <li><a href="#auto-completion-since-v1-4">4.26. Auto-completion since v1.4</a></li>
 <li><a href="#check-whether-the-command-s-format-is-valid-while-the-user-is-typing-since-v1-5">4.27. Check whether the command&#8217;s format is valid while the user is typing since v1.5</a></li>
 <li><a href="#backing-up-your-weaver-code-backup-code-since-v1-5">4.28. Backing up your Weaver : <code>backup</code> since v1.5</a></li>
-<li><a href="#sending-emails-to-your-contacts-code-backup-code-since-v1-5">4.29. Sending Emails to your contacts : <code>backup</code> since v1.5</a></li>
+<li><a href="#sending-emails-to-your-contacts-code-email-code-since-v1-5">4.29. Sending Emails to your contacts : <code>email</code> since v1.5</a></li>
 <li><a href="#exiting-the-program-code-exit-code">4.30. Exiting the program : <code>exit</code></a></li>
 <li><a href="#coming-in-v2-0">4.31. Coming in v2.0</a></li>
 <li><a href="#saving-the-data">4.32. Saving the data</a></li>
@@ -602,11 +602,11 @@ Format: <code>remark INDEX r/REMARK</code></p>
 <code>remark 2 r/CS2104/LEC/1</code><br>
 Remarks the 2nd person&#8217;s module information as CS2104/LEC/1.</p>
 </li>
-</ul>
-</div>
-<div class="paragraph">
+<li>
 <p><code>remark 1 r/MA1101R/LEC/1,CS2105/LEC/1</code><br>
 Remarks the 2nd person&#8217;s module information as MA1101R and CS2105</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -624,18 +624,18 @@ Remarks the 2nd person&#8217;s module information as MA1101R and CS2105</p>
 <h3 id="login-logout-since-v1-2"><a class="link" href="#login-logout-since-v1-2">4.14. Login / Logout Since v1.2</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/Login.png" alt="Login" width="790">
+<img src="images/login.png" alt="login" width="790">
 </div>
 </div>
 <div class="paragraph">
-<p>Users now can login using valid accounts. And their files are seperated.<br>
+<p>Users now can login using valid accounts. And their files are separated.<br>
 To start with, there are two default pairs of username and password. They are
 {admin, admin} and {user, user}.<br>
 To logout, just click logout in the <span class="menuseq"><span class="menu">file -</span>&#160;&#9656; <span class="menuitem">logout</span></span> button. Or, use the "logout" command.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Logout.png" alt="Logout" width="790">
+<img src="images/logout.png" alt="logout" width="790">
 </div>
 </div>
 </div>
@@ -737,8 +737,14 @@ index 1 in the address book.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>e.g. <code>Photo 1 delete</code>.<br>
-** Result - Picture is deleted from the person at index at 1.<br></p>
+<p>e.g. <code>Photo 1 delete</code>.<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Result - Picture is deleted from the person at index at 1.<br></p>
+</li>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -908,7 +914,8 @@ Format: <code>fs [FONT SIZE]</code> or <code>fs [+/-]</code></p>
 <div class="sect2">
 <h3 id="facebook-integration-since-v1-3"><a class="link" href="#facebook-integration-since-v1-3">4.20. FaceBook Integration since v1.3</a></h3>
 <div class="paragraph">
-<p>Helps you view the profile page of a person in your contact list.<br></p>
+<p>This feature helps you view the profile page of a person in your contact list. This way we can know more about your friends<br>
+and colleagues.<br></p>
 </div>
 <div class="paragraph">
 <p>Below are listed some conditions for the command.<br></p>
@@ -930,14 +937,28 @@ Format: <code>fs [FONT SIZE]</code> or <code>fs [+/-]</code></p>
 <p>Command Format - <code>Facebook [INDEX]</code><br></p>
 </div>
 <div class="paragraph">
-<p>e.g. - <code>facebook 1</code><br></p>
-</div>
-<div class="paragraph">
-<p>If the person does not have a facebook account or the username is not entered in Weaver,you will be notified.</p>
+<p>e.g. - <code>facebook 1</code><br>
+<strong> Result </strong> - The facebook homepgae shows up on the browser panel.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/facebook.png" alt="facebook" width="790">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the person does not have a facebook account or the username is not entered in Weaver, you will be notified.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>e.g. - <code>facebook 2</code>
+<strong> Result </strong> - You will see a prompt telling you that the person has no username.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Username.png" alt="Username" width="790">
 </div>
 </div>
 </div>
@@ -1159,9 +1180,9 @@ Refer to the Edit section above for more details.
 <div class="sect2">
 <h3 id="reminders-panel-since-v1-4-br"><a class="link" href="#reminders-panel-since-v1-4-br">4.25. Reminders Panel since v1.4<br></a></h3>
 <div class="paragraph">
-<p>Have you ever felt the need to be constantly reminded of your daily assignments. Fret not!Weaver helps you keep up to
-date with your daily school assignments.Just add your reminders using a single command and weaver will display your
-reminders with an image depicting the priority level of that assignment and the due date.That way, you can keep scrolling through your
+<p>Have you ever felt the need to be constantly reminded of your daily assignments. Fret not! Weaver helps you keep up to
+date with your daily school assignments. Just add your reminders using a single command and weaver will display your
+remindersdepicting the priority level of that assignment and the due date.That way, you can keep scrolling through your
 reminders panel when you open the application and be aware of the upcoming tasks.</p>
 </div>
 <div class="sect3">
@@ -1206,7 +1227,8 @@ The reminder is removed from your reminders panel.<br></p>
 <ul>
 <li>
 <p>Change an existing reminder.<br>
-Command Format - <code>Change d/22.12.2017</code><br>
+Command Format - <code>Change [INDEX] field to be changed</code><br>
+e.g. <code>change 1 d/22.12.2017</code><br>
 The above command will change the due date of the reminder to the new date.<br></p>
 </li>
 <li>
@@ -1319,7 +1341,7 @@ until this command is executed.
 </div>
 </div>
 <div class="sect2">
-<h3 id="sending-emails-to-your-contacts-code-backup-code-since-v1-5"><a class="link" href="#sending-emails-to-your-contacts-code-backup-code-since-v1-5">4.29. Sending Emails to your contacts : <code>backup</code> since v1.5</a></h3>
+<h3 id="sending-emails-to-your-contacts-code-email-code-since-v1-5"><a class="link" href="#sending-emails-to-your-contacts-code-email-code-since-v1-5">4.29. Sending Emails to your contacts : <code>email</code> since v1.5</a></h3>
 <div class="paragraph">
 <p>Weaver now allows you to send emails to all your contacts with a common tag!<br>
 If you want to send an important mail to people who are tagged as temmates, you are just a command away!.<br>
@@ -1336,7 +1358,7 @@ This command will open the default browser in your desktop and direct you to you
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You must have Gmail Account to send mails.<br>
+You must have a Gmail Account to send mails.<br>
 </td>
 </tr>
 </table>
@@ -1361,7 +1383,7 @@ Email is sent!</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/email.png" alt="email" width="237">
+<img src="images/emailsent.png" alt="emailsent" width="237">
 </div>
 </div>
 <div class="paragraph">
@@ -1371,7 +1393,7 @@ Multiple tags cannot be entered<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/emailMultiple.png" alt="emailMultiple" width="237">
+<img src="images/error.png" alt="error" width="237">
 </div>
 </div>
 </div>
@@ -1516,7 +1538,7 @@ e.g. <code>photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-12 17:04:16 +00:00
+Last updated 2017-11-13 08:49:19 +00:00
 </div>
 </div>
 </body>

@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Weaver Test Script For Manual Testing</title>
+<link rel="stylesheet" href="./gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Weaver Test Script For Manual Testing</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="load-sample-data"><a class="link" href="#load-sample-data">Load Sample data</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>To load the sample data, follow the instructions given below:-<br></p>
+</li>
+<li>
+<p>1) Download the [W13-B2][Weaver]SampleData.xml file.<br></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+RENAME THE FILE NAME to <code>SampleData.xml</code> Make sure it is exactly the same. It is case-sensitive.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2) Run the Weaver.jar file to open the app.<br></p>
+</li>
+<li>
+<p>3) <strong> LOGIN </strong> with the Username - <code>admin</code> and Password - <code>admin</code> .<br></p>
+</li>
+<li>
+<p>4) After logging in make a change to the Weaver data by executing the command - <code>edit 1 n/change</code> .<br></p>
+</li>
+<li>
+<p>5) Close the app. You will notice that the <code>data</code> folder is created.<br></p>
+</li>
+<li>
+<p>6) Open the data folder. Drag/Copy the SampleData.xml file into the data folder.<br></p>
+</li>
+<li>
+<p>7) Close the folder. Run the App again.<br></p>
+</li>
+<li>
+<p>8) Click on <strong> REGISTER </strong> to register a new account.<br></p>
+</li>
+<li>
+<p>9) Enter username as <strong>SampleData</strong>. <code>S</code> and <code>D</code> must in uppercase. <code>SampleData</code> is case-sensitive. Enter any password. Take a note of the password.<br></p>
+</li>
+<li>
+<p>10) You will reach the <strong>LOGIN</strong> page.<br></p>
+</li>
+<li>
+<p>11) Login with the username <strong>SampleData</strong> and the password you used to register.<br></p>
+</li>
+<li>
+<p>12) The app opens with the data.<br></p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+ 	If at any point the app stops responding, close the app and restart again with username ‘SampleData.xml’ and the password you used to register.<br>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>IMPORTANT NOTE - The outputs provided in this sheet are according to the inputs we have put. Please not if you put different inputs, the output will be different.<br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="test-login-feature"><a class="link" href="#test-login-feature">Test login feature</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Start the app, and now the only valid username and password pairs are {admin, admin} and {user, user}.<br></p>
+</li>
+<li>
+<p>Try to login with any name and password that are not valid and see the warning window poping up.<br></p>
+</li>
+<li>
+<p>Try to login with valid username and password pair and see the mainWindow(the effect of correctly login)<br></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="test-register-feature"><a class="link" href="#test-register-feature">Test register feature</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Go to the register page using the button “register” on the right bottom of login page.</p>
+</li>
+<li>
+<p>Choose any username and password to register. If you use duplicate username, you will get a pop up window and need to choose other valid username.</p>
+</li>
+<li>
+<p>Choose a valid username, but key in different password purposely to see the effect.</p>
+</li>
+<li>
+<p>Register using username “SampleData” and whatever password to see the effect of correct registering. Meanwhile, to load the “SampleData.xml”, you need to use the username “SampleData” to get start with.</p>
+</li>
+<li>
+<p>Login with valid username and password pair and see the mainWindow(the effect of correctly login)<br></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="command-0"><a class="link" href="#command-0">Command 0</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>undo</code> <br></p>
+</li>
+<li>
+<p><strong>Result</strong> - No more commands to undo!<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="help-command"><a class="link" href="#help-command">Help Command</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>help</code><br></p>
+</li>
+<li>
+<p><strong>Result</strong> - A new window appears with a summary of all commands, FAQS and shortcuts.
+It is the Weaver User handbook.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-command"><a class="link" href="#add-command">Add Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>add</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS b/Date of Birth r/REMARK [f/IMAGE]
+[u/USERNAME][t/TAG]&#8230;&#8203;
+Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/13.10.1997 r/CS2103T/LEC/1 f/
+u/john.doe t/friends t/owesMoney<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>add n/User p/999222 e/user@gmail.com a/Prince Georges Park b/29.02.2017 r/CS2103T/LEC/1 f/ u/ t/friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Date of Birth must be a Valid Date that is days should be less than 32 , months should be less than 12
+.For the month of February make sure days are less than 29 unless it is a leap year.
+The following format should be followed:
+'.' and '-' can be used as separators.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>add n/User p/999222 e/user@gmail.com a/Prince Georges Park b/29.02.2000 r/CS2103T/LEC/1 f/ u/ t/friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+New person added: User Phone: 999222 Email: <a href="mailto:user@gmail.com">user@gmail.com</a> Address: Prince Georges Park Date of birth: 29.02.2000
+Remark: CS2103T/LEC/1 FilePath:  Facebook Username:  Tags: [friends]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>add n/Dummy p/999222 e/dummy@gmail.com a/Prince Georges Park b/29.02.2017 r/CS2103T/LEC/1 f/random.png u/ t/friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+File Path must be correctly entered, that is the image must exist in the path specified
+For example: src/resources/images/clock.png<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>add n/Dummy p/999222 e/dummy@gmail.com a/Prince Georges Park b/31.04.2017 r/CS2103T/LEC/1 f/ u/ t/friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Date of Birth must be a Valid Date that is days should be less than 32 , months should be less than 12
+.For the month of February make sure days are less than 29 unless it is a leap year.
+The following format should be followed:
+'.' and '-' can be used as separators.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 5</strong> - <code>add n/Dummy p/999222 e/dummy@gmail.com</code> <br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+New person added: Dummy Phone: 999222 Email: <a href="mailto:dummy@gmail.com">dummy@gmail.com</a> Address:  Date of birth:  Remark:  FilePath:
+Facebook Username:  Tags:<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 6</strong> - <code>add n/new.user p/191919 e/dummy@gmail.com a/Prince Georges Park b/31.04.2017 r/CS2103T/LEC/1 f/ u/
+t/friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Person names should only contain alphanumeric characters and spaces, and it should not be blank<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 7</strong> - <code>add n/newuser p/191919 e/dummygmail.com a/Prince Georges Park b/31.04.2017 r/CS2103T/LEC/1 f/ u/
+t/friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Person emails should be 2 alphanumeric/period strings separated by '@'<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="edit-command"><a class="link" href="#edit-command">Edit Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>edit 5</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+At least one field to edit must be provided.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>edit 5 n/ChangeIt</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Edited Person: ChangeIt Phone: 92492021 Email: <a href="mailto:email@gmail.com">email@gmail.com</a> Address: Blk 47 Tampines Street 20, #17-35 Date of birth: 13.10.1997 Remark: CS2103T/LEC/1 FilePath: Facebook Username: Tags: [classmates]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>edit 3 u/ronak.lakhotia</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Edited Person: Charlotte Oliveiro Phone: 93210283 Email: <a href="mailto:charlotte@example.com">charlotte@example.com</a> Address: Blk 11 Ang Mo Kio Street 74, #11-04 Date of birth: 12.02.1994 Remark: CS3230/LEC/1 FilePath:  Facebook Username: ronak.lakhotia Tags: [neighbours]<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>edit 0</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+edit: Edits the details of the person identified by the index number used in the last person listing. Existing values
+will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATE_OF_BIRTH] [r/REMARK]
+[f/IMAGE[t/TAG]&#8230;&#8203;
+Example: edit 1 p/91234567 e/johndoe@example.com<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 5</strong> - <code>edit 5 f/<strong>please enter a valid file path</strong></code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Success message is displayed with an image displayed at the person of index 5. <br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 6</strong> - <code>edit 6 n/another a/PGP p/91234567 e/another@example.com</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Edited Person: another Phone: 91234567 Email: <a href="mailto:another@example.com">another@example.com</a> Address: PGP Date of birth: 17.08.1993 Remark: CS2105/LEC/1 FilePath:  Facebook Username:  Tags: [colleagues]<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="remark-command"><a class="link" href="#remark-command">Remark Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>remark</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+remark: Remark the module information of the person identified by the index. Existing modulelist will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) r/MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2
+Example: remark 1 r/CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>remark 1 r/CS2101/SEC/</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+remark: Remark the module information of the person identified by the index. Existing modulelist will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) r/MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2
+Example: remark 1 r/CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>remark 1 r/CS2101//1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+remark: Remark the module information of the person identified by the index. Existing modulelist will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) r/MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2
+Example: remark 1 r/CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>remark 1 r//SEC/1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+remark: Remark the module information of the person identified by the index. Existing modulelist will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) r/MODULENAME1/MODULETYPE1/NUM1,MODULENAME2/MODULETYPE2/NUM2
+Example: remark 1 r/CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>remark 1 r/CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Added remark to Person: John Doe Phone: 87438807 Email: <a href="mailto:alexyeoh@example.com">alexyeoh@example.com</a> Address: Blk 30 Geylang Street 29, #06-40 Date of birth: 11.11.1995 Remark: CS2101/SEC/1,CS2104/LEC/1,CS2105/LEC/1,CS2102/LEC/1 FilePath:  Facebook Username: john.doe Tags: [friends]<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 5</strong> - <code>remark 1 r/</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Added remark to Person: John Doe Phone: 87438807 Email: <a href="mailto:alexyeoh@example.com">alexyeoh@example.com</a> Address: Blk 30 Geylang Street 29, #06-40 Date of birth: 11.11.1995 Remark:  FilePath:  Facebook Username: john.doe Tags: [friends] <br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logout-command"><a class="link" href="#logout-command">Logout Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>logout</code><br></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+After the logout, please login again with the credentials:<br>
+Username - <code>SampleData</code><br>
+Password - The password you used to register.<br>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-command"><a class="link" href="#delete-command">Delete Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>delete 1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Deleted Person: John Doe Phone: 87438807 Email: <a href="mailto:alexyeoh@example.com">alexyeoh@example.com</a> Address: Blk 30 Geylang Street 29, #06-40 Date of birth: 11.11.1995 Remark:  FilePath:  Facebook Username: john.doe Tags: [friends]<br>
+<strong>Follow up with undo</strong><br></p>
+</li>
+<li>
+<p><strong>Result</strong><br>
+Undo success!<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>delete 0</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+delete: Deletes the person identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer)
+Example: delete 1<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="reminders-panel-commands"><a class="link" href="#reminders-panel-commands">Reminders panel Commands</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="add-a-reminder"><a class="link" href="#add-a-reminder">Add a reminder</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>reminder g/CS2102 Assignment p/High d/12.05.2017</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+New reminder added: CS2102 Assignment Details: Priority Level: High Priority: 12.05.2017 DueDate:</p>
+</li>
+<li>
+<p>Follow up with undo.  <br></p>
+</li>
+<li>
+<p><strong>Result</strong><br>
+Reminder is removed .<br></p>
+</li>
+<li>
+<p>Follow up with redo <br></p>
+</li>
+<li>
+<p><strong>Result</strong><br>
+Reminder is added back.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>reminder g/CS2103T Assignment p/Okayish d/12.05.2017</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Priority must have one of the three values which are - High, Low, and Medium<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>reminder g/CS2103T Assignment p/high d/32.01.2018</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Due Date must be a Valid Date and in the following format:
+'.' and '-' can be used as separators.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>reminder g/CS2105.Assignment p/high d/11.01.2018</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Reminders should only contain alphanumeric characters and spaces, and it should not be blank</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-a-reminder"><a class="link" href="#delete-a-reminder">Delete a reminder</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>remove 1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Deleted Reminder: CS2103T Assignment Details: Priority Level: High Priority: 12.05.2017 DueDate:<br>
+Hence successful deletion.<br></p>
+</li>
+<li>
+<p>Follow up with undo *<br></p>
+</li>
+<li>
+<p><strong>Result</strong> *<br>
+Undo success.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>remove 0</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format is displayed.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="change-a-reminder"><a class="link" href="#change-a-reminder">Change a reminder</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>change 1 d/12.11.2017</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Changed Reminder: CS2103T Assignment Details: Priority Level: High Priority: 12.11.2017 DueDate:<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>change 0 d/12.11.2017</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid Command Format message displayed.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>change 1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+At least one field to change must be provided.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>change 50 p/medium</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+The reminder index provided is invalid.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>change 50 p/error</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Priority must have one of the three values which are - High, Low, and Medium.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clear-command"><a class="link" href="#clear-command">Clear Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>cls</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Weaver has been cleared. Clears the person list and reminder list panel.Also clears the browser panel.<br></p>
+</li>
+<li>
+<p>Follow up with undo <br></p>
+</li>
+<li>
+<p><strong>Result</strong> <br>
+Undo success.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find-command"><a class="link" href="#find-command">Find Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>find ronak</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+2 persons listed!.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="search-command"><a class="link" href="#search-command">Search Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>search n/random b/13.10.1997</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+0 persons listed!.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>search n/ronak</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format message displayed.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>search b/12.10.1997</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format message displayed.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>search n/Ronak b/11.11.1998</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+1 persons listed!<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>search n/Ronak b/16.09.1997</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+0 persons listed!<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>search n/Ronak b/13.10.1997</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+1 persons listed!<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-command"><a class="link" href="#list-command">List Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> = <code>list</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Displays the list of people.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="photo-command"><a class="link" href="#photo-command">Photo Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> = <code>photo 0</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format displayed.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> = <code>photo 1 dummy.png</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Enter correct path, the path you entered may not be correct!
+You may have entered the incorrect name of the file!<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> = <code>photo 1 /Users/ronaklakhotia/Desktop/Ronak.jpeg</code><br>
+Now /Users/ronaklakhotia/Desktop/Ronak.jpeg is a valid path on my PC, you must enter a valid path in your pc.<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Added Photo to Person: John Doe Phone: 87438807 Email: <a href="mailto:alexyeoh@example.com">alexyeoh@example.com</a> Address: Blk 30 Geylang Street 29, #06-40 Date of birth: 11.11.1995 Remark:  FilePath: /Users/ronaklakhotia/Desktop/Ronak.jpeg Facebook Username: john.doe Tags: [friends]<br>
+Photo appears next to person.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> = <code>photo 1 delete</code>.<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>* 2 Results Possible*<br></p>
+</li>
+<li>
+<p><strong>Result1</strong><br>
+If the person at index one has no photo to be deleted an error message will be displayed.<br>
+The person has no Photo to be deleted.<br></p>
+</li>
+<li>
+<p><strong>Result2</strong><br>
+If the person at index one has photo to be deleted an error message will be displayed.<br>
+Success message displayed.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="facebook-command"><a class="link" href="#facebook-command">FaceBook Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> = <code>facebook 0</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format displayed.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> = <code>facebook 1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+If the person at index one a username. (John has a username) <br>
+Success message displayed.<br>
+Facebook login page shows up on the browser panel.<br>
+After successful login you will be directed to the profile page of the person.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> = <code>facebook 4</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+This Person has no Facebook username!<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> = <code>facebook 99</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Person index provided is invalid.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="email-command"><a class="link" href="#email-command">Email Command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> = <code>email t/friends s/birthday party</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Opens up the default browser (Chrome or safari) on your pc, and directs you to your Gmail account.<br>
+If you are already signed in , you will see the Gmail compose message box, with the email id of the persons specified by the tag already filled in. Furthermore, the subject body will also be filled in with the subject specified.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> = <code>email t/notAValidTag s/party</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+The tag provided is invalid. Please check again.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> = <code>email t/friends s/party.birthday</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Subject lines should only contain alphanumeric characters and spaces, and it should not be blank.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> = <code>email t/friends t/colleagues s/party</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Multiple tags cannot be entered</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> = <code>email t/friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format displayed.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="history"><a class="link" href="#history">history</a></h3>
+<div class="paragraph">
+<p>Lists all the commands that you have entered in reverse chronological order.<br>
+Format: <code>history</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="customize-tag-color-command"><a class="link" href="#customize-tag-color-command">Customize tag color command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>color</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+color: Edits the color of a tag or list of tags. Existing color will be overwritten by the input.<br>
+Parameters: color t/[TAG] c/[COLOR]<br>
+Example: color t/friend c/red</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>color t/friends c/ red</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Change tag color of <a id="friends"></a> to red</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>color t/friends t/family c/teal</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Change tag color of [[family], [friends]] to teal</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>color t/friends t/family c/notAColor</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Valid colors are: [red, blue, green, teal, aqua, black, gray, lime, maroon, navy, orange, purple, silver, olive, white, yellow, transparent]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>color t/notATag t/family c/teal</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Cannot change color of not existing tags: <a id="notATag"></a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 5</strong> - <code>undo</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+undo success</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 6</strong> - <code>redo</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+redo success</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Close the app and open again</strong></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+After the closing, please login again with the credentials:<br>
+Username - <code>SampleData</code><br>
+Password - The password you used to register.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+The tag color of tags "friends" and "family" remain in color teal</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="customize-font-size-command"><a class="link" href="#customize-font-size-command">Customize font size command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>fs</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Font size can only be either "xs", "s", "m", "l",  or "xl"</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>fs l</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Changed font size to l.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>fs +</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Changed font size to xl.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>fs +</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+The current font size is the largest one.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>fs s</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Changed font size to s.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 5</strong> - <code>fs -</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Changed font size to xs.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 6</strong> - <code>fs -</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+The current font size is the smallest one.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 6</strong> - <code>fs notAFontSize</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Font size can only be either "xs", "s", "m", "l",  or "xl"</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Press the "+" button on the left corner</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Changed font size to s.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Press the "-" button on the left corner</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Changed font size to xs.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 7</strong> - <code>undo</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+undo success</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 8</strong> - <code>redo</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+redo success</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Close the app and open again</strong></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+After the closing, please login again with the credentials:<br>
+Username - <code>SampleData</code><br>
+Password - The password you used to register.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The font size remains in xs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="change-theme-command"><a class="link" href="#change-theme-command">Change theme command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>theme</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+theme: Change the theme of the application. Parameters: theme [THEME]
+Example: theme bright</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>theme dark</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Changed theme to dark.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>undo</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+undo success</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>redo</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+redo success</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Press the theme button "bright"</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Changed theme to bright.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Press the theme button "dark"</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Changed theme to dark.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Close the app and open again</strong></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+After the closing, please login again with the credentials:<br>
+Username - <code>SampleData</code><br>
+Password - The password you used to register.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The theme remains dark theme.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="map-command"><a class="link" href="#map-command">Map command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>map</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+map: Shows the address of the person identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer)
+Example: map 1</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>map 1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Showing the address of Person: John Doe</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>map 0</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+map: Shows the address of the person identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer)
+Example: map 1</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>map 100</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+The person index provided is invalid</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Click on the address field of a person in the person card panel</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Shows address of that person</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="feature-check-command-formats-validity-while-the-user-is-typing-br"><a class="link" href="#feature-check-command-formats-validity-while-the-user-is-typing-br">Feature: Check command formats’ validity while the user is typing<br></a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For all the following command, you need to type in the command without pressing enter key.
+And then you can check the result displayed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>map 1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Command format is valid</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>abc</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Unknown command</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>theme</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+theme: Change the theme of the application. Parameters: theme [THEME]
+Example: theme bright</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>color t/friends c/</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Valid colors are: [red, blue, green, teal, aqua, black, gray, lime, maroon, navy, orange, purple, silver, olive, white, yellow, transparent]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>add n/Damith p/123456 e/abc</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Person emails should be 2 alphanumeric/period strings separated by '@'</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 5</strong> - <code>add n/Damith p/abc e/abc@gamil.com</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Phone numbers can only contain numbers, and should be at least 3 digits long</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 6</strong> - <code>edit 1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+At least one field to edit must be provided.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find-by-tag-command"><a class="link" href="#find-by-tag-command">Find by Tag command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>findtag</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+findtag: Finds all persons whose tag(s) contain any of the specified keywords (case-sensitive) and displays them as a list with index numbers.
+Parameters: KEYWORD [MORE_KEYWORDS]&#8230;&#8203;
+Example: findtag friends colleagues</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>findtag friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+6 persons listed!</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>findtag friend</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+0 persons listed!</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>findtag 1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+0 persons listed!</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>findtag FRIENDS</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+6 persons listed!</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-person-tag-command"><a class="link" href="#delete-person-tag-command">Delete person tag command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>deletetag</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+deletetag: Deletes the tag identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
+Example: deletetag 1 t/friends</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>deletetag 1 t/friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Deleted Tag: [[friends]]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>deletetag 1</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+At least one field to delete must be provided.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>deletetag t/friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+deletetag: Deletes the tag identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
+Example: deletetag 1 t/friends</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>deletetag 2 t/colleagues t/friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Deleted Tag: [[colleagues], [friends]]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>deletetag 1 friends</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Invalid command format!
+deletetag: Deletes the tag identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
+Example: deletetag 1 t/friends</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="backup-command"><a class="link" href="#backup-command">Backup command</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In your root directory, under data/ you should have a SampleData.xml file, and
+entering the backup command, will create a SampleData-backup.xml file.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>backup</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+A backup of Weaver has been created!</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="autocompletion-feature"><a class="link" href="#autocompletion-feature">Autocompletion feature</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For all the following command, you need to type in the command without pressing enter key.
+And then you can check the suggested words displayed. To cancel the suggested words, press the <code>ESC</code> key.
+If you press <code>Enter</code>, you will see the auto-completed word on the command line.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>del</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Suggested words</strong><br>
+delete<br>
+deletetag</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>ete</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Suggested words</strong><br>
+delete<br>
+deletetag</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>delete</code><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Suggested words</strong><br>
+deletetag</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>del</code> + press <code>Enter</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Suggested words</strong><br>
+delete<br>
+deletetag</p>
+</li>
+<li>
+<p><strong>Result</strong><br>
+Command Line: delete</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 4</strong> - <code>delete</code> + press <code>Enter</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Suggested words</strong><br>
+deletetag</p>
+</li>
+<li>
+<p><strong>Result</strong><br>
+Command Line: deletetag</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 5</strong> - <code>delete</code> + press <code>ESC</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Command Line: delete</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 6</strong> - <code>del</code> + press <code>DOWN arrow</code> + press <code>Enter</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Suggested words</strong><br>
+delete<br>
+deletetag</p>
+</li>
+<li>
+<p><strong>Result</strong><br>
+Command Line: deletetag</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clear-popup-command"><a class="link" href="#clear-popup-command">Clear Popup command</a></h3>
+<div class="paragraph">
+<p><strong>COMMAND 0</strong> - <code>clear</code> + press <code>ENTER</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+A clear confirmation dialog would appear.
+Click on the app again to see it.<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 1</strong> - <code>clear 1</code> + press <code>ESC</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+A clear confirmation dialog would appear.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 2</strong> - <code>clear</code> + click <code>OK</code> / press <code>Enter</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Weaver has been cleared!</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>COMMAND 3</strong> - <code>clear</code> +  click <code>Cancel</code> /</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Result</strong><br>
+Weaver has not been cleared!</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-13 08:49:19 +00:00
+</div>
+</div>
+</body>
+</html>
