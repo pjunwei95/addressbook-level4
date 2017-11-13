@@ -5,26 +5,27 @@
 ** To load the sample data, follow the instructions given below:- +
 ** 1) Download the [W13-B2][Weaver]SampleData.xml file. +
 
-[TIP]
-IMPORTANT STEP - RENAME THE FILE TO `SampleData.xml`. Please note the use of Uppercase characters 'S' and 'D'. +
 
-** 2) Run the [W13-B2][Weaver].jar file to open the app. +
+[TIP]
+RENAME THE FILE NAME to `SampleData.xml` Make sure it is exactly the same. It is case-sensitive. +
+
+
+** 2) Run the Weaver.jar file to open the app. +
 ** 3) ** LOGIN ** with the Username - `admin` and Password - `admin` . +
 ** 4) After logging in make a change to the Weaver data by executing the command - `edit 1 n/change` . +
 ** 5) Close the app. You will notice that the `data` folder is created. +
 ** 6) Open the data folder. Drag/Copy the SampleData.xml file into the data folder. +
-** 7) Close the folder. Run the App again.  You will see the Login page again. +
+** 7) Close the folder. Run the App again. +
 ** 8) Click on ** REGISTER ** to register a new account. +
-** 9) Enter username as **SampleData**. `S` and `D` must in uppercase. `SampleData` is case-sensitive. Enter any password. Please Take a note of the password since you will be needing it. After entering credentials click on ** REGISTER ** +
+** 9) Enter username as **SampleData**. `S` and `D` must in uppercase. `SampleData` is case-sensitive. Enter any password. Take a note of the password. +
 ** 10) You will reach the **LOGIN** page. +
-** 11) Login with the username **SampleData** and the password you used to register. Click on the ** LOGIN ** button. +
+** 11) Login with the username **SampleData** and the password you used to register. +
 ** 12) The app opens with the data. +
-
 [TIP]
- 	If at any point the app stops responding, close the app and restart again with username ‘SampleData.xml’ and the password you used to register. Click on the ** LOGIN ** button each time you need to enter the app with the credentials. +
+ 	If at any point the app stops responding, close the app and restart again with username ‘SampleData.xml’ and the password you used to register. +
 
 
-** IMPORTANT NOTE - The outputs provided in this sheet are according to the inputs we have put. Please note if you put different inputs, the output will be different. +
+** IMPORTANT NOTE - The outputs provided in this sheet are according to the inputs we have put. Please not if you put different inputs, the output will be different. +
 
 
 == Test login feature
@@ -35,13 +36,9 @@ IMPORTANT STEP - RENAME THE FILE TO `SampleData.xml`. Please note the use of Upp
 == Test register feature
 ** Go to the register page using the button “register” on the right bottom of login page.
 ** Choose any username and password to register. If you use duplicate username, you will get a pop up window and need to choose other valid username.
-** Choose a valid username, but key in different password purposely to see the effect. +
-** Register using any new username and whatever password to see the effect of correct registering. +
+** Choose a valid username, but key in different password purposely to see the effect.
+** Register using username “SampleData” and whatever password to see the effect of correct registering. Meanwhile, to load the “SampleData.xml”, you need to use the username “SampleData” to get start with.
 ** Login with valid username and password pair and see the mainWindow(the effect of correctly login) +
-
-** Please note - After you have tested the LOGIN and REGISTER feature follow the steps below :- +
-1) Close the app. +
-2) Login in again with the USERNAME - `SampleData` and PASSWORD - You used to register the account with username `SampleData` . +
 
 === Command 0
 
@@ -259,8 +256,8 @@ Reminders should only contain alphanumeric characters and spaces, and it should 
 Deleted Reminder: CS2103T Assignment Details: Priority Level: High Priority: 12.05.2017 DueDate: +
 Hence successful deletion. +
 
-* Follow up with undo  +
-* *Result  +
+* Follow up with undo * +
+* *Result* * +
 Undo success. +
 
 *COMMAND 1* - `remove 0` +
@@ -378,7 +375,7 @@ Photo appears next to person. +
 
 *COMMAND 2* = `photo 1 delete`. +
 
-* 2 Results Possible +
+* * 2 Results Possible* +
 
 * *Result1* +
 If the person at index one has no photo to be deleted an error message will be displayed. +
@@ -463,13 +460,13 @@ Example: color t/friend c/red
 *COMMAND 1* - `color t/friends c/ red`
 
 * *Result* +
-Change tag color of 【friends】 to red
+Change tag color of [[friends]] to red
 
 
 *COMMAND 2* - `color t/friends t/family c/teal`
 
 * *Result* +
-Change tag color of 【【family】, 【friends】】 to teal
+Change tag color of [[family], [friends]] to teal
 
 *COMMAND 3* - `color t/friends t/family c/notAColor`
 
@@ -479,7 +476,7 @@ Valid colors are: [red, blue, green, teal, aqua, black, gray, lime, maroon, navy
 *COMMAND 4* - `color t/notATag t/family c/teal`
 
 * *Result* +
-Cannot change color of not existing tags: 【【notATag】】.
+Cannot change color of not existing tags: [[notATag]]
 
 *COMMAND 5* - `undo`
 
@@ -565,6 +562,11 @@ redo success
 
 *Close the app and open again*
 
+[TIP]
+After the closing, please login again with the credentials: +
+Username - `SampleData` +
+Password - The password you used to register. +
+
 * *Result* +
 
 The font size remains in xs.
@@ -604,6 +606,11 @@ Changed theme to bright.
 Changed theme to dark.
 
 *Close the app and open again*
+
+[TIP]
+After the closing, please login again with the credentials: +
+Username - `SampleData` +
+Password - The password you used to register. +
 
 * *Result* +
 
@@ -756,18 +763,17 @@ deletetag: Deletes the tag identified by the index number used in the last perso
 Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
 Example: deletetag 1 t/friends
 
+
 === Backup command
 
 [NOTE]
-
 In your root directory, under data/ you should have a SampleData.xml file, and
 entering the backup command, will create a SampleData-backup.xml file.
 
 *COMMAND 0* - `backup` +
 
 * *Result* +
-A backup of Weaver has been created! +
-If you close the app and open the data folder, you will notice, a `SampleData-backup.xml` is created. +
+A backup of Weaver has been created!
 
 
 === Autocompletion feature

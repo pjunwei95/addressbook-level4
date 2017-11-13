@@ -6,7 +6,7 @@
         <email>alexyeoh@example.com</email>
         <address>Blk 30 Geylang Street 29, #06-40</address>
         <date>11.11.1995</date>
-        <remark>CS2105/LEC/1,CS2104/LEC/1</remark>
+        <remark></remark>
         <username>john.doe</username>
         <tagged>
             <name>friends</name>
@@ -39,7 +39,7 @@
         <address>Blk 11 Ang Mo Kio Street 74, #11-04</address>
         <date>12.02.1994</date>
         <remark>CS3230/LEC/1</remark>
-        <username></username>
+        <username>ronak.lakhotia</username>
         <tagged>
             <name>neighbours</name>
             <color>orange</color>
@@ -61,7 +61,7 @@
         <image></image>
     </persons>
     <persons>
-        <name>Ronak Lakhotia</name>
+        <name>ChangeIt</name>
         <phone>92492021</phone>
         <email>email@gmail.com</email>
         <address>Blk 47 Tampines Street 20, #17-35</address>
@@ -75,10 +75,10 @@
         <image></image>
     </persons>
     <persons>
-        <name>Roy Balakrishnan</name>
-        <phone>92624417</phone>
-        <email>royb@example.com</email>
-        <address>Blk 45 Aljunied Street 85, #11-31</address>
+        <name>another</name>
+        <phone>91234567</phone>
+        <email>another@example.com</email>
+        <address>PGP</address>
         <date>17.08.1993</date>
         <remark>CS2105/LEC/1</remark>
         <username></username>
@@ -261,11 +261,11 @@
         <image></image>
     </persons>
     <persons>
-        <name>Xiaoman</name>
+        <name>Ronak Lakhotia</name>
         <phone>71815432</phone>
-        <email>xiaoman@example.com</email>
+        <email>ronak@example.com</email>
         <address>69 Balestier Rd</address>
-        <date>16.10.1997</date>
+        <date>13.10.1997</date>
         <remark>MA1521/LEC/1,MA1101R/LEC/1</remark>
         <username></username>
         <tagged>
@@ -293,6 +293,38 @@
         <image></image>
     </persons>
     <tags>
+        <name>neighbours</name>
+        <color>orange</color>
+    </tags>
+    <tags>
+        <name>classmate</name>
+        <color>orange</color>
+    </tags>
+    <tags>
+        <name>colleague</name>
+        <color>orange</color>
+    </tags>
+    <tags>
+        <name>friends</name>
+        <color>orange</color>
+    </tags>
+    <tags>
+        <name>cricketer</name>
+        <color>orange</color>
+    </tags>
+    <tags>
+        <name>senior</name>
+        <color>orange</color>
+    </tags>
+    <tags>
+        <name>owesMoney</name>
+        <color>orange</color>
+    </tags>
+    <tags>
+        <name>footballer</name>
+        <color>orange</color>
+    </tags>
+    <tags>
         <name>colleagues</name>
         <color>orange</color>
     </tags>
@@ -301,49 +333,17 @@
         <color>orange</color>
     </tags>
     <tags>
-        <name>neighbours</name>
-        <color>orange</color>
-    </tags>
-    <tags>
         <name>family</name>
-        <color>orange</color>
-    </tags>
-    <tags>
-        <name>friends</name>
-        <color>orange</color>
-    </tags>
-    <tags>
-        <name>colleague</name>
-        <color>orange</color>
-    </tags>
-    <tags>
-        <name>cricketer</name>
         <color>orange</color>
     </tags>
     <tags>
         <name>NUSComputing</name>
         <color>orange</color>
     </tags>
-    <tags>
-        <name>classmate</name>
-        <color>orange</color>
-    </tags>
-    <tags>
-        <name>owesMoney</name>
-        <color>orange</color>
-    </tags>
-    <tags>
-        <name>senior</name>
-        <color>orange</color>
-    </tags>
-    <tags>
-        <name>footballer</name>
-        <color>orange</color>
-    </tags>
     <reminders>
         <details>CS2103T Assignment</details>
         <priority>Priority Level: High</priority>
-        <dueDate>12.11.2017</dueDate>
+        <dueDate>12.05.2017</dueDate>
     </reminders>
     <reminders>
         <details>Group meeting</details>

@@ -236,7 +236,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-
+// tag::search[]
 === Searching a person : `search` Since v1.1
 
 Lists persons with the given name and Date Of Birth. +
@@ -262,6 +262,7 @@ Returns persons with name `John` and Date of Birth `13.10.1997`.
 ** Result - 2 persons listed!
 
 image::Search.png[width="790"]
+// end::search[]
 
 // tag::remark[]
 === Remarking a person : `remark` Since v1.1
@@ -358,6 +359,7 @@ index 1 in the address book.
 image::MockUp.png[width="790"]
 
 e.g. `Photo 1 delete`. +
+
 ** Result - Picture is deleted from the person at index at 1. +
 
 image::delete.png[width="790"]
@@ -449,7 +451,8 @@ image::fs.png[width="790"]
 // tag::facebook[]
 === FaceBook Integration since v1.3
 
-Helps you view the profile page of a person in your contact list. +
+This feature helps you view the profile page of a person in your contact list. This way we can know more about your friends +
+and colleagues. +
 
 Below are listed some conditions for the command. +
 
@@ -462,11 +465,16 @@ Below are listed some conditions for the command. +
 Command Format - `Facebook [INDEX]` +
 
 e.g. - `facebook 1` +
-
-If the person does not have a facebook account or the username is not entered in Weaver,you will be notified.
+** Result ** - The facebook homepgae shows up on the browser panel. +
 
 image::facebook.png[width="790"]
 
+** If the person does not have a facebook account or the username is not entered in Weaver, you will be notified.
+
+e.g. - `facebook 2`
+** Result ** - You will see a prompt telling you that the person has no username. +
+
+image::username.png[width="790"]
 // end::facebook[]
 
 // tag::map[]
@@ -570,11 +578,12 @@ image::theme.png[width="840"]
 
 // end::theme[]
 
+// tag::reminder[]
 === Reminders Panel since v1.4 +
 
-Have you ever felt the need to be constantly reminded of your daily assignments. Fret not!Weaver helps you keep up to
-date with your daily school assignments.Just add your reminders using a single command and weaver will display your
-reminders with an image depicting the priority level of that assignment and the due date.That way, you can keep scrolling through your
+Have you ever felt the need to be constantly reminded of your daily assignments. Fret not! Weaver helps you keep up to
+date with your daily school assignments. Just add your reminders using a single command and weaver will display your
+remindersdepicting the priority level of that assignment and the due date.That way, you can keep scrolling through your
 reminders panel when you open the application and be aware of the upcoming tasks.
 
 
@@ -600,7 +609,8 @@ image::remove.png[width="840"]
 
 
 ** Change an existing reminder. +
-Command Format - `Change d/22.12.2017` +
+Command Format - `Change [INDEX] field to be changed` +
+e.g. `change 1 d/22.12.2017` +
 The above command will change the due date of the reminder to the new date. +
 
 ** `Result` +
@@ -608,7 +618,7 @@ The reminder duedate is changed . +
 
 image::change.png[width="840"]
 
-
+// end::reminder[]
 
 // tag::autocompletion[]
 === Auto-completion since v1.4
@@ -662,7 +672,8 @@ image::backup.png[width="237"]
 
 // end::backup[]
 
-=== Sending Emails to your contacts : `backup` since v1.5
+// tag::email[]
+=== Sending Emails to your contacts : `email` since v1.5
 
 Weaver now allows you to send emails to all your contacts with a common tag! +
 If you want to send an important mail to people who are tagged as temmates, you are just a command away!. +
@@ -672,7 +683,7 @@ This command will open the default browser in your desktop and direct you to you
 Format: `email t/[TAG] s/[SUBJECT]`. +
 
 [TIP]
-You must have Gmail Account to send mails. +
+You must have a Gmail Account to send mails. +
 
 ** You cannot include more than one tag. Also you must specify 1 tag +
 ** The tag specified must be attached to atleast one person in Weaver. +
@@ -682,14 +693,15 @@ e.g. `email t/friends s/birthday party`
 ** Result ** +
 Email is sent!
 
-image::email.png[width="237"]
+image::emailsent.png[width="237"]
 
 e.g. `email t/friends t/colleagues s/subject`
 ** Result ** +
 Multiple tags cannot be entered +
 
-image::emailMultiple.png[width="237"]
+image::error.png[width="237"]
 
+// end::email[]
 === Exiting the program : `exit`
 
 Exits the program. +
