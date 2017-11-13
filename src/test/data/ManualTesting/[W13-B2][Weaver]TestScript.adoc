@@ -6,7 +6,7 @@
 ** 1) Download the [W13-B2][Weaver]SampleData.xml file. +
 
 [TIP]
-IMPORTANT STEP - RENAME THE FILE TO `SampleData.xml`. Please note the use of Upeercase characters 'S' and 'D'. +
+IMPORTANT STEP - RENAME THE FILE TO `SampleData.xml`. Please note the use of Uppercase characters 'S' and 'D'. +
 
 ** 2) Run the [W13-B2][Weaver].jar file to open the app. +
 ** 3) ** LOGIN ** with the Username - `admin` and Password - `admin` . +
