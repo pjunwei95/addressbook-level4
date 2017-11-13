@@ -292,30 +292,6 @@
         </tagged>
         <image></image>
     </persons>
-    <persons>
-        <name>User</name>
-        <phone>999222</phone>
-        <email>user@gmail.com</email>
-        <address>Prince Georges Park</address>
-        <date>29.02.2000</date>
-        <remark>CS2103T/LEC/1</remark>
-        <username></username>
-        <tagged>
-            <name>friends</name>
-            <color>orange</color>
-        </tagged>
-        <image></image>
-    </persons>
-    <persons>
-        <name>Dummy</name>
-        <phone>999222</phone>
-        <email>dummy@gmail.com</email>
-        <address></address>
-        <date></date>
-        <remark></remark>
-        <username></username>
-        <image></image>
-    </persons>
     <tags>
         <name>neighbours</name>
         <color>orange</color>
@@ -367,7 +343,7 @@
     <reminders>
         <details>CS2103T Assignment</details>
         <priority>Priority Level: High</priority>
-        <dueDate>12.11.2017</dueDate>
+        <dueDate>12.05.2017</dueDate>
     </reminders>
     <reminders>
         <details>Group meeting</details>
@@ -463,10 +439,5 @@
         <details>CS3230 Lecture</details>
         <priority>Priority Level: High</priority>
         <dueDate>15.01.2018</dueDate>
-    </reminders>
-    <reminders>
-        <details>CS2102 Assignment</details>
-        <priority>Priority Level: High</priority>
-        <dueDate>12.05.2017</dueDate>
     </reminders>
 </addressbook>
