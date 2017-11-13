@@ -947,7 +947,7 @@ loadPage(url);
     }
 ---
 
-image::FacebookSequence.png[width="790"] 
+image::FacebookSequence.png[width="790"]
 
 Figure 3.1
 
