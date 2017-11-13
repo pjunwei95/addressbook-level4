@@ -281,7 +281,7 @@ Examples:
 `remark 2 r/CS2104/LEC/1` +
 Remarks the 2nd person's module information as CS2104/LEC/1.
 
-`remark 1 r/MA1101R/LEC/1,CS2105/LEC/1` +
+* `remark 1 r/MA1101R/LEC/1,CS2105/LEC/1` +
 Remarks the 2nd person's module information as MA1101R and CS2105
 // end::remark[]
 
@@ -297,7 +297,7 @@ image::nusmods.png[width="790"]
 === Login / Logout Since v1.2
 image::Login.png[width="790"]
 
-Users now can login using valid accounts. And their files are seperated. +
+Users now can login using valid accounts. And their files are separated. +
 To start with, there are two default pairs of username and password. They are
 {admin, admin} and {user, user}. +
 To logout, just click logout in the "file - > logout" button. Or, use the "logout" command. +
