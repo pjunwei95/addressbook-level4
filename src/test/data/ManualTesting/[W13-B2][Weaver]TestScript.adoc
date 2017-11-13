@@ -454,13 +454,13 @@ Example: color t/friend c/red
 *COMMAND 1* - `color t/friends c/ red`
 
 * *Result* +
-Change tag color of [[friends]] to red
+Change tag color of 【friends】 to red
 
 
 *COMMAND 2* - `color t/friends t/family c/teal`
 
 * *Result* +
-Change tag color of [[family], [friends]] to teal
+Change tag color of 【【family】, 【friends】】 to teal
 
 *COMMAND 3* - `color t/friends t/family c/notAColor`
 
@@ -470,7 +470,7 @@ Valid colors are: [red, blue, green, teal, aqua, black, gray, lime, maroon, navy
 *COMMAND 4* - `color t/notATag t/family c/teal`
 
 * *Result* +
-Cannot change color of not existing tags: [[notATag]]
+Cannot change color of not existing tags: 【【notATag】】.
 
 *COMMAND 5* - `undo`
 
@@ -556,11 +556,6 @@ redo success
 
 *Close the app and open again*
 
-[TIP]
-After the closing, please login again with the credentials: +
-Username - `SampleData` +
-Password - The password you used to register. +
-
 * *Result* +
 
 The font size remains in xs.
@@ -600,11 +595,6 @@ Changed theme to bright.
 Changed theme to dark.
 
 *Close the app and open again*
-
-[TIP]
-After the closing, please login again with the credentials: +
-Username - `SampleData` +
-Password - The password you used to register. +
 
 * *Result* +
 
@@ -699,11 +689,7 @@ Example: findtag friends colleagues
 *COMMAND 1* - `findtag friends` +
 
 * *Result* +
-<<<<<<< HEAD
-6 persons listed!
-=======
 5 persons listed!
->>>>>>> d4b1c980ae5676848d9b1399301bb6d096b7d8a2
 
 *COMMAND 2* - `findtag friend` +
 
@@ -718,11 +704,7 @@ Example: findtag friends colleagues
 *COMMAND 4* - `findtag FRIENDS` +
 
 * *Result* +
-<<<<<<< HEAD
 6 persons listed!
-=======
-5 persons listed!
->>>>>>> d4b1c980ae5676848d9b1399301bb6d096b7d8a2
 
 === Delete person tag command
 
@@ -765,31 +747,6 @@ deletetag: Deletes the tag identified by the index number used in the last perso
 Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
 Example: deletetag 1 t/friends
 
-<<<<<<< HEAD
-=======
-=== Clear Popup command
-
-*COMMAND 0* - `clear` + press `ESC`
-
-* *Result* +
-A clear confirmation dialog would appear.
-
-*COMMAND 1* - `clear 1` + press `ESC`
-
-* *Result* +
-A clear confirmation dialog would appear.
-
-*COMMAND 2* - `clear` + click `OK` / press `Enter` / press `Space`
-
-* *Result* +
-Weaver has been cleared!
-
-*COMMAND 3* - `clear` +  press `ESC` / press `->` + `Space` /
-press `Tab` + `Space` / click `X` / click `Cancel` /
-
-* *Result* +
-Weaver has not been cleared!
-
 === Clear Popup command
 
 *COMMAND 0* - `clear` +
@@ -811,16 +768,12 @@ Weaver has been cleared!
 
 * *Result* +
 Weaver has not been cleared!
->>>>>>> d4b1c980ae5676848d9b1399301bb6d096b7d8a2
 
 === Backup command
 
 [NOTE]
-<<<<<<< HEAD
+
 In your root directory, under data/ you should have a SampleData.xml file, and
-=======
-In your root directory, under `data/` you should have a SampleData.xml file, and
->>>>>>> d4b1c980ae5676848d9b1399301bb6d096b7d8a2
 entering the backup command, will create a SampleData-backup.xml file.
 
 *COMMAND 0* - `backup` +
