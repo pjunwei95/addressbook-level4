@@ -946,7 +946,8 @@ Below are few code snippets to guide you through the working of the feature. +
 loadPage(url);
     }
 ---
-image::FacebookSequence.png[width="800"] 
+
+image::FacebookSequence.png[width="790"] 
 
 Figure 3.1
 
