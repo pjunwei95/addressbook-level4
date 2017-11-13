@@ -296,14 +296,14 @@ image::nusmods.png[width="790"]
 // end::nusmods[]
 
 === Login / Logout Since v1.2
-image::Login.png[width="790"]
+image::login.png[width="790"]
 
 Users now can login using valid accounts. And their files are separated. +
 To start with, there are two default pairs of username and password. They are
 {admin, admin} and {user, user}. +
 To logout, just click logout in the "file - > logout" button. Or, use the "logout" command. +
 
-image::Logout.png[width="790"]
+image::logout.png[width="790"]
 
 // tag::customizetagcolor[]
 === Customize tags' color : `color` Since v1.2
