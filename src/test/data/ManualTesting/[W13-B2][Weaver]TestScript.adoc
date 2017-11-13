@@ -15,10 +15,11 @@ IMPORTANT STEP - RENAME THE FILE TO `SampleData.xml`. Please note the use of Upp
 ** 6) Open the data folder. Drag/Copy the SampleData.xml file into the data folder. +
 ** 7) Close the folder. Run the App again.  You will see the Login page again. +
 ** 8) Click on ** REGISTER ** to register a new account. +
-** 9) Enter username as **SampleData**. `S` and `D` must in uppercase. `SampleData` is case-sensitive. Enter any password. Please Take a note of the password since you will be need ing it. +
+** 9) Enter username as **SampleData**. `S` and `D` must in uppercase. `SampleData` is case-sensitive. Enter any password. Please Take a note of the password since you will be needing it. After entering credentials click on ** REGISTER ** +
 ** 10) You will reach the **LOGIN** page. +
 ** 11) Login with the username **SampleData** and the password you used to register. +
 ** 12) The app opens with the data. +
+
 [TIP]
  	If at any point the app stops responding, close the app and restart again with username ‘SampleData.xml’ and the password you used to register. +
 
@@ -38,7 +39,7 @@ IMPORTANT STEP - RENAME THE FILE TO `SampleData.xml`. Please note the use of Upp
 ** Register using any new username and whatever password to see the effect of correct registering. +
 ** Login with valid username and password pair and see the mainWindow(the effect of correctly login) +
 
-** Please note - After you have tested the LOGIN and REGISTER feature follow the steps below :-
+** Please note - After you have tested the LOGIN and REGISTER feature follow the steps below :- +
 1) Close the app. +
 2) Login in again with the USERNAME - `SampleData` and PASSWORD - You used to register the account with username `SampleData` . +
 
@@ -258,8 +259,8 @@ Reminders should only contain alphanumeric characters and spaces, and it should 
 Deleted Reminder: CS2103T Assignment Details: Priority Level: High Priority: 12.05.2017 DueDate: +
 Hence successful deletion. +
 
-* Follow up with undo * +
-* *Result* * +
+* Follow up with undo  +
+* *Result  +
 Undo success. +
 
 *COMMAND 1* - `remove 0` +
@@ -377,7 +378,7 @@ Photo appears next to person. +
 
 *COMMAND 2* = `photo 1 delete`. +
 
-* * 2 Results Possible* +
+* 2 Results Possible +
 
 * *Result1* +
 If the person at index one has no photo to be deleted an error message will be displayed. +
@@ -697,7 +698,7 @@ Example: findtag friends colleagues
 *COMMAND 1* - `findtag friends` +
 
 * *Result* +
-5 persons listed!
+6 persons listed!
 
 *COMMAND 2* - `findtag friend` +
 
@@ -754,28 +755,6 @@ Invalid command format!
 deletetag: Deletes the tag identified by the index number used in the last person listing.
 Parameters: INDEX (must be a positive integer) t/TAG (must match tag)
 Example: deletetag 1 t/friends
-
-=== Clear Popup command
-
-*COMMAND 0* - `clear` +
-
-* *Result* +
-A clear confirmation dialog would appear.
-
-*COMMAND 1* - `clear 1` +
-
-* *Result* +
-A clear confirmation dialog would appear.
-
-*COMMAND 2* - `clear` + click `OK` / press `Enter` / press `Space`
-
-* *Result* +
-Weaver has been cleared!
-
-*COMMAND 3* - `clear` + click `X` / `Cancel` / press `->` + `Space` / press `Tab` + `Space`
-
-* *Result* +
-Weaver has not been cleared!
 
 === Backup command
 
