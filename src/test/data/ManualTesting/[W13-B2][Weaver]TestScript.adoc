@@ -17,11 +17,11 @@ IMPORTANT STEP - RENAME THE FILE TO `SampleData.xml`. Please note the use of Upp
 ** 8) Click on ** REGISTER ** to register a new account. +
 ** 9) Enter username as **SampleData**. `S` and `D` must in uppercase. `SampleData` is case-sensitive. Enter any password. Please Take a note of the password since you will be needing it. After entering credentials click on ** REGISTER ** +
 ** 10) You will reach the **LOGIN** page. +
-** 11) Login with the username **SampleData** and the password you used to register. +
+** 11) Login with the username **SampleData** and the password you used to register. Click on the ** LOGIN ** button. +
 ** 12) The app opens with the data. +
 
 [TIP]
- 	If at any point the app stops responding, close the app and restart again with username ‘SampleData.xml’ and the password you used to register. +
+ 	If at any point the app stops responding, close the app and restart again with username ‘SampleData.xml’ and the password you used to register. Click on the ** LOGIN ** button each time you need to enter the app with the credentials. +
 
 
 ** IMPORTANT NOTE - The outputs provided in this sheet are according to the inputs we have put. Please not if you put different inputs, the output will be different. +
