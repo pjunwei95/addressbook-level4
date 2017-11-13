@@ -1066,7 +1066,7 @@ image::ReminderArchi.png[width="800"]
 ** The reminders panel is implemented in a similar manner like the person list panel. +
 ** Data is written/stored in the same addressbook.xml file. +
 
-image::LogicReminder.png[width="800"]]
+image::LogicReminder.png[width="800"]
 (Figure 5.2)
 
 Figure 5.2 above shows the Logic Component Diagram of the Reminders Panel implementation. +
